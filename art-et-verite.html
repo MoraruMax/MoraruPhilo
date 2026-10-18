@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>L’art est-il un moyen d’accéder à la vérité ?</title>
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+  --bg:#F5F6F8; --surface:#FFFFFF; --ink:#111318; --muted:#555B66; --line:#D8DBE2; --focus:#1D4ED8;
+  --red:#D01F1F; --blue:#1D4ED8; --yel:#F2C200; --yelt:#7A5C00;
+  --head:system-ui,-apple-system,"Segoe UI",sans-serif;
+  --text:Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#101114; --surface:#1A1C21; --ink:#F2F2F2; --muted:#A8AEBA; --line:#2C3038; --focus:#7FA2FF;
+    --red:#FF6B6B; --blue:#7FA2FF; --yel:#FFD43B; --yelt:#FFD43B;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#101114; --surface:#1A1C21; --ink:#F2F2F2; --muted:#A8AEBA; --line:#2C3038; --focus:#7FA2FF;
+  --red:#FF6B6B; --blue:#7FA2FF; --yel:#FFD43B; --yelt:#FFD43B;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.15rem/1.6 var(--text)}
+.wrap{width:min(1000px,100% - 2.5rem);margin-inline:auto}
+h1,h2,h3{margin:0;font-family:var(--head)}
+h1{font-weight:800;font-size:clamp(2rem,6vw,3.6rem);line-height:1.08;letter-spacing:-.03em}
+h2{font-weight:800;font-size:clamp(1.4rem,3vw,1.9rem);line-height:1.15;margin-bottom:1rem}
+p{margin:0 0 1em}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
+.hero{padding:clamp(2rem,6vw,4rem) 0 2rem}
+.hgrid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,.8fr);gap:2rem 3rem;align-items:center}
+.def{margin:1.4rem 0 0;padding:.9rem 1.1rem;background:var(--surface);border-left:6px solid var(--ink);max-width:46ch}
+.def b{font:700 .8rem/1 var(--head);display:block;margin-bottom:.3rem}
+.mond{display:grid;grid-template-columns:2fr 1fr 3fr;grid-template-rows:2fr 1fr 2fr;gap:6px;background:#111318;padding:6px;aspect-ratio:1;width:100%;max-width:340px;justify-self:center}
+.mond i{background:#fff;animation:pop .6s cubic-bezier(.3,.7,.2,1) both}
+.mond .r{background:#D01F1F;grid-row:1/3}.mond .b{background:#1D4ED8;grid-row:3}.mond .y{background:#F2C200;grid-column:2;grid-row:3}
+.mond .w2{grid-column:2/4;grid-row:2}
+.mond i:nth-child(2){animation-delay:.1s}.mond i:nth-child(3){animation-delay:.2s}.mond i:nth-child(4){animation-delay:.3s}.mond i:nth-child(5){animation-delay:.4s}.mond i:nth-child(6){animation-delay:.5s}.mond i:nth-child(7){animation-delay:.6s}
+@keyframes pop{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:none}}
+section.block{border-top:1px solid var(--line);padding:clamp(2.2rem,5vw,3.4rem) 0}
+.alt{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}
+.alt div{padding:1rem 1.1rem;background:var(--surface);border-top:6px solid var(--red)}
+.alt div+div{border-top-color:var(--blue)}
+.alt b{font:700 .85rem/1.2 var(--head);display:block;margin-bottom:.3rem}
+.todo{margin:0;padding-left:1.2rem}
+.todo li{margin-bottom:.3rem}
+.filters{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.2rem}
+.filters button{font:700 .88rem/1.2 var(--head);color:var(--ink);background:transparent;border:2px solid var(--ink);border-radius:6px;padding:.55rem .85rem;cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr));gap:1.1rem}
+.card{background:var(--surface);border:1px solid var(--line);border-top:8px solid var(--c);padding:1rem 1.2rem 1.2rem}
+.card[hidden]{display:none}
+.top{display:flex;align-items:center;gap:.6rem;margin-bottom:.6rem}
+.no{font:800 1.6rem/1 var(--head);color:var(--ct)}
+.tag{font:700 .75rem/1 var(--head);padding:.3rem .5rem;background:var(--c);color:#fff}
+.card[data-c="yel"] .tag{color:#111318}
+.th{font:700 1.05rem/1.35 var(--head);margin:0 0 .3rem}
+.src{font:600 .85rem/1.3 var(--head);color:var(--muted);margin:0 0 .8rem}
+.card blockquote{margin:0 0 .8rem;padding-left:.8rem;border-left:3px solid var(--c);font-style:italic}
+details{border-top:1px solid var(--line);padding-top:.5rem}
+summary{cursor:pointer;font:700 .88rem/1.3 var(--head);padding:.2rem 0}
+details p{margin:.5rem 0 0}
+.qs{color:var(--muted);font-style:italic}
+.plan{display:grid;gap:.8rem}
+.plan div{background:var(--surface);border-left:8px solid var(--c);padding:.8rem 1.1rem}
+.plan b{font:800 1rem/1.3 var(--head)}
+.plan a{font:700 .8rem/1 var(--head);color:var(--ink);text-decoration:none;border:1.5px solid var(--ink);padding:.2rem .4rem;margin-left:.3rem}
+.note{font:600 .85rem/1.4 var(--head);color:var(--muted)}
+.rep{margin:.6rem 0 0;padding:.7rem .9rem;background:var(--bg);border-left:4px solid var(--c)}
+.rep b{font:700 .8rem/1 var(--head);display:block;margin-bottom:.3rem;color:var(--ct)}
+.figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:.8rem;margin:.9rem 0 0;padding:0}
+.figs figure{margin:0;display:flex;flex-direction:column;gap:.35rem}
+.figs a{display:block;background:var(--surface);border:1px solid var(--line)}
+.figs img{display:block;width:100%;height:190px;object-fit:contain}
+.figs figcaption{font:500 .8rem/1.35 var(--head);color:var(--muted)}
+.figs figcaption b{display:inline;margin:0;font:700 .8rem/1.35 var(--head);color:var(--ink)}
+.views{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.7rem}
+.views a{font:700 .8rem/1.2 var(--head);color:var(--ink);border:1.5px solid var(--ink);padding:.3rem .5rem;text-decoration:none}
+footer{padding:1.6rem 0 2.5rem;font:600 .85rem/1.5 var(--head);color:var(--muted)}
+footer p{margin:0}
+@media (max-width:760px){.hgrid,.alt{grid-template-columns:1fr}.mond{max-width:220px;justify-self:start}}
+@media (prefers-reduced-motion:reduce){.mond i{animation:none}}
+
+.pn{display:flex;gap:1rem;flex-wrap:wrap;margin:2.5rem auto 0;max-width:980px;padding:0 1.25rem;box-sizing:content-box}
+.pn a{flex:1 1 16rem;display:flex;flex-direction:column;gap:.25rem;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--k,var(--ink));padding:.9rem 1.1rem;border-radius:0 0 8px 8px}
+.pn a:hover{border-color:var(--k,var(--ink))}.pn a:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.pn small{font:600 .78rem/1 system-ui,-apple-system,sans-serif;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.pn b{font:700 1.1rem/1.25 system-ui,-apple-system,sans-serif}
+.pn .nx{text-align:right}
+.pn .nx:first-child{margin-left:auto;max-width:calc(50% - .5rem)}
+.pn .hm{flex:0 0 100%;text-align:center;font:500 .92rem/1 system-ui,-apple-system,sans-serif;background:none;border:0;padding:.4rem;color:var(--ink);text-decoration:underline}
+
+.pdfbtn{display:inline-flex;align-items:center;gap:.5rem;font:600 .88rem/1 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--surface);border:1.5px solid var(--ink);border-radius:999px;padding:.55rem .95rem;cursor:pointer}
+.pdfbtn:hover{background:var(--ink);color:var(--bg)}.pdfbtn:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:2px}
+@media print{
+  :root{--bg:#fff!important;--surface:#fff!important;--ink:#111!important;--muted:#444!important;--line:#bbb!important;color-scheme:light!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:#fff!important;color:#111!important}
+  body::before,body::after{display:none!important}
+  nav,.pdfbtn,.pn,video,section[aria-labelledby="h-video"]{display:none!important}
+  .rev,.js .rev{opacity:1!important;transform:none!important}
+  .stp li[hidden]{display:list-item!important}
+  details>*{display:block!important}
+  article,li,.card,figure,.stage{break-inside:avoid}
+  h1,h2,h3{break-after:avoid;text-shadow:none!important}
+  *{text-shadow:none!important}
+  a{color:inherit;text-decoration:none}
+  section.block,.part{padding-top:1.2rem!important;padding-bottom:1.2rem!important}
+  footer{break-before:avoid;border-top:1px solid #999;margin-top:1rem}
+}
+@page{size:A4;margin:16mm 14mm}
+</style>
+</head>
+<body>
+<nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
+
+<header class="hero">
+  <div class="wrap hgrid">
+    <div>
+      <h1>L’art est-il un moyen d’accéder à la vérité ?</h1>
+      <p class="def"><b>Définition</b>L’art se comprend d’abord comme la production de beaux objets : les « beaux-arts », l’œuvre d’art.</p>
+    </div>
+    <div class="mond" aria-hidden="true"><i class="r"></i><i></i><i></i><i class="w2"></i><i class="b"></i><i class="y"></i><i></i></div>
+  </div>
+</header>
+<main>
+<section class="block" aria-labelledby="h-enj">
+  <div class="wrap">
+    <h2 id="h-enj">Les enjeux</h2>
+    <p>L’art peut sembler étranger à la vérité : il peut être fiction, inventer, déformer, embellir. Même une nature morte ou un paysage ne rendraient pas exactement compte du réel. Mais l’art ne permet-il pas aussi d’« ouvrir les yeux » sur ce qui nous entoure, et d’accéder à une vérité « cachée » sur le monde ? Il relèverait alors d’une rationalité propre, qui ne serait pas celle de la science.</p>
+    <div class="alt"><div><b>Première possibilité</b>L’art n’est que tromperie et supercherie, apparence trompeuse et illusion.</div><div><b>Seconde possibilité</b>L’art révèle des vérités qui ne seraient pas immédiatement accessibles.</div></div>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-con">
+  <div class="wrap">
+    <h2 id="h-con">La consigne</h2>
+    <p>Pour chacun des neuf textes ci-dessous, il faut :</p>
+    <ol class="todo"><li>identifier le ou les arguments qui défendent la thèse ;</li><li>expliquer comment l’exemple illustre cette thèse ;</li><li>intégrer ces références et arguments dans un plan répondant à la problématique.</li></ol>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-th">
+  <div class="wrap">
+    <h2 id="h-th">Neuf thèses, textes et exemples</h2>
+    <p class="note">La couleur indique le sens général de la thèse (lecture proposée). Les arguments sont reformulés ; les citations sont de courts extraits. Dans chaque carte, « Exemple, question et piste de réponse » propose une réponse aux questions posées. Les œuvres ne sont pas reproduites sur la page : les liens « Voir » ouvrent une recherche d’images dans un nouvel onglet.</p>
+    <div class="filters" id="filters" role="group" aria-label="Filtrer les thèses"></div>
+    <div class="cards" id="cards"></div>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-pl">
+  <div class="wrap">
+    <h2 id="h-pl">Un plan possible</h2>
+    <p class="note">Proposition à discuter : elle regroupe les neuf textes en trois parties.</p>
+    <div class="plan" id="plan"></div>
+  </div>
+</section>
+</main>
+<nav class="pn" aria-label="Pages de la section Vérité"><a class="pv" href="verite-hume.html" rel="prev"><small>← Page précédente</small><b>Hume : croyance raisonnable</b></a><a class="hm" href="accueil.html">Retour à l’accueil</a></nav>
+<footer><div class="wrap"><p>Page réalisée à partir du document « Révisions : l’art est-il un moyen d’accéder à la vérité ? ».</p></div></footer>
+
+<script>
+(function(){
+  var C={trompe:['L’art trompe','var(--red)','var(--red)'],revele:['L’art révèle','var(--blue)','var(--blue)'],yel:['Déplace la question','var(--yel)','var(--yelt)']};
+  var T=[
+  {c:'trompe',th:'L’art n’est qu’imitation de l’apparence, et ne peut être vrai.',s:'Platon, La République, livre X',
+   a:'Le but de la peinture est de représenter ce qui paraît, non ce qui est. Le peintre peut représenter un artisan sans rien connaître de son métier et faire illusion aux enfants et aux ignorants, qui prennent l’imitation pour la vérité.',
+   q:'L’art d’imiter est donc bien éloigné du vrai',
+   e:'Zeuxis (peintre grec, 464-398 av. J.-C.) représente des raisins avec tant de réalisme que des oiseaux tentent de picorer la toile.',
+   u:'Comment cet exemple permet-il d’illustrer la thèse de Platon ?'},
+  {c:'revele',th:'L’art dévoile la vérité, il nous fait voir.',s:'Heidegger, L’Origine de l’œuvre d’art',
+   a:'Dans la peinture de Van Gogh, la vérité advient : non parce qu’un objet y serait dépeint en toute exactitude, mais parce que l’œuvre manifeste l’être de l’objet produit (des souliers) et, à travers lui, l’étant dans sa totalité, monde et terre en leur jeu réciproque.',
+   q:'la vérité advient',
+   e:'Heidegger prend l’exemple du tableau Les Souliers de Van Gogh : cherchez ce tableau.',
+   u:'Quelle « vérité » ce tableau permettrait-il de dévoiler ?'},
+  {c:'revele',th:'L’art exprime ce qui échappe au langage : il peut être indicible et ineffable, et permettrait d’accéder à une certaine vérité.',s:'Schopenhauer, Le Monde comme volonté et comme représentation',
+   a:'La musique est à la fois parfaitement intelligible et inexplicable : elle montre tous les mouvements de notre être, même les plus cachés, délivrés de la réalité qui les déforme. Elle a directement pour objet la volonté. L’art est la sensibilité rendue plus nette, comme une chambre noire qui montre les objets plus distinctement.',
+   q:'quelque chose d’ineffable et d’intime',
+   e:'L’Ode à la joie (poème de Schiller mis en musique par Beethoven), l’« accord de Tristan » du prélude de Tristan und Isolde (Wagner) ou l’adagietto de la Symphonie n° 5 de Mahler nous font ressentir des choses sans que nous puissions les exprimer.'},
+  {c:'yel',th:'L’art peut être volontairement menteur, en tant qu’il rend visible.',s:'Klee, Confession créatrice',
+   a:'Le visible n’est qu’un cas particulier dans un univers qu’habitent d’innombrables vérités latentes. L’art ne se contente donc pas de reproduire ce que l’on voit : il fait voir autre chose.',
+   q:'L’art ne reproduit pas le visible ; il rend visible.',
+   e:'Cherchez ce qu’est Le Triomphe de la volonté, de Riefenstahl.',
+   u:'Comment ce film illustre-t-il la thèse défendue ici ?'},
+  {c:'revele',th:'La perception de l’artiste est particulière : il perçoit « plus » que nous.',s:'Bergson, La pensée et le mouvant',
+   a:'Certains hommes naissent détachés, par un de leurs sens ou par leur conscience : ils perçoivent pour percevoir, sans chercher à utiliser leur perception. Selon ce détachement, ils sont peintres, sculpteurs, musiciens ou poètes. Les arts offrent ainsi une vision plus directe de la réalité.',
+   q:'une vision plus directe de la réalité',
+   e:'Trouvez un exemple d’œuvre d’art permettant d’illustrer ce propos de Bergson.'},
+  {c:'yel',th:'La science, dont on pense qu’elle produit la vérité, ne serait qu’une mathématisation du monde et rendrait le sujet extérieur au monde.',s:'Michel Henry, Voir l’invisible. Sur Kandinsky',
+   a:'Pour la science moderne, connaître, c’est connaître « objectivement » les phénomènes extérieurs. Mais cet objet, étalé dans le monde, ne se donne que comme une surface sur laquelle le regard glisse sans pénétrer à l’intérieur de la chose : cette connaissance n’atteindra jamais son but.',
+   e:'Trouvez un ou des exemples d’échecs de la science, permettant d’illustrer l’impossibilité pour la science d’atteindre son but.'},
+  {c:'yel',th:'L’art est émotion pure : il n’est peut-être ni « vrai » ni « faux ».',s:'Michel Henry, Voir l’invisible. Sur Kandinsky',
+   a:'Le milieu de la peinture, c’est la vie, et aucun chemin ne conduit à la vie sinon la vie elle-même. Le point de départ de la peinture est une émotion, un mode plus intense de la vie ; le contenu de l’art est cette émotion, et son but est de la transmettre à d’autres.',
+   q:'Le but de l’art, c’est de la transmettre à d’autres.',
+   e:'Cherchez des œuvres de Kandinsky.',u:'Comment illustrent-elles l’idée que l’art est la vie elle-même, l’émotion pure ?'},
+  {c:'yel',th:'Ce n’est peut-être pas l’art qui est trompeur, mais l’œil qui n’est pas innocent.',s:'Goodman, Langages de l’Art',
+   a:'L’œil n’est pas un instrument solitaire : il est marqué par son passé et par les autres sens, et ses besoins et préjugés gouvernent la manière de voir comme le contenu de ce qu’il voit. Il choisit, organise, classe, construit : il saisit et fabrique plutôt qu’il ne reflète.',
+   q:'Rien n’est vu tout simplement, à nu.'},
+  {c:'revele',th:'L’art fait émerger une autre rationalité, fondée sur l’acceptation du sensible.',s:'Adorno, Théorie esthétique',
+   a:'L’art s’oppose au concept et à la domination, mais il a besoin des concepts pour s’opposer. La séparation entre intuition et concept, entre rationalité et sensibilité, est commandée par la société, et l’art la critique : ce qu’il combat n’est pas la rationalité, mais son opposition figée au particulier.',
+   e:'Cherchez des exemples de peintures abstraites contemporaines (Twombly, Pollock, Mondrian, Soulages, etc.).',u:'Comment permettent-elles d’illustrer le propos d’Adorno ?'}
+  ];
+  function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;')}
+  var R=[
+   {r:'Les raisins de Zeuxis imitent si bien l’apparence que des oiseaux s’y trompent : l’art produit une illusion qui se fait passer pour le réel. Mais ce qu’on imite est l’apparence d’un raisin, non sa nature (ce qu’il est, comment il pousse, à quoi il sert) : la réussite technique éloigne du vrai plutôt qu’elle n’en rapproche. Comme le peintre de Platon qui trompe les enfants et les ignorants, le tableau ne trompe que ceux qui ne savent pas distinguer l’image de la chose. Aucune œuvre de Zeuxis ne nous est parvenue : l’anecdote vient des textes antiques.',v:[['illustrations de l’anecdote de Zeuxis','Zeuxis raisins peinture']]},
+   {r:'Le tableau ne vaut pas par l’exactitude de sa copie. Heidegger y lit ce que sont des souliers dans la vie de celui qui les porte : l’usure, la fatigue du travail, le chemin dans les champs, la terre. L’œuvre dévoile ainsi un monde (la vie, le travail) et la terre dont l’outil est inséparable, ce que l’usage quotidien, qui oublie l’outil, laisse caché. Cette lecture est discutée : on lui reproche d’imaginer des souliers de paysanne.',},
+   {r:'Ces œuvres nous font ressentir sans que nous sachions dire quoi : la joie, le désir, la tension ou l’apaisement ne se laissent pas traduire en concepts. Pour Schopenhauer, c’est ce qui montre que la musique atteint directement ce que les mots manquent : les mouvements les plus cachés de notre être.'},
+   {r:'Le Triomphe de la volonté (1935) est un film de propagande nazie sur le congrès de Nuremberg de 1934. Cadrages, éclairages, montage et mise en scène des foules n’y reproduisent pas simplement ce qui a eu lieu : ils fabriquent à l’écran une image de puissance, d’unité et de culte du chef. Le film rend visible une vision voulue, volontairement trompeuse : il illustre que l’art peut mentir précisément parce qu’il rend visible, et non seulement reproduit.',v:[['Le Triomphe de la volonté','Le Triomphe de la volonté Riefenstahl film']]},
+   {r:'Piste : les Cathédrales de Rouen de Monet. Là où nous voyons « une cathédrale », c’est-à-dire un repère utile, Monet perçoit pour percevoir : les variations de lumière et de couleur selon l’heure, que la perception ordinaire néglige. L’artiste voit « plus » parce qu’il songe moins à utiliser sa perception.',},
+   {r:'Piste : la douleur. La science en mesure les causes et les effets extérieurs (signaux nerveux, zones du cerveau activées), mais pas ce que c’est que souffrir pour celui qui souffre : elle glisse sur l’extériorité sans atteindre le vécu, l’intérieur de la chose. Autre piste : l’émotion éprouvée devant une musique, qu’aucune description du son ne rend.'},
+   {r:'Piste : Impression III (Concert), Composition VII ou Jaune-rouge-bleu de Kandinsky. Ces toiles ne représentent aucun objet reconnaissable : couleurs et formes agissent directement sur la sensibilité, comme des sons. Le tableau ne dit pas une vérité sur le monde, il transmet une émotion, un mode plus intense de la vie : on ne peut le dire ni vrai ni faux.',},
+   {r:'Piste : quand on dit qu’un tableau « déforme », on suppose qu’il existerait une vision neutre à laquelle le comparer. Si rien n’est vu « à nu », l’art ne trompe pas plus que notre perception ordinaire : il montre une manière de voir parmi d’autres.'},
+   {r:'Pollock, Mondrian, Soulages ou Twombly ne représentent pas d’objet que l’on pourrait nommer : elles échappent au concept figé. Pourtant elles ne sont pas irrationnelles : composition, structure, geste maîtrisé. Mondrian tient ensemble la grille géométrique et la couleur ; Pollock ou Twombly donnent à voir le geste singulier ; Soulages fait éprouver la couleur et la lumière. Elles montrent que le sensible et la rationalité ne s’opposent pas, et que l’art critique cette séparation.'}
+  ];
+  var IM={1:[['van-gogh-souliers','Une paire de souliers','Vincent van Gogh','Une paire de souliers']],
+   4:[['monet-portail','Cathédrale de Rouen, le portail, au soleil','Claude Monet','Cathédrale de Rouen, le portail (1894)'],['monet-albane','Cathédrale de Rouen, la tour d’Albane','Claude Monet','Cathédrale de Rouen, la tour d’Albane']],
+   6:[['kandinsky-impression-iii','Impression III (Concert)','Vassily Kandinsky','Impression III (Concert), 1911'],['kandinsky-composition-vii','Composition VII','Vassily Kandinsky','Composition VII, 1913'],['kandinsky-jaune-rouge-bleu','Jaune-rouge-bleu','Vassily Kandinsky','Jaune-rouge-bleu, 1925']],
+   8:[['mondrian','Composition en rouge, jaune, noir, gris et bleu de Piet Mondrian','Piet Mondrian','Composition avec grand plan rouge, jaune, noir, gris et bleu, 1921'],['pollock','Peinture de Jackson Pollock','Jackson Pollock','Peinture « all-over » (dripping)'],['soulages','Peinture de Pierre Soulages','Pierre Soulages','Peinture (outrenoir)'],['twombly','Peinture de Cy Twombly','Cy Twombly','Peinture sur toile']]};
+  function figs(i){
+    var a=IM[i];if(!a)return '';
+    return '<div class="figs">'+a.map(function(x){return '<figure><a href="images/'+x[0]+'.jpg" target="_blank" rel="noopener"><img src="images/'+x[0]+'.jpg" alt="'+esc(x[1])+'" loading="lazy"></a><figcaption><b>'+esc(x[2])+'</b> — '+esc(x[3])+'</figcaption></figure>'}).join('')+'</div>';
+  }
+  function det(t,i){
+    var r=R[i]||{};if(!t.e&&!r.r)return '';
+    return '<details><summary>Exemple, question et piste de réponse</summary>'+(t.e?'<p><b>Exemple :</b> '+esc(t.e)+'</p>':'')+(t.u?'<p class="qs">'+esc(t.u)+'</p>':'')+(r.r?'<div class="rep"><b>Piste de réponse</b>'+esc(r.r)+figs(i)+(r.v?'<div class="views">'+r.v.map(function(v){return '<a href="https://www.google.com/search?tbm=isch&amp;q='+encodeURIComponent(v[1])+'" target="_blank" rel="noopener">Voir : '+esc(v[0])+'</a>'}).join('')+'</div>':'')+'</div>':'')+'</details>';
+  }
+  var html='';
+  T.forEach(function(t,i){
+    var k=C[t.c];
+    html+='<article class="card" id="t'+(i+1)+'" data-c="'+t.c+'" style="--c:'+k[1]+';--ct:'+k[2]+'"><div class="top"><span class="no">'+(i+1)+'</span><span class="tag">'+k[0]+'</span></div>'+
+      '<p class="th">Thèse : '+esc(t.th)+'</p><p class="src">'+esc(t.s)+'</p><p>'+esc(t.a)+'</p>'+
+      (t.q?'<blockquote>« '+esc(t.q)+' »</blockquote>':'')+
+      det(t,i)+'</article>';
+  });
+  document.getElementById('cards').innerHTML=html;
+  var cards=[].slice.call(document.querySelectorAll('.card')),fb=document.getElementById('filters');
+  [['all','Toutes les thèses']].concat(Object.keys(C).map(function(k){return [k,C[k][0]]})).forEach(function(f,i){
+    var b=document.createElement('button');b.type='button';b.textContent=f[1];b.setAttribute('aria-pressed',i===0?'true':'false');
+    b.addEventListener('click',function(){
+      [].slice.call(fb.children).forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
+      cards.forEach(function(c){c.hidden=f[0]!=='all'&&c.getAttribute('data-c')!==f[0]});
+    });
+    fb.appendChild(b);
+  });
+  var P=[['I. L’art semble étranger à la vérité : imitation, illusion et mensonge','var(--red)',[1,4]],['II. L’art révèle une vérité cachée, que le langage et la perception ordinaire manquent','var(--blue)',[2,3,5]],['III. Une autre rationalité : ni la science, ni le simple trompe-l’œil, mais le sensible et l’œil qui construit','var(--yelt)',[6,7,8,9]]];
+  document.getElementById('plan').innerHTML=P.map(function(p){
+    return '<div style="--c:'+p[1]+'"><b>'+esc(p[0])+'</b><br>Textes : '+p[2].map(function(n){return '<a href="#t'+n+'">'+n+'</a>'}).join('')+'</div>';
+  }).join('');
+})();
+</script>
+</body>
+</html>

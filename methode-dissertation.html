@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Construire une dissertation</title>
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+  --bg:#FBFBFD; --surface:#FFFFFF; --ink:#1A2340; --muted:#566080; --line:#D9DEEC; --grid:#E3EAF8;
+  --a:#2B55C6; --r:#C42B1A; --g:#0F7A5F; --on:#FFFFFF; --focus:#2B55C6;
+  --head:system-ui,-apple-system,"Segoe UI",sans-serif;
+  --text:Georgia,"Times New Roman",serif;
+  --hand:"Segoe Print","Bradley Hand",cursive;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0F1422; --surface:#161C2F; --ink:#E8ECF8; --muted:#9EA8C6; --line:#2A3250; --grid:#18203A;
+    --a:#8FA8FF; --r:#FF7A66; --g:#4FD1A8; --on:#0F1422; --focus:#8FA8FF;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0F1422; --surface:#161C2F; --ink:#E8ECF8; --muted:#9EA8C6; --line:#2A3250; --grid:#18203A;
+  --a:#8FA8FF; --r:#FF7A66; --g:#4FD1A8; --on:#0F1422; --focus:#8FA8FF;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:calc(4.2rem + env(safe-area-inset-top,0px));-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.125rem/1.65 var(--text)}
+.wrap{width:min(1000px,100% - 2.5rem);margin-inline:auto}
+h1,h2,h3,h4{margin:0}
+h1{font:800 clamp(2.4rem,7.5vw,4.8rem)/1.02 var(--head);letter-spacing:-.03em}
+h2{font:800 clamp(1.5rem,3.2vw,2.1rem)/1.12 var(--head);letter-spacing:-.02em}
+h3{font:800 1.15rem/1.25 var(--head)}
+p{margin:0 0 1em}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.btn{font:700 .95rem/1.2 var(--head);color:var(--ink);background:transparent;border:1.5px solid var(--ink);border-radius:8px;padding:.65rem 1rem;cursor:pointer}
+.btn:hover{background:var(--grid)}
+.btn.primary{background:var(--ink);color:var(--bg)}
+.btn.danger{border-color:var(--r);color:var(--r)}
+
+/* En-tête sur papier quadrillé */
+.hero{padding:clamp(2.2rem,6vw,4.5rem) 0 clamp(2rem,5vw,3.2rem);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:28px 28px}
+.uline{position:relative;display:inline-block}
+.wave{position:absolute;left:0;bottom:-.14em;width:100%;height:.26em;overflow:visible}
+.wave path{fill:none;stroke:var(--r);stroke-width:4;stroke-linecap:round;vector-effect:non-scaling-stroke;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.1s cubic-bezier(.3,.7,.2,1) .3s}
+.wave.on path{stroke-dashoffset:0}
+.lead{font:400 clamp(1.2rem,2.4vw,1.5rem)/1.45 var(--text);max-width:36ch;margin:1.8rem 0 1.8rem}
+.stats{display:flex;flex-wrap:wrap;gap:1rem 2.4rem}
+.stat{max-width:19rem}
+.stat .n{display:block;font:600 clamp(2.2rem,5vw,3.2rem)/1 var(--hand);color:var(--r)}
+.stat .l{display:block;font-size:1rem;color:var(--muted);line-height:1.4}
+
+/* Navigation des étapes */
+.stepnav{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--bg);border-bottom:1px solid var(--line)}
+.stepnav ol{display:flex;gap:.3rem;list-style:none;margin:0;padding:.5rem 0;overflow-x:auto}
+.stepnav a{display:flex;align-items:center;gap:.45rem;white-space:nowrap;padding:.45rem .7rem;border-radius:8px;text-decoration:none;color:var(--muted);font:700 .9rem/1.2 var(--head)}
+.stepnav a:hover{color:var(--ink)}
+.stepnav b{display:inline-flex;align-items:center;justify-content:center;width:1.6rem;height:1.6rem;border-radius:50%;border:1.5px solid currentColor;font-size:.85rem}
+.stepnav li.done b{background:var(--g);border-color:var(--g);color:var(--on)}
+.stepnav a[aria-current="true"]{background:var(--ink);color:var(--bg)}
+.stepnav li.done a[aria-current="true"] b{border-color:var(--bg)}
+
+/* Étapes */
+.step{border-bottom:1px solid var(--line);padding:clamp(2.6rem,6vw,4rem) 0}
+.step-grid{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.6fr);gap:1.5rem clamp(2rem,5vw,4rem)}
+.num{display:block;font:800 clamp(4rem,9vw,6.5rem)/.9 var(--head);color:var(--r);margin-bottom:.6rem}
+.instr{max-width:60ch}
+.work{background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--wc,var(--ink));border-radius:8px;padding:1.1rem 1.2rem 1.3rem;margin:1.2rem 0 0}
+.work + .work{margin-top:1rem}
+.work-t{font:600 1.45rem/1 var(--hand);color:var(--r);margin:0 0 .8rem}
+.f{margin-bottom:.9rem}
+.f:last-child{margin-bottom:0}
+.f label{display:block;font:700 .88rem/1.3 var(--head);margin-bottom:.3rem}
+input[type="text"],textarea{display:block;width:100%;font:400 1rem/1.5 var(--text);color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:6px;padding:.6rem .75rem;resize:vertical}
+input[type="text"]:focus,textarea:focus{border-color:var(--focus)}
+textarea{min-height:3.2rem;overflow:hidden}
+.trow{display:grid;grid-template-columns:minmax(0,.6fr) minmax(0,1.4fr);gap:.9rem;margin-bottom:.9rem}
+.trow:last-child{margin-bottom:0}
+.trow .f{margin:0}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1rem}
+.a{--wc:var(--a)} .a .work-t,.a .tag{color:var(--a)}
+.r{--wc:var(--r)}
+.g{--wc:var(--g)}
+.tag{font:800 .85rem/1 var(--head);margin:0 0 .7rem;display:block}
+.tag.a{color:var(--a)} .tag.r{color:var(--r)} .tag.g{color:var(--g)}
+.recall{font:700 .95rem/1.4 var(--head);margin:0 0 .8rem}
+.ph{color:var(--muted);font-style:italic;font-weight:400}
+.problem{font:500 clamp(1.15rem,2.4vw,1.4rem)/1.5 var(--text);margin:0;padding-left:1rem;border-left:5px solid var(--r)}
+.note{font-size:1rem;color:var(--muted)}
+
+/* Plan */
+.ptabs{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.2rem 0 1rem}
+.ptabs button{font:800 .98rem/1.2 var(--head);color:var(--c);background:transparent;border:2px solid var(--c);border-radius:8px;padding:.6rem .9rem;cursor:pointer}
+.ptabs button[aria-selected="true"]{background:var(--c);color:var(--on)}
+.ppanel[hidden]{display:none}
+.sub{background:var(--surface);border:1px solid var(--line);border-top:5px solid var(--c);border-radius:0 0 8px 8px;padding:1rem 1.1rem 1.2rem;margin-bottom:1rem}
+.sub h4{font:800 1rem/1.3 var(--head);margin-bottom:.8rem;color:var(--c)}
+.trans{border:2px dashed var(--c);border-radius:8px;padding:1rem 1.1rem 1.2rem}
+.trans h4{font:600 1.45rem/1 var(--hand);color:var(--c);margin-bottom:.8rem}
+
+/* Conclusion, introduction */
+.list{list-style:none;margin:0 0 1rem;padding:0}
+.list li{padding:.6rem 0;border-top:1px solid var(--line)}
+.list li:last-child{border-bottom:1px solid var(--line)}
+.list strong{font-family:var(--head)}
+.ingr{display:flex;flex-direction:column;gap:.8rem;margin-bottom:1rem}
+.ingr > div{background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--r);border-radius:0 8px 8px 0;padding:.8rem 1rem}
+.ingr h4{font:800 .88rem/1.3 var(--head);margin-bottom:.2rem}
+.ingr p{margin:0;font-size:1.02rem}
+
+/* Écrire */
+.checks{list-style:none;margin:1rem 0 0;padding:0}
+.checks li{border-top:1px solid var(--line)}
+.checks li:last-child{border-bottom:1px solid var(--line)}
+.checks label{display:flex;align-items:flex-start;gap:.7rem;padding:.7rem 0;cursor:pointer}
+.checks input{width:1.3rem;height:1.3rem;margin-top:.2rem;flex:none;accent-color:var(--g)}
+.export{margin-top:2.4rem;padding-top:1.6rem;border-top:1px solid var(--line)}
+.export h3{margin-bottom:.4rem}
+.export textarea{min-height:16rem;font:400 .92rem/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;overflow:auto}
+.btns{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin-top:.8rem}
+.msg{font:700 .9rem/1.3 var(--head);color:var(--g);margin:0}
+footer{padding:1.6rem 0 2.5rem;color:var(--muted);font-size:.95rem}
+footer p{margin:0 0 .3rem}
+
+@media (max-width:820px){
+  .step-grid{grid-template-columns:1fr}
+  .trow,.two{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition:none!important;animation:none!important}
+  .wave path{stroke-dashoffset:0}
+}
+
+.pdfbtn{display:inline-flex;align-items:center;gap:.5rem;font:600 .88rem/1 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--surface);border:1.5px solid var(--ink);border-radius:999px;padding:.55rem .95rem;cursor:pointer}
+.pdfbtn:hover{background:var(--ink);color:var(--bg)}.pdfbtn:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:2px}
+@media print{
+  :root{--bg:#fff!important;--surface:#fff!important;--ink:#111!important;--muted:#444!important;--line:#bbb!important;color-scheme:light!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:#fff!important;color:#111!important}
+  body::before,body::after{display:none!important}
+  nav,.pdfbtn,.pn,video,section[aria-labelledby="h-video"]{display:none!important}
+  .rev,.js .rev{opacity:1!important;transform:none!important}
+  .stp li[hidden]{display:list-item!important}
+  details>*{display:block!important}
+  article,li,.card,figure,.stage{break-inside:avoid}
+  h1,h2,h3{break-after:avoid;text-shadow:none!important}
+  *{text-shadow:none!important}
+  a{color:inherit;text-decoration:none}
+  section.block,.part{padding-top:1.2rem!important;padding-bottom:1.2rem!important}
+  footer{break-before:avoid;border-top:1px solid #999;margin-top:1rem}
+}
+@page{size:A4;margin:16mm 14mm}
+</style>
+</head>
+<body>
+<nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
+
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Construire une <span class="uline">dissertation<svg class="wave" id="wave" viewBox="0 0 400 12" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M2 7 Q 22 0 42 7 T 82 7 T 122 7 T 162 7 T 202 7 T 242 7 T 282 7 T 322 7 T 362 7 T 398 7"/></svg></span></h1>
+    <p class="lead">Toutes les étapes se font au brouillon. Prenez le temps : l’essentiel de la dissertation se fait ici, le reste n’est « que » de l’écriture.</p>
+    <div class="stats">
+      <div class="stat"><span class="n">1h30 à 2h</span><span class="l">à consacrer au brouillon</span></div>
+      <div class="stat"><span class="n">99 %</span><span class="l">du travail est déjà fait quand toutes les étapes sont respectées</span></div>
+    </div>
+  </div>
+</header>
+
+<nav class="stepnav" aria-label="Les huit étapes">
+  <div class="wrap">
+    <ol id="stepnav">
+      <li><a href="#s1"><b>1</b>Définir</a></li>
+      <li><a href="#s2"><b>2</b>Thèses</a></li>
+      <li><a href="#s3"><b>3</b>Arguments</a></li>
+      <li><a href="#s4"><b>4</b>Problème</a></li>
+      <li><a href="#s5"><b>5</b>Plan</a></li>
+      <li><a href="#s6"><b>6</b>Conclure</a></li>
+      <li><a href="#s7"><b>7</b>Introduire</a></li>
+      <li><a href="#s8"><b>8</b>Écrire</a></li>
+    </ol>
+  </div>
+</nav>
+
+<main>
+
+<section class="step" id="s1" aria-labelledby="h-s1">
+  <div class="wrap step-grid">
+    <div><span class="num" aria-hidden="true">1</span><h2 id="h-s1">Définir les termes importants</h2></div>
+    <div>
+      <p class="instr">Commencez par des définitions larges. Indiquez les différents sens de chaque terme : ce n’est qu’ensuite que vous pourrez déterminer les sens les plus importants pour le sujet.</p>
+      <div class="work">
+        <p class="work-t">À faire au brouillon</p>
+        <div class="f"><label for="sujet">Votre sujet</label><textarea id="sujet" data-f rows="2"></textarea></div>
+        <div class="trow"><div class="f"><label for="t1n">Terme 1</label><input type="text" id="t1n" data-f></div><div class="f"><label for="t1s">Ses différents sens</label><textarea id="t1s" data-f rows="2"></textarea></div></div>
+        <div class="trow"><div class="f"><label for="t2n">Terme 2</label><input type="text" id="t2n" data-f></div><div class="f"><label for="t2s">Ses différents sens</label><textarea id="t2s" data-f rows="2"></textarea></div></div>
+        <div class="trow"><div class="f"><label for="t3n">Terme 3</label><input type="text" id="t3n" data-f></div><div class="f"><label for="t3s">Ses différents sens</label><textarea id="t3s" data-f rows="2"></textarea></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="step" id="s2" aria-labelledby="h-s2">
+  <div class="wrap step-grid">
+    <div><span class="num" aria-hidden="true">2</span><h2 id="h-s2">Identifier les grandes thèses du sujet</h2></div>
+    <div>
+      <p class="instr">Puisque l’on peut toujours répondre par « oui » ou par « non », commençons par mettre le sujet à l’affirmative (idée 1), puis cette phrase à la négative (idée 2).</p>
+      <div class="work a">
+        <span class="tag a">Idée 1 : le sujet à l’affirmative</span>
+        <div class="f"><label for="oui">Oui, …</label><textarea id="oui" data-f rows="2"></textarea></div>
+        <div class="f"><label for="oui_c">Conséquence : …</label><textarea id="oui_c" data-f rows="2"></textarea></div>
+      </div>
+      <div class="work r">
+        <span class="tag r">Idée 2 : cette phrase à la négative</span>
+        <div class="f"><label for="non">Non, …</label><textarea id="non" data-f rows="2"></textarea></div>
+        <div class="f"><label for="non_c">Conséquence : …</label><textarea id="non_c" data-f rows="2"></textarea></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="step" id="s3" aria-labelledby="h-s3">
+  <div class="wrap step-grid">
+    <div><span class="num" aria-hidden="true">3</span><h2 id="h-s3">Identifier un argument et un exemple pour défendre chaque idée</h2></div>
+    <div>
+      <p class="instr">Pour chacune des deux idées, trouvez un argument et un exemple.</p>
+      <div class="work a">
+        <span class="tag a">a. Pour défendre l’idée 1</span>
+        <p class="recall">Idée 1 : <span data-bind="oui" data-ph="à écrire à l’étape 2"></span></p>
+        <div class="f"><label for="car1">Car …</label><textarea id="car1" data-f rows="2"></textarea></div>
+        <div class="f"><label for="ex1">Par exemple …</label><textarea id="ex1" data-f rows="2"></textarea></div>
+      </div>
+      <div class="work r">
+        <span class="tag r">b. Pour défendre l’idée 2</span>
+        <p class="recall">Idée 2 : <span data-bind="non" data-ph="à écrire à l’étape 2"></span></p>
+        <div class="f"><label for="car2">Car …</label><textarea id="car2" data-f rows="2"></textarea></div>
+        <div class="f"><label for="ex2">Par exemple …</label><textarea id="ex2" data-f rows="2"></textarea></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="step" id="s4" aria-labelledby="h-s4">
+  <div class="wrap step-grid">
+    <div><span class="num" aria-hidden="true">4</span><h2 id="h-s4">Construire le problème</h2></div>
+    <div>
+      <p class="instr">Il faut ici construire une question soulevant deux alternatives sérieuses et crédibles, à partir des grandes thèses identifiées. Elle se forme à partir de vos réponses aux étapes 2 et 3 :</p>
+      <p class="problem" id="problem" aria-live="polite">« Est-ce que <span data-bind="oui" data-ph="idée 1"></span>, puisque <span data-bind="car1" data-ph="argument 1"></span>, ou bien <span data-bind="non" data-ph="idée 2"></span>, puisque <span data-bind="car2" data-ph="argument 2"></span> ? »</p>
+      <p class="instr" style="margin-top:1.2rem">Nous avons donc un problème : une question soulevant une alternative, à laquelle nous ne pouvons pas directement répondre par l’affirmative ou la négative. Reste désormais à construire un plan permettant de rendre compte de ce problème, et à le dépasser pour répondre à la question.</p>
+    </div>
+  </div>
+</section>
+
+<section class="step" id="s5" aria-labelledby="h-s5">
+  <div class="wrap step-grid">
+    <div><span class="num" aria-hidden="true">5</span><h2 id="h-s5">Construire le plan</h2></div>
+    <div>
+      <p class="instr">Le plan, c’est la manière dont vous allez répondre à la question. Pour chaque grande idée (ou partie), identifiez deux à trois arguments permettant de la défendre : un argument = une sous-partie. Pour chaque argument, ajoutez un exemple ou une référence philosophique (une référence maximum par sous-partie).</p>
+      <div class="ptabs" id="ptabs" role="tablist" aria-label="Les trois parties du plan"></div>
+      <div id="ppanels"></div>
+    </div>
+  </div>
+</section>
+
+<section class="step" id="s6" aria-labelledby="h-s6">
+  <div class="wrap step-grid">
+    <div><span class="num" aria-hidden="true">6</span><h2 id="h-s6">Conclure</h2></div>
+    <div>
+      <p class="instr">Reprenez chaque « bilan » de vos transitions, et apportez une réponse claire et franche à la question.</p>
+      <ul class="list">
+        <li><strong>Bilan de la partie I.</strong> <span data-bind="b1" data-ph="à écrire dans le plan (étape 5)"></span></li>
+        <li><strong>Bilan de la partie II.</strong> <span data-bind="b2" data-ph="à écrire dans le plan (étape 5)"></span></li>
+        <li><strong>Bilan de la partie III.</strong> <span data-bind="b3" data-ph="à écrire dans le plan (étape 5)"></span></li>
+      </ul>
+      <div class="work g">
+        <p class="work-t">À faire au brouillon</p>
+        <div class="f"><label for="concl">Ma réponse claire et franche à la question</label><textarea id="concl" data-f rows="3"></textarea></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="step" id="s7" aria-labelledby="h-s7">
+  <div class="wrap step-grid">
+    <div><span class="num" aria-hidden="true">7</span><h2 id="h-s7">Introduire</h2></div>
+    <div>
+      <p class="instr">Écrivez au brouillon votre introduction, intégrant les définitions importantes, le problème et le plan. Voici les trois éléments, tels que vos étapes précédentes les fournissent :</p>
+      <div class="ingr">
+        <div><h4>Les définitions importantes</h4><p id="i-defs"></p></div>
+        <div><h4>Le problème</h4><p id="i-pb"></p></div>
+        <div><h4>Le plan</h4><p id="i-plan"></p></div>
+      </div>
+      <div class="work g">
+        <p class="work-t">À faire au brouillon</p>
+        <div class="f"><label for="intro">Mon introduction</label><textarea id="intro" data-f rows="5"></textarea></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="step" id="s8" aria-labelledby="h-s8">
+  <div class="wrap step-grid">
+    <div><span class="num" aria-hidden="true">8</span><h2 id="h-s8">Écrire</h2></div>
+    <div>
+      <p class="instr">Ne reste plus qu’à écrire votre copie. Si vous avez respecté toutes ces étapes, 99 % du travail est déjà fait : vous savez ce que vous soutenez, les références que vous utilisez, les exemples, etc.</p>
+      <p class="instr">Soyez attentifs à la structure de votre copie : le correcteur doit pouvoir identifier directement les parties et sous-parties, et votre propos doit être logique et fluide. Indiquez pourquoi et comment vous passez d’une partie à une autre, et reliez systématiquement votre propos au sujet.</p>
+      <ul class="checks" aria-label="Liste de vérification de la copie">
+        <li><label><input type="checkbox" id="c1" data-f>Les parties et les sous-parties sont directement identifiables.</label></li>
+        <li><label><input type="checkbox" id="c2" data-f>Le propos est logique et fluide.</label></li>
+        <li><label><input type="checkbox" id="c3" data-f>J’indique pourquoi et comment je passe d’une partie à une autre.</label></li>
+        <li><label><input type="checkbox" id="c4" data-f>Je relie systématiquement mon propos au sujet.</label></li>
+        <li><label><input type="checkbox" id="c5" data-f>Chaque sous-partie se termine par une synthèse.</label></li>
+      </ul>
+
+      <div class="export">
+        <h3>Mon brouillon en texte</h3>
+        <p class="note">Tout ce que vous avez écrit sur cette page est rassemblé ici. Il reste dans votre navigateur : il n’est envoyé nulle part.</p>
+        <textarea id="compiled" readonly aria-label="Brouillon rassemblé"></textarea>
+        <div class="btns">
+          <button class="btn primary" id="copy" type="button">Copier mon brouillon</button>
+          <button class="btn danger" id="clear" type="button">Effacer mon brouillon</button>
+          <p class="msg" id="msg" aria-live="polite"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Page réalisée à partir de la fiche « Construction d’une dissertation ».</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  function $(s){return document.querySelector(s)}
+  function $$(s,r){return [].slice.call((r||document).querySelectorAll(s))}
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- Plan : construction des trois parties ---------- */
+  var PARTS=[
+    {k:1,rom:'I',title:'Idée 1',bind:'oui',c:'var(--a)',tr:[['b1','Bilan','Ce que cette partie a établi'],['pb1','Problème','Le problème qui appelle la partie suivante']]},
+    {k:2,rom:'II',title:'Idée 2',bind:'non',c:'var(--r)',tr:[['b2','Bilan','Ce que cette partie a établi'],['pb2','Problème','Le problème qui appelle la partie suivante']]},
+    {k:3,rom:'III',title:'Dépassement de l’alternative',bind:null,c:'var(--g)',tr:[['b3','Bilan','Ce que cette partie a établi'],['lim3','Limite','La limite de votre réponse']]}
+  ];
+  var ORD=['1er argument = 1ère sous-partie','2ème argument = 2ème sous-partie','3ème argument = 3ème sous-partie (facultatif)'];
+  var FIELDS=[['car','Car','L’argument'],['ref','Référence','Une référence philosophique maximum'],['ex','Exemple','Un exemple'],['syn','Synthèse','Reliez à la question posée']];
+  function ta(id,label,ph){
+    return '<div class="f"><label for="'+id+'">'+label+'</label><textarea id="'+id+'" data-f rows="2" placeholder="'+ph+'"></textarea></div>';
+  }
+  var tabsEl=$('#ptabs'),panelsEl=$('#ppanels'),tabBtns=[],panels=[];
+  PARTS.forEach(function(p,pi){
+    var b=document.createElement('button');
+    b.type='button';b.setAttribute('role','tab');b.id='pt'+p.k;
+    b.setAttribute('aria-controls','pp'+p.k);b.style.setProperty('--c',p.c);
+    b.textContent=p.rom+'. '+p.title;
+    b.setAttribute('aria-selected',pi===0?'true':'false');
+    b.addEventListener('click',function(){showPart(pi)});
+    b.addEventListener('keydown',function(e){
+      if(e.key==='ArrowRight'){e.preventDefault();showPart((pi+1)%3,true)}
+      else if(e.key==='ArrowLeft'){e.preventDefault();showPart((pi+2)%3,true)}
+    });
+    tabsEl.appendChild(b);tabBtns.push(b);
+
+    var pan=document.createElement('div');
+    pan.className='ppanel';pan.id='pp'+p.k;pan.setAttribute('role','tabpanel');
+    pan.setAttribute('aria-labelledby','pt'+p.k);pan.style.setProperty('--c',p.c);
+    if(pi!==0)pan.hidden=true;
+    var h='';
+    if(p.bind){
+      h+='<p class="recall">'+p.rom+'. '+p.title+' : <span data-bind="'+p.bind+'" data-ph="à écrire à l’étape 2"></span></p>';
+    }else{
+      h+='<p class="recall">'+p.rom+'. '+p.title+' : il s’agit de dépasser l’alternative pour répondre à la question.</p>';
+    }
+    for(var s=1;s<=3;s++){
+      h+='<div class="sub"><h4>'+ORD[s-1]+'</h4>';
+      FIELDS.forEach(function(f){h+=ta('p'+p.k+'_'+s+'_'+f[0],f[1],f[2])});
+      h+='</div>';
+    }
+    h+='<div class="trans"><h4>Transition</h4>';
+    p.tr.forEach(function(t){h+=ta(t[0],t[1],t[2])});
+    h+='</div>';
+    pan.innerHTML=h;
+    panelsEl.appendChild(pan);panels.push(pan);
+  });
+  function showPart(i,focus){
+    tabBtns.forEach(function(b,k){
+      b.setAttribute('aria-selected',k===i?'true':'false');
+      b.setAttribute('tabindex',k===i?'0':'-1');
+      panels[k].hidden=k!==i;
+    });
+    if(focus)tabBtns[i].focus();
+    $$('textarea',panels[i]).forEach(fit);
+  }
+  tabBtns.forEach(function(b,k){b.setAttribute('tabindex',k===0?'0':'-1')});
+
+  /* ---------- Champs : mémorisation et affichage ---------- */
+  var KEY='methode-dissertation-brouillon';
+  var inputs=$$('[data-f]');
+  var byId={};inputs.forEach(function(el){byId[el.id]=el});
+  function fit(t){
+    if(t.tagName!=='TEXTAREA'||t.readOnly)return;
+    if(!t.offsetParent&&!t.getClientRects().length)return;
+    t.style.height='auto';
+    if(t.scrollHeight>0)t.style.height=(t.scrollHeight+2)+'px';
+  }
+  function getVal(el){return el.type==='checkbox'?(el.checked?'1':''):el.value}
+  function val(id){var el=byId[id];return el&&el.type!=='checkbox'?el.value.trim():''}
+  function clean(s){return s.replace(/\s+/g,' ').trim().replace(/[.\s…]+$/,'')}
+  function save(){
+    try{
+      var o={};inputs.forEach(function(el){var v=getVal(el);if(v)o[el.id]=v});
+      localStorage.setItem(KEY,JSON.stringify(o));
+    }catch(e){}
+  }
+  function restore(){
+    try{
+      var o=JSON.parse(localStorage.getItem(KEY)||'{}');
+      Object.keys(o).forEach(function(id){
+        var el=byId[id];if(!el)return;
+        if(el.type==='checkbox')el.checked=true;else el.value=o[id];
+      });
+    }catch(e){}
+  }
+
+  function placeholderText(id,ph){var v=clean(val(id));return v||'['+ph+']'}
+  function problemText(){
+    return 'Est-ce que '+placeholderText('oui','idée 1')+', puisque '+placeholderText('car1','argument 1')+', ou bien '+placeholderText('non','idée 2')+', puisque '+placeholderText('car2','argument 2')+' ?';
+  }
+  function updateBinds(){
+    $$('[data-bind]').forEach(function(el){
+      var v=clean(val(el.getAttribute('data-bind')));
+      if(v){el.textContent=v;el.classList.remove('ph')}
+      else{el.textContent=el.getAttribute('data-ph');el.classList.add('ph')}
+    });
+    var names=['t1n','t2n','t3n'].map(function(i){return clean(val(i))}).filter(Boolean);
+    $('#i-defs').textContent=names.length?names.join(', '):'[les termes définis à l’étape 1]';
+    $('#i-pb').textContent='« '+problemText()+' »';
+    $('#i-plan').textContent='I. '+placeholderText('oui','idée 1')+' — II. '+placeholderText('non','idée 2')+' — III. dépassement de l’alternative.';
+  }
+
+  /* Texte rassemblé */
+  function compile(){
+    var L=[];
+    function line(label,id){var v=val(id);if(v)L.push(label+v.replace(/\n+/g,' '))}
+    function head(t){if(L.length)L.push('');L.push(t)}
+    var s=val('sujet');
+    if(s)L.push('SUJET : '+s.replace(/\n+/g,' '));
+    var defs=[];
+    [1,2,3].forEach(function(i){
+      var n=val('t'+i+'n'),m=val('t'+i+'s');
+      if(n||m)defs.push('- '+(n||'Terme '+i)+(m?' : '+m.replace(/\n+/g,' '):''));
+    });
+    if(defs.length){head('1. DÉFINITIONS');L=L.concat(defs)}
+    var h2=L.length;
+    head('2. GRANDES THÈSES');
+    var b2=L.length;
+    line('Oui, ','oui');line('Conséquence : ','oui_c');line('Non, ','non');line('Conséquence : ','non_c');
+    if(L.length===b2){L.length=h2;if(L[L.length-1]==='')L.pop()}
+    var h3=L.length;head('3. ARGUMENTS ET EXEMPLES');var b3=L.length;
+    line('Idée 1 – Car ','car1');line('Idée 1 – Par exemple ','ex1');line('Idée 2 – Car ','car2');line('Idée 2 – Par exemple ','ex2');
+    if(L.length===b3){L.length=h3;if(L[L.length-1]==='')L.pop()}
+    if(val('oui')&&val('car1')&&val('non')&&val('car2')){head('4. PROBLÈME');L.push(problemText())}
+    var h5=L.length;head('5. PLAN');var b5=L.length;
+    PARTS.forEach(function(p){
+      var sub=[];
+      for(var k=1;k<=3;k++){
+        var parts=[];
+        FIELDS.forEach(function(f){var v=val('p'+p.k+'_'+k+'_'+f[0]);if(v)parts.push('   '+f[1]+' : '+v.replace(/\n+/g,' '))});
+        if(parts.length){sub.push('  '+k+'. Sous-partie '+k);sub=sub.concat(parts)}
+      }
+      var tr=[];
+      p.tr.forEach(function(t){var v=val(t[0]);if(v)tr.push('  '+t[1]+' : '+v.replace(/\n+/g,' '))});
+      if(sub.length||tr.length){
+        L.push(p.rom+'. '+p.title+(p.bind&&val(p.bind)?' : '+val(p.bind).replace(/\n+/g,' '):''));
+        L=L.concat(sub);
+        if(tr.length){L.push('  Transition');L=L.concat(tr.map(function(x){return ' '+x}))}
+      }
+    });
+    if(L.length===b5){L.length=h5;if(L[L.length-1]==='')L.pop()}
+    var h6=L.length;head('6. CONCLUSION');var b6=L.length;
+    line('Bilan I : ','b1');line('Bilan II : ','b2');line('Bilan III : ','b3');line('Réponse : ','concl');
+    if(L.length===b6){L.length=h6;if(L[L.length-1]==='')L.pop()}
+    if(val('intro')){head('7. INTRODUCTION');L.push(val('intro'))}
+    return L.join('\n');
+  }
+  var compiled=$('#compiled');
+  function updateAll(){
+    updateBinds();
+    compiled.value=compile();
+    updateNav();
+  }
+
+  /* ---------- Navigation : étapes remplies et étape courante ---------- */
+  var navItems=$$('#stepnav li');
+  function updateNav(){
+    navItems.forEach(function(li,i){
+      var sec=document.getElementById('s'+(i+1));
+      var any=$$('[data-f]',sec).some(function(el){return el.type==='checkbox'?el.checked:el.value.trim()!==''});
+      li.classList.toggle('done',any);
+    });
+  }
+  var current=null;
+  function setCurrent(i){
+    if(current===i)return;current=i;
+    navItems.forEach(function(li,k){
+      var a=li.firstChild;
+      if(k===i)a.setAttribute('aria-current','true');else a.removeAttribute('aria-current');
+    });
+    var a=navItems[i].firstChild,box=a.parentNode.parentNode;
+    if(box.scrollWidth>box.clientWidth){
+      box.scrollTo?box.scrollTo({left:a.offsetLeft-20,behavior:reduce?'auto':'smooth'}):0;
+    }
+  }
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(e.isIntersecting)setCurrent(parseInt(e.target.id.slice(1),10)-1);
+      });
+    },{rootMargin:'-30% 0px -60% 0px'});
+    for(var n=1;n<=8;n++)io.observe(document.getElementById('s'+n));
+  }
+
+  /* ---------- Événements ---------- */
+  inputs.forEach(function(el){
+    el.addEventListener('input',function(){fit(el);save();updateAll()});
+    el.addEventListener('change',function(){save();updateAll()});
+  });
+  restore();
+  inputs.forEach(fit);
+  updateAll();
+  window.addEventListener('resize',function(){inputs.forEach(fit)});
+
+  /* Copie du brouillon */
+  var msg=$('#msg');
+  function say(t){msg.textContent=t;setTimeout(function(){if(msg.textContent===t)msg.textContent=''},4000)}
+  $('#copy').addEventListener('click',function(){
+    var text=compiled.value;
+    if(!text){say('Il n’y a encore rien à copier.');return}
+    function fallback(){
+      compiled.focus();compiled.select();
+      var ok=false;try{ok=document.execCommand('copy')}catch(e){}
+      say(ok?'Brouillon copié.':'Sélectionnez le texte puis copiez-le (Ctrl+C).');
+    }
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){say('Brouillon copié.')},fallback);
+    }else fallback();
+  });
+
+  /* Effacement en deux temps */
+  var clearBtn=$('#clear'),armed=false,timer=0;
+  clearBtn.addEventListener('click',function(){
+    if(!armed){
+      armed=true;clearBtn.textContent='Confirmer l’effacement';
+      timer=setTimeout(function(){armed=false;clearBtn.textContent='Effacer mon brouillon'},4000);
+      return;
+    }
+    clearTimeout(timer);armed=false;clearBtn.textContent='Effacer mon brouillon';
+    inputs.forEach(function(el){if(el.type==='checkbox')el.checked=false;else{el.value='';el.style.height=''}});
+    try{localStorage.removeItem(KEY)}catch(e){}
+    updateAll();say('Brouillon effacé.');
+  });
+
+  /* Un seul moment orchestré à l’ouverture : le soulignement se trace */
+  var wave=$('#wave');
+  if(reduce){wave.classList.add('on')}
+  else{requestAnimationFrame(function(){requestAnimationFrame(function(){wave.classList.add('on')})})}
+})();
+</script>
+</body>
+</html>

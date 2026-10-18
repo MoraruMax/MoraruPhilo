@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>L’âne de Buridan : la liberté d’indifférence</title>
+<script>document.documentElement.classList.add('js')</script>
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+  --bg:#EDF1EE; --surface:#FFFFFF; --ink:#1B2A24; --muted:#4B5F56; --line:#CFDAD3; --focus:#0F766E;
+  --food:#8A5A0B; --food-fill:#D69E2E; --water:#1F5C99; --water-fill:#3B82C4; --none:#4B5F56;
+  --mod:#B3261E; --attr:#5B3FC4; --keep:#0F766E; --keep-soft:#DDF3EE;
+  --donkey:#8C919D; --donkey-d:#6E7380; --muzzle:#E6DFD2; --metal:#7C8798; --wood:#8A6642;
+  --display:Georgia,"Times New Roman",serif;
+  --text:system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0F1714; --surface:#17221D; --ink:#E6EFEA; --muted:#9FB3AA; --line:#263832; --focus:#4FD1B5;
+    --food:#F0B54A; --food-fill:#F0B54A; --water:#6FB1F0; --water-fill:#4D93D6; --none:#9FB3AA;
+    --mod:#FF8A80; --attr:#B7A6FF; --keep:#4FD1B5; --keep-soft:#12332D;
+    --donkey:#9AA0AD; --donkey-d:#7B8190; --muzzle:#CFC8BA; --metal:#9AA6B6; --wood:#A8825A;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0F1714; --surface:#17221D; --ink:#E6EFEA; --muted:#9FB3AA; --line:#263832; --focus:#4FD1B5;
+  --food:#F0B54A; --food-fill:#F0B54A; --water:#6FB1F0; --water-fill:#4D93D6; --none:#9FB3AA;
+  --mod:#FF8A80; --attr:#B7A6FF; --keep:#4FD1B5; --keep-soft:#12332D;
+  --donkey:#9AA0AD; --donkey-d:#7B8190; --muzzle:#CFC8BA; --metal:#9AA6B6; --wood:#A8825A;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.65 var(--text)}
+.wrap{width:min(1040px,100% - 2.5rem);margin-inline:auto}
+h1,h2,h3{margin:0}
+h1{font:400 clamp(2.8rem,9vw,6rem)/1 var(--display);letter-spacing:-.02em}
+h2{font:400 clamp(1.7rem,3.6vw,2.4rem)/1.12 var(--display)}
+h3{font:700 1.1rem/1.3 var(--text)}
+p{margin:0 0 1em;max-width:62ch}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
+.note{font-size:.9rem;color:var(--muted)}
+.btn{font:500 .98rem/1.2 var(--text);color:var(--ink);background:transparent;border:1.5px solid var(--ink);border-radius:6px;padding:.65rem 1rem;cursor:pointer}
+.btn.primary{background:var(--ink);color:var(--bg)}
+.btn[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+
+/* Hero */
+.hero{padding:clamp(2.2rem,6vw,4.5rem) 0 clamp(2.5rem,6vw,4rem)}
+.sub{font:500 1.2rem/1.3 var(--text);color:var(--muted);margin:1rem 0 0;max-width:none}
+.lead{font:400 clamp(1.15rem,2.2vw,1.45rem)/1.45 var(--text);max-width:42ch;margin:1.6rem 0 2rem}
+.stage{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:.8rem .8rem 1.3rem}
+#scene{display:block;width:100%;height:auto}
+.ground{stroke:var(--ink);stroke-width:2}
+.mk{stroke:var(--muted);stroke-width:2;fill:none}
+.mk-t{fill:var(--muted);font:500 20px var(--text);text-anchor:middle}
+.lbl-w{fill:var(--water);font:700 26px var(--text);text-anchor:middle}
+.lbl-f{fill:var(--food);font:700 26px var(--text);text-anchor:middle}
+.bub-box{fill:var(--surface);stroke:var(--ink);stroke-width:2.5}
+.bub-t{fill:var(--ink);font:700 32px var(--text);text-anchor:middle}
+#bub{transition:opacity .35s ease}
+.opts{display:flex;flex-wrap:wrap;gap:.6rem;padding:.4rem .8rem 0}
+.caption{padding:1rem .8rem 0;margin:0;min-height:4.6em;max-width:none;font-weight:500}
+
+/* Sections */
+section.block{border-top:1px solid var(--line);padding:clamp(3rem,7vw,5rem) 0}
+.sec-head{max-width:46rem;margin-bottom:2rem}
+.kicker{display:block;font:700 .9rem/1 var(--text);color:var(--keep);margin-bottom:.8rem}
+.sec-head h2{margin-bottom:1rem}
+.conds{display:flex;flex-wrap:wrap;gap:.6rem;list-style:none;margin:0 0 1.6rem;padding:0}
+.conds li{background:var(--surface);border:1.5px solid var(--line);border-radius:6px;padding:.5rem .85rem;font-weight:500}
+.question{font:400 clamp(1.4rem,3vw,2rem)/1.25 var(--display);max-width:30ch;margin:0;padding-left:1.1rem;border-left:5px solid var(--keep)}
+
+/* Tableau d'arguments */
+.tools{display:flex;flex-wrap:wrap;gap:.7rem 1rem;align-items:center;margin-bottom:1.4rem}
+.tools .status{margin:0;flex:1 1 14rem;font-weight:500}
+.legend{display:flex;flex-wrap:wrap;gap:.5rem 1.6rem;list-style:none;margin:0 0 1.6rem;padding:0;font-size:.95rem}
+.legend li{display:flex;align-items:center;gap:.5rem}
+.sw{display:inline-block;width:.85rem;height:.85rem;border-radius:3px;flex:none}
+.cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.4rem}
+.col{min-width:0}
+.col h3{font:400 1.5rem/1.1 var(--display);padding-bottom:.6rem;margin-bottom:.8rem;border-bottom:4px solid var(--cc);color:var(--cc)}
+.args{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.5rem}
+button.arg{display:block;width:100%;text-align:left;font:500 .98rem/1.35 var(--text);color:var(--ink);background:var(--surface);border:1.5px solid var(--line);border-left:5px solid var(--cc);border-radius:6px;padding:.65rem .8rem;cursor:pointer;transition:background-color .4s,border-color .4s,color .4s}
+button.arg:hover{border-color:var(--cc)}
+.arg .t{display:block;text-decoration:line-through 2px;text-decoration-color:transparent;transition:color .4s,text-decoration-color .4s}
+.arg .why{display:block;font-size:.85rem;font-weight:500;line-height:1.3;max-height:0;opacity:0;overflow:hidden;transition:max-height .45s ease,opacity .4s ease,margin .4s ease}
+.arg.out{background:transparent}
+.arg.out .t{color:var(--muted);text-decoration-color:currentColor}
+.arg.out .why{max-height:5em;opacity:1;margin-top:.3rem}
+.arg.out.mod{border-left-color:var(--mod)}
+.arg.out.mod .why{color:var(--mod)}
+.arg.out.attr{border-left-color:var(--attr)}
+.arg.out.attr .why{color:var(--attr)}
+.arg.out.keep{background:var(--keep-soft);border-color:var(--keep);border-left-color:var(--keep)}
+.arg.out.keep .t{color:var(--ink);text-decoration-color:transparent;font-weight:700}
+.arg.out.keep .why{color:var(--keep);font-weight:700}
+
+/* Lecture */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem}
+.reason{border-top:5px solid var(--rc);background:var(--surface);padding:1.1rem 1.2rem 1.3rem;border-radius:0 0 8px 8px}
+.reason h3{color:var(--rc);margin-bottom:.5rem}
+.reason p{margin:0}
+.keepbox{margin-top:1.6rem;padding:1.1rem 1.3rem;border:2px solid var(--keep);background:var(--keep-soft);border-radius:8px;max-width:46rem}
+.keepbox p{margin:0;font-weight:500}
+
+/* Conclusion */
+.big{font:400 clamp(1.6rem,3.8vw,2.6rem)/1.15 var(--display);max-width:22ch;margin:0 0 1.4rem;padding-left:1.1rem;border-left:5px solid var(--keep)}
+.quote{margin:1.6rem 0 0;padding:.3rem 0 .3rem 1.2rem;border-left:4px solid var(--ink);max-width:46rem}
+.quote p{font:400 clamp(1.25rem,2.4vw,1.6rem)/1.3 var(--display);margin:0 0 .5rem}
+.quote cite{font-style:normal;font-size:.9rem;color:var(--muted)}
+
+.recap{margin:0;padding:0;list-style:none;max-width:46rem}
+.recap li{padding:.95rem 0;border-top:1px solid var(--line)}
+.recap li:last-child{border-bottom:1px solid var(--line)}
+footer{border-top:1px solid var(--line);padding:2rem 0 3rem}
+footer p{font-size:.92rem;color:var(--muted);margin:0}
+
+/* Apparition */
+.js .rev{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+.js .rev.in{opacity:1;transform:none}
+
+@media (max-width:860px){
+  .cols{grid-template-columns:1fr}
+  .two{grid-template-columns:1fr}
+  .caption{min-height:6.5em}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition:none!important;animation:none!important}
+  .js .rev{opacity:1;transform:none}
+}
+
+.pn{display:flex;gap:1rem;flex-wrap:wrap;margin:2.5rem auto 0;max-width:980px;padding:0 1.25rem;box-sizing:content-box}
+.pn a{flex:1 1 16rem;display:flex;flex-direction:column;gap:.25rem;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--k,var(--ink));padding:.9rem 1.1rem;border-radius:0 0 8px 8px}
+.pn a:hover{border-color:var(--k,var(--ink))}.pn a:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.pn small{font:600 .78rem/1 system-ui,-apple-system,sans-serif;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.pn b{font:700 1.1rem/1.25 system-ui,-apple-system,sans-serif}
+.pn .nx{text-align:right}
+.pn .nx:first-child{margin-left:auto;max-width:calc(50% - .5rem)}
+.pn .hm{flex:0 0 100%;text-align:center;font:500 .92rem/1 system-ui,-apple-system,sans-serif;background:none;border:0;padding:.4rem;color:var(--ink);text-decoration:underline}
+
+.pdfbtn{display:inline-flex;align-items:center;gap:.5rem;font:600 .88rem/1 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--surface);border:1.5px solid var(--ink);border-radius:999px;padding:.55rem .95rem;cursor:pointer}
+.pdfbtn:hover{background:var(--ink);color:var(--bg)}.pdfbtn:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:2px}
+@media print{
+  :root{--bg:#fff!important;--surface:#fff!important;--ink:#111!important;--muted:#444!important;--line:#bbb!important;color-scheme:light!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:#fff!important;color:#111!important}
+  body::before,body::after{display:none!important}
+  nav,.pdfbtn,.pn,video,section[aria-labelledby="h-video"]{display:none!important}
+  .rev,.js .rev{opacity:1!important;transform:none!important}
+  .stp li[hidden]{display:list-item!important}
+  details>*{display:block!important}
+  article,li,.card,figure,.stage{break-inside:avoid}
+  h1,h2,h3{break-after:avoid;text-shadow:none!important}
+  *{text-shadow:none!important}
+  a{color:inherit;text-decoration:none}
+  section.block,.part{padding-top:1.2rem!important;padding-bottom:1.2rem!important}
+  footer{break-before:avoid;border-top:1px solid #999;margin-top:1rem}
+}
+@page{size:A4;margin:16mm 14mm}
+@media print{.opts,#run,#reset,#caption,#status{display:none!important}}
+</style>
+</head>
+<body>
+<nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
+
+
+<header class="hero">
+  <div class="wrap">
+    <h1>L’âne de Buridan</h1>
+    <p class="sub">La liberté d’indifférence</p>
+    <p class="lead">Un âne a autant faim que soif. D’un côté un seau d’eau, de l’autre un seau de nourriture, à la même distance. Que va-t-il faire ?</p>
+
+    <div class="stage">
+      <svg id="scene" viewBox="0 0 800 330" role="img" aria-labelledby="sceneTitle sceneDesc">
+        <title id="sceneTitle">L’âne entre l’eau et la nourriture</title>
+        <desc id="sceneDesc">Un âne est placé exactement au milieu, entre un seau d’eau à gauche et un seau de nourriture à droite.</desc>
+        <line class="ground" x1="30" y1="285" x2="770" y2="285"/>
+
+        <g>
+          <line class="mk" x1="110" y1="305" x2="690" y2="305"/>
+          <line class="mk" x1="110" y1="297" x2="110" y2="313"/>
+          <line class="mk" x1="400" y1="297" x2="400" y2="313"/>
+          <line class="mk" x1="690" y1="297" x2="690" y2="313"/>
+          <text class="mk-t" x="400" y="327">à équidistance</text>
+        </g>
+
+        <g transform="translate(110 285)">
+          <path d="M-36 -64 Q0 -112 36 -64" fill="none" stroke="var(--metal)" stroke-width="4"/>
+          <path d="M-36 -64 L36 -64 L28 0 L-28 0 Z" fill="var(--metal)"/>
+          <ellipse cx="0" cy="-64" rx="36" ry="8" fill="var(--water-fill)"/>
+          <text class="lbl-w" x="0" y="-122">Eau</text>
+        </g>
+
+        <g transform="translate(690 285)">
+          <path d="M-36 -64 L36 -64 L28 0 L-28 0 Z" fill="var(--wood)"/>
+          <circle cx="-20" cy="-70" r="11" fill="var(--food-fill)"/>
+          <circle cx="2" cy="-78" r="13" fill="var(--food-fill)"/>
+          <circle cx="22" cy="-70" r="11" fill="var(--food-fill)"/>
+          <text class="lbl-f" x="0" y="-102">Nourriture</text>
+        </g>
+
+        <g transform="translate(400 285)">
+          <g id="don">
+            <path d="M-60 -72 Q-86 -68 -82 -38" fill="none" stroke="var(--donkey-d)" stroke-width="7" stroke-linecap="round"/>
+            <rect x="-54" y="-46" width="11" height="40" rx="4" fill="var(--donkey-d)"/>
+            <rect x="26" y="-46" width="11" height="40" rx="4" fill="var(--donkey-d)"/>
+            <rect x="-36" y="-46" width="12" height="40" rx="4" fill="var(--donkey)"/>
+            <rect x="40" y="-46" width="12" height="40" rx="4" fill="var(--donkey)"/>
+            <rect x="-54" y="-7" width="11" height="7" rx="2" fill="var(--ink)"/>
+            <rect x="26" y="-7" width="11" height="7" rx="2" fill="var(--ink)"/>
+            <rect x="-36" y="-7" width="12" height="7" rx="2" fill="var(--ink)"/>
+            <rect x="40" y="-7" width="12" height="7" rx="2" fill="var(--ink)"/>
+            <rect x="-62" y="-90" width="118" height="52" rx="24" fill="var(--donkey)"/>
+            <polygon points="34,-84 52,-116 74,-104 58,-68" fill="var(--donkey)"/>
+            <ellipse cx="86" cy="-106" rx="27" ry="15" transform="rotate(22 86 -106)" fill="var(--donkey)"/>
+            <ellipse cx="108" cy="-96" rx="10" ry="8.5" fill="var(--muzzle)"/>
+            <circle cx="92" cy="-111" r="2.8" fill="var(--ink)"/>
+            <ellipse cx="64" cy="-132" rx="6" ry="18" transform="rotate(-14 64 -132)" fill="var(--donkey)"/>
+            <ellipse cx="76" cy="-133" rx="6" ry="18" transform="rotate(12 76 -133)" fill="var(--donkey-d)"/>
+          </g>
+        </g>
+
+        <g id="bub">
+          <circle class="bub-box" cx="404" cy="132" r="4"/>
+          <circle class="bub-box" cx="416" cy="116" r="6.5"/>
+          <ellipse class="bub-box" cx="440" cy="76" rx="38" ry="26"/>
+          <text class="bub-t" id="bubTxt" x="440" y="88">?</text>
+        </g>
+      </svg>
+      <div class="opts" role="group" aria-label="Choisir ce que fait l’âne">
+        <button class="btn" type="button" data-o="eat" aria-pressed="false">L’âne mange</button>
+        <button class="btn" type="button" data-o="drink" aria-pressed="false">L’âne boit</button>
+        <button class="btn" type="button" data-o="none" aria-pressed="false">L’âne ne fait rien</button>
+      </div>
+      <p class="caption" id="caption" aria-live="polite"></p>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="block" aria-labelledby="h-exp">
+  <div class="wrap">
+    <div class="sec-head rev">
+      <span class="kicker">Expérience de pensée</span>
+      <h2 id="h-exp">Une situation imaginaire</h2>
+      <p>Une expérience de pensée est une situation imaginaire. Celle-ci consiste à imaginer un âne placé dans des conditions parfaitement symétriques :</p>
+    </div>
+    <ul class="conds rev">
+      <li>Autant de faim que de soif</li>
+      <li>À équidistance des deux seaux</li>
+      <li>Un seau d’eau, un seau de nourriture</li>
+    </ul>
+    <p class="question rev">Que va faire l’âne ? S’il se dirige vers un seau, lequel ? Et, surtout, pour quelles raisons ?</p>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="h-args">
+  <div class="wrap">
+    <div class="sec-head rev">
+      <span class="kicker">Options et arguments</span>
+      <h2 id="h-args">Dix-huit arguments à mettre à l’épreuve</h2>
+      <p>Trois options sont possibles : manger, boire ou ne rien faire. Chacune a ses arguments. Cliquez sur un argument pour voir s’il tient, ou passez-les tous au crible.</p>
+    </div>
+    <div class="tools rev">
+      <button class="btn primary" id="run" type="button">Tout passer au crible</button>
+      <button class="btn" id="reset" type="button">Réinitialiser</button>
+      <p class="status" id="status" aria-live="polite"></p>
+    </div>
+    <ul class="legend rev">
+      <li><span class="sw" style="background:var(--mod)"></span>Modifie les conditions de l’expérience</li>
+      <li><span class="sw" style="background:var(--attr)"></span>Attribue à l’âne des pensées ou des désirs injustifiés</li>
+      <li><span class="sw" style="background:var(--keep)"></span>L’argument qui tient</li>
+    </ul>
+    <div class="cols" id="cols"></div>
+    <p class="note" style="margin-top:1.2rem">Le classement de chaque argument dans l’une des deux catégories est une proposition de lecture, à discuter.</p>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="h-lect">
+  <div class="wrap">
+    <div class="sec-head rev">
+      <span class="kicker">Lecture du tableau</span>
+      <h2 id="h-lect">Un seul argument se tient</h2>
+      <p>On peut éliminer presque tous les arguments, pour l’une de ces deux raisons.</p>
+    </div>
+    <div class="two rev">
+      <div class="reason" style="--rc:var(--mod)">
+        <h3>Ils modifient les conditions</h3>
+        <p>Ils ajoutent un élément qui n’est pas dans l’expérience : une odeur, un seau vu en premier, un besoin plus urgent. La situation n’est plus symétrique.</p>
+      </div>
+      <div class="reason" style="--rc:var(--attr)">
+        <h3>Ils prêtent des pensées à l’âne</h3>
+        <p>Ils lui attribuent des pensées ou des désirs dont on ne peut pas justifier l’existence : une préférence, un instinct, un choix délibéré.</p>
+      </div>
+    </div>
+    <div class="keepbox rev">
+      <p>Reste un argument : n’ayant aucune raison de choisir une option plutôt qu’une autre, l’âne ne parvient pas à se décider.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="h-conc">
+  <div class="wrap">
+    <div class="sec-head rev">
+      <span class="kicker">Conclusion</span>
+      <h2 id="h-conc">Une liberté qui paralyse</h2>
+    </div>
+    <p class="big rev">La liberté d’indifférence peut conduire à l’inaction.</p>
+    <blockquote class="quote rev">
+      <p>C’est pourquoi, selon Descartes, elle constitue le « plus bas degré de la liberté ».</p>
+      <cite>Descartes</cite>
+    </blockquote>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="h-r">
+  <div class="wrap">
+    <h2 id="h-r" style="margin-bottom:1.8rem">À retenir</h2>
+    <ul class="recap rev">
+      <li>L’âne de Buridan est une expérience de pensée : un âne a autant faim que soif et se trouve à équidistance d’un seau d’eau et d’un seau de nourriture.</li>
+      <li>Les arguments pour manger ou pour boire modifient les conditions de l’expérience ou prêtent des pensées à l’âne.</li>
+      <li>Le seul argument qui tient : sans raison de choisir, l’âne ne parvient pas à se décider.</li>
+      <li>La liberté d’indifférence peut donc conduire à l’inaction : pour Descartes, c’est le plus bas degré de la liberté.</li>
+    </ul>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-video">
+  <div class="wrap">
+    <h2 id="h-video" style="margin-bottom:1rem">En vidéo : l’âne de Buridan</h2>
+    <video controls preload="metadata" playsinline style="display:block;width:100%;max-width:880px;aspect-ratio:16/9;background:#000;border-radius:8px" src="videos/ane-de-buridan.mp4"><p>Votre navigateur ne peut pas lire cette vidéo.</p></video>
+  </div>
+</section>
+</main>
+
+<nav class="pn" aria-label="Pages de la section Liberté"><a class="nx" href="determinisme-social.html" rel="next"><small>Page suivante →</small><b>Le déterminisme social</b></a><a class="hm" href="accueil.html">Retour à l’accueil</a></nav>
+<footer>
+  <div class="wrap">
+    <p>Page réalisée à partir de la fiche « La liberté d’indifférence : l’âne de Buridan ».</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  function $(s){return document.querySelector(s)}
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- Scène de l’âne ---------- */
+  var don=$('#don'),bub=$('#bub'),bubTxt=$('#bubTxt'),caption=$('#caption');
+  var opts=[].slice.call(document.querySelectorAll('.opts button'));
+  var st={x:0,s:1},raf=0,token=0,cur=null;
+  var CAP={
+    start:'Que va faire l’âne ? S’il se dirige vers un seau, lequel ? Et surtout, pour quelles raisons ?',
+    eat:'L’âne se dirige vers la nourriture. Pour quelle raison ? Rien, dans l’énoncé, ne favorise ce seau.',
+    drink:'L’âne se dirige vers l’eau. Pour quelle raison ? Rien, dans l’énoncé, ne favorise ce seau.',
+    none:'L’âne reste immobile : n’ayant aucune raison de choisir un seau plutôt qu’un autre, il ne parvient pas à se décider.'
+  };
+  function apply(){
+    don.setAttribute('transform','translate('+st.x.toFixed(1)+' 0) scale('+st.s.toFixed(3)+' 1)');
+  }
+  function go(x,s,ms,done){
+    cancelAnimationFrame(raf);
+    if(reduce||!ms){st.x=x;st.s=s;apply();if(done)done();return}
+    var x0=st.x,s0=st.s,t0=null;
+    function step(ts){
+      if(t0===null)t0=ts;
+      var p=Math.min((ts-t0)/ms,1);
+      var e=p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2;
+      st.x=x0+(x-x0)*e;st.s=s0+(s-s0)*e;apply();
+      if(p<1)raf=requestAnimationFrame(step);else if(done)done();
+    }
+    raf=requestAnimationFrame(step);
+  }
+  function showBubble(txt){
+    if(txt){bubTxt.textContent=txt;bub.style.opacity=1}else{bub.style.opacity=0}
+  }
+  function setOpt(o){
+    opts.forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-o')===o?'true':'false')});
+  }
+  function choose(o){
+    token++;
+    if(cur===o){
+      cur=null;setOpt(null);go(0,1,600);showBubble('?');caption.textContent=CAP.start;return;
+    }
+    cur=o;setOpt(o);caption.textContent=CAP[o];
+    if(o==='eat'){showBubble(null);go(150,1,900)}
+    else if(o==='drink'){showBubble(null);go(-150,-1,900)}
+    else{showBubble('…');go(0,1,600)}
+  }
+  opts.forEach(function(b){b.addEventListener('click',function(){choose(b.getAttribute('data-o'))})});
+
+  /* Un seul moment orchestré à l’ouverture : l’âne hésite d’un seau à l’autre */
+  apply();showBubble('?');caption.textContent=CAP.start;
+  if(!reduce){
+    var my=++token,seq=[[14,1],[-14,-1],[14,1],[-14,-1],[0,1]],i=0;
+    (function next(){
+      if(my!==token)return;
+      if(i>=seq.length)return;
+      var q=seq[i++];
+      go(q[0],q[1],520,function(){setTimeout(next,170)});
+    })();
+  }
+
+  /* ---------- Arguments ---------- */
+  var WHY={
+    mod:'Modifie les conditions de l’expérience.',
+    attr:'Attribue à l’âne une pensée ou un désir injustifié.',
+    keep:'Il tient : sans raison de choisir, l’âne ne se décide pas.'
+  };
+  var COLS=[
+    {title:'Manger',color:'var(--food)',args:[
+      ['L’odeur est attrayante','mod'],
+      ['Il préfère manger','attr'],
+      ['La nourriture est hydratante','mod'],
+      ['La nourriture lui procure plus d’énergie','mod'],
+      ['Son instinct le pousse à manger','attr'],
+      ['Il voit d’abord la nourriture','mod'],
+      ['Il a plus faim que soif','mod']]},
+    {title:'Boire',color:'var(--water)',args:[
+      ['Le besoin est plus urgent','mod'],
+      ['Il préfère boire','attr'],
+      ['Le besoin est plus vital','mod'],
+      ['Il voit d’abord l’eau','mod'],
+      ['Il a la gorge sèche, et boit pour davantage apprécier la nourriture','attr'],
+      ['Son instinct le pousse à boire','attr'],
+      ['Il a plus soif que faim','mod']]},
+    {title:'Ne rien faire',color:'var(--none)',args:[
+      ['Il ne parvient pas à se décider, et n’agit pas','keep'],
+      ['Il choisit de ne rien faire','attr'],
+      ['Il n’a pas l’énergie suffisante pour agir','mod'],
+      ['Les seaux sont trop éloignés de lui','mod']]}
+  ];
+  var colsEl=$('#cols'),statusEl=$('#status'),runBtn=$('#run');
+  var all=[],byCol=[];
+  COLS.forEach(function(c,ci){
+    var col=document.createElement('div');col.className='col';col.style.setProperty('--cc',c.color);
+    var h=document.createElement('h3');h.textContent=c.title;
+    var ul=document.createElement('ul');ul.className='args';
+    byCol[ci]=[];
+    c.args.forEach(function(a){
+      var li=document.createElement('li'),b=document.createElement('button');
+      b.type='button';b.className='arg '+a[1];b.setAttribute('aria-pressed','false');
+      b.innerHTML='<span class="t"></span><span class="why"></span>';
+      b.querySelector('.t').textContent=a[0];
+      b.querySelector('.why').textContent=WHY[a[1]];
+      b.addEventListener('click',function(){runToken++;setOut(b,!b.classList.contains('out'))});
+      li.appendChild(b);ul.appendChild(li);
+      all.push(b);byCol[ci].push(b);
+    });
+    col.appendChild(h);col.appendChild(ul);colsEl.appendChild(col);
+  });
+  var runToken=0;
+  function count(){return all.filter(function(b){return b.classList.contains('out')}).length}
+  function updateStatus(){
+    var n=count();
+    if(n===0)statusEl.textContent='Aucun argument examiné pour l’instant.';
+    else if(n===all.length)statusEl.textContent='Les '+n+' arguments sont examinés : un seul tient.';
+    else statusEl.textContent=n+' argument'+(n>1?'s examinés':' examiné')+' sur '+all.length+'.';
+  }
+  function setOut(b,on){
+    b.classList.toggle('out',on);
+    b.setAttribute('aria-pressed',on?'true':'false');
+    updateStatus();
+  }
+  updateStatus();
+
+  /* Ordre de passage : ligne par ligne, colonne par colonne */
+  var order=[];
+  for(var r=0;r<7;r++){byCol.forEach(function(c){if(c[r])order.push(c[r])})}
+  runBtn.addEventListener('click',function(){
+    var my=++runToken,k=0;
+    all.forEach(function(b){b.classList.remove('out');b.setAttribute('aria-pressed','false')});
+    updateStatus();
+    (function next(){
+      if(my!==runToken)return;
+      if(k>=order.length)return;
+      setOut(order[k++],true);
+      setTimeout(next,reduce?0:170);
+    })();
+  });
+  $('#reset').addEventListener('click',function(){
+    runToken++;
+    all.forEach(function(b){b.classList.remove('out');b.setAttribute('aria-pressed','false')});
+    updateStatus();
+  });
+
+  /* ---------- Apparition au défilement ---------- */
+  var revs=[].slice.call(document.querySelectorAll('.rev'));
+  if(reduce||!('IntersectionObserver' in window)){
+    revs.forEach(function(e){e.classList.add('in')});
+  }else{
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}
+      });
+    },{threshold:.12});
+    revs.forEach(function(e){io.observe(e)});
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Séries technologiques : explication de texte</title>
+<style>
+:root{
+  color-scheme:light;
+  --bg:#F4F7F6; --surface:#FFFFFF; --ink:#12201E; --muted:#51635F; --line:#D3DEDB; --focus:#0B5CAD; --on:#FFFFFF;
+  --a:#0B6B73; --a-soft:#DDF0F1;
+  --b:#B24A00; --b-soft:#FBE8D8;
+  --c:#6B3FA0; --c-soft:#ECE3F7;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --serif:"Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0E1615; --surface:#162120; --ink:#E9F1EF; --muted:#A3B5B1; --line:#27403C; --focus:#8CC2FF; --on:#0E1615;
+    --a:#5FD0D8; --a-soft:#10393C; --b:#FFA462; --b-soft:#43240D; --c:#C4A2F0; --c-soft:#2E2046;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0E1615; --surface:#162120; --ink:#E9F1EF; --muted:#A3B5B1; --line:#27403C; --focus:#8CC2FF; --on:#0E1615;
+  --a:#5FD0D8; --a-soft:#10393C; --b:#FFA462; --b-soft:#43240D; --c:#C4A2F0; --c-soft:#2E2046;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.08rem/1.65 var(--serif)}
+.wrap{width:min(960px,100% - 2.5rem);margin-inline:auto}
+h1,h2,h3{margin:0}
+h1{font:800 clamp(2.3rem,7vw,4.4rem)/1.05 var(--sans);letter-spacing:-.02em}
+h2{font:800 clamp(1.5rem,3.2vw,2rem)/1.2 var(--sans);margin-bottom:.8rem}
+h3{font:700 1.05rem/1.35 var(--sans)}
+p{margin:0 0 1em}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
+.btn{font:600 .95rem/1.2 var(--sans);color:var(--ink);background:transparent;border:1.5px solid var(--ink);border-radius:8px;padding:.65rem 1rem;cursor:pointer}
+.btn:hover{background:var(--line)}
+.note{font:500 .9rem/1.5 var(--sans);color:var(--muted)}
+section.block{border-top:1px solid var(--line);padding:clamp(2.2rem,6vw,3.6rem) 0}
+.sec-head{max-width:46rem;margin-bottom:1.6rem}
+
+.hero{padding:clamp(2rem,6vw,4rem) 0 clamp(2rem,5vw,3rem)}
+.lead{font-size:clamp(1.15rem,2.4vw,1.4rem);line-height:1.5;margin:1.2rem 0 0;max-width:38ch}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.8rem}
+.opt{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--muted);padding:.9rem 1.1rem}
+.opt.rec{border-left-color:var(--a)}
+.opt h3{margin-bottom:.3rem}
+.opt p{margin:0;font:500 .98rem/1.5 var(--sans)}
+.tagrec{display:inline-block;font:700 .75rem/1 var(--sans);background:var(--a);color:var(--on);padding:.25rem .45rem;margin-left:.4rem;vertical-align:middle}
+
+.parts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
+.part{background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--c);padding:1rem 1.1rem 1.2rem}
+.part .let{font:800 2.6rem/1 var(--sans);color:var(--c)}
+.part h3{margin:.2rem 0 .1rem}
+.part .nb{font:600 .88rem/1.3 var(--sans);color:var(--muted);margin-bottom:.6rem}
+.part p{font:500 .98rem/1.5 var(--sans);margin:0}
+.part.A{--c:var(--a)} .part.B{--c:var(--b)} .part.C{--c:var(--c)}
+
+.tabs{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1rem}
+.tabs button{font:700 .95rem/1.2 var(--sans);color:var(--ink);background:var(--surface);border:2px solid var(--line);border-radius:8px;padding:.6rem .9rem;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.panel{background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--k);padding:clamp(1rem,3vw,1.6rem)}
+.panel[hidden]{display:none}
+.panel h3{color:var(--k);font-size:1.25rem;margin-bottom:.5rem}
+.panel ul{margin:0 0 1rem;padding-left:1.2rem}
+.panel li{margin-bottom:.45rem}
+.panel .qs{list-style:none;padding:0;margin:0}
+.panel .qs li{padding:.7rem 0;border-top:1px solid var(--line);margin:0}
+.panel .qs b{font:800 1rem/1 var(--sans);color:var(--k);margin-right:.4rem}
+.tip{font:500 .95rem/1.5 var(--sans);background:var(--bg);border-left:4px solid var(--k);padding:.6rem .9rem;margin:0}
+
+.sorter{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.5rem 1rem;align-items:center;padding:.8rem 0;border-bottom:1px solid var(--line)}
+.row .name{font:600 1rem/1.4 var(--sans)}
+.pick{display:flex;gap:.4rem}
+.pick button{font:800 1rem/1 var(--sans);min-width:2.8rem;color:var(--ink);background:var(--surface);border:2px solid var(--line);border-radius:8px;padding:.55rem .7rem;cursor:pointer}
+.pick button[disabled]{cursor:default}
+.pick button.A:hover:not([disabled]){border-color:var(--a)} .pick button.B:hover:not([disabled]){border-color:var(--b)} .pick button.C:hover:not([disabled]){border-color:var(--c)}
+.pick button[aria-pressed="true"].A{background:var(--a);border-color:var(--a);color:var(--on)}
+.pick button[aria-pressed="true"].B{background:var(--b);border-color:var(--b);color:var(--on)}
+.pick button[aria-pressed="true"].C{background:var(--c);border-color:var(--c);color:var(--on)}
+.fb{grid-column:1/-1;margin:0;font:500 .95rem/1.45 var(--sans);padding:.5rem .8rem;border-left:5px solid var(--line);background:var(--surface)}
+.fb[hidden]{display:none}
+.row.good .fb{border-left-color:var(--a)} .row.bad .fb{border-left-color:var(--b)}
+.score{display:flex;flex-wrap:wrap;gap:.8rem 1.2rem;align-items:center;margin-top:1.1rem}
+.score p{margin:0;font:600 1rem/1.4 var(--sans);flex:1 1 16rem}
+
+.build{background:var(--surface);border:1px solid var(--line);padding:clamp(1rem,3vw,1.5rem)}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin:.8rem 0}
+.chips button{font:600 .95rem/1.2 var(--sans);color:var(--ink);background:var(--bg);border:2px solid var(--line);border-radius:8px;padding:.6rem .9rem;cursor:pointer}
+.chips button:hover:not([disabled]){border-color:var(--c)}
+.chips button[disabled]{opacity:.45;cursor:default}
+.seq{list-style:none;margin:.8rem 0 0;padding:0;counter-reset:s}
+.seq li{counter-increment:s;display:grid;grid-template-columns:2rem 1fr;gap:.6rem;padding:.55rem 0;border-top:1px solid var(--line);font:500 .98rem/1.5 var(--sans)}
+.seq li::before{content:counter(s);font:800 1.4rem/1 var(--sans);color:var(--c)}
+.seq b{display:block}
+.msg{font:600 .95rem/1.4 var(--sans);min-height:1.4em;margin:.4rem 0 0}
+
+.plan{background:var(--surface);border:1px solid var(--line);padding:clamp(1rem,3vw,1.5rem)}
+.plan label{font:600 1rem/1.4 var(--sans);display:block;margin-bottom:.5rem}
+.plan input[type=range]{width:100%;accent-color:var(--a)}
+.bar{display:flex;height:3.2rem;margin:1rem 0 .6rem;border:1px solid var(--line);overflow:hidden}
+.bar div{display:flex;align-items:center;justify-content:center;font:700 .88rem/1.2 var(--sans);padding:0 .5rem;text-align:center;color:var(--on);min-width:0}
+.bar .s1{background:var(--a)} .bar .s2{background:var(--b)}
+@media (prefers-reduced-motion:no-preference){.bar div{transition:flex-basis .2s}}
+.plan .out{font:500 .98rem/1.5 var(--sans);margin:0}
+
+.checks{list-style:none;margin:0;padding:0;max-width:46rem}
+.checks li{border-top:1px solid var(--line)}
+.checks li:last-child{border-bottom:1px solid var(--line)}
+.checks label{display:grid;grid-template-columns:1.6rem 1fr;gap:.7rem;padding:.8rem 0;cursor:pointer;font:500 1rem/1.5 var(--sans)}
+.checks input{width:1.2rem;height:1.2rem;margin-top:.2rem;accent-color:var(--a)}
+.checks input:checked + span{color:var(--muted);text-decoration:line-through}
+.prog{font:700 1rem/1.4 var(--sans);margin-top:1rem}
+footer{padding:1.6rem 0 2.5rem;font:500 .9rem/1.5 var(--sans);color:var(--muted)}
+footer p{margin:0}
+@media (max-width:760px){
+  .opts,.parts{grid-template-columns:1fr}
+  .row{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
+
+.pdfbtn{display:inline-flex;align-items:center;gap:.5rem;font:600 .88rem/1 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--surface);border:1.5px solid var(--ink);border-radius:999px;padding:.55rem .95rem;cursor:pointer}
+.pdfbtn:hover{background:var(--ink);color:var(--bg)}.pdfbtn:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:2px}
+@media print{
+  :root{--bg:#fff!important;--surface:#fff!important;--ink:#111!important;--muted:#444!important;--line:#bbb!important;color-scheme:light!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:#fff!important;color:#111!important}
+  body::before,body::after{display:none!important}
+  nav,.pdfbtn,.pn,video,section[aria-labelledby="h-video"]{display:none!important}
+  .rev,.js .rev{opacity:1!important;transform:none!important}
+  .stp li[hidden]{display:list-item!important}
+  details>*{display:block!important}
+  article,li,.card,figure,.stage{break-inside:avoid}
+  h1,h2,h3{break-after:avoid;text-shadow:none!important}
+  *{text-shadow:none!important}
+  a{color:inherit;text-decoration:none}
+  section.block,.part{padding-top:1.2rem!important;padding-bottom:1.2rem!important}
+  footer{break-before:avoid;border-top:1px solid #999;margin-top:1rem}
+}
+@page{size:A4;margin:16mm 14mm}
+</style>
+</head>
+<body>
+<nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Séries technologiques : explication de texte</h1>
+    <p class="lead">Analyser, synthétiser, commenter : comment répondre aux questions de l’épreuve.</p>
+    <div class="opts">
+      <div class="opt rec"><h3>Option 1<span class="tagrec">conseillée</span></h3><p>Répondre aux questions posées. Le professeur la conseille et l’encourage très vivement.</p></div>
+      <div class="opt"><h3>Option 2</h3><p>Rédiger intégralement l’explication du texte.</p></div>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="block" aria-labelledby="h-3">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-3">Trois catégories de questions</h2>
+      <p>Les questions sont divisées en trois catégories : les éléments d’analyse, les éléments de synthèse et le commentaire.</p>
+    </div>
+    <div class="parts">
+      <div class="part A"><span class="let">A</span><h3>Éléments d’analyse</h3><p class="nb">3 questions</p><p>Décomposer un tout en ses éléments simples, pour les expliquer.</p></div>
+      <div class="part B"><span class="let">B</span><h3>Éléments de synthèse</h3><p class="nb">3 questions</p><p>Ramener les éléments identifiés à une totalité.</p></div>
+      <div class="part C"><span class="let">C</span><h3>Commentaire</h3><p class="nb">en général 2 questions</p><p>Vérifier votre compréhension et élargir le propos par un raisonnement personnel.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="h-det">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-det">Comment répondre ?</h2>
+      <p>Choisissez une catégorie.</p>
+    </div>
+    <div class="tabs" role="tablist" aria-label="Catégories de questions">
+      <button role="tab" id="tab-A" aria-selected="true" aria-controls="p-A" type="button">A. Analyse</button>
+      <button role="tab" id="tab-B" aria-selected="false" aria-controls="p-B" type="button" tabindex="-1">B. Synthèse</button>
+      <button role="tab" id="tab-C" aria-selected="false" aria-controls="p-C" type="button" tabindex="-1">C. Commentaire</button>
+    </div>
+
+    <div class="panel" id="p-A" role="tabpanel" aria-labelledby="tab-A" style="--k:var(--a)">
+      <h3>A. Éléments d’analyse</h3>
+      <ul>
+        <li>3 questions, qui portent chacune sur un aspect du texte : une phrase, une citation de quelques mots.</li>
+        <li>En règle générale, elles suivent l’ordre du texte : <b>A1</b> porte sur le début, <b>A2</b> sur le milieu, <b>A3</b> sur la fin.</li>
+        <li>Il ne s’agit pas seulement d’expliquer les quelques mots de la question : il faut prendre en compte le <b>contexte global</b> du texte. Un argument, une phrase, ne s’éclaire que lorsqu’elle est ramenée au contexte dans lequel elle s’insère.</li>
+        <li>Vous devez donc expliquer le texte dans sa quasi-globalité, pour répondre de manière « précise et développée », comme le demande la consigne.</li>
+      </ul>
+      <p class="tip">À retenir : une citation s’explique avec ce qui la précède et ce qui la suit.</p>
+    </div>
+
+    <div class="panel" id="p-B" role="tabpanel" aria-labelledby="tab-B" style="--k:var(--b)" hidden>
+      <h3>B. Éléments de synthèse</h3>
+      <p>3 questions : prenez appui sur les éléments que vous avez analysés.</p>
+      <ul class="qs">
+        <li><b>B1</b><strong>La question du texte.</strong> À quelle question l’auteur tente-t-il de répondre ? Autrement dit, à quelle question ce texte pourrait-il apporter une réponse ?</li>
+        <li><b>B2</b><strong>La structure argumentative.</strong> Quels arguments l’auteur utilise-t-il, et comment sont-ils agencés ? Identifiez les grandes parties du texte (en général 3), indiquez leurs lignes et décrivez les arguments de chacune. Il s’agit de produire une synthèse : indiquez les liens logiques entre les arguments.</li>
+        <li><b>B3</b><strong>L’idée principale, ou thèse de l’auteur.</strong> Quelle réponse l’auteur donne-t-il à la question qu’il se pose ? Les arguments identifiés en B2 doivent éclairer cette thèse, la préciser.</li>
+      </ul>
+    </div>
+
+    <div class="panel" id="p-C" role="tabpanel" aria-labelledby="tab-C" style="--k:var(--c)" hidden>
+      <h3>C. Commentaire</h3>
+      <p>En général, deux questions. Elles vérifient votre compréhension du texte et doivent vous permettre d’élargir le propos. Pour chacune, structurez votre réponse :</p>
+      <ul class="qs">
+        <li><b>1</b><strong>Une courte introduction.</strong> Identifiez les enjeux de la question et sa pertinence : pourquoi elle se pose, pourquoi elle est intéressante, pourquoi la réponse n’est pas évidente.</li>
+        <li><b>2</b><strong>Première partie : le texte.</strong> Répondez à la question à la manière de l’auteur, à partir de ses arguments.</li>
+        <li><b>3</b><strong>Seconde partie : votre avis.</strong> Indiquez les limites du raisonnement de l’auteur, confrontez sa position à une autre thèse philosophique, ou trouvez d’autres arguments qui la soutiennent.</li>
+        <li><b>4</b><strong>Une conclusion.</strong> Un court bilan (une à deux phrases) qui répond de manière claire à la question.</li>
+      </ul>
+      <p class="tip">C’est la partie où vous utilisez votre cours : exemples, repères conceptuels, références philosophiques, et un raisonnement personnel.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="h-build">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-build">Construire une réponse de commentaire</h2>
+      <p>Cliquez sur les quatre étapes dans l’ordre où elles apparaissent dans une réponse de la catégorie C.</p>
+    </div>
+    <div class="build">
+      <div class="chips" id="chips"></div>
+      <ol class="seq" id="seq" aria-label="Votre ordre"></ol>
+      <p class="msg" id="msg" aria-live="polite"></p>
+      <button class="btn" id="bres" type="button" style="margin-top:.6rem">Recommencer</button>
+    </div>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="h-time">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-time">Organiser les quatre heures</h2>
+      <p>L’épreuve dure quatre heures : utilisez le temps dans sa totalité. Le conseil est de diviser son temps en deux : la première moitié pour le choix du sujet et le brouillon, la seconde pour la rédaction. Chacun adapte cette division selon sa facilité à rédiger.</p>
+    </div>
+    <div class="plan">
+      <label for="rng">Part du temps consacrée au choix du sujet et au brouillon : <span id="pct">50 %</span></label>
+      <input type="range" id="rng" min="20" max="80" step="5" value="50">
+      <div class="bar" aria-hidden="true"><div class="s1" id="s1" style="flex:1 1 50%">Sujet et brouillon</div><div class="s2" id="s2" style="flex:1 1 50%">Rédaction</div></div>
+      <p class="out" id="out" aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="h-cons">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-cons">Les conseils</h2>
+      <p>Cochez au fur et à mesure.</p>
+    </div>
+    <ul class="checks" id="checks"></ul>
+    <p class="prog" id="prog" aria-live="polite"></p>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap"><p>Page réalisée à partir du document « Les principes de l’explication de texte ».</p></div></footer>
+
+<script>
+(function(){
+  function $(s){return document.querySelector(s)}
+
+  /* Onglets */
+  var tabs=[].slice.call(document.querySelectorAll('[role=tab]'));
+  function sel(t){
+    tabs.forEach(function(x){
+      var on=x===t;x.setAttribute('aria-selected',on);x.tabIndex=on?0:-1;
+      document.getElementById(x.getAttribute('aria-controls')).hidden=!on;
+    });
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){sel(t)});
+    t.addEventListener('keydown',function(e){
+      var n=e.key==='ArrowRight'?i+1:e.key==='ArrowLeft'?i-1:null;
+      if(n===null)return;e.preventDefault();n=(n+tabs.length)%tabs.length;tabs[n].focus();sel(tabs[n]);
+    });
+  });
+
+  /* Construire */
+  var STEPS=[
+   ['Introduction','enjeux de la question, pertinence, pourquoi la réponse n’est pas évidente'],
+   ['Première partie : le texte','répondre à la manière de l’auteur, à partir de ses arguments'],
+   ['Seconde partie : votre avis','limites, autre thèse, ou nouveaux arguments, avec exemples et repères'],
+   ['Conclusion','bilan en une à deux phrases, réponse claire à la question']
+  ];
+  var order=[1,3,0,2],chips=$('#chips'),seq=$('#seq'),msg=$('#msg'),next=0,btns=[];
+  function build(){
+    chips.innerHTML='';seq.innerHTML='';msg.textContent='';next=0;btns=[];
+    order.forEach(function(idx){
+      var b=document.createElement('button');b.type='button';b.textContent=STEPS[idx][0];
+      b.addEventListener('click',function(){
+        if(idx===next){
+          b.disabled=true;
+          var li=document.createElement('li');li.innerHTML='<span><b></b><span></span></span>';
+          li.querySelector('b').textContent=STEPS[idx][0];li.querySelector('span span').textContent=STEPS[idx][1];
+          seq.appendChild(li);next++;
+          msg.textContent=next===4?'Bravo : c’est l’ordre attendu. Chaque réponse de commentaire suit ce plan.':'Bien.';
+        }else{
+          msg.textContent='Ce n’est pas la bonne étape à cette place : '+(next===0?'on commence par présenter les enjeux.':'relisez l’ordre : introduction, partie sur le texte, partie sur votre avis, conclusion.');
+        }
+      });
+      chips.appendChild(b);btns.push(b);
+    });
+  }
+  $('#bres').addEventListener('click',build);build();
+
+  /* Temps */
+  var rng=$('#rng');
+  function fmt(m){var h=Math.floor(m/60),r=m%60;return h+' h'+(r?(' '+(r<10?'0':'')+r):'')}
+  function plan(){
+    var p=+rng.value,m1=Math.round(240*p/100/5)*5,m2=240-m1;
+    $('#pct').textContent=p+' %';
+    $('#s1').style.flexBasis=p+'%';$('#s2').style.flexBasis=(100-p)+'%';
+    $('#out').textContent='Sujet et brouillon : '+fmt(m1)+'. Rédaction : '+fmt(m2)+'.'+(p===50?' C’est la répartition conseillée.':'');
+  }
+  rng.addEventListener('input',plan);plan();
+
+  /* Conseils */
+  var TIPS=[
+   'Utiliser les quatre heures dans leur totalité.',
+   'Lire le texte plusieurs fois, en se concentrant à chaque lecture sur des éléments différents : d’abord le propos général, puis la structure.',
+   'Surligner les concepts importants et les termes de liaison.',
+   'Lire l’intégralité des questions avant de répondre, pour structurer son propos et ne pas se répéter.',
+   'Rédiger un brouillon : pas la copie entière, mais les termes les plus importants, les phrases à expliquer, etc.',
+   'Diviser son temps en deux : sujet et brouillon, puis rédaction.',
+   'Soigner la copie et l’orthographe : indiquer clairement le numéro des questions et répondre dans l’ordre.'
+  ];
+  var ul=$('#checks'),prog=$('#prog'),cnt=0;
+  TIPS.forEach(function(t){
+    var li=document.createElement('li'),lb=document.createElement('label'),i=document.createElement('input'),s=document.createElement('span');
+    i.type='checkbox';s.textContent=t;lb.appendChild(i);lb.appendChild(s);li.appendChild(lb);ul.appendChild(li);
+    i.addEventListener('change',function(){cnt+=i.checked?1:-1;pg()});
+  });
+  function pg(){prog.textContent=cnt+' conseil'+(cnt>1?'s':'')+' sur '+TIPS.length+' pris en compte.'+(cnt===TIPS.length?' Vous êtes prêt.':'')}
+  pg();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Les stéréotypes</title>
+<script>document.documentElement.classList.add('js')</script>
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+  --bg:#F1F5F4; --surface:#FFFFFF; --ink:#10262B; --muted:#4A6064; --line:#D0DCDA;
+  --stamp:#B3124F; --free:#0B6E6D; --stamp-soft:#FBE3EC;
+  --g1:#0B6E6D; --g2:#B3124F; --g3:#5B3FC4; --focus:#0B6E6D;
+  --display:Georgia,"Times New Roman",serif;
+  --text:system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0C1719; --surface:#142427; --ink:#E6F0EF; --muted:#9DB5B4; --line:#24393C;
+    --stamp:#FF7FAA; --free:#4FD1C5; --stamp-soft:#3A1625;
+    --g1:#4FD1C5; --g2:#FF7FAA; --g3:#A592FF; --focus:#4FD1C5;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0C1719; --surface:#142427; --ink:#E6F0EF; --muted:#9DB5B4; --line:#24393C;
+  --stamp:#FF7FAA; --free:#4FD1C5; --stamp-soft:#3A1625;
+  --g1:#4FD1C5; --g2:#FF7FAA; --g3:#A592FF; --focus:#4FD1C5;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.65 var(--text)}
+.wrap{width:min(1040px,100% - 2.5rem);margin-inline:auto}
+h1,h2,h3{margin:0}
+h1{font:700 clamp(2.8rem,9vw,6rem)/1 var(--display);letter-spacing:-.03em}
+h2{font:700 clamp(1.7rem,3.6vw,2.5rem)/1.1 var(--display);letter-spacing:-.02em}
+h3{font:700 1.15rem/1.3 var(--text)}
+p{margin:0 0 1em;max-width:62ch}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
+.muted{color:var(--muted)}
+.note{font-size:.9rem;color:var(--muted)}
+.btn{font:500 .98rem/1.2 var(--text);color:var(--ink);background:transparent;border:1.5px solid var(--ink);border-radius:6px;padding:.7rem 1.1rem;cursor:pointer}
+.btn.primary{background:var(--ink);color:var(--bg)}
+.btn[aria-pressed="true"]{background:var(--stamp);border-color:var(--stamp);color:var(--bg)}
+
+/* Hero */
+.hero{padding:clamp(2.2rem,6vw,4.5rem) 0 clamp(2.5rem,6vw,4rem)}
+.lead{font:400 clamp(1.25rem,2.4vw,1.6rem)/1.4 var(--display);max-width:38ch;margin:1.6rem 0 2.2rem}
+.stage{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:clamp(1rem,3vw,1.8rem)}
+.groups{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(.6rem,2.5vw,1.8rem)}
+.grp{min-width:0}
+.inds{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(.25rem,1.2vw,.7rem)}
+.ind{aspect-ratio:1;transition:background-color .8s ease,border-radius .8s ease,transform .8s ease}
+.gname{font:700 .95rem/1.2 var(--text);margin:.9rem 0 .15rem}
+.gcap{font-size:.88rem;line-height:1.35;color:var(--muted);margin:0;min-height:2.7em}
+.stage-foot{display:flex;flex-wrap:wrap;gap:.8rem 1.2rem;align-items:center;margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid var(--line)}
+.state{margin:0;font:500 1.05rem/1.4 var(--text);flex:1 1 18rem;max-width:none;min-height:2.8em}
+
+/* Sections */
+section.block{border-top:1px solid var(--line);padding:clamp(3rem,7vw,5rem) 0}
+.sec-head{max-width:44rem;margin-bottom:2rem}
+.sec-head .kicker{display:block;font:700 .9rem/1 var(--text);color:var(--stamp);margin-bottom:.8rem}
+.sec-head h2{margin-bottom:1rem}
+
+/* Etymologie */
+.etym{display:flex;flex-wrap:wrap;align-items:stretch;gap:.8rem 1rem;margin:0 0 2rem}
+.word{padding:.9rem 1.2rem;border:1.5px solid var(--ink);border-radius:8px;background:var(--surface)}
+.word b{display:block;font:700 clamp(1.5rem,3.4vw,2.2rem)/1.1 var(--display)}
+.word span{display:block;font-size:.95rem;color:var(--muted)}
+.word.out{border-color:var(--stamp);background:var(--stamp-soft)}
+.word.out b{color:var(--stamp)}
+.op{align-self:center;font:700 1.8rem/1 var(--display);color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;margin:.4rem 0 0;padding:0}
+.chips li{border:1.5px solid var(--line);background:var(--surface);border-radius:6px;padding:.4rem .75rem;font-weight:500;font-size:.98rem}
+
+/* Flux en trois temps */
+.flow{display:flex;flex-wrap:wrap;gap:1rem;list-style:none;margin:0;padding:0;counter-reset:f}
+.flow li{counter-increment:f;flex:1 1 15rem;min-width:0;border-top:4px solid var(--stamp);background:var(--surface);padding:1rem 1.1rem 1.2rem;border-radius:0 0 8px 8px}
+.flow li::before{content:counter(f);display:block;font:700 2rem/1 var(--display);color:var(--stamp);margin-bottom:.5rem}
+.flow p{margin:0}
+
+/* Experience */
+.exp{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:2rem clamp(2rem,5vw,4rem);align-items:start}
+.steps{list-style:none;margin:0;padding:0 0 0 1.4rem;border-left:2px solid var(--line)}
+.steps li{position:relative;padding:0 0 1.5rem}
+.steps li:last-child{padding-bottom:0}
+.steps li::before{content:"";position:absolute;left:calc(-1.4rem - 7px);top:.4rem;width:12px;height:12px;border-radius:50%;background:var(--bg);border:3px solid var(--stamp)}
+.steps h3{margin-bottom:.25rem}
+.steps p{margin:0}
+.chart{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:1.2rem}
+.chart h3{margin-bottom:1rem}
+.bar-row{margin-bottom:1.1rem}
+.bl{display:block;font-size:.92rem;font-weight:500;margin-bottom:.35rem}
+.track{height:2.4rem;background:var(--bg);border-radius:6px;overflow:hidden}
+.fill{height:100%;width:0;display:flex;align-items:center;padding:0 .8rem;font:700 .88rem/1 var(--text);color:var(--bg);white-space:nowrap;transition:width 1.1s cubic-bezier(.2,.7,.2,1)}
+.fill.a{background:var(--free)}
+.fill.b{background:var(--stamp)}
+.chart-foot{display:flex;flex-wrap:wrap;gap:.7rem 1rem;align-items:center;margin-top:1.2rem}
+.chart-foot .note{margin:0;flex:1 1 12rem}
+
+/* Explication */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.two > div{padding:0 2rem 0 0}
+.two > div + div{padding:0 0 0 2rem;border-left:1px solid var(--line)}
+.two h3{margin-bottom:.6rem}
+.two p{margin:0}
+
+/* Consequence */
+.big{font:700 clamp(1.6rem,3.8vw,2.6rem)/1.15 var(--display);letter-spacing:-.02em;max-width:24ch;margin:0 0 1.4rem;padding-left:1.1rem;border-left:5px solid var(--stamp)}
+.example{margin-top:2rem;padding-top:1.6rem;border-top:1px solid var(--line);max-width:46rem}
+
+.recap{margin:0;padding:0;list-style:none;max-width:46rem}
+.recap li{padding:.95rem 0;border-top:1px solid var(--line)}
+.recap li:last-child{border-bottom:1px solid var(--line)}
+footer{border-top:1px solid var(--line);padding:2rem 0 3rem}
+footer p{font-size:.92rem;color:var(--muted);margin:0}
+
+/* Apparition */
+.js .rev{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+.js .rev.in{opacity:1;transform:none}
+
+@media (max-width:820px){
+  .exp{grid-template-columns:1fr}
+  .two{grid-template-columns:1fr}
+  .two > div,.two > div + div{padding:0;border-left:0}
+  .two > div + div{margin-top:1.8rem;padding-top:1.8rem;border-top:1px solid var(--line)}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition:none!important;animation:none!important}
+  .js .rev{opacity:1;transform:none}
+}
+
+.pn{display:flex;gap:1rem;flex-wrap:wrap;margin:2.5rem auto 0;max-width:980px;padding:0 1.25rem;box-sizing:content-box}
+.pn a{flex:1 1 16rem;display:flex;flex-direction:column;gap:.25rem;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--k,var(--ink));padding:.9rem 1.1rem;border-radius:0 0 8px 8px}
+.pn a:hover{border-color:var(--k,var(--ink))}.pn a:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.pn small{font:600 .78rem/1 system-ui,-apple-system,sans-serif;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.pn b{font:700 1.1rem/1.25 system-ui,-apple-system,sans-serif}
+.pn .nx{text-align:right}
+.pn .nx:first-child{margin-left:auto;max-width:calc(50% - .5rem)}
+.pn .hm{flex:0 0 100%;text-align:center;font:500 .92rem/1 system-ui,-apple-system,sans-serif;background:none;border:0;padding:.4rem;color:var(--ink);text-decoration:underline}
+
+.pdfbtn{display:inline-flex;align-items:center;gap:.5rem;font:600 .88rem/1 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--surface);border:1.5px solid var(--ink);border-radius:999px;padding:.55rem .95rem;cursor:pointer}
+.pdfbtn:hover{background:var(--ink);color:var(--bg)}.pdfbtn:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:2px}
+@media print{
+  :root{--bg:#fff!important;--surface:#fff!important;--ink:#111!important;--muted:#444!important;--line:#bbb!important;color-scheme:light!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:#fff!important;color:#111!important}
+  body::before,body::after{display:none!important}
+  nav,.pdfbtn,.pn,video,section[aria-labelledby="h-video"]{display:none!important}
+  .rev,.js .rev{opacity:1!important;transform:none!important}
+  .stp li[hidden]{display:list-item!important}
+  details>*{display:block!important}
+  article,li,.card,figure,.stage{break-inside:avoid}
+  h1,h2,h3{break-after:avoid;text-shadow:none!important}
+  *{text-shadow:none!important}
+  a{color:inherit;text-decoration:none}
+  section.block,.part{padding-top:1.2rem!important;padding-bottom:1.2rem!important}
+  footer{break-before:avoid;border-top:1px solid #999;margin-top:1rem}
+}
+@page{size:A4;margin:16mm 14mm}
+</style>
+</head>
+<body>
+<nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
+
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Les stéréotypes</h1>
+    <p class="lead">Une manière de considérer quelqu’un a priori, en le réduisant aux caractéristiques de son groupe d’appartenance.</p>
+
+    <div class="stage">
+      <div class="groups" id="groups" role="img" aria-label="Trois groupes de huit personnes. Au départ chacune est différente ; avec le stéréotype, toutes les personnes d’un groupe deviennent identiques."></div>
+      <div class="stage-foot">
+        <p class="state" id="state" aria-live="polite"></p>
+        <button class="btn primary" id="toggle" type="button" aria-pressed="false">Appliquer le stéréotype</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="block" aria-labelledby="h-def">
+  <div class="wrap">
+    <div class="sec-head rev">
+      <span class="kicker">Définition</span>
+      <h2 id="h-def">Une empreinte solide</h2>
+      <p>Le mot vient du grec. Un stéréotype est une image préconçue : on juge d’abord, on regarde ensuite.</p>
+    </div>
+    <div class="etym rev">
+      <div class="word"><b>stereos</b><span>ferme, solide</span></div>
+      <span class="op" aria-hidden="true">+</span>
+      <div class="word"><b>typos</b><span>empreinte, modèle</span></div>
+      <span class="op" aria-hidden="true">=</span>
+      <div class="word out"><b>stéréotype</b><span>une image préconçue</span></div>
+    </div>
+    <div class="rev">
+      <p>On peut parler de stéréotypes liés :</p>
+      <ul class="chips">
+        <li>au genre</li>
+        <li>à l’appartenance ethnique ou religieuse supposée</li>
+        <li>à la nationalité</li>
+        <li>etc.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="h-prob">
+  <div class="wrap">
+    <div class="sec-head rev">
+      <span class="kicker">Problème</span>
+      <h2 id="h-prob">La menace du stéréotype</h2>
+      <p>Des individus soumis à un stéréotype finissent par modifier leur comportement et l’adapter pour que leurs actions correspondent à ce que l’on attend d’eux.</p>
+    </div>
+    <ol class="flow rev">
+      <li><h3>Un stéréotype vise un groupe</h3><p>Il est attaché à tous ceux que l’on rattache à ce groupe.</p></li>
+      <li><h3>On attend d’eux qu’ils s’y conforment</h3><p>Chacun est regardé à travers l’image de son groupe.</p></li>
+      <li><h3>Ils adaptent leur comportement</h3><p>Leurs actions finissent par correspondre à ce que l’on attend d’eux.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="h-ill">
+  <div class="wrap">
+    <div class="sec-head rev">
+      <span class="kicker">Illustration</span>
+      <h2 id="h-ill">L’expérience de Steele et Aronson</h2>
+      <p>En 1995, deux chercheurs testent l’effet d’un simple rappel du stéréotype.</p>
+    </div>
+    <div class="exp">
+      <ol class="steps rev">
+        <li><h3>Les participants</h3><p>Claude Steele et Joshua Aronson soumettent des étudiants blancs et noirs à des tests académiques.</p></li>
+        <li><h3>Le rappel du stéréotype</h3><p>À l’un des groupes, ils rappellent qu’il serait « normal », voire « attendu », que les étudiants noirs ne réussissent pas pleinement les tests.</p></li>
+        <li><h3>Le stéréotype visé</h3><p>Il renvoie à un stéréotype culturel en vigueur aux États-Unis, selon lequel les Noirs seraient moins intelligents. C’est un préjugé, non un fait.</p></li>
+        <li><h3>Le résultat</h3><p>Dans le groupe auquel le stéréotype a été rappelé, les étudiants obtiennent des résultats bien plus faibles que dans les autres groupes.</p></li>
+      </ol>
+      <div class="chart rev">
+        <h3>Résultats aux tests</h3>
+        <div class="bar-row">
+          <span class="bl">Autres groupes</span>
+          <div class="track"><div class="fill a" id="fillA" data-w="82"></div></div>
+        </div>
+        <div class="bar-row">
+          <span class="bl">Groupe à qui l’on rappelle le stéréotype</span>
+          <div class="track"><div class="fill b" id="fillB" data-w="42"></div></div>
+        </div>
+        <div class="chart-foot">
+          <button class="btn primary" id="play" type="button">Voir le résultat</button>
+          <p class="note">Schéma qualitatif : la fiche ne donne pas de chiffres.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="h-exp">
+  <div class="wrap">
+    <div class="sec-head rev">
+      <span class="kicker">Explication</span>
+      <h2 id="h-exp">Pourquoi cela fonctionne</h2>
+    </div>
+    <div class="two rev">
+      <div>
+        <h3>Des stéréotypes culturels</h3>
+        <p>Ils sont connus et reconnus par l’ensemble d’une société.</p>
+      </div>
+      <div>
+        <h3>Une influence inconsciente</h3>
+        <p>Ils modifient le comportement des personnes ciblées, sans qu’elles s’en rendent compte.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="h-cons">
+  <div class="wrap">
+    <div class="sec-head rev">
+      <span class="kicker">Conséquence</span>
+      <h2 id="h-cons">Sommes-nous libres de nos actions ?</h2>
+    </div>
+    <p class="big rev">Nous ne serions jamais totalement libres de nos actions.</p>
+    <p class="rev">Nous courons le risque de nous comporter comme on attend que nous nous comportions, en fonction du groupe auquel nous sommes rattachés.</p>
+    <div class="example rev">
+      <p>Par exemple, une femme risque de modifier son comportement pour correspondre au modèle social qui lui est imposé :</p>
+      <ul class="chips">
+        <li>être « féminine »</li>
+        <li>se maquiller</li>
+        <li>s’habiller de telle manière</li>
+        <li>etc.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="h-r">
+  <div class="wrap">
+    <h2 id="h-r" style="margin-bottom:1.8rem">À retenir</h2>
+    <ul class="recap rev">
+      <li>Un stéréotype est une image préconçue qui réduit une personne aux caractéristiques de son groupe.</li>
+      <li>La menace du stéréotype pousse les personnes visées à adapter leur comportement à ce que l’on attend d’elles.</li>
+      <li>L’expérience de Steele et Aronson (1995) le montre : rappeler le stéréotype fait baisser les résultats du groupe visé.</li>
+      <li>Cette influence est inconsciente : nous ne serions jamais totalement libres de nos actions.</li>
+    </ul>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-video">
+  <div class="wrap">
+    <h2 id="h-video" style="margin-bottom:1rem">En vidéo : la menace du stéréotype</h2>
+    <video controls preload="metadata" playsinline style="display:block;width:100%;max-width:880px;aspect-ratio:16/9;background:#000;border-radius:8px" src="videos/menace-du-stereotype.mp4"><p>Votre navigateur ne peut pas lire cette vidéo.</p></video>
+  </div>
+</section>
+</main>
+
+<nav class="pn" aria-label="Pages de la section Liberté"><a class="pv" href="spinoza-lettre-a-schuller.html" rel="prev"><small>← Page précédente</small><b>Spinoza : l’ignorance des causes déterminantes</b></a><a class="nx" href="epictete.html" rel="next"><small>Page suivante →</small><b>Epictète : ce qui dépend de nous</b></a><a class="hm" href="accueil.html">Retour à l’accueil</a></nav>
+<footer>
+  <div class="wrap">
+    <p>Page réalisée à partir de la fiche « Les stéréotypes ».</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  function $(s){return document.querySelector(s)}
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- Scène : individus et stéréotype ---------- */
+  var names=['Groupe A','Groupe B','Groupe C'];
+  var groupColors=['var(--g1)','var(--g2)','var(--g3)'];
+  var shapes=['50%','50% 50% 12% 50%','12%','50% 12% 50% 12%','30%','50% 50% 50% 8%','8% 50%','42%'];
+  var hues=[12,48,95,160,200,255,290,330];
+  var wrap=$('#groups'),stateEl=$('#state'),btn=$('#toggle');
+  var inds=[],caps=[];
+
+  names.forEach(function(n,g){
+    var grp=document.createElement('div');grp.className='grp';
+    var box=document.createElement('div');box.className='inds';
+    for(var i=0;i<8;i++){
+      var d=document.createElement('div');d.className='ind';
+      box.appendChild(d);inds.push({el:d,g:g,i:i});
+    }
+    var nm=document.createElement('p');nm.className='gname';nm.textContent=n;
+    var cap=document.createElement('p');cap.className='gcap';
+    grp.appendChild(box);grp.appendChild(nm);grp.appendChild(cap);
+    wrap.appendChild(grp);caps.push(cap);
+  });
+
+  function free(o){
+    var hue=hues[(o.i*3+o.g*2)%8];
+    var scale=(.78+((o.i*5+o.g*3)%5)*.07).toFixed(2);
+    var rot=((o.i*37+o.g*19)%50)-25;
+    o.el.style.backgroundColor='hsl('+hue+' 62% 58%)';
+    o.el.style.borderRadius=shapes[(o.i+o.g*3)%8];
+    o.el.style.transform='rotate('+rot+'deg) scale('+scale+')';
+  }
+  function stamped(o){
+    o.el.style.backgroundColor=groupColors[o.g];
+    o.el.style.borderRadius='12%';
+    o.el.style.transform='none';
+  }
+  var applied=false,touched=false;
+  function render(on,animate){
+    applied=on;
+    inds.forEach(function(o,k){
+      o.el.style.transitionDelay=(animate&&!reduce)?((k%8)*45+o.g*120)+'ms':'0ms';
+      if(on)stamped(o);else free(o);
+    });
+    caps.forEach(function(c){c.textContent=on?'Tous vus comme identiques.':'Chacun est différent.'});
+    stateEl.textContent=on
+      ?'Le stéréotype réduit chacun aux caractéristiques supposées de son groupe d’appartenance.'
+      :'Chaque personne est différente. Appliquez le stéréotype pour voir ce qui change.';
+    btn.setAttribute('aria-pressed',on?'true':'false');
+    btn.textContent=on?'Retirer le stéréotype':'Appliquer le stéréotype';
+  }
+  btn.addEventListener('click',function(){touched=true;render(!applied,true)});
+  render(false,false);
+  /* Un seul moment orchestré à l’ouverture : le stéréotype s’applique tout seul */
+  if(!reduce){setTimeout(function(){if(!touched)render(true,true)},1100)}
+
+  /* ---------- Graphique qualitatif ---------- */
+  var fa=$('#fillA'),fb=$('#fillB'),play=$('#play'),shown=false;
+  function showBars(on){
+    shown=on;
+    fa.style.width=on?fa.getAttribute('data-w')+'%':'0';
+    fb.style.width=on?fb.getAttribute('data-w')+'%':'0';
+    fa.textContent=on?'Résultats plus élevés':'';
+    fb.textContent=on?'Résultats bien plus faibles':'';
+    play.textContent=on?'Rejouer':'Voir le résultat';
+  }
+  play.addEventListener('click',function(){
+    if(shown){
+      showBars(false);
+      setTimeout(function(){showBars(true)},reduce?0:350);
+    }else{showBars(true)}
+  });
+
+  /* ---------- Apparition au défilement ---------- */
+  var revs=[].slice.call(document.querySelectorAll('.rev'));
+  if(reduce||!('IntersectionObserver' in window)){
+    revs.forEach(function(e){e.classList.add('in')});
+  }else{
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}
+      });
+    },{threshold:.12});
+    revs.forEach(function(e){io.observe(e)});
+  }
+})();
+</script>
+</body>
+</html>

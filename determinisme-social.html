@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Le déterminisme social</title>
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+  --bg:#F1F3F5; --surface:#FFFFFF; --ink:#17202B; --muted:#4E5A67; --line:#D3D9DF; --focus:#2A4FBF; --on:#FFFFFF;
+  --g0:#5A7422; --g1:#A86A00; --g2:#2A4FBF; --g3:#0F7777; --g4:#8E3A80; --g5:#B23A26;
+  --head:system-ui,-apple-system,"Segoe UI",sans-serif;
+  --text:Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#12171D; --surface:#1B222A; --ink:#E8ECF0; --muted:#A0ACB8; --line:#2E3842; --focus:#8FB0FF; --on:#10151B;
+    --g0:#A5C060; --g1:#F0B445; --g2:#7C9BF2; --g3:#45C4C4; --g4:#D585C6; --g5:#F08A74;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#12171D; --surface:#1B222A; --ink:#E8ECF0; --muted:#A0ACB8; --line:#2E3842; --focus:#8FB0FF; --on:#10151B;
+  --g0:#A5C060; --g1:#F0B445; --g2:#7C9BF2; --g3:#45C4C4; --g4:#D585C6; --g5:#F08A74;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.125rem/1.62 var(--text)}
+.wrap{width:min(1100px,100% - 2.5rem);margin-inline:auto}
+h1,h2,h3{font-family:var(--head);margin:0;line-height:1.1;letter-spacing:-.015em}
+h1{font-size:clamp(2.5rem,6.2vw,4.4rem);font-weight:700;letter-spacing:-.025em;line-height:1.02}
+h2{font-size:clamp(1.7rem,3.6vw,2.4rem);font-weight:700}
+h3{font-size:1.25rem;font-weight:700}
+p{margin:0 0 1em;max-width:62ch}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.sw{display:inline-block;width:.8rem;height:.8rem;border-radius:50%;flex:none;margin-right:.55rem;vertical-align:-.05em}
+.sw.same,.dot.same{background-image:radial-gradient(circle,var(--bg) 0 24%,transparent 27%)}
+.note{font-size:.95rem;color:var(--muted)}
+
+/* Hero */
+.hero{padding:clamp(2rem,6vw,4.5rem) 0 clamp(2.5rem,6vw,4.5rem)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:clamp(2rem,5vw,4rem);align-items:start}
+.lead{font-size:1.3rem;line-height:1.5;margin:1.4rem 0 2rem;max-width:34rem}
+.picker-label{font:500 1rem/1.3 var(--head);margin:0 0 .7rem;color:var(--muted)}
+.picker{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.6rem}
+.picker button{display:inline-flex;align-items:center;text-align:left;font:500 .95rem/1.25 var(--head);color:var(--ink);background:transparent;border:1.5px solid var(--line);border-radius:6px;padding:.55rem .8rem;cursor:pointer;transition:background-color .2s,border-color .2s,color .2s}
+.picker button:hover{border-color:var(--ink)}
+.picker button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.result{font:500 1.45rem/1.3 var(--head);min-height:5.2em;max-width:30rem;margin:0}
+.result strong{font-weight:700}
+.dots{display:grid;grid-template-columns:repeat(10,1fr);gap:clamp(5px,1.3vw,10px);width:min(100%,440px)}
+.dot{aspect-ratio:1;border-radius:50%;background-color:var(--line);transition:background-color .5s ease}
+.legend{list-style:none;margin:1.6rem 0 .8rem;padding:0;width:min(100%,440px)}
+.legend li{display:flex;align-items:baseline;padding:.32rem 0;border-bottom:1px solid var(--line);font:500 .95rem/1.3 var(--head)}
+.legend .nm{flex:1}
+.legend .tag{color:var(--muted);font-weight:400;margin-left:.4rem}
+.legend .pc{font-variant-numeric:tabular-nums;font-weight:700;margin-left:1rem}
+
+/* Sections */
+section.block{border-top:1px solid var(--line);padding:clamp(3rem,7vw,5rem) 0}
+.sec-head{max-width:46rem;margin-bottom:2.2rem}
+.sec-head h2{margin-bottom:1rem}
+
+/* Concepts */
+.concepts{margin:0}
+.concept{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:1.5rem 3rem;padding:1.6rem 0;border-top:1px solid var(--line)}
+.concept:last-child{border-bottom:1px solid var(--line)}
+.concept dt{font:700 clamp(1.5rem,3vw,2rem)/1.1 var(--head);letter-spacing:-.015em}
+.concept dd{margin:0}
+.concept dd p:last-child{margin-bottom:0}
+.echo{font:500 1rem/1.4 var(--head);margin-top:.9rem;padding-left:.9rem;border-left:4px solid var(--g2)}
+.ex{color:var(--muted);font-style:italic}
+
+/* Table */
+.tools{display:flex;flex-wrap:wrap;gap:.7rem 1.2rem;align-items:center;margin-bottom:1.2rem}
+.switch{font:500 .95rem/1.2 var(--head);color:var(--ink);background:transparent;border:1.5px solid var(--ink);border-radius:6px;padding:.55rem .85rem;cursor:pointer}
+.switch[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.scroller{overflow-x:auto;max-width:100%;border-top:1px solid var(--line)}
+table{border-collapse:separate;border-spacing:0;width:100%;min-width:780px}
+caption{caption-side:top;text-align:left;font:500 .95rem/1.4 var(--head);color:var(--muted);padding:.8rem 0}
+thead th{font:500 .85rem/1.25 var(--head);color:var(--muted);text-align:left;vertical-align:bottom;padding:.6rem .6rem .7rem;border-top:4px solid var(--c);border-bottom:2px solid var(--ink)}
+tbody th{position:sticky;left:0;z-index:1;background:var(--bg);text-align:left;font:500 .92rem/1.3 var(--head);padding:.8rem .8rem .8rem 0;width:13rem;border-bottom:1px solid var(--line)}
+tbody td{padding:.7rem .6rem;vertical-align:bottom;border-bottom:1px solid var(--line);transition:opacity .3s,background-color .2s}
+tbody tr:hover td,tbody tr:hover th{background:var(--surface)}
+td .n{display:block;font:700 1.2rem/1.2 var(--head);font-variant-numeric:tabular-nums;margin-bottom:.35rem}
+td .bar{display:block;height:6px;border-radius:3px;width:calc(var(--w) * 1%);transition:width .9s cubic-bezier(.2,.7,.2,1)}
+.armed .bar{width:0}
+table.show-diag td:not(.diag){opacity:.35}
+table.show-diag td.diag{background:var(--surface);box-shadow:inset 0 0 0 2px var(--ink)}
+td.pick{background:var(--surface);box-shadow:inset 0 0 0 2px var(--ink)}
+.lecture{margin-top:1.4rem;display:flex;flex-wrap:wrap;gap:.6rem 1.2rem;align-items:center}
+.lecture p{margin:0}
+
+/* Compare */
+.cmp{max-width:900px}
+.cmp-row{margin-bottom:1.6rem}
+.cmp-row label{display:block;font:500 .95rem/1.3 var(--head);color:var(--muted);margin-bottom:.4rem}
+select{width:100%;max-width:34rem;font:500 1rem/1.3 var(--head);color:var(--ink);background:var(--surface);border:1.5px solid var(--line);border-radius:6px;padding:.6rem .8rem;margin-bottom:.8rem;display:block}
+.stack{display:flex;height:3.2rem;border-radius:6px;overflow:hidden}
+.seg{display:flex;align-items:center;justify-content:center;height:100%;color:var(--on);font:700 .95rem/1 var(--head);font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;transition:width .7s cubic-bezier(.2,.7,.2,1);border-right:2px solid var(--bg)}
+.seg:last-child{border-right:0}
+.cmp-legend{list-style:none;margin:0 0 1.6rem;padding:0;display:flex;flex-wrap:wrap;gap:.4rem 1.4rem;font:500 .9rem/1.3 var(--head)}
+.cmp-legend li{display:flex;align-items:center}
+.verdict{font:500 1.35rem/1.35 var(--head);max-width:40rem;margin:0;padding-left:1rem;border-left:4px solid var(--ink)}
+.verdict strong{font-weight:700}
+
+/* Consequences */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.two > div{padding:0 2.2rem 0 0}
+.two > div + div{padding:0 0 0 2.2rem;border-left:1px solid var(--line)}
+.two h3{margin-bottom:.8rem}
+.nuance{margin-top:2.6rem;padding-top:1.8rem;border-top:1px solid var(--line);max-width:46rem}
+.nuance h3{margin-bottom:.8rem}
+
+.recap{margin:0;padding:0;list-style:none;max-width:46rem}
+.recap li{padding:.9rem 0;border-top:1px solid var(--line)}
+.recap li:last-child{border-bottom:1px solid var(--line)}
+
+footer{border-top:1px solid var(--line);padding:2.2rem 0 3rem}
+footer p{font-size:.92rem;color:var(--muted);max-width:70ch;margin-bottom:.6rem}
+
+@media (max-width:860px){
+  .hero-grid{grid-template-columns:1fr}
+  .result{min-height:0}
+  .concept{grid-template-columns:1fr;gap:.8rem}
+  .two{grid-template-columns:1fr}
+  .two > div,.two > div + div{padding:0;border-left:0}
+  .two > div + div{margin-top:2rem;padding-top:2rem;border-top:1px solid var(--line)}
+  tbody th{width:9rem}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition:none!important;animation:none!important}
+}
+
+.pn{display:flex;gap:1rem;flex-wrap:wrap;margin:2.5rem auto 0;max-width:980px;padding:0 1.25rem;box-sizing:content-box}
+.pn a{flex:1 1 16rem;display:flex;flex-direction:column;gap:.25rem;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--k,var(--ink));padding:.9rem 1.1rem;border-radius:0 0 8px 8px}
+.pn a:hover{border-color:var(--k,var(--ink))}.pn a:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.pn small{font:600 .78rem/1 system-ui,-apple-system,sans-serif;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.pn b{font:700 1.1rem/1.25 system-ui,-apple-system,sans-serif}
+.pn .nx{text-align:right;margin-left:auto;max-width:calc(50% - .5rem)}
+.pn .nx:first-child{margin-left:auto;max-width:calc(50% - .5rem)}
+.pn .hm{flex:0 0 100%;text-align:center;font:500 .92rem/1 system-ui,-apple-system,sans-serif;background:none;border:0;padding:.4rem;color:var(--ink);text-decoration:underline}
+
+.pdfbtn{display:inline-flex;align-items:center;gap:.5rem;font:600 .88rem/1 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--surface);border:1.5px solid var(--ink);border-radius:999px;padding:.55rem .95rem;cursor:pointer}
+.pdfbtn:hover{background:var(--ink);color:var(--bg)}.pdfbtn:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:2px}
+@media print{
+  :root{--bg:#fff!important;--surface:#fff!important;--ink:#111!important;--muted:#444!important;--line:#bbb!important;color-scheme:light!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:#fff!important;color:#111!important}
+  body::before,body::after{display:none!important}
+  nav,.pdfbtn,.pn,video,section[aria-labelledby="h-video"]{display:none!important}
+  .rev,.js .rev{opacity:1!important;transform:none!important}
+  .stp li[hidden]{display:list-item!important}
+  details>*{display:block!important}
+  article,li,.card,figure,.stage{break-inside:avoid}
+  h1,h2,h3{break-after:avoid;text-shadow:none!important}
+  *{text-shadow:none!important}
+  a{color:inherit;text-decoration:none}
+  section.block,.part{padding-top:1.2rem!important;padding-bottom:1.2rem!important}
+  footer{break-before:avoid;border-top:1px solid #999;margin-top:1rem}
+}
+@page{size:A4;margin:16mm 14mm}
+</style>
+</head>
+<body>
+<nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
+
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <h1>Le déterminisme social</h1>
+      <p class="lead">Notre milieu social d’origine influence, parfois fortement et souvent sans que nous le sachions, nos comportements, nos choix et plus largement notre profession et notre place dans la société.</p>
+      <p class="picker-label" id="picker-label">Choisissez la profession du père et voyez où se retrouvent ses fils</p>
+      <div class="picker" id="picker" role="group" aria-labelledby="picker-label"></div>
+      <p class="result" id="result" aria-live="polite"></p>
+    </div>
+    <div>
+      <div class="dots" id="dots" role="img" aria-label="Grille de 100 points colorés selon le groupe socioprofessionnel des fils"></div>
+      <ul class="legend" id="legend"></ul>
+      <p class="note">Chaque point représente 1 homme sur 100. Un point percé appartient au même groupe que son père. Hommes de 35 à 59 ans, France métropolitaine, 2024.</p>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="block" aria-labelledby="t-concepts">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="t-concepts">Trois notions pour comprendre</h2>
+      <p>Le déterminisme social s’appuie sur trois notions à bien distinguer.</p>
+    </div>
+    <dl class="concepts">
+      <div class="concept">
+        <dt>La reproduction sociale</dt>
+        <dd>
+          <p>Le fait d’appartenir au même groupe socioprofessionnel que ses ascendants. La table de mobilité la mesure sur sa diagonale.</p>
+          <p class="echo">Dans les données : 53,4 % des fils de cadres sont eux aussi dans le groupe des cadres et professions intellectuelles supérieures.</p>
+        </dd>
+      </div>
+      <div class="concept">
+        <dt>Le capital culturel</dt>
+        <dd>
+          <p>Ce que notre groupe d’origine nous transmet en termes de références culturelles.</p>
+          <p class="ex">Par exemple : la lecture, les sorties culturelles, l’aisance avec le vocabulaire scolaire.</p>
+        </dd>
+      </div>
+      <div class="concept">
+        <dt>L’habitus</dt>
+        <dd>
+          <p>L’ensemble des codes et des comportements que nous avons intériorisés depuis l’enfance.</p>
+          <p class="ex">Par exemple : une façon de parler, de se tenir ou d’envisager ses études qui paraît naturelle parce qu’elle a été acquise très tôt.</p>
+        </dd>
+      </div>
+    </dl>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="t-table">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="t-table">La table de mobilité</h2>
+      <p>Elle compare le groupe socioprofessionnel des hommes à celui de leur père. Chaque ligne se lit horizontalement et totalise 100 %, à l’arrondi près. Les barres donnent la part de chaque destination.</p>
+    </div>
+    <div class="tools">
+      <button class="switch" id="diag" type="button" aria-pressed="false">Repérer la reproduction sociale</button>
+      <span class="note">La diagonale regroupe les fils qui sont dans le même groupe que leur père.</span>
+    </div>
+    <div class="scroller armed" id="table" role="region" aria-label="Table de mobilité sociale, défilement horizontal possible" tabindex="0">
+      <table id="mob"></table>
+    </div>
+    <div class="lecture">
+      <p><strong>Lecture :</strong> en 2024, 9,6 % des hommes ayant un père agriculteur exploitant sont artisans, commerçants ou chefs d’entreprise.</p>
+      <button class="switch" id="pick" type="button" aria-pressed="false">Repérer cette case</button>
+    </div>
+    <p class="note" style="margin-top:1rem">Champ : France métropolitaine, hommes de nationalité française, en emploi ou ayant travaillé, âgés de 35 à 59 ans au 31 décembre de l’année d’enquête. Source : Insee, enquête Emploi 2024.</p>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="t-why">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="t-why">Pourquoi parler de déterminisme ?</h2>
+      <p>Si nos choix ne dépendaient que de nous, les lignes du tableau se ressembleraient : on retrouverait à peu près la même répartition quel que soit le métier du père. Or rien ne justifie, a priori, qu’un fils de cadre devienne cadre plutôt qu’autre chose.</p>
+      <p>Comparez deux origines et jugez si les barres se ressemblent.</p>
+    </div>
+    <div class="cmp">
+      <div class="cmp-row">
+        <label for="selA">Père de la première ligne</label>
+        <select id="selA"></select>
+        <div class="stack" id="stackA" role="img"></div>
+      </div>
+      <div class="cmp-row">
+        <label for="selB">Père de la seconde ligne</label>
+        <select id="selB"></select>
+        <div class="stack" id="stackB" role="img"></div>
+      </div>
+      <ul class="cmp-legend" id="cmpLegend"></ul>
+      <p class="verdict" id="verdict" aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="t-cons">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="t-cons">Ce que cela change</h2>
+    </div>
+    <div class="two">
+      <div>
+        <h3>Des choix qui ne sont pas vraiment libres</h3>
+        <p>Il existe une corrélation importante entre la classe sociale d’origine et le rôle et la place que l’on occupe dans la société.</p>
+      </div>
+      <div>
+        <h3>Une méritocratie à nuancer</h3>
+        <p>Si l’origine pèse autant, l’idée que chacun obtient sa place grâce à son seul mérite est à nuancer, voire à remettre en cause.</p>
+      </div>
+    </div>
+    <div class="nuance">
+      <h3>Déterminisme ne veut pas dire fatalité</h3>
+      <p>46,6 % des fils de cadres ne sont pas cadres, et 13,5 % des fils d’employés et d’ouvriers peu qualifiés le sont. Le tableau décrit des tendances statistiques, pas des destins individuels.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="t-recap">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="t-recap">À retenir</h2>
+    </div>
+    <ul class="recap">
+      <li>Notre milieu d’origine influence nos choix, souvent sans que nous en ayons conscience.</li>
+      <li>La reproduction sociale, le capital culturel et l’habitus décrivent comment cette influence s’exerce.</li>
+      <li>La table de mobilité le montre : 53,4 % des fils de cadres sont cadres, contre 13,5 % des fils d’employés et d’ouvriers peu qualifiés.</li>
+      <li>C’est une corrélation importante, pas une fatalité.</li>
+    </ul>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-video">
+  <div class="wrap">
+    <h2 id="h-video" style="margin-bottom:1rem">En vidéo : le déterminisme social</h2>
+    <video controls preload="metadata" playsinline style="display:block;width:100%;max-width:880px;aspect-ratio:16/9;background:#000;border-radius:8px" src="videos/determinisme-social.mp4"><p>Votre navigateur ne peut pas lire cette vidéo.</p></video>
+  </div>
+</section>
+</main>
+
+<nav class="pn" aria-label="Pages de la section Liberté"><a class="pv" href="ane-de-buridan.html" rel="prev"><small>← Page précédente</small><b>L’âne de Buridan</b></a><a class="nx" href="spinoza-lettre-a-schuller.html" rel="next"><small>Page suivante →</small><b>Spinoza : l’ignorance des causes déterminantes</b></a><a class="hm" href="accueil.html">Retour à l’accueil</a></nav>
+<footer>
+  <div class="wrap">
+    <p>Page réalisée à partir de la fiche « Le déterminisme social » et de la table de mobilité distribuée en cours.</p>
+    <p>Source des données : Insee, enquête Emploi 2024.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var groups=[
+    {name:"Agriculteurs exploitants",sing:"agriculteur exploitant"},
+    {name:"Artisans, commerçants et chefs d’entreprise",sing:"artisan, commerçant ou chef d’entreprise"},
+    {name:"Cadres et professions intellectuelles supérieures",sing:"cadre ou profession intellectuelle supérieure"},
+    {name:"Professions intermédiaires",sing:"profession intermédiaire"},
+    {name:"Employés et ouvriers qualifiés",sing:"employé ou ouvrier qualifié"},
+    {name:"Employés et ouvriers peu qualifiés",sing:"employé ou ouvrier peu qualifié"}
+  ];
+  var M=[
+    [27.7,9.6,15.1,16.0,20.8,10.8],
+    [0.8,20.7,27.0,21.4,22.9,7.2],
+    [0.6,7.7,53.4,21.9,11.8,4.6],
+    [0.7,6.6,34.7,30.4,20.5,7.1],
+    [0.6,8.2,17.1,25.0,37.6,11.5],
+    [1.0,7.6,13.5,21.1,37.1,19.6]
+  ];
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function $(s){return document.querySelector(s)}
+  function fmt(n){return n.toFixed(1).replace('.',',')}
+  function col(g){return 'var(--g'+g+')'}
+
+  /* Répartition de 100 points (méthode du plus fort reste) */
+  function alloc(row){
+    var s=row.reduce(function(a,b){return a+b},0);
+    var raw=row.map(function(v){return v/s*100});
+    var base=raw.map(Math.floor);
+    var rest=100-base.reduce(function(a,b){return a+b},0);
+    raw.map(function(v,i){return [v-base[i],i]})
+       .sort(function(a,b){return b[0]-a[0]||a[1]-b[1]})
+       .slice(0,rest).forEach(function(p){base[p[1]]++});
+    return base;
+  }
+
+  /* ---------- Hero ---------- */
+  var picker=$('#picker'),dotsEl=$('#dots'),legend=$('#legend'),result=$('#result');
+  var buttons=[],dots=[],legendItems=[];
+  groups.forEach(function(g,i){
+    var b=document.createElement('button');
+    b.type='button';b.setAttribute('aria-pressed','false');
+    b.innerHTML='<span class="sw" style="background:'+col(i)+'"></span>'+g.name;
+    b.addEventListener('click',function(){setOrigin(i,true)});
+    picker.appendChild(b);buttons.push(b);
+  });
+  for(var i=0;i<100;i++){var d=document.createElement('span');d.className='dot';dotsEl.appendChild(d);dots.push(d)}
+  groups.forEach(function(g,i){
+    var li=document.createElement('li');
+    li.innerHTML='<span class="sw" style="background:'+col(i)+'"></span><span class="nm">'+g.name+'<span class="tag"></span></span><span class="pc"></span>';
+    legend.appendChild(li);legendItems.push(li);
+  });
+
+  var current=2;
+  function setOrigin(o,animate){
+    current=o;
+    var counts=alloc(M[o]),ids=[];
+    counts.forEach(function(c,g){for(var k=0;k<c;k++)ids.push(g)});
+    dots.forEach(function(d,i){
+      var g=ids[i];
+      d.style.transitionDelay=(animate&&!reduce)?(i*7)+'ms':'0ms';
+      d.style.backgroundColor=col(g);
+      d.classList.toggle('same',g===o);
+    });
+    buttons.forEach(function(b,i){b.setAttribute('aria-pressed',i===o?'true':'false')});
+    legendItems.forEach(function(li,g){
+      li.querySelector('.pc').textContent=fmt(M[o][g])+' %';
+      li.querySelector('.tag').textContent=g===o?'comme le père':'';
+      li.querySelector('.sw').classList.toggle('same',g===o);
+    });
+    result.innerHTML='Parmi les hommes dont le père est '+groups[o].sing+', <strong>'+fmt(M[o][o])+' %</strong> sont eux aussi dans ce groupe.';
+  }
+  /* Mise en place : un seul moment orchestré à l’ouverture */
+  setOrigin(2,false);
+  dots.forEach(function(d){d.style.backgroundColor='';d.classList.remove('same');d.style.transitionDelay='0ms'});
+  setTimeout(function(){setOrigin(2,true)},reduce?0:450);
+
+  /* ---------- Table ---------- */
+  var tbl=$('#mob');
+  var html='<caption>Groupe socioprofessionnel de l’homme selon celui de son père, en %</caption><thead><tr><th scope="col">Groupe du père</th>';
+  groups.forEach(function(g,j){html+='<th scope="col" style="--c:'+col(j)+'">'+g.name+'</th>'});
+  html+='</tr></thead><tbody>';
+  M.forEach(function(row,i){
+    html+='<tr><th scope="row"><span class="sw" style="background:'+col(i)+'"></span>'+groups[i].name+'</th>';
+    row.forEach(function(v,j){
+      html+='<td class="'+(i===j?'diag':'')+'" data-r="'+i+'" data-c="'+j+'"><span class="n">'+fmt(v)+'</span><span class="bar" style="--w:'+(v/55*100).toFixed(1)+';background:'+col(j)+'"></span></td>';
+    });
+    html+='</tr>';
+  });
+  html+='</tbody>';
+  tbl.innerHTML=html;
+
+  var diag=$('#diag');
+  diag.addEventListener('click',function(){
+    var on=tbl.classList.toggle('show-diag');
+    diag.setAttribute('aria-pressed',on?'true':'false');
+  });
+  var pick=$('#pick');
+  pick.addEventListener('click',function(){
+    var cell=tbl.querySelector('td[data-r="0"][data-c="1"]');
+    var on=cell.classList.toggle('pick');
+    pick.setAttribute('aria-pressed',on?'true':'false');
+  });
+  var tw=$('#table');
+  if(reduce||!('IntersectionObserver' in window)){tw.classList.remove('armed')}
+  else{
+    var io=new IntersectionObserver(function(es){
+      if(es[0].isIntersecting){tw.classList.remove('armed');io.disconnect()}
+    },{threshold:.25});
+    io.observe(tw);
+  }
+
+  /* ---------- Comparateur ---------- */
+  var selA=$('#selA'),selB=$('#selB'),verdict=$('#verdict');
+  var stacks=[$('#stackA'),$('#stackB')],segs=[[],[]];
+  groups.forEach(function(g,i){
+    [selA,selB].forEach(function(s){var o=document.createElement('option');o.value=i;o.textContent=g.name;s.appendChild(o)});
+  });
+  selA.value=2;selB.value=5;
+  stacks.forEach(function(st,k){
+    groups.forEach(function(g,i){
+      var s=document.createElement('span');s.className='seg';s.style.background=col(i);
+      st.appendChild(s);segs[k].push(s);
+    });
+  });
+  var cl=$('#cmpLegend');
+  groups.forEach(function(g,i){
+    var li=document.createElement('li');
+    li.innerHTML='<span class="sw" style="background:'+col(i)+'"></span>'+g.name;
+    cl.appendChild(li);
+  });
+  function fmtRatio(r){var x=Math.round(r*10)/10;return String(x).replace('.',',')}
+  function compare(){
+    var sel=[parseInt(selA.value,10),parseInt(selB.value,10)];
+    sel.forEach(function(o,k){
+      var row=M[o],s=row.reduce(function(a,b){return a+b},0),desc=[];
+      row.forEach(function(v,i){
+        var seg=segs[k][i];
+        seg.style.width=(v/s*100)+'%';
+        seg.textContent=v>=7?fmt(v):'';
+        desc.push(groups[i].name+' '+fmt(v)+' %');
+      });
+      stacks[k].setAttribute('aria-label','Hommes dont le père est '+groups[o].sing+' : '+desc.join(', '));
+    });
+    var A=sel[0],B=sel[1];
+    if(A===B){verdict.textContent='Choisissez deux origines différentes pour les comparer.';return}
+    var a=M[A][2],b=M[B][2];
+    var hi=a>=b?A:B,lo=a>=b?B:A,r=M[hi][2]/M[lo][2];
+    var tail=r<1.1?'Les deux proportions sont proches.':'C’est environ '+fmtRatio(r)+' fois plus.';
+    verdict.innerHTML='Parmi les hommes dont le père est '+groups[hi].sing+', <strong>'+fmt(M[hi][2])+' %</strong> sont cadres ou de profession intellectuelle supérieure, contre <strong>'+fmt(M[lo][2])+' %</strong> de ceux dont le père est '+groups[lo].sing+'. '+tail;
+  }
+  selA.addEventListener('change',compare);
+  selB.addEventListener('change',compare);
+  compare();
+})();
+</script>
+</body>
+</html>

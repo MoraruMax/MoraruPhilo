@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Frise des philosophes</title>
+<style>
+:root{
+  color-scheme:light;
+  --bg:#F7F4EF; --surface:#FFFFFF; --ink:#1E1A16; --muted:#5E564D; --line:#DED6CB; --focus:#0B5CAD; --on:#FFFFFF;
+  --soc:#9A3412; --soc-soft:#FBE7DC;
+  --nat:#1B6B4A; --nat-soft:#DDF1E7;
+  --rai:#2B4C9B; --rai-soft:#E1E8F8;
+  --gold:#8A5A00; --bad:#B3261E;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --serif:Charter,"Bitstream Charter","Sitka Text",Cambria,Georgia,serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#16130F; --surface:#211D18; --ink:#F2ECE4; --muted:#B5AA9C; --line:#3A332B; --focus:#8CC2FF; --on:#16130F;
+    --soc:#FF9E6B; --soc-soft:#45220F; --nat:#74DDA7; --nat-soft:#143826; --rai:#9DB8FF; --rai-soft:#1C2A52; --gold:#F2C36B; --bad:#FF8F86;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#16130F; --surface:#211D18; --ink:#F2ECE4; --muted:#B5AA9C; --line:#3A332B; --focus:#8CC2FF; --on:#16130F;
+  --soc:#FF9E6B; --soc-soft:#45220F; --nat:#74DDA7; --nat-soft:#143826; --rai:#9DB8FF; --rai-soft:#1C2A52; --gold:#F2C36B; --bad:#FF8F86;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.1rem/1.65 var(--serif)}
+.wrap{width:min(980px,100% - 2.5rem);margin-inline:auto}
+h1,h2,h3{margin:0}
+h1{font:800 clamp(2.6rem,8vw,5rem)/1.02 var(--sans);letter-spacing:-.025em}
+h2{font:800 clamp(1.5rem,3.2vw,2.1rem)/1.2 var(--sans);margin-bottom:.8rem}
+h3{font:700 1.08rem/1.35 var(--sans)}
+p{margin:0 0 1em}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
+.btn{font:600 .95rem/1.2 var(--sans);color:var(--ink);background:transparent;border:1.5px solid var(--ink);border-radius:8px;padding:.65rem 1rem;cursor:pointer}
+.btn:hover{background:var(--line)}
+.btn.primary{background:var(--ink);color:var(--bg)}
+.btn.primary:hover{background:var(--ink);filter:brightness(1.2)}
+.note{font:500 .92rem/1.5 var(--sans);color:var(--muted)}
+section.block{border-top:1px solid var(--line);padding:clamp(2.2rem,6vw,3.8rem) 0}
+.sec-head{max-width:46rem;margin-bottom:1.6rem}
+.src{font:600 .85rem/1.35 var(--sans);color:var(--muted)}
+blockquote{margin:0}
+
+
+.hero{padding:clamp(2rem,6vw,3.6rem) 0 1.5rem}
+.lead{font-size:clamp(1.15rem,2.4vw,1.4rem);line-height:1.5;margin:1.1rem 0 0;max-width:46ch}
+.ctl{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:1rem 2rem;align-items:end;margin:1.6rem 0 1rem}
+.ctl label{font:700 .95rem/1.3 var(--sans);display:block;margin-bottom:.4rem}
+.ctl input[type=search]{width:100%;font:500 1rem var(--sans);padding:.65rem .8rem;border:2px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
+.ctl input[type=range]{width:100%;accent-color:var(--ink)}
+.yr{font:800 1.4rem/1 var(--sans)}
+.alive{font:500 .98rem/1.5 var(--sans);background:var(--surface);border-left:5px solid var(--ink);padding:.7rem 1rem;margin:0 0 1rem;min-height:3.2rem}
+.tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin:1rem 0}
+.tabs button{font:700 1rem/1.2 var(--sans);color:var(--ink);background:var(--surface);border:2px solid var(--line);border-radius:8px;padding:.7rem 1rem;cursor:pointer}
+.tabs button[aria-selected=true]{border-color:var(--ink);background:var(--ink);color:var(--bg)}
+.legend{display:flex;flex-wrap:wrap;gap:.4rem 1rem;font:600 .85rem/1.3 var(--sans);color:var(--muted);margin:.5rem 0 1rem;padding:0;list-style:none}
+.legend i{display:inline-block;width:.9rem;height:.9rem;border-radius:3px;vertical-align:-.1rem;margin-right:.35rem}
+.axis{position:relative;height:2rem;margin-left:var(--lw);border-bottom:2px solid var(--ink)}
+.axis span{position:absolute;bottom:.15rem;font:600 .78rem/1 var(--sans);color:var(--muted);transform:translateX(-50%);white-space:nowrap}
+.axis span::after{content:"";position:absolute;left:50%;top:1.1rem;height:.45rem;border-left:2px solid var(--ink)}
+.rows{--lw:10.5rem;position:relative}
+.axis{--lw:10.5rem}
+.row2{display:grid;grid-template-columns:var(--lw) minmax(0,1fr);align-items:center;width:100%;background:none;border:0;border-bottom:1px solid var(--line);padding:0;text-align:left;cursor:pointer;color:var(--ink);font:inherit}
+.row2 .nm{font:600 .95rem/1.2 var(--sans);padding:.38rem .6rem .38rem 0;text-align:right}
+.row2 .tr{position:relative;height:1.55rem}
+.row2 .bar{position:absolute;top:.3rem;height:.95rem;border-radius:3px;background:var(--bc);min-width:5px}
+.row2:hover .nm,.row2[aria-pressed=true] .nm{text-decoration:underline}
+.row2[aria-pressed=true]{background:var(--surface)}
+.row2.dim .bar{opacity:.2}.row2.dim .nm{color:var(--muted)}
+.row2.hit .nm{font-weight:800}
+.row2.hide{display:none}
+.row2.rel .bar{outline:2px solid var(--ink);outline-offset:1px}
+.mark{position:absolute;top:0;bottom:0;width:0;border-left:2px dashed var(--ink);left:calc(var(--lw) + (100% - var(--lw)) * var(--p,0));pointer-events:none}
+@media (prefers-reduced-motion:no-preference){.row2 .bar{transition:opacity .25s}.mark{transition:left .15s}}
+.card{background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--ink);padding:1rem 1.2rem;margin-top:1.2rem;font:500 1rem/1.55 var(--sans)}
+.card h3{font-size:1.3rem;margin-bottom:.2rem}
+.card .dt{color:var(--muted);margin:0 0 .6rem}
+.card ul{margin:.3rem 0 0;padding-left:1.1rem}
+.card a{color:var(--focus);font-weight:700}
+.qz{background:var(--surface);border:1px solid var(--line);padding:clamp(1rem,3vw,1.6rem)}
+.qz .pr{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin:1rem 0}
+.qz .pr button{font:700 1.15rem/1.3 var(--sans);padding:1.1rem .8rem;border:2px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);cursor:pointer}
+.qz .pr button:hover:not([disabled]){border-color:var(--ink)}
+.qz .pr button.ok{border-color:var(--nat);background:var(--nat-soft)}
+.qz .pr button.no{border-color:var(--bad)}
+.qz .pr button[disabled]{cursor:default;color:var(--ink)}
+.qz .fbk{font:500 1rem/1.5 var(--sans);min-height:3rem}
+.qz .top{display:flex;justify-content:space-between;font:700 .9rem var(--sans);color:var(--muted)}
+.ring{width:96px;height:96px;flex:none}.ring circle{fill:none;stroke-width:10}.ring .bg{stroke:var(--line)}
+.ring .fg{stroke:var(--ink);stroke-linecap:round;transform:rotate(-90deg);transform-origin:50% 50%;stroke-dasharray:264;stroke-dashoffset:264}
+@media (prefers-reduced-motion:no-preference){.ring .fg{transition:stroke-dashoffset 1s ease}}
+.ring text{font:800 26px var(--sans);fill:var(--ink);text-anchor:middle;dominant-baseline:central}
+.bh{display:flex;flex-wrap:wrap;align-items:center;gap:1.2rem}
+.bh h3{font-size:1.25rem}.bh p{margin:0;font:500 1rem/1.5 var(--sans)}
+.brev{margin:1rem 0 0;padding:0;list-style:none;font:500 .98rem/1.5 var(--sans)}.brev li{padding:.5rem 0;border-top:1px solid var(--line)}
+@media (max-width:720px){.ctl{grid-template-columns:1fr}.rows,.axis{--lw:7.2rem}.row2 .nm{font-size:.82rem}.qz .pr{grid-template-columns:1fr}}
+:root{--p1:#2B7A6B;--p2:#8A6D00;--p3:#B4532A;--p4:#2B5FB4;--p5:#8E3B8E;--p6:#4D6B1F}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--p1:#6FD1BC;--p2:#F2C36B;--p3:#FF9E6B;--p4:#8CB4FF;--p5:#E39AE3;--p6:#B6DE7A}}
+:root[data-theme="dark"]{--p1:#6FD1BC;--p2:#F2C36B;--p3:#FF9E6B;--p4:#8CB4FF;--p5:#E39AE3;--p6:#B6DE7A}
+footer{padding:1.6rem 0 2.5rem;font:500 .9rem/1.5 var(--sans);color:var(--muted)}footer p{margin:0}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
+
+.pdfbtn{display:inline-flex;align-items:center;gap:.5rem;font:600 .88rem/1 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--surface);border:1.5px solid var(--ink);border-radius:999px;padding:.55rem .95rem;cursor:pointer}
+.pdfbtn:hover{background:var(--ink);color:var(--bg)}.pdfbtn:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:2px}
+@media print{
+  :root{--bg:#fff!important;--surface:#fff!important;--ink:#111!important;--muted:#444!important;--line:#bbb!important;color-scheme:light!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:#fff!important;color:#111!important}
+  body::before,body::after{display:none!important}
+  nav,.pdfbtn,.pn,video,section[aria-labelledby="h-video"]{display:none!important}
+  .rev,.js .rev{opacity:1!important;transform:none!important}
+  .stp li[hidden]{display:list-item!important}
+  details>*{display:block!important}
+  article,li,.card,figure,.stage{break-inside:avoid}
+  h1,h2,h3{break-after:avoid;text-shadow:none!important}
+  *{text-shadow:none!important}
+  a{color:inherit;text-decoration:none}
+  section.block,.part{padding-top:1.2rem!important;padding-bottom:1.2rem!important}
+  footer{break-before:avoid;border-top:1px solid #999;margin-top:1rem}
+}
+@page{size:A4;margin:16mm 14mm}
+</style>
+</head>
+<body>
+<nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
+<header class="hero"><div class="wrap">
+  <h1>Frise des philosophes</h1>
+  <p class="lead">Qui vivait en même temps que qui ? Faites glisser le curseur dans le temps, cliquez sur un philosophe, puis testez-vous.</p>
+</div></header>
+<main>
+<section class="wrap" aria-label="Frise">
+  <div class="tabs" role="tablist" aria-label="Période">
+    <button role="tab" id="tb1" aria-selected="true" aria-controls="fr" type="button">Antiquité et Moyen Âge</button>
+    <button role="tab" id="tb2" aria-selected="false" aria-controls="fr" type="button" tabindex="-1">Philosophie moderne et contemporaine</button>
+  </div>
+  <div class="ctl">
+    <div><label for="q">Chercher un philosophe</label><input id="q" type="search" placeholder="Par exemple : Kant" autocomplete="off"></div>
+    <div><label for="y">Année : <span class="yr" id="yv"></span></label><input id="y" type="range" step="1"></div>
+  </div>
+  <p class="alive" id="alive" aria-live="polite"></p>
+  <ul class="legend" id="legend" aria-label="Légende : siècle de naissance"></ul>
+  <div id="fr" role="tabpanel" aria-labelledby="tb1">
+    <div class="axis" id="axis" aria-hidden="true"></div>
+    <div class="rows" id="rows"><div class="mark" id="mark" aria-hidden="true"></div></div>
+  </div>
+  <div class="card" id="card" aria-live="polite"><h3>Cliquez sur un nom</h3><p class="dt" style="margin:0">Vous verrez ses dates, ses contemporains (entourés sur la frise) et les pages du site où il apparaît.</p></div>
+</section>
+
+<section class="block" aria-labelledby="h-q" style="margin-top:2.5rem">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="h-q">Exercice : qui est né le premier ?</h2><p>Dix paires de philosophes. <span class="note">Exercice rédigé pour cette page ; il porte sur l’ensemble de la frise.</span></p></div>
+    <div class="qz" id="qz"></div>
+  </div>
+</section>
+</main>
+<footer><div class="wrap"><p>Page réalisée à partir de la frise « Philosophes de terminale » (deux pages : antiquité et Moyen Âge, puis moderne et contemporaine). La frise d’origine ne donne que des barres sans dates chiffrées : les dates indiquées ici sont des repères que j’ai ajoutés ; elles sont approximatives pour les noms précédés de « vers ». Les couleurs (siècle de naissance), le curseur, la recherche, les contemporains et l’exercice sont rédigés pour cette page.</p></div></footer>
+
+<script>
+(function(){
+function $(s){return document.querySelector(s)}
+function norm(s){return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')}
+/* nom, naissance, mort, approximatif(1) */
+var A=[
+['Anaximandre',-610,-546,1],['Pythagore',-570,-495,1],['Xénophane',-570,-475,1],['Héraclite',-540,-480,1],['Parménide',-515,-450,1],['Anaxagore',-500,-428,1],['Empédocle',-494,-434,1],['Zénon d’Élée',-490,-430,1],['Protagoras',-490,-420,1],['Gorgias',-483,-375,1],['Platon',-428,-348],['Aristote',-384,-322],['Zhuangzi',-369,-286,1],['Épicure',-341,-270],['Cicéron',-106,-43],['Lucrèce',-98,-55,1],['Sénèque',-4,65],['Épictète',50,135,1],['Marc Aurèle',121,180],['Nāgārjuna',150,250,1],['Sextus Empiricus',160,210,1],['Plotin',204,270],['Augustin',354,430],['Avicenne',980,1037],['Anselme',1033,1109],['Averroès',1126,1198],['Maïmonide',1138,1204],['Thomas d’Aquin',1225,1274],['Guillaume d’Occam',1287,1347,1]];
+var M=[
+['Machiavel',1469,1527],['Montaigne',1533,1592],['Francis Bacon',1561,1626],['Hobbes',1588,1679],['Descartes',1596,1650],['Pascal',1623,1662],['Locke',1632,1704],['Spinoza',1632,1677],['Malebranche',1638,1715],['Leibniz',1646,1716],['Giambattista Vico',1668,1744],['Berkeley',1685,1753],['Montesquieu',1689,1755],['Hume',1711,1776],['Rousseau',1712,1778],['Diderot',1713,1784],['Condillac',1714,1780],['Adam Smith',1723,1790],['Kant',1724,1804],['Bentham',1748,1832],['Hegel',1770,1831],['Schopenhauer',1788,1860],['Auguste Comte',1798,1857],['Cournot',1801,1877],['Feuerbach',1804,1872],['Tocqueville',1805,1859],['John Stuart Mill',1806,1873],['Søren Kierkegaard',1813,1855],['Marx',1818,1883],['Engels',1820,1895],['William James',1842,1910],['Nietzsche',1844,1900],['Freud',1856,1939],['Durkheim',1858,1917],['Bergson',1859,1941],['Husserl',1859,1938],['Max Weber',1864,1920],['Alain',1868,1951],['Marcel Mauss',1872,1950],['Russell',1872,1970],['Karl Jaspers',1883,1969],['Bachelard',1884,1962],['Heidegger',1889,1976],['Wittgenstein',1889,1951],['Walter Benjamin',1892,1940],['Karl Popper',1902,1994],['Vladimir Jankélévitch',1903,1985],['Hans Jonas',1903,1993],['Raymond Aron',1905,1983],['Jean-Paul Sartre',1905,1980],['Hannah Arendt',1906,1975],['Emmanuel Levinas',1906,1995],['Simone de Beauvoir',1908,1986],['Claude Lévi-Strauss',1908,2009],['Maurice Merleau-Ponty',1908,1961],['Simone Weil',1909,1943],['Jeanne Hersch',1910,2000],['Paul Ricœur',1913,2005],['Elizabeth Anscombe',1919,2001],['Iris Murdoch',1919,1999],['John Rawls',1921,2002]];
+/* pages du site */
+var L={'Platon':[['verite-platon.html','Le mythe de la caverne']],'Épictète':[['epictete.html','Épictète et la liberté']],'Descartes':[['descartes-du-doute-au-cogito.html','Du doute au cogito']],'Pascal':[['pascal.html','Pascal']],'Spinoza':[['spinoza-lettre-a-schuller.html','Lettre à Schuller']],'Hume':[['verite-hume.html','Croyance raisonnable']],'Kant':[['verite-kant.html','Mensonge et devoir'],['le-devoir.html','Le devoir']],'Rousseau':[['verite-rousseau.html','Dire faux et mentir'],['le-devoir.html','Le devoir']],'Francis Bacon':[['technique-bacon.html','Vaincre la nature']],'Heidegger':[['technique-heidegger.html','Le Rhin et la centrale']],'Emmanuel Levinas':[['technique-levinas.html','Défendre l’homme contre la technique ?']],'Hannah Arendt':[['technique-arendt.html','Animal laborans et homo faber']],'Russell':[['travail-alienation-emancipation.html','Travail : aliénation ou émancipation']],'Hegel':[['travail-alienation-emancipation.html','Travail : aliénation ou émancipation']],'Marx':[['travail-alienation-emancipation.html','Travail : aliénation ou émancipation']],'Nietzsche':[['le-devoir.html','Le devoir']],'Durkheim':[['le-devoir.html','Le devoir']],'Wittgenstein':[['le-devoir.html','Le devoir']]};
+var P=[['Avant J.-C.',-9999,0,'--p1'],['1ᵉʳ–XIVᵉ siècle',1,1399,'--p2'],['XVIᵉ–XVIIᵉ',1400,1699,'--p3'],['XVIIIᵉ',1700,1799,'--p4'],['XIXᵉ',1800,1899,'--p5'],['XXᵉ',1900,2100,'--p6']];
+function col(b){for(var i=0;i<P.length;i++)if(b>=P[i][1]&&b<=P[i][2])return P[i][3];return '--p1'}
+function fy(y){return y<0?(-y)+' av. J.-C.':String(y)}
+function dates(p){var c=p[3]?'vers ':'';return (p[3]?'vers ':'')+fy(p[1])+' – '+(p[3]?'vers ':'')+fy(p[2])}
+var SETS=[{d:A,min:-640,max:1360,step:20,ticks:[-600,-400,-200,0,200,400,600,800,1000,1200]},{d:M,min:1450,max:2020,step:10,ticks:[1500,1550,1600,1650,1700,1750,1800,1850,1900,1950,2000]}];
+var cur=0,sel=null;
+var rows=$('#rows'),axis=$('#axis'),yr=$('#y'),yv=$('#yv'),alive=$('#alive'),q=$('#q'),mark=$('#mark'),card=$('#card');
+function pct(S,v){return (v-S.min)/(S.max-S.min)*100}
+function build(){
+  var S=SETS[cur];
+  [].slice.call(rows.querySelectorAll('.row2')).forEach(function(n){n.remove()});
+  axis.innerHTML='';
+  S.ticks.forEach(function(t){var s=document.createElement('span');s.style.left=pct(S,t)+'%';s.textContent=t<0?(-t)+' av.':t===0?'0':t;axis.appendChild(s)});
+  S.d.forEach(function(p,i){
+    var b=document.createElement('button');b.type='button';b.className='row2';b.setAttribute('aria-pressed','false');b.dataset.i=i;
+    b.setAttribute('aria-label',p[0]+', '+dates(p));
+    b.innerHTML='<span class="nm"></span><span class="tr"><span class="bar"></span></span>';
+    b.querySelector('.nm').textContent=p[0];
+    var bar=b.querySelector('.bar');bar.style.left=pct(S,p[1])+'%';bar.style.width=Math.max(0.4,pct(S,p[2])-pct(S,p[1]))+'%';bar.style.setProperty('--bc','var('+col(p[1])+')');
+    b.addEventListener('click',function(){pick(i)});
+    rows.appendChild(b);
+  });
+  yr.min=S.min;yr.max=S.max;yr.step=S.step;yr.value=Math.round((S.min+S.max)/2/S.step)*S.step;
+  sel=null;upd();filt();
+  card.innerHTML='<h3>Cliquez sur un nom</h3><p class="dt" style="margin:0">Vous verrez ses dates, ses contemporains (entourés sur la frise) et les pages du site où il apparaît.</p>';
+}
+function upd(){
+  var S=SETS[cur],y=+yr.value;yv.textContent=fy(y);
+  mark.style.setProperty('--p',pct(S,y)/100);
+  var names=[];
+  [].slice.call(rows.querySelectorAll('.row2')).forEach(function(b){
+    var p=S.d[b.dataset.i],on=p[1]<=y&&y<=p[2];
+    b.classList.toggle('dim',!on);b.classList.toggle('hit',on);if(on)names.push(p[0]);
+  });
+  alive.textContent=names.length?('En '+fy(y)+' vivaient : '+names.join(', ')+'.'):('En '+fy(y)+', aucun philosophe de la frise n’est vivant.');
+}
+function filt(){
+  var v=norm(q.value.trim()),S=SETS[cur];
+  [].slice.call(rows.querySelectorAll('.row2')).forEach(function(b){b.classList.toggle('hide',v&&norm(S.d[b.dataset.i][0]).indexOf(v)<0)});
+}
+function pick(i){
+  var S=SETS[cur],p=S.d[i];sel=i;
+  var rs=[].slice.call(rows.querySelectorAll('.row2')),cont=[];
+  rs.forEach(function(b,k){
+    var o=S.d[k],ov=k!==i&&o[1]<=p[2]&&o[2]>=p[1];
+    b.classList.toggle('rel',ov);b.setAttribute('aria-pressed',k===i?'true':'false');if(ov)cont.push(o[0]);
+  });
+  var h='<h3></h3><p class="dt">'+dates(p)+(p[2]-p[1]<130?' · environ '+(p[2]-p[1])+' ans':'')+'</p>';
+  h+='<p style="margin:0 0 .3rem"><b>Contemporains sur cette frise :</b> '+(cont.length?cont.join(', '):'aucun')+'.</p>';
+  var key=p[0];
+  if(L[key]){h+='<p style="margin:.6rem 0 .2rem"><b>Pages du site :</b></p><ul>';L[key].forEach(function(l){h+='<li><a href="'+l[0]+'">'+l[1]+'</a></li>'});h+='</ul>'}
+  card.innerHTML=h;card.querySelector('h3').textContent=p[0];
+}
+yr.addEventListener('input',upd);q.addEventListener('input',filt);
+/* onglets */
+var tabs=[$('#tb1'),$('#tb2')];
+function setTab(i,focus){cur=i;tabs.forEach(function(t,k){t.setAttribute('aria-selected',k===i);t.tabIndex=k===i?0:-1});$('#fr').setAttribute('aria-labelledby',tabs[i].id);if(focus)tabs[i].focus();build()}
+tabs.forEach(function(t,i){t.addEventListener('click',function(){setTab(i)});t.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();setTab(1-i,true)}})});
+/* légende */
+var lg=$('#legend');P.forEach(function(p){var li=document.createElement('li');li.innerHTML='<i style="background:var('+p[3]+')"></i>';li.appendChild(document.createTextNode('Né : '+p[0]));lg.appendChild(li)});
+/* quiz */
+var ALL=A.concat(M),Z=$('#qz'),N=10,qs,qi,score,wrong;
+function shuf(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
+function start(){
+  qs=[];var tries=0;
+  while(qs.length<N&&tries++<500){var a=ALL[Math.floor(Math.random()*ALL.length)],b=ALL[Math.floor(Math.random()*ALL.length)];
+    if(a===b||Math.abs(a[1]-b[1])<40)continue;
+    if(qs.some(function(x){return x[0]===a||x[1]===a||x[0]===b||x[1]===b}))continue;
+    qs.push(Math.random()<.5?[a,b]:[b,a])}
+  qi=0;score=0;wrong=[];ask();
+}
+function ask(){
+  var pr=qs[qi];
+  Z.innerHTML='<div class="top"><span>Question '+(qi+1)+' sur '+qs.length+'</span><span>Score : '+score+'</span></div><p style="margin:.8rem 0 0;font:700 1.05rem var(--sans)">Lequel est né le premier ?</p><div class="pr"></div><div class="fbk" aria-live="polite"></div>';
+  var box=Z.querySelector('.pr'),bs=[];
+  pr.forEach(function(p,k){var b=document.createElement('button');b.type='button';b.textContent=p[0];bs.push(b);
+    b.addEventListener('click',function(){
+      var first=pr[0][1]<pr[1][1]?0:1,ok=k===first;
+      bs.forEach(function(x,j){x.disabled=true;if(j===first)x.classList.add('ok');else if(j===k)x.classList.add('no')});
+      if(ok)score++;else wrong.push(pr);
+      var f=Z.querySelector('.fbk');
+      f.textContent=(ok?'Bien vu. ':'Pas tout à fait. ')+pr[0][0]+' : '+dates(pr[0])+' ; '+pr[1][0]+' : '+dates(pr[1])+'.';
+      var n=document.createElement('button');n.type='button';n.className='btn primary';n.style.marginTop='.8rem';n.textContent=qi+1<qs.length?'Question suivante':'Voir le bilan';
+      n.addEventListener('click',function(){qi++;qi<qs.length?ask():end()});f.appendChild(document.createElement('br'));f.appendChild(n);n.focus();
+    });box.appendChild(b)});
+}
+function end(){
+  var pc=score/qs.length,h=pc===1?'Sans faute !':pc>=.7?'Très bien':pc>=.4?'Une bonne base':'À retravailler';
+  Z.innerHTML='<div class="bh"><svg class="ring" viewBox="0 0 100 100" aria-hidden="true"><circle class="bg" cx="50" cy="50" r="42"/><circle class="fg" id="rg" cx="50" cy="50" r="42"/><text x="50" y="50">'+score+'/'+qs.length+'</text></svg><div><h3></h3><p>Revoyez les dates ci-dessous, puis rejouez.</p></div></div><ul class="brev"></ul><div style="display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1rem;align-items:center"><button class="btn" id="cp" type="button">Copier mon bilan</button><button class="btn primary" id="rp" type="button">Rejouer</button><span class="note" id="cn" aria-live="polite"></span></div>';
+  Z.querySelector('h3').textContent=h;
+  var ul=Z.querySelector('.brev');
+  if(!wrong.length){var l=document.createElement('li');l.textContent='Aucun point à revoir.';ul.appendChild(l)}
+  wrong.forEach(function(pr){var l=document.createElement('li');l.textContent=pr[0][0]+' ('+dates(pr[0])+') et '+pr[1][0]+' ('+dates(pr[1])+')';ul.appendChild(l)});
+  requestAnimationFrame(function(){requestAnimationFrame(function(){var r=$('#rg');if(r)r.style.strokeDashoffset=264*(1-pc)})});
+  var txt='Frise des philosophes : '+score+'/'+qs.length+(wrong.length?'\nÀ revoir : '+wrong.map(function(p){return p[0][0]+' / '+p[1][0]}).join(' ; '):'');
+  $('#rp').addEventListener('click',start);
+  $('#cp').addEventListener('click',function(){var n=$('#cn');try{navigator.clipboard.writeText(txt).then(function(){n.textContent='Bilan copié.'},function(){n.textContent='Copie impossible.'})}catch(e){n.textContent='Copie impossible.'}});
+}
+build();start();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>L’anarchie : vivre sans maître ?</title>
+<style>
+:root{
+  color-scheme:light;
+  --bg:#F7F4EF; --surface:#FFFFFF; --ink:#1E1A16; --muted:#5E564D; --line:#DED6CB; --focus:#0B5CAD; --on:#FFFFFF;
+  --soc:#9A3412; --soc-soft:#FBE7DC;
+  --nat:#1B6B4A; --nat-soft:#DDF1E7;
+  --rai:#2B4C9B; --rai-soft:#E1E8F8;
+  --gold:#8A5A00; --gold-soft:#F6E8C8; --bad:#B3261E;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --serif:Charter,"Bitstream Charter","Sitka Text",Cambria,Georgia,serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#16130F; --surface:#211D18; --ink:#F2ECE4; --muted:#B5AA9C; --line:#3A332B; --focus:#8CC2FF; --on:#16130F;
+    --soc:#FF9E6B; --soc-soft:#45220F; --nat:#74DDA7; --nat-soft:#143826; --rai:#9DB8FF; --rai-soft:#1C2A52; --gold:#F2C36B; --gold-soft:#3F3112; --bad:#FF8F86;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#16130F; --surface:#211D18; --ink:#F2ECE4; --muted:#B5AA9C; --line:#3A332B; --focus:#8CC2FF; --on:#16130F;
+  --soc:#FF9E6B; --soc-soft:#45220F; --nat:#74DDA7; --nat-soft:#143826; --rai:#9DB8FF; --rai-soft:#1C2A52; --gold:#F2C36B; --gold-soft:#3F3112; --bad:#FF8F86;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.1rem/1.65 var(--serif)}
+.wrap{width:min(980px,100% - 2.5rem);margin-inline:auto}
+h1,h2,h3{margin:0}
+h1{font:800 clamp(2.6rem,8vw,5rem)/1.02 var(--sans);letter-spacing:-.025em}
+h2{font:800 clamp(1.5rem,3.2vw,2.1rem)/1.2 var(--sans);margin-bottom:.8rem}
+h3{font:700 1.08rem/1.35 var(--sans)}
+p{margin:0 0 1em}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
+.btn{font:600 .95rem/1.2 var(--sans);color:var(--ink);background:transparent;border:1.5px solid var(--ink);border-radius:8px;padding:.65rem 1rem;cursor:pointer}
+.btn:hover{background:var(--line)}
+.btn.primary{background:var(--ink);color:var(--bg)}
+.btn.primary:hover{background:var(--ink);filter:brightness(1.2)}
+.note{font:500 .92rem/1.5 var(--sans);color:var(--muted)}
+section.block{border-top:1px solid var(--line);padding:clamp(2.2rem,6vw,3.8rem) 0}
+.sec-head{max-width:46rem;margin-bottom:1.6rem}
+.src{font:600 .85rem/1.35 var(--sans);color:var(--muted)}
+blockquote{margin:0}
+
+/* Hero */
+.hero{padding:clamp(2rem,6vw,4rem) 0 clamp(2rem,5vw,3rem)}
+.hgrid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:2rem clamp(2rem,5vw,4rem);align-items:center}
+.lead{font-size:clamp(1.2rem,2.4vw,1.45rem);line-height:1.5;margin:1.3rem 0 0;max-width:34ch}
+.must{background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--ink);padding:1.2rem 1.3rem}
+.must p{margin:0 0 .7rem;font-size:1.05rem}
+.must .q{font:700 1.3rem/1.3 var(--serif)}
+.must .chain{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;margin:.8rem 0}
+.must .chain span{font:700 .85rem/1.2 var(--sans);padding:.35rem .55rem;background:var(--bg);border:1px solid var(--line)}
+.must .chain i{font-style:normal;color:var(--muted)}
+
+/* Questions */
+.qs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+.qc{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--k);padding:1rem 1.2rem}
+.qc h3{color:var(--k);margin-bottom:.4rem}
+.qc p{margin:0;font-size:1rem}
+
+/* Parcours */
+.path{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.6rem;margin-bottom:1rem}
+.path button{font:700 .98rem/1.3 var(--sans);text-align:left;color:var(--ink);background:var(--surface);border:2px solid var(--line);border-radius:8px;padding:.8rem .9rem;cursor:pointer}
+.path button small{display:block;font:600 .8rem/1.3 var(--sans);color:var(--muted);margin-top:.15rem}
+.path button[aria-selected="true"]{border-color:var(--k);background:var(--ks)}
+.panel{background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--k);padding:clamp(1rem,3vw,1.7rem)}
+.panel[hidden]{display:none}
+.panel > h3{font-size:1.3rem;color:var(--k);margin-bottom:.3rem}
+.panel .thesis{font:700 1.2rem/1.35 var(--serif);margin:.2rem 0 1rem}
+.panel h4{font:800 .8rem/1 var(--sans);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin:1.3rem 0 .5rem}
+.panel ul{margin:0;padding-left:1.15rem}
+.panel li{margin-bottom:.5rem;font-size:1.02rem}
+.auth{background:var(--ks);border-left:5px solid var(--k);padding:.8rem 1rem;margin:0 0 .8rem}
+.auth b{font:700 .95rem/1.3 var(--sans);color:var(--k);display:block;margin-bottom:.25rem}
+.auth blockquote{font-size:1rem;font-style:italic;margin:.3rem 0}
+.auth p{margin:.3rem 0 0;font-size:1rem}
+.lim{background:var(--bg);border-left:5px solid var(--gold);padding:.8rem 1rem;font:500 .98rem/1.55 var(--sans)}
+.lim b{color:var(--gold)}
+
+/* Sorters */
+.sorter{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.5rem 1rem;align-items:center;padding:.8rem 0;border-bottom:1px solid var(--line)}
+.row .name{font:600 1rem/1.45 var(--sans)}
+.row .name i{font:italic 400 1rem/1.45 var(--serif)}
+.pick{display:flex;flex-wrap:wrap;gap:.4rem}
+.pick button{font:700 .9rem/1.15 var(--sans);color:var(--ink);background:var(--surface);border:2px solid var(--line);border-radius:8px;padding:.55rem .75rem;cursor:pointer}
+.pick button[disabled]{cursor:default}
+.pick button:hover:not([disabled]){border-color:var(--c)}
+.pick button[aria-pressed="true"]{background:var(--c);border-color:var(--c);color:var(--on)}
+.fb{grid-column:1/-1;margin:0;font:500 .95rem/1.45 var(--sans);padding:.5rem .8rem;border-left:5px solid var(--line);background:var(--surface)}
+.fb[hidden]{display:none}
+.row.good .fb{border-left-color:var(--nat)} .row.bad .fb{border-left-color:var(--bad)}
+.score{display:flex;flex-wrap:wrap;gap:.8rem 1.2rem;align-items:center;margin-top:1.1rem}
+.score p{margin:0;font:600 1rem/1.4 var(--sans);flex:1 1 16rem}
+
+/* Test d'universalisation */
+.lab{background:var(--surface);border:1px solid var(--line);padding:clamp(1rem,3vw,1.6rem)}
+.maxims{display:flex;flex-wrap:wrap;gap:.5rem;margin:.8rem 0 1.2rem}
+.maxims button{font:600 .98rem/1.3 var(--sans);color:var(--ink);background:var(--bg);border:2px solid var(--line);border-radius:8px;padding:.7rem .95rem;cursor:pointer;text-align:left}
+.maxims button[aria-pressed="true"]{border-color:var(--rai);background:var(--rai-soft)}
+.world{display:grid;grid-template-columns:repeat(8,1fr);gap:.4rem;max-width:30rem;margin:.6rem 0 1rem}
+.world span{aspect-ratio:1;border-radius:50%;background:var(--rai);opacity:.85;display:flex;align-items:center;justify-content:center;font:700 .8rem/1 var(--sans);color:var(--on)}
+.world.broken span{background:var(--bad);opacity:.7}
+@media (prefers-reduced-motion:no-preference){.world span{transition:background .4s,opacity .4s}}
+.steps{margin:0;padding:0;list-style:none;counter-reset:s}
+.steps li{counter-increment:s;display:grid;grid-template-columns:2rem 1fr;gap:.5rem;padding:.5rem 0;border-top:1px solid var(--line);font:500 1rem/1.5 var(--sans)}
+.steps li::before{content:counter(s);font:800 1.3rem/1 var(--sans);color:var(--rai)}
+.steps[hidden]{display:none}
+.verdict{margin:1rem 0 0;padding:.8rem 1rem;border-left:6px solid var(--bad);background:var(--bg);font:600 1rem/1.5 var(--sans)}
+.verdict[hidden]{display:none}
+
+/* Dilemme */
+.dil{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.opt{background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--k);padding:1rem 1.2rem;font:500 1rem/1.55 var(--sans)}
+.opt h3{color:var(--k);margin-bottom:.4rem}
+.opt ul{margin:.4rem 0 .8rem;padding-left:1.1rem}
+.opt li{margin-bottom:.35rem}
+.opt .m{font-weight:700}
+.pickd{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+.after{margin-top:1rem;padding:1rem 1.2rem;background:var(--surface);border-left:6px solid var(--gold);font:500 1rem/1.55 var(--sans)}
+.after[hidden]{display:none}
+
+/* Fil */
+.recap{margin:0;padding:0;list-style:none;max-width:48rem}
+.recap li{padding:.9rem 0;border-top:1px solid var(--line)}
+.recap li:last-child{border-bottom:1px solid var(--line)}
+.recap b{font-family:var(--sans)}
+footer{padding:1.6rem 0 2.5rem;font:500 .9rem/1.5 var(--sans);color:var(--muted)}
+footer p{margin:0}
+@media (max-width:820px){
+  .hgrid,.qs,.dil{grid-template-columns:1fr}
+  .path{grid-template-columns:1fr}
+  .row{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
+
+.pdfbtn{display:inline-flex;align-items:center;gap:.5rem;font:600 .88rem/1 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--surface);border:1.5px solid var(--ink);border-radius:999px;padding:.55rem .95rem;cursor:pointer}
+.pdfbtn:hover{background:var(--ink);color:var(--bg)}.pdfbtn:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:2px}
+@media print{
+  :root{--bg:#fff!important;--surface:#fff!important;--ink:#111!important;--muted:#444!important;--line:#bbb!important;color-scheme:light!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:#fff!important;color:#111!important}
+  body::before,body::after{display:none!important}
+  nav,.pdfbtn,.pn,video,section[aria-labelledby="h-video"]{display:none!important}
+  .rev,.js .rev{opacity:1!important;transform:none!important}
+  .stp li[hidden]{display:list-item!important}
+  details>*{display:block!important}
+  article,li,.card,figure,.stage{break-inside:avoid}
+  h1,h2,h3{break-after:avoid;text-shadow:none!important}
+  *{text-shadow:none!important}
+  a{color:inherit;text-decoration:none}
+  section.block,.part{padding-top:1.2rem!important;padding-bottom:1.2rem!important}
+  footer{break-before:avoid;border-top:1px solid #999;margin-top:1rem}
+}
+@page{size:A4;margin:16mm 14mm}
+</style>
+</head>
+<body>
+<nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
+
+<header class="hero">
+  <div class="wrap hgrid">
+    <div>
+      <h1>L’anarchie</h1>
+      <p class="lead">Le désordre, ou la liberté sans maître ? Quatre voix du XIXᵉ siècle pour comprendre un mot que l’on emploie souvent à contresens.</p>
+    </div>
+    <div class="must">
+      <p class="src">Étymologie</p>
+      <p class="q">An-archè : « sans commandement ».</p>
+      <p>Le mot grec <i>archè</i> désigne à la fois le commencement et le commandement. L’anarchie, au sens des auteurs étudiés ici, n’est pas l’absence d’ordre, mais l’absence de <b>domination imposée d’en haut</b>.</p>
+      <div class="chain" aria-label="Idée centrale"><span>Pas de maître</span><i>→</i><span>liberté de chacun</span><i>→</i><span>ordre par l’entente</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="block" aria-labelledby="h-pb">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-pb">Une doctrine, quatre angles</h2>
+      <p>Les quatre textes ne disent pas la même chose. Ensemble, ils dessinent une critique du pouvoir et une confiance dans l’entente entre égaux. En EMC, il s’agit de comprendre cette pensée <b>et</b> de la soumettre à la discussion.</p>
+    </div>
+    <div class="qs">
+      <div class="qc" style="--k:var(--soc)"><h3>Bakounine</h3><p>Contre Dieu et contre l’État : toute autorité imposée est une servitude.</p></div>
+      <div class="qc" style="--k:var(--nat)"><h3>Kropotkine</h3><p>Sans commandement, la morale existe-t-elle ? Oui : elle naît de la sympathie et de l’entraide.</p></div>
+      <div class="qc" style="--k:var(--rai)"><h3>Reclus</h3><p>Définir l’anarchie : un idéal ancien, devenu un but pratique, qui refuse tout gouvernement.</p></div>
+      <div class="qc" style="--k:var(--gold)"><h3>Louise Michel</h3><p>Le témoignage d’une communarde : l’expérience du pouvoir l’a rendue anarchiste.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="h-parc">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-parc">Quatre textes</h2>
+      <p>Choisissez un auteur. Les citations sont courtes ; le reste est une synthèse.</p>
+    </div>
+    <div class="path" role="tablist" aria-label="Les quatre auteurs">
+      <button role="tab" id="pt-1" aria-selected="true" aria-controls="pp-1" type="button" style="--k:var(--soc);--ks:var(--soc-soft)">Bakounine<small>Dieu et l’État</small></button>
+      <button role="tab" id="pt-2" aria-selected="false" aria-controls="pp-2" type="button" tabindex="-1" style="--k:var(--nat);--ks:var(--nat-soft)">Kropotkine<small>La morale anarchiste</small></button>
+      <button role="tab" id="pt-3" aria-selected="false" aria-controls="pp-3" type="button" tabindex="-1" style="--k:var(--rai);--ks:var(--rai-soft)">Reclus<small>L’Anarchie</small></button>
+      <button role="tab" id="pt-4" aria-selected="false" aria-controls="pp-4" type="button" tabindex="-1" style="--k:var(--gold);--ks:var(--gold-soft)">Louise Michel<small>La Commune</small></button>
+    </div>
+
+    <div class="panel" id="pp-1" role="tabpanel" aria-labelledby="pt-1" style="--k:var(--soc);--ks:var(--soc-soft)">
+      <h3>Michel Bakounine, <i>Dieu et l’État</i> (1882, posthume)</h3>
+      <p class="thesis">La liberté de l’homme est incompatible avec un maître, divin ou politique.</p>
+      <div class="auth"><b>Le raisonnement</b><blockquote>« Si Dieu est, l’homme est esclave ; or l’homme peut, doit être libre ; donc Dieu n’existe pas. »</blockquote><p>Un maître suprême et absolu rend impossibles la justice, l’égalité et la fraternité. Bakounine étend ce raisonnement à l’État, qu’il range avec l’Église parmi ses « deux bêtes noires ».</p></div>
+      <div class="auth"><b>Toute autorité est-elle rejetée ?</b>
+        <p>Non. Pour une paire de bottes, on consulte le cordonnier ; pour une maison, l’architecte. Mais on les accepte <b>librement</b>, en gardant son droit de critique et de contrôle, et sans en reconnaître aucun comme infaillible.</p>
+        <blockquote>« Nous reconnaissons l’autorité absolue de la science, mais nous en repoussons l’infaillibilité et l’universalité du savant. »</blockquote></div>
+      <h4>À retenir</h4>
+      <ul>
+        <li>Distinguer l’autorité <b>librement acceptée</b> (compétence, savoir) de l’autorité <b>imposée</b> (privilège, loi extérieure).</li>
+        <li>La religion et l’État sont critiqués pour la même raison : ils demandent d’obéir plutôt que de raisonner.</li>
+      </ul>
+      <div class="lim"><b>Difficulté.</b> Qui décide de ce qui est « librement accepté » ? Et une société sans loi commune peut-elle trancher un conflit entre deux libertés ?</div>
+    </div>
+
+    <div class="panel" id="pp-2" role="tabpanel" aria-labelledby="pt-2" hidden style="--k:var(--nat);--ks:var(--nat-soft)">
+      <h3>Pierre Kropotkine, <i>La morale anarchiste</i></h3>
+      <p class="thesis">Il n’est pas besoin de commandement ni de sanction pour être moral : la morale naît de la vie en société.</p>
+      <div class="auth"><b>L’objection visée</b><p>« Sans loi ni punition, chacun ferait n’importe quoi. » Kropotkine répond que la morale ne vient ni de la religion ni de la peur du gendarme.</p></div>
+      <div class="auth"><b>L’origine du sentiment moral</b><p>S’appuyant sur Adam Smith, il la trouve dans la <b>sympathie</b> : voir souffrir quelqu’un, c’est souffrir un peu avec lui. Devenu habitude, ce sentiment se développe en <b>solidarité</b> et en <b>entraide</b>, qu’il observe aussi chez les animaux.</p></div>
+      <h4>À retenir</h4>
+      <ul>
+        <li>La morale est un fait naturel et social, non un ordre venu d’en haut.</li>
+        <li>Elle progresse avec l’égalité : plus les rapports sont égaux, plus la solidarité se développe.</li>
+      </ul>
+      <div class="lim"><b>Difficulté.</b> La sympathie suffit-elle ? On peut sympathiser avec les siens et rester indifférent aux autres. Peut-on fonder des devoirs universels sur un sentiment ? (À comparer avec Rousseau et Kant dans la fiche « Le devoir ».)</div>
+    </div>
+
+    <div class="panel" id="pp-3" role="tabpanel" aria-labelledby="pt-3" hidden style="--k:var(--rai);--ks:var(--rai-soft)">
+      <h3>Élisée Reclus, <i>L’Anarchie</i></h3>
+      <p class="thesis">L’anarchie est aussi ancienne que l’humanité, mais les anarchistes en ont fait un but conscient.</p>
+      <div class="auth"><b>Une définition par le refus et par le projet</b><p>Reclus rappelle que bien des peuples se sont gérés sans loi imposée. Les anarchistes y ajoutent la conscience du but : repousser toute forme de gouvernement, partout sur la Terre.</p></div>
+      <div class="auth"><b>Une autre idée de la morale</b><blockquote>« La morale n’est pas un ordre auquel on se soumet […] elle devient une partie de l’être. »</blockquote><p>On devient moral en s’éduquant soi-même et en respectant les droits et les intérêts des camarades : c’est ce qui fait naître le sentiment de responsabilité.</p></div>
+      <h4>À retenir</h4>
+      <ul>
+        <li>L’anarchie vise un ordre fondé sur la satisfaction des intérêts de tous, non sur l’obéissance.</li>
+        <li>L’éducation de soi remplace la discipline imposée.</li>
+      </ul>
+      <div class="lim"><b>Difficulté.</b> Un idéal si exigeant suppose des individus déjà responsables. Comment y parvenir sans institutions qui éduquent ?</div>
+    </div>
+
+    <div class="panel" id="pp-4" role="tabpanel" aria-labelledby="pt-4" hidden style="--k:var(--gold);--ks:var(--gold-soft)">
+      <h3>Louise Michel, <i>La Commune</i> (1898)</h3>
+      <p class="thesis">Une communarde raconte pourquoi elle est devenue anarchiste.</p>
+      <div class="auth"><b>Le contexte</b><p>Louise Michel participe à la Commune de Paris (1871). Condamnée, elle est déportée en Nouvelle-Calédonie. Elle écrit y être devenue anarchiste pendant la traversée.</p></div>
+      <div class="auth"><b>Sa conclusion</b><p>Des hommes dévoués et énergiques, une fois au pouvoir, ont vu leur énergie annulée par lui. Elle en tire une formule :</p><blockquote>« Le pouvoir est maudit, et c’est pour cela que je suis anarchiste. »</blockquote></div>
+      <h4>À retenir</h4>
+      <ul>
+        <li>Une pensée née de l’expérience : même les meilleures intentions sont neutralisées par l’exercice du pouvoir.</li>
+        <li>Le livre rappelle aussi des mesures de la Commune : autonomie communale, adhésion des chambres syndicales, mobilisation des artistes.</li>
+      </ul>
+      <div class="lim"><b>Difficulté.</b> L’expérience de la Commune est aussi celle de son échec et de sa répression. Le pouvoir est-il en lui-même « maudit », ou est-ce son usage qu’il faut encadrer (élection, contrôle, révocation) ?</div>
+    </div>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="h-ex2">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-ex2">Exercice : autorité imposée ou librement acceptée ?</h2>
+      <p>Appliquez le critère de Bakounine : peut-on la contrôler, la critiquer, la refuser ?</p>
+    </div>
+    <ul class="sorter" id="s2"></ul>
+    <div class="score"><p id="sc2" aria-live="polite"></p><button class="btn" id="r2" type="button">Recommencer</button></div>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="h-deb">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-deb">Pour débattre en EMC</h2>
+      <p>Une pensée se comprend mieux quand on l’éprouve : les arguments de chaque côté.</p>
+    </div>
+    <div class="dil">
+      <div class="opt" style="--k:var(--nat)"><h3>Pour les anarchistes</h3><ul><li>Le pouvoir tend à neutraliser ou à corrompre ceux qui l’exercent (Louise Michel).</li><li>Obéir par peur n’est pas être moral (Reclus, Kropotkine).</li><li>La solidarité existe déjà dans la vie sociale (Kropotkine).</li></ul></div>
+      <div class="opt" style="--k:var(--soc)"><h3>Objections</h3><ul><li>Qui protège le faible face au plus fort sans loi commune ?</li><li>Comment décider à grande échelle, sans institution ?</li><li>La démocratie permet d’élire, de contrôler et de révoquer le pouvoir : le problème n’est-il pas là ?</li></ul></div>
+    </div>
+    <p class="note" style="margin-top:1rem">Certains passages des textes évoquent aussi la violence politique ; cette page ne les développe pas et s’en tient aux idées. Les situer dans leur époque et les discuter à la lumière de l’État de droit relève du travail en classe.</p>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="h-rec">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="h-rec">Pour réviser</h2></div>
+    <ul class="recap">
+      <li><b>Sens du mot :</b> anarchie = sans commandement, et non désordre.</li>
+      <li><b>Bakounine :</b> « Si Dieu est, l’homme est esclave » ; autorité acceptée librement, jamais imposée.</li>
+      <li><b>Kropotkine :</b> la morale naît de la sympathie et de l’entraide, sans sanction.</li>
+      <li><b>Reclus :</b> un idéal ancien, devenu but conscient ; la morale devient « une partie de l’être ».</li>
+      <li><b>Louise Michel :</b> « Le pouvoir est maudit » ; une conviction née de la Commune et de l’exil.</li>
+      <li><b>Pour discuter :</b> autorité légitime et contrôle démocratique, contre refus de tout pouvoir.</li>
+    </ul>
+  </div>
+</section>
+</main>
+<footer><div class="wrap"><p>Synthèse construite à partir des quatre textes : Bakounine, <i>Dieu et l’État</i> ; Kropotkine, <i>La morale anarchiste</i> ; Reclus, <i>L’Anarchie</i> ; Louise Michel, <i>La Commune</i>. Les citations viennent des textes ; les formulations de synthèse, les exercices (dont les cas imaginés de l’exercice) et les pistes de débat sont de moi.</p></div></footer>
+<script>
+(function(){
+  function $(s){return document.querySelector(s)}
+  function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;')}
+
+  /* Onglets */
+  var tabs=[].slice.call(document.querySelectorAll('[role=tab]'));
+  function sel(t){tabs.forEach(function(x){var on=x===t;x.setAttribute('aria-selected',on);x.tabIndex=on?0:-1;document.getElementById(x.getAttribute('aria-controls')).hidden=!on})}
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){sel(t)});
+    t.addEventListener('keydown',function(e){
+      var n=e.key==='ArrowRight'?i+1:e.key==='ArrowLeft'?i-1:null;
+      if(n===null)return;e.preventDefault();n=(n+tabs.length)%tabs.length;tabs[n].focus();sel(tabs[n]);
+    });
+  });
+
+  /* Générateur de tri */
+  function sorter(listSel,scoreSel,resetSel,items,choices){
+    var list=$(listSel),sc=$(scoreSel),rows=[],done=0,right=0;
+    items.forEach(function(it){
+      var li=document.createElement('li');li.className='row';
+      li.innerHTML='<span class="name"></span><div class="pick" role="group"></div><p class="fb" hidden aria-live="polite"></p>';
+      li.querySelector('.name').innerHTML=it[0];
+      var pick=li.querySelector('.pick'),fb=li.querySelector('.fb'),bs=[];
+      pick.setAttribute('aria-label',li.querySelector('.name').textContent);
+      choices.forEach(function(c,k){
+        var b=document.createElement('button');b.type='button';b.textContent=c[0];b.style.setProperty('--c',c[1]);b.setAttribute('aria-pressed','false');
+        b.addEventListener('click',function(){
+          if(li.classList.contains('good')||li.classList.contains('bad'))return;
+          var ok=k===it[1];
+          b.setAttribute('aria-pressed','true');bs.forEach(function(x){x.disabled=true});
+          li.classList.add(ok?'good':'bad');fb.hidden=false;
+          fb.textContent=(ok?'Bien vu. ':'Pas tout à fait. ')+it[2];
+          done++;if(ok)right++;upd();
+        });
+        pick.appendChild(b);bs.push(b);
+      });
+      list.appendChild(li);rows.push(li);
+    });
+    function upd(){
+      var n=items.length,s=function(x){return x>1?'s':''};
+      sc.textContent=!done?n+' à classer.':done<n?done+' classé'+s(done)+' sur '+n+' : '+right+' bonne'+s(right)+' réponse'+s(right)+'.':'Terminé : '+right+' bonne'+s(right)+' réponse'+s(right)+' sur '+n+'.';
+    }
+    $(resetSel).addEventListener('click',function(){
+      rows.forEach(function(li){li.classList.remove('good','bad');li.querySelector('.fb').hidden=true;
+        [].forEach.call(li.querySelectorAll('button'),function(b){b.disabled=false;b.setAttribute('aria-pressed','false')})});
+      done=0;right=0;upd();
+    });
+    upd();
+  }
+
+  sorter('#s2','#sc2','#r2',[
+   ['Vous demandez conseil à un médecin, vous comparez avec l’avis d’un autre et vous décidez.',1,'Compétence reconnue, contrôlable, comparable : c’est le modèle de Bakounine.'],
+   ['Un règlement s’impose à tous, sans qu’on puisse le discuter ni le contester.',0,'Autorité imposée : aucun droit de critique ni de contrôle.'],
+   ['Un groupe choisit un porte-parole qu’il peut remplacer à tout moment.',1,'Autorité acceptée et révocable : cohérent avec la logique de Bakounine.'],
+   ['Un savant déclare que sa parole ne peut être discutée par les non-spécialistes.',0,'Bakounine rejette l’infaillibilité du savant.'],
+   ['On obéit parce qu’« on a toujours fait comme ça ».',0,'La coutume imposée sans examen n’est pas une autorité librement acceptée.']
+  ],[['Imposée','var(--soc)'],['Librement acceptée','var(--nat)']]);
+})();
+</script>
+</body>
+</html>

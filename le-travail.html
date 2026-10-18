@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Révisions : le travail</title>
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+  --bg:#F3F4F6; --surface:#FFFFFF; --ink:#18212B; --muted:#56606C; --line:#D9DDE3; --focus:#1F4E9E;
+  --devoir:#1F4E9E; --critique:#B3261E; --sens:#0F7A4A; --div:#A8460A; --on:#FFFFFF;
+  --head:system-ui,-apple-system,"Segoe UI",sans-serif;
+  --text:Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0F151C; --surface:#18212B; --ink:#EAEFF4; --muted:#A5B0BC; --line:#2A3441; --focus:#8DB4FF;
+    --devoir:#8DB4FF; --critique:#FF8F86; --sens:#5FD8A0; --div:#FFA766; --on:#0F151C;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0F151C; --surface:#18212B; --ink:#EAEFF4; --muted:#A5B0BC; --line:#2A3441; --focus:#8DB4FF;
+  --devoir:#8DB4FF; --critique:#FF8F86; --sens:#5FD8A0; --div:#FFA766; --on:#0F151C;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.05rem/1.6 var(--text)}
+.wrap{width:min(1000px,100% - 2.5rem);margin-inline:auto}
+h1,h2{margin:0;font-family:var(--head)}
+h1{font-weight:700;font-size:clamp(2.4rem,7vw,4.4rem);line-height:1.05;letter-spacing:-.025em}
+h2{font-weight:700;font-size:clamp(1.4rem,3vw,1.9rem);line-height:1.15;margin-bottom:1rem}
+p{margin:0 0 1em}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
+.hero{padding:clamp(2rem,6vw,4rem) 0 1.6rem}
+.lead{font-size:clamp(1.1rem,2.2vw,1.35rem);max-width:44ch;margin:1.2rem 0 1.4rem}
+.line{display:flex;flex-wrap:wrap;gap:5px;max-width:30rem}
+.line i{width:1.1rem;height:1.1rem;background:var(--div);border-radius:2px;animation:pop .35s ease both;animation-delay:calc(var(--i) * 60ms)}
+@keyframes pop{from{opacity:0;transform:translateY(8px) scale(.6)}to{opacity:1;transform:none}}
+.cap{font:500 .85rem/1.4 var(--head);color:var(--muted);margin:.6rem 0 0}
+section.block{border-top:1px solid var(--line);padding:clamp(2rem,5vw,3.2rem) 0}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem 3rem}
+.chips{display:flex;flex-wrap:wrap;gap:.45rem;list-style:none;margin:0;padding:0}
+.chips li{background:var(--surface);border:1px solid var(--line);padding:.3rem .65rem;font-size:.95rem}
+.todo{margin:0;padding-left:1.2rem}.todo li{margin-bottom:.3rem}
+.note{font:500 .85rem/1.45 var(--head);color:var(--muted)}
+.filters{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0 1.2rem}
+.filters button{font:500 .88rem/1.2 var(--head);color:var(--ink);background:transparent;border:2px solid var(--ink);border-radius:6px;padding:.5rem .8rem;cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr));gap:1.1rem}
+.card{background:var(--surface);border:1px solid var(--line);border-top:8px solid var(--c);padding:1rem 1.2rem 1.2rem}
+.card[hidden]{display:none}
+.top{display:flex;align-items:center;gap:.6rem;margin-bottom:.5rem}
+.no{font:700 1.5rem/1 var(--head);color:var(--c)}
+.tag{font:700 .72rem/1 var(--head);padding:.3rem .5rem;background:var(--c);color:var(--on)}
+.src{font:500 .88rem/1.3 var(--head);color:var(--muted);margin:0 0 .6rem}
+.th{font:700 1.02rem/1.35 var(--head);margin:0 0 .6rem}
+.card ul{margin:0 0 .8rem;padding-left:1.1rem}
+.card li{margin-bottom:.3rem}
+.card blockquote{margin:0 0 .8rem;padding-left:.8rem;border-left:3px solid var(--c);font-style:italic}
+.links{font:500 .85rem/1.6 var(--head);color:var(--muted);border-top:1px solid var(--line);padding-top:.6rem;margin:0}
+.links a{display:inline-block;color:var(--ink);text-decoration:none;border:1.5px solid var(--c);padding:0 .4rem;margin:0 .15rem}
+footer{padding:1.6rem 0 2.5rem;font:500 .85rem/1.5 var(--head);color:var(--muted)}
+footer p{margin:0}
+@media (max-width:760px){.two{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.line i{animation:none}}
+
+.pn{display:flex;gap:1rem;flex-wrap:wrap;margin:2.5rem auto 0;max-width:980px;padding:0 1.25rem;box-sizing:content-box}
+.pn a{flex:1 1 16rem;display:flex;flex-direction:column;gap:.25rem;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--k,var(--ink));padding:.9rem 1.1rem;border-radius:0 0 8px 8px}
+.pn a:hover{border-color:var(--k,var(--ink))}.pn a:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.pn small{font:600 .78rem/1 system-ui,-apple-system,sans-serif;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.pn b{font:700 1.1rem/1.25 system-ui,-apple-system,sans-serif}
+.pn .nx{text-align:right}
+.pn .nx:first-child{margin-left:auto;max-width:calc(50% - .5rem)}
+.pn .hm{flex:0 0 100%;text-align:center;font:500 .92rem/1 system-ui,-apple-system,sans-serif;background:none;border:0;padding:.4rem;color:var(--ink);text-decoration:underline}
+
+.pdfbtn{display:inline-flex;align-items:center;gap:.5rem;font:600 .88rem/1 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--surface);border:1.5px solid var(--ink);border-radius:999px;padding:.55rem .95rem;cursor:pointer}
+.pdfbtn:hover{background:var(--ink);color:var(--bg)}.pdfbtn:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:2px}
+@media print{
+  :root{--bg:#fff!important;--surface:#fff!important;--ink:#111!important;--muted:#444!important;--line:#bbb!important;color-scheme:light!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:#fff!important;color:#111!important}
+  body::before,body::after{display:none!important}
+  nav,.pdfbtn,.pn,video,section[aria-labelledby="h-video"]{display:none!important}
+  .rev,.js .rev{opacity:1!important;transform:none!important}
+  .stp li[hidden]{display:list-item!important}
+  details>*{display:block!important}
+  article,li,.card,figure,.stage{break-inside:avoid}
+  h1,h2,h3{break-after:avoid;text-shadow:none!important}
+  *{text-shadow:none!important}
+  a{color:inherit;text-decoration:none}
+  section.block,.part{padding-top:1.2rem!important;padding-bottom:1.2rem!important}
+  footer{break-before:avoid;border-top:1px solid #999;margin-top:1rem}
+}
+@page{size:A4;margin:16mm 14mm}
+</style>
+</head>
+<body>
+<nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Révisions : le travail</h1>
+    <p class="lead">Onze textes, de saint Paul à Arendt : le travail est-il un devoir, une contrainte, une source de sens, ou ce qui divise les hommes ?</p>
+    <div class="line" id="line" aria-hidden="true"></div>
+    <p class="cap">Dix-huit opérations pour fabriquer une épingle : c’est l’exemple de la division du travail chez Smith (texte 11).</p>
+  </div>
+</header>
+<main>
+<section class="block" aria-labelledby="h-enj">
+  <div class="wrap two">
+    <div>
+      <h2 id="h-enj">Les enjeux</h2>
+      <p>Le travail peut être bénéfique : comme nécessité morale qui éloigne de l’oisiveté, pour la société, dont il semble la condition, et pour l’individu, qui y trouve un sens et une utilité. Cette utilité collective viendrait de la division du travail.</p>
+      <p>Sans négliger ce que le travail comporte de pénible, d’imposé et de contraint.</p>
+    </div>
+    <div>
+      <h2>La consigne</h2>
+      <p>Pour chaque texte, il faut identifier :</p>
+      <ol class="todo"><li>les arguments ;</li><li>la thèse qu’ils permettent de défendre en dissertation ;</li><li>les liens avec les autres textes du document ou du cours.</li></ol>
+    </div>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-su">
+  <div class="wrap">
+    <h2 id="h-su">Sujets possibles</h2>
+    <ul class="chips">
+      <li>Le refus du travail a-t-il un sens ?</li><li>Le travail divise-t-il les hommes ?</li><li>Le travail est-il nécessairement source de progrès ?</li><li>Les hommes peuvent-ils se passer de travailler ?</li><li>Le travail éduque-t-il ?</li><li>Travailler moins, est-ce vivre mieux ?</li><li>Est-ce un devoir de travailler ?</li><li>Le travail est-il en lui-même aliénation ?</li><li>Le travail peut-il rendre libre ?</li><li>La technique doit-elle nous libérer du travail ?</li>
+    </ul>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-tx">
+  <div class="wrap">
+    <h2 id="h-tx">Les textes, leurs arguments et leurs thèses</h2>
+    <p class="note">Arguments et thèses sont reformulés ; les couleurs et les liens entre textes sont une lecture proposée ; les citations sont de courts extraits.</p>
+    <div class="filters" id="filters" role="group" aria-label="Filtrer par thème"></div>
+    <div class="cards" id="cards"></div>
+  </div>
+</section>
+</main>
+<nav class="pn" aria-label="Pages de la section Travail"><a class="pv" href="travail-alienation-emancipation.html" rel="prev"><small>← Page précédente</small><b>Le travail : aliénation ou émancipation ?</b></a><a class="hm" href="accueil.html">Retour à l’accueil</a></nav>
+<footer><div class="wrap"><p>Page réalisée à partir du document « Révisions : le travail ».</p></div></footer>
+
+<script>
+(function(){
+  var C={devoir:['Devoir et nécessité','var(--devoir)'],critique:['Critique et contrainte','var(--critique)'],sens:['Sens et identité','var(--sens)'],div:['Division du travail','var(--div)']};
+  var T=[
+  {n:'1',c:'devoir',s:'Saint Paul, Lettre aux Thessaloniciens',
+   th:'Travailler est un devoir moral : l’oisiveté est condamnable.',
+   a:['Il faut s’éloigner de ceux qui vivent en paresseux.','Paul et ses compagnons ont travaillé jour et nuit pour n’être à la charge de personne.','La règle en découle : celui qui ne travaille pas ne mange pas.'],
+   q:'Celui qui ne veut pas travailler ne doit pas manger non plus.',l:['1bis','2','4']},
+  {n:'1bis',c:'devoir',s:'Weber, L’Éthique protestante et l’esprit du capitalisme',
+   th:'Le travail est un devoir religieux, dont le refus signale l’absence de grâce.',
+   a:['Le travail est le but même de la vie, tel que Dieu l’a fixé.','Le verset de saint Paul vaut pour chacun, sans restriction.'],
+   q:'La répugnance au travail est le symptôme d’une absence de la grâce.',l:['1','4']},
+  {n:'2',c:'devoir',s:'Kant, Traité de pédagogie',
+   th:'Le travail éduque : il faut y habituer l’enfant, même par la contrainte.',
+   a:['Apprendre aux enfants à travailler est de la plus grande importance : l’homme est le seul animal voué au travail.','Il serait faux de souhaiter que le Ciel nous offre tout préparé : il faut à l’homme des occupations, même contraignantes.','L’école est le lieu où cultiver ce penchant, par une contrainte dont l’enfant reconnaîtra plus tard l’utilité.'],
+   q:'L’école est une culture forcée.',l:['1','3','4']},
+  {n:'3',c:'devoir',s:'Foucault, Les mots et les choses',
+   th:'Le travail naît de la nécessité vitale : on travaille sous la menace de la mort.',
+   a:['Le travail apparaît quand les hommes, trop nombreux, ne peuvent plus se nourrir des fruits spontanés de la terre.','La population croît, il faut défricher de nouvelles terres, faire des travaux plus nombreux et plus difficiles.','L’homo economicus use sa vie à échapper à la mort : c’est un être fini.'],
+   q:'l’humanité ne travaille plus que sous la menace de la mort',l:['2','5','7']},
+  {n:'4',c:'critique',s:'Nietzsche, Aurore',
+   th:'La glorification du travail est un moyen de contrôle qui étouffe l’individu.',
+   a:['Les éloges du travail cachent la peur de tout ce qui est individuel.','Le dur labeur du matin au soir tient chacun en bride et entrave le développement de la raison, des désirs et de l’indépendance.','Il offre un but mesquin et des satisfactions faciles ; une société qui travaille dur est plus sûre, et l’on adore la sécurité.'],
+   q:'la meilleure des polices',l:['1','1bis','2','5']},
+  {n:'5',c:'sens',s:'Nietzsche, Le Gai savoir',
+   th:'Pour presque tous le travail n’est qu’un moyen ; quelques-uns ne le veulent que s’il est joie.',
+   a:['Presque tous cherchent du travail pour le salaire, sans être exigeants sur sa nature.','De rares natures (artistes, contemplatifs, mais aussi oisifs) préfèrent périr plutôt que travailler sans joie.','Elles veulent le travail, même le plus dur, quand le plaisir y est associé.'],
+   q:'le travail n’est qu’un moyen, non pas le but en soi',l:['4','6','3']},
+  {n:'6',c:'sens',s:'Dejours, L’Évaluation du travail à l’épreuve du réel',
+   th:'Le travail construit l’identité grâce à la reconnaissance.',
+   a:['Travailler, c’est souffrir et prendre des risques.','Chacun attend une rétribution en échange de sa contribution ; la plus importante est symbolique : la reconnaissance (gratitude, accusé de réception de la contribution).','Grâce à elle, le sujet tire de son effort un bénéfice pour son identité.'],
+   q:'Travailler alors n’est pas seulement produire, c’est aussi se transformer soi-même.',l:['5','10','4']},
+  {n:'7',c:'div',s:'Platon, La République',
+   th:'La cité naît de nos besoins et de l’entraide, ce qui suppose des métiers distincts.',
+   a:['La cité se forme parce que chacun manque de beaucoup de choses : on s’associe pour s’entraider.','Les besoins premiers sont la nourriture, le logement, le vêtement.','Pour y pourvoir, chacun a son métier : laboureur, maçon, tisserand, cordonnier.'],
+   q:'ne pas se suffire à lui-même',l:['3','8','9','11']},
+  {n:'8',c:'div',s:'Smith, La Richesse des nations (1)',
+   th:'La division du travail rend les hommes interdépendants et exige des provisions accumulées.',
+   a:['Sans division du travail, chacun pourvoit seul à ses besoins : aucun fonds accumulé n’est nécessaire.','Avec elle, chacun achète l’essentiel avec le produit de son travail ; il faut donc des provisions amassées d’avance pour vivre en attendant de vendre.','Plus la division progresse, plus ce fonds doit être important.'],
+   l:['7','9','10']},
+  {n:'9',c:'div',s:'Smith, La Richesse des nations (2)',
+   th:'La division du travail augmente fortement la production.',
+   a:['L’habileté de chaque ouvrier s’accroît.','On épargne le temps perdu à passer d’un ouvrage à l’autre.','On invente des machines qui facilitent et abrègent le travail : un homme remplit la tâche de plusieurs.'],
+   l:['11','10','7']},
+  {n:'10',c:'div',s:'Arendt, Condition de l’homme moderne',
+   th:'La division du travail rend les travailleurs identiques et interchangeables.',
+   a:['La spécialisation est guidée par le produit fini, qui demande des compétences diverses à organiser.','La division du travail suppose au contraire l’équivalence de toutes les activités, sans compétence spéciale ni finalité : de la force de travail additionnée quantitativement.','Cette « unité » est le contraire de la coopération.'],
+   q:'tous les membres un à un sont identiques et interchangeables',l:['8','9','11','6']},
+  {n:'11',c:'div',s:'Smith, La Richesse des nations (annexe : les épingles)',
+   th:'Diviser une même tâche en opérations simples multiplie la production.',
+   a:['Un ouvrier isolé ferait à peine une épingle par jour, certainement pas vingt.','La fabrication est divisée en dix-huit opérations environ ; dix ouvriers font ensemble plus de 48 000 épingles par jour, soit 4 800 chacun.','Plus la société est avancée, plus les métiers sont séparés : un fermier n’est que fermier.'],
+   l:['9','10','7']}
+  ];
+  function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;')}
+  var html='';
+  T.forEach(function(t){
+    var k=C[t.c];
+    html+='<article class="card" id="t'+t.n+'" data-c="'+t.c+'" style="--c:'+k[1]+'"><div class="top"><span class="no">'+t.n+'</span><span class="tag">'+k[0]+'</span></div>'+
+      '<p class="src">'+esc(t.s)+'</p><p class="th">Thèse possible : '+esc(t.th)+'</p>'+
+      '<ul>'+t.a.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul>'+
+      (t.q?'<blockquote>« '+esc(t.q)+' »</blockquote>':'')+
+      '<p class="links">Liens avec les textes : '+t.l.map(function(n){return '<a href="#t'+n+'">'+n+'</a>'}).join('')+'</p></article>';
+  });
+  document.getElementById('cards').innerHTML=html;
+  var cards=[].slice.call(document.querySelectorAll('.card')),fb=document.getElementById('filters');
+  [['all','Tous les textes']].concat(Object.keys(C).map(function(k){return [k,C[k][0]]})).forEach(function(f,i){
+    var b=document.createElement('button');b.type='button';b.textContent=f[1];b.setAttribute('aria-pressed',i===0?'true':'false');
+    b.addEventListener('click',function(){
+      [].slice.call(fb.children).forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
+      cards.forEach(function(c){c.hidden=f[0]!=='all'&&c.getAttribute('data-c')!==f[0]});
+    });
+    fb.appendChild(b);
+  });
+  var line=document.getElementById('line'),s='';
+  for(var i=0;i<18;i++)s+='<i style="--i:'+i+'"></i>';
+  line.innerHTML=s;
+})();
+</script>
+</body>
+</html>

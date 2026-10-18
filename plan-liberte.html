@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sommes-nous véritablement libres ?</title>
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+  --bg:#F6F4F9; --surface:#FFFFFF; --ink:#22192B; --muted:#62566E; --line:#DDD6E6; --focus:#8A1850;
+  --k:#8A1850; --k-soft:#F7E3EE; --b:#7A1BB5; --b-soft:#EEDFF8; --p:#9A5200; --q:#2F4FA8;
+  --serif:Georgia,"Times New Roman",serif;
+  --sans:system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#16111C; --surface:#201929; --ink:#EEE8F5; --muted:#B0A3BF; --line:#352B42; --focus:#FF8CC0;
+    --k:#FF8CC0; --k-soft:#3A1830; --b:#C99BFF; --b-soft:#2D1A44; --p:#F0B45C; --q:#9DB2FF;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#16111C; --surface:#201929; --ink:#EEE8F5; --muted:#B0A3BF; --line:#352B42; --focus:#FF8CC0;
+  --k:#FF8CC0; --k-soft:#3A1830; --b:#C99BFF; --b-soft:#2D1A44; --p:#F0B45C; --q:#9DB2FF;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:calc(4rem + env(safe-area-inset-top,0px));-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.08rem/1.6 var(--serif)}
+.wrap{width:min(900px,100% - 2.5rem);margin-inline:auto}
+h1,h2,h3{margin:0;font-family:var(--serif)}
+h1{font-weight:700;font-size:clamp(2.4rem,7.5vw,4.6rem);line-height:1.05;letter-spacing:-.02em}
+h2{font-weight:700;font-size:clamp(1.6rem,3.4vw,2.2rem);line-height:1.15;margin-bottom:1.2rem}
+p{margin:0 0 1em}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
+.hero{padding:clamp(2.2rem,6vw,4.5rem) 0 1.6rem}
+.def{margin:1.6rem 0 1.2rem;padding:1rem 1.2rem;background:var(--k-soft);border-left:5px solid var(--k);border-radius:0 8px 8px 0;font-weight:600;max-width:46ch}
+.def span{display:block;font:700 .8rem/1 var(--sans);color:var(--k);margin-bottom:.4rem}
+.btn{font:700 .92rem/1.2 var(--sans);color:var(--ink);background:transparent;border:1.5px solid var(--ink);border-radius:8px;padding:.6rem .95rem;cursor:pointer}
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--bg);border-bottom:1px solid var(--line)}
+.nav ol{display:flex;gap:.3rem;list-style:none;margin:0;padding:.5rem 0;overflow-x:auto}
+.nav a{display:block;white-space:nowrap;text-decoration:none;color:var(--muted);font:700 .88rem/1.2 var(--sans);padding:.5rem .75rem;border-radius:6px}
+.nav a:hover{color:var(--ink)}
+.nav a[aria-current="true"]{background:var(--ink);color:var(--bg)}
+.part{padding:clamp(2.2rem,5vw,3.4rem) 0;border-bottom:1px solid var(--line)}
+.gt{font:700 1rem/1.3 var(--sans);color:var(--muted);margin:1.6rem 0 .6rem}
+.branches{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr));align-items:start}
+details.br{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:0 1rem}
+details.br summary{cursor:pointer;font:700 1rem/1.35 var(--sans);padding:.9rem 0;list-style:none}
+details.br summary::-webkit-details-marker{display:none}
+details.br summary::before{content:"";display:inline-block;width:.5rem;height:.5rem;border-right:3px solid var(--k);border-bottom:3px solid var(--k);transform:rotate(-45deg);margin-right:.7rem;vertical-align:.1em;transition:transform .2s}
+details.br[open] summary::before{transform:rotate(45deg)}
+ol.st{list-style:none;margin:0;padding:0 0 .9rem}
+.s{margin:0 0 .6rem;padding:.6rem .8rem;border-left:4px solid var(--line);background:var(--bg);border-radius:0 6px 6px 0}
+.lb{display:block;font:700 .75rem/1 var(--sans);margin-bottom:.3rem;color:var(--muted)}
+.s-q{border-left-color:var(--q)} .s-q .lb{color:var(--q)}
+.s-p{border-left-color:var(--p)} .s-p .lb{color:var(--p)}
+.s-k{border-left-color:var(--k);background:var(--k-soft);font-weight:600} .s-k .lb{color:var(--k)}
+.s-b{border-left-color:var(--b);background:var(--b-soft);font-weight:600} .s-b .lb{color:var(--b)}
+.who{font-weight:700;color:var(--k)}
+.bridge{margin:1.6rem 0 0;padding:.9rem 1.1rem;border:2px dashed var(--p);border-radius:8px;font:700 1rem/1.4 var(--sans);color:var(--p)}
+.final{background:var(--b-soft);border:2px solid var(--b);border-radius:12px;padding:1.4rem 1.5rem;font:600 clamp(1.2rem,2.6vw,1.5rem)/1.45 var(--serif);margin-top:1.4rem}
+.final span{display:block;font:700 .8rem/1 var(--sans);color:var(--b);margin-bottom:.6rem}
+footer{padding:1.6rem 0 2.5rem;font:500 .92rem/1.5 var(--sans);color:var(--muted)}
+footer p{margin:0}
+
+.pn{display:flex;gap:1rem;flex-wrap:wrap;margin:2.5rem auto 0;max-width:980px;padding:0 1.25rem;box-sizing:content-box}
+.pn a{flex:1 1 16rem;display:flex;flex-direction:column;gap:.25rem;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--k,var(--ink));padding:.9rem 1.1rem;border-radius:0 0 8px 8px}
+.pn a:hover{border-color:var(--k,var(--ink))}.pn a:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.pn small{font:600 .78rem/1 system-ui,-apple-system,sans-serif;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.pn b{font:700 1.1rem/1.25 system-ui,-apple-system,sans-serif}
+.pn .nx{text-align:right}
+.pn .nx:first-child{margin-left:auto;max-width:calc(50% - .5rem)}
+.pn .hm{flex:0 0 100%;text-align:center;font:500 .92rem/1 system-ui,-apple-system,sans-serif;background:none;border:0;padding:.4rem;color:var(--ink);text-decoration:underline}
+
+.pdfbtn{display:inline-flex;align-items:center;gap:.5rem;font:600 .88rem/1 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--surface);border:1.5px solid var(--ink);border-radius:999px;padding:.55rem .95rem;cursor:pointer}
+.pdfbtn:hover{background:var(--ink);color:var(--bg)}.pdfbtn:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:2px}
+@media print{
+  :root{--bg:#fff!important;--surface:#fff!important;--ink:#111!important;--muted:#444!important;--line:#bbb!important;color-scheme:light!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:#fff!important;color:#111!important}
+  body::before,body::after{display:none!important}
+  nav,.pdfbtn,.pn,video,section[aria-labelledby="h-video"]{display:none!important}
+  .rev,.js .rev{opacity:1!important;transform:none!important}
+  .stp li[hidden]{display:list-item!important}
+  details>*{display:block!important}
+  article,li,.card,figure,.stage{break-inside:avoid}
+  h1,h2,h3{break-after:avoid;text-shadow:none!important}
+  *{text-shadow:none!important}
+  a{color:inherit;text-decoration:none}
+  section.block,.part{padding-top:1.2rem!important;padding-bottom:1.2rem!important}
+  footer{break-before:avoid;border-top:1px solid #999;margin-top:1rem}
+}
+@page{size:A4;margin:16mm 14mm}
+</style>
+</head>
+<body>
+<nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Sommes-nous véritablement libres ?</h1>
+    <p class="def"><span>Première définition</span>La liberté se comprend comme la capacité à effectuer des choix.</p>
+    <button class="btn" id="tog" type="button">Tout replier</button>
+  </div>
+</header>
+<nav class="nav" aria-label="Les trois parties"><div class="wrap"><ol id="nav"></ol></div></nav>
+<main id="main"><noscript><div class="wrap"><p>Cette page a besoin de JavaScript pour afficher le plan.</p></div></noscript></main>
+<nav class="pn" aria-label="Pages de la section Liberté"><a class="pv" href="epictete.html" rel="prev"><small>← Page précédente</small><b>Epictète : ce qui dépend de nous</b></a><a class="hm" href="accueil.html">Retour à l’accueil</a></nav>
+<footer><div class="wrap"><p>Page réalisée à partir du plan de cours « Sommes-nous véritablement libres ? ».</p></div></footer>
+
+<script>
+(function(){
+  var L={t:'Thèse',c:'Conséquence',k:'Conclusion',p:'Problème',q:'Question',b:'Bilan',n:'Suite'};
+  var P=[
+  {id:'p1',t:'I. Comment choisir ?',nav:'I. Choisir',blocks:[
+    {br:[
+     {h:'Si nous n’avons pas de raisons de choisir',s:[['t','La liberté d’indifférence : l’âne de Buridan.'],['c','Cette liberté peut conduire à l’inaction. Cependant, l’homme diffère de l’âne.'],['c','Même si nous choisissons d’abord au hasard, nous choisissons, et nous devons nous y tenir. C’est la deuxième maxime de Descartes, avec le texte des voyageurs perdus en forêt.'],['k','Même si nous choisissions toujours, cette liberté est « le degré le plus bas de liberté », puisque nous n’avons aucune raison de nous décider.'],['n','Donc, deuxième solution : se tourner vers la raison.']]},
+     {h:'Si nous avons des raisons de choisir',s:[['q','Comment alors nous décider, c’est-à-dire comment faire le « bon » choix ?'],['t','Nous en remettre à la raison : le bon choix est celui de la raison, et non celui des désirs.'],['c','« Si je connaissais toujours clairement ce qui est vrai et ce qui est bon, je ne serais jamais en peine de délibérer quel jugement et quel choix je devrais faire, et ainsi je serais véritablement libre, sans jamais être indifférent. » Descartes'],['k','Être véritablement libre, c’est faire le choix de la raison.']]}]}],
+   bridge:'Problème : pouvons-nous vraiment choisir ?'},
+  {id:'p2',t:'II. Pouvons-nous vraiment choisir ?',nav:'II. Déterminismes',blocks:[
+    {br:[
+     {h:'Non : la liberté est une illusion',s:[['t','Spinoza : nous pensons être libres, mais nous ne le sommes pas, car nous ne connaissons pas les causes de nos actions.'],['c','Tout choix n’est que le résultat de causes déterminantes extérieures.'],['k','La liberté n’est rien d’autre qu’une illusion. Sauf si nous connaissons les causes déterminantes de nos actions.']]},
+     {h:'Oui : mais ces choix sont-ils les « nôtres » ?',s:[['q','Ces choix sont-ils les « nôtres » ?'],['t','Si oui, il faudrait échapper à tout déterminisme.'],['p','C’est impossible : on en revient à l’illusion de la liberté. On accepte donc le déterminisme.'],['t','Si non, nous sommes de toute façon toujours déterminés, influencés par les trois formes ci-dessous.']]}]},
+    {g:'Nous sommes toujours déterminés, influencés par :',br:[
+     {h:'Le déterminisme « naturel », « physiologique »',s:[['k','Il ne constitue pas un véritable obstacle à la liberté.']]},
+     {h:'Le déterminisme social (Bourdieu)',s:[['t','La table de mobilité : nous pouvons quantifier ce déterminisme, en mesurer les effets et tenter de les minimiser.'],['k','Le déterminisme social limite notre liberté, mais sans la supprimer.']]},
+     {h:'La menace du stéréotype (Fanon)',s:[['p','Modification inconsciente du comportement, aussi bien de l’émetteur que du récepteur du stéréotype culturel.'],['c','C’est un déterminisme plus insidieux, car moins visible et plus difficilement détectable.'],['k','La menace du stéréotype réduit la liberté, mais sans la supprimer.']]}]},
+    {s:[['k','Si le déterminisme réduit la liberté, il ne la supprime pas.'],['b','Être libre, c’est donc faire le choix de la raison, même lorsque ces choix sont soumis aux déterminismes.']]}],
+   bridge:'Problème : la liberté peut-elle alors être objective ?'},
+  {id:'p3',t:'III. La liberté peut-elle être objective ?',nav:'III. Objectivité',blocks:[
+    {br:[
+     {h:'Non : une liberté subjective',s:[['t','La liberté restera toujours subjective, une forme de « sentiment » de liberté.']]},
+     {h:'Oui : des critères objectifs',s:[['t','Nous pouvons trouver des critères objectifs de la liberté.'],['n','Redéfinition : la liberté comme autonomie.']]}]},
+    {g:'Deux formes d’autonomie',br:[
+     {h:'L’autonomie morale',s:[['t','Être libre, c’est obéir à la loi morale universelle.'],['c','Une volonté libre et une volonté soumise à la loi morale ne font qu’une seule et même chose.'],['k','La véritable liberté se comprend comme obéissance à la loi morale.'],['p','Une vie véritablement morale est impossible : les tentations sont trop nombreuses.']]},
+     {h:'L’autonomie politique (Rousseau)',s:[['t','Il n’y a pas de liberté sans lois.'],['c','Nous sommes obligés envers un chef, et non soumis à un maître. C’est ce que permet la loi, expression de la volonté générale.'],['k','Obéir à la loi politique, c’est finalement s’obéir à soi-même.'],['p','Encore faut-il que la loi soit véritablement l’expression de la volonté générale.']]}]},
+    {s:[['k','Être libre, c’est être autonome.']]}]},
+  ];
+  function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;')}
+  function fmt(s){return esc(s).replace(/(Descartes|Spinoza|Bourdieu|Fanon|Rousseau|Buridan)/g,'<b class="who">$1</b>')}
+  function steps(a){return '<ol class="st">'+a.map(function(x){return '<li class="s s-'+x[0]+'"><span class="lb">'+L[x[0]]+'</span>'+fmt(x[1])+'</li>'}).join('')+'</ol>'}
+  var nav='',html='';
+  P.forEach(function(p){
+    nav+='<li><a href="#'+p.id+'">'+p.nav+'</a></li>';
+    html+='<section class="part" id="'+p.id+'" aria-labelledby="h-'+p.id+'"><div class="wrap"><h2 id="h-'+p.id+'">'+p.t+'</h2>';
+    p.blocks.forEach(function(b){
+      if(b.g)html+='<p class="gt">'+esc(b.g)+'</p>';
+      if(b.br)html+='<div class="branches">'+b.br.map(function(x){return '<details class="br" open><summary>'+fmt(x.h)+'</summary>'+steps(x.s)+'</details>'}).join('')+'</div>';
+      if(b.s)html+='<div style="margin-top:1.2rem">'+steps(b.s)+'</div>';
+    });
+    if(p.bridge)html+='<p class="bridge">'+esc(p.bridge)+'</p>';
+    html+='</div></section>';
+  });
+  nav+='<li><a href="#concl">Conclusion</a></li>';
+  html+='<section class="part" id="concl" aria-labelledby="h-concl" style="border-bottom:0"><div class="wrap"><h2 id="h-concl">Conclusion générale</h2><div class="final"><span>Être libre</span>Être libre, ce n’est pas agir selon ses désirs comme nous pourrions d’abord le croire, mais obéir à la raison, qui trouve une expression objective aussi bien dans la loi morale que dans la loi politique.</div></div></section>';
+  document.getElementById('nav').innerHTML=nav;
+  document.getElementById('main').innerHTML=html;
+
+  var det=[].slice.call(document.querySelectorAll('details.br')),tog=document.getElementById('tog'),open=true;
+  tog.addEventListener('click',function(){open=!open;det.forEach(function(d){d.open=open});tog.textContent=open?'Tout replier':'Tout déplier'});
+
+  var links=[].slice.call(document.querySelectorAll('#nav a'));
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(!e.isIntersecting)return;
+        links.forEach(function(a){if(a.getAttribute('href')==='#'+e.target.id)a.setAttribute('aria-current','true');else a.removeAttribute('aria-current')});
+      });
+    },{rootMargin:'-30% 0px -60% 0px'});
+    [].slice.call(document.querySelectorAll('.part')).forEach(function(s){io.observe(s)});
+  }
+})();
+</script>
+</body>
+</html>

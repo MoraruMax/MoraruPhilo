@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>L’explication d’un texte philosophique au baccalauréat</title>
+<style>
+:root{
+  color-scheme:light;
+  --bg:#F5F5FA; --surface:#FFFFFF; --ink:#16162B; --muted:#55557A; --line:#D9D9EA; --focus:#0B5CAD; --on:#FFFFFF;
+  --no:#B3261E; --no-soft:#FBE5E3; --yes:#1B6B3A; --yes-soft:#DFF2E5; --acc:#3B3FA8; --acc-soft:#E4E5F8; --gold:#8A5A00;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --serif:Charter,"Bitstream Charter","Sitka Text",Cambria,Georgia,serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#101022; --surface:#1A1A34; --ink:#ECECFA; --muted:#A9A9CC; --line:#2E2E52; --focus:#8CC2FF; --on:#101022;
+    --no:#FF8F86; --no-soft:#46201D; --yes:#7BDFA0; --yes-soft:#16382A; --acc:#A4A8FF; --acc-soft:#25264F; --gold:#F2C36B;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#101022; --surface:#1A1A34; --ink:#ECECFA; --muted:#A9A9CC; --line:#2E2E52; --focus:#8CC2FF; --on:#101022;
+  --no:#FF8F86; --no-soft:#46201D; --yes:#7BDFA0; --yes-soft:#16382A; --acc:#A4A8FF; --acc-soft:#25264F; --gold:#F2C36B;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.08rem/1.65 var(--serif)}
+.wrap{width:min(960px,100% - 2.5rem);margin-inline:auto}
+h1,h2,h3{margin:0}
+h1{font:800 clamp(2.2rem,6.5vw,4.2rem)/1.06 var(--sans);letter-spacing:-.02em}
+h2{font:800 clamp(1.5rem,3.2vw,2rem)/1.2 var(--sans);margin-bottom:.8rem}
+h3{font:700 1.05rem/1.35 var(--sans)}
+p{margin:0 0 1em}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
+.btn{font:600 .95rem/1.2 var(--sans);color:var(--ink);background:transparent;border:1.5px solid var(--ink);border-radius:8px;padding:.65rem 1rem;cursor:pointer}
+.btn:hover{background:var(--line)}
+.note{font:500 .9rem/1.5 var(--sans);color:var(--muted)}
+section.block{border-top:1px solid var(--line);padding:clamp(2.2rem,6vw,3.6rem) 0}
+.sec-head{max-width:46rem;margin-bottom:1.6rem}
+
+.hero{padding:clamp(2rem,6vw,4rem) 0 clamp(2rem,5vw,3rem)}
+.lead{font-size:clamp(1.15rem,2.4vw,1.4rem);line-height:1.5;margin:1.2rem 0 0;max-width:40ch}
+.quotes{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.8rem}
+.quote{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--acc);padding:.9rem 1.1rem}
+.quote h3{margin-bottom:.35rem;color:var(--acc)}
+.quote p{margin:0;font-size:1rem;line-height:1.55}
+.def{margin-top:1.2rem;background:var(--acc);color:var(--on);padding:1rem 1.2rem;font:600 1.05rem/1.5 var(--sans)}
+
+.pairs{display:grid;gap:.9rem}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:0;background:var(--surface);border:1px solid var(--line)}
+.pair > div{padding:.9rem 1.1rem}
+.pair .n{border-left:6px solid var(--no);background:var(--no-soft)}
+.pair .y{border-left:6px solid var(--yes);background:var(--yes-soft)}
+.pair b{display:block;font:800 .78rem/1 var(--sans);letter-spacing:.04em;text-transform:uppercase;margin-bottom:.4rem}
+.pair .n b{color:var(--no)} .pair .y b{color:var(--yes)}
+.pair p{margin:0;font:500 .98rem/1.5 var(--sans)}
+.pair .t{font-weight:700}
+
+.sorter{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.5rem 1rem;align-items:center;padding:.8rem 0;border-bottom:1px solid var(--line)}
+.row .name{font:600 1rem/1.4 var(--sans)}
+.pick{display:flex;gap:.4rem}
+.pick button{font:700 .92rem/1.1 var(--sans);color:var(--ink);background:var(--surface);border:2px solid var(--line);border-radius:8px;padding:.55rem .8rem;cursor:pointer}
+.pick button[disabled]{cursor:default}
+.pick button.N:hover:not([disabled]){border-color:var(--no)} .pick button.Y:hover:not([disabled]){border-color:var(--yes)}
+.pick button[aria-pressed="true"].N{background:var(--no);border-color:var(--no);color:var(--on)}
+.pick button[aria-pressed="true"].Y{background:var(--yes);border-color:var(--yes);color:var(--on)}
+.fb{grid-column:1/-1;margin:0;font:500 .95rem/1.45 var(--sans);padding:.5rem .8rem;border-left:5px solid var(--line);background:var(--surface)}
+.fb[hidden]{display:none}
+.row.good .fb{border-left-color:var(--yes)} .row.bad .fb{border-left-color:var(--no)}
+.score{display:flex;flex-wrap:wrap;gap:.8rem 1.2rem;align-items:center;margin-top:1.1rem}
+.score p{margin:0;font:600 1rem/1.4 var(--sans);flex:1 1 16rem}
+
+.time{display:grid;grid-template-columns:1fr 1fr 2fr;gap:.5rem;margin-bottom:1rem}
+.time button{font:700 .95rem/1.3 var(--sans);text-align:left;color:var(--ink);background:var(--surface);border:2px solid var(--line);border-radius:8px;padding:.8rem .9rem;cursor:pointer}
+.time button small{display:block;font:600 .8rem/1.3 var(--sans);color:var(--muted);margin-top:.15rem}
+.time button[aria-selected="true"]{border-color:var(--acc);background:var(--acc-soft)}
+.panel{background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--acc);padding:clamp(1rem,3vw,1.6rem)}
+.panel[hidden]{display:none}
+.panel > h3{font-size:1.25rem;color:var(--acc);margin-bottom:.6rem}
+.panel > p.intro{font:500 1rem/1.5 var(--sans);color:var(--muted)}
+
+.steps{list-style:none;margin:0;padding:0}
+.steps > li{border-top:1px solid var(--line)}
+.steps details summary{cursor:pointer;display:grid;grid-template-columns:2.6rem 1fr;gap:.6rem;align-items:baseline;padding:.8rem 0;list-style:none}
+.steps details summary::-webkit-details-marker{display:none}
+.steps .no{font:800 1.5rem/1 var(--sans);color:var(--acc)}
+.steps .tt{font:700 1.02rem/1.35 var(--sans)}
+.steps details[open] .tt{color:var(--acc)}
+.steps .body{padding:0 0 1rem 3.2rem}
+.steps .body ul{margin:0;padding-left:1.1rem}
+.steps .body li{margin-bottom:.45rem;font:500 .98rem/1.5 var(--sans)}
+.tip{font:500 .95rem/1.5 var(--sans);background:var(--bg);border-left:4px solid var(--acc);padding:.6rem .9rem;margin:.8rem 0 0}
+
+.plan{display:grid;gap:.9rem}
+.pbox{background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--k);padding:1rem 1.2rem}
+.pbox h3{color:var(--k);margin-bottom:.5rem;font-size:1.15rem}
+.pbox ul{margin:0;padding-left:1.1rem}
+.pbox li{margin-bottom:.45rem;font:500 .98rem/1.5 var(--sans)}
+.pbox em{font-style:normal;font-weight:700}
+.arrow{text-align:center;font:600 .92rem/1.4 var(--sans);color:var(--muted);margin:-.2rem 0}
+.arrow::before{content:"↓ "}
+
+.checks{list-style:none;margin:0;padding:0;max-width:46rem}
+.checks li{border-top:1px solid var(--line)}
+.checks li:last-child{border-bottom:1px solid var(--line)}
+.checks label{display:grid;grid-template-columns:1.6rem 1fr;gap:.7rem;padding:.8rem 0;cursor:pointer;font:500 1rem/1.5 var(--sans)}
+.checks input{width:1.2rem;height:1.2rem;margin-top:.2rem;accent-color:var(--acc)}
+.checks input:checked + span{color:var(--muted);text-decoration:line-through}
+.prog{font:700 1rem/1.4 var(--sans);margin-top:1rem}
+.final{margin-top:2rem;max-width:46rem;font-size:1.2rem;line-height:1.55;border-left:6px solid var(--gold);padding-left:1.1rem}
+footer{padding:1.6rem 0 2.5rem;font:500 .9rem/1.5 var(--sans);color:var(--muted)}
+footer p{margin:0 0 .4rem}
+@media (max-width:760px){
+  .quotes,.pair,.time{grid-template-columns:1fr}
+  .row{grid-template-columns:1fr}
+  .steps .body{padding-left:0}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
+
+.pdfbtn{display:inline-flex;align-items:center;gap:.5rem;font:600 .88rem/1 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--surface);border:1.5px solid var(--ink);border-radius:999px;padding:.55rem .95rem;cursor:pointer}
+.pdfbtn:hover{background:var(--ink);color:var(--bg)}.pdfbtn:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:2px}
+@media print{
+  :root{--bg:#fff!important;--surface:#fff!important;--ink:#111!important;--muted:#444!important;--line:#bbb!important;color-scheme:light!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:#fff!important;color:#111!important}
+  body::before,body::after{display:none!important}
+  nav,.pdfbtn,.pn,video,section[aria-labelledby="h-video"]{display:none!important}
+  .rev,.js .rev{opacity:1!important;transform:none!important}
+  .stp li[hidden]{display:list-item!important}
+  details>*{display:block!important}
+  article,li,.card,figure,.stage{break-inside:avoid}
+  h1,h2,h3{break-after:avoid;text-shadow:none!important}
+  *{text-shadow:none!important}
+  a{color:inherit;text-decoration:none}
+  section.block,.part{padding-top:1.2rem!important;padding-bottom:1.2rem!important}
+  footer{break-before:avoid;border-top:1px solid #999;margin-top:1rem}
+}
+@page{size:A4;margin:16mm 14mm}
+</style>
+</head>
+<body>
+<nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>L’explication d’un texte philosophique au baccalauréat</h1>
+    <p class="lead">Qu’est-ce qu’expliquer un texte, et comment s’y prendre en quatre heures ?</p>
+    <div class="quotes">
+      <div class="quote"><h3>Extrait du programme</h3><p>« L’explication s’attache à dégager les enjeux philosophiques et la démarche d’un texte de longueur restreinte ».</p></div>
+      <div class="quote"><h3>Libellé de l’exercice</h3><p>« La connaissance de la doctrine de l’auteur n’est pas requise. Il faut et il suffit que l’explication rende compte, par la compréhension précise du texte, du problème dont il est question ».</p></div>
+    </div>
+    <p class="def">Expliquer, c’est « déplier » les difficultés, rendre explicite le sens de quelque chose. Le but est de faire comprendre le sens et les enjeux du texte, de faire voir ce que le texte donne à penser.</p>
+  </div>
+</header>
+
+<main>
+<section class="block" aria-labelledby="h-fp">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="h-fp">Ce qu’il ne faut pas faire, ce qu’il faut faire</h2></div>
+    <div class="pairs" id="pairs"></div>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="h-tri">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-tri">Piège ou bon réflexe ?</h2>
+      <p>Pour chaque attitude, dites si c’est à éviter ou à adopter.</p>
+    </div>
+    <ul class="sorter" id="sorter"></ul>
+    <div class="score"><p id="score" aria-live="polite"></p><button class="btn" id="reset" type="button">Recommencer</button></div>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="h-t">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-t">Les trois temps de l’épreuve</h2>
+      <p>Choisissez une étape.</p>
+    </div>
+    <div class="time" role="tablist" aria-label="Les trois temps">
+      <button role="tab" id="tb-1" aria-selected="true" aria-controls="pn-1" type="button">I. Lecture analytique<small>environ 1 h</small></button>
+      <button role="tab" id="tb-2" aria-selected="false" aria-controls="pn-2" type="button" tabindex="-1">II. Organisation du plan<small>environ 1 h</small></button>
+      <button role="tab" id="tb-3" aria-selected="false" aria-controls="pn-3" type="button" tabindex="-1">III. Rédaction<small>environ 2 h</small></button>
+    </div>
+
+    <div class="panel" id="pn-1" role="tabpanel" aria-labelledby="tb-1">
+      <h3>I. Lecture analytique</h3>
+      <p class="intro">Plusieurs niveaux de lecture sont nécessaires à chaque fois. Lisez et relisez le texte dans l’ordre, patiemment, et prenez des notes au brouillon.</p>
+      <ol class="steps" id="steps"></ol>
+    </div>
+
+    <div class="panel" id="pn-2" role="tabpanel" aria-labelledby="tb-2" hidden>
+      <h3>II. Organisation du plan</h3>
+      <div class="plan">
+        <div class="pbox" style="--k:var(--acc)">
+          <h3>Introduction</h3>
+          <ul>
+            <li><em>§ 1.</em> Montrez ce qui justifie de lire et d’expliquer le texte : introduisez l’objet du texte en formulant le problème à partir duquel il prend son sens (ex. « On dit souvent que… mais… »).</li>
+            <li><em>§ 2.</em> Présentez la thèse du texte, en montrant précisément en quoi elle n’est pas forcément évidente, qu’elle est paradoxale ou susceptible de plusieurs interprétations, et suppose donc une explication.</li>
+            <li><em>§ 3.</em> Présentez les étapes du texte, non comme une succession chronologique d’idées mais comme un cheminement logique, en indiquant obligatoirement les lignes ou les passages auxquels on se réfère.</li>
+          </ul>
+        </div>
+        <div class="arrow">une partie par grande étape argumentative du texte</div>
+        <div class="pbox" style="--k:var(--gold)">
+          <h3>Développement</h3>
+          <ul>
+            <li><em>Objet.</em> Formulez l’idée centrale de l’étape qu’on va expliquer, en la reliant aux enjeux posés en introduction.</li>
+            <li><em>Sous-parties.</em> Questionnez le texte de manière méthodique : partez de ce qu’il faut expliquer en premier (le concept, l’argument) pour faire comprendre la suite. Ex. : « Que signifie cet argument, cette affirmation, ce concept ? Comment doit-on le comprendre et pourquoi ? »</li>
+            <li><em>Transition.</em> Revenez à l’objet de l’étape étudiée, récapitulez son sens par rapport au texte, et justifiez ce qui reste à expliquer en formulant la question qui conduit à l’étape suivante. Une objection peut légitimement surgir, à laquelle la suite du texte répond ; tout dépend de la logique du texte.</li>
+          </ul>
+          <p class="tip"><b>Remarques importantes.</b><br>
+          a. Suivre les étapes du texte ne veut pas dire prendre le texte mot à mot ou phrase par phrase.<br>
+          b. Allez du plus général au plus particulier, du plus évident au plus complexe, du sens premier à la nuance. N’hésitez pas à faire apparaître le questionnement, l’étonnement, la difficulté.<br>
+          c. Citez précisément le texte, mais citer n’est pas expliquer : on cite pour expliquer, et toute citation doit être expliquée. Les exemples concrets, les connaissances de cours et, éventuellement, d’autres auteurs peuvent éclairer un point du texte.</p>
+        </div>
+        <div class="arrow">pour finir</div>
+        <div class="pbox" style="--k:var(--yes)">
+          <h3>Conclusion</h3>
+          <ul>
+            <li>Rappelez le problème auquel le texte se confronte et la thèse qu’il soutient.</li>
+            <li>Montrez en quoi l’analyse a permis de préciser le sens et les nuances de la thèse.</li>
+            <li>Éclairez l’originalité de la thèse et ses enjeux, même s’il s’agit de formuler d’éventuelles critiques ou de discuter la portée du texte.</li>
+          </ul>
+        </div>
+      </div>
+      <p class="note" style="margin-top:1rem">Attention : on n’explique pas le texte d’un auteur en le rapportant à la pensée d’un autre. Montrez plutôt ce qui distingue les idées entre elles, pour faire comprendre le texte dans son originalité.</p>
+    </div>
+
+    <div class="panel" id="pn-3" role="tabpanel" aria-labelledby="tb-3" hidden>
+      <h3>III. Rédiger l’ensemble de la composition</h3>
+      <p class="intro">Avant de rendre la copie, cochez ce que vous avez vérifié.</p>
+      <ul class="checks" id="checks"></ul>
+      <p class="prog" id="prog" aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="h-ret">
+  <div class="wrap">
+    <h2 id="h-ret">À retenir</h2>
+    <blockquote class="final" style="margin-left:0;margin-bottom:0">Une bonne explication n’est pas celle qui ne voit aucune difficulté dans le texte ou tente de la masquer. C’est au contraire celle qui la met en évidence et cherche à formuler des hypothèses fondées sur l’analyse du texte pour y répondre.</blockquote>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap"><p>Page réalisée à partir du document « L’explication d’un texte philosophique au baccalauréat » (Terminale générale).</p></div></footer>
+
+<script>
+(function(){
+  function $(s){return document.querySelector(s)}
+  function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;')}
+
+  /* Faire / ne pas faire */
+  var P=[
+   ['La paraphrase','répéter ce que le texte dit avec d’autres mots, le résumer, constater que le texte dit ce qu’il dit, « l’auteur dit que… ».','Questionner le texte','se demander pourquoi ; analyser les arguments et les notions du texte ; se confronter à ses difficultés.'],
+   ['Prendre le texte mot à mot ou phrase après phrase','séparément, en isolant les termes ou expressions sans tenir compte du reste.','Aller des parties au tout et du tout aux parties','tout en suivant les étapes du texte, étudier le sens global et la logique, c’est-à-dire le lien entre les idées et les notions.'],
+   ['Prendre le texte pour prétexte','parler de manière générale des notions du texte ; plaquer une interprétation toute faite ; le rabattre sur d’autres auteurs ; faire étalage de connaissances (sur l’auteur, sa doctrine, son époque).','Analyser le texte pour lui-même','dans sa singularité, pour ce qu’il affirme. Si d’autres auteurs sont convoqués, c’est pour mettre en lumière l’originalité du texte ou le discuter.'],
+   ['Produire un commentaire stylistique','rechercher les « axes », les « figures de style », s’intéresser à l’aspect formel.','Analyser des idées','réfléchir sur des concepts, des arguments et leur portée.'],
+   ['S’en tenir à ses impressions subjectives','juger l’auteur.','Se mettre à l’écoute du texte','faire l’effort de comprendre une pensée autre que la sienne.']
+  ];
+  $('#pairs').innerHTML=P.map(function(p){
+    return '<div class="pair"><div class="n"><b>À éviter</b><p><span class="t">'+esc(p[0])+' :</span> '+esc(p[1])+'</p></div><div class="y"><b>À faire</b><p><span class="t">'+esc(p[2])+' :</span> '+esc(p[3])+'</p></div></div>';
+  }).join('');
+
+  /* Tri */
+  var ITEMS=[
+   ['Répéter ce que dit le texte avec d’autres mots, en écrivant « l’auteur dit que… » à chaque phrase','N','Paraphrase : c’est constater que le texte dit ce qu’il dit, sans l’expliquer.'],
+   ['Se demander pourquoi l’auteur affirme cela, et analyser ses arguments','Y','Questionner le texte : c’est le cœur de l’explication.'],
+   ['Expliquer la première phrase, puis la deuxième, puis la troisième, sans les relier','N','Le texte pris mot à mot ou phrase après phrase : on perd la logique d’ensemble.'],
+   ['Étudier le lien logique entre les idées, en allant des parties au tout et du tout aux parties','Y','Le détail et l’ensemble ne se séparent pas.'],
+   ['Raconter la vie de l’auteur et le contexte de son époque','N','Prendre le texte pour prétexte : faire étalage de connaissances ne vaut pas explication.'],
+   ['Relever les figures de style et les « axes » du texte','N','Commentaire stylistique : l’explication analyse des idées, pas la forme.'],
+   ['Citer le texte puis expliquer la citation','Y','On cite pour expliquer. Une citation non expliquée ne vaut rien.'],
+   ['Faire l’effort de comprendre une pensée différente de la sienne avant de la discuter','Y','Se mettre à l’écoute du texte, sans s’en tenir à ses impressions ni juger l’auteur.']
+  ];
+  var list=$('#sorter'),sc=$('#score'),rows=[],done=0,right=0;
+  ITEMS.forEach(function(it){
+    var li=document.createElement('li');li.className='row';
+    li.innerHTML='<span class="name"></span><div class="pick" role="group"><button type="button" class="N" aria-pressed="false">À éviter</button><button type="button" class="Y" aria-pressed="false">À faire</button></div><p class="fb" hidden aria-live="polite"></p>';
+    li.querySelector('.name').textContent=it[0];
+    li.querySelector('.pick').setAttribute('aria-label',it[0]);
+    var bs=li.querySelectorAll('button'),fb=li.querySelector('.fb');
+    ['N','Y'].forEach(function(L,k){
+      bs[k].addEventListener('click',function(){
+        if(li.classList.contains('good')||li.classList.contains('bad'))return;
+        var ok=L===it[1];
+        bs[k].setAttribute('aria-pressed','true');
+        [].forEach.call(bs,function(b){b.disabled=true});
+        li.classList.add(ok?'good':'bad');fb.hidden=false;
+        fb.textContent=(ok?'Bien vu. ':'Pas tout à fait. ')+it[2];
+        done++;if(ok)right++;upd();
+      });
+    });
+    list.appendChild(li);rows.push(li);
+  });
+  function upd(){
+    var n=ITEMS.length,s=function(x){return x>1?'s':''};
+    sc.textContent=!done?n+' attitudes à classer.':done<n?done+' classée'+s(done)+' sur '+n+' : '+right+' bonne'+s(right)+' réponse'+s(right)+'.':'Terminé : '+right+' bonne'+s(right)+' réponse'+s(right)+' sur '+n+'.';
+  }
+  $('#reset').addEventListener('click',function(){
+    rows.forEach(function(li){li.classList.remove('good','bad');li.querySelector('.fb').hidden=true;
+      [].forEach.call(li.querySelectorAll('button'),function(b){b.disabled=false;b.setAttribute('aria-pressed','false')})});
+    done=0;right=0;upd();
+  });
+  upd();
+
+  /* Onglets */
+  var tabs=[].slice.call(document.querySelectorAll('[role=tab]'));
+  function sel(t){tabs.forEach(function(x){var on=x===t;x.setAttribute('aria-selected',on);x.tabIndex=on?0:-1;document.getElementById(x.getAttribute('aria-controls')).hidden=!on})}
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){sel(t)});
+    t.addEventListener('keydown',function(e){
+      var n=e.key==='ArrowRight'?i+1:e.key==='ArrowLeft'?i-1:null;
+      if(n===null)return;e.preventDefault();n=(n+tabs.length)%tabs.length;tabs[n].focus();sel(tabs[n]);
+    });
+  });
+
+  /* Lecture analytique */
+  var S=[
+   ['00','Prendre connaissance du texte',[
+     'Ne craignez pas de ne pas tout saisir à la première lecture. Inversement, méfiez-vous du sentiment d’avoir tout compris.',
+     'Assurez-vous de comprendre le vocabulaire et les expressions ; identifiez les difficultés.',
+     'Identifiez et notez l’objet du texte, son thème principal : de quoi parle-t-il ? Le texte se rattache nécessairement à une ou plusieurs notions du programme.']],
+   ['01','Identifier la thèse du texte',[
+     'La thèse est l’idée principale que le texte soutient : qu’affirme-t-il sur le thème dont il parle ? Elle peut apparaître dans le texte, mais le plus souvent il faut la synthétiser en une ou deux phrases.',
+     'Distinguez la thèse en elle-même et l’argumentation qui s’y rattache (prémisses, conséquences, remarques, nuances) : tout n’est pas sur le même plan.',
+     'Procédez par hypothèses de lecture : confrontez la thèse identifiée à la relecture d’ensemble, pour la confirmer ou la préciser.',
+     'Pour vérifier : tous les moments et toutes les idées du texte doivent prendre leur sens par rapport à la thèse, de manière cohérente.']],
+   ['02','Saisir les grandes étapes du texte',[
+     'Par quelles étapes le texte passe-t-il pour établir sa thèse ? En général, on repère deux ou trois grandes étapes.',
+     'Repérez-les précisément (de telle ligne à telle ligne).',
+     'Identifiez les arguments et les exemples du texte, ou cherchez des exemples qui permettent de faire comprendre les arguments.',
+     'Reformulez synthétiquement le contenu de chaque étape en indiquant le lien logique entre elles, par rapport à la thèse globale : pas de « d’abord… ensuite… puis… », mais demandez-vous pourquoi on passe d’une étape à une autre.']],
+   ['03','Saisir les concepts du texte',[
+     'Tous les mots comptent, mais ils ne jouent pas tous le même rôle ni n’ont la même importance.',
+     'Quels sont les concepts principaux ou les distinctions conceptuelles qu’il faut expliquer pour faire comprendre le texte ? Analysez-les, montrez leur sens et leur importance dans le texte.']],
+   ['04','Rendre compte du problème dont il est question',[
+     'À quelle question ou à quel problème philosophique la thèse entend-elle répondre ? Quel est l’enjeu du texte ?',
+     'Qu’a-t-il de paradoxal ? Quelle opinion, implicite ou explicite, remet-il en cause ? Quel est l’intérêt philosophique de la position exprimée, qu’on soit d’accord ou non ?',
+     'La thèse appelle-t-elle une discussion ou une réserve ? Ne critiquez pas sans être sûr d’avoir compris : laissez place au doute quant à votre propre lecture. Vous n’analysez qu’un court extrait d’une œuvre plus large, qui répond peut-être ailleurs aux objections.']]
+  ];
+  $('#steps').innerHTML=S.map(function(s){
+    return '<li><details><summary><span class="no">'+s[0]+'</span><span class="tt">'+esc(s[1])+'</span></summary><div class="body"><ul>'+s[2].map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul></div></details></li>';
+  }).join('');
+
+  /* Rédaction */
+  var C=[
+   'Soigner l’orthographe et la syntaxe.',
+   'Indiquer les lignes des passages du texte que l’on cite.',
+   'Structurer la forme du propos : sauter une ligne entre l’introduction, la partie 1, la partie 2, etc., et la conclusion.',
+   'Faire apparaître les sous-parties par des alinéas.',
+   'Vérifier que chaque citation est expliquée.'
+  ];
+  var ul=$('#checks'),pr=$('#prog'),cnt=0;
+  C.forEach(function(t){
+    var li=document.createElement('li'),lb=document.createElement('label'),i=document.createElement('input'),s=document.createElement('span');
+    i.type='checkbox';s.textContent=t;lb.appendChild(i);lb.appendChild(s);li.appendChild(lb);ul.appendChild(li);
+    i.addEventListener('change',function(){cnt+=i.checked?1:-1;pg()});
+  });
+  function pg(){pr.textContent=cnt+' point'+(cnt>1?'s':'')+' vérifié'+(cnt>1?'s':'')+' sur '+C.length+'.'+(cnt===C.length?' La copie est prête.':'')}
+  pg();
+})();
+</script>
+</body>
+</html>

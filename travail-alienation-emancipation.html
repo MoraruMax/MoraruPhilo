@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Le travail : aliénation ou émancipation ?</title>
+<style>
+:root{
+  color-scheme:light;
+  --bg:#F6F5F1; --surface:#FFFFFF; --ink:#1C1B18; --muted:#5C5A52; --line:#DCD9CE; --focus:#0B5CAD; --on:#FFFFFF;
+  --al:#A33B1F; --al-soft:#FAE5DD;
+  --em:#17696A; --em-soft:#DCF0EF;
+  --ab:#5B3FA0; --ab-soft:#EAE3F8;
+  --gold:#8A5A00; --bad:#B3261E;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --serif:Charter,"Bitstream Charter","Sitka Text",Cambria,Georgia,serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#151410; --surface:#1F1E19; --ink:#F1EFE7; --muted:#B4B0A2; --line:#37352C; --focus:#8CC2FF; --on:#151410;
+    --al:#FF9C80; --al-soft:#44211A; --em:#6BD6D2; --em-soft:#123A3A; --ab:#BCA4F5; --ab-soft:#2C2150; --gold:#F2C36B; --bad:#FF8F86;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#151410; --surface:#1F1E19; --ink:#F1EFE7; --muted:#B4B0A2; --line:#37352C; --focus:#8CC2FF; --on:#151410;
+  --al:#FF9C80; --al-soft:#44211A; --em:#6BD6D2; --em-soft:#123A3A; --ab:#BCA4F5; --ab-soft:#2C2150; --gold:#F2C36B; --bad:#FF8F86;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.1rem/1.65 var(--serif)}
+.wrap{width:min(980px,100% - 2.5rem);margin-inline:auto}
+h1,h2,h3{margin:0}
+h1{font:800 clamp(2.5rem,7.5vw,4.8rem)/1.03 var(--sans);letter-spacing:-.025em}
+h2{font:800 clamp(1.5rem,3.2vw,2.1rem)/1.2 var(--sans);margin-bottom:.8rem}
+h3{font:700 1.08rem/1.35 var(--sans)}
+p{margin:0 0 1em}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
+.btn{font:600 .95rem/1.2 var(--sans);color:var(--ink);background:transparent;border:1.5px solid var(--ink);border-radius:8px;padding:.65rem 1rem;cursor:pointer}
+.btn:hover{background:var(--line)}
+.btn.primary{background:var(--ink);color:var(--bg)}
+.btn.primary:hover{background:var(--ink);filter:brightness(1.2)}
+.note{font:500 .92rem/1.5 var(--sans);color:var(--muted)}
+section.block{border-top:1px solid var(--line);padding:clamp(2.2rem,6vw,3.8rem) 0}
+.sec-head{max-width:46rem;margin-bottom:1.6rem}
+blockquote{margin:0}
+
+.hero{padding:clamp(2rem,6vw,4rem) 0 clamp(2rem,5vw,3rem)}
+.lead{font-size:clamp(1.2rem,2.4vw,1.45rem);line-height:1.5;margin:1.3rem 0 0;max-width:36ch}
+.chirac{margin-top:1.4rem;font:600 .95rem/1.5 var(--sans);color:var(--muted);max-width:44ch}
+.chirac q{font-family:var(--serif);font-style:italic;font-weight:400;font-size:1.05rem;color:var(--ink)}
+
+/* Balance */
+.bal{margin-top:2rem;background:var(--surface);border:1px solid var(--line);padding:clamp(1rem,3vw,1.5rem)}
+.bal h2{font-size:1.2rem;margin-bottom:.4rem}
+.bal input[type=range]{width:100%;accent-color:var(--ink);margin:.8rem 0 .4rem}
+.bal .ends{display:flex;justify-content:space-between;font:700 .85rem/1.3 var(--sans);gap:1rem}
+.bal .ends span:first-child{color:var(--al)} .bal .ends span:last-child{color:var(--em);text-align:right}
+.bal .cols{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}
+.bal .col{border-top:6px solid var(--k);padding:.7rem .9rem;background:var(--bg);transition:opacity .3s}
+.bal .col h3{color:var(--k);margin-bottom:.3rem}
+.bal .col ul{margin:0;padding-left:1.1rem;font:500 .95rem/1.5 var(--sans)}
+.bal .col li{margin-bottom:.35rem}
+@media (prefers-reduced-motion:reduce){.bal .col{transition:none}}
+
+.tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem;margin-bottom:1rem}
+.tabs button{font:700 .98rem/1.3 var(--sans);text-align:left;color:var(--ink);background:var(--surface);border:2px solid var(--line);border-radius:8px;padding:.8rem .9rem;cursor:pointer}
+.tabs button small{display:block;font:600 .8rem/1.3 var(--sans);color:var(--muted);margin-top:.15rem}
+.tabs button[aria-selected="true"]{border-color:var(--k);background:var(--ks)}
+.panel{background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--k);padding:clamp(1rem,3vw,1.7rem)}
+.panel[hidden]{display:none}
+.panel > h3{font-size:1.3rem;color:var(--k);margin-bottom:.3rem}
+.panel .thesis{font:700 1.2rem/1.35 var(--serif);margin:.2rem 0 1rem}
+.panel h4{font:800 .8rem/1 var(--sans);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin:1.3rem 0 .5rem}
+.panel ul{margin:0;padding-left:1.15rem}
+.panel li{margin-bottom:.5rem;font-size:1.02rem}
+.auth{background:var(--ks);border-left:5px solid var(--k);padding:.8rem 1rem;margin:0 0 .8rem}
+.auth b{font:700 .95rem/1.3 var(--sans);color:var(--k);display:block;margin-bottom:.25rem}
+.auth blockquote{font-size:1rem;font-style:italic;margin:.3rem 0}
+.auth p{margin:.3rem 0 0;font-size:1rem}
+.lim{background:var(--bg);border-left:5px solid var(--gold);padding:.8rem 1rem;font:500 .98rem/1.55 var(--sans)}
+.lim b{color:var(--gold)}
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.7rem;margin:.4rem 0 .8rem}
+.three div{background:var(--bg);border-top:4px solid var(--k);padding:.7rem .85rem;font:500 .95rem/1.5 var(--sans)}
+.three b{display:block;font-weight:800;margin-bottom:.2rem;color:var(--k)}
+
+.sorter{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.5rem 1rem;align-items:center;padding:.8rem 0;border-bottom:1px solid var(--line)}
+.row .name{font:600 1rem/1.45 var(--sans)}
+.pick{display:flex;flex-wrap:wrap;gap:.4rem}
+.pick button{font:700 .9rem/1.15 var(--sans);color:var(--ink);background:var(--surface);border:2px solid var(--line);border-radius:8px;padding:.55rem .75rem;cursor:pointer}
+.pick button[disabled]{cursor:default}
+.pick button:hover:not([disabled]){border-color:var(--c)}
+.pick button[aria-pressed="true"]{background:var(--c);border-color:var(--c);color:var(--on)}
+.fb{grid-column:1/-1;margin:0;font:500 .95rem/1.45 var(--sans);padding:.5rem .8rem;border-left:5px solid var(--line);background:var(--surface)}
+.fb[hidden]{display:none}
+.row.good .fb{border-left-color:var(--em)} .row.bad .fb{border-left-color:var(--bad)}
+.score{display:flex;flex-wrap:wrap;gap:.8rem 1.2rem;align-items:center;margin-top:1.1rem}
+.score p{margin:0;font:600 1rem/1.4 var(--sans);flex:1 1 16rem}
+
+/* Maître / serviteur */
+.hg{display:grid;grid-template-columns:1fr 1fr;gap:1rem;position:relative}
+.person{background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--k);padding:1rem 1.2rem;font:500 1rem/1.5 var(--sans)}
+.person h3{color:var(--k);font-size:1.2rem;margin-bottom:.4rem}
+.person .st{display:inline-block;font:800 .78rem/1 var(--sans);letter-spacing:.04em;text-transform:uppercase;padding:.3rem .5rem;margin-bottom:.6rem;color:var(--on);background:var(--k)}
+.person ul{margin:.4rem 0 0;padding-left:1.1rem}
+.person li{margin-bottom:.3rem}
+.person .after{display:none}
+.hg.flipped .after{display:list-item}
+.hg.flipped .before{display:none}
+.hg .free{display:none}
+.hg.flipped .free{display:inline-block}
+.hg.flipped .notfree{display:none}
+.person.lead-p{transition:transform .5s,border-color .5s}
+@media (prefers-reduced-motion:no-preference){.hg.flipped .person.win{transform:translateY(-.4rem)}}
+.hgctl{margin-top:1rem;display:flex;gap:.6rem;flex-wrap:wrap;align-items:center}
+.hgmsg{font:600 1rem/1.5 var(--sans);margin:0}
+
+/* Journée */
+.chips li{background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:.4rem .8rem}
+.day{background:var(--surface);border:1px solid var(--line);padding:clamp(1rem,3vw,1.5rem)}
+.day input[type=range]{width:100%;accent-color:var(--ab)}
+.dbar{display:flex;height:3rem;border:1px solid var(--line);margin:.9rem 0 .5rem;overflow:hidden}
+.dbar div{display:flex;align-items:center;justify-content:center;font:700 .85rem/1.2 var(--sans);color:var(--on);min-width:0;overflow:hidden;white-space:nowrap}
+.dbar .w{background:var(--al)} .dbar .s{background:var(--muted)} .dbar .f{background:var(--ab)}
+@media (prefers-reduced-motion:no-preference){.dbar div{transition:flex-basis .2s}}
+
+.recap{margin:0;padding:0;list-style:none;max-width:48rem}
+.recap li{padding:.9rem 0;border-top:1px solid var(--line)}
+.recap li:last-child{border-bottom:1px solid var(--line)}
+.recap b{font-family:var(--sans)}
+footer{padding:1.6rem 0 2.5rem;font:500 .9rem/1.5 var(--sans);color:var(--muted)}
+footer p{margin:0}
+@media (max-width:820px){
+  .tabs,.three,.hg,.bal .cols{grid-template-columns:1fr}
+  .row{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
+
+.pn{display:flex;gap:1rem;flex-wrap:wrap;margin:2.5rem auto 0;max-width:980px;padding:0 1.25rem;box-sizing:content-box}
+.pn a{flex:1 1 16rem;display:flex;flex-direction:column;gap:.25rem;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--k,var(--ink));padding:.9rem 1.1rem;border-radius:0 0 8px 8px}
+.pn a:hover{border-color:var(--k,var(--ink))}.pn a:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.pn small{font:600 .78rem/1 system-ui,-apple-system,sans-serif;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.pn b{font:700 1.1rem/1.25 system-ui,-apple-system,sans-serif}
+.pn .nx{text-align:right;margin-left:auto;max-width:calc(50% - .5rem)}
+.pn .nx:first-child{margin-left:auto;max-width:calc(50% - .5rem)}
+.pn .hm{flex:0 0 100%;text-align:center;font:500 .92rem/1 system-ui,-apple-system,sans-serif;background:none;border:0;padding:.4rem;color:var(--ink);text-decoration:underline}
+
+.pdfbtn{display:inline-flex;align-items:center;gap:.5rem;font:600 .88rem/1 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--surface);border:1.5px solid var(--ink);border-radius:999px;padding:.55rem .95rem;cursor:pointer}
+.pdfbtn:hover{background:var(--ink);color:var(--bg)}.pdfbtn:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:2px}
+@media print{
+  :root{--bg:#fff!important;--surface:#fff!important;--ink:#111!important;--muted:#444!important;--line:#bbb!important;color-scheme:light!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:#fff!important;color:#111!important}
+  body::before,body::after{display:none!important}
+  nav,.pdfbtn,.pn,video,section[aria-labelledby="h-video"]{display:none!important}
+  .rev,.js .rev{opacity:1!important;transform:none!important}
+  .stp li[hidden]{display:list-item!important}
+  details>*{display:block!important}
+  article,li,.card,figure,.stage{break-inside:avoid}
+  h1,h2,h3{break-after:avoid;text-shadow:none!important}
+  *{text-shadow:none!important}
+  a{color:inherit;text-decoration:none}
+  section.block,.part{padding-top:1.2rem!important;padding-bottom:1.2rem!important}
+  footer{break-before:avoid;border-top:1px solid #999;margin-top:1rem}
+}
+@page{size:A4;margin:16mm 14mm}
+</style>
+</head>
+<body>
+<nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Le travail : aliénation ou émancipation ?</h1>
+    <p class="lead">À la fois peine et libération, le travail est un paradoxe. Faut-il lui chercher un sens, ou tenter de l’abolir ?</p>
+    <p class="chirac"><q>Nous devons prendre conscience que le travail ne constitue plus, désormais, l’essentiel d’une vie.</q> (Chirac)</p>
+
+    <div class="bal">
+      <h2>Le paradoxe du travail</h2>
+      <p class="note" style="margin:0">Déplacez le curseur pour passer d’un visage du travail à l’autre.</p>
+      <input type="range" id="bal" min="0" max="100" value="50" aria-label="Du travail comme peine au travail comme libération">
+      <div class="ends"><span>Peine, souffrance</span><span>Ce que nous sommes</span></div>
+      <div class="cols">
+        <div class="col" id="c1" style="--k:var(--al)"><h3>Le travail, une peine</h3><ul>
+          <li>L’étymologie : le <i>tripalium</i>, instrument de torture.</li>
+          <li>Une punition : chassé d’Éden, l’homme devra travailler la terre à la sueur de son front.</li>
+          <li>Une souffrance : on dit d’une femme qui s’apprête à accoucher que son « travail » commence.</li></ul></div>
+        <div class="col" id="c2" style="--k:var(--em)"><h3>Le travail, ce que nous sommes</h3><ul>
+          <li>« Que fais-tu dans la vie ? » : on interroge sur le travail, non sur les passions ou les hobbys.</li>
+          <li>L’utilité : ce que nous apportons à la société, à la collectivité.</li>
+          <li>Gagner sa vie : un moyen privilégié d’émancipation.</li></ul></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="block" aria-labelledby="h-pb">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-pb">Un emploi n’est pas toujours un sens</h2>
+      <p>Gagner sa vie est-il suffisant ? Le capitalisme moderne ne multiplie-t-il pas les « <i>bullshit jobs</i> » (Graeber, 2013), des emplois que le salarié lui-même juge inutiles et dépourvus de sens ? Le cours cite le manager intermédiaire qui encadre une équipe qui n’en a pas besoin, l’assistant qui ne sert qu’à flatter l’ego du chef, ou les équipes dont la seule fonction est de permettre à l’entreprise de cocher une case.</p>
+      <p><b>Problématique :</b> le travail est-il seulement une contrainte aliénante, ou une activité libératrice et réalisatrice ? Faut-il chercher à lui trouver un sens, ou tenter de l’abolir ?</p>
+    </div>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="h-plan">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-plan">Le plan du cours</h2>
+      <p>Trois temps, trois thèses.</p>
+    </div>
+    <div class="tabs" role="tablist" aria-label="Les trois parties">
+      <button role="tab" id="tb-1" aria-selected="true" aria-controls="pn-1" type="button" style="--k:var(--al);--ks:var(--al-soft)">I. La contrainte<small>Le travail, négation de la liberté</small></button>
+      <button role="tab" id="tb-2" aria-selected="false" aria-controls="pn-2" type="button" tabindex="-1" style="--k:var(--em);--ks:var(--em-soft)">II. L’émancipation<small>Le travail, réalisation de soi</small></button>
+      <button role="tab" id="tb-3" aria-selected="false" aria-controls="pn-3" type="button" tabindex="-1" style="--k:var(--ab);--ks:var(--ab-soft)">III. Abolir le travail ?<small>L’éloge de l’oisiveté</small></button>
+    </div>
+
+    <!-- I -->
+    <div class="panel" id="pn-1" role="tabpanel" aria-labelledby="tb-1" style="--k:var(--al);--ks:var(--al-soft)">
+      <h3>I. Le travail, contrainte et négation de la liberté</h3>
+      <p class="thesis">Travailler, c’est avant tout souffrir, peiner, se fatiguer.</p>
+      <div class="auth"><b>La Genèse (chap. 3, 17-19)</b><blockquote>« C’est à la sueur de ton visage que tu gagneras ton pain. »</blockquote><p>Le travail est présenté comme une punition divine, résultat de la désobéissance : une malédiction après la Chute. L’homme devra transformer une nature hostile, un sol maudit qui ne donne que « épines et chardons », avant de retourner à la poussière.</p></div>
+      <div class="auth"><b>Aristote, <i>La Politique</i> (livre 3)</b>
+        <p>Le travail est réservé à ceux qui n’ont pas la possibilité de faire autrement : l’esclave, mais finalement tout travailleur. L’homme libre consacre sa vie à des tâches plus importantes : la vie des idées, la vie contemplative, la vie politique. La « constitution parfaite » n’admettra jamais l’artisan parmi les citoyens : la vertu du citoyen s’entend de ceux « qui n’ont point à travailler nécessairement pour vivre ».</p>
+        <p>Le travailleur est toujours soumis : esclave s’il travaille pour un particulier, « mercenaire » s’il travaille pour le public. Il ne dispose jamais du temps ni de l’indépendance d’esprit nécessaires à la vie politique.</p>
+      </div>
+      <h4>Deux temps</h4>
+      <ul>
+        <li><b>La Scholè</b>, le temps « libre » : non pas notre temps après le travail, mais le temps libéré de toute nécessité et de toute contrainte productive. C’est le temps de la philosophie et de la politique. Ce n’est pas pure oisiveté.</li>
+        <li><b>L’Ascholia</b>, le temps du travail : soumis à la nécessité, à la contrainte. Un temps servile.</li>
+      </ul>
+      <p style="margin-top:.8rem">Le travail serait donc intrinsèquement dégradant, puisqu’il place l’homme sous le joug de la nécessité.</p>
+      <div class="auth" style="margin-top:1.2rem"><b>Marx, <i>Manuscrits de 1844</i> : l’aliénation du travail</b>
+        <blockquote>« L’ouvrier n’a le sentiment d’être auprès de lui-même qu’en dehors du travail et, dans le travail, il se sent en dehors de soi. »</blockquote>
+        <p>Le travail devrait permettre à l’homme de s’affirmer : il est le lieu de sa négation. Le travailleur devrait se sentir « chez lui » dans sa création, il s’y sent étranger. Dès qu’il n’existe pas de contrainte, « le travail est fui comme la peste ».</p></div>
+      <p>L’aliénation (ce qui appartient à un autre, ce qui est étranger à nous) se comprend de trois manières :</p>
+      <div class="three">
+        <div style="--k:var(--al)"><b>Subjective</b>L’ouvrier ne se sent pas « chez lui » dans le travail : mal-être, expérience vécue. Il ne se reconnaît pas dans le produit de son activité, mais s’y perd. C’est une dépossession.</div>
+        <div style="--k:var(--al)"><b>Par la contrainte</b>Sans contrainte physique ou financière, le travail serait évité. Nous signons librement notre contrat, mais cette liberté n’est qu’apparente : il faut bien gagner son pain.</div>
+        <div style="--k:var(--al)"><b>Marchandisation</b>Pendant ses heures de travail, l’ouvrier ne s’appartient plus, pas plus que le produit de son travail : tous deux sont la propriété de l’employeur. La liberté est suspendue : quota, timing, productivité.</div>
+      </div>
+      <p class="lim"><b>Transition.</b> Réduire le travail à une simple contrainte serait méconnaître ce qu’il peut avoir de libérateur et d’émancipateur.</p>
+    </div>
+
+    <!-- II -->
+    <div class="panel" id="pn-2" role="tabpanel" aria-labelledby="tb-2" style="--k:var(--em);--ks:var(--em-soft)" hidden>
+      <h3>II. Le travail comme émancipation</h3>
+      <p class="thesis">Le travail est une activité essentielle de l’homme : transformer la nature en conformité avec ses propres fins.</p>
+      <div class="auth"><b>Marx, <i>Le Capital</i> : l’architecte et l’abeille</b>
+        <blockquote>« Ce qui distingue dès l’abord le plus mauvais architecte de l’abeille la plus experte, c’est qu’il a construit la cellule dans sa tête avant de la construire dans la ruche. »</blockquote>
+        <p>L’araignée et l’abeille agissent par instinct : c’est la nature qui leur dicte leur conduite. Le travail humain est <b>intentionnel</b> : il suppose la représentation d’une fin, qui détermine « comme loi » son mode d’action. Le résultat préexiste « idéalement » dans l’imagination du travailleur. Le travail est une <b>objectivation</b> : la transformation en objet d’un projet, d’une pensée. Il exige une attention soutenue, une « tension constante de la volonté ».</p></div>
+      <p>Le travail n’est donc pas seulement aliénation, il est aussi réalisation : il nous fait prendre conscience de nous-mêmes comme transformateurs de la nature.</p>
+      <div class="auth"><b>Hegel, <i>La Phénoménologie de l’esprit</i> : le maître et le serviteur</b>
+        <blockquote>« Dans le travail, il transforme les choses et se transforme en même temps lui-même. »</blockquote>
+        <p>On croit le maître libre, parce qu’il consomme ce que l’esclave prépare. Mais le maître ne produit rien de stable en dehors de lui : il détruit seulement les produits du travail de l’autre, et sa jouissance reste purement subjective. Le serviteur, lui, refoule son désir, se confronte à la résistance de la matière et imprime la marque de sa conscience sur les choses : il se forme et s’éduque. Un renversement dialectique s’opère. Voir l’animation plus bas.</p></div>
+      <h4>Travail et œuvre (Arendt)</h4>
+      <ul>
+        <li><b>Le travail</b> (<i>labor</i>) : le processus de production des biens de consommation, en perpétuel recommencement. C’est le fait de l’<b>animal laborans</b>, soumis aux processus dévorants de la vie.</li>
+        <li><b>L’œuvre</b> (<i>work</i>) : une activité qui produit des objets durables et transforme le monde. C’est le fait de l’<b>homo faber</b>, créateur d’outils et d’œuvres qui résistent au temps.</li>
+        <li>Si l’on veut trouver du sens au travail, sortir de l’aliénation et de la contrainte, c’est du côté de l’œuvre qu’il faudrait se tourner. Peut-être est-ce la condition de la vie heureuse et de la joie (voir Bergson, cours sur le bonheur).</li>
+      </ul>
+      <p class="lim" style="margin-top:1rem"><b>Transition.</b> Vouloir ainsi réhabiliter le travail, n’est-ce pas vouloir sauver quelque chose qui ne mérite pas de l’être ? N’est-ce pas un simple pis-aller, un aveu d’échec ?</p>
+    </div>
+
+    <!-- III -->
+    <div class="panel" id="pn-3" role="tabpanel" aria-labelledby="tb-3" style="--k:var(--ab);--ks:var(--ab-soft)" hidden>
+      <h3>III. Abolir le travail ?</h3>
+      <p class="thesis">Plutôt que de chercher un sens au travail, renverser les rapports entre temps libre et temps de travail.</p>
+      <div class="three" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+        <div style="--k:var(--ab)"><b>Otium</b>Le temps libre, non contraint, de la production intellectuelle. Pas l’oisiveté : un temps plein d’activités non contraintes (lecture, écriture, contemplation, discussions entre amis).</div>
+        <div style="--k:var(--ab)"><b>Negotium</b>Littéralement la négation de l’otium : les activités contraintes, le commerce, mais aussi, contrairement au terme grec, la gestion des affaires courantes de la cité.</div>
+      </div>
+      <p>Il faut insister sur une dimension essentielle de la vie de l’homme : non pas le travail, mais une forme <b>active</b> d’oisiveté. C’était la promesse de la technique : libérer du travail et de la pénibilité, réduire les heures et accorder plus de place au temps libre. Mais une oisiveté active, pour ne pas tomber dans le désœuvrement (voir le texte de Rousseau, devoir commun).</p>
+      <div class="auth"><b>Russell, <i>Éloge de l’oisiveté</i></b>
+        <blockquote>« Travailler quatre heures par jour devrait donner le droit à chacun de jouir des nécessités et des commodités élémentaires de la vie, et le temps restant serait employé par chacun comme il l’entend. »</blockquote>
+        <p>L’éducation devrait viser à développer des goûts permettant d’employer ses loisirs intelligemment. La « classe de loisir », malgré ses privilèges injustifiés, a cultivé les arts, découvert les sciences, écrit les livres et inventé les philosophies : sans elle, le genre humain ne serait jamais sorti de la barbarie. Les méthodes modernes de production permettent d’offrir à tous bien-être et sérénité ; nous avons choisi « le surmenage pour les uns et la misère pour les autres ».</p></div>
+      <h4>Exemples : que faire de ce temps libre ?</h4>
+      <ul>
+        <li><b>Cultiver les arts :</b> fréquenter les musées, aller au théâtre ou au concert, pratiquer la peinture, la musique, l’écriture.</li>
+        <li><b>S’adonner à ses passions :</b> le jardinage, la photographie, la cuisine, le bricolage, un sport ou un artisanat choisi pour lui-même.</li>
+        <li><b>Chercher à comprendre :</b> lire, suivre des conférences, étudier une langue, observer le ciel ou la nature, s’initier aux sciences.</li>
+        <li><b>Penser et discuter :</b> débattre entre amis, participer à la vie de la cité, à une association.</li>
+        <li><b>Prendre soin des autres :</b> du temps pour la famille, les amis, le bénévolat.</li>
+      </ul>
+      <p class="note">Ces exemples sont de moi, pour illustrer l’idée de Russell : il s’agit d’activités choisies et épanouissantes, à distinguer d’un simple divertissement passif.</p>
+      <h4>Une démocratisation des loisirs</h4>
+      <ul>
+        <li>La promesse de la technique et la refondation de nos modes de production et de consommation devraient permettre à tous d’accéder à la Scholè, non plus réservée à une élite.</li>
+        <li>Pas à n’importe quel prix : il ne s’agit pas de défendre une société de loisirs de masse et de divertissements, mais de repenser le loisir comme activité épanouissante, enrichissante, culturelle : cultiver les arts, la science, la pensée.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="h-tl">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-tl">Temps libre ou temps contraint ?</h2>
+      <p>Selon la distinction grecque (Scholè et Ascholia) et la distinction latine (otium et negotium), classez ces activités.</p>
+    </div>
+    <ul class="sorter" id="s1"></ul>
+    <div class="score"><p id="sc1" aria-live="polite"></p><button class="btn" id="r1" type="button">Recommencer</button></div>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="h-al">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-al">Les trois visages de l’aliénation</h2>
+      <p>Chez Marx, de quelle forme d’aliénation relève chaque situation ?</p>
+    </div>
+    <ul class="sorter" id="s2"></ul>
+    <div class="score"><p id="sc2" aria-live="polite"></p><button class="btn" id="r2" type="button">Recommencer</button></div>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="h-hg">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-hg">Qui est libre : le maître ou le serviteur ?</h2>
+      <p>Hegel : la dialectique du maître et du serviteur. Avant de regarder le texte, qui vous semble libre ?</p>
+    </div>
+    <div class="hg" id="hg">
+      <div class="person win" style="--k:var(--ab)" id="pm">
+        <h3>Le maître</h3>
+        <span class="st notfree">Libre en apparence</span><span class="st free">Dépendant</span>
+        <ul>
+          <li class="before">Il consomme la chose préparée par l’esclave et en jouit.</li>
+          <li class="before">Il semble libre vis-à-vis de la nature.</li>
+          <li class="after">Il ne produit rien de stable en dehors de lui.</li>
+          <li class="after">Il détruit seulement les produits du travail de l’autre.</li>
+          <li class="after">Sa jouissance reste purement subjective : elle n’a pas de réalité objective, et ne peut être reconnue que par lui.</li>
+        </ul>
+      </div>
+      <div class="person win" style="--k:var(--em)" id="ps">
+        <h3>Le serviteur</h3>
+        <span class="st notfree" style="background:var(--al)">Asservi en apparence</span><span class="st free">Libre</span>
+        <ul>
+          <li class="before">Il travaille, asservi à la nature, à la matière première.</li>
+          <li class="before">Il travaille pour un autre que lui.</li>
+          <li class="after">Il refoule son désir : il s’éduque, « cultive » et « sublime » ses instincts.</li>
+          <li class="after">Il imprime la marque de sa conscience sur les choses et se confronte à leur résistance.</li>
+          <li class="after">Dans le travail, il transforme les choses et se transforme lui-même.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="hgctl">
+      <button class="btn primary" id="hgb" type="button" aria-pressed="false">Renverser la dialectique</button>
+      <p class="hgmsg" id="hgm" aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="h-aw">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-aw">Travail ou œuvre ?</h2>
+      <p>Arendt distingue le travail (<i>labor</i>), processus sans fin de production de biens de consommation, et l’œuvre (<i>work</i>), qui produit des objets durables. Les exemples sont proposés pour illustrer la distinction.</p>
+    </div>
+    <ul class="sorter" id="s3"></ul>
+    <div class="score"><p id="sc3" aria-live="polite"></p><button class="btn" id="r3" type="button">Recommencer</button></div>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="h-ru">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-ru">Une journée à la manière de Russell</h2>
+      <p>Russell propose de ramener les heures de travail à quatre. Faites varier la durée du travail pour voir ce qu’il reste de temps pour le reste.</p>
+    </div>
+    <div class="day">
+      <label for="wh" style="font:600 1rem/1.4 var(--sans)">Heures de travail par jour : <span id="whv">4</span> h</label>
+      <input type="range" id="wh" min="0" max="12" value="8" step="1">
+      <div class="dbar" aria-hidden="true"><div class="w" id="dw">Travail</div><div class="s" id="ds">Sommeil et besoins</div><div class="f" id="df">Temps libre</div></div>
+      <p class="note" id="dtxt" style="margin:.4rem 0 0" aria-live="polite"></p>
+      <div id="idees" style="margin-top:1rem" hidden>
+        <p style="font:700 .95rem/1.4 var(--sans);margin:0 0 .5rem">Avec ce temps libre, on pourrait par exemple :</p>
+        <ul class="chips" style="list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.4rem;font:600 .92rem/1.3 var(--sans)">
+          <li>fréquenter des musées</li><li>s’adonner à ses passions</li><li>lire et apprendre</li><li>pratiquer un art ou un sport</li><li>débattre avec ses amis</li><li>participer à la vie de la cité</li><li>voir ses proches</li>
+        </ul>
+      </div>
+      <p class="note" style="margin:.8rem 0 0">Repère indicatif : on suppose ici 8 heures de sommeil et de besoins vitaux. Le chiffre est ma simplification, pas celle du cours.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="h-ret">
+  <div class="wrap">
+    <h2 id="h-ret" style="margin-bottom:1.2rem">Conclusion et à retenir</h2>
+    <ul class="recap">
+      <li><b>Le travail oscille entre aliénation et émancipation.</b> Aliénation, car il est une contrainte, une forme de souffrance ; émancipation, car il est l’affirmation objective dans le monde réel d’une pensée, d’une conscience.</li>
+      <li><b>Mais il semble perdre son sens :</b> <i>bullshit jobs</i>, dépressions, burn-out, aspiration à un meilleur équilibre entre vie privée et vie professionnelle.</li>
+      <li><b>Peut-être faut-il le repenser</b> et nous concentrer sur le temps libre, sur une activité productrice, intellectuelle, artistique, culturelle : laisser aux machines ou aux IA le travail, pour nous concentrer sur ce qui fait notre plus-value, l’intelligence et la réflexion.</li>
+    </ul>
+  </div>
+</section>
+</main>
+
+<nav class="pn" aria-label="Pages de la section Travail"><a class="nx" href="le-travail.html" rel="next"><small>Page suivante →</small><b>Le travail</b></a><a class="hm" href="accueil.html">Retour à l’accueil</a></nav>
+<footer><div class="wrap"><p>Page réalisée à partir du cours « Le travail ». Les citations sont de courts extraits. Les exercices, leurs corrections et le curseur de la journée et les exemples de loisirs sont rédigés pour cette page.</p></div></footer>
+
+<script>
+(function(){
+  function $(s){return document.querySelector(s)}
+
+  /* Balance */
+  var bal=$('#bal');
+  function setBal(){var v=+bal.value;$('#c1').style.opacity=.35+.65*(1-v/100);$('#c2').style.opacity=.35+.65*(v/100)}
+  bal.addEventListener('input',setBal);setBal();
+
+  /* Onglets */
+  var tabs=[].slice.call(document.querySelectorAll('[role=tab]'));
+  function sel(t){tabs.forEach(function(x){var on=x===t;x.setAttribute('aria-selected',on);x.tabIndex=on?0:-1;document.getElementById(x.getAttribute('aria-controls')).hidden=!on})}
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){sel(t)});
+    t.addEventListener('keydown',function(e){
+      var n=e.key==='ArrowRight'?i+1:e.key==='ArrowLeft'?i-1:null;
+      if(n===null)return;e.preventDefault();n=(n+tabs.length)%tabs.length;tabs[n].focus();sel(tabs[n]);
+    });
+  });
+
+  /* Tri */
+  function sorter(listSel,scoreSel,resetSel,items,choices){
+    var list=$(listSel),sc=$(scoreSel),rows=[],done=0,right=0;
+    items.forEach(function(it){
+      var li=document.createElement('li');li.className='row';
+      li.innerHTML='<span class="name"></span><div class="pick" role="group"></div><p class="fb" hidden aria-live="polite"></p>';
+      li.querySelector('.name').textContent=it[0];
+      var pick=li.querySelector('.pick'),fb=li.querySelector('.fb'),bs=[];
+      pick.setAttribute('aria-label',it[0]);
+      choices.forEach(function(c,k){
+        var b=document.createElement('button');b.type='button';b.textContent=c[0];b.style.setProperty('--c',c[1]);b.setAttribute('aria-pressed','false');
+        b.addEventListener('click',function(){
+          if(li.classList.contains('good')||li.classList.contains('bad'))return;
+          var ok=k===it[1];
+          b.setAttribute('aria-pressed','true');bs.forEach(function(x){x.disabled=true});
+          li.classList.add(ok?'good':'bad');fb.hidden=false;
+          fb.textContent=(ok?'Bien vu. ':'Pas tout à fait. ')+it[2];
+          done++;if(ok)right++;upd();
+        });
+        pick.appendChild(b);bs.push(b);
+      });
+      list.appendChild(li);rows.push(li);
+    });
+    function upd(){
+      var n=items.length,s=function(x){return x>1?'s':''};
+      sc.textContent=!done?n+' à classer.':done<n?done+' classé'+s(done)+' sur '+n+' : '+right+' bonne'+s(right)+' réponse'+s(right)+'.':'Terminé : '+right+' bonne'+s(right)+' réponse'+s(right)+' sur '+n+'.';
+    }
+    $(resetSel).addEventListener('click',function(){
+      rows.forEach(function(li){li.classList.remove('good','bad');li.querySelector('.fb').hidden=true;
+        [].forEach.call(li.querySelectorAll('button'),function(b){b.disabled=false;b.setAttribute('aria-pressed','false')})});
+      done=0;right=0;upd();
+    });
+    upd();
+  }
+
+  sorter('#s1','#sc1','#r1',[
+   ['La philosophie',0,'Temps libre : c’est, avec la politique, le temps de la Scholè.'],
+   ['Le travail de l’esclave ou de l’artisan',1,'Temps contraint (Ascholia) : un temps servile, soumis à la nécessité.'],
+   ['La vie politique, chez Aristote',0,'Temps libre : seul celui qui est libéré de la nécessité peut s’y consacrer.'],
+   ['Lecture, écriture, discussions entre amis',0,'Otium : un temps plein d’activités, mais non contraintes.'],
+   ['Le commerce',1,'Negotium : la négation de l’otium, les activités contraintes.'],
+   ['La gestion des affaires courantes de la cité, chez les Latins',1,'Negotium : contrairement au terme grec, elle relève des activités contraintes.']
+  ],[['Temps libre','var(--ab)'],['Temps contraint','var(--al)']]);
+
+  sorter('#s2','#sc2','#r2',[
+   ['L’ouvrier a l’impression d’être « en dehors de soi » quand il travaille et « chez lui » quand il ne travaille pas.',0,'Aliénation subjective : une expérience vécue de mal-être.'],
+   ['Un contrat de travail est signé librement, mais il faut bien gagner son pain.',1,'Aliénation par la contrainte : la liberté n’est qu’apparente, la nécessité économique pousse à travailler.'],
+   ['Pendant ses heures de travail, l’ouvrier et le produit de son travail appartiennent à l’employeur.',2,'Marchandisation : la force de travail devient la propriété d’un autre.'],
+   ['L’ouvrier ne se reconnaît pas dans le produit de son activité, mais s’y perd.',0,'Aliénation subjective : une forme de dépossession.'],
+   ['Quota, timing, productivité : la liberté est suspendue pendant le temps de travail.',2,'Marchandisation : on est soumis à des finalités extérieures.']
+  ],[['Subjective','var(--al)'],['Par la contrainte','var(--gold)'],['Marchandisation','var(--ab)']]);
+
+  sorter('#s3','#sc3','#r3',[
+   ['Préparer chaque jour les repas du lendemain',0,'Travail (labor) : un processus de production de biens de consommation, en perpétuel recommencement.'],
+   ['Construire un pont qui servira des générations',1,'Œuvre (work) : un objet durable qui transforme le monde.'],
+   ['Écrire un livre',1,'Œuvre : il résiste au temps, selon l’idée d’Arendt de l’homo faber.'],
+   ['Laver le linge chaque semaine',0,'Travail : une activité qui consomme ses propres produits et doit sans cesse recommencer.']
+  ],[['Travail (labor)','var(--al)'],['Œuvre (work)','var(--em)']]);
+
+  /* Maître / serviteur */
+  var hg=$('#hg'),hb=$('#hgb'),hm=$('#hgm');
+  hb.addEventListener('click',function(){
+    var f=hg.classList.toggle('flipped');
+    hb.setAttribute('aria-pressed',f);
+    hb.textContent=f?'Revenir à l’apparence':'Renverser la dialectique';
+    hm.textContent=f?'La position initiale se retourne : c’est le serviteur qui est libre.':'';
+  });
+
+  /* Journée */
+  var wh=$('#wh');
+  function day(){
+    var w=+wh.value,s=8,f=Math.max(0,24-w-s);
+    $('#whv').textContent=w;
+    $('#dw').style.flex='0 0 '+(w/24*100)+'%';$('#dw').textContent=w>=2?'Travail '+w+' h':'';
+    $('#ds').style.flex='0 0 '+(s/24*100)+'%';
+    $('#df').style.flex='1 1 0';$('#df').textContent=f>=2?'Temps libre '+f+' h':'';
+    $('#idees').hidden=f<3;
+    $('#dtxt').textContent='Travail : '+w+' h. Sommeil et besoins : '+s+' h. Temps libre : '+f+' h.'+(w===4?' C’est la proposition de Russell : le temps restant est employé par chacun comme il l’entend.':'');
+  }
+  wh.addEventListener('input',day);day();
+})();
+</script>
+</body>
+</html>

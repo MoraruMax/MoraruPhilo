@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Le devoir : que dois-je faire ?</title>
+<style>
+:root{
+  color-scheme:light;
+  --bg:#F7F4EF; --surface:#FFFFFF; --ink:#1E1A16; --muted:#5E564D; --line:#DED6CB; --focus:#0B5CAD; --on:#FFFFFF;
+  --soc:#9A3412; --soc-soft:#FBE7DC;
+  --nat:#1B6B4A; --nat-soft:#DDF1E7;
+  --rai:#2B4C9B; --rai-soft:#E1E8F8;
+  --gold:#8A5A00; --bad:#B3261E;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --serif:Charter,"Bitstream Charter","Sitka Text",Cambria,Georgia,serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#16130F; --surface:#211D18; --ink:#F2ECE4; --muted:#B5AA9C; --line:#3A332B; --focus:#8CC2FF; --on:#16130F;
+    --soc:#FF9E6B; --soc-soft:#45220F; --nat:#74DDA7; --nat-soft:#143826; --rai:#9DB8FF; --rai-soft:#1C2A52; --gold:#F2C36B; --bad:#FF8F86;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#16130F; --surface:#211D18; --ink:#F2ECE4; --muted:#B5AA9C; --line:#3A332B; --focus:#8CC2FF; --on:#16130F;
+  --soc:#FF9E6B; --soc-soft:#45220F; --nat:#74DDA7; --nat-soft:#143826; --rai:#9DB8FF; --rai-soft:#1C2A52; --gold:#F2C36B; --bad:#FF8F86;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.1rem/1.65 var(--serif)}
+.wrap{width:min(980px,100% - 2.5rem);margin-inline:auto}
+h1,h2,h3{margin:0}
+h1{font:800 clamp(2.6rem,8vw,5rem)/1.02 var(--sans);letter-spacing:-.025em}
+h2{font:800 clamp(1.5rem,3.2vw,2.1rem)/1.2 var(--sans);margin-bottom:.8rem}
+h3{font:700 1.08rem/1.35 var(--sans)}
+p{margin:0 0 1em}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
+.btn{font:600 .95rem/1.2 var(--sans);color:var(--ink);background:transparent;border:1.5px solid var(--ink);border-radius:8px;padding:.65rem 1rem;cursor:pointer}
+.btn:hover{background:var(--line)}
+.btn.primary{background:var(--ink);color:var(--bg)}
+.btn.primary:hover{background:var(--ink);filter:brightness(1.2)}
+.note{font:500 .92rem/1.5 var(--sans);color:var(--muted)}
+section.block{border-top:1px solid var(--line);padding:clamp(2.2rem,6vw,3.8rem) 0}
+.sec-head{max-width:46rem;margin-bottom:1.6rem}
+.src{font:600 .85rem/1.35 var(--sans);color:var(--muted)}
+blockquote{margin:0}
+
+/* Hero */
+.hero{padding:clamp(2rem,6vw,4rem) 0 clamp(2rem,5vw,3rem)}
+.hgrid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:2rem clamp(2rem,5vw,4rem);align-items:center}
+.lead{font-size:clamp(1.2rem,2.4vw,1.45rem);line-height:1.5;margin:1.3rem 0 0;max-width:34ch}
+.must{background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--ink);padding:1.2rem 1.3rem}
+.must p{margin:0 0 .7rem;font-size:1.05rem}
+.must .q{font:700 1.3rem/1.3 var(--serif)}
+.must .chain{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;margin:.8rem 0}
+.must .chain span{font:700 .85rem/1.2 var(--sans);padding:.35rem .55rem;background:var(--bg);border:1px solid var(--line)}
+.must .chain i{font-style:normal;color:var(--muted)}
+
+/* Questions */
+.qs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+.qc{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--k);padding:1rem 1.2rem}
+.qc h3{color:var(--k);margin-bottom:.4rem}
+.qc p{margin:0;font-size:1rem}
+
+/* Parcours */
+.path{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem;margin-bottom:1rem}
+.path button{font:700 .98rem/1.3 var(--sans);text-align:left;color:var(--ink);background:var(--surface);border:2px solid var(--line);border-radius:8px;padding:.8rem .9rem;cursor:pointer}
+.path button small{display:block;font:600 .8rem/1.3 var(--sans);color:var(--muted);margin-top:.15rem}
+.path button[aria-selected="true"]{border-color:var(--k);background:var(--ks)}
+.panel{background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--k);padding:clamp(1rem,3vw,1.7rem)}
+.panel[hidden]{display:none}
+.panel > h3{font-size:1.3rem;color:var(--k);margin-bottom:.3rem}
+.panel .thesis{font:700 1.2rem/1.35 var(--serif);margin:.2rem 0 1rem}
+.panel h4{font:800 .8rem/1 var(--sans);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin:1.3rem 0 .5rem}
+.panel ul{margin:0;padding-left:1.15rem}
+.panel li{margin-bottom:.5rem;font-size:1.02rem}
+.auth{background:var(--ks);border-left:5px solid var(--k);padding:.8rem 1rem;margin:0 0 .8rem}
+.auth b{font:700 .95rem/1.3 var(--sans);color:var(--k);display:block;margin-bottom:.25rem}
+.auth blockquote{font-size:1rem;font-style:italic;margin:.3rem 0}
+.auth p{margin:.3rem 0 0;font-size:1rem}
+.lim{background:var(--bg);border-left:5px solid var(--gold);padding:.8rem 1rem;font:500 .98rem/1.55 var(--sans)}
+.lim b{color:var(--gold)}
+
+/* Sorters */
+.sorter{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.5rem 1rem;align-items:center;padding:.8rem 0;border-bottom:1px solid var(--line)}
+.row .name{font:600 1rem/1.45 var(--sans)}
+.row .name i{font:italic 400 1rem/1.45 var(--serif)}
+.pick{display:flex;flex-wrap:wrap;gap:.4rem}
+.pick button{font:700 .9rem/1.15 var(--sans);color:var(--ink);background:var(--surface);border:2px solid var(--line);border-radius:8px;padding:.55rem .75rem;cursor:pointer}
+.pick button[disabled]{cursor:default}
+.pick button:hover:not([disabled]){border-color:var(--c)}
+.pick button[aria-pressed="true"]{background:var(--c);border-color:var(--c);color:var(--on)}
+.fb{grid-column:1/-1;margin:0;font:500 .95rem/1.45 var(--sans);padding:.5rem .8rem;border-left:5px solid var(--line);background:var(--surface)}
+.fb[hidden]{display:none}
+.row.good .fb{border-left-color:var(--nat)} .row.bad .fb{border-left-color:var(--bad)}
+.score{display:flex;flex-wrap:wrap;gap:.8rem 1.2rem;align-items:center;margin-top:1.1rem}
+.score p{margin:0;font:600 1rem/1.4 var(--sans);flex:1 1 16rem}
+
+/* Test d'universalisation */
+.lab{background:var(--surface);border:1px solid var(--line);padding:clamp(1rem,3vw,1.6rem)}
+.maxims{display:flex;flex-wrap:wrap;gap:.5rem;margin:.8rem 0 1.2rem}
+.maxims button{font:600 .98rem/1.3 var(--sans);color:var(--ink);background:var(--bg);border:2px solid var(--line);border-radius:8px;padding:.7rem .95rem;cursor:pointer;text-align:left}
+.maxims button[aria-pressed="true"]{border-color:var(--rai);background:var(--rai-soft)}
+.world{display:grid;grid-template-columns:repeat(8,1fr);gap:.4rem;max-width:30rem;margin:.6rem 0 1rem}
+.world span{aspect-ratio:1;border-radius:50%;background:var(--rai);opacity:.85;display:flex;align-items:center;justify-content:center;font:700 .8rem/1 var(--sans);color:var(--on)}
+.world.broken span{background:var(--bad);opacity:.7}
+@media (prefers-reduced-motion:no-preference){.world span{transition:background .4s,opacity .4s}}
+.steps{margin:0;padding:0;list-style:none;counter-reset:s}
+.steps li{counter-increment:s;display:grid;grid-template-columns:2rem 1fr;gap:.5rem;padding:.5rem 0;border-top:1px solid var(--line);font:500 1rem/1.5 var(--sans)}
+.steps li::before{content:counter(s);font:800 1.3rem/1 var(--sans);color:var(--rai)}
+.steps[hidden]{display:none}
+.verdict{margin:1rem 0 0;padding:.8rem 1rem;border-left:6px solid var(--bad);background:var(--bg);font:600 1rem/1.5 var(--sans)}
+.verdict[hidden]{display:none}
+
+/* Dilemme */
+.dil{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.opt{background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--k);padding:1rem 1.2rem;font:500 1rem/1.55 var(--sans)}
+.opt h3{color:var(--k);margin-bottom:.4rem}
+.opt ul{margin:.4rem 0 .8rem;padding-left:1.1rem}
+.opt li{margin-bottom:.35rem}
+.opt .m{font-weight:700}
+.pickd{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+.after{margin-top:1rem;padding:1rem 1.2rem;background:var(--surface);border-left:6px solid var(--gold);font:500 1rem/1.55 var(--sans)}
+.after[hidden]{display:none}
+
+/* Fil */
+.recap{margin:0;padding:0;list-style:none;max-width:48rem}
+.recap li{padding:.9rem 0;border-top:1px solid var(--line)}
+.recap li:last-child{border-bottom:1px solid var(--line)}
+.recap b{font-family:var(--sans)}
+footer{padding:1.6rem 0 2.5rem;font:500 .9rem/1.5 var(--sans);color:var(--muted)}
+footer p{margin:0}
+@media (max-width:820px){
+  .hgrid,.qs,.dil{grid-template-columns:1fr}
+  .path{grid-template-columns:1fr}
+  .row{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
+
+.pdfbtn{display:inline-flex;align-items:center;gap:.5rem;font:600 .88rem/1 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--surface);border:1.5px solid var(--ink);border-radius:999px;padding:.55rem .95rem;cursor:pointer}
+.pdfbtn:hover{background:var(--ink);color:var(--bg)}.pdfbtn:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:2px}
+@media print{
+  :root{--bg:#fff!important;--surface:#fff!important;--ink:#111!important;--muted:#444!important;--line:#bbb!important;color-scheme:light!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:#fff!important;color:#111!important}
+  body::before,body::after{display:none!important}
+  nav,.pdfbtn,.pn,video,section[aria-labelledby="h-video"]{display:none!important}
+  .rev,.js .rev{opacity:1!important;transform:none!important}
+  .stp li[hidden]{display:list-item!important}
+  details>*{display:block!important}
+  article,li,.card,figure,.stage{break-inside:avoid}
+  h1,h2,h3{break-after:avoid;text-shadow:none!important}
+  *{text-shadow:none!important}
+  a{color:inherit;text-decoration:none}
+  section.block,.part{padding-top:1.2rem!important;padding-bottom:1.2rem!important}
+  footer{break-before:avoid;border-top:1px solid #999;margin-top:1rem}
+}
+@page{size:A4;margin:16mm 14mm}
+</style>
+</head>
+<body>
+<nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
+
+<header class="hero">
+  <div class="wrap hgrid">
+    <div>
+      <h1>Le devoir</h1>
+      <p class="lead">Que dois-je faire, et d’où vient ce « je dois » ? Du troupeau, de ma nature, ou de ma raison ?</p>
+    </div>
+    <div class="must">
+      <p class="src">Wittgenstein, <i>Manifeste du Cercle de Vienne et autres écrits</i></p>
+      <p class="q">« Un “doit” est en soi dépourvu de sens. »</p>
+      <p>« Un enfant doit faire telle chose » signifie : s’il ne le fait pas, telle chose désagréable va se produire. Récompense et punition : il faut que quelque chose se tienne derrière le « doit » pour lui donner une force.</p>
+      <div class="chain" aria-label="Le devoir selon Wittgenstein"><span>« Tu dois »</span><i>→</i><span>sinon, punition</span><i>→</i><span>force du « doit »</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="block" aria-labelledby="h-pb">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-pb">Un devoir, c’est d’abord une contrainte</h2>
+      <p>Nous avons des devoirs, nous devons accomplir notre devoir, sous peine de conséquences souvent néfastes ou de punitions : l’élève qui ne fait pas ses « devoirs », le citoyen qui ne remplit pas ses « devoirs civiques », l’homme qui n’accomplit pas son « devoir moral ». Et le devoir n’est pas toujours aisé : la bonne action n’est pas toujours celle qui nous arrange le plus. D’où trois difficultés.</p>
+    </div>
+    <div class="qs">
+      <div class="qc" style="--k:var(--soc)"><h3>1. Nos motivations</h3><p>Celui qui agit par devoir mais parce que ça l’arrange remplit-il véritablement son devoir ? Faut-il distinguer l’action effectuée <b>par</b> devoir de l’action simplement <b>conforme</b> au devoir ?</p></div>
+      <div class="qc" style="--k:var(--nat)"><h3>2. Les niveaux de devoir</h3><p>Devoir envers soi-même, envers les autres citoyens, envers autrui, envers l’humanité : peut-on distinguer plusieurs « niveaux » de devoir ?</p></div>
+      <div class="qc" style="--k:var(--rai)"><h3>3. L’origine du devoir</h3><p>D’où provient-il ? Un sentiment hérité de la nature (Rousseau) ? Un travail de la raison, qui en fait une loi morale objective (Kant) ? L’équivalent des mœurs, et donc le relativisme des valeurs (Nietzsche) ? Alors le devoir est-il éminemment social et politique (Durkheim) ?</p></div>
+      <div class="qc" style="--k:var(--gold)"><h3>La question du cours</h3><p>Comment comprendre le devoir, et comment faire notre devoir, c’est-à-dire faire la bonne chose ?</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="h-parc">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-parc">Trois sources possibles du devoir</h2>
+      <p>Le cours parcourt trois réponses. Chacune se heurte à une difficulté, qui conduit à la suivante.</p>
+    </div>
+    <div class="path" role="tablist" aria-label="Les trois sources">
+      <button role="tab" id="pt-1" aria-selected="true" aria-controls="pp-1" type="button" style="--k:var(--soc);--ks:var(--soc-soft)">I. La société<small>La généalogie de la morale</small></button>
+      <button role="tab" id="pt-2" aria-selected="false" aria-controls="pp-2" type="button" tabindex="-1" style="--k:var(--nat);--ks:var(--nat-soft)">II. La nature humaine<small>Le sentiment, la pitié</small></button>
+      <button role="tab" id="pt-3" aria-selected="false" aria-controls="pp-3" type="button" tabindex="-1" style="--k:var(--rai);--ks:var(--rai-soft)">III. La raison<small>Kant</small></button>
+    </div>
+
+    <!-- I -->
+    <div class="panel" id="pp-1" role="tabpanel" aria-labelledby="pt-1" style="--k:var(--soc);--ks:var(--soc-soft)">
+      <h3>I. La généalogie de la morale</h3>
+      <p class="thesis">Le devoir vient des mœurs : est moral ce qui est conforme aux habitudes d’une société.</p>
+      <div class="auth"><b>Durkheim, <i>L’éducation morale</i></b><blockquote>« Quand notre conscience parle, c’est la société qui parle en nous. »</blockquote><p>La conscience morale est l’œuvre de la société, et le ton impératif dont elle nous parle prouve l’autorité exceptionnelle dont celle-ci est investie.</p></div>
+      <div class="auth"><b>Nietzsche, <i>Le Gai Savoir</i>, <i>Aurore</i></b>
+        <ul>
+          <li>Nous tenons les valeurs morales pour des évidences, comme si la morale était une donnée naturelle. Nietzsche veut briser cette représentation : les valeurs ne sont pas absolues, elles sont le résultat d’une histoire et le produit d’une société. Le « Bien » diffère d’une société à l’autre.</li>
+          <li><b>Morale du troupeau :</b> le « bien » est ce qui est conforme à la normalité, à l’habitude ; à la base du jugement moral, il y a la crainte de ce qui sort de l’ordinaire et un besoin de sécurité. « La moralité est l’instinct du troupeau dans l’individu. »</li>
+          <li>« La moralité n’est rien d’autre que l’obéissance aux mœurs, quelles qu’elles soient. » L’homme libre est « immoral » : il veut tout tenir de lui-même et non d’une tradition.</li>
+        </ul>
+      </div>
+      <h4>Le dressage</h4>
+      <ul>
+        <li>Si le « bien » est le régulier, le « mal » est l’imprévisible et le sauvage : les mœurs cherchent à domestiquer les pulsions. C’est une <b>morale du dressage</b>.</li>
+        <li>L’histoire de la morale est d’abord une histoire de la cruauté : la norme se rappelle par la punition, par la souffrance infligée au corps, pour créer à l’homme une mémoire. « Seul ce qui ne cesse de faire souffrir reste dans la mémoire » (<i>Généalogie de la morale</i>).</li>
+        <li>Forme ultime du dressage : <b>l’intériorisation</b>. Les instincts qui ne peuvent s’exprimer au-dehors se retournent contre l’homme lui-même : remords, culpabilité, honte, « mauvaise conscience ». L’individu s’autocontrôle et se punit lui-même ; l’homme devient son propre bourreau.</li>
+        <li>On peut rapprocher cela de Foucault et des techniques disciplinaires (surveillance, examen, sanction) : ici l’individu organise lui-même sa surveillance, son examen de conscience et sa sanction.</li>
+      </ul>
+      <h4>Conséquence</h4>
+      <p>La morale est étroitement liée à la politique : imposer à des individus les désirs collectifs d’un groupe. C’est la thèse du <b>relativisme</b> : chaque société a ses propres normes, ce qui lui permet de fonctionner au mieux.</p>
+      <p class="lim"><b>Difficulté.</b> Nous condamnons presque tous les mêmes actes, comme le meurtre ou l’inceste. Est-ce seulement parce que cela permet à la société de fonctionner, ou faut-il postuler une norme morale absolue ?</p>
+    </div>
+
+    <!-- II -->
+    <div class="panel" id="pp-2" role="tabpanel" aria-labelledby="pt-2" style="--k:var(--nat);--ks:var(--nat-soft)" hidden>
+      <h3>II. La nature humaine comme origine de la morale</h3>
+      <p class="thesis">Est moral non ce qui est conforme aux normes d’une société, mais ce qui est conforme à la nature humaine.</p>
+      <div class="auth"><b>D’Holbach, <i>Système de la nature</i></b>
+        <p>La morale ne doit pas suivre les caprices des passions ; elle doit être stable, la même pour tous, sans varier d’un pays ou d’un temps à l’autre. Pour lui donner cette solidité, il faut la fonder sur « la nature de l’homme » : un être qui sent, pense, s’aime lui-même, tend à se conserver et vit en société pour satisfaire ses besoins. On n’a alors pas besoin de « chimères théologiques » : la morale est « la science des devoirs de l’homme vivant en société », fondée sur des « sentiments universels ».</p></div>
+      <div class="auth"><b>Rousseau, <i>Discours sur l’origine et les fondements de l’inégalité parmi les hommes</i></b>
+        <blockquote>« La pitié est un sentiment naturel qui, modérant dans chaque individu l’activité de l’amour de soi-même, concourt à la conservation mutuelle de toute l’espèce. »</blockquote>
+        <p>La pitié nous porte « sans réflexion » au secours de ceux qui souffrent ; dans l’état de nature, elle « tient lieu de lois, de mœurs et de vertu ». C’est en elle qu’il faut chercher la cause de la répugnance à mal faire, « même indépendamment des maximes de l’éducation ».</p></div>
+      <h4>Ce que cela implique</h4>
+      <ul>
+        <li>Le fondement de la morale n’est pas la raison mais un <b>sentiment</b> : la pitié, identification immédiate à la souffrance d’autrui.</li>
+        <li>Le sens moral exprime d’abord une subjectivité qui ressent une souffrance, avant toute recherche d’objectivité. La société risque plutôt de nous détourner de cette pitié naturelle.</li>
+        <li>Le sens du bien et du mal est inscrit en chaque individu ; la pitié nous rappelle l’unité de l’espèce et ce que nous avons d’universel.</li>
+      </ul>
+      <p class="lim"><b>Difficulté.</b> Si tout homme peut sentir la souffrance d’autrui, comment comprendre le mal ? Comment expliquer, malgré ce principe universel, les trop nombreux exemples d’actions sauvages et dévastatrices (l’expérience de Milgram, le cas Eichmann) ? Ne faudrait-il pas refonder la morale sur la raison, et expliquer les mauvaises actions par une faute de raisonnement ou un refus d’appliquer la raison ?</p>
+    </div>
+
+    <!-- III -->
+    <div class="panel" id="pp-3" role="tabpanel" aria-labelledby="pt-3" style="--k:var(--rai);--ks:var(--rai-soft)" hidden>
+      <h3>III. Fonder rationnellement la morale</h3>
+      <p class="thesis">La raison seule suffit à savoir ce qu’on doit faire, et sa portée est universelle.</p>
+      <p>Selon Kant, l’homme doit simplement réfléchir pour savoir ce qu’il doit faire. C’est le but de l’usage de la raison que de dépasser les particularismes. Il distingue deux sortes d’impératifs.</p>
+      <h4>A. Les impératifs hypothétiques</h4>
+      <div class="auth"><b>« Si on veut… [hypothèse], alors il faut… [impératif] »</b>
+        <p>Par exemple : « si on veut être médecin, il faut faire médecine » ; « si on veut couper du bois, il faut utiliser une scie ». Ils commandent de choisir le moyen le plus adapté à ses fins ; le critère est l’efficacité, et ce qu’on évalue, ce sont les moyens, non la finalité.</p></div>
+      <p>Ils ne peuvent pas fonder la morale, car :</p>
+      <ul>
+        <li>soit ils n’ont rien à voir avec la morale (la scie) ;</li>
+        <li>soit ils visent une fin immorale (la lettre de Willy Just sur les modifications techniques des camions à gaz) ;</li>
+        <li>soit ils réduisent l’action apparemment morale à l’intérêt (« si je veux des clients qui reviennent, il faut que je sois honnête »), à la crainte (« si je ne veux pas être puni, je respecte la loi ») ou au désir de reconnaissance. L’individu n’agit pas <b>par</b> devoir, mais seulement <b>conformément</b> au devoir : son intention n’a rien de moral.</li>
+      </ul>
+      <p><b>Par devoir ou conformément au devoir.</b> Kant prend le devoir de conserver sa propre vie. Celui qui a toutes les raisons d’aimer sa vie la conserve par amour et par intérêt, non par devoir. Celui qui a toutes les raisons de vouloir en finir mais qui continue à s’alimenter et à conserver sa santé agit véritablement par devoir.</p>
+      <h4>B. L’impératif catégorique</h4>
+      <p>Il commande sans aucune condition : il faut le faire, voilà tout. Il est universel, il s’applique à tous. Faire son devoir moral, c’est respecter une obligation intérieure (voir l’autonomie).</p>
+      <div class="auth"><b>Première formulation</b><blockquote>« Agis uniquement d’après la maxime qui fait que tu puisses vouloir en même temps qu’elle devienne une loi universelle. »</blockquote><p>Un test d’universalisation de la maxime de l’action, c’est-à-dire de son principe directeur. Essayez-le plus bas.</p></div>
+      <div class="auth"><b>Deuxième formulation</b><blockquote>« Agis de telle sorte que tu traites l’humanité aussi bien dans ta personne que dans la personne de tout autre toujours en même temps comme une fin, et jamais simplement comme un moyen. »</blockquote><p>Chaque être humain possède une valeur intrinsèque, qui fait sa dignité : on ne peut le réduire à une chose disponible et échangeable. Cette dignité repose sur son autonomie, sa capacité à poser ses propres fins. La morale se fonde donc sur la raison, non par calcul de coûts et de bénéfices, mais parce qu’elle repose sur le respect de la raison en chaque individu.</p></div>
+      <h4>Les limites</h4>
+      <ul>
+        <li><b>Eichmann</b> cite Kant et l’impératif pour justifier ses actes.</li>
+        <li><b>a)</b> La vertu ne repose-t-elle pas aussi sur une sensibilité morale, un plaisir à aider les autres, une forme de joie ou d’amour (Bergson) ?</li>
+        <li><b>b)</b> Peut-on résoudre les dilemmes moraux par des principes généraux et abstraits, ou faut-il être attentif à la particularité de chaque situation (Rawls) ?</li>
+        <li><b>c)</b> Dignité et respect de la personne sont des notions trop vagues, invoquées pour soutenir des choses contradictoires : l’euthanasie est-elle un mépris de la dignité de toute vie humaine, ou le choix de mourir dignement ? Pornographie et prostitution réduisent-elles indignement la personne à un moyen ? L’interdiction du voile protège-t-elle la dignité des femmes, ou manque-t-elle de respect pour la liberté de culte ?</li>
+      </ul>
+      <p class="lim"><b>Bilan du cours.</b> Le problème de la morale kantienne est d’être atteinte de « cécité » pour les situations particulières. C’est tout l’intérêt, et toute la difficulté, des questions morales : elles posent un cas de conscience, un dilemme.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="h-src">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-src">D’où vient le devoir selon… ?</h2>
+      <p>Pour chaque affirmation, choisissez la source du devoir qu’elle défend.</p>
+    </div>
+    <ul class="sorter" id="s1"></ul>
+    <div class="score"><p id="sc1" aria-live="polite"></p><button class="btn" id="r1" type="button">Recommencer</button></div>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="h-kant">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-kant">Par devoir, ou seulement conformément au devoir ?</h2>
+      <p>Dans chaque cas, l’action est conforme au devoir. Mais, selon Kant, est-elle accomplie par devoir ?</p>
+    </div>
+    <ul class="sorter" id="s2"></ul>
+    <div class="score"><p id="sc2" aria-live="polite"></p><button class="btn" id="r2" type="button">Recommencer</button></div>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="h-test">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-test">Le test d’universalisation</h2>
+      <p>Première formulation de l’impératif catégorique : imaginez un monde où chacun accomplit l’action, et où chacun sait que tout le monde l’accomplit.</p>
+    </div>
+    <div class="lab">
+      <p class="note" style="margin:0">Choisissez une maxime.</p>
+      <div class="maxims" role="group" aria-label="Maximes">
+        <button type="button" data-m="mentir" aria-pressed="false">Je mens quand cela m’arrange</button>
+        <button type="button" data-m="tricher" aria-pressed="false">Je triche quand cela m’avantage</button>
+      </div>
+      <div class="world" id="world" aria-hidden="true"></div>
+      <ol class="steps" id="tsteps" hidden></ol>
+      <p class="verdict" id="verd" hidden></p>
+    </div>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="h-dil">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-dil">Un cas de conscience</h2>
+      <p>Sartre, <i>L’existentialisme est un humanisme</i> : un jeune homme doit choisir entre partir pour l’Angleterre et s’engager dans les Forces Françaises Libres, en abandonnant sa mère, ou rester auprès d’elle pour l’aider à vivre. Elle ne vit que par lui ; sa disparition, peut-être sa mort, la plongerait dans le désespoir.</p>
+    </div>
+    <div class="dil">
+      <div class="opt" style="--k:var(--nat)">
+        <h3>Rester auprès de sa mère</h3>
+        <ul><li>Une action <span class="m">concrète, immédiate</span>, qui ne s’adresse qu’à un individu.</li><li>Chaque acte à l’égard de sa mère a son répondant : il l’aide à vivre.</li></ul>
+        <p class="m">Une morale de la sympathie, du dévouement individuel.</p>
+      </div>
+      <div class="opt" style="--k:var(--rai)">
+        <h3>Partir combattre</h3>
+        <ul><li>Une action qui s’adresse à un ensemble infiniment plus vaste, <span class="m">une collectivité nationale</span>.</li><li>Mais elle est ambiguë : elle peut se perdre dans les sables, se réduire à des écritures dans un bureau.</li></ul>
+        <p class="m">Une morale plus large, d’une efficacité plus contestable.</p>
+      </div>
+    </div>
+    <div class="pickd">
+      <button class="btn" id="d1" type="button">Que choisiriez-vous ?</button>
+    </div>
+    <div class="after" id="after" hidden>
+      <p><b>Qui pouvait l’aider à choisir ?</b> Le cours pose la question : comment ce jeune homme devrait-il agir, et surtout pourquoi ?</p>
+      <p style="margin:0">Le cours ne donne pas de réponse : il pose un cas de conscience. La sympathie et l’efficacité tirent chacune de leur côté, et c’est la limite relevée plus haut : peut-on résoudre un dilemme par des principes généraux et abstraits, ou faut-il être attentif à la particularité de la situation ?</p>
+    </div>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="h-ret">
+  <div class="wrap">
+    <h2 id="h-ret" style="margin-bottom:1.2rem">À retenir</h2>
+    <ul class="recap">
+      <li><b>Le devoir est d’abord vécu comme une contrainte</b> : un « doit » a besoin d’une force derrière lui (Wittgenstein).</li>
+      <li><b>Par la société</b> (Durkheim, Nietzsche) : la morale est affaire de mœurs et de dressage, intériorisé en culpabilité ; d’où le relativisme.</li>
+      <li><b>Par la nature humaine</b> (d’Holbach, Rousseau) : des sentiments universels, notamment la pitié ; mais comment alors expliquer le mal ?</li>
+      <li><b>Par la raison</b> (Kant) : impératif catégorique, agir par devoir et non seulement conformément au devoir ; mais la raison reste aveugle aux situations particulières.</li>
+      <li><b>Le dilemme</b> (Sartre) montre toute la difficulté des questions morales.</li>
+    </ul>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap"><p>Page réalisée à partir du cours « Le devoir ». Les citations sont de courts extraits. Les intitulés des exercices et leurs corrections sont rédigés pour cette page.</p></div></footer>
+
+<script>
+(function(){
+  function $(s){return document.querySelector(s)}
+  function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;')}
+
+  /* Onglets */
+  var tabs=[].slice.call(document.querySelectorAll('[role=tab]'));
+  function sel(t){tabs.forEach(function(x){var on=x===t;x.setAttribute('aria-selected',on);x.tabIndex=on?0:-1;document.getElementById(x.getAttribute('aria-controls')).hidden=!on})}
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){sel(t)});
+    t.addEventListener('keydown',function(e){
+      var n=e.key==='ArrowRight'?i+1:e.key==='ArrowLeft'?i-1:null;
+      if(n===null)return;e.preventDefault();n=(n+tabs.length)%tabs.length;tabs[n].focus();sel(tabs[n]);
+    });
+  });
+
+  /* Générateur de tri */
+  function sorter(listSel,scoreSel,resetSel,items,choices){
+    var list=$(listSel),sc=$(scoreSel),rows=[],done=0,right=0;
+    items.forEach(function(it){
+      var li=document.createElement('li');li.className='row';
+      li.innerHTML='<span class="name"></span><div class="pick" role="group"></div><p class="fb" hidden aria-live="polite"></p>';
+      li.querySelector('.name').innerHTML=it[0];
+      var pick=li.querySelector('.pick'),fb=li.querySelector('.fb'),bs=[];
+      pick.setAttribute('aria-label',li.querySelector('.name').textContent);
+      choices.forEach(function(c,k){
+        var b=document.createElement('button');b.type='button';b.textContent=c[0];b.style.setProperty('--c',c[1]);b.setAttribute('aria-pressed','false');
+        b.addEventListener('click',function(){
+          if(li.classList.contains('good')||li.classList.contains('bad'))return;
+          var ok=k===it[1];
+          b.setAttribute('aria-pressed','true');bs.forEach(function(x){x.disabled=true});
+          li.classList.add(ok?'good':'bad');fb.hidden=false;
+          fb.textContent=(ok?'Bien vu. ':'Pas tout à fait. ')+it[2];
+          done++;if(ok)right++;upd();
+        });
+        pick.appendChild(b);bs.push(b);
+      });
+      list.appendChild(li);rows.push(li);
+    });
+    function upd(){
+      var n=items.length,s=function(x){return x>1?'s':''};
+      sc.textContent=!done?n+' à classer.':done<n?done+' classé'+s(done)+' sur '+n+' : '+right+' bonne'+s(right)+' réponse'+s(right)+'.':'Terminé : '+right+' bonne'+s(right)+' réponse'+s(right)+' sur '+n+'.';
+    }
+    $(resetSel).addEventListener('click',function(){
+      rows.forEach(function(li){li.classList.remove('good','bad');li.querySelector('.fb').hidden=true;
+        [].forEach.call(li.querySelectorAll('button'),function(b){b.disabled=false;b.setAttribute('aria-pressed','false')})});
+      done=0;right=0;upd();
+    });
+    upd();
+  }
+
+  sorter('#s1','#sc1','#r1',[
+   ['<i>« Quand notre conscience parle, c’est la société qui parle en nous. »</i>',0,'Durkheim : la conscience morale est l’œuvre de la société.'],
+   ['<i>« La moralité est l’instinct du troupeau dans l’individu. »</i>',0,'Nietzsche : la morale est celle du troupeau ; elle naît de la société et de ses mœurs.'],
+   ['<i>La pitié nous porte, sans réflexion, au secours de ceux que nous voyons souffrir.</i>',1,'Rousseau : le fondement du devoir est un sentiment naturel, la pitié.'],
+   ['<i>La morale doit se fonder sur la nature de l’homme et sur des sentiments universels, sans chimères théologiques.</i>',1,'D’Holbach : la morale se fonde sur la nature humaine.'],
+   ['<i>L’homme doit simplement réfléchir pour savoir ce qu’il doit faire.</i>',2,'Kant : la raison suffit à découvrir le devoir, avec une portée universelle.'],
+   ['<i>Chaque société a ses propres normes morales : le bien diffère d’une société à l’autre.</i>',0,'C’est la thèse du relativisme, qui découle de la généalogie de la morale.']
+  ],[['La société','var(--soc)'],['La nature humaine','var(--nat)'],['La raison','var(--rai)']]);
+
+  sorter('#s2','#sc2','#r2',[
+   ['Un commerçant rend la monnaie exacte à ses clients parce que « s’il veut des clients qui reviennent, il faut qu’il soit honnête ».',1,'Conformément au devoir seulement : l’intention est l’intérêt, pas le devoir.'],
+   ['Une personne qui n’a que des raisons d’aimer sa vie en prend soin, par amour de la vie.',1,'Elle conserve sa vie conformément au devoir, mais par amour et par intérêt (exemple de Kant).'],
+   ['Une personne qui a toutes les raisons de vouloir en finir continue pourtant à s’alimenter et à conserver sa santé.',0,'Par devoir : c’est l’exemple de Kant. Aucune inclination ne l’y pousse.'],
+   ['Quelqu’un respecte une loi pour ne pas être puni.',1,'Conformément au devoir seulement : l’action est motivée par la crainte.'],
+   ['Quelqu’un donne à des associations pour être bien vu des autres.',1,'Conformément au devoir seulement : l’action est motivée par le désir de reconnaissance.']
+  ],[['Par devoir','var(--rai)'],['Seulement conforme au devoir','var(--soc)']]);
+
+  /* Test d'universalisation */
+  var W=$('#world');
+  for(var i=0;i<32;i++){var s=document.createElement('span');W.appendChild(s)}
+  var M={
+   mentir:{
+    steps:['Maxime : « je mens quand cela m’arrange ».','Imaginons un monde où chacun ment, et où chacun sait que tout le monde ment.','Le mensonge n’est possible que si les autres croient que ce que vous racontez est vrai.','Dans ce monde, plus personne ne croit la parole d’autrui : le mensonge devient impossible.'],
+    v:'La maxime se détruit elle-même : elle n’est pas universalisable. L’individu s’accorde un statut d’exception par rapport à une règle qu’il suppose suivie par les autres. L’action ne doit donc pas être accomplie.'},
+   tricher:{
+    steps:['Maxime : « je triche quand cela m’avantage ».','Imaginons un monde où chacun triche, et où chacun sait que tout le monde triche.','Tricher suppose des règles que les autres respectent : sinon, il n’y a plus rien à contourner.','Dans ce monde, la tricherie devient impossible.'],
+    v:'Là encore, la maxime n’est pas universalisable : elle suppose que les autres suivent la règle que l’on enfreint. Selon Kant, la procédure est simple : pas besoin de calculer les conséquences globales.'}
+  };
+  var ts=$('#tsteps'),vd=$('#verd'),mb=[].slice.call(document.querySelectorAll('.maxims button')),timer=[];
+  mb.forEach(function(b){
+    b.addEventListener('click',function(){
+      mb.forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
+      timer.forEach(clearTimeout);timer=[];
+      var d=M[b.dataset.m];
+      W.classList.remove('broken');
+      ts.hidden=false;ts.innerHTML='';vd.hidden=true;
+      var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+      d.steps.forEach(function(t,k){
+        function add(){
+          var li=document.createElement('li');li.textContent=t;ts.appendChild(li);
+          if(k===d.steps.length-1){W.classList.add('broken');vd.textContent=d.v;vd.hidden=false}
+        }
+        if(reduce)add();else timer.push(setTimeout(add,k*900));
+      });
+    });
+  });
+
+  /* Dilemme */
+  $('#d1').addEventListener('click',function(){var a=$('#after');a.hidden=!a.hidden;this.textContent=a.hidden?'Que choisiriez-vous ?':'Masquer'});
+})();
+</script>
+</body>
+</html>

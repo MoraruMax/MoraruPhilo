@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Arendt : animal laborans et homo faber</title>
+<style>
+:root{
+  color-scheme:light;
+  --bg:#F7F4EF; --surface:#FFFFFF; --ink:#1E1A16; --muted:#5E564D; --line:#DED6CB; --focus:#0B5CAD; --on:#FFFFFF;
+  --soc:#9A3412; --soc-soft:#FBE7DC;
+  --nat:#1B6B4A; --nat-soft:#DDF1E7;
+  --rai:#2B4C9B; --rai-soft:#E1E8F8;
+  --gold:#8A5A00; --gold-soft:#F6E8C8; --bad:#B3261E;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --serif:Charter,"Bitstream Charter","Sitka Text",Cambria,Georgia,serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#16130F; --surface:#211D18; --ink:#F2ECE4; --muted:#B5AA9C; --line:#3A332B; --focus:#8CC2FF; --on:#16130F;
+    --soc:#FF9E6B; --soc-soft:#45220F; --nat:#74DDA7; --nat-soft:#143826; --rai:#9DB8FF; --rai-soft:#1C2A52; --gold:#F2C36B; --gold-soft:#3F3112; --bad:#FF8F86;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#16130F; --surface:#211D18; --ink:#F2ECE4; --muted:#B5AA9C; --line:#3A332B; --focus:#8CC2FF; --on:#16130F;
+  --soc:#FF9E6B; --soc-soft:#45220F; --nat:#74DDA7; --nat-soft:#143826; --rai:#9DB8FF; --rai-soft:#1C2A52; --gold:#F2C36B; --gold-soft:#3F3112; --bad:#FF8F86;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.1rem/1.65 var(--serif)}
+.wrap{width:min(980px,100% - 2.5rem);margin-inline:auto}
+h1,h2,h3{margin:0}
+h1{font:800 clamp(2.6rem,8vw,5rem)/1.02 var(--sans);letter-spacing:-.025em}
+h2{font:800 clamp(1.5rem,3.2vw,2.1rem)/1.2 var(--sans);margin-bottom:.8rem}
+h3{font:700 1.08rem/1.35 var(--sans)}
+p{margin:0 0 1em}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
+.btn{font:600 .95rem/1.2 var(--sans);color:var(--ink);background:transparent;border:1.5px solid var(--ink);border-radius:8px;padding:.65rem 1rem;cursor:pointer}
+.btn:hover{background:var(--line)}
+.btn.primary{background:var(--ink);color:var(--bg)}
+.btn.primary:hover{background:var(--ink);filter:brightness(1.2)}
+.note{font:500 .92rem/1.5 var(--sans);color:var(--muted)}
+section.block{border-top:1px solid var(--line);padding:clamp(2.2rem,6vw,3.8rem) 0}
+.sec-head{max-width:46rem;margin-bottom:1.6rem}
+.src{font:600 .85rem/1.35 var(--sans);color:var(--muted)}
+blockquote{margin:0}
+
+/* Hero */
+.hero{padding:clamp(2rem,6vw,4rem) 0 clamp(2rem,5vw,3rem)}
+.hgrid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:2rem clamp(2rem,5vw,4rem);align-items:center}
+.lead{font-size:clamp(1.2rem,2.4vw,1.45rem);line-height:1.5;margin:1.3rem 0 0;max-width:34ch}
+.must{background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--ink);padding:1.2rem 1.3rem}
+.must p{margin:0 0 .7rem;font-size:1.05rem}
+.must .q{font:700 1.3rem/1.3 var(--serif)}
+.must .chain{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;margin:.8rem 0}
+.must .chain span{font:700 .85rem/1.2 var(--sans);padding:.35rem .55rem;background:var(--bg);border:1px solid var(--line)}
+.must .chain i{font-style:normal;color:var(--muted)}
+
+/* Questions */
+.qs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+.qc{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--k);padding:1rem 1.2rem}
+.qc h3{color:var(--k);margin-bottom:.4rem}
+.qc p{margin:0;font-size:1rem}
+
+/* Parcours */
+.path{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem;margin-bottom:1rem}
+.path button{font:700 .98rem/1.3 var(--sans);text-align:left;color:var(--ink);background:var(--surface);border:2px solid var(--line);border-radius:8px;padding:.8rem .9rem;cursor:pointer}
+.path button small{display:block;font:600 .8rem/1.3 var(--sans);color:var(--muted);margin-top:.15rem}
+.path button[aria-selected="true"]{border-color:var(--k);background:var(--ks)}
+.panel{background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--k);padding:clamp(1rem,3vw,1.7rem)}
+.panel[hidden]{display:none}
+.panel > h3{font-size:1.3rem;color:var(--k);margin-bottom:.3rem}
+.panel .thesis{font:700 1.2rem/1.35 var(--serif);margin:.2rem 0 1rem}
+.panel h4{font:800 .8rem/1 var(--sans);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin:1.3rem 0 .5rem}
+.panel ul{margin:0;padding-left:1.15rem}
+.panel li{margin-bottom:.5rem;font-size:1.02rem}
+.auth{background:var(--ks);border-left:5px solid var(--k);padding:.8rem 1rem;margin:0 0 .8rem}
+.auth b{font:700 .95rem/1.3 var(--sans);color:var(--k);display:block;margin-bottom:.25rem}
+.auth blockquote{font-size:1rem;font-style:italic;margin:.3rem 0}
+.auth p{margin:.3rem 0 0;font-size:1rem}
+.lim{background:var(--bg);border-left:5px solid var(--gold);padding:.8rem 1rem;font:500 .98rem/1.55 var(--sans)}
+.lim b{color:var(--gold)}
+
+/* Sorters */
+.sorter{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.5rem 1rem;align-items:center;padding:.8rem 0;border-bottom:1px solid var(--line)}
+.row .name{font:600 1rem/1.45 var(--sans)}
+.row .name i{font:italic 400 1rem/1.45 var(--serif)}
+.pick{display:flex;flex-wrap:wrap;gap:.4rem}
+.pick button{font:700 .9rem/1.15 var(--sans);color:var(--ink);background:var(--surface);border:2px solid var(--line);border-radius:8px;padding:.55rem .75rem;cursor:pointer}
+.pick button[disabled]{cursor:default}
+.pick button:hover:not([disabled]){border-color:var(--c)}
+.pick button[aria-pressed="true"]{background:var(--c);border-color:var(--c);color:var(--on)}
+.fb{grid-column:1/-1;margin:0;font:500 .95rem/1.45 var(--sans);padding:.5rem .8rem;border-left:5px solid var(--line);background:var(--surface)}
+.fb[hidden]{display:none}
+.row.good .fb{border-left-color:var(--nat)} .row.bad .fb{border-left-color:var(--bad)}
+.score{display:flex;flex-wrap:wrap;gap:.8rem 1.2rem;align-items:center;margin-top:1.1rem}
+.score p{margin:0;font:600 1rem/1.4 var(--sans);flex:1 1 16rem}
+
+/* Test d'universalisation */
+.lab{background:var(--surface);border:1px solid var(--line);padding:clamp(1rem,3vw,1.6rem)}
+.maxims{display:flex;flex-wrap:wrap;gap:.5rem;margin:.8rem 0 1.2rem}
+.maxims button{font:600 .98rem/1.3 var(--sans);color:var(--ink);background:var(--bg);border:2px solid var(--line);border-radius:8px;padding:.7rem .95rem;cursor:pointer;text-align:left}
+.maxims button[aria-pressed="true"]{border-color:var(--rai);background:var(--rai-soft)}
+.world{display:grid;grid-template-columns:repeat(8,1fr);gap:.4rem;max-width:30rem;margin:.6rem 0 1rem}
+.world span{aspect-ratio:1;border-radius:50%;background:var(--rai);opacity:.85;display:flex;align-items:center;justify-content:center;font:700 .8rem/1 var(--sans);color:var(--on)}
+.world.broken span{background:var(--bad);opacity:.7}
+@media (prefers-reduced-motion:no-preference){.world span{transition:background .4s,opacity .4s}}
+.steps{margin:0;padding:0;list-style:none;counter-reset:s}
+.steps li{counter-increment:s;display:grid;grid-template-columns:2rem 1fr;gap:.5rem;padding:.5rem 0;border-top:1px solid var(--line);font:500 1rem/1.5 var(--sans)}
+.steps li::before{content:counter(s);font:800 1.3rem/1 var(--sans);color:var(--rai)}
+.steps[hidden]{display:none}
+.verdict{margin:1rem 0 0;padding:.8rem 1rem;border-left:6px solid var(--bad);background:var(--bg);font:600 1rem/1.5 var(--sans)}
+.verdict[hidden]{display:none}
+
+/* Dilemme */
+.dil{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.opt{background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--k);padding:1rem 1.2rem;font:500 1rem/1.55 var(--sans)}
+.opt h3{color:var(--k);margin-bottom:.4rem}
+.opt ul{margin:.4rem 0 .8rem;padding-left:1.1rem}
+.opt li{margin-bottom:.35rem}
+.opt .m{font-weight:700}
+.pickd{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+.after{margin-top:1rem;padding:1rem 1.2rem;background:var(--surface);border-left:6px solid var(--gold);font:500 1rem/1.55 var(--sans)}
+.after[hidden]{display:none}
+
+/* Fil */
+.recap{margin:0;padding:0;list-style:none;max-width:48rem}
+.recap li{padding:.9rem 0;border-top:1px solid var(--line)}
+.recap li:last-child{border-bottom:1px solid var(--line)}
+.recap b{font-family:var(--sans)}
+footer{padding:1.6rem 0 2.5rem;font:500 .9rem/1.5 var(--sans);color:var(--muted)}
+footer p{margin:0}
+@media (max-width:820px){
+  .hgrid,.qs,.dil{grid-template-columns:1fr}
+  .path{grid-template-columns:1fr}
+  .row{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
+
+.stp{list-style:none;margin:0;padding:0;counter-reset:s}
+.stp li{counter-increment:s;display:grid;grid-template-columns:2.4rem 1fr;gap:.6rem;background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--k,var(--ink));padding:.9rem 1.1rem;margin-bottom:.7rem}
+.stp li::before{content:counter(s);font:800 1.6rem/1 var(--sans);color:var(--k)}
+.stp li[hidden]{display:none}
+.stp h3{font-size:1.02rem;margin-bottom:.2rem}
+.stp p{margin:0;font-size:1.02rem}
+@media (prefers-reduced-motion:no-preference){.stp li.new{animation:in .5s ease both}@keyframes in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}}
+.terms details{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--k);margin-bottom:.6rem;padding:.2rem 1rem}
+.terms summary{font:700 1.02rem/1.4 var(--sans);cursor:pointer;padding:.7rem 0}
+.terms details p{margin:0 0 .9rem;font-size:1.02rem}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media (max-width:820px){.two{grid-template-columns:1fr}}
+.links a{color:var(--k);font-weight:700}
+
+/* Fond : portrait (arendt) */
+body::before{content:"";position:fixed;inset:0;z-index:-2;background:url("images/arendt.jpg") center top/cover no-repeat}
+@media (min-aspect-ratio:1/1){body::before{background:#504e4f url("images/arendt.jpg") right center/auto 100% no-repeat}}
+body::after{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);opacity:.77;pointer-events:none}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) body::after{opacity:.87}}
+:root[data-theme="dark"] body::after{opacity:.87}
+.hero h1,.hero p,section.block h2,section.block > .wrap > p,.sec-head p,footer p{text-shadow:0 0 .4em var(--bg),0 0 .9em var(--bg)}
+
+.pn{display:flex;gap:1rem;flex-wrap:wrap;margin:2.5rem auto 0;max-width:980px;padding:0 1.25rem;box-sizing:content-box}
+.pn a{flex:1 1 16rem;display:flex;flex-direction:column;gap:.25rem;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--k,var(--ink));padding:.9rem 1.1rem;border-radius:0 0 8px 8px}
+.pn a:hover{border-color:var(--k,var(--ink))}.pn a:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.pn small{font:600 .78rem/1 system-ui,-apple-system,sans-serif;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.pn b{font:700 1.1rem/1.25 system-ui,-apple-system,sans-serif}
+.pn .nx{text-align:right}
+.pn .nx:first-child{margin-left:auto;max-width:calc(50% - .5rem)}
+.pn .hm{flex:0 0 100%;text-align:center;font:500 .92rem/1 system-ui,-apple-system,sans-serif;background:none;border:0;padding:.4rem;color:var(--ink);text-decoration:underline}
+
+.pdfbtn{display:inline-flex;align-items:center;gap:.5rem;font:600 .88rem/1 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--surface);border:1.5px solid var(--ink);border-radius:999px;padding:.55rem .95rem;cursor:pointer}
+.pdfbtn:hover{background:var(--ink);color:var(--bg)}.pdfbtn:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:2px}
+@media print{
+  :root{--bg:#fff!important;--surface:#fff!important;--ink:#111!important;--muted:#444!important;--line:#bbb!important;color-scheme:light!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:#fff!important;color:#111!important}
+  body::before,body::after{display:none!important}
+  nav,.pdfbtn,.pn,video,section[aria-labelledby="h-video"]{display:none!important}
+  .rev,.js .rev{opacity:1!important;transform:none!important}
+  .stp li[hidden]{display:list-item!important}
+  details>*{display:block!important}
+  article,li,.card,figure,.stage{break-inside:avoid}
+  h1,h2,h3{break-after:avoid;text-shadow:none!important}
+  *{text-shadow:none!important}
+  a{color:inherit;text-decoration:none}
+  section.block,.part{padding-top:1.2rem!important;padding-bottom:1.2rem!important}
+  footer{break-before:avoid;border-top:1px solid #999;margin-top:1rem}
+}
+@page{size:A4;margin:16mm 14mm}
+</style>
+</head>
+<body style="--k:var(--soc);--ks:var(--soc-soft)">
+<nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
+<header class="hero">
+  <div class="wrap hgrid">
+    <div>
+      <h1>Arendt</h1>
+      <p class="lead">Les outils sont-ils au service de nos fins, ou finissent-ils par nous commander ? Cela dépend de qui les emploie.</p>
+    </div>
+    <div class="must" style="border-top-color:var(--k)">
+      <p class="src">Arendt, <i>Condition de l’homme moderne</i></p>
+      <p class="q">« L’homme […] est un fabricant d’outils. »</p>
+      <p>Arendt cite Benjamin Franklin pour caractériser l’<i>homo faber</i>, puis distingue deux manières d’utiliser les mêmes outils.</p>
+    </div>
+  </div>
+</header>
+<main>
+<section class="block" aria-labelledby="h-th">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="h-th">Le problème et la thèse</h2></div>
+    <div class="two">
+      <div class="qc" style="--k:var(--gold)"><h3>La question</h3><p>Pourquoi, dans la société moderne, les hommes paraissent-ils devenir « esclaves des machines » ? La faute en revient-elle aux outils ?</p></div>
+      <div class="qc" style="--k:var(--k)"><h3>La thèse</h3><p>Ce n’est pas l’outil qui pervertit les fins et les moyens, mais la situation de l’animal laborans, enfermé dans le cycle de la vie : produire pour consommer, consommer pour pouvoir produire.</p></div>
+    </div>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-arg">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="h-arg">Le fil de l’argumentation</h2><p>Faites avancer le raisonnement étape par étape.</p></div>
+    <ol class="stp" id="stp" aria-live="polite"><li hidden><div><h3>L’homo faber fabrique des outils</h3><p>Il invente les outils pour édifier « un monde d’objets ». Leur commodité et leur précision sont dictées par des buts objectifs, non par des désirs ou des besoins subjectifs.</p></div></li><li hidden><div><h3>Les mêmes outils servent l’animal laborans</h3><p>L’animal laborans les utilise pour alléger le fardeau et mécaniser son travail. Pour lui, soumis aux processus « dévorants » de la vie, les outils représentent la durabilité du monde.</p></div></li><li hidden><div><h3>Dans une société de travailleurs, les outils changent de statut</h3><p>Ils risquent d’acquérir des fonctions qui dépassent la simple instrumentalité : de moyens, ils tendent à devenir des fins.</p></div></li><li hidden><div><h3>La plainte habituelle</h3><p>On déplore la perversion des fins et des moyens : les hommes s’adaptent aux exigences des machines au lieu de les mettre au service de leurs besoins.</p></div></li><li hidden><div><h3>Le diagnostic d’Arendt</h3><p>Se plaindre ainsi, c’est se plaindre de la situation de fait de l’activité de travail. Dans le processus vital, produire, c’est se préparer à consommer : la distinction entre fin et moyens n’a plus de sens.</p></div></li><li hidden><div><h3>Une question sans réponse</h3><p>Vit-on et consomme-t-on pour avoir la force de travailler, ou travaille-t-on pour pouvoir consommer ? Dans le cycle de la vie, la question est « vaine » : il n’y a pas de fin extérieure au cycle.</p></div></li></ol>
+    <div class="score"><button class="btn primary" id="nx" type="button">Première étape</button><button class="btn" id="all" type="button">Tout afficher</button><button class="btn" id="rs" type="button">Recommencer</button></div>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-no">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="h-no">Notions à maîtriser</h2><p>Cliquez sur une notion pour ouvrir sa définition.</p></div>
+    <div class="terms"><details><summary>Homo faber</summary><p>L’homme qui fabrique : il produit des objets durables, qui composent un monde stable, en choisissant des fins et en employant des moyens.</p></details><details><summary>Animal laborans</summary><p>L’homme en tant que travailleur soumis aux besoins de la vie : il produit pour consommer, dans un cycle qui recommence sans cesse.</p></details><details><summary>Instrumentalité</summary><p>Le fait d’être un moyen au service d’une fin. L’outil est instrumental tant qu’il sert un but extérieur à lui.</p></details><details><summary>Fin et moyens</summary><p>La fin est le but poursuivi, le moyen ce qui y conduit. Arendt soutient que cette distinction propre à l’homo faber disparaît dans le travail pur.</p></details></div>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-ex">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="h-ex">Exercice : est-ce la position de l’auteur ?</h2><p>Pour chaque phrase, dites si elle correspond à la pensée de l’auteur dans ce texte. <span class="note">Exercice et corrections rédigés pour cette page.</span></p></div>
+    <ul class="sorter" id="s1"></ul>
+    <div class="score"><p id="sc1" aria-live="polite"></p><button class="btn" id="r1" type="button">Recommencer</button></div>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-di">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="h-di">Pour discuter</h2></div>
+    <div class="lim" style="margin-bottom:.8rem"><b>Une défense de la technique ?</b> Arendt n’accuse pas l’outil : elle replace le problème dans le mode de vie. Cela rejoint-il l’idée que la technique est « neutre » et que tout dépend de l’usage ?</div><div class="lim" style="margin-bottom:.8rem"><b>Le lien avec la fiche sur le travail.</b> La distinction travail / œuvre éclaire la question de l’aliénation : un travail réduit à la reproduction de la vie est-il émancipateur ?</div><div class="lim" style="margin-bottom:.8rem"><b>Limite.</b> Le texte ne dit pas comment sortir du cycle. Pour Arendt, l’action et l’œuvre y échappent, mais cela dépasse l’extrait.</div>
+    <p class="links note">Voir aussi : <a href="technique-bacon.html">Bacon</a>, <a href="travail-alienation-emancipation.html">Travail : aliénation ou émancipation</a>.</p>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-re">
+  <div class="wrap">
+    <h2 id="h-re" style="margin-bottom:1.2rem">À retenir</h2>
+    <ul class="recap"><li><b>Homo faber :</b> fabrique des outils pour bâtir un monde durable.</li><li><b>Animal laborans :</b> enfermé dans le cycle production-consommation.</li><li><b>Diagnostic :</b> le renversement des moyens et des fins vient de la situation du travail.</li><li><b>Question vaine :</b> vit-on pour travailler ou travaille-t-on pour vivre ?</li></ul>
+  </div>
+</section>
+</main>
+<nav class="pn" aria-label="Pages de la section Technique"><a class="pv" href="technique-hoelderlin.html" rel="prev"><small>← Page précédente</small><b>Hölderlin : le Rhin, fleuve libre</b></a><a class="nx" href="technique-levinas.html" rel="next"><small>Page suivante →</small><b>Lévinas : défendre l’homme contre la technique ?</b></a><a class="hm" href="accueil.html">Retour à l’accueil</a></nav>
+<footer><div class="wrap"><p>Page réalisée à partir de l’extrait de <i>Condition de l’homme moderne</i> d’Hannah Arendt. Les citations sont de courts extraits du texte étudié ; la présentation de l’argumentation, les exercices et les pistes de discussion sont rédigés pour cette page. Portrait de fond : Photographie de Hannah Arendt.</p></div></footer>
+<script>
+(function(){
+function $(s){return document.querySelector(s)}
+function sorter(listSel,scoreSel,resetSel,items,choices){
+    var list=$(listSel),sc=$(scoreSel),rows=[],done=0,right=0;
+    items.forEach(function(it){
+      var li=document.createElement('li');li.className='row';
+      li.innerHTML='<span class="name"></span><div class="pick" role="group"></div><p class="fb" hidden aria-live="polite"></p>';
+      li.querySelector('.name').innerHTML=it[0];
+      var pick=li.querySelector('.pick'),fb=li.querySelector('.fb'),bs=[];
+      pick.setAttribute('aria-label',li.querySelector('.name').textContent);
+      choices.forEach(function(c,k){
+        var b=document.createElement('button');b.type='button';b.textContent=c[0];b.style.setProperty('--c',c[1]);b.setAttribute('aria-pressed','false');
+        b.addEventListener('click',function(){
+          if(li.classList.contains('good')||li.classList.contains('bad'))return;
+          var ok=k===it[1];
+          b.setAttribute('aria-pressed','true');bs.forEach(function(x){x.disabled=true});
+          li.classList.add(ok?'good':'bad');fb.hidden=false;
+          fb.textContent=(ok?'Bien vu. ':'Pas tout à fait. ')+it[2];
+          done++;if(ok)right++;upd();
+        });
+        pick.appendChild(b);bs.push(b);
+      });
+      list.appendChild(li);rows.push(li);
+    });
+    function upd(){
+      var n=items.length,s=function(x){return x>1?'s':''};
+      sc.textContent=!done?n+' à classer.':done<n?done+' classé'+s(done)+' sur '+n+' : '+right+' bonne'+s(right)+' réponse'+s(right)+'.':'Terminé : '+right+' bonne'+s(right)+' réponse'+s(right)+' sur '+n+'.';
+    }
+    $(resetSel).addEventListener('click',function(){
+      rows.forEach(function(li){li.classList.remove('good','bad');li.querySelector('.fb').hidden=true;
+        [].forEach.call(li.querySelectorAll('button'),function(b){b.disabled=false;b.setAttribute('aria-pressed','false')})});
+      done=0;right=0;upd();
+    });
+    upd();
+  }
+
+var L=[].slice.call(document.querySelectorAll('#stp li')),n=0,nx=$('#nx');
+function show(i){L[i].hidden=false;L[i].classList.add('new')}
+function lab(){nx.textContent=n===0?'Première étape':n<L.length?'Étape suivante ('+(n+1)+'/'+L.length+')':'Terminé';nx.disabled=n>=L.length}
+nx.addEventListener('click',function(){if(n<L.length){show(n);n++;lab();}});
+$('#all').addEventListener('click',function(){while(n<L.length){show(n);n++}lab()});
+$('#rs').addEventListener('click',function(){L.forEach(function(l){l.hidden=true;l.classList.remove('new')});n=0;lab()});
+lab();
+sorter('#s1','#sc1','#r1',[["Les outils de l’homo faber servent à édifier un monde d’objets.", 0, "Oui, c’est la première idée du texte."], ["Pour Arendt, la technique elle-même est responsable de la perversion des fins et des moyens.", 1, "Non : c’est la situation de l’activité de travail qui l’explique, non l’outil en lui-même."], ["Dans le processus vital, la distinction entre fin et moyens perd son sens.", 0, "Oui : produire prépare à consommer, et consommer à reproduire la force de travail."], ["Les hommes travaillent pour consommer, et la question de savoir pourquoi ils consomment a une réponse simple.", 1, "Non : elle est jugée vaine, dans le cycle de la vie il n’y a pas de fin extérieure."], ["Les outils peuvent dépasser leur simple fonction d’instrument dans une société de travailleurs.", 0, "Oui : ils risquent d’acquérir des caractères qui dépassent l’instrumentalité."]],[['Selon l’auteur','var(--nat)'],['Pas selon l’auteur','var(--soc)']]);
+})();
+</script>
+</body>
+</html>

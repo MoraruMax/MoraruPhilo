@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fiches de cours</title>
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+  --bg:#F3F4F7; --surface:#FFFFFF; --ink:#151A24; --muted:#525B6B; --line:#D6DAE2; --focus:#2347A8;
+  --a1:#2347A8; --a2:#8F5B00; --a3:#4A3C9C; --a4:#B3124F; --a5:#0F766E; --a6:#2F3BE0; --a7:#C42B1A; --a8:#8A1850; --a9:#156082; --a10:#8A6A00; --a11:#A8460A;
+  --head:system-ui,-apple-system,"Segoe UI",sans-serif;
+  --text:Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0F131B; --surface:#181E29; --ink:#E8ECF3; --muted:#A2ACBD; --line:#2A3242; --focus:#8FB0FF;
+    --a1:#7C9BF2; --a2:#F2B84B; --a3:#B3A6FF; --a4:#FF7FAA; --a5:#4FD1B5; --a6:#9AA4FF; --a7:#FF7A66; --a8:#FF8CC0; --a9:#6CC3E8; --a10:#FFD43B; --a11:#FFA766;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0F131B; --surface:#181E29; --ink:#E8ECF3; --muted:#A2ACBD; --line:#2A3242; --focus:#8FB0FF;
+  --a1:#7C9BF2; --a2:#F2B84B; --a3:#B3A6FF; --a4:#FF7FAA; --a5:#4FD1B5; --a6:#9AA4FF; --a7:#FF7A66; --a8:#FF8CC0; --a9:#6CC3E8; --a10:#FFD43B; --a11:#FFA766;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.1875rem/1.6 var(--text)}
+.wrap{width:min(1000px,100% - 2.5rem);margin-inline:auto}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:4px}
+header{padding:clamp(2.5rem,8vw,5.5rem) 0 clamp(2rem,5vw,3.5rem)}
+h1{margin:0;font:700 clamp(2.6rem,8vw,5.2rem)/1 var(--head);letter-spacing:-.03em}
+.sub{margin:1.2rem 0 0;font-size:clamp(1.2rem,2.4vw,1.5rem);color:var(--muted);max-width:34ch}
+.list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.2rem;padding-bottom:clamp(3rem,7vw,5rem)}
+.item{display:flex;flex-direction:column;min-width:0;text-decoration:none;color:inherit;background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--c);border-radius:0 0 8px 8px;padding:1.3rem 1.4rem 1.4rem;transition:transform .25s ease,border-color .25s ease}
+.item{position:relative}
+.item .pt{position:absolute;top:1.3rem;right:1.4rem;width:4.2rem;height:4.2rem;border-radius:50%;object-fit:cover;border:3px solid var(--c);background:var(--line)}
+.item .vu{display:none;align-self:flex-start;margin:0 0 .6rem;font:700 .78rem/1 var(--head);color:var(--c);border:1.5px solid var(--c);border-radius:999px;padding:.3rem .6rem}
+.item.seen .vu{display:inline-block}
+.prog{margin:.9rem 0 0;font:500 .92rem/1.3 var(--head);text-shadow:0 0 .35em var(--bg),0 0 .8em var(--bg)}
+.prog button{font:inherit;color:inherit;background:none;border:0;text-decoration:underline;cursor:pointer;padding:0 0 0 .5rem}
+.prog button:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.item:hover{transform:translateY(-4px);border-color:var(--c)}
+.item svg{display:block;width:100%;max-width:150px;height:auto;margin-bottom:1rem}
+.item h2{margin:0 0 .5rem;font:700 1.5rem/1.15 var(--head);letter-spacing:-.015em}
+.item p{margin:0 0 1.2rem;color:var(--muted);font-size:1.08rem;line-height:1.5}
+.go{margin-top:auto;font:500 1rem/1 var(--head);color:var(--c)}
+.item:hover .go{text-decoration:underline;text-underline-offset:4px}
+.notion{border:0}
+.notion + .notion{border-top:0}
+.notion:last-of-type{margin-bottom:1.6rem}
+.notion.gap{margin-top:1.6rem}
+.notion summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:.8rem;padding:1rem 0;font:700 1.5rem/1.2 var(--head);color:var(--ink)}
+.notion summary::-webkit-details-marker{display:none}
+.notion > summary::before{content:"";width:.6rem;height:.6rem;border-right:3px solid var(--muted);border-bottom:3px solid var(--muted);transform:rotate(-45deg);transition:transform .2s;flex:none}
+.notion[open] > summary::before{transform:rotate(45deg)}
+.notion summary .n{margin-left:auto;font:500 .95rem/1 var(--head);color:var(--muted)}
+.notion summary:hover{color:var(--muted)}
+.notion .list{padding-top:.4rem}
+@media (prefers-reduced-motion:reduce){.notion summary::before{transition:none}}
+.sub-n{margin:.2rem 0 .6rem 1.4rem;border:0}
+.sub-n summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:.7rem;padding:.8rem 0;font:700 1.15rem/1.2 var(--head);color:var(--ink)}
+.sub-n summary::-webkit-details-marker{display:none}
+.sub-n summary::before{content:"";width:.5rem;height:.5rem;border-right:2.5px solid var(--muted);border-bottom:2.5px solid var(--muted);transform:rotate(-45deg);transition:transform .2s;flex:none}
+.sub-n[open] summary::before{transform:rotate(45deg)}
+.sub-n summary:hover{color:var(--muted)}
+.sub-n .list{padding-bottom:1rem}
+@media (prefers-reduced-motion:reduce){.sub-n summary::before{transition:none}}
+.sec{margin:0 0 1rem;font:700 1.15rem/1.2 var(--head);color:var(--muted)}
+.list{padding-bottom:clamp(2rem,5vw,3rem)}
+footer{border-top:1px solid var(--line);padding:1.6rem 0 2.5rem;font-size:.95rem;color:var(--muted)}
+footer p{margin:0;text-align:right}
+footer .wrap{max-width:none;padding:0 1rem}
+@media (max-width:700px){.list{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important}}
+
+/* Fond : L’École d’Athènes (Raphaël) */
+body::before{content:"";position:fixed;inset:0;z-index:-2;background:var(--fill,transparent) var(--img) center var(--pos,center)/cover no-repeat}
+@media (min-aspect-ratio:1/1){html.bg-portrait body::before{background:var(--fill) var(--img) right center/auto 100% no-repeat}}
+body::after{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);opacity:.55;pointer-events:none}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) body::after{opacity:.68}}
+:root[data-theme="dark"] body::after{opacity:.68}
+h1,.lead,h2.sec,.notion > summary,footer p{text-shadow:0 0 .35em var(--bg),0 0 .8em var(--bg),0 0 1.2em var(--bg)}
+.fond{font:500 .85rem/1.4 var(--head,system-ui)}
+
+.grp{margin:0 auto 1rem;border:0}
+.grp > summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:.9rem;padding:1.1rem 0}
+.grp > summary::-webkit-details-marker{display:none}
+.grp > summary::before{content:"";width:.75rem;height:.75rem;border-right:3.5px solid var(--ink);border-bottom:3.5px solid var(--ink);transform:rotate(-45deg);transition:transform .2s;flex:none}
+.grp[open] > summary::before{transform:rotate(45deg)}
+.grp > summary h2.sec{margin:0;font:800 clamp(1.4rem,3.2vw,1.9rem)/1.2 var(--head);color:var(--ink)}
+.grp > summary:hover h2.sec{color:var(--muted)}
+.grp > .notion{width:auto;margin-inline:0}
+.grp > summary{text-shadow:0 0 .35em var(--bg),0 0 .8em var(--bg),0 0 1.2em var(--bg)}
+@media (prefers-reduced-motion:reduce){.grp > summary::before{transition:none}}
+
+body{min-height:100vh;display:flex;flex-direction:column}
+main{flex:1 0 auto}
+footer{margin-top:auto;border-top:0;color:var(--ink);font-weight:500}
+
+.item[hidden],main details[hidden]{display:none!important}
+.find{margin:1.2rem 0 0;max-width:34rem}
+.find label{display:block;font:600 .9rem/1.2 var(--head);margin-bottom:.4rem;text-shadow:0 0 .35em var(--bg),0 0 .8em var(--bg)}
+.find input{width:100%;box-sizing:border-box;font:500 1.05rem/1.3 var(--head);color:var(--ink);background:var(--surface);border:1.5px solid var(--line);border-radius:999px;padding:.75rem 1.1rem}
+.find input:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.find .n{margin:.5rem 0 0;font:500 .9rem/1.3 var(--head);text-shadow:0 0 .35em var(--bg),0 0 .8em var(--bg)}
+:root{--img:url("images/ecole-athenes.jpg")}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>Fiches de cours</h1>
+    <p class="sub">Des pages conçues par IA consacrées aux thèmes de notre année, et des outils pour réviser.</p>
+    <p class="prog" id="prog" hidden></p>
+    <div class="find" role="search"><label for="q">Chercher un auteur, une notion, un texte</label><input id="q" type="search" placeholder="Ex. : Kant, liberté, mensonge…" autocomplete="off"><p class="n" id="qn" aria-live="polite"></p></div>
+  </div>
+</header>
+
+<main>
+  <details class="grp wrap"><summary><h2 class="sec">Les thèmes</h2></summary>
+  <details class="notion"><summary>Devoir</summary>
+  <div class="list">
+    <a class="item" href="le-devoir.html" style="--c:var(--a7)">
+      <svg viewBox="0 0 120 48" aria-hidden="true">
+        <rect x="14" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".4"/>
+        <rect x="47" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".7"/>
+        <rect x="80" y="8" width="26" height="32" rx="3" fill="var(--c)"/>
+      </svg>
+      <h2>Le devoir</h2>
+      <p>Société, nature humaine ou raison : d’où vient le « je dois » ? De Nietzsche à Kant et Sartre.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+  </div>
+  </details>
+  <details class="notion"><summary>Liberté</summary>
+  <div class="list">
+    <a class="item" href="ane-de-buridan.html" style="--c:var(--a5)">
+      <svg viewBox="0 0 120 48" aria-hidden="true">
+        <path d="M6 14 L30 14 L27 40 L9 40 Z" fill="var(--muted)" opacity=".5"/>
+        <path d="M90 14 L114 14 L111 40 L93 40 Z" fill="var(--muted)" opacity=".5"/>
+        <line x1="60" y1="27" x2="34" y2="27" stroke="var(--c)" stroke-width="2.5" stroke-dasharray="1 6" stroke-linecap="round"/>
+        <line x1="60" y1="27" x2="86" y2="27" stroke="var(--c)" stroke-width="2.5" stroke-dasharray="1 6" stroke-linecap="round"/>
+        <circle cx="60" cy="27" r="9" fill="var(--c)"/>
+      </svg>
+      <h2>L’âne de Buridan</h2>
+      <p>Un âne entre l’eau et la nourriture : dix-huit arguments à passer au crible, et la liberté d’indifférence.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="determinisme-social.html" style="--c:var(--a1)">
+      <svg viewBox="0 0 120 48" aria-hidden="true">
+        <g fill="var(--muted)" opacity=".4">
+          <circle cx="15" cy="9" r="5"/><circle cx="45" cy="9" r="5"/><circle cx="75" cy="9" r="5"/><circle cx="105" cy="9" r="5"/>
+          <circle cx="15" cy="24" r="5"/><circle cx="75" cy="24" r="5"/><circle cx="105" cy="24" r="5"/>
+          <circle cx="15" cy="39" r="5"/><circle cx="45" cy="39" r="5"/><circle cx="105" cy="39" r="5"/>
+        </g>
+        <g fill="var(--c)"><circle cx="15" cy="9" r="5"/><circle cx="45" cy="24" r="5"/><circle cx="75" cy="39" r="5"/></g>
+      </svg>
+      <h2>Le déterminisme social</h2>
+      <p>Reproduction sociale, capital culturel, habitus, et la table de mobilité de l’Insee à explorer.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="spinoza-lettre-a-schuller.html" style="--c:var(--a2)"><img class="pt" src="images/spinoza.jpg" alt="" loading="lazy" style="object-position:50% 30%">
+      <svg viewBox="0 0 120 48" aria-hidden="true">
+        <path d="M12 38 Q60 -16 108 38" fill="none" stroke="var(--c)" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 8"/>
+        <circle cx="12" cy="38" r="7" fill="var(--muted)" opacity=".6"/>
+        <circle cx="108" cy="38" r="7" fill="var(--c)"/>
+      </svg>
+      <h2>Spinoza : l’ignorance des causes déterminantes</h2>
+      <p>La pierre lancée qui se croit libre : la liberté comme illusion, d’après la Lettre à Schuller.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="les-stereotypes.html" style="--c:var(--a4)">
+      <svg viewBox="0 0 120 48" aria-hidden="true">
+        <circle cx="12" cy="24" r="8" fill="var(--muted)" opacity=".5"/>
+        <rect x="26" y="15" width="16" height="16" rx="3" fill="var(--muted)" opacity=".5" transform="rotate(20 34 23)"/>
+        <ellipse cx="56" cy="24" rx="5" ry="9" fill="var(--muted)" opacity=".5"/>
+        <rect x="74" y="14" width="14" height="20" rx="2" fill="var(--c)"/>
+        <rect x="92" y="14" width="14" height="20" rx="2" fill="var(--c)"/>
+        <rect x="110" y="14" width="10" height="20" rx="2" fill="var(--c)"/>
+      </svg>
+      <h2>Les stéréotypes</h2>
+      <p>Images préconçues, menace du stéréotype et expérience de Steele et Aronson.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="epictete.html" style="--c:var(--a9)"><img class="pt" src="images/epictete.jpg" alt="" loading="lazy" style="object-position:50% 40%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><circle cx="60" cy="24" r="22" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5" stroke-dasharray="2 5" opacity=".8"/><circle cx="60" cy="24" r="12" fill="var(--c)" opacity=".2" stroke="var(--c)" stroke-width="3.5"/><circle cx="60" cy="24" r="4" fill="var(--c)"/><g fill="var(--muted)" opacity=".55"><rect x="14" y="20" width="8" height="8" rx="2"/><rect x="98" y="20" width="8" height="8" rx="2"/><rect x="56" y="1" width="8" height="6" rx="2"/><rect x="56" y="41" width="8" height="6" rx="2"/></g></svg>
+      <h2>Epictète : ce qui dépend de nous</h2>
+      <p>Liberté et bonheur selon le <i>Manuel</i> : la frontière entre ce que nous maîtrisons et ce qui nous échappe.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="plan-liberte.html" style="--c:var(--a8)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><circle cx="60" cy="9" r="6" fill="var(--c)"/><circle cx="25" cy="38" r="6" fill="var(--muted)" opacity=".6"/><circle cx="95" cy="38" r="6" fill="var(--muted)" opacity=".6"/><line x1="56" y1="14" x2="28" y2="33" stroke="var(--c)" stroke-width="2.5"/><line x1="64" y1="14" x2="92" y2="33" stroke="var(--c)" stroke-width="2.5"/></svg>
+      <h2>Sommes-nous véritablement libres ?</h2>
+      <p>Le plan de cours sur la liberté : choisir, déterminismes, objectivité et autonomie.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+  </div>
+  </details>
+  <details class="notion"><summary>Technique</summary>
+  <div class="list">
+    <a class="item" href="technique-bacon.html" style="--c:var(--a5)"><img class="pt" src="images/bacon.jpg" alt="" loading="lazy" style="object-position:50% 25%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M58 44 L66 31 L74 44Z" fill="var(--muted)" opacity=".5"/><path d="M14 42 L108 24" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="4"/><circle cx="96" cy="12" r="8" fill="var(--c)"/></svg>
+      <h2>Bacon : vaincre la nature en lui obéissant</h2>
+      <p>La science donne la puissance : on ne vainc la nature qu’en lui obéissant.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="technique-heidegger.html" style="--c:var(--a9)"><img class="pt" src="images/heidegger.jpg" alt="" loading="lazy" style="object-position:50% 28%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="40" y="6" width="26" height="30" rx="2" fill="var(--muted)" opacity=".5"/><path d="M6 40 q8 -6 16 0 t16 0 t16 0 t16 0 t16 0 t16 0" stroke="var(--c)" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" fill="none"/><path d="M92 6 L82 22 H92 L86 36 L104 16 H94 L100 6Z" fill="var(--c)"/></svg>
+      <h2>Heidegger : le Rhin, de fleuve à ressource</h2>
+      <p>Une centrale dans le Rhin : la technique moderne réduit la nature à un stock d’énergie.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="technique-hoelderlin.html" style="--c:var(--a2)"><img class="pt" src="images/holderlin.jpg" alt="" loading="lazy" style="object-position:50% 30%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M4 44 L38 10 L56 30 L76 6 L116 44Z" fill="var(--muted)" opacity=".4"/><path d="M76 12 L68 24 L84 30 L74 40 L92 44" stroke="var(--c)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" fill="none"/><circle cx="104" cy="10" r="4" fill="var(--c)"/></svg>
+      <h2>Hölderlin : le Rhin, fleuve libre</h2>
+      <p>L’hymne au fleuve demi-dieu, contrepoint poétique du texte de Heidegger.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="technique-arendt.html" style="--c:var(--a11)"><img class="pt" src="images/arendt.jpg" alt="" loading="lazy" style="object-position:50% 22%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M60 8 A16 16 0 0 1 76 24" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="4"/><path d="M60 40 A16 16 0 0 1 44 24" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="4"/><path d="M72 17 L77 25 L68 25" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="3"/><path d="M48 31 L43 23 L52 23" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="3"/><circle cx="60" cy="8" r="5" fill="var(--c)"/><circle cx="60" cy="40" r="5" fill="var(--c)"/><path d="M14 24h14M92 24h14" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="3" opacity=".5"/></svg>
+      <h2>Arendt : animal laborans et homo faber</h2>
+      <p>Qui est responsable de la perversion des fins et des moyens : l’outil, ou le travail ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="technique-levinas.html" style="--c:var(--a4)"><img class="pt" src="images/levinas.jpg" alt="" loading="lazy" style="object-position:50% 35%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><circle cx="60" cy="13" r="9" fill="var(--c)"/><path d="M54 21 L60 33 L66 21" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5"/><circle cx="60" cy="36" r="2.6" fill="var(--muted)"/><path d="M60 38 V44 M54 41 H66" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5"/><rect x="14" y="38" width="22" height="8" rx="3" fill="var(--muted)" opacity=".5"/><rect x="84" y="38" width="22" height="8" rx="3" fill="var(--muted)" opacity=".5"/></svg>
+      <h2>Lévinas : défendre l’homme contre la technique ?</h2>
+      <p>La technique est dangereuse, mais la critiquer au nom des racines est-il légitime ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+  </div>
+  </details>
+  <details class="notion"><summary>Travail</summary>
+  <div class="list">
+    <a class="item" href="travail-alienation-emancipation.html" style="--c:var(--a4)">
+      <svg viewBox="0 0 120 48" aria-hidden="true">
+        <path d="M16 38 L52 38 L52 14 Z" fill="var(--c)" opacity=".45"/>
+        <path d="M104 38 L68 38 L68 10 Z" fill="var(--c)"/>
+        <rect x="56" y="38" width="8" height="4" fill="var(--muted)"/>
+      </svg>
+      <h2>Le travail : aliénation ou émancipation ?</h2>
+      <p>De la Genèse à Russell : le travail comme contrainte, comme réalisation de soi, et l’éloge de l’oisiveté.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="le-travail.html" style="--c:var(--a11)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="12" y="32" width="16" height="12" fill="var(--c)" opacity=".5"/><rect x="34" y="24" width="16" height="20" fill="var(--c)" opacity=".65"/><rect x="56" y="16" width="16" height="28" fill="var(--c)" opacity=".8"/><rect x="78" y="6" width="16" height="38" fill="var(--c)"/></svg>
+      <h2>Le travail</h2>
+      <p>Onze textes, de saint Paul à Arendt, sur le devoir, la contrainte et la division du travail.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+  </div>
+  </details>
+  <details class="notion"><summary>Vérité</summary>
+  <div class="list">
+    <a class="item" href="verite-platon.html" style="--c:var(--a9)"><img class="pt" src="images/platon.jpg" alt="" loading="lazy" style="object-position:50% 32%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M12 46 V24 C12 2 108 2 108 24 V46" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="3" opacity=".7"/><path d="M26 44 q-4 -10 2 -16 q6 6 2 16Z" fill="var(--c)"/><circle cx="52" cy="40" r="3" fill="var(--muted)"/><circle cx="64" cy="40" r="3" fill="var(--muted)"/><ellipse cx="94" cy="28" rx="3" ry="7" fill="var(--muted)" opacity=".5"/><ellipse cx="102" cy="30" rx="2.5" ry="5" fill="var(--muted)" opacity=".5"/></svg>
+      <h2>Platon : le mythe de la caverne</h2>
+      <p>Des prisonniers prennent des ombres pour le réel : le chemin douloureux vers la vérité.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="descartes-du-doute-au-cogito.html" style="--c:var(--a3)"><img class="pt" src="images/descartes.jpg" alt="" loading="lazy" style="object-position:50% 28%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="14" y="10" width="26" height="26" rx="3" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="3" stroke-dasharray="3 5" opacity=".6"/><rect x="26" y="20" width="26" height="26" rx="3" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="3" stroke-dasharray="3 5" opacity=".4" transform="rotate(12 39 33)"/><path d="M60 24 H74" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="3" opacity=".6"/><circle cx="96" cy="24" r="16" fill="none" stroke="var(--c)" stroke-width="3"/><circle cx="96" cy="24" r="6" fill="var(--c)"/></svg>
+      <h2>Descartes : du doute au cogito</h2>
+      <p>Du doute des sens au mauvais génie, jusqu’à la première certitude : « je pense, donc je suis ».</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="pascal.html" style="--c:var(--a9)"><img class="pt" src="images/pascal.jpg" alt="" loading="lazy" style="object-position:50% 32%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><circle cx="38" cy="24" r="16" fill="var(--c)" opacity=".9"/><path d="M38 14 v20 M30 21 h16" stroke="var(--bg)" stroke-width="3" stroke-linecap="round" fill="none"/><path d="M60 10 L60 42" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="3" stroke-dasharray="2 5"/><path d="M96 38 C78 28 76 16 86 14 C91 13 95 16 96 20 C97 16 101 13 106 14 C116 16 114 28 96 38Z" fill="none" stroke="var(--c)" stroke-width="3" stroke-linejoin="round"/></svg>
+      <h2>Pascal : le cœur et le pari</h2>
+      <p>Les raisons du cœur, la foi comme don, puis le pari : gager que Dieu est.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="verite-kant.html" style="--c:var(--a4)"><img class="pt" src="images/kant.jpg" alt="" loading="lazy" style="object-position:50% 45%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M60 8 V44 M46 44 H74" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="3"/><path d="M20 14 H100" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="3"/><path d="M12 32 L20 14 L28 32Z M92 32 L100 14 L108 32Z" fill="var(--c)" opacity=".85"/><circle cx="60" cy="8" r="3" fill="var(--c)"/></svg>
+      <h2>Kant : mensonge et devoir</h2>
+      <p>Faut-il dire la vérité même à un meurtrier ? Un devoir sans exception.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="verite-rousseau.html" style="--c:var(--a11)"><img class="pt" src="images/rousseau.jpg" alt="" loading="lazy" style="object-position:50% 28%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M14 12 C14 6 44 6 44 12 C44 34 36 44 29 44 C22 44 14 34 14 12Z" fill="var(--c)"/><path d="M20 20 q3 -3 6 0 M32 20 q3 -3 6 0 M22 31 q7 5 14 0" stroke="var(--bg)" stroke-width="2" fill="none" stroke-linecap="round"/><rect x="56" y="8" width="50" height="22" rx="6" fill="var(--muted)" opacity=".45"/><path d="M66 30 L62 40 L74 30Z" fill="var(--muted)" opacity=".45"/></svg>
+      <h2>Rousseau : dire faux et mentir</h2>
+      <p>Imposture, fraude, calomnie, fiction : toutes les paroles fausses ne se valent pas.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="verite-hume.html" style="--c:var(--a5)"><img class="pt" src="images/hume.jpg" alt="" loading="lazy" style="object-position:50% 22%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M10 36 H110" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="3"/><path d="M42 36 a18 18 0 0 1 36 0Z" fill="var(--c)"/><path d="M60 10 V4 M38 16 l-5 -5 M82 16 l5 -5 M26 26 h-7 M94 26 h7" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="3"/></svg>
+      <h2>Hume : croyance raisonnable</h2>
+      <p>Pourquoi croit-on que le soleil se lèvera demain ? Les faits ne se démontrent pas.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="art-et-verite.html" style="--c:var(--a10)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="14" y="4" width="26" height="22" fill="var(--c)"/><rect x="44" y="4" width="62" height="12" fill="var(--muted)" opacity=".35"/><rect x="44" y="20" width="34" height="6" fill="var(--muted)" opacity=".35"/><rect x="14" y="30" width="26" height="14" fill="var(--muted)" opacity=".35"/><rect x="44" y="30" width="16" height="14" fill="var(--c)" opacity=".7"/><rect x="64" y="30" width="42" height="14" fill="var(--muted)" opacity=".35"/></svg>
+      <h2>L’art et la vérité</h2>
+      <p>Neuf thèses sur l’art, avec arguments, exemples et pistes de réponse.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+  </div>
+  </details>
+  </details>
+  <details class="grp wrap"><summary><h2 class="sec">Repères, méthodologies et frise chronologique</h2></summary>
+  <details class="notion"><summary>Repères conceptuels</summary>
+  <div class="list">
+    <a class="item" href="reperes-conceptuels.html" style="--c:var(--a6)">
+      <svg viewBox="0 0 120 48" aria-hidden="true">
+        <rect x="14" y="10" width="62" height="32" rx="5" fill="var(--muted)" opacity=".3"/>
+        <rect x="30" y="6" width="62" height="32" rx="5" fill="var(--surface)" stroke="var(--muted)" stroke-width="2" opacity=".9"/>
+        <rect x="46" y="2" width="62" height="32" rx="5" fill="var(--surface)" stroke="var(--c)" stroke-width="2.5"/>
+        <line x1="56" y1="14" x2="96" y2="14" stroke="var(--c)" stroke-width="3" stroke-linecap="round"/>
+        <line x1="56" y1="23" x2="84" y2="23" stroke="var(--muted)" stroke-width="3" stroke-linecap="round" opacity=".6"/>
+      </svg>
+      <h2>Les repères conceptuels</h2>
+      <p>Trente et un repères à parcourir, à mémoriser avec des cartes et à tester par un quiz.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+  </div>
+  </details>
+  <details class="notion"><summary>Méthodologies</summary>
+  <details class="sub-n"><summary>Série générale</summary>
+  <div class="list">
+    <a class="item" href="methode-dissertation.html" style="--c:var(--a7)">
+      <svg viewBox="0 0 120 48" aria-hidden="true">
+        <line x1="10" y1="10" x2="110" y2="10" stroke="var(--muted)" stroke-width="3" stroke-linecap="round" opacity=".5"/>
+        <line x1="10" y1="22" x2="92" y2="22" stroke="var(--muted)" stroke-width="3" stroke-linecap="round" opacity=".5"/>
+        <line x1="10" y1="34" x2="70" y2="34" stroke="var(--muted)" stroke-width="3" stroke-linecap="round" opacity=".5"/>
+        <path d="M10 44 Q 20 38 30 44 T 50 44 T 70 44 T 90 44 T 110 44" fill="none" stroke="var(--c)" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+      <h2>Construire une dissertation</h2>
+      <p>Les huit étapes de la méthode, avec un brouillon interactif pour préparer sa copie.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="explication-texte-bac.html" style="--c:var(--a6)">
+      <svg viewBox="0 0 120 48" aria-hidden="true">
+        <rect x="14" y="6" width="40" height="5" rx="2" fill="var(--muted)" opacity=".4"/>
+        <rect x="14" y="16" width="52" height="5" rx="2" fill="var(--c)"/>
+        <rect x="14" y="26" width="34" height="5" rx="2" fill="var(--muted)" opacity=".4"/>
+        <rect x="14" y="36" width="60" height="5" rx="2" fill="var(--c)" opacity=".6"/>
+        <circle cx="94" cy="24" r="14" fill="none" stroke="var(--c)" stroke-width="3"/>
+      </svg>
+      <h2>L’explication d’un texte philosophique</h2>
+      <p>Ce qu’il faut faire et éviter, la lecture analytique, le plan et la rédaction en quatre heures.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+  </div>
+  </details>
+  <details class="sub-n"><summary>Séries technologiques</summary>
+  <div class="list">
+    <a class="item" href="methode-dissertation.html" style="--c:var(--a7)">
+      <svg viewBox="0 0 120 48" aria-hidden="true">
+        <line x1="10" y1="10" x2="110" y2="10" stroke="var(--muted)" stroke-width="3" stroke-linecap="round" opacity=".5"/>
+        <line x1="10" y1="22" x2="92" y2="22" stroke="var(--muted)" stroke-width="3" stroke-linecap="round" opacity=".5"/>
+        <line x1="10" y1="34" x2="70" y2="34" stroke="var(--muted)" stroke-width="3" stroke-linecap="round" opacity=".5"/>
+        <path d="M10 44 Q 20 38 30 44 T 50 44 T 70 44 T 90 44 T 110 44" fill="none" stroke="var(--c)" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+      <h2>Construire une dissertation</h2>
+      <p>Les huit étapes de la méthode, avec un brouillon interactif pour préparer sa copie.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="methode-explication-de-texte.html" style="--c:var(--a8)">
+      <svg viewBox="0 0 120 48" aria-hidden="true">
+        <rect x="14" y="6" width="26" height="36" rx="3" fill="var(--c)" opacity=".85"/>
+        <rect x="47" y="6" width="26" height="36" rx="3" fill="var(--c)" opacity=".55"/>
+        <rect x="80" y="6" width="26" height="36" rx="3" fill="var(--c)" opacity=".3"/>
+      </svg>
+      <h2>Séries technologiques : explication de texte</h2>
+      <p>Analyse, synthèse, commentaire : comment répondre aux questions de l’épreuve.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+  </div>
+  </details>
+  </details>
+  <details class="notion"><summary>Frise chronologique</summary>
+  <div class="list">
+    <a class="item" href="frise-philosophes.html" style="--c:var(--a1)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="8" y="6" width="40" height="7" rx="2" fill="var(--c)"/><rect x="30" y="17" width="48" height="7" rx="2" fill="var(--c)" opacity=".7"/><rect x="58" y="28" width="38" height="7" rx="2" fill="var(--c)" opacity=".5"/><rect x="80" y="39" width="32" height="6" rx="2" fill="var(--c)" opacity=".35"/></svg>
+      <h2>Frise des philosophes</h2>
+      <p>Qui vivait en même temps que qui ? Une frise interactive, de l’Antiquité à aujourd’hui.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+  </div>
+  </details>
+  </details>
+  <details class="grp wrap"><summary><h2 class="sec">EMC</h2></summary>
+  <details class="notion"><summary>Démocratie</summary>
+  <div class="list">
+    <a class="item" href="textes-democratie.html" style="--c:var(--a9)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="14" y="6" width="92" height="7" fill="var(--c)"/><rect x="22" y="16" width="9" height="26" fill="var(--muted)" opacity=".6"/><rect x="42" y="16" width="9" height="26" fill="var(--muted)" opacity=".6"/><rect x="62" y="16" width="9" height="26" fill="var(--muted)" opacity=".6"/><rect x="82" y="16" width="9" height="26" fill="var(--muted)" opacity=".6"/><rect x="10" y="43" width="100" height="4" fill="var(--c)"/></svg>
+      <h2>La démocratie en sept textes</h2>
+      <p>D’Hérodote à Bergson : les arguments pour, contre et sur les limites de la démocratie.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+  </div>
+  </details>
+  <details class="notion"><summary>Anarchie</summary>
+  <div class="list">
+    <a class="item" href="anarchie.html" style="--c:var(--a3)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><circle cx="60" cy="24" r="18" fill="none" stroke="var(--c)" stroke-width="4"/><path d="M44 40 L60 8 L76 40 M48 28 H72" fill="none" stroke="var(--muted)" stroke-width="4" stroke-linejoin="round"/></svg>
+      <h2>L’anarchie : vivre sans maître ?</h2>
+      <p>Bakounine, Kropotkine, Reclus et Louise Michel : une critique du pouvoir, et ses limites.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+  </div>
+  </details>
+  </details>
+</main>
+
+<footer>
+  <div class="wrap"><p id="credit">Raphaël, <i>L’École d’Athènes</i> (1509-1511), Vatican.</p></div>
+</footer>
+<script>
+(function(){var q=document.getElementById('q'),n=document.getElementById('qn'),items=[].slice.call(document.querySelectorAll('a.item')),dets=[].slice.call(document.querySelectorAll('main details')),saved=null;
+function norm(s){return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')}
+var idx=items.map(function(a){return norm(a.textContent)});
+q.addEventListener('input',function(){var v=norm(q.value.trim());
+ if(!v){items.forEach(function(a){a.hidden=false});dets.forEach(function(d,i){d.hidden=false;if(saved)d.open=saved[i]});saved=null;n.textContent='';return}
+ if(!saved)saved=dets.map(function(d){return d.open});
+ var words=v.split(/\s+/),c=0;
+ items.forEach(function(a,i){var ok=words.every(function(w){return idx[i].indexOf(w)>-1});a.hidden=!ok;if(ok)c++});
+ dets.slice().reverse().forEach(function(d){var has=d.querySelector('a.item:not([hidden])');d.hidden=!has;if(has)d.open=true});
+ n.textContent=c?c+' page'+(c>1?'s':'')+' trouvée'+(c>1?'s':''):'Aucune page trouvée.';});})();
+</script>
+<script>
+(function(){var K='fiches-vues',items=[].slice.call(document.querySelectorAll('a.item')),prog=document.getElementById('prog'),seen={};
+try{seen=JSON.parse(localStorage.getItem(K)||'{}')}catch(e){}
+function save(){try{localStorage.setItem(K,JSON.stringify(seen))}catch(e){}}
+function paint(){var n=0;items.forEach(function(a){var h=a.getAttribute('href'),on=!!seen[h];a.classList.toggle('seen',on);if(on)n++});
+ if(!n){prog.hidden=true;return}prog.hidden=false;prog.textContent=n+' page'+(n>1?'s':'')+' vue'+(n>1?'s':'')+' sur '+items.length+' ';
+ var b=document.createElement('button');b.type='button';b.textContent='Effacer';b.onclick=function(){seen={};save();paint()};prog.appendChild(b)}
+items.forEach(function(a){var s=document.createElement('span');s.className='vu';s.textContent='✓ Vu';a.insertBefore(s,a.querySelector('h2'));
+ a.addEventListener('click',function(){seen[a.getAttribute('href')]=1;save()})});
+paint();})();
+</script>
+<script>
+(function(){var B=[
+ {img:'images/ecole-athenes.jpg',cap:'Raphaël, <i>L’École d’Athènes</i> (1509-1511), Vatican.'},
+ {img:'images/nietzsche.jpg',portrait:1,fill:'#d3bab4',cap:'Portrait de Friedrich Nietzsche'},
+ {img:'images/freud.jpg',portrait:1,fill:'#6d6d6d',cap:'Photographie de Sigmund Freud'},
+ {img:'images/voltaire.jpg',portrait:1,fill:'#363430',cap:'Portrait de Voltaire, attribué à Nicolas de Largillière (vers 1724), musée Carnavalet.'},
+ {img:'images/machiavel.jpg',portrait:1,fill:'#52301f',cap:'Santi di Tito, <i>Portrait de Nicolas Machiavel</i> (XVIᵉ siècle), Palazzo Vecchio, Florence.'},
+ {img:'images/schopenhauer.jpg',portrait:1,fill:'#818181',cap:'Photographie d’Arthur Schopenhauer, Johann Schäfer (1859).'},
+ {img:'images/marx.jpg',portrait:1,fill:'#444444',cap:'Photographie de Karl Marx, John Mayall (vers 1875).'},
+ {img:'images/delacroix.jpg',pos:'8%',cap:'Eugène Delacroix, <i>La Liberté guidant le peuple</i> (1830), musée du Louvre.'},
+ {img:'images/friedrich.jpg',cap:'Caspar David Friedrich, <i>Le Voyageur au-dessus de la mer de nuages</i> (vers 1818), Kunsthalle de Hambourg.'},
+ {img:'images/rembrandt.jpg',cap:'Rembrandt, <i>Le Philosophe en méditation</i> (1632), musée du Louvre.'},
+ {img:'images/david.jpg',cap:'Jacques-Louis David, <i>La Mort de Socrate</i> (1787), Metropolitan Museum of Art, New York.'}];
+var r=document.documentElement,cr=document.getElementById('credit'),K='fond-accueil';
+function last(){try{return +localStorage.getItem(K)}catch(e){return -1}}
+function show(i){var b=B[i];r.style.setProperty('--img','url("'+b.img+'")');
+ if(b.fill)r.style.setProperty('--fill',b.fill);else r.style.removeProperty('--fill');
+ if(b.pos)r.style.setProperty('--pos',b.pos);else r.style.removeProperty('--pos');
+ r.classList.toggle('bg-portrait',!!b.portrait);cr.innerHTML=b.cap;
+ try{localStorage.setItem(K,i)}catch(e){}}
+function pick(){var q=location.search.match(/fond=(\d+)/);if(q&&B[+q[1]]){show(+q[1]);return}
+ var l=last(),i;do{i=Math.floor(Math.random()*B.length)}while(B.length>1&&i===l);show(i)}
+pick();
+window.addEventListener('pageshow',function(e){if(e.persisted)pick()});
+})();
+</script>
+</body>
+</html>

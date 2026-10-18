@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Réviser les repères conceptuels</title>
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+  --bg:#F6F7FB; --surface:#FFFFFF; --ink:#12141C; --muted:#565C70; --line:#DCDFEA;
+  --brand:#2F3BE0; --brand-soft:#E8EAFD; --hl:#FFE45C; --focus:#2F3BE0;
+  --ok:#0B7A4B; --ok-soft:#DDF4E8; --bad:#C42B43; --bad-soft:#FBE3E7; --on-brand:#FFFFFF;
+  --head:system-ui,-apple-system,"Segoe UI",sans-serif;
+  --text:Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0E1018; --surface:#171A26; --ink:#EEF0F8; --muted:#A0A6BD; --line:#2A2F44;
+    --brand:#9AA4FF; --brand-soft:#232849; --hl:#6B5A00; --focus:#9AA4FF;
+    --ok:#4ADE9B; --ok-soft:#12332A; --bad:#FF7088; --bad-soft:#3A1822; --on-brand:#0E1018;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0E1018; --surface:#171A26; --ink:#EEF0F8; --muted:#A0A6BD; --line:#2A2F44;
+  --brand:#9AA4FF; --brand-soft:#232849; --hl:#6B5A00; --focus:#9AA4FF;
+  --ok:#4ADE9B; --ok-soft:#12332A; --bad:#FF7088; --bad-soft:#3A1822; --on-brand:#0E1018;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:calc(5rem + env(safe-area-inset-top,0px));-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.65 var(--text)}
+.wrap{width:min(960px,100% - 2.5rem);margin-inline:auto}
+h1,h2,h3{margin:0}
+h1{font:800 clamp(2.4rem,8vw,4.8rem)/1 var(--head);letter-spacing:-.035em}
+h3{font:800 1.2rem/1.2 var(--head)}
+p{margin:0 0 1em}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
+.muted{color:var(--muted)}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+.btn{font:700 .95rem/1.2 var(--head);color:var(--ink);background:transparent;border:1.5px solid var(--ink);border-radius:8px;padding:.7rem 1.1rem;cursor:pointer}
+.btn:hover{background:var(--brand-soft)}
+.btn.primary{background:var(--brand);border-color:var(--brand);color:var(--on-brand)}
+.btn.primary:hover{filter:brightness(1.08)}
+.btn.good{background:var(--ok);border-color:var(--ok);color:var(--surface)}
+.btn.again{border-color:var(--bad);color:var(--bad)}
+.btn.again:hover{background:var(--bad-soft)}
+.btn[disabled]{opacity:.5;cursor:default}
+
+/* En-tête */
+.hero{padding:clamp(2rem,6vw,4rem) 0 1.6rem}
+mark.hl{color:inherit;background:linear-gradient(var(--hl),var(--hl)) 0 88%/0% 42% no-repeat;transition:background-size .9s cubic-bezier(.2,.7,.2,1) .25s}
+mark.hl.on{background-size:100% 42%}
+.lead{font:500 clamp(1.1rem,2.4vw,1.35rem)/1.45 var(--head);margin:1.2rem 0 1.4rem;max-width:40ch}
+.note-box{background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--brand);border-radius:0 8px 8px 0;padding:1rem 1.2rem;max-width:60ch;font-size:.98rem;margin:0}
+
+/* Onglets */
+.tabbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+.tabs{display:flex;gap:.4rem;padding:.7rem 0}
+.tabs button{flex:1 1 0;font:700 1rem/1.2 var(--head);color:var(--muted);background:transparent;border:1.5px solid transparent;border-radius:8px;padding:.7rem .6rem;cursor:pointer}
+.tabs button:hover{color:var(--ink)}
+.tabs button[aria-selected="true"]{background:var(--brand);color:var(--on-brand)}
+main{padding:2rem 0 4rem}
+[role="tabpanel"][hidden]{display:none}
+
+/* Parcourir */
+.tools{display:flex;flex-wrap:wrap;gap:1rem 1.4rem;align-items:flex-end;margin-bottom:1rem}
+.field{flex:1 1 18rem}
+.field label{display:block;font:700 .9rem/1.2 var(--head);margin-bottom:.4rem}
+input[type="search"]{width:100%;font:500 1rem/1.3 var(--head);color:var(--ink);background:var(--surface);border:1.5px solid var(--line);border-radius:8px;padding:.75rem .9rem}
+.check{display:flex;align-items:center;gap:.5rem;font:500 .95rem/1.3 var(--head);cursor:pointer}
+.check input{width:1.1rem;height:1.1rem;accent-color:var(--brand)}
+.btns{display:flex;gap:.5rem}
+.btns .btn{padding:.6rem .9rem}
+.count{font:500 .92rem/1.4 var(--head);color:var(--muted);margin:0 0 .6rem}
+.rep{position:relative;border-top:1px solid var(--line)}
+.rep:last-child{border-bottom:1px solid var(--line)}
+.rep summary{list-style:none;cursor:pointer;display:flex;align-items:baseline;gap:.7rem;padding:1rem 3.4rem 1rem 0;font:800 1.2rem/1.3 var(--head)}
+.rep summary::-webkit-details-marker{display:none}
+.rep summary::marker{content:""}
+.rep summary::before{content:"";flex:none;width:.55rem;height:.55rem;border-right:3px solid var(--brand);border-bottom:3px solid var(--brand);transform:rotate(-45deg);transition:transform .25s ease;margin-bottom:.15rem}
+.rep details[open] summary::before{transform:rotate(45deg)}
+.star{position:absolute;right:0;top:.55rem;width:2.5rem;height:2.5rem;display:flex;align-items:center;justify-content:center;background:transparent;border:0;border-radius:8px;cursor:pointer;color:var(--muted)}
+.star:hover{background:var(--brand-soft)}
+.star svg{width:1.4rem;height:1.4rem;fill:none;stroke:currentColor;stroke-width:2;stroke-linejoin:round}
+.star[aria-pressed="true"]{color:var(--brand)}
+.star[aria-pressed="true"] svg{fill:currentColor}
+.terms{display:flex;flex-wrap:wrap;gap:1.2rem 2.2rem;padding:.1rem 0 1.6rem}
+.term{flex:1 1 17rem;min-width:0}
+.term h3{color:var(--brand);padding-bottom:.4rem;border-bottom:3px solid var(--hl);display:inline-block;margin-bottom:.5rem}
+.term p{margin:.45rem 0;font-size:1rem;line-height:1.55}
+.lab{font:700 .78rem/1 var(--head);color:var(--brand);margin-right:.4rem;white-space:nowrap}
+
+/* Cartes */
+.deck-tools{display:flex;flex-wrap:wrap;gap:.8rem 1.4rem;align-items:center}
+.seg{display:inline-flex;border:1.5px solid var(--ink);border-radius:8px;overflow:hidden}
+.seg button{font:700 .92rem/1.2 var(--head);color:var(--ink);background:transparent;border:0;padding:.6rem .9rem;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.cardwrap{perspective:1500px;margin:1.4rem 0 1rem}
+.card{display:grid;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.3,.7,.2,1);min-height:19rem;cursor:pointer;border-radius:14px}
+.card.flipped{transform:rotateY(180deg)}
+.face{grid-area:1/1;-webkit-backface-visibility:hidden;backface-visibility:hidden;background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:1.6rem;display:flex;flex-direction:column;justify-content:center}
+.face.front{border-top:8px solid var(--brand)}
+.face.back{transform:rotateY(180deg);justify-content:flex-start;border-top:8px solid var(--hl)}
+.big{font:800 clamp(2rem,7vw,3.6rem)/1.05 var(--head);letter-spacing:-.025em;margin:0 0 1rem}
+.hint{color:var(--muted);margin:0;font-size:1rem}
+.back h3{font-size:1.7rem;color:var(--brand);margin-bottom:.2rem}
+.back .of{font:500 .9rem/1.3 var(--head);color:var(--muted);margin:0 0 .6rem}
+.back p.sn{margin:.5rem 0;font-size:1.02rem;line-height:1.55}
+.answers{display:flex;flex-wrap:wrap;gap:.7rem;align-items:center}
+.progress{font:500 .92rem/1.4 var(--head);color:var(--muted);margin:1rem 0 0}
+.done{background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:1.6rem;margin:1.4rem 0}
+.done h3{font-size:1.5rem;margin-bottom:.6rem}
+
+/* Quiz */
+.qbox{background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:clamp(1.1rem,3vw,1.8rem);margin-top:1.2rem}
+.qhead{display:flex;justify-content:space-between;gap:1rem;font:700 .92rem/1.2 var(--head);color:var(--muted);margin-bottom:1.1rem}
+.chip{display:inline-block;font:700 .82rem/1 var(--head);color:var(--brand);background:var(--brand-soft);border-radius:6px;padding:.35rem .6rem;margin-bottom:.7rem}
+.clue{font:500 clamp(1.15rem,2.6vw,1.45rem)/1.45 var(--text);margin:0 0 1.3rem}
+.q-ask{font:700 .95rem/1.3 var(--head);margin:0 0 .6rem}
+.opts{display:flex;flex-direction:column;gap:.55rem}
+.opt{display:flex;justify-content:space-between;gap:1rem;align-items:center;width:100%;text-align:left;font:700 1.05rem/1.3 var(--head);color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:8px;padding:.85rem 1rem;cursor:pointer}
+.opt:hover:not([disabled]){border-color:var(--brand)}
+.opt[disabled]{cursor:default}
+.opt.ok{background:var(--ok-soft);border-color:var(--ok)}
+.opt.bad{background:var(--bad-soft);border-color:var(--bad)}
+.opt .tag{font:700 .8rem/1 var(--head);white-space:nowrap}
+.opt.ok .tag{color:var(--ok)}
+.opt.bad .tag{color:var(--bad)}
+.fb{margin-top:1.2rem;padding-top:1.2rem;border-top:1px solid var(--line)}
+.fb .verdict{font:800 1.2rem/1.3 var(--head);margin:0 0 .6rem}
+.fb .verdict.ok{color:var(--ok)}
+.fb .verdict.bad{color:var(--bad)}
+.fb h4{font:800 .95rem/1.3 var(--head);margin:1rem 0 .3rem}
+.fb p{margin:.3rem 0;font-size:1rem;line-height:1.55}
+.fb .next{margin-top:1.1rem}
+.score{font:800 clamp(2.4rem,8vw,4rem)/1 var(--head);letter-spacing:-.03em;margin:0 0 .6rem}
+.missed{margin:.8rem 0 1.2rem;padding:0;list-style:none}
+.missed li{padding:.5rem 0;border-top:1px solid var(--line)}
+.missed span{color:var(--muted);font-size:.95rem}
+footer{border-top:1px solid var(--line);padding:1.6rem 0 2.5rem;color:var(--muted);font-size:.92rem}
+footer p{margin:0}
+
+@media (max-width:560px){
+  .tabs button{font-size:.92rem;padding:.65rem .3rem}
+  .face{padding:1.2rem}
+  .opt{flex-direction:column;align-items:flex-start;gap:.3rem}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition:none!important;animation:none!important}
+  mark.hl{background-size:100% 42%}
+}
+
+.ring{width:96px;height:96px;flex:none}
+.ring circle{fill:none;stroke-width:10}
+.ring .bg{stroke:var(--line)}
+.ring .fg{stroke:var(--brand);stroke-linecap:round;transform:rotate(-90deg);transform-origin:50% 50%;stroke-dasharray:264;stroke-dashoffset:264}
+@media (prefers-reduced-motion:no-preference){.ring .fg{transition:stroke-dashoffset 1s ease}}
+.ring text{font:800 26px var(--head);fill:var(--ink);text-anchor:middle;dominant-baseline:central}
+.bhead{display:flex;flex-wrap:wrap;align-items:center;gap:1.2rem;margin-bottom:.4rem}
+.bhead h3{font:800 1.3rem/1.2 var(--head);margin:0 0 .2rem}
+.bhead p{margin:0}
+.missed li b{display:block;font-family:var(--head);color:var(--bad)}
+.missed li p{margin:.2rem 0 0;font-size:.98rem}
+
+.pdfbtn{display:inline-flex;align-items:center;gap:.5rem;font:600 .88rem/1 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--surface);border:1.5px solid var(--ink);border-radius:999px;padding:.55rem .95rem;cursor:pointer}
+.pdfbtn:hover{background:var(--ink);color:var(--bg)}.pdfbtn:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:2px}
+@media print{
+  :root{--bg:#fff!important;--surface:#fff!important;--ink:#111!important;--muted:#444!important;--line:#bbb!important;color-scheme:light!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:#fff!important;color:#111!important}
+  body::before,body::after{display:none!important}
+  nav,.pdfbtn,.pn,video,section[aria-labelledby="h-video"]{display:none!important}
+  .rev,.js .rev{opacity:1!important;transform:none!important}
+  .stp li[hidden]{display:list-item!important}
+  details>*{display:block!important}
+  article,li,.card,figure,.stage{break-inside:avoid}
+  h1,h2,h3{break-after:avoid;text-shadow:none!important}
+  *{text-shadow:none!important}
+  a{color:inherit;text-decoration:none}
+  section.block,.part{padding-top:1.2rem!important;padding-bottom:1.2rem!important}
+  footer{break-before:avoid;border-top:1px solid #999;margin-top:1rem}
+}
+@page{size:A4;margin:16mm 14mm}
+</style>
+</head>
+<body>
+<nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
+
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Les <mark class="hl" id="hl">repères</mark> conceptuels</h1>
+    <p class="lead" id="lead">Parcourez les repères, mémorisez-les avec des cartes, puis testez-vous.</p>
+    <p class="note-box">Ces repères ne sont pas à apprendre par cœur : ils servent à problématiser des sujets et à expliquer des textes, en les intégrant à votre réflexion. Leurs définitions n’épuisent pas tous les sens des termes ; elles aident à ouvrir des perspectives.</p>
+  </div>
+</header>
+
+<div class="tabbar">
+  <div class="wrap">
+    <div class="tabs" role="tablist" aria-label="Mode de révision">
+      <button role="tab" id="t-browse" aria-controls="p-browse" aria-selected="true" type="button">Parcourir</button>
+      <button role="tab" id="t-cards" aria-controls="p-cards" aria-selected="false" tabindex="-1" type="button">Cartes</button>
+      <button role="tab" id="t-quiz" aria-controls="p-quiz" aria-selected="false" tabindex="-1" type="button">Quiz</button>
+    </div>
+  </div>
+</div>
+
+<main>
+  <div class="wrap">
+
+    <section id="p-browse" role="tabpanel" aria-labelledby="t-browse">
+      <div class="tools">
+        <div class="field">
+          <label for="q">Rechercher un repère ou un mot</label>
+          <input id="q" type="search" placeholder="Par exemple : cause, droit, Dieu" autocomplete="off">
+        </div>
+        <label class="check"><input type="checkbox" id="onlyFlag"> Seulement les repères à revoir</label>
+        <div class="btns">
+          <button class="btn" id="openAll" type="button">Tout ouvrir</button>
+          <button class="btn" id="closeAll" type="button">Tout fermer</button>
+        </div>
+      </div>
+      <p class="count" id="resCount" aria-live="polite"></p>
+      <div id="list"></div>
+      <p class="muted" id="empty" hidden>Aucun repère ne correspond à votre recherche.</p>
+      <p class="muted" style="margin-top:1rem;font-size:.95rem">L’étoile permet de marquer un repère à revoir : les cartes et le quiz peuvent alors se limiter à ces repères.</p>
+    </section>
+
+    <section id="p-cards" role="tabpanel" aria-labelledby="t-cards" hidden>
+      <div class="deck-tools">
+        <div class="seg" role="group" aria-label="Choix du paquet">
+          <button type="button" id="scopeAll" aria-pressed="true">Tous les termes</button>
+          <button type="button" id="scopeFlag" aria-pressed="false">À revoir</button>
+        </div>
+        <button class="btn" id="restart" type="button">Recommencer le paquet</button>
+      </div>
+      <div id="deckArea"></div>
+    </section>
+
+    <section id="p-quiz" role="tabpanel" aria-labelledby="t-quiz" hidden>
+      <div class="deck-tools">
+        <div class="seg" role="group" aria-label="Choix des questions">
+          <button type="button" id="qAll" aria-pressed="true">Tous les repères</button>
+          <button type="button" id="qFlag" aria-pressed="false">À revoir</button>
+        </div>
+        <button class="btn primary" id="qStart" type="button">Commencer un quiz</button>
+      </div>
+      <div id="quizArea"><p class="muted" style="margin-top:1.2rem">Dix questions : à partir d’une définition, retrouvez le terme. Les termes proposés incluent souvent son voisin dans le repère, pour apprendre à les distinguer.</p></div>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap"><p>Page de révision réalisée à partir du document « Repères conceptuels ».</p></div>
+</footer>
+
+<script>
+(function(){
+  function $(s){return document.querySelector(s)}
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ===================== Données ===================== */
+  /* Chaque sens : [étiquette, texte, (0 = exclu du quiz)] */
+  var D=[
+  {t:'Absolu – Relatif',terms:[
+    {n:'Absolu',s:[['','désigne ce qui ne comporte ni restriction ni réserve (ex : un pouvoir absolu, une confiance absolue, etc.).'],['Perspective religieuse','désigne Dieu.']]},
+    {n:'Relatif',s:[['','désigne ce qui se rapporte à quelque chose d’autre (ex : l’obtention du bac est relative à votre travail).']]}]},
+  {t:'Abstrait – Concret',terms:[
+    {n:'Abstrait',s:[['','ce qui n’a pas de réalité concrète (ex : une pensée, un désir).']]},
+    {n:'Concret',s:[['','la réalité singulière, le vécu, l’existence immédiate.']]}]},
+  {t:'En acte – En puissance',terms:[
+    {n:'En acte',s:[['','ce qui existe tel qu’il est, ce qui est pleinement réalisé.']]},
+    {n:'En puissance',s:[['','ce qui est possible, ce que quelque chose peut devenir.']]}]},
+  {t:'Analyse – Synthèse',terms:[
+    {n:'Analyse',s:[['','processus de décomposition d’un tout en ses éléments constitutifs.']]},
+    {n:'Synthèse',s:[['','procédé de recomposition ou de reconstitution d’un tout à partir d’éléments ou de notions simples.']]}]},
+  {t:'Concept – Image – Métaphore',terms:[
+    {n:'Concept',s:[['','représentation générale et abstraite, sorte de définition générale.']]},
+    {n:'Image',s:[['','représentation matérielle d’un objet.']]},
+    {n:'Métaphore',s:[['','figure de rhétorique, procédé de langage qui consiste dans un transfert du sens par substitution.']]}]},
+  {t:'Contingent – Nécessaire',terms:[
+    {n:'Contingent',s:[['','désigne tout ce qui peut être conçu comme pouvant être ou ne pas être (ex : la météo, il peut faire beau ou pleuvoir demain).']]},
+    {n:'Nécessaire',s:[['','qui ne peut pas ne pas être ; qui ne peut être autrement (ex : le présent, les lois mathématiques).']]}]},
+  {t:'Croire – Savoir',terms:[
+    {n:'Croire',s:[['','tenir pour vrai sans disposer de preuves ; accepter sans examen critique rationnel.']]},
+    {n:'Savoir',s:[['','avoir une connaissance objective d’un objet, dans sa nature et dans ses propriétés.']]}]},
+  {t:'Essentiel – Accidentel',terms:[
+    {n:'Essentiel',s:[['','ce sans quoi un objet X n’est plus le même objet (ex : il est essentiel pour une table de comporter un plateau).']]},
+    {n:'Accidentel',s:[['','ce qui relève de la contingence (ex : la couleur de la table peut changer, cela reste une table).']]}]},
+  {t:'Exemple – Preuve',terms:[
+    {n:'Exemple',s:[['a.','personne dont les actes sont dignes d’être imités.'],['b.','cas, événement particulier, qui sert à illustrer, préciser un concept.']]},
+    {n:'Preuve',s:[['','démonstration ; processus intellectuel par lequel on établit la vérité d’une proposition.']]}]},
+  {t:'Expliquer – Comprendre',terms:[
+    {n:'Expliquer',s:[['','action de « déplier », de rendre intelligible un objet en montrant le « pourquoi », le « comment », la cause de l’objet.']]},
+    {n:'Comprendre',s:[['','saisir intellectuellement, connaître.']]}]},
+  {t:'En fait – En droit',terms:[
+    {n:'En fait',s:[['','toute donnée réelle provenant de l’expérience.']]},
+    {n:'En droit',s:[['Adjectif, a.','qui suit un raisonnement correct.'],['Adjectif, b.','qui ne s’écarte pas d’une règle morale (ex : un homme droit).'],['Nom, a.','un droit : ce qui est permis par une règle, ce qui est conforme à une règle.'],['Nom, b.','le Droit : désigne le légitime, par opposition au fait, qui désigne le réel.'],['Nom, c.','le droit : l’ensemble des droits régissant les rapports des hommes.']]}]},
+  {t:'Formel – Matériel',terms:[
+    {n:'Formel',s:[['','ce qui désigne la forme, par opposition au contenu.']]},
+    {n:'Matériel',s:[['','ce qui relève de la matière en tant que substance dont les corps sont faits.']]}]},
+  {t:'Genre – Espèce – Individu',terms:[
+    {n:'Genre',s:[['Sens biologique','subdivision d’une famille.'],['Genre humain','universalité.',0]]},
+    {n:'Espèce',s:[['Sens biologique','élément de classification, groupe d’êtres vivants caractérisé par un type commun, bien défini et héréditaire (ex : l’espèce humaine).']]},
+    {n:'Individu',s:[['Sens biologique','corps vivant formant un tout, anatomiquement isolé, et autonome dans son fonctionnement.'],['Sens psychologique et sociologique','être humain distinct des autres (par opposition à l’État ou la société).']]}]},
+  {t:'Hypothèse – Conséquence – Conclusion',terms:[
+    {n:'Hypothèse',s:[['Étymologie','du grec hypothesis, action de mettre en dessous, base, fondement.',0],['','proposition constituant le point de départ d’un raisonnement, destinée à être prouvée.']]},
+    {n:'Conséquence',s:[['a.','ce que l’on déduit d’un principe.'],['b.','résultat logique d’une argumentation rationnelle.']]},
+    {n:'Conclusion',s:[['','proposition achevant un raisonnement, l’aboutissement d’une déduction.']]}]},
+  {t:'Idéal – Réel',terms:[
+    {n:'Idéal',s:[['Adjectif, a.','qui n’existe que dans la pensée, à titre d’idée.'],['Adjectif, b.','parfait, qui réalise l’accomplissement parfait d’un type (ex : la beauté idéale).']]},
+    {n:'Réel',s:[['Adjectif, a.','opposé à illusoire ou apparent ; ce qui n’est pas seulement imaginaire (ex : un mérite réel, un pouvoir réel).'],['Adjectif, b.','opposé à possible, virtuel.'],['Adjectif, c.','opposé à abstrait, intelligible.'],['Nom','les choses elles-mêmes, ce qui est.']]}]},
+  {t:'Identité – Égalité – Différence',terms:[
+    {n:'Identité',s:[['','caractère de ce qui reste tel qu’il est (ex : notre identité).']]},
+    {n:'Égalité',s:[['Sens juridique','principe selon lequel tous les individus se présentent de façon identique devant la loi.'],['Sens politique','droit identique de participer à un gouvernement.']]},
+    {n:'Différence',s:[['','caractère par lequel une chose se distingue d’une autre.']]}]},
+  {t:'Impossible – Possible',terms:[
+    {n:'Impossible',s:[['','ce qui ne peut être, ce qui ne peut se réaliser, ce qui ne peut se produire.']]},
+    {n:'Possible',s:[['Sens courant','qui n’est pas, mais qui pourrait être, qui n’implique pas de contradiction.'],['Sens physique','qui n’est pas en contradiction avec les lois de la nature.']]}]},
+  {t:'Intuitif – Discursif',terms:[
+    {n:'Intuitif',s:[['','qui relève de l’intuition, qui procède de l’intuition.']]},
+    {n:'Discursif',s:[['','qui se rapporte à une opération de la pensée qui procède de manière générale (jugement, raisonnement, etc.). Renvoie au discours.']]}]},
+  {t:'Légal – Légitime',terms:[
+    {n:'Légal',s:[['','qui est conforme à la loi.']]},
+    {n:'Légitime',s:[['','que l’on est en droit de faire. Ce droit peut revêtir plusieurs formes : droit juridique, droit moral, droit éthique, etc. (ex : l’esclavage peut être légal, sans être légitime).']]}]},
+  {t:'Médiat – Immédiat',terms:[
+    {n:'Médiat',s:[['','qui est en relation avec un autre terme ou une autre chose au moyen d’un intermédiaire (ex : un médiateur de justice).']]},
+    {n:'Immédiat',s:[['','ce qui est direct, ce qui est donné sans médiation.']]}]},
+  {t:'Objectif – Subjectif – Intersubjectif',terms:[
+    {n:'Objectif',s:[['Sens courant','impartial, indépendant des goûts, inclinations et intérêts du sujet.']]},
+    {n:'Subjectif',s:[['Sens courant (et souvent péjoratif)','ce qui est individuel et dépendant des préférences personnelles, qui ne concerne pas tout le monde.'],['Sens philosophique et psychologique','ce qui appartient au sujet en tant qu’être conscient.']]},
+    {n:'Intersubjectif',s:[['','rapports entre différents sujets/individus.']]}]},
+  {t:'Obligation – Contrainte',terms:[
+    {n:'Obligation',s:[['Sens juridique','lien juridique par lequel une personne est tenue (vis-à-vis d’une autre personne) à faire ou ne pas faire quelque chose.'],['Sens moral','caractère impératif de la loi morale (« Tu dois »).']]},
+    {n:'Contrainte',s:[['a.','violence, pression exercée sur un sujet.'],['b.','règle à laquelle nous devons nous soumettre.']]}]},
+  {t:'Origine – Fondement',terms:[
+    {n:'Origine',s:[['','commencement (ex : l’origine de l’univers).'],['','désigne aussi la source, la provenance de quelque chose (ex : l’origine d’un fruit).']]},
+    {n:'Fondement',s:[['','principes qui soutiennent un ensemble de phénomènes (ex : les fondements de la morale).']]}]},
+  {t:'Persuader – Convaincre',terms:[
+    {n:'Persuader',s:[['','emporter l’adhésion par des moyens irrationnels (ex : la séduction, l’émotion).']]},
+    {n:'Convaincre',s:[['','emporter l’adhésion en amenant l’interlocuteur à reconnaître la vérité d’un énoncé ou d’un raisonnement, en s’appuyant sur des raisons et des moyens rationnels.']]}]},
+  {t:'Principe – Cause – Fin',terms:[
+    {n:'Principe',s:[['a. Point de vue temporel','commencement, point de départ.'],['b. Point de vue causal','cause, source de l’action.'],['c. Point de vue épistémologique','proposition commandant un secteur de la science (ex : principe d’Archimède) ou une théorie (ex : principe de la relativité générale).'],['d. Point de vue normatif','règle, norme d’action (ex : « j’ai pour principe de »).']]},
+    {n:'Cause',s:[['','ce qui répond à la question « pourquoi ? » : le phénomène qui précède un autre et le détermine.']]},
+    {n:'Fin',s:[['a.','but vers lequel on tend, finalité.'],['b.','limite, terme.']]}]},
+  {t:'Public – Privé',terms:[
+    {n:'Public',s:[['a.','qui concerne le peuple pris dans son ensemble ; qui appartient à la collectivité sociale ou politique.'],['b.','accessible, ouvert à tous.'],['c.','qui a lieu en présence de témoins, qui n’est pas secret.']]},
+    {n:'Privé',s:[['a.','où le public n’a pas accès, n’est pas admis.'],['b.','individuel, particulier, opposé à collectif.'],['c.','personnel, intime.'],['d.','qui ne dépend pas de l’État.']]}]},
+  {t:'Ressemblance – Analogie',terms:[
+    {n:'Ressemblance',s:[['a.','rapport de proximité entre deux choses ou deux personnes, conduisant à la reconnaissance d’une parenté (réelle ou symbolique).'],['b.','ce qui résulte de la comparaison entre l’inconnu et le connu, qui permet de ramener l’inconnu au connu.']]},
+    {n:'Analogie',s:[['','ressemblance plus ou moins vague ou lointaine.']]}]},
+  {t:'Théorie – Pratique',terms:[
+    {n:'Théorie',s:[['','ce qui relève de la pure conception, de l’idée.']]},
+    {n:'Pratique',s:[['','ce qui concerne l’action, ou qui est orienté vers l’action ; s’oppose au théorique.']]}]},
+  {t:'Transcendant – Immanent',terms:[
+    {n:'Transcendant',s:[['Adjectif, sens courant','qui dépasse la moyenne, qui se démarque.'],['Adjectif, sens métaphysique','qui est d’une nature supérieure, d’un autre ordre (ex : Dieu est transcendant).']]},
+    {n:'Immanent',s:[['Sens philosophique','qui reste à l’intérieur de l’objet pensé ou donné (qui ne « dépasse » pas, opposé à transcendant).']]}]},
+  {t:'Universel – Général – Particulier – Singulier',terms:[
+    {n:'Universel',s:[['Sens courant','qui concerne l’univers, l’ensemble de tout ce qui existe (ex : l’attraction universelle), qui concerne les hommes en tant qu’ils forment une collectivité (ex : le suffrage universel).'],['Sens logique','désigne ce qui s’applique à tous les cas, sans aucune exception.']]},
+    {n:'Général',s:[['Sens courant','désigne à tort l’universel.'],['Sens logique','ce dit d’une propriété qui s’applique à la plupart des éléments d’un ensemble (alors que l’universel s’applique à tous).']]},
+    {n:'Particulier',s:[['','ce qui appartient à un individu ou à quelques-uns, par opposition à universel.']]},
+    {n:'Singulier',s:[['Sens courant','qui concerne un individu.']]}]},
+  {t:'Vrai – Probable – Certain',terms:[
+    {n:'Vrai',s:[['','qui est possible et pensable logiquement ; qui est conforme aux lois logiques ; qui n’implique pas de contradiction.']]},
+    {n:'Probable',s:[['','qui mérite davantage d’être cru, qui est le plus vraisemblable.']]},
+    {n:'Certitude',s:[['','état d’esprit du sujet dont l’adhésion exclut toute crainte d’erreur. État de l’esprit qui adhère fermement à ce qu’il juge être vrai.']]}]}];
+
+  /* ===================== Utilitaires ===================== */
+  function norm(s){return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')}
+  function cap(s){return s.charAt(0).toUpperCase()+s.slice(1)}
+  function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+  function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+  function stem(name){
+    var w=norm(name).replace(/^(en|le|la|l’)\s+/,'').split(/[\s(]/)[0].replace(/[^a-z]/g,'');
+    return w.length<=6?w:w.slice(0,5);
+  }
+
+  /* Termes à plat + indices de questions possibles */
+  var T=[];
+  D.forEach(function(g,gi){
+    g.terms.forEach(function(t){
+      var st=stem(t.n),clues=[];
+      t.s.forEach(function(x){
+        if(x[2]===0)return;
+        var base=x[3]||x[1];
+        var clue=base.replace(/\s*\([^)]*\)/g,'').trim();
+        if(clue.length<5)return;
+        if(norm(clue).indexOf(st)!==-1)return;
+        clues.push({label:x[0],text:cap(clue)});
+      });
+      T.push({g:gi,n:t.n,s:t.s,clues:clues});
+    });
+  });
+  $('#lead').textContent=D.length+' repères et '+T.length+' termes à explorer : parcourez, mémorisez avec des cartes, puis testez-vous.';
+
+  /* ===================== Repères à revoir (mémorisés) ===================== */
+  var KEY='reperes-a-revoir';
+  var flags=new Set();
+  try{JSON.parse(localStorage.getItem(KEY)||'[]').forEach(function(i){flags.add(i)})}catch(e){}
+  function saveFlags(){try{localStorage.setItem(KEY,JSON.stringify(Array.from(flags)))}catch(e){}}
+  var STAR='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l2.6 5.4 5.9.8-4.3 4.1 1 5.9L12 16.9 6.8 19.7l1-5.9L3.5 9.7l5.9-.8z"/></svg>';
+
+  /* ===================== Onglets ===================== */
+  var tabs=[$('#t-browse'),$('#t-cards'),$('#t-quiz')];
+  var panels=[$('#p-browse'),$('#p-cards'),$('#p-quiz')];
+  function showTab(i,focus){
+    tabs.forEach(function(t,k){
+      t.setAttribute('aria-selected',k===i?'true':'false');
+      t.setAttribute('tabindex',k===i?'0':'-1');
+      panels[k].hidden=k!==i;
+    });
+    if(focus)tabs[i].focus();
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){showTab(i)});
+    t.addEventListener('keydown',function(e){
+      if(e.key==='ArrowRight'){e.preventDefault();showTab((i+1)%3,true)}
+      else if(e.key==='ArrowLeft'){e.preventDefault();showTab((i+2)%3,true)}
+    });
+  });
+
+  /* ===================== Parcourir ===================== */
+  var list=$('#list'),qEl=$('#q'),onlyFlag=$('#onlyFlag'),resCount=$('#resCount'),emptyEl=$('#empty');
+  var items=[];
+  D.forEach(function(g,gi){
+    var wrap=document.createElement('div');wrap.className='rep';
+    var det=document.createElement('details');
+    var sum=document.createElement('summary');sum.textContent=g.t;
+    var terms=document.createElement('div');terms.className='terms';
+    var hay=norm(g.t);
+    g.terms.forEach(function(t){
+      var d=document.createElement('div');d.className='term';
+      var h=document.createElement('h3');h.textContent=t.n;d.appendChild(h);
+      hay+=' '+norm(t.n);
+      t.s.forEach(function(x){
+        var p=document.createElement('p');
+        if(x[0]){var l=document.createElement('span');l.className='lab';l.textContent=x[0];p.appendChild(l)}
+        p.appendChild(document.createTextNode(cap(x[1])));
+        d.appendChild(p);
+        hay+=' '+norm(x[0]+' '+x[1]);
+      });
+      terms.appendChild(d);
+    });
+    var star=document.createElement('button');
+    star.type='button';star.className='star';star.innerHTML=STAR;
+    star.setAttribute('aria-label','Marquer le repère « '+g.t+' » à revoir');
+    star.addEventListener('click',function(e){
+      e.preventDefault();e.stopPropagation();
+      if(flags.has(gi))flags.delete(gi);else flags.add(gi);
+      saveFlags();syncFlags();filter();
+    });
+    det.appendChild(sum);det.appendChild(terms);
+    wrap.appendChild(det);wrap.appendChild(star);
+    list.appendChild(wrap);
+    items.push({gi:gi,wrap:wrap,el:det,star:star,hay:hay});
+  });
+  function syncFlags(){
+    items.forEach(function(it){
+      it.star.setAttribute('aria-pressed',flags.has(it.gi)?'true':'false');
+    });
+    updateScopeLabels();
+  }
+  function filter(){
+    var q=norm(qEl.value.trim()),only=onlyFlag.checked,n=0;
+    items.forEach(function(it){
+      var show=(!q||it.hay.indexOf(q)!==-1)&&(!only||flags.has(it.gi));
+      it.wrap.hidden=!show;
+      if(show){n++;if(q)it.el.open=true}
+    });
+    resCount.textContent=n+' repère'+(n>1?'s':'')+' affiché'+(n>1?'s':'')+' sur '+D.length+'.';
+    emptyEl.hidden=n!==0;
+  }
+  qEl.addEventListener('input',filter);
+  onlyFlag.addEventListener('change',filter);
+  $('#openAll').addEventListener('click',function(){items.forEach(function(it){if(!it.wrap.hidden)it.el.open=true})});
+  $('#closeAll').addEventListener('click',function(){items.forEach(function(it){it.el.open=false})});
+
+  /* ===================== Cartes ===================== */
+  var deckArea=$('#deckArea'),scope='all';
+  var queue=[],missed=new Set(),stats={known:0,first:0,total:0},flipped=false;
+  var scopeAll=$('#scopeAll'),scopeFlag=$('#scopeFlag');
+
+  function updateScopeLabels(){
+    var nT=T.filter(function(t){return flags.has(t.g)}).length;
+    scopeAll.textContent='Tous les termes ('+T.length+')';
+    scopeFlag.textContent='À revoir ('+nT+')';
+    var nQ=T.filter(function(t){return t.clues.length&&flags.has(t.g)}).length;
+    $('#qFlag').textContent='À revoir ('+nQ+' termes)';
+  }
+  function buildDeck(){
+    var base=T.filter(function(t){return scope==='all'||flags.has(t.g)});
+    queue=shuffle(base);missed=new Set();stats={known:0,first:0,total:base.length};flipped=false;
+    renderCard();
+  }
+  function setScope(s){
+    scope=s;
+    scopeAll.setAttribute('aria-pressed',s==='all'?'true':'false');
+    scopeFlag.setAttribute('aria-pressed',s==='flag'?'true':'false');
+    buildDeck();
+  }
+  scopeAll.addEventListener('click',function(){setScope('all')});
+  scopeFlag.addEventListener('click',function(){setScope('flag')});
+  $('#restart').addEventListener('click',buildDeck);
+
+  function senseHTML(t){
+    return t.s.map(function(x){
+      return '<p class="sn">'+(x[0]?'<span class="lab">'+esc(x[0])+'</span>':'')+esc(cap(x[1]))+'</p>';
+    }).join('');
+  }
+  function renderCard(){
+    if(!stats.total){
+      deckArea.innerHTML='<div class="done"><h3>Aucun repère à revoir pour l’instant</h3><p class="muted" style="margin:0">Marquez des repères avec l’étoile dans l’onglet Parcourir, ou signalez-les « À revoir » pendant les cartes.</p></div>';
+      return;
+    }
+    if(!queue.length){
+      deckArea.innerHTML='<div class="done"><h3>Paquet terminé</h3><p>Vous avez parcouru les '+stats.total+' termes. '+stats.first+' sur '+stats.total+' ont été sus du premier coup.</p><button class="btn primary" id="again" type="button">Recommencer le paquet</button></div>';
+      $('#again').addEventListener('click',buildDeck);
+      return;
+    }
+    var t=queue[0];
+    deckArea.innerHTML=
+      '<div class="cardwrap"><div class="card" id="card" role="button" tabindex="0" aria-label="Carte : '+esc(t.n)+'. Appuyez pour retourner.">'+
+        '<div class="face front"><p class="big">'+esc(t.n)+'</p><p class="hint">Que signifie ce terme ? À quel terme s’oppose-t-il ou se compare-t-il ? Répondez, puis retournez la carte.</p></div>'+
+        '<div class="face back" aria-hidden="true"><h3>'+esc(t.n)+'</h3><p class="of">Repère : '+esc(D[t.g].t)+'</p>'+senseHTML(t)+'</div>'+
+      '</div></div>'+
+      '<div class="answers" id="answers"><button class="btn primary" id="flip" type="button">Retourner la carte</button>'+
+        '<button class="btn again" id="again" type="button" hidden>À revoir</button>'+
+        '<button class="btn good" id="knew" type="button" hidden>Je savais</button></div>'+
+      '<p class="progress">'+queue.length+' carte'+(queue.length>1?'s':'')+' restante'+(queue.length>1?'s':'')+' · '+stats.first+' sue'+(stats.first>1?'s':'')+' du premier coup</p>';
+    flipped=false;
+    var card=$('#card');
+    function toggle(){
+      flipped=!flipped;
+      card.classList.toggle('flipped',flipped);
+      card.setAttribute('aria-label',flipped?'Carte retournée : '+t.n+'. Appuyez pour revenir au terme.':'Carte : '+t.n+'. Appuyez pour retourner.');
+      card.querySelector('.front').setAttribute('aria-hidden',flipped?'true':'false');
+      card.querySelector('.back').setAttribute('aria-hidden',flipped?'false':'true');
+      $('#flip').hidden=flipped;$('#again').hidden=!flipped;$('#knew').hidden=!flipped;
+      if(flipped)$('#knew').focus();
+    }
+    card.addEventListener('click',toggle);
+    card.addEventListener('keydown',function(e){if(e.key===' '||e.key==='Enter'){e.preventDefault();toggle()}});
+    $('#flip').addEventListener('click',toggle);
+    $('#knew').addEventListener('click',function(){
+      queue.shift();stats.known++;
+      if(!missed.has(t))stats.first++;
+      renderCard();
+    });
+    $('#again').addEventListener('click',function(){
+      queue.shift();queue.push(t);missed.add(t);
+      if(!flags.has(t.g)){flags.add(t.g);saveFlags();syncFlags()}
+      renderCard();
+    });
+  }
+
+  /* ===================== Quiz ===================== */
+  var quizArea=$('#quizArea'),qScope='all',qAll=$('#qAll'),qFlag=$('#qFlag');
+  var Q=null;
+  function setQScope(s){
+    qScope=s;
+    qAll.setAttribute('aria-pressed',s==='all'?'true':'false');
+    qFlag.setAttribute('aria-pressed',s==='flag'?'true':'false');
+  }
+  qAll.addEventListener('click',function(){setQScope('all')});
+  qFlag.addEventListener('click',function(){setQScope('flag')});
+  $('#qStart').addEventListener('click',startQuiz);
+
+  function startQuiz(){
+    var pool=T.filter(function(t){return t.clues.length&&(qScope==='all'||flags.has(t.g))});
+    if(!pool.length){
+      quizArea.innerHTML='<div class="qbox"><h3>Aucun terme à interroger</h3><p class="muted" style="margin:.6rem 0 0">Marquez des repères avec l’étoile dans l’onglet Parcourir, puis relancez le quiz.</p></div>';
+      return;
+    }
+    var picked=shuffle(pool).slice(0,10);
+    Q={qs:picked.map(buildQuestion),i:0,score:0,wrong:[]};
+    renderQ();
+  }
+  function buildQuestion(t){
+    var clue=t.clues[Math.floor(Math.random()*t.clues.length)];
+    var sib=shuffle(T.filter(function(x){return x.g===t.g&&x!==t})).slice(0,3);
+    var others=shuffle(T.filter(function(x){return x.g!==t.g&&x.n!==t.n}));
+    var opts=[t].concat(sib);
+    var k=0;
+    while(opts.length<4&&k<others.length){opts.push(others[k++])}
+    return {term:t,clue:clue,opts:shuffle(opts)};
+  }
+  function renderQ(){
+    var q=Q.qs[Q.i];
+    var html='<div class="qbox"><div class="qhead"><span>Question '+(Q.i+1)+' sur '+Q.qs.length+'</span><span>Score : '+Q.score+'</span></div>';
+    if(q.clue.label)html+='<span class="chip">'+esc(q.clue.label)+'</span>';
+    html+='<p class="clue">'+esc(q.clue.text)+'</p><p class="q-ask">À quel terme correspond cette définition ?</p><div class="opts" id="opts">';
+    q.opts.forEach(function(o,idx){
+      html+='<button class="opt" type="button" data-i="'+idx+'"><span>'+esc(o.n)+'</span><span class="tag"></span></button>';
+    });
+    html+='</div><div id="fb" aria-live="polite"></div></div>';
+    quizArea.innerHTML=html;
+    [].slice.call(quizArea.querySelectorAll('.opt')).forEach(function(b){
+      b.addEventListener('click',function(){answer(parseInt(b.getAttribute('data-i'),10))});
+    });
+  }
+  function answer(idx){
+    var q=Q.qs[Q.i],chosen=q.opts[idx],good=chosen===q.term;
+    var btns=[].slice.call(quizArea.querySelectorAll('.opt'));
+    btns.forEach(function(b,k){
+      b.disabled=true;
+      if(q.opts[k]===q.term){b.classList.add('ok');b.querySelector('.tag').textContent='Bonne réponse'}
+      else if(k===idx){b.classList.add('bad');b.querySelector('.tag').textContent='Votre réponse'}
+    });
+    if(good)Q.score++;else Q.wrong.push(q.term);
+    var sibs=T.filter(function(x){return x.g===q.term.g&&x!==q.term});
+    var fb='<div class="fb"><p class="verdict '+(good?'ok':'bad')+'">'+(good?'Bonne réponse.':'Pas tout à fait : la réponse était « '+esc(q.term.n)+' ».')+'</p>'+
+      '<h4>'+esc(q.term.n)+'</h4>'+senseHTML(q.term);
+    if(sibs.length){
+      fb+='<h4>À ne pas confondre avec</h4>';
+      sibs.forEach(function(s){
+        var first=s.s.filter(function(x){return x[2]!==0})[0]||s.s[0];
+        fb+='<p><strong style="font-family:var(--head)">'+esc(s.n)+'</strong> : '+esc(first[1])+'</p>';
+      });
+    }
+    fb+='<button class="btn primary next" id="next" type="button">'+(Q.i+1<Q.qs.length?'Question suivante':'Voir le résultat')+'</button></div>';
+    $('#fb').innerHTML=fb;
+    $('#next').addEventListener('click',function(){
+      Q.i++;
+      if(Q.i<Q.qs.length)renderQ();else renderResult();
+    });
+    $('#next').focus();
+  }
+  function renderResult(){
+    var n=Q.qs.length,pct=Q.score/n;
+    var head=Q.score===n?'Sans faute !':Q.score>=Math.ceil(n*0.7)?'Très bien':Q.score>=Math.ceil(n*0.4)?'Une bonne base':'À retravailler';
+    var msg=Q.score===n?'Les repères sont en place.':Q.score>=Math.ceil(n*0.7)?'Les repères sont en place ; reprenez les termes ci-dessous.':Q.score>=Math.ceil(n*0.4)?'Revoyez les termes manqués.':'Reprenez les cartes puis refaites un quiz.';
+    var html='<div class="qbox"><div class="bhead"><svg class="ring" viewBox="0 0 100 100" aria-hidden="true"><circle class="bg" cx="50" cy="50" r="42"/><circle class="fg" id="bfg" cx="50" cy="50" r="42"/><text x="50" y="50">'+Q.score+'/'+n+'</text></svg><div><h3>'+head+'</h3><p>'+msg+'</p></div></div>';
+    if(Q.wrong.length){
+      html+='<h3 style="font-size:1.1rem;margin-top:1rem">À revoir</h3><ul class="missed">';
+      Q.wrong.forEach(function(t){
+        var first=t.s.filter(function(x){return x[2]!==0})[0]||t.s[0];
+        html+='<li><b>'+esc(t.n)+' <span>— '+esc(D[t.g].t)+'</span></b><p>'+esc(cap(first[1]))+'</p></li>';
+      });
+      html+='</ul><button class="btn" id="flagMissed" type="button">Marquer ces repères à revoir</button> ';
+    }
+    html+='<button class="btn" id="copyB" type="button">Copier mon bilan</button> <button class="btn primary" id="replay" type="button">Rejouer</button><div id="flagMsg" class="muted" aria-live="polite" style="margin-top:.8rem"></div></div>';
+    quizArea.innerHTML=html;
+    requestAnimationFrame(function(){requestAnimationFrame(function(){var f=$('#bfg');if(f)f.style.strokeDashoffset=264*(1-pct)})});
+    var txt='Repères conceptuels, quiz : '+Q.score+'/'+n+(Q.wrong.length?'\nÀ revoir : '+Q.wrong.map(function(t){return t.n}).join(', '):'');
+    $('#copyB').addEventListener('click',function(){
+      var m=$('#flagMsg');
+      try{navigator.clipboard.writeText(txt).then(function(){m.textContent='Bilan copié : collez-le dans un message pour votre professeur.'},function(){m.textContent='Copie impossible : recopiez le résultat à la main.'})}catch(e){m.textContent='Copie impossible : recopiez le résultat à la main.'}
+    });
+    $('#replay').addEventListener('click',startQuiz);
+    var fm=$('#flagMissed');
+    if(fm)fm.addEventListener('click',function(){
+      Q.wrong.forEach(function(t){flags.add(t.g)});
+      saveFlags();syncFlags();filter();
+      $('#flagMsg').textContent='Repères marqués : retrouvez-les dans l’onglet Parcourir ou dans le paquet « À revoir ».';
+      fm.disabled=true;
+    });
+  }
+
+  /* ===================== Démarrage ===================== */
+  syncFlags();filter();buildDeck();
+  var hl=$('#hl');
+  if(reduce){hl.classList.add('on')}else{requestAnimationFrame(function(){requestAnimationFrame(function(){hl.classList.add('on')})})}
+})();
+</script>
+</body>
+</html>

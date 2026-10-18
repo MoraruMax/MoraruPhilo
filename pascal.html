@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pascal : le cœur et le pari</title>
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+  --bg:#F6F4F8; --surface:#FFFFFF; --ink:#1B1530; --muted:#5A5170; --line:#DAD5E5; --focus:#8A1C5C;
+  --heart:#A3195B; --heart-soft:#F8E1EC; --reason:#1F4F94; --reason-soft:#DFE9F8; --gold:#8A6100; --coin:#D4A12A; --coin-ink:#2B1F00; --on:#FFFFFF;
+  --serif:Baskerville,"Baskerville Old Face","Hoefler Text",Garamond,"Palatino Linotype",Georgia,serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#120E1F; --surface:#1C1730; --ink:#EEEAF8; --muted:#ABA3C6; --line:#2F2848; --focus:#FF8FC4;
+    --heart:#FF8FC4; --heart-soft:#42153A; --reason:#8FB6FF; --reason-soft:#172A4D; --gold:#F2C75C; --coin:#E1B342; --coin-ink:#2B1F00; --on:#120E1F;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#120E1F; --surface:#1C1730; --ink:#EEEAF8; --muted:#ABA3C6; --line:#2F2848; --focus:#FF8FC4;
+  --heart:#FF8FC4; --heart-soft:#42153A; --reason:#8FB6FF; --reason-soft:#172A4D; --gold:#F2C75C; --coin:#E1B342; --coin-ink:#2B1F00; --on:#120E1F;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.12rem/1.65 var(--serif)}
+.wrap{width:min(980px,100% - 2.5rem);margin-inline:auto}
+h1,h2,h3{margin:0;font-family:var(--serif)}
+h1{font-weight:700;font-size:clamp(2.5rem,7.5vw,4.8rem);line-height:1.04;letter-spacing:-.015em}
+h2{font-weight:700;font-size:clamp(1.55rem,3.2vw,2.1rem);line-height:1.15;margin-bottom:1rem}
+h3{font:700 1.02rem/1.35 var(--sans)}
+p{margin:0 0 1em}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.btn{font:600 .95rem/1.2 var(--sans);color:var(--ink);background:transparent;border:1.5px solid var(--ink);border-radius:8px;padding:.65rem 1rem;cursor:pointer}
+.btn:hover{background:var(--line)}
+.btn.primary{background:var(--ink);color:var(--bg)}
+.btn.primary:hover{filter:brightness(1.2);background:var(--ink)}
+.note{font:500 .9rem/1.5 var(--sans);color:var(--muted)}
+.src{font:600 .85rem/1.3 var(--sans);color:var(--muted)}
+
+/* Hero */
+.hero{padding:clamp(2rem,6vw,4rem) 0 clamp(2rem,5vw,3.5rem)}
+.hgrid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:2rem clamp(2rem,5vw,4rem);align-items:center}
+.sub{font:600 1.05rem/1.3 var(--sans);color:var(--muted);margin:1rem 0 0}
+.lead{font-size:clamp(1.2rem,2.4vw,1.45rem);line-height:1.5;margin:1.4rem 0 0;max-width:34ch}
+.flip{display:flex;flex-direction:column;align-items:center;gap:1.1rem;text-align:center}
+.scene{perspective:900px;width:min(62vw,230px);aspect-ratio:1}
+.coin{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform 1.5s cubic-bezier(.2,.7,.2,1)}
+.face{position:absolute;inset:0;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.2rem;background:var(--coin);color:var(--coin-ink);border:8px double var(--coin-ink);backface-visibility:hidden;-webkit-backface-visibility:hidden;font:700 1.5rem/1.1 var(--serif);padding:1rem}
+.face small{font:700 .78rem/1.2 var(--sans)}
+.face.back{transform:rotateY(180deg)}
+.flip .says{font:600 1.05rem/1.45 var(--sans);min-height:4.4em;margin:0;max-width:26ch}
+
+/* Sections */
+section.block{border-top:1px solid var(--line);padding:clamp(2.4rem,6vw,4rem) 0}
+.sec-head{max-width:46rem;margin-bottom:1.8rem}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+.way{background:var(--surface);border-top:6px solid var(--c);padding:1.1rem 1.3rem 1.3rem}
+.way h3{color:var(--c);margin-bottom:.5rem}
+.way p{margin:0}
+.way .big{font:700 1.4rem/1.2 var(--serif);margin-bottom:.4rem;color:var(--ink)}
+
+/* Tri */
+.sorter{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.5rem 1rem;align-items:center;padding:.8rem 0;border-bottom:1px solid var(--line)}
+.row .name{font:600 1.02rem/1.35 var(--sans)}
+.pick{display:flex;flex-wrap:wrap;gap:.45rem}
+.pick button{font:600 .88rem/1.2 var(--sans);color:var(--ink);background:var(--surface);border:2px solid var(--line);border-radius:8px;padding:.5rem .75rem;cursor:pointer}
+.pick button.h:hover:not([disabled]){border-color:var(--heart)}
+.pick button.r:hover:not([disabled]){border-color:var(--reason)}
+.pick button[disabled]{cursor:default}
+.pick button[aria-pressed="true"].h{background:var(--heart);border-color:var(--heart);color:var(--on)}
+.pick button[aria-pressed="true"].r{background:var(--reason);border-color:var(--reason);color:var(--on)}
+.fb{grid-column:1/-1;margin:0;font:500 .95rem/1.45 var(--sans);padding:.5rem .8rem;border-left:5px solid var(--line);background:var(--surface);border-radius:0 6px 6px 0}
+.fb[hidden]{display:none}
+.row.good .fb{border-left-color:var(--reason)}
+.row.bad .fb{border-left-color:var(--heart)}
+.row.good .fb b{color:var(--reason)}
+.row.bad .fb b{color:var(--heart)}
+.score{display:flex;flex-wrap:wrap;gap:.8rem 1.2rem;align-items:center;margin-top:1.2rem}
+.score p{margin:0;font:600 1rem/1.4 var(--sans);flex:1 1 16rem}
+
+/* Textes */
+.jump{display:flex;flex-wrap:wrap;gap:.45rem;list-style:none;margin:0 0 1.8rem;padding:0}
+.jump a{display:block;font:600 .9rem/1.2 var(--sans);color:var(--ink);text-decoration:none;border:1.5px solid var(--ink);border-radius:8px;padding:.5rem .75rem}
+.jump a:hover{background:var(--line)}
+.txt{background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--c);padding:clamp(1rem,3vw,1.6rem);margin-bottom:1.4rem}
+.txt h3{font:700 1.15rem/1.3 var(--sans);margin-bottom:.8rem;color:var(--c)}
+.pt{margin:0 0 1rem;padding:.2rem 0 .2rem 1rem;border-left:4px solid var(--c);font-size:1.15rem}
+.pt p{margin:0 0 .6em}
+.pt p:last-child{margin:0}
+.who{display:block;font:700 .78rem/1 var(--sans);color:var(--c);margin-bottom:.25rem}
+sup.ln{font:600 .65rem/1 var(--sans);color:var(--muted);margin:0 .15em 0 .35em;vertical-align:super}
+.vocab{margin:0 0 1rem}
+.vocab summary,.q details summary{cursor:pointer;font:600 .92rem/1.35 var(--sans)}
+.vocab dl{margin:.6rem 0 0;display:grid;grid-template-columns:max-content 1fr;gap:.35rem 1rem;font:500 .95rem/1.45 var(--sans)}
+.vocab dt{font-weight:700;color:var(--c)}
+.vocab dd{margin:0}
+.q{padding:.8rem 0;border-top:1px solid var(--line)}
+.q p{font:600 1rem/1.45 var(--sans);margin:0 0 .5rem}
+.q details{margin:0}
+.q .ans{margin:.6rem 0 0;padding:.6rem .9rem;background:var(--bg);border-left:4px solid var(--c)}
+.q .ans p{font:400 1rem/1.55 var(--serif);margin:0 0 .5em}
+.q .ans p:last-child{margin:0}
+.q .ans p b{font-family:var(--sans)}
+
+/* Pari */
+.steps{list-style:none;margin:0 0 1.6rem;padding:0;counter-reset:s}
+.steps li{counter-increment:s;display:grid;grid-template-columns:2.4rem minmax(0,1fr);gap:0 .9rem;padding:.9rem 0;border-top:1px solid var(--line)}
+.steps li:last-child{border-bottom:1px solid var(--line)}
+.steps li::before{content:counter(s);font:700 1.8rem/1 var(--serif);color:var(--gold)}
+.steps p{margin:0}
+.steps strong{font-family:var(--sans)}
+.steps em{font:600 .8rem/1 var(--sans);color:var(--muted);font-style:normal;margin-left:.3rem}
+.wager{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:clamp(1rem,3vw,1.5rem);margin-bottom:1.6rem}
+.wager h3{font:700 1.2rem/1.3 var(--serif);margin-bottom:.4rem}
+.wager > p{margin:0 0 1rem}
+.cases{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.case{font:600 1rem/1.35 var(--sans);text-align:left;color:var(--ink);background:var(--bg);border:2px solid var(--line);border-radius:8px;padding:.9rem 1rem;cursor:pointer;min-height:7.2rem}
+.case:hover{border-color:var(--gold)}
+.case[aria-pressed="true"]{border-color:var(--gold);background:var(--surface)}
+.case small{display:block;font:600 .8rem/1.2 var(--sans);color:var(--muted);margin-bottom:.3rem}
+.case .out{display:block;margin-top:.5rem;font:700 1.15rem/1.3 var(--serif);color:var(--gold)}
+.case .out[hidden]{display:none}
+.other{margin-top:1rem;font:500 .92rem/1.5 var(--sans);color:var(--muted)}
+
+.recap{margin:0;padding:0;list-style:none;max-width:46rem}
+.recap li{padding:.9rem 0;border-top:1px solid var(--line)}
+.recap li:last-child{border-bottom:1px solid var(--line)}
+footer{padding:1.6rem 0 2.5rem;font:500 .9rem/1.5 var(--sans);color:var(--muted)}
+footer p{margin:0 0 .4rem}
+
+@media (max-width:820px){
+  .hgrid{grid-template-columns:1fr}
+  .flip{align-items:flex-start;text-align:left}
+  .two,.cases{grid-template-columns:1fr}
+  .row{grid-template-columns:1fr}
+  .vocab dl{grid-template-columns:1fr;gap:.1rem}
+  .vocab dd{margin-bottom:.5rem}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition:none!important;animation:none!important}
+}
+
+/* Fond : portrait (pascal) */
+body::before{content:"";position:fixed;inset:0;z-index:-2;background:url("images/pascal.jpg") center top/cover no-repeat}
+@media (min-aspect-ratio:1/1){body::before{background:#ede4d1 url("images/pascal.jpg") right center/auto 100% no-repeat}}
+body::after{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);opacity:.77;pointer-events:none}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) body::after{opacity:.87}}
+:root[data-theme="dark"] body::after{opacity:.87}
+.hero h1,.hero p,section.block h2,section.block > .wrap > p,.sec-head p,footer p{text-shadow:0 0 .4em var(--bg),0 0 .9em var(--bg)}
+
+.pn{display:flex;gap:1rem;flex-wrap:wrap;margin:2.5rem auto 0;max-width:980px;padding:0 1.25rem;box-sizing:content-box}
+.pn a{flex:1 1 16rem;display:flex;flex-direction:column;gap:.25rem;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--k,var(--ink));padding:.9rem 1.1rem;border-radius:0 0 8px 8px}
+.pn a:hover{border-color:var(--k,var(--ink))}.pn a:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.pn small{font:600 .78rem/1 system-ui,-apple-system,sans-serif;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.pn b{font:700 1.1rem/1.25 system-ui,-apple-system,sans-serif}
+.pn .nx{text-align:right}
+.pn .nx:first-child{margin-left:auto;max-width:calc(50% - .5rem)}
+.pn .hm{flex:0 0 100%;text-align:center;font:500 .92rem/1 system-ui,-apple-system,sans-serif;background:none;border:0;padding:.4rem;color:var(--ink);text-decoration:underline}
+
+.pdfbtn{display:inline-flex;align-items:center;gap:.5rem;font:600 .88rem/1 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--surface);border:1.5px solid var(--ink);border-radius:999px;padding:.55rem .95rem;cursor:pointer}
+.pdfbtn:hover{background:var(--ink);color:var(--bg)}.pdfbtn:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:2px}
+@media print{
+  :root{--bg:#fff!important;--surface:#fff!important;--ink:#111!important;--muted:#444!important;--line:#bbb!important;color-scheme:light!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:#fff!important;color:#111!important}
+  body::before,body::after{display:none!important}
+  nav,.pdfbtn,.pn,video,section[aria-labelledby="h-video"]{display:none!important}
+  .rev,.js .rev{opacity:1!important;transform:none!important}
+  .stp li[hidden]{display:list-item!important}
+  details>*{display:block!important}
+  article,li,.card,figure,.stage{break-inside:avoid}
+  h1,h2,h3{break-after:avoid;text-shadow:none!important}
+  *{text-shadow:none!important}
+  a{color:inherit;text-decoration:none}
+  section.block,.part{padding-top:1.2rem!important;padding-bottom:1.2rem!important}
+  footer{break-before:avoid;border-top:1px solid #999;margin-top:1rem}
+}
+@page{size:A4;margin:16mm 14mm}
+</style>
+</head>
+<body>
+<nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
+
+<header class="hero">
+  <div class="wrap hgrid">
+    <div>
+      <h1>Pascal : le cœur et le pari</h1>
+      <p class="sub">D’après des fragments des <i>Pensées</i>, 1670</p>
+      <p class="lead">Dieu est, ou il n’est pas. La raison n’y peut rien déterminer : de quel côté pencher ?</p>
+    </div>
+    <div class="flip">
+      <div class="scene">
+        <div class="coin" id="coin">
+          <div class="face front"><span>Croix</span><small>Dieu est</small></div>
+          <div class="face back"><span>Pile</span><small>Dieu n’est pas</small></div>
+        </div>
+      </div>
+      <button class="btn primary" id="toss" type="button">Jouer à croix ou pile</button>
+      <p class="says" id="says" aria-live="polite">Il se joue un jeu, où il arrivera croix ou pile. Que gagerez-vous ?</p>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="block" aria-labelledby="h-th">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-th">La théorie en bref</h2>
+      <p>Dans ces fragments, Pascal distingue deux manières de connaître la vérité, puis en tire une conséquence pour la foi.</p>
+    </div>
+    <div class="two">
+      <div class="way" style="--c:var(--heart)">
+        <h3>Le cœur</h3>
+        <p class="big">Les principes se sentent.</p>
+        <p>Par une évidence immédiate, le cœur nous fait connaître les premiers principes (l’espace a trois dimensions, les nombres sont infinis). Il sent aussi Dieu : c’est cela, la foi.</p>
+      </div>
+      <div class="way" style="--c:var(--reason)">
+        <h3>La raison</h3>
+        <p class="big">Les propositions se concluent.</p>
+        <p>La raison démontre ensuite, à partir des principes. Mais elle ne peut pas établir les principes eux-mêmes, ni trancher la question de Dieu : elle est impuissante, ce qui doit l’humilier.</p>
+      </div>
+    </div>
+    <p class="note" style="margin-top:1rem">Synthèse rédigée à partir des fragments 277 à 282 ; voir les textes plus bas.</p>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="h-tri">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-tri">Le cœur le sent, la raison le démontre</h2>
+      <p>« Les principes se sentent, les propositions se concluent ; et le tout avec certitude, quoique par différentes voies. » Classez ces éléments selon la voie par laquelle, d’après Pascal, nous les connaissons.</p>
+    </div>
+    <ul class="sorter" id="sorter"></ul>
+    <div class="score">
+      <p id="score" aria-live="polite"></p>
+      <button class="btn" id="reset" type="button">Recommencer</button>
+    </div>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="h-tx">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-tx">Les textes et leurs questions</h2>
+      <p>Chaque fragment est suivi des questions de votre document. Essayez d’y répondre, puis ouvrez la piste de réponse. Les définitions sont là pour vous aider ; la consigne du cours est de chercher d’abord les termes que vous ne comprenez pas.</p>
+    </div>
+    <ul class="jump" id="jump" aria-label="Aller à un texte"></ul>
+    <div id="texts"></div>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="h-pari">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-pari">Le pari</h2>
+      <p>Quand la raison ne peut trancher et qu’il faut pourtant choisir, Pascal propose de peser le gain et la perte. Le raisonnement tient en cinq temps.</p>
+    </div>
+    <ol class="steps">
+      <li><p><strong>La raison ne peut rien déterminer.</strong> Par raison, on ne peut défendre ni « Dieu est » ni « Dieu n’est pas » <em>l. 2 à 5</em></p></li>
+      <li><p><strong>Il faut pourtant parier.</strong> Le choix n’est pas volontaire : nous sommes embarqués. <em>l. 9</em></p></li>
+      <li><p><strong>On choisit ce qui intéresse le moins.</strong> Il y a deux choses à perdre (le vrai et le bien) et deux à fuir (l’erreur et la misère) ; la raison n’est pas plus blessée par un choix que par l’autre. <em>l. 10 à 13</em></p></li>
+      <li><p><strong>Reste la béatitude : peser le gain et la perte.</strong> En prenant croix, c’est-à-dire que Dieu est : si l’on gagne, on gagne tout ; si l’on perd, on ne perd rien. <em>l. 14 et 15</em></p></li>
+      <li><p><strong>Conclusion : gagez qu’il est, sans hésiter.</strong> <em>l. 16</em></p></li>
+    </ol>
+
+    <div class="wager">
+      <h3>Pesez le gain et la perte</h3>
+      <p>Vous gagez que Dieu est (« croix »). Cliquez sur chaque cas pour voir ce que, selon Pascal, vous gagnez ou perdez.</p>
+      <div class="cases">
+        <button class="case" type="button" aria-pressed="false"><small>Si Dieu est…</small>Vous avez parié juste.<span class="out" hidden>Vous gagnez tout.</span></button>
+        <button class="case" type="button" aria-pressed="false"><small>Si Dieu n’est pas…</small>Vous avez parié faux.<span class="out" hidden>Vous ne perdez rien.</span></button>
+      </div>
+      <p class="other">Le texte étudié ne pèse que ce pari-là. À vous de réfléchir à ce qu’on gagnerait et perdrait en gageant que Dieu n’est pas.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="h-ret">
+  <div class="wrap">
+    <h2 id="h-ret" style="margin-bottom:1.4rem">À retenir</h2>
+    <ul class="recap">
+      <li>Pascal distingue deux voies vers le vrai : le cœur, qui sent les premiers principes, et la raison, qui démontre ensuite. Les deux donnent la certitude.</li>
+      <li>La raison ne peut pas établir les principes : cette impuissance doit l’humilier, non la discréditer.</li>
+      <li>La foi est Dieu sensible au cœur : un don de Dieu, non un don de raisonnement.</li>
+      <li>La raison ne peut rien dire sur l’existence de Dieu, mais il faut parier : en gageant que Dieu est, on peut tout gagner et ne rien perdre.</li>
+    </ul>
+  </div>
+</section>
+</main>
+
+<nav class="pn" aria-label="Pages de la section Vérité"><a class="pv" href="descartes-du-doute-au-cogito.html" rel="prev"><small>← Page précédente</small><b>Descartes : du doute au cogito</b></a><a class="nx" href="verite-kant.html" rel="next"><small>Page suivante →</small><b>Kant : mensonge et devoir</b></a><a class="hm" href="accueil.html">Retour à l’accueil</a></nav>
+<footer>
+  <div class="wrap">
+    <p>Page réalisée à partir du document « Travail à partir de fragments des <i>Pensées</i>, Pascal, 1670 ». Les définitions, les pistes de réponse et la synthèse sont rédigées pour cette page. Portrait de fond : Gravure de Gérard Edelinck (XVIIᵉ siècle), domaine public.</p>
+    <p>Dans le texte 5, « le raisonnement qu’y a point part » est corrigé en « le raisonnement qui n’y a point de part ».</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  function $(s){return document.querySelector(s)}
+  var reduce=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;")}
+  function ln(s){return esc(s).replace(/\{(\d+)\}/g,"<sup class=\"ln\" aria-label=\"ligne $1\">$1</sup>")}
+
+  /* ---------- Pièce ---------- */
+  var coin=$("#coin"),toss=$("#toss"),says=$("#says"),rot=0,busy=false;
+  toss.addEventListener("click",function(){
+    if(busy)return;
+    var croix=Math.random()<.5;
+    rot=Math.ceil(rot/360)*360+(reduce?0:1440)+(croix?0:180);
+    busy=!reduce;
+    coin.style.transform="rotateY("+rot+"deg)";
+    says.textContent="…";
+    setTimeout(function(){
+      busy=false;
+      says.textContent=(croix?"Croix : Dieu est.":"Pile : Dieu n’est pas.")+" Le hasard a tranché. Mais la raison, elle, ne peut rien déterminer de ce côté.";
+    },reduce?0:1550);
+  });
+
+  /* ---------- Tri ---------- */
+  var ITEMS=[
+    ["Il y a trois dimensions dans l’espace",true,"Le cœur le sent : c’est un premier principe (texte 6)."],
+    ["Il n’y a point deux nombres carrés dont l’un soit le double de l’autre",false,"La raison le démontre (texte 6)."],
+    ["Les nombres sont infinis",true,"Le cœur le sent (texte 6)."],
+    ["Les propositions qui se déduisent des principes",false,"« Les propositions se concluent » : c’est l’œuvre de la raison (texte 6)."],
+    ["Les premiers principes",true,"Nous les connaissons par le cœur (texte 5)."],
+    ["Dieu, pour celui qui a la foi",true,"« C’est le cœur qui sent Dieu et non la raison » (texte 2)."]
+  ];
+  var list=$("#sorter"),scoreEl=$("#score"),rows=[],done=0,right=0;
+  ITEMS.forEach(function(it){
+    var li=document.createElement("li");li.className="row";
+    li.innerHTML="<span class=\"name\"></span><div class=\"pick\" role=\"group\"><button type=\"button\" class=\"h\" aria-pressed=\"false\">Le cœur le sent</button><button type=\"button\" class=\"r\" aria-pressed=\"false\">La raison le démontre</button></div><p class=\"fb\" hidden aria-live=\"polite\"></p>";
+    li.querySelector(".name").textContent=it[0];
+    li.querySelector(".pick").setAttribute("aria-label",it[0]);
+    var b=li.querySelectorAll("button"),fb=li.querySelector(".fb");
+    [true,false].forEach(function(val,k){
+      b[k].addEventListener("click",function(){
+        if(li.classList.contains("good")||li.classList.contains("bad"))return;
+        var ok=val===it[1];
+        b[k].setAttribute("aria-pressed","true");
+        b[0].disabled=b[1].disabled=true;
+        li.classList.add(ok?"good":"bad");
+        fb.hidden=false;
+        fb.innerHTML="<b>"+(ok?"Bien vu.":"Pas tout à fait.")+"</b> "+it[2];
+        done++;if(ok)right++;
+        update();
+      });
+    });
+    list.appendChild(li);rows.push(li);
+  });
+  function update(){
+    var n=ITEMS.length,s=function(x){return x>1?"s":""};
+    if(!done)scoreEl.textContent=n+" éléments à classer.";
+    else if(done<n)scoreEl.textContent=done+" classé"+s(done)+" sur "+n+" : "+right+" bonne"+s(right)+" réponse"+s(right)+".";
+    else scoreEl.textContent="Tout est classé : "+right+" bonne"+s(right)+" réponse"+s(right)+" sur "+n+".";
+  }
+  $("#reset").addEventListener("click",function(){
+    rows.forEach(function(li){
+      li.classList.remove("good","bad");
+      li.querySelector(".fb").hidden=true;
+      [].forEach.call(li.querySelectorAll("button"),function(b){b.disabled=false;b.setAttribute("aria-pressed","false")});
+    });
+    done=0;right=0;update();
+  });
+  update();
+
+  /* ---------- Textes ---------- */
+  var HEART="var(--heart)",REASON="var(--reason)",GOLD="var(--gold)";
+  var T=[
+   {n:1,fr:"277",c:HEART,
+    paras:[[null,"Le cœur a ses raisons, que la raison ne connaît point ; on le sait en mille choses. Je dis que le cœur aime l’être universel naturellement, et soi-même naturellement selon ce qu’il s’y adonne ; et il se durcit contre l’un ou l’autre à son choix. Vous avez rejeté l’un et conservé l’autre : est-ce par raison que vous vous aimez ?"]],
+    v:[["Cœur","ici, ce qui sent et aime de façon immédiate (le sentiment, l’intuition), par opposition à la raison qui démontre."],["Être universel","l’Être qui embrasse tout, ce qui dépasse chaque être particulier : ici, Dieu."],["S’adonner à","se consacrer à, s’attacher à."],["Se durcir contre","devenir insensible à, se fermer à."],["Naturellement","spontanément, sans l’avoir décidé."]],
+    q:[
+     ["Expliquez : « le cœur a ses raisons, que la raison ne connaît point » ; quels sont les sens différents du mot « raison » ici ?",
+      ["<b>Première occurrence, « ses raisons » :</b> les motifs, ce qui fonde les élans du cœur (pourquoi on aime, pourquoi on croit). Le cœur n’agit pas au hasard : il a des fondements propres.","<b>Seconde occurrence, « la raison » :</b> la faculté de raisonner, de démontrer et de déduire logiquement.","<b>Sens de la phrase :</b> la faculté de démontrer ne peut pas saisir ni expliquer les motifs du cœur. Et Pascal ajoute : « on le sait en mille choses », c’est-à-dire que chacun en fait l’expérience."]],
+     ["À quoi fait référence « l’être universel » ?",
+      ["À Dieu : l’Être qui embrasse tout. Pascal dit que le cœur l’aime naturellement, tout comme il s’aime soi-même."]],
+     ["Que veut dire « vous avez rejeté l’un et conservé l’autre » ; à quoi se réfèrent les termes « l’un » et « l’autre » ? Que « conservons »-nous ?",
+      ["<b>« L’un » :</b> l’être universel, Dieu. <b>« L’autre » :</b> soi-même.","<b>Ce que nous conservons :</b> l’amour de soi. Nous avons rejeté l’amour de Dieu : le cœur « se durcit contre l’un ou l’autre à son choix ».","<b>La question finale</b> (« est-ce par raison que vous vous aimez ? ») appelle la réponse non : on s’aime spontanément, sans raisonnement. L’amour relève donc du cœur, non de la raison."]]
+    ]},
+   {n:2,fr:"278",c:HEART,
+    paras:[[null,"C’est le cœur qui sent Dieu et non la raison. Voilà ce que c’est que la foi : Dieu sensible au cœur, non à la raison."]],
+    v:[["Foi","adhésion, confiance en Dieu : une croyance qui ne repose pas sur une preuve."],["Sensible","qui se sent, qui est éprouvé de façon immédiate."]],
+    q:[
+     ["Que veut dire « foi » ici ?",
+      ["La foi est la croyance en Dieu, mais pas une croyance fondée sur une preuve ou une démonstration. Pascal la définit lui-même : Dieu est <i>senti</i> par le cœur. C’est une certitude vécue, intérieure."]],
+     ["Que signifie « Dieu sensible au cœur, non à la raison » ? Expliquez.",
+      ["Dieu n’est pas atteint par un raisonnement ni par une preuve : il est éprouvé directement, de façon intérieure et immédiate, comme on sent un principe ou un sentiment. La raison ne peut ni le démontrer ni le saisir ; seul le cœur le « sent »."]]
+    ]},
+   {n:3,fr:"279",c:HEART,
+    paras:[[null,"La foi est un don de Dieu ; ne croyez pas que nous disions que c’est un don de raisonnement."]],
+    v:[["Don","ce qui est reçu gratuitement, sans l’avoir mérité ni fabriqué."],["Raisonnement","démarche de l’esprit qui déduit des conclusions à partir de prémisses."]],
+    q:[
+     ["Expliquez pourquoi la foi n’est pas un « don de raisonnement ».",
+      ["Un don se reçoit : la foi est donnée par Dieu, elle ne se construit pas par un effort de démonstration. Un raisonnement, lui, est une démarche volontaire dont on produit soi-même la conclusion. Si la foi résultait d’un raisonnement, ce serait un savoir démontré, non une foi. Elle est donc reçue, non déduite."]]
+    ]},
+   {n:4,fr:"280",c:HEART,
+    paras:[[null,"Qu’il y a loin de la connaissance de Dieu à l’aimer !"]],
+    v:[["Connaître","saisir intellectuellement, avoir une connaissance. Pour le <i>savoir</i>, c’est « avoir une connaissance objective d’un objet, dans sa nature et ses propriétés »."]],
+    q:[
+     ["Expliquez pourquoi « connaître » Dieu n’est pas du tout la même chose que « aimer » Dieu. Avons-nous besoin de connaître quelque chose pour l’aimer ? Rattachez-vous aux définitions de « connaître » et « connaissances ».",
+      ["<b>Deux domaines différents.</b> Connaître est un acte de l’intelligence : on sait ce qu’est Dieu (sa nature, ses attributs), comme on connaît les propriétés d’un objet. Aimer est un mouvement du cœur, de la volonté. On peut connaître sans aimer : connaître une doctrine sans l’aimer, comme on peut savoir beaucoup de choses sur quelqu’un sans l’apprécier.","<b>Faut-il connaître pour aimer ?</b> Pas au sens d’un savoir complet : on aime ses proches ou une musique sans pouvoir en démontrer la valeur. L’amour naît d’un sentiment immédiat, non d’une connaissance objective. Une certaine présence ou connaissance du moins est nécessaire (on n’aime pas ce dont on n’a aucune idée), mais elle ne suffit jamais à produire l’amour : d’où « qu’il y a loin ».","<b>Lien avec le fragment précédent :</b> connaître Dieu relève de la raison, l’aimer relève du cœur."]]
+    ]},
+   {n:5,fr:"282",c:REASON,
+    paras:[[null,"Nous connaissons la vérité, non seulement par la raison, mais encore par le cœur ; c’est de cette dernière sorte que nous connaissons les premiers principes, et c’est en vain que le raisonnement, qui n’y a point de part, essaye de les combattre. […]"]],
+    v:[["Premiers principes","vérités de départ, qu’on ne peut pas démontrer, parce que toute démonstration s’appuie sur elles."],["En vain","inutilement, sans succès."],["Raisonnement","démarche qui déduit à partir de principes."]],
+    q:[
+     ["Comment comprendre que nous connaissons la vérité « par le cœur » ?",
+      ["Par le cœur, c’est par une connaissance immédiate, une évidence ressentie qui n’a pas besoin de preuve : nous saisissons directement certaines vérités premières. Pascal appelle cela « sentir ». Ce n’est pas une connaissance moins certaine : c’est une autre voie vers la vérité, qui nous donne les premiers principes."]],
+     ["Pourquoi le raisonnement n’aurait-il pas sa place alors ?",
+      ["Un raisonnement part toujours de principes qu’il suppose déjà : il ne peut donc pas les démontrer sans tourner en rond. Les premiers principes sont premiers : ils précèdent tout raisonnement. Le raisonnement « n’y a point de part » et il est vain qu’il essaye de les combattre. Il n’a sa place qu’après, pour en tirer des propositions."]]
+    ]},
+   {n:6,fr:"282",c:REASON,
+    paras:[[null,"Le cœur sent qu’il y a trois dimensions dans l’espace et que les nombres sont infinis ; et la raison démontre ensuite qu’il n’y a point deux nombres carrés dont l’un soit le double de l’autre. Les principes se sentent, les propositions se concluent ; et le tout avec certitude, quoique par différentes voies. Et il est aussi inutile et aussi ridicule que le cœur demandât à la raison un sentiment de toutes les propositions qu’elle démontre, pour vouloir les recevoir."]],
+    v:[["Dimensions de l’espace","les directions indépendantes dans lesquelles on peut se déplacer : longueur, largeur, hauteur."],["Nombre carré","carré d’un nombre entier : 1, 4, 9, 16…"],["Se conclure","se déduire d’un raisonnement. Dire qu’aucun carré n’est le double d’un autre revient à dire que la racine carrée de 2 n’est pas une fraction de nombres entiers."]],
+    q:[
+     ["Justifiez l’affirmation de Pascal « le cœur sent qu’il y a trois dimensions dans l’espace ». Pourquoi est-il question de « sentir » ici ?",
+      ["<b>Pourquoi cette affirmation est justifiée.</b> Le nombre de dimensions de l’espace est un premier principe : nous le saisissons dans notre expérience immédiate de l’espace (devant et derrière, droite et gauche, haut et bas). Il ne se démontre pas : on ne pourrait le déduire sans le supposer déjà.","<b>Pourquoi « sentir ».</b> Parce que la connaissance est ici immédiate, sans intermédiaire de raisonnement, comme une évidence qu’on éprouve. Cette voie est aussi sûre que l’autre : « le tout avec certitude, quoique par différentes voies ».","<b>La dernière phrase</b> confirme que chaque faculté a son domaine : il serait ridicule que le cœur exige de la raison des preuves de ses principes, comme il le serait que la raison exige un sentiment pour chaque proposition qu’elle démontre."]]
+    ]},
+   {n:7,fr:"282",c:REASON,
+    paras:[[null,"Cette impuissance ne doit donc servir qu’à humilier la raison, qui voudrait juger de tout. […] Et c’est pourquoi ceux à qui Dieu a donné la religion par sentiment du cœur sont bien heureux et bien légitimement persuadés. Mais [à] ceux qui ne l’ont pas nous ne pouvons la donner que par le raisonnement, en attendant que Dieu la leur donne par sentiment de cœur."]],
+    v:[["Humilier","ici, rappeler ses limites, rabaisser."],["Persuader","emporter l’adhésion par des moyens non rationnels (émotion, sentiment). Il s’oppose à <i>convaincre</i> : emporter l’adhésion par des raisons."],["Légitime","que l’on est en droit de faire ou d’admettre."],["Révélation","au sens religieux, manifestation de Dieu aux hommes."]],
+    q:[
+     ["Expliquez « bien légitimement persuadés » : en quoi est-ce légitime ? Que signifie persuader, et à quel autre terme s’oppose-t-il ?",
+      ["<b>Persuader</b> consiste à faire adhérer par le sentiment, non par des raisons ; le terme s’oppose à <b>convaincre</b>, qui passe par des preuves rationnelles.","<b>Pourquoi légitime ?</b> Parce que la voie du cœur est une voie valable vers le vrai. Nous accordons déjà une pleine certitude aux premiers principes, que la raison ne démontre pas (textes 5 et 6). Être persuadé par le sentiment du cœur n’est donc pas une illusion : on est en droit d’y adhérer, avec la même certitude.","<b>Et pour les autres</b> ? On ne peut que leur proposer des raisonnements, en attendant que Dieu leur donne la foi."]],
+     ["Cherchez ce qu’est la « Révélation », au sens religieux. Est-ce de cela que parle Pascal alors ? Justifiez.",
+      ["<b>Révélation :</b> au sens religieux, la manifestation de Dieu aux hommes, qui leur fait connaître ce qu’ils ne pourraient découvrir par la seule raison.","<b>Pascal en parle en partie.</b> Dieu « a donné la religion » : la foi est reçue de lui comme un don (texte 3), et non obtenue par raisonnement. C’est une révélation intérieure, faite au cœur.","<b>Mais ce n’est pas toute la Révélation.</b> Ici il n’est pas question des textes sacrés ni de leur contenu : il s’agit du moyen par lequel la foi est donnée, le sentiment du cœur."]]
+    ]}
+  ];
+  var T8={
+   n:8,fr:"233",c:GOLD,
+   paras:[
+    ["Pascal","{1}233 – Examinons donc ce point, et disons : « Dieu est, ou il n’est pas. » Mais de quel {2}côté pencherons-nous ? La raison n’y peut rien déterminer. Il se joue un jeu, où il {3}arrivera croix ou pile. Que gagerez-vous ? Par raison, vous ne pouvez faire ni l’un {4}ni l’autre ; par raison, vous ne pouvez défendre nul des deux. Ne blâmez donc pas {5}de fausseté ceux qui ont pris un choix ; car vous n’en savez rien."],
+    ["Son interlocuteur","{6}« Non ; mais je les blâmerai d’avoir fait, non ce choix, mais un choix ; car, encore {7}que celui qui prend croix et l’autre soient en pareille faute, ils sont tous deux en {8}faute : le juste est de ne point parier. »"],
+    ["Pascal","{9}Oui ; mais il faut parier. Cela n’est pas volontaire, vous êtes embarqué. Lequel {10}prendrez-vous donc ? Voyons. Puisqu’il faut choisir, voyons ce qui vous intéresse le {11}moins. Vous avez deux choses à perdre : le vrai et le bien, et votre nature a deux {12}choses à fuir : l’erreur et la misère. Votre raison n’est pas plus blessée, en {13}choisissant l’un que l’autre, puisqu’il faut nécessairement choisir. Mais votre {14}béatitude ? Pesons le gain et la perte, en prenant croix que Dieu est. Estimons ces {15}deux cas : si vous gagnez, vous gagnez tout ; si vous perdez, vous ne perdez rien. {16}Gagez donc qu’il est, sans hésiter."]
+   ],
+   v:[["Croix ou pile","jeu de hasard où l’on lance une pièce : l’équivalent de « pile ou face »."],["Gager","parier, mettre en jeu."],["Ne pas blâmer de fausseté","ne pas accuser d’erreur : ne pas dire de quelqu’un qu’il se trompe."],["Béatitude","bonheur parfait ; au sens religieux, le bonheur éternel de ceux qui sont auprès de Dieu."],["Ce qui vous intéresse le moins","dans l’usage du XVII<sup>e</sup> siècle, à peu près : ce qui risque le moins de nuire à votre intérêt."]],
+   q:[
+    ["Expliquez : « par raison, vous ne pouvez défendre nul des deux ». Que représentent les « deux » ici ?",
+     ["Les « deux » sont les deux possibilités posées au début : « Dieu est » et « Dieu n’est pas ». La raison ne peut démontrer ni l’une ni l’autre : elle ne peut défendre ni l’existence de Dieu ni son inexistence."]],
+    ["Pourquoi ne faudrait-il pas « blâme[r] de fausseté ceux qui ont fait un choix » ? Que ne savons-nous pas ici (ligne 4) ?",
+     ["Nous ne savons pas si Dieu est ou s’il n’est pas : c’est ce qu’il manque. Puisque personne ne peut le prouver, on ne peut pas dire que celui qui parie pour Dieu a tort, ni que celui qui parie contre a tort : « vous n’en savez rien ». On n’a aucune preuve pour les accuser d’erreur."]],
+    ["Pourquoi faut-il parier (lignes 8 et 9 du document) ? Que signifie ici « être embarqué », c’est-à-dire dans quoi serions-nous « embarqués » ?",
+     ["<b>L’objection :</b> le juste serait de ne pas parier du tout.","<b>La réponse de Pascal :</b> il faut parier, car ne pas parier est encore un choix. Vivre, c’est agir comme si Dieu était ou comme s’il n’était pas : on ne peut pas rester neutre.","<b>« Embarqué » :</b> nous sommes déjà dans la vie, comme sur un bateau en route, et « cela n’est pas volontaire ». Nous n’avons pas choisi d’être mis devant cette question, mais nous ne pouvons pas descendre."]],
+    ["Expliquez « si vous gagnez, vous gagnez tout ; si vous perdez, vous ne perdez rien ». Que signifient « tout » et « rien » ici ?",
+     ["<b>« Tout » :</b> la béatitude, le bonheur parfait et éternel, si Dieu existe.","<b>« Rien » :</b> si Dieu n’existe pas, on ne perd rien de ce qui est en jeu. La raison, incapable de trancher, n’est « pas plus blessée » par ce choix que par l’autre ; on n’a donc rien sacrifié que la raison aurait pu défendre.","<b>La balance :</b> la seule chose qui change selon le choix est donc la béatitude, à gagner dans un cas et sans contrepartie à perdre dans l’autre."]],
+    ["Selon Pascal, pourquoi devrions-nous alors croire en Dieu ?",
+     ["Parce que la raison ne peut trancher, qu’il faut pourtant choisir, et que le choix le plus avantageux est de gager que Dieu est : on peut y gagner tout et on n’y perd rien. Pascal ne démontre pas que Dieu existe : il montre qu’il est de notre intérêt de parier qu’il existe."]]
+   ]
+  };
+  function vocab(v){
+    return "<details class=\"vocab\"><summary>Pour comprendre les termes</summary><dl>"+v.map(function(x){return "<dt>"+esc(x[0])+"</dt><dd>"+x[1]+"</dd>"}).join("")+"</dl></details>";
+  }
+  function qs(q){
+    return q.map(function(x){
+      return "<div class=\"q\"><p>"+esc(x[0])+"</p><details><summary>Voir une piste de réponse</summary><div class=\"ans\">"+x[1].map(function(a){return "<p>"+a+"</p>"}).join("")+"</div></details></div>";
+    }).join("");
+  }
+  var html="",jump="";
+  T.forEach(function(t){
+    jump+="<li><a href=\"#t"+t.n+"\">Texte "+t.n+"</a></li>";
+    html+="<article class=\"txt\" id=\"t"+t.n+"\" style=\"--c:"+t.c+"\"><h3>Texte "+t.n+" — fragment "+t.fr+"</h3><div class=\"pt\">"+t.paras.map(function(p){return "<p>"+esc(p[1])+"</p>"}).join("")+"</div>"+vocab(t.v)+qs(t.q)+"</article>";
+  });
+  jump+="<li><a href=\"#t8\">Texte 8</a></li>";
+  html+="<article class=\"txt\" id=\"t8\" style=\"--c:"+T8.c+"\"><h3>Texte 8 — fragment 233 : le pari</h3><div class=\"pt\">"+T8.paras.map(function(p){return "<p><span class=\"who\">"+p[0]+"</span>"+ln(p[1])+"</p>"}).join("")+"</div><p class=\"note\" style=\"margin:0 0 1rem\">Les petits numéros renvoient aux lignes du document.</p>"+vocab(T8.v)+qs(T8.q)+"</article>";
+  $("#jump").innerHTML=jump;
+  $("#texts").innerHTML=html;
+
+  /* ---------- Pari ---------- */
+  [].forEach.call(document.querySelectorAll(".case"),function(b){
+    b.addEventListener("click",function(){
+      var out=b.querySelector(".out"),on=out.hidden;
+      out.hidden=!on;
+      b.setAttribute("aria-pressed",on?"true":"false");
+    });
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Epictète : ce qui dépend de nous</title>
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+  --bg:#F5F7F9; --surface:#FFFFFF; --ink:#0F2233; --muted:#4F6272; --line:#D3DBE2; --focus:#0B6B73;
+  --in:#0B6B73; --in-soft:#DCF0F1; --out:#A3283A; --out-soft:#F8E1E5; --on:#FFFFFF;
+  --serif:"Palatino Linotype",Palatino,"Book Antiqua","Iowan Old Style",Georgia,serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0D1822; --surface:#14232F; --ink:#E8EEF3; --muted:#A3B4C2; --line:#2A3C4B; --focus:#5FD3DB;
+    --in:#5FD3DB; --in-soft:#10393F; --out:#FF8A9B; --out-soft:#45202A; --on:#0D1822;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0D1822; --surface:#14232F; --ink:#E8EEF3; --muted:#A3B4C2; --line:#2A3C4B; --focus:#5FD3DB;
+  --in:#5FD3DB; --in-soft:#10393F; --out:#FF8A9B; --out-soft:#45202A; --on:#0D1822;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.12rem/1.65 var(--serif)}
+.wrap{width:min(1000px,100% - 2.5rem);margin-inline:auto}
+h1,h2,h3{margin:0;font-family:var(--serif)}
+h1{font-weight:700;font-size:clamp(2.5rem,7.5vw,4.8rem);line-height:1.04;letter-spacing:-.015em}
+h2{font-weight:700;font-size:clamp(1.55rem,3.2vw,2.1rem);line-height:1.15;margin-bottom:1rem}
+h3{font:700 1.05rem/1.3 var(--sans)}
+p{margin:0 0 1em}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.btn{font:600 .95rem/1.2 var(--sans);color:var(--ink);background:transparent;border:1.5px solid var(--ink);border-radius:8px;padding:.65rem 1rem;cursor:pointer}
+.btn:hover{background:var(--line)}
+.btn.primary{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.btn.primary:hover{background:var(--ink);filter:brightness(1.15)}
+.note{font:500 .9rem/1.5 var(--sans);color:var(--muted)}
+.src{font:600 .85rem/1.3 var(--sans);color:var(--muted);margin:0 0 .6rem}
+
+/* Hero */
+.hero{padding:clamp(2rem,6vw,4rem) 0 clamp(2rem,5vw,3.5rem)}
+.hgrid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:2rem clamp(2rem,5vw,4rem);align-items:center}
+.sub{font:600 1.05rem/1.3 var(--sans);color:var(--muted);margin:1rem 0 0}
+.lead{font-size:clamp(1.2rem,2.4vw,1.45rem);line-height:1.5;margin:1.4rem 0 1rem;max-width:34ch}
+.fig{width:100%;max-width:430px;justify-self:center}
+.fig svg{display:block;width:100%;height:auto}
+.zone-out{fill:var(--out-soft);stroke:var(--out);stroke-width:2.5;stroke-dasharray:3 9;stroke-linecap:round}
+.zone-in{fill:var(--in-soft);stroke:var(--in);stroke-width:5}
+.zone-in.draw{stroke-dasharray:1;stroke-dashoffset:1;animation:trace 1.6s cubic-bezier(.3,.7,.2,1) .3s forwards}
+@keyframes trace{to{stroke-dashoffset:0}}
+.fig text{font-family:var(--sans)}
+.t-in{fill:var(--in);font-weight:700}
+.t-out{fill:var(--out);font-weight:700}
+.t-w{fill:var(--ink);font-size:17px;text-anchor:middle}
+.t-h{font-size:14px;text-anchor:middle}
+
+/* Sections */
+section.block{border-top:1px solid var(--line);padding:clamp(2.4rem,6vw,4rem) 0}
+.sec-head{max-width:46rem;margin-bottom:1.8rem}
+
+/* Tri */
+.sorter{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.5rem 1rem;align-items:center;padding:.8rem 0;border-bottom:1px solid var(--line)}
+.row .name{font:600 1.05rem/1.35 var(--sans)}
+.pick{display:flex;flex-wrap:wrap;gap:.45rem}
+.pick button{font:600 .88rem/1.2 var(--sans);color:var(--ink);background:var(--surface);border:2px solid var(--line);border-radius:8px;padding:.5rem .75rem;cursor:pointer}
+.pick button.in:hover:not([disabled]){border-color:var(--in)}
+.pick button.out:hover:not([disabled]){border-color:var(--out)}
+.pick button[disabled]{cursor:default}
+.pick button[aria-pressed="true"].in{background:var(--in);border-color:var(--in);color:var(--on)}
+.pick button[aria-pressed="true"].out{background:var(--out);border-color:var(--out);color:var(--on)}
+.fb{grid-column:1/-1;margin:0;font:500 .95rem/1.45 var(--sans);padding:.5rem .8rem;border-left:5px solid var(--line);background:var(--surface);border-radius:0 6px 6px 0}
+.fb[hidden]{display:none}
+.row.good .fb{border-left-color:var(--in)}
+.row.good .fb b{color:var(--in)}
+.row.bad .fb{border-left-color:var(--out)}
+.row.bad .fb b{color:var(--out)}
+.score{display:flex;flex-wrap:wrap;gap:.8rem 1.2rem;align-items:center;margin-top:1.2rem}
+.score p{margin:0;font:600 1rem/1.4 var(--sans);flex:1 1 16rem}
+
+/* Argument */
+.steps{list-style:none;margin:0;padding:0;counter-reset:s}
+.steps li{counter-increment:s;display:grid;grid-template-columns:2.6rem minmax(0,1fr);gap:0 1rem;padding:1.1rem 0;border-top:1px solid var(--line)}
+.steps li:last-child{border-bottom:1px solid var(--line)}
+.steps li::before{content:counter(s);font:700 2rem/1 var(--serif);color:var(--in)}
+.steps p{margin:0}
+.steps strong{font-family:var(--sans)}
+
+/* Deux natures */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+.nat{background:var(--surface);border-top:6px solid var(--c);padding:1.1rem 1.3rem 1.3rem}
+.nat h3{color:var(--c);margin-bottom:.5rem}
+.nat ul{margin:0;padding-left:1.1rem}
+.nat li{margin-bottom:.25rem}
+.nat blockquote{margin:.9rem 0 0;padding-left:.9rem;border-left:3px solid var(--c);font-style:italic}
+
+/* Simulateur */
+.sim{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:clamp(1rem,3vw,1.6rem)}
+fieldset{border:0;margin:0 0 1.2rem;padding:0}
+legend{font:700 1rem/1.3 var(--sans);padding:0;margin-bottom:.6rem}
+.opt{display:flex;gap:.7rem;align-items:flex-start;padding:.55rem 0;cursor:pointer;font-size:1.05rem}
+.opt input{width:1.2rem;height:1.2rem;margin-top:.3rem;flex:none;accent-color:var(--in)}
+.hist{display:flex;flex-wrap:wrap;gap:.45rem;list-style:none;margin:1rem 0;padding:0;min-height:2.3rem}
+.hist li{font:700 .8rem/1 var(--sans);padding:.45rem .6rem;border-radius:6px;background:var(--line);color:var(--ink)}
+.hist li.w{background:var(--in-soft);color:var(--in)}
+.hist li.l{background:var(--out-soft);color:var(--out)}
+.meter{position:relative;height:1.1rem;border-radius:99px;margin:1.5rem 0 .4rem;background:linear-gradient(90deg,var(--out-soft),var(--surface) 50%,var(--in-soft));border:1.5px solid var(--line)}
+.meter i{position:absolute;top:50%;left:50%;width:1.6rem;height:1.6rem;margin:-.8rem 0 0 -.8rem;border-radius:50%;background:var(--ink);border:3px solid var(--bg);transition:left .8s cubic-bezier(.3,.7,.2,1)}
+.mlab{display:flex;justify-content:space-between;font:600 .82rem/1.2 var(--sans);color:var(--muted)}
+.mood{font:600 1.1rem/1.5 var(--sans);min-height:4.5em;margin:1rem 0 0}
+
+/* Manuel */
+.hash{display:grid;gap:1rem}
+.hash > div{background:var(--surface);padding:1rem 1.2rem;border-left:6px solid var(--c)}
+.hash h3{margin-bottom:.4rem;color:var(--c)}
+.hash p{margin:0}
+.hash blockquote{margin:.6rem 0 0;font-style:italic}
+
+.recap{margin:0;padding:0;list-style:none;max-width:46rem}
+.recap li{padding:.9rem 0;border-top:1px solid var(--line)}
+.recap li:last-child{border-bottom:1px solid var(--line)}
+footer{padding:1.6rem 0 2.5rem;font:500 .9rem/1.5 var(--sans);color:var(--muted)}
+footer p{margin:0}
+
+@media (max-width:800px){
+  .hgrid{grid-template-columns:1fr}
+  .fig{justify-self:start}
+  .two{grid-template-columns:1fr}
+  .row{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition:none!important;animation:none!important}
+  .zone-in.draw{stroke-dashoffset:0}
+}
+
+/* Fond : portrait (epictete) */
+body::before{content:"";position:fixed;inset:0;z-index:-2;background:url("images/epictete.jpg") center top/cover no-repeat}
+@media (min-aspect-ratio:1/1){body::before{background:#696969 url("images/epictete.jpg") right center/auto 100% no-repeat}}
+body::after{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);opacity:.77;pointer-events:none}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) body::after{opacity:.87}}
+:root[data-theme="dark"] body::after{opacity:.87}
+.hero h1,.hero p,section.block h2,section.block > .wrap > p,.sec-head p,footer p{text-shadow:0 0 .4em var(--bg),0 0 .9em var(--bg)}
+
+.pn{display:flex;gap:1rem;flex-wrap:wrap;margin:2.5rem auto 0;max-width:980px;padding:0 1.25rem;box-sizing:content-box}
+.pn a{flex:1 1 16rem;display:flex;flex-direction:column;gap:.25rem;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--k,var(--ink));padding:.9rem 1.1rem;border-radius:0 0 8px 8px}
+.pn a:hover{border-color:var(--k,var(--ink))}.pn a:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.pn small{font:600 .78rem/1 system-ui,-apple-system,sans-serif;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.pn b{font:700 1.1rem/1.25 system-ui,-apple-system,sans-serif}
+.pn .nx{text-align:right}
+.pn .nx:first-child{margin-left:auto;max-width:calc(50% - .5rem)}
+.pn .hm{flex:0 0 100%;text-align:center;font:500 .92rem/1 system-ui,-apple-system,sans-serif;background:none;border:0;padding:.4rem;color:var(--ink);text-decoration:underline}
+
+.pdfbtn{display:inline-flex;align-items:center;gap:.5rem;font:600 .88rem/1 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--surface);border:1.5px solid var(--ink);border-radius:999px;padding:.55rem .95rem;cursor:pointer}
+.pdfbtn:hover{background:var(--ink);color:var(--bg)}.pdfbtn:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:2px}
+@media print{
+  :root{--bg:#fff!important;--surface:#fff!important;--ink:#111!important;--muted:#444!important;--line:#bbb!important;color-scheme:light!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:#fff!important;color:#111!important}
+  body::before,body::after{display:none!important}
+  nav,.pdfbtn,.pn,video,section[aria-labelledby="h-video"]{display:none!important}
+  .rev,.js .rev{opacity:1!important;transform:none!important}
+  .stp li[hidden]{display:list-item!important}
+  details>*{display:block!important}
+  article,li,.card,figure,.stage{break-inside:avoid}
+  h1,h2,h3{break-after:avoid;text-shadow:none!important}
+  *{text-shadow:none!important}
+  a{color:inherit;text-decoration:none}
+  section.block,.part{padding-top:1.2rem!important;padding-bottom:1.2rem!important}
+  footer{break-before:avoid;border-top:1px solid #999;margin-top:1rem}
+}
+@page{size:A4;margin:16mm 14mm}
+</style>
+</head>
+<body>
+<nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
+
+<header class="hero">
+  <div class="wrap hgrid">
+    <div>
+      <h1>Epictète : ce qui dépend de nous</h1>
+      <p class="sub">Liberté et bonheur, d’après le <i>Manuel</i></p>
+      <p class="lead">Epictète est un philosophe stoïcien. Sa thèse principale consiste à poser une séparation stricte entre ce qui dépend de nous et ce qui n’en dépend pas.</p>
+    </div>
+    <div class="fig">
+      <svg viewBox="0 0 440 440" role="img" aria-labelledby="figT figD">
+        <title id="figT">Le cercle de ce qui dépend de nous</title>
+        <desc id="figD">Un grand cercle contient ce qui ne dépend pas de nous : le corps, l’argent, la réputation et les charges publiques. Au centre, un cercle plus petit contient ce qui dépend de nous : la pensée, l’impulsion, le désir et l’aversion.</desc>
+        <circle class="zone-out" cx="220" cy="220" r="208"/>
+        <circle class="zone-in draw" pathLength="1" cx="220" cy="220" r="100"/>
+        <text class="t-out t-h" x="220" y="48">n’en dépend pas</text>
+        <text class="t-w" x="220" y="92">Corps</text>
+        <text class="t-w" x="62" y="226">Réputation</text>
+        <text class="t-w" x="378" y="216">Charges</text>
+        <text class="t-w" x="378" y="238">publiques</text>
+        <text class="t-w" x="220" y="372">Argent</text>
+        <text class="t-in t-h" x="220" y="178">dépend de nous</text>
+        <text class="t-w" x="220" y="204">Pensée</text>
+        <text class="t-w" x="220" y="226">Impulsion</text>
+        <text class="t-w" x="220" y="248">Désir</text>
+        <text class="t-w" x="220" y="270">Aversion</text>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="block" aria-labelledby="h-tri">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-tri">Faites le tri</h2>
+      <p>Pour chaque élément, dites s’il dépend de nous ou non. La réponse s’appuie sur le texte d’Epictète.</p>
+    </div>
+    <ul class="sorter" id="sorter"></ul>
+    <div class="score">
+      <p id="score" aria-live="polite"></p>
+      <button class="btn" id="reset" type="button">Recommencer</button>
+    </div>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="h-pq">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-pq">Pourquoi poser cette distinction ?</h2>
+      <p>Parce que nous ne pouvons agir que sur ce qui dépend de nous. Le raisonnement tient en trois temps.</p>
+    </div>
+    <ol class="steps">
+      <li><p><strong>Nous ne pouvons agir que sur ce qui dépend de nous.</strong> Nous ne pouvons pas maîtriser ce qui n’en dépend pas.</p></li>
+      <li><p><strong>Agir sur ce qui échappe à notre contrôle, c’est perdre la main.</strong> Si nous cherchons à agir sur ce qui est hors de notre contrôle, nous plaçons la réussite de l’opération hors de nos mains.</p></li>
+      <li><p><strong>La liberté est donc intérieure.</strong> Tout ce qui est sous mon contrôle est libre naturellement ; tout ce qui ne dépend pas de nous est soumis à des obstacles extérieurs.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="h-nat">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-nat">Deux natures opposées</h2>
+      <p>Le <i>Manuel</i> oppose ces deux domaines par leur nature même.</p>
+    </div>
+    <div class="two">
+      <div class="nat" style="--c:var(--in)">
+        <h3>Ce qui dépend de nous</h3>
+        <ul>
+          <li>La pensée</li><li>L’impulsion</li><li>Le désir</li><li>L’aversion</li>
+          <li>Tout ce en quoi c’est nous qui agissons</li>
+        </ul>
+        <blockquote>« libre naturellement, ne connaît ni obstacles ni entraves »</blockquote>
+      </div>
+      <div class="nat" style="--c:var(--out)">
+        <h3>Ce qui n’en dépend pas</h3>
+        <ul>
+          <li>Le corps</li><li>L’argent</li><li>La réputation</li><li>Les charges publiques</li>
+          <li>Tout ce en quoi ce n’est pas nous qui agissons</li>
+        </ul>
+        <blockquote>« faible, esclave, exposé aux obstacles et nous est étranger »</blockquote>
+      </div>
+    </div>
+    <p class="note" style="margin-top:1rem"><i>Manuel</i>, § 1 et 2. Dans la fiche, les pensées, désirs, intentions et actions dépendent de nous ; le corps, la richesse et la réputation n’en dépendent pas.</p>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="h-bon">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-bon">Où placer son bonheur ?</h2>
+      <p>La distinction permet le bonheur. Si nous plaçons notre bonheur dans des choses qui ne dépendent pas de nous, nous nous en remettons au hasard pour être heureux. Mettez l’idée à l’épreuve.</p>
+    </div>
+    <div class="sim">
+      <fieldset>
+        <legend>Je place mon bonheur dans…</legend>
+        <label class="opt"><input type="radio" name="where" value="out" checked><span>la victoire de mon équipe sportive favorite</span></label>
+        <label class="opt"><input type="radio" name="where" value="in"><span>ce qui dépend de moi : mes pensées et mes actions</span></label>
+      </fieldset>
+      <button class="btn primary" id="play" type="button">Jouer un match</button>
+      <ul class="hist" id="hist" aria-label="Résultats des matchs"></ul>
+      <div class="meter" aria-hidden="true"><i id="dot"></i></div>
+      <div class="mlab" aria-hidden="true"><span>malheur</span><span>bonheur</span></div>
+      <p class="mood" id="mood" aria-live="polite">Lancez un match pour voir ce que devient votre bonheur.</p>
+      <p class="note" style="margin:.4rem 0 0">Illustration : le curseur n’est pas une mesure. La victoire ou la défaite de l’équipe ne dépend en tout cas pas de moi.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="h-man">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-man">Ce que dit le <i>Manuel</i></h2>
+      <p>Epictète décrit deux manières de vivre, selon ce que l’on tient pour libre.</p>
+    </div>
+    <div class="hash">
+      <div style="--c:var(--out)">
+        <h3>Tenir pour libre ce qui est naturellement esclave</h3>
+        <p>Si l’on prend pour un bien propre ce qui nous est étranger, on vit contrarié, chagriné, tourmenté, et l’on en veut aux hommes comme aux dieux.</p>
+        <blockquote>« tu vivras contrarié, chagriné, tourmenté »</blockquote>
+      </div>
+      <div style="--c:var(--in)">
+        <h3>Ne juger sien que ce qui l’est vraiment</h3>
+        <p>Si l’on tient tout le reste pour étranger, personne ne peut nous contraindre ni nous barrer la route. On n’accuse personne, on ne fait rien contre son gré, personne ne peut nous faire de mal, et l’on n’a pas d’ennemis.</p>
+        <blockquote>« jamais personne ne saura te contraindre ni te barrer la route »</blockquote>
+      </div>
+    </div>
+    <p class="src" style="margin-top:1rem">Epictète, <i>Manuel</i>, § 3.</p>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="h-ret">
+  <div class="wrap">
+    <h2 id="h-ret" style="margin-bottom:1.4rem">À retenir</h2>
+    <ul class="recap">
+      <li>Epictète, philosophe stoïcien, sépare strictement ce qui dépend de nous (pensées, désirs, intentions, actions) de ce qui n’en dépend pas (corps, richesse, réputation).</li>
+      <li>Nous ne pouvons agir que sur ce qui dépend de nous : vouloir agir sur le reste, c’est en remettre la réussite hors de nos mains.</li>
+      <li>La liberté est donc intérieure.</li>
+      <li>Placer son bonheur hors de nous, c’est s’en remettre au hasard : la distinction permet d’être véritablement libre et heureux.</li>
+    </ul>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-video">
+  <div class="wrap">
+    <h2 id="h-video" style="margin-bottom:1rem">En vidéo : Épictète et la liberté</h2>
+    <video controls preload="metadata" playsinline style="display:block;width:100%;max-width:880px;aspect-ratio:16/9;background:#000;border-radius:8px" src="videos/epictete-et-la-liberte.mp4"><p>Votre navigateur ne peut pas lire cette vidéo.</p></video>
+  </div>
+</section>
+</main>
+
+<nav class="pn" aria-label="Pages de la section Liberté"><a class="pv" href="les-stereotypes.html" rel="prev"><small>← Page précédente</small><b>Les stéréotypes</b></a><a class="nx" href="plan-liberte.html" rel="next"><small>Page suivante →</small><b>Sommes-nous véritablement libres ?</b></a><a class="hm" href="accueil.html">Retour à l’accueil</a></nav>
+<footer>
+  <div class="wrap"><p>Page réalisée à partir de la fiche « Epictète » et de l’extrait du <i>Manuel</i> (§ 1 à 3). Portrait de fond : Gravure représentant Épictète.</p></div>
+</footer>
+
+<script>
+(function(){
+  function $(s){return document.querySelector(s)}
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- Tri ---------- */
+  var ITEMS=[
+    ['Mes pensées',true,'La pensée dépend de nous.'],
+    ['Mon corps',false,'Le corps ne dépend pas de nous.'],
+    ['Mes désirs',true,'Le désir dépend de nous.'],
+    ['Mon argent',false,'L’argent, ou la richesse, ne dépend pas de nous.'],
+    ['Mes intentions',true,'Nos intentions dépendent de nous.'],
+    ['Ma réputation',false,'La réputation ne dépend pas de nous : elle est dans le regard des autres.'],
+    ['Mon impulsion à agir',true,'L’impulsion dépend de nous.'],
+    ['Les charges publiques',false,'Les charges publiques ne dépendent pas de nous.'],
+    ['Mes actions',true,'C’est nous qui agissons : elles dépendent de nous.'],
+    ['La victoire de mon équipe favorite',false,'Sa victoire ou sa défaite ne dépend pas de moi.'],
+    ['Mon aversion, ce que je cherche à fuir',true,'L’aversion dépend de nous.']
+  ];
+  var list=$('#sorter'),scoreEl=$('#score'),rows=[],done=0,right=0;
+  ITEMS.forEach(function(it,i){
+    var li=document.createElement('li');li.className='row';
+    li.innerHTML='<span class="name"></span><div class="pick" role="group"><button type="button" class="in" aria-pressed="false">Dépend de nous</button><button type="button" class="out" aria-pressed="false">N’en dépend pas</button></div><p class="fb" hidden aria-live="polite"></p>';
+    li.querySelector('.name').textContent=it[0];
+    li.querySelector('.pick').setAttribute('aria-label',it[0]);
+    var b=li.querySelectorAll('button'),fb=li.querySelector('.fb');
+    [true,false].forEach(function(val,k){
+      b[k].addEventListener('click',function(){
+        if(li.classList.contains('good')||li.classList.contains('bad'))return;
+        var ok=val===it[1];
+        b[k].setAttribute('aria-pressed','true');
+        b[0].disabled=b[1].disabled=true;
+        li.classList.add(ok?'good':'bad');
+        fb.hidden=false;
+        fb.innerHTML='<b>'+(ok?'Bien vu.':'Pas tout à fait.')+'</b> '+it[2];
+        done++;if(ok)right++;
+        update();
+      });
+    });
+    list.appendChild(li);rows.push(li);
+  });
+  function update(){
+    if(!done)scoreEl.textContent=ITEMS.length+' éléments à classer.';
+    else if(done<ITEMS.length)scoreEl.textContent=done+' classé'+(done>1?'s':'')+' sur '+ITEMS.length+' : '+right+' bonne'+(right>1?'s':'')+' réponse'+(right>1?'s':'')+'.';
+    else scoreEl.textContent='Tout est classé : '+right+' bonne'+(right>1?'s':'')+' réponse'+(right>1?'s':'')+' sur '+ITEMS.length+'.';
+  }
+  $('#reset').addEventListener('click',function(){
+    rows.forEach(function(li){
+      li.classList.remove('good','bad');
+      li.querySelector('.fb').hidden=true;
+      [].forEach.call(li.querySelectorAll('button'),function(b){b.disabled=false;b.setAttribute('aria-pressed','false')});
+    });
+    done=0;right=0;update();
+  });
+  update();
+
+  /* ---------- Bonheur ---------- */
+  var play=$('#play'),hist=$('#hist'),mood=$('#mood'),dot=$('#dot');
+  var radios=[].slice.call(document.querySelectorAll('input[name="where"]'));
+  function mode(){return radios.filter(function(r){return r.checked})[0].value}
+  var n=0;
+  function resetSim(){
+    n=0;hist.innerHTML='';dot.style.left='50%';
+    mood.textContent='Lancez un match pour voir ce que devient votre bonheur.';
+  }
+  radios.forEach(function(r){r.addEventListener('change',resetSim)});
+  play.addEventListener('click',function(){
+    var win=Math.random()<.5,m=mode();n++;
+    var li=document.createElement('li');
+    li.className=win?'w':'l';
+    li.textContent='Match '+n+' : '+(win?'victoire':'défaite');
+    hist.appendChild(li);
+    if(hist.children.length>6)hist.removeChild(hist.firstChild);
+    if(m==='out'){
+      dot.style.left=(win?88:12)+'%';
+      mood.textContent=win
+        ?'Mon équipe gagne : me voilà heureux… pour cette fois. Mais cette victoire ne dépendait pas de moi.'
+        :'Mon équipe perd : me voilà malheureux. Mon bonheur était entre les mains du hasard.';
+    }else{
+      dot.style.left='72%';
+      mood.textContent=(win?'Mon équipe a gagné':'Mon équipe a perdu')+', mais cela ne dépend pas de moi. Mon bonheur repose sur ce que je pense et sur ce que je fais : il reste le même.';
+    }
+  });
+  resetSim();
+})();
+</script>
+</body>
+</html>
