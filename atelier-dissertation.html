@@ -83,6 +83,14 @@ textarea:focus{outline:2px solid var(--blue);outline-offset:2px;border-radius:2p
 .btn:disabled{opacity:.45;cursor:not-allowed}
 .btn:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
 .btn.ghost{border-color:transparent;color:var(--ink-soft);padding-inline:8px}
+.liens{grid-column:1/-1;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:12px 22px}
+.liens summary{cursor:pointer;font-weight:700;color:var(--blue)}
+.liens-aide{margin:10px 0 6px;font-size:14px;color:var(--ink-soft)}
+.liens ul{margin:6px 0 4px;padding-left:20px}
+.liens li{margin:4px 0}
+.liens a{color:var(--blue)}
+.btn.depot{display:inline-block;text-decoration:none;line-height:1.2}
+.depot-note{margin:12px 0 0;font-size:14px;color:var(--ink-soft)}
 .spacer{flex:1}
 .pen{margin-top:22px;border-left:3px solid var(--red);background:var(--red-soft);border-radius:0 8px 8px 0;padding:14px 18px}
 .pen .who{font-family:var(--f-hand);color:var(--red);font-size:21px;font-weight:700;line-height:1.2;margin-bottom:6px}
@@ -112,6 +120,7 @@ textarea:focus{outline:2px solid var(--blue);outline-offset:2px;border-radius:2p
 .verdict b{font-family:var(--f-display);font-size:20px;color:var(--blue)}
 .valorise{font-size:14.5px;color:var(--ink-soft);max-width:70ch;margin:0 0 14px}
 .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:8px;font-weight:700;font-size:14px}
+.conseil{margin:18px 0 -6px;font-size:14px;color:var(--ink-soft)}
 .copy-fallback{width:100%;min-height:160px;margin-top:10px;font-size:13px;background-image:none;border:1px solid var(--line)}
 @media (max-width:820px){
   .wrap{grid-template-columns:minmax(0,1fr);gap:16px}
@@ -135,9 +144,33 @@ textarea:focus{outline:2px solid var(--blue);outline-offset:2px;border-radius:2p
   #print-zone .pt{white-space:pre-wrap}
   #print-zone .psujet{font-size:13pt}
 }
+
+/* Mode lecture */
+.a11y{position:relative;display:inline-block;margin-left:auto}
+.lcbtn{display:inline-flex;align-items:center;gap:.5rem;font:600 .88rem/1 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--paper);border:1.5px solid var(--ink);border-radius:999px;padding:.55rem .95rem;cursor:pointer}
+.lcbtn:hover{background:var(--ink);color:var(--paper)}.lcbtn:focus-visible{outline:3px solid #06c;outline-offset:2px}
+.a11y-menu{position:absolute;right:0;top:calc(100% + .4rem);z-index:60;min-width:14rem;background:var(--paper);color:var(--ink);border:1.5px solid var(--ink);border-radius:14px;padding:.35rem;box-shadow:0 8px 24px rgba(0,0,0,.18)}
+.a11y-menu[hidden]{display:none}
+.a11y-menu p{margin:0;padding:.45rem .7rem .3rem;font:700 .72rem/1 system-ui,-apple-system,sans-serif;letter-spacing:.06em;text-transform:uppercase;opacity:.65}
+.a11y-opt{display:flex;align-items:center;gap:.6rem;width:100%;text-align:left;font:600 .92rem/1.2 system-ui,-apple-system,sans-serif;color:inherit;background:none;border:0;border-radius:9px;padding:.6rem .7rem;cursor:pointer}
+.a11y-opt:hover{background:var(--line)}
+.a11y-opt:focus-visible{outline:3px solid #06c;outline-offset:-2px}
+.a11y-opt .dot{flex:none;width:1rem;height:1rem;border:2px solid currentColor;border-radius:50%;position:relative}
+.a11y-opt[aria-checked="true"] .dot::after{content:"";position:absolute;inset:2px;background:currentColor;border-radius:50%}
+.a11y-opt small{display:block;font-weight:500;opacity:.7;font-size:.78rem;margin-top:.15rem}
+#lecture{display:none}
+html.lect nav.steps,html.lect main{display:none!important}
+html.lect #lecture{display:block;grid-column:1/-1;width:100%;max-width:46rem;margin:0 auto;padding:0 0 3rem}
+html.lect #lecture .lsec{background:none;border:0;border-radius:0;padding:1.6rem 0 .4rem}
+html.lect #lecture .lsec h2{font-size:1.7rem;margin:.2rem 0 .5rem}
+html.lect #lecture .consigne{font:400 1.15rem/1.75 Georgia,"Times New Roman",serif}
+html.lect #lecture #btn-prev,html.lect #lecture #btn-next{display:none}
+@media print{#lecture,.a11y{display:none!important}}
 </style>
+<script>try{history.scrollRestoration="manual"}catch(e){}(function(){function t(){if(!location.hash)window.scrollTo(0,0)}t();document.addEventListener("DOMContentLoaded",t);window.addEventListener("load",function(){t();setTimeout(t,60)});window.addEventListener("pageshow",t)})();</script>
+<script src="confort.js"></script>
 </head>
-<body><nav style="font:500 .92rem/1 system-ui,-apple-system,'Segoe UI',sans-serif;max-width:1120px;margin:0 auto 14px;display:flex;align-items:center"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a></nav>
+<body><nav style="font:500 .92rem/1 system-ui,-apple-system,'Segoe UI',sans-serif;max-width:1120px;margin:0 auto 14px;display:flex;align-items:center"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><span class="a11y"><button type="button" class="lcbtn" id="a11y-btn" aria-haspopup="true" aria-expanded="false" aria-controls="a11y-menu"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="1.6"/><path d="M5 8.5l7 1.5 7-1.5M12 10v4.5M8.5 21l3.5-6.5 3.5 6.5"/></svg><span>Accessibilité</span></button><div class="a11y-menu" id="a11y-menu" role="radiogroup" aria-label="Affichage de la page" hidden><p>Affichage</p><button type="button" role="radio" class="a11y-opt" data-mode="orig" aria-checked="true"><span class="dot"></span><span>Page d’origine<small>Une étape à la fois</small></span></button><button type="button" role="radio" class="a11y-opt" data-mode="lect" aria-checked="false"><span class="dot"></span><span>Mode lecture<small>Toutes les étapes sur une page</small></span></button></div></span></nav>
 <div class="wrap">
   <header class="top">
     <div class="brand"><small>Philosophie · Terminale</small><h1>Atelier dissertation</h1></div>
@@ -154,6 +187,8 @@ textarea:focus{outline:2px solid var(--blue);outline-offset:2px;border-radius:2p
   </section>
 
 
+  <details class="liens" id="liens" hidden><summary>Textes à relire pour ce sujet</summary><p class="liens-aide">Ces pages du site vous donnent des arguments, des références et des exemples pour traiter ce sujet. Votre brouillon est enregistré sur cet appareil : vous le retrouverez en revenant sur l'atelier.</p><ul id="liens-list"></ul></details>
+
   <nav class="steps" aria-label="Étapes de la dissertation">
     <ol id="steps-nav"></ol>
     <p class="side-note">Toutes ces étapes se font au brouillon : prévoyez 1h30 à 2h. L'essentiel de la dissertation se joue ici, le reste est de l'écriture.<br><br>Votre brouillon est enregistré sur cet appareil.</p>
@@ -162,6 +197,7 @@ textarea:focus{outline:2px solid var(--blue);outline-offset:2px;border-radius:2p
   <main>
     <div class="sheet" id="sheet"></div>
   </main>
+  <section id="lecture" aria-label="Mode lecture"></section>
 </div>
 <div class="toast" id="toast" hidden></div>
 
@@ -396,6 +432,7 @@ const MODEL_IA_INCONSCIENT = {"source": "Corrigé rédigé en partie par IA", "i
 const MODEL_IA_BONHEUR2 = {"source": "Corrigé rédigé en partie par IA", "intro": "Nous disons qu'une personne est heureuse quand elle obtient ce qu'elle désire : un voyage, un amour, un succès. Le bonheur paraît donc la satisfaction de nos désirs, et la meilleure vie, celle où rien ne manque. Pourtant, nos désirs se renouvellent à mesure que nous les satisfaisons, et certains, une fois comblés, nous déçoivent. Le bonheur consiste-t-il à obtenir tout ce que l'on désire, ou faut-il faire le tri parmi ses désirs, voire les restreindre ? Nous verrons d'abord que le bonheur semble consister dans la satisfaction de tous les désirs, puis que ce projet est vain et qu'il faut satisfaire certains désirs seulement, avant de montrer que le bonheur exige peut-être de modifier notre rapport aux désirs, et de le penser avec la morale.", "probleme": "Puisque nous désirons être heureux, le bonheur est-il simplement l'obtention de ce que nous désirons, ou suppose-t-il de savoir quels désirs satisfaire, voire de les limiter, au risque de n'être heureux que par renoncement ?", "conclusion": "Le bonheur semblait d'abord consister dans la satisfaction de tous nos désirs, puisque celle-ci procure du plaisir. Mais nos désirs sont infinis, et il a fallu distinguer ceux qu'il convient de satisfaire. Il apparaît finalement que le bonheur ne consiste pas à satisfaire tous ses désirs : il suppose de modifier notre rapport à eux, de les ajuster à ce qui dépend de nous, et de ne pas le chercher indépendamment de la morale.", "custom": {"def": "<p><b>Le bonheur</b> : Vie heureuse, au sens d'un état durable de satisfaction. À distinguer du plaisir (passager) et de la joie, et à ne pas réduire à la chance (étymologie : « bon heur »).</p><p><b>Consiste</b> : Quelle est la nature du bonheur : est-il identique à la satisfaction des désirs, ou en dépend-il seulement ?</p><p><b>Satisfaire tous ses désirs</b> : Obtenir tout ce que l'on désire, sans restriction. Le « tous » invite à se demander si la satisfaction totale est possible et souhaitable.</p>", "theses": "<p><b>Idée 1 (oui) :</b> Le bonheur consiste à satisfaire tous ses désirs. Conséquence : Il faut laisser grandir ses désirs et les satisfaire.</p><p><b>Idée 2 (non) :</b> Le bonheur ne consiste pas à satisfaire tous ses désirs. Conséquence : Il faut trier, limiter ou ajuster ses désirs.</p>", "args": "<p><b>Pour l'idée 1 :</b> Parce que satisfaire un désir procure du plaisir, et que le bonheur serait la somme des plaisirs (Calliclès). Exemple : Calliclès : vivre en laissant ses désirs croître et en les comblant, sans jamais se limiter.</p><p><b>Pour l'idée 2 :</b> Parce que nos désirs sont infinis : leur satisfaction totale est impossible (Socrate dans le Gorgias), et il faut distinguer les désirs (Épicure). Exemple : Les tonneaux percés de Socrate, ou le tonneau des Danaïdes ; les désirs naturels et nécessaires.</p>"}, "parts": [{"t": "I. Le bonheur est la satisfaction de tous ses désirs", "subs": [{"t": "I.a. Le bonheur comme plaisir", "car": "Satisfaire un désir procure du plaisir. Le bonheur serait donc l'ensemble des plaisirs qu'on obtient : une définition simple, accessible à tous.", "ref": "L'hédonisme : le bonheur, c'est le plaisir.", "ex": "Manger quand on a faim, aimer, voyager : autant de désirs dont la satisfaction rend heureux.", "syn": "Définir le bonheur comme plaisir le rend accessible et concret."}, {"t": "I.b. L'hédonisme démesuré", "car": "Pour être heureux, il faudrait laisser grandir ses désirs et les satisfaire à mesure qu'ils viennent, sans se priver.", "ref": "Platon, Gorgias : Calliclès soutient que vivre bien, c'est laisser grandir ses désirs et les satisfaire sans limite, la tempérance n'étant bonne que pour les faibles.", "ex": "Le luxe, l'intempérance, la satisfaction immédiate de tout caprice.", "syn": "La vie heureuse serait la vie de l'abondance des désirs et de leur satisfaction."}], "bilan": "Le bonheur serait la satisfaction de tous nos désirs.", "pb": "Mais cette satisfaction totale est-elle possible, alors que nos désirs sont infinis ?"}, {"t": "II. Il faut satisfaire certains désirs seulement", "subs": [{"t": "II.a. Le tonneau des Danaïdes", "car": "Les désirs de l'homme sont infinis : chaque satisfaction en fait naître de nouveaux. La quête de satisfaction est donc vouée à l'échec et à l'insatisfaction.", "ref": "Platon, Gorgias : Socrate répond à Calliclès par l'image des tonneaux. L'homme intempérant verse sans fin dans des tonneaux percés qu'il ne remplit jamais, alors que l'homme tempérant a des tonneaux sains qu'il remplit une fois pour toutes.", "ex": "Le tonneau des Danaïdes, que l'on remplit sans jamais le remplir.", "syn": "Vouloir satisfaire tous ses désirs mène à la frustration, non au bonheur."}, {"t": "II.b. Distinguer les désirs", "car": "Il faut trier : les désirs naturels et nécessaires (manger, boire, dormir), les naturels non nécessaires (mets raffinés), les ni naturels ni nécessaires (gloire, richesse).", "ref": "Épicure, Lettre à Ménécée : on ne satisfait que les premiers, on évite les seconds, on fuit les derniers pour atteindre l'ataraxie, l'absence de trouble.", "ex": "Un repas simple et un abri suffisent à la tranquillité de l'âme, la quête de gloire la trouble.", "syn": "Le bonheur consiste à satisfaire certains désirs seulement."}, {"t": "II.c. Une définition trop minimale ?", "car": "Puisque presque tous mangent à leur faim et dorment sous un toit, tous devraient être heureux : ce n'est pas ce que nous constatons.", "ref": "Objection contre Épicure.", "ex": "Une personne qui ne manque de rien mais qui s'ennuie ou se sent seule.", "syn": "Épicure ne suffit pas : il faut penser le rapport même que nous entretenons à nos désirs."}], "bilan": "Le bonheur ne consiste pas à satisfaire tous ses désirs, mais certains.", "pb": "Reste que satisfaire, même un peu, ne suffit peut-être pas : ne faut-il pas ajuster nos désirs au monde, voire penser le bonheur avec la morale ?"}, {"t": "III. Le bonheur suppose de se rapporter autrement à ses désirs", "subs": [{"t": "III.a. Ajuster ses désirs au monde", "car": "Plutôt que de vouloir plier le monde à ses désirs, il faut adapter ses désirs au monde : distinguer ce qui dépend de nous (pensée, désir) de ce qui n'en dépend pas (corps, richesse, réputation).", "ref": "Épictète, Manuel : le stoïcisme, qui invite à désirer ce qui arrive.", "ex": "Le pot de terre est fragile, le fils est mortel : ne pas l'oublier. Face à l'injustice d'un frère, on ne peut agir que sur sa propre réaction.", "syn": "Le bonheur consiste à restreindre ses désirs à ce que l'on peut obtenir."}, {"t": "III.b. Être digne du bonheur", "car": "Faut-il poursuivre le bonheur par tous les moyens ? La morale ne nous rend pas heureux mais dignes de l'être.", "ref": "Kant, Critique de la raison pratique : le souverain bien, vertu et bonheur ; Fondements de la métaphysique des mœurs : le concept de bonheur est indéterminé.", "ex": "Celui qui renonce à tromper autrui pour son profit n'est pas toujours récompensé en ce monde.", "syn": "Le bonheur ne se réduit pas à la satisfaction des désirs : il ne se pense pas sans la morale."}], "bilan": "", "pb": ""}]};
 const MODEL_IA_JUSTICE2 = {"source": "Corrigé rédigé en partie par IA", "intro": "L'esclavage a longtemps été légal ; Rosa Parks a été condamnée pour avoir refusé de céder sa place dans un bus. Dans les deux cas, la loi disait une chose, et nous jugeons aujourd'hui que la justice en exigeait une autre. Pourtant, sans lois, qui déterminerait ce qui est juste ? Chacun défendrait sa propre idée de la justice. La justice se réduit-elle à la loi, ou permet-elle de juger la loi elle-même ? Nous verrons d'abord que la loi semble être la seule mesure du juste, puis que nous pouvons sentir et juger ce qui est juste indépendamment d'elle, avant de montrer que la justice, pour être effective, doit passer par des lois justes, c'est-à-dire fondées sur la volonté générale et sur des principes que tous pourraient accepter.", "probleme": "La loi définit-elle ce qui est juste, ou existe-t-il un juste qui permet de juger les lois, auquel cas d'où tient-il son autorité, puisque nous avons besoin des lois pour vivre ensemble ?", "conclusion": "La loi semblait d'abord la seule mesure du juste : sans elle, ni ordre ni liberté. Mais l'esclavage ou la ségrégation prouvent que l'on peut juger une loi, et que le juste ne se réduit pas au légal. Il apparaît finalement que la justice ne se réduit pas à la loi, mais qu'elle a besoin d'elle pour exister : la loi juste est celle qui émane de la volonté générale et qui respecte les droits de chacun.", "custom": {"def": "<p><b>La justice</b> : Deux sens à distinguer : la justice comme vertu ou morale individuelle (être juste), et la justice comme institution politique et sociale (rendre la justice, faire appliquer la loi).</p><p><b>La loi</b> : Règle commune établie et sanctionnée par l'État. À distinguer de la morale et des mœurs, et de ce qui est légitime (conforme au juste) par opposition à ce qui est légal (conforme à la loi).</p><p><b>Se réduire à</b> : Être seulement cela et rien de plus. La question n'est pas de savoir si la loi sert la justice mais si elle en est la mesure exclusive.</p>", "theses": "<p><b>Idée 1 (oui) :</b> La justice se réduit à la loi. Conséquence : On n'a pas à juger les lois : est juste ce que la loi prescrit.</p><p><b>Idée 2 (non) :</b> La justice ne se réduit pas à la loi. Conséquence : Il faut pouvoir juger les lois à l'aune d'un critère de justice.</p>", "args": "<p><b>Pour l'idée 1 :</b> Parce que sans lois il n'y a pas de justice mais l'état de nature, et qu'une loi ne peut être injuste (Hobbes). Exemple : L'état de nature décrit par Hobbes.</p><p><b>Pour l'idée 2 :</b> Parce que le légitime n'est pas toujours légal et que nous sentons ce qui est juste (Rawls, Rousseau). Exemple : L'esclavage, Rosa Parks.</p>"}, "parts": [{"t": "I. La justice se réduit à la loi", "subs": [{"t": "I.a. Sans lois, pas de justice", "car": "Sans lois, nous ne serions guère différents des bêtes sauvages : nos désirs et nos intérêts nous empêchent de décider seuls du juste.", "ref": "Platon, Les Lois ; Hobbes, Léviathan : sans justice coercitive, retour à l'état de nature.", "ex": "L'état de nature chez Hobbes : la guerre de tous contre tous.", "syn": "La loi est la condition de la justice : il n'y a pas de justice sans elle."}, {"t": "I.b. La loi ne peut être injuste", "car": "Si la loi résulte de l'accord de tous, alors on ne peut la tenir pour injuste : elle définit le juste.", "ref": "Hobbes, Léviathan : une loi ne peut être injuste, puisqu'elle résulte de l'accord collectif.", "ex": "Respecter le code de la route parce que c'est la loi, sans se demander si sa limitation est « juste ».", "syn": "Le juste coïncide avec le légal : la justice se réduit à la loi."}, {"t": "I.c. Sans lois, pas de liberté", "car": "La loi protège ma liberté contre celle des autres : sans justice instituée, le plus fort règne.", "ref": "Rousseau, Du contrat social : la loi comme condition de la liberté.", "ex": "Sans droit de propriété garanti, le plus fort peut tout prendre.", "syn": "La loi est ce qui rend la justice possible."}], "bilan": "La loi serait la seule mesure du juste.", "pb": "Mais alors, comment juger une loi injuste ? Nous ne pouvons pourtant pas dire que l'esclavage était juste parce qu'il était légal."}, {"t": "II. La justice déborde la loi", "subs": [{"t": "II.a. Le légitime n'est pas toujours légal", "car": "Le légal n'est pas toujours légitime, et le légitime n'est pas toujours légal. C'est la preuve que nous disposons d'un critère extérieur à la loi.", "ref": "Rosa Parks : condamnée pour avoir désobéi à une loi ségrégationniste.", "ex": "L'esclavage, la ségrégation, l'asservissement des femmes : légaux mais injustes.", "syn": "Si l'on peut juger la loi, la justice ne se réduit pas à elle."}, {"t": "II.b. Sentir le juste", "car": "Nous pouvons percevoir ce qui est juste ou injuste sans l'aide de la loi : nous avons une intuition du juste.", "ref": "Rawls, Théorie de la justice : l'intuitionnisme moral. Voir aussi la pitié naturelle chez Rousseau.", "ex": "Voir un enfant maltraité suffit à ressentir l'injustice.", "syn": "La justice a une source morale distincte de la loi."}, {"t": "II.c. La justice comme harmonie", "car": "Être juste, c'est ordonner harmonieusement les parties de son âme : la justice est d'abord santé de l'âme, avant d'être une affaire d'institutions.", "ref": "Platon, La République : justice individuelle et justice de la cité.", "ex": "Celui qui maîtrise ses désirs par la raison est juste sans qu'aucune loi le contraigne.", "syn": "La justice est d'abord une vertu : la loi n'en est pas la mesure."}], "bilan": "La justice excède la loi : c'est elle qui permet de la juger.", "pb": "Mais si chacun sent le juste, pourquoi des lois ? Et comment éviter que notre sentiment ne soit arbitraire ? Comment fonder des lois qui soient justes ?"}, {"t": "III. La justice demande des lois justes", "subs": [{"t": "III.a. Une loi juste émane de la volonté générale", "car": "La loi est juste lorsqu'elle exprime la volonté générale, c'est-à-dire la volonté tournée vers l'intérêt commun, et non les intérêts particuliers.", "ref": "Rousseau, Du contrat social.", "ex": "Une loi votée par le peuple dans l'intérêt de tous, plutôt qu'imposée par un souverain pour son profit.", "syn": "La loi n'est pas la justice, mais elle doit chercher à l'incarner."}, {"t": "III.b. Le voile d'ignorance", "car": "Pour juger des lois justes, il faut se placer dans une situation où personne ne sait quelle place il occupera dans la société : on choisit alors des principes équitables.", "ref": "Rawls, Théorie de la justice : le voile d'ignorance, le principe de liberté, d'égalité devant la loi et le principe de différence.", "ex": "Choisir les règles d'un partage sans savoir si l'on recevra la plus petite part.", "syn": "La justice est le critère de la loi : elle suppose pourtant des lois pour exister."}], "bilan": "", "pb": ""}]};
 
+const LIENS = {"etat": [["etat-hobbes.html", "Hobbes : l’état de nature, guerre de tous contre tous"], ["etat-nietzsche.html", "Nietzsche : l’État, le plus froid des monstres froids"], ["justice-hobbes.html", "Hobbes : qu’est-ce qu’une bonne loi ?"], ["justice-platon-lois.html", "Platon : pourquoi avoir des lois ?"], ["justice-rawls.html", "Rawls : l’intuitionnisme en matière de justice"]], "circ": [["conscience-sartre.html", "Sartre : condamné à être libre"], ["devoir-sartre.html", "Sartre : le dilemme moral d’un jeune homme"], ["spinoza-lettre-a-schuller.html", "Spinoza : l’ignorance des causes déterminantes"], ["ane-de-buridan.html", "L’âne de Buridan : la liberté d’indifférence"], ["determinisme-social.html", "Le déterminisme social"]], "choix": [["ane-de-buridan.html", "L’âne de Buridan : la liberté d’indifférence"], ["conscience-sartre.html", "Sartre : condamné à être libre"], ["devoir-sartre.html", "Sartre : le dilemme moral d’un jeune homme"], ["spinoza-lettre-a-schuller.html", "Spinoza : l’ignorance des causes déterminantes"]], "fardeau": [["conscience-sartre.html", "Sartre : condamné à être libre"], ["devoir-rousseau-conscience.html", "Rousseau : la conscience, instinct divin"], ["devoir-nietzsche.html", "Nietzsche : morale du troupeau et mauvaise conscience"], ["conscience-hume.html", "Hume : le moi n’est qu’un faisceau de perceptions"]], "artv": [["art-et-verite.html", "L’art est-il un moyen d’accéder à la vérité ?"], ["art-kant.html", "Kant : le jugement de goût"], ["art-hume-delicatesse.html", "Hume : la délicatesse du goût"], ["art-bourdieu.html", "Bourdieu : l’idéologie charismatique"]], "bonh": [["bonheur-epictete.html", "Épictète : les opinions troublent les hommes"], ["bonheur-descartes-epictete.html", "Épictète et Descartes : acceptation et grandeur d’âme"], ["bonheur-kant-difficulte.html", "Kant : la difficulté de définir le bonheur"], ["bonheur-bergson.html", "Bergson : la joie, signe de la création"]], "ia_travail": [["travail-marx-alienation.html", "Marx : l’aliénation par le travail"], ["travail-hegel.html", "Hegel : le maître et le serviteur"], ["travail-genese.html", "Genèse 3 : le travail comme punition"], ["travail-russell.html", "Russell : éloge de l’oisiveté"], ["travail-aristote.html", "Aristote : citoyen et travail"]], "ia_parler": [["langage-austin.html", "Austin : la performativité"], ["langage-klemperer.html", "Klemperer : la langue du Troisième Reich"], ["langage-wittgenstein.html", "Wittgenstein : usage et signification"]], "ia_temps": [["temps-bergson.html", "Bergson : l’exemple de l’eau sucrée"], ["temps-proust.html", "Proust : l’extra-temporalité"], ["temps-einstein.html", "Einstein : temps du physicien et temps psychologique"], ["temps-sartre.html", "Sartre : passé et présent"]], "ia_nature": [["technique-bacon.html", "Bacon : vaincre la nature en lui obéissant"], ["nature-descartes.html", "Descartes : maîtres et possesseurs de la nature"], ["nature-galilee.html", "Galilée : l’univers, un livre écrit en langue mathématique"], ["nature-genese.html", "Genèse : la domination de l’homme sur la nature"], ["technique-heidegger.html", "Heidegger : le Rhin, de fleuve à ressource"]], "ia_devoir": [["devoir-kant.html", "Kant : la bonne volonté et le devoir"], ["devoir-sartre.html", "Sartre : le dilemme moral d’un jeune homme"], ["devoir-eichmann.html", "Arendt : Eichmann et l’impératif catégorique"], ["devoir-kropotkine.html", "Kropotkine : pourquoi serais-je moral ?"], ["devoir-durkheim.html", "Durkheim : le devoir comme fait social"]], "ia_religion": [["religion-kant.html", "Kant : l’existence de Dieu comme nécessité morale"], ["religion-nietzsche.html", "Nietzsche : la mort de Dieu"], ["religion-marx.html", "Marx : la religion est l’opium du peuple"], ["devoir-holbach.html", "D’Holbach : fonder la morale sur la nature"]], "ia_conscience": [["conscience-hume.html", "Hume : le moi n’est qu’un faisceau de perceptions"], ["conscience-hobbes.html", "Hobbes : objection au cogito de Descartes"], ["conscience-sartre.html", "Sartre : condamné à être libre"], ["descartes-du-doute-au-cogito.html", "Descartes : du doute au cogito"]], "ia_inconscient": [["inconscient-freud.html", "Freud : l’hypothèse de l’inconscient"], ["inconscient-leibniz.html", "Leibniz : les petites perceptions"], ["inconscient-freud-elisabeth.html", "Freud : le cas d’Élisabeth"]], "ia_bonheur2": [["bonheur-callicles.html", "Calliclès et Socrate : l’image des tonneaux"], ["bonheur-epicure.html", "Épicure : les différents désirs"], ["bonheur-aristophane.html", "Aristophane : le mythe des moitiés séparées"], ["bonheur-kant-digne.html", "Kant : se rendre digne du bonheur"], ["bonheur-bergson.html", "Bergson : la joie, signe de la création"]], "ia_justice2": [["justice-platon-gyges.html", "Platon : le mythe de l’anneau de Gygès"], ["justice-hobbes.html", "Hobbes : qu’est-ce qu’une bonne loi ?"], ["justice-smith.html", "Smith : la justice et la négligence"], ["justice-rawls.html", "Rawls : l’intuitionnisme en matière de justice"], ["justice-platon-lois.html", "Platon : pourquoi avoir des lois ?"]]};
 const SUJETS = [
   {id:"etat", txt:"Revient-il à l'État de décider ce qui est juste ?", notions:["L'État","La justice"], terms:["Revient-il","L'État","Décider","Ce qui est juste"], model:MODEL_ETAT},
   {id:"circ", txt:"Sommes-nous libres en toutes circonstances ?", notions:["La liberté","L'État"], terms:["Libres","Toutes circonstances","",""], model:MODEL_CIRC},
@@ -447,6 +484,7 @@ const STORE_KEY = "atelier-dissertation-v1";
 let store = {sujet:"etat", step:0, libre:"", drafts:{}};
 try{ const s = JSON.parse(localStorage.getItem(STORE_KEY)||"null"); if(s && typeof s==="object") store = Object.assign(store, s); }catch(e){}
 if(!SUJETS.some(s=>s.id===store.sujet)) store.sujet = "etat";
+try{ const h=decodeURIComponent((location.hash||"").slice(1)); if(h && SUJETS.some(s=>s.id===h && !s.libre) && h!==store.sujet){ store.sujet=h; store.step=0; } }catch(e){}
 let saveT;
 function save(){ clearTimeout(saveT); saveT = setTimeout(()=>{ try{ localStorage.setItem(STORE_KEY, JSON.stringify(store)); }catch(e){} }, 300); }
 const sujet = ()=> SUJETS.find(s=>s.id===store.sujet);
@@ -537,8 +575,8 @@ function modelFor(i){
 }
 
 /* ---------- Rendu des étapes ---------- */
-function renderStep(){
-  const i = store.step, st = STEPS[i], d = draft();
+function renderStep(i=store.step, root=$("#sheet")){
+  const st = STEPS[i], d = draft();
   let body = "";
   if(st.k==="def"){
     const terms = sujet().terms || [];
@@ -575,26 +613,27 @@ function renderStep(){
 
   const model = modelFor(i);
   const isLast = i===STEPS.length-1;
-  $("#sheet").innerHTML = `
+  root.innerHTML = `
     <div class="eyebrow">Étape ${i+1} sur ${STEPS.length}</div>
     <h2>${st.lbl}</h2>
     <p class="consigne">${st.consigne}</p>
     <div id="fields">${body}</div>
+    ${model?`<p class="conseil"><b>Conseil :</b> ne comparez avec la correction qu'une fois les champs intégralement remplis.</p>`:""}
     <div class="actions">
       ${model?`<button class="btn red" id="btn-model" aria-expanded="false">Comparer avec la correction</button>`:""}
-      ${isLast?`<button class="btn" id="btn-copy">Copier tout le brouillon</button><button class="btn" id="btn-pdf">Enregistrer en PDF</button>`:""}
+      ${isLast?`<button class="btn" id="btn-pdf">Enregistrer en PDF</button><a class="btn primary depot" href="https://framaforms.org/dissertations-1792415023" target="_blank" rel="noopener noreferrer">Déposer mon travail ↗</a>`:""}
       <span class="spacer"></span>
       ${i>0?`<button class="btn ghost" id="btn-prev">← Précédent</button>`:""}
       ${!isLast?`<button class="btn" id="btn-next">Étape suivante →</button>`:""}
     </div>
+    ${isLast?`<p class="depot-note">Pour rendre votre travail, et ce uniquement si vous souhaitez que je vous corrige : enregistrez-le en PDF, puis cliquez sur « Déposer mon travail ». N'oubliez pas d'indiquer votre prénom et nom sur le Framaform.</p>`:""}
     <div id="model-zone" hidden>${model?`<div class="model">${model}</div>`:""}</div>
-    ${isLast?`<textarea class="copy-fallback" id="copy-fallback" hidden readonly aria-label="Brouillon à copier"></textarea>`:""}`;
+    `;
 
-  $("#btn-prev")?.addEventListener("click",()=>go(i-1));
-  $("#btn-next")?.addEventListener("click",()=>go(i+1));
-  $("#btn-copy")?.addEventListener("click",copyAll);
-  $("#btn-pdf")?.addEventListener("click",savePdf);
-  $("#btn-model")?.addEventListener("click",e=>{ const z=$("#model-zone"); z.hidden=!z.hidden; e.currentTarget.setAttribute("aria-expanded",String(!z.hidden)); e.currentTarget.textContent = z.hidden?"Comparer avec la correction":"Masquer la correction"; if(!z.hidden) z.scrollIntoView({behavior:"smooth",block:"nearest"}); });
+  root.querySelector("#btn-prev")?.addEventListener("click",()=>go(i-1));
+  root.querySelector("#btn-next")?.addEventListener("click",()=>go(i+1));
+  root.querySelector("#btn-pdf")?.addEventListener("click",savePdf);
+  root.querySelector("#btn-model")?.addEventListener("click",e=>{ const z=root.querySelector("#model-zone"); z.hidden=!z.hidden; e.currentTarget.setAttribute("aria-expanded",String(!z.hidden)); e.currentTarget.textContent = z.hidden?"Comparer avec la correction":"Masquer la correction"; if(!z.hidden) z.scrollIntoView({behavior:"smooth",block:"nearest"}); });
   if(st.k==="bilan") updateVerdict();
   renderNav();
 }
@@ -620,6 +659,8 @@ function renderSujet(){
   $("#sujet-libre").hidden = !s.libre;
   $("#sujet-libre").value = store.libre;
   $("#sujet-txt").textContent = sujetTxt();
+  { const d=$("#liens"), l=LIENS[s.id]||[]; d.hidden=!l.length; d.open=false;
+    $("#liens-list").innerHTML=l.map(x=>`<li><a href="${x[0]}">${esc(x[1])}</a></li>`).join(""); }
   $("#sujet-tags").innerHTML = (s.notions||[]).map(n=>`<span class="tag">${esc(n)}</span>`).join("") + (s.model?`<span class="tag corr">${s.ia?"Corrigé rédigé en partie par IA":"Corrigé rédigé par l'enseignant"}</span>`:"");
 }
 function go(i){ store.step = Math.max(0,Math.min(STEPS.length-1,i)); save(); renderStep(); $("#sheet").scrollIntoView({behavior:"smooth",block:"start"}); }
@@ -729,15 +770,41 @@ $("#sujet").innerHTML = SUJETS.map(s=>`<option value="${s.id}">${s.libre?"Autre 
 $("#sujet").addEventListener("change",e=>{ store.sujet=e.target.value; store.step=0; save(); renderSujet(); renderStep(); });
 $("#sujet-libre").addEventListener("input",e=>{ store.libre=e.target.value; save(); $("#sujet-txt").textContent=sujetTxt(); });
 $("#steps-nav").addEventListener("click",e=>{ const b=e.target.closest("button[data-i]"); if(b) go(+b.dataset.i); });
-$("#sheet").addEventListener("input",e=>{
+function onField(e){
   const k = e.target.dataset?.k; if(!k) return;
   draft()[k] = e.target.type==="checkbox" ? e.target.checked : e.target.value;
   save();
   if(k.startsWith("grille_")) updateVerdict();
   clearTimeout(renderNav.t); renderNav.t = setTimeout(renderNav, 400);
-});
+}
+$("#sheet").addEventListener("input",onField);
 
 renderSujet(); renderStep();
+
+/* ---------- Mode lecture : toutes les étapes sur une page ---------- */
+function renderLecture(){
+  const z=$("#lecture"); z.innerHTML="";
+  STEPS.forEach((_,i)=>{ const sec=document.createElement("section"); sec.className="sheet lsec"; z.appendChild(sec); renderStep(i,sec); });
+}
+$("#lecture").addEventListener("input",onField);
+(function(){
+  const btn=$("#a11y-btn"), menu=$("#a11y-menu"), opts=menu.querySelectorAll(".a11y-opt"), r=document.documentElement, K="atelier-lecture";
+  function set(m){
+    const on=m==="lect", was=r.classList.contains("lect"); if(on===was) { opts.forEach(o=>o.setAttribute("aria-checked",o.dataset.mode===m?"true":"false")); return; }
+    r.classList.toggle("lect",on);
+    opts.forEach(o=>o.setAttribute("aria-checked",o.dataset.mode===m?"true":"false"));
+    if(on){ $("#sheet").innerHTML=""; renderLecture(); } else { $("#lecture").innerHTML=""; renderStep(); }
+    try{localStorage.setItem(K,on?"1":"0")}catch(e){}
+  }
+  function open(on){ menu.hidden=!on; btn.setAttribute("aria-expanded",on?"true":"false"); }
+  btn.addEventListener("click",e=>{ e.stopPropagation(); open(menu.hidden); });
+  opts.forEach(o=>o.addEventListener("click",()=>{ set(o.dataset.mode); open(false); btn.focus(); }));
+  document.addEventListener("click",e=>{ if(!menu.hidden && !menu.contains(e.target) && e.target!==btn) open(false); });
+  document.addEventListener("keydown",e=>{ if(e.key==="Escape" && !menu.hidden){ open(false); btn.focus(); } });
+  $("#sujet").addEventListener("change",()=>{ if(r.classList.contains("lect")) renderLecture(); });
+  let v=false; try{v=localStorage.getItem(K)==="1"}catch(e){}
+  if(v) set("lect");
+})();
 
 </script>
 </body>

@@ -43,7 +43,7 @@ p{margin:0 0 1em}
 .btn.primary{background:var(--ink);color:var(--bg)}
 .btn.primary:hover{background:var(--ink);filter:brightness(1.2)}
 .note{font:500 .92rem/1.5 var(--sans);color:var(--muted)}
-section.block{border-top:1px solid var(--line);padding:clamp(2.2rem,6vw,3.8rem) 0}
+section.block{border-top:0;padding:clamp(2.2rem,6vw,3.8rem) 0}
 .sec-head{max-width:46rem;margin-bottom:1.6rem}
 .src{font:600 .85rem/1.35 var(--sans);color:var(--muted)}
 blockquote{margin:0}
@@ -127,6 +127,8 @@ footer{padding:1.6rem 0 2.5rem;font:500 .9rem/1.5 var(--sans);color:var(--muted)
 }
 @page{size:A4;margin:16mm 14mm}
 </style>
+<script>try{history.scrollRestoration="manual"}catch(e){}(function(){function t(){if(!location.hash)window.scrollTo(0,0)}t();document.addEventListener("DOMContentLoaded",t);window.addEventListener("load",function(){t();setTimeout(t,60)});window.addEventListener("pageshow",t)})();</script>
+<script src="confort.js"></script>
 </head>
 <body>
 <nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
@@ -160,7 +162,6 @@ footer{padding:1.6rem 0 2.5rem;font:500 .9rem/1.5 var(--sans);color:var(--muted)
   </div>
 </section>
 </main>
-<footer><div class="wrap"><p>Page réalisée à partir de la frise « Philosophes de terminale » (deux pages : antiquité et Moyen Âge, puis moderne et contemporaine). La frise d’origine ne donne que des barres sans dates chiffrées : les dates indiquées ici sont des repères que j’ai ajoutés ; elles sont approximatives pour les noms précédés de « vers ». Les couleurs (siècle de naissance), le curseur, la recherche, les contemporains et l’exercice sont rédigés pour cette page.</p></div></footer>
 
 <script>
 (function(){

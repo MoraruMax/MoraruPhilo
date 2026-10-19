@@ -43,7 +43,7 @@ p{margin:0 0 1em}
 .btn.primary{background:var(--ink);color:var(--bg)}
 .btn.primary:hover{background:var(--ink);filter:brightness(1.2)}
 .note{font:500 .92rem/1.5 var(--sans);color:var(--muted)}
-section.block{border-top:1px solid var(--line);padding:clamp(2.2rem,6vw,3.8rem) 0}
+section.block{border-top:0;padding:clamp(2.2rem,6vw,3.8rem) 0}
 .sec-head{max-width:46rem;margin-bottom:1.6rem}
 .src{font:600 .85rem/1.35 var(--sans);color:var(--muted)}
 blockquote{margin:0}
@@ -174,6 +174,58 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);op
 
 .pdfbtn{display:inline-flex;align-items:center;gap:.5rem;font:600 .88rem/1 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--surface);border:1.5px solid var(--ink);border-radius:999px;padding:.55rem .95rem;cursor:pointer}
 .pdfbtn:hover{background:var(--ink);color:var(--bg)}.pdfbtn:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:2px}
+
+/* Texte seul */
+html.ts body::before,html.ts body::after{display:none!important}
+html.ts body{background:var(--bg)!important}
+html.ts .hero h1,html.ts .hero p,html.ts section.block h2,html.ts section.block > .wrap > p,html.ts .sec-head p,html.ts footer p{text-shadow:none!important}
+
+/* Mode lecture */
+html.lect body::before,html.lect body::after{display:none!important}
+html.lect body{background:var(--bg)!important}
+html.lect .pn,html.lect #quiz,html.lect section[aria-labelledby="h-ex"],html.lect section[aria-labelledby="h-video"],html.lect .sec-head p,html.lect .score{display:none!important}
+html.lect .hero h1,html.lect .hero p,html.lect section.block h2,html.lect footer p{text-shadow:none!important}
+html.lect .hero,html.lect section.block{padding-block:1.2rem!important;border:0!important}
+html.lect .wrap,html.lect .sec-head{max-width:40rem!important;margin-inline:auto}
+html.lect .hgrid,html.lect .two{display:block!important}
+html.lect main,html.lect .hero{font-family:var(--serif)}
+html.lect .hero h1{font-size:clamp(1.9rem,5vw,2.6rem)!important}
+html.lect .lead,html.lect p,html.lect li{font-size:1.15rem!important;line-height:1.8!important}
+html.lect .lead{max-width:none!important}
+html.lect .must,html.lect .qc,html.lect .lim,html.lect .terms details,html.lect .txb,html.lect .stp li{background:none!important;border:0!important;box-shadow:none!important;padding:0!important;margin:0 0 1rem!important;display:block!important;border-radius:0!important}
+html.lect .must p{margin:.4rem 0!important}
+html.lect .must .q,html.lect .must .src{font-style:normal}
+html.lect .stp li[hidden]{display:block!important}
+html.lect .stp li::before{display:none!important}
+html.lect .stp h3{display:block!important;margin:0 0 .1rem!important}
+html.lect .qc h3,html.lect .terms summary,html.lect .lim b{display:inline;font:700 1.15rem/1.8 var(--sans);color:var(--ink)!important;margin:0}
+html.lect .stp h3{font:700 1.15rem/1.8 var(--sans);color:var(--ink)!important}
+html.lect .terms summary::after{content:" \2014  "}
+html.lect .qc h3::after{content:" : "}
+html.lect .stp div{display:block}
+html.lect .terms summary{cursor:default;list-style:none;padding:0}
+html.lect .terms summary::-webkit-details-marker,html.lect .terms summary::marker{display:none;content:""}
+html.lect .terms details p{display:inline;margin:0}
+html.lect .qc p{display:inline}
+html.lect .qc{margin-bottom:.6rem!important}
+html.lect .tx summary{cursor:default;pointer-events:none;padding:0}
+html.lect .tx summary::before{display:none!important}
+html.lect .txb{margin-top:.6rem!important}
+html.lect .txb .tsrc:not(:last-child){border:0!important}
+html.lect .recap li{border:0!important;padding:.2rem 0!important}
+html.lect .recap{max-width:none}
+
+/* Accessibilité */
+.a11y{position:relative;display:inline-block}
+.a11y-menu{position:absolute;right:0;top:calc(100% + .4rem);z-index:60;min-width:14rem;background:var(--bg);color:var(--ink);border:1.5px solid var(--ink);border-radius:14px;padding:.35rem;box-shadow:0 8px 24px rgba(0,0,0,.18);text-shadow:none}
+.a11y-menu[hidden]{display:none}
+.a11y-menu p{margin:0;padding:.45rem .7rem .3rem;font:700 .72rem/1 system-ui,-apple-system,sans-serif;letter-spacing:.06em;text-transform:uppercase;opacity:.65}
+.a11y-opt{display:flex;align-items:center;gap:.6rem;width:100%;text-align:left;font:600 .92rem/1.2 system-ui,-apple-system,sans-serif;color:inherit;background:none;border:0;border-radius:9px;padding:.6rem .7rem;cursor:pointer}
+.a11y-opt:hover{background:var(--surface)}
+.a11y-opt:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:-2px}
+.a11y-opt .dot{flex:none;width:1rem;height:1rem;border:2px solid currentColor;border-radius:50%;position:relative}
+.a11y-opt[aria-checked="true"] .dot::after{content:"";position:absolute;inset:2px;background:currentColor;border-radius:50%}
+.a11y-opt small{display:block;font-weight:500;opacity:.7;font-size:.78rem;margin-top:.15rem}
 @media print{
   :root{--bg:#fff!important;--surface:#fff!important;--ink:#111!important;--muted:#444!important;--line:#bbb!important;color-scheme:light!important}
   *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
@@ -191,11 +243,24 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);op
   footer{break-before:avoid;border-top:1px solid #999;margin-top:1rem}
 }
 @page{size:A4;margin:16mm 14mm}
+.tx summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:.7rem;font:800 clamp(1.4rem,3vw,1.9rem)/1.2 var(--sans);padding:.3rem 0}
+.tx summary::-webkit-details-marker{display:none}
+.tx summary::before{content:"";width:.6em;height:.6em;border-right:.2em solid currentColor;border-bottom:.2em solid currentColor;transform:rotate(-45deg);transition:transform .15s;flex:none;margin-right:.2rem}
+.tx[open] summary::before{transform:rotate(45deg)}
+@media (prefers-reduced-motion:reduce){.tx summary::before{transition:none}}
+.txb{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--k,var(--ink));padding:1.2rem clamp(1rem,3vw,1.8rem);margin-top:.9rem;max-width:46rem;font:400 1.1rem/1.75 var(--serif)}
+.txb p{margin:0 0 1em}
+.txb h3{font:700 1rem/1.3 var(--sans);margin:1.2em 0 .5em}
+.txb .vs{font:700 .72rem/1 var(--sans);color:var(--muted);margin-right:.15em}
+.txb .tsrc{font:600 .88rem/1.4 var(--sans);color:var(--muted);text-align:right;margin:1.1em 0 0}
+.txb .tsrc:not(:last-child){margin-bottom:1.4em;padding-bottom:1.2em;border-bottom:1px solid var(--line)}
 </style>
 <link rel="stylesheet" href="quiz.css">
+<script>try{history.scrollRestoration="manual"}catch(e){}(function(){function t(){if(!location.hash)window.scrollTo(0,0)}t();document.addEventListener("DOMContentLoaded",t);window.addEventListener("load",function(){t();setTimeout(t,60)});window.addEventListener("pageshow",t)})();</script>
+<script src="confort.js"></script>
 </head>
 <body style="--k:var(--gold);--ks:var(--gold-soft)">
-<nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
+<nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><span style="display:inline-flex;gap:.6rem;flex-wrap:wrap;align-items:center"><span class="a11y"><button type="button" class="pdfbtn" id="a11y-btn" aria-haspopup="true" aria-expanded="false" aria-controls="a11y-menu"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="1.6"/><path d="M5 8.5l7 1.5 7-1.5M12 10v4.5M8.5 21l3.5-6.5 3.5 6.5"/></svg><span>Accessibilité</span></button><div class="a11y-menu" id="a11y-menu" role="radiogroup" aria-label="Affichage de la page" hidden><p>Affichage</p><button type="button" role="radio" class="a11y-opt" data-mode="orig" aria-checked="true"><span class="dot"></span><span>Page d’origine<small>Image de fond et mise en page habituelle</small></span></button><button type="button" role="radio" class="a11y-opt" data-mode="ts" aria-checked="false"><span class="dot"></span><span>Texte seul<small>Sans image de fond</small></span></button><button type="button" role="radio" class="a11y-opt" data-mode="lect" aria-checked="false"><span class="dot"></span><span>Mode lecture<small>Texte continu, sans cadres ni exercices</small></span></button></div></span><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></span></nav>
 <header class="hero">
   <div class="wrap hgrid">
     <div>
@@ -210,6 +275,11 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);op
   </div>
 </header>
 <main>
+<section class="block" aria-labelledby="h-tx">
+  <div class="wrap">
+    <details class="tx"><summary id="h-tx">Le texte</summary><div class="txb"><p>Le Rhin</p><p>À Isaac de Sinclair</p><p>Dans le sombre lierre j’étais assis, au seuil<br>De la forêt, à l’instant où midi<br>Visiteur de la source, étincelant d’or<br>Descendait des gradins de l’ Alpe<br>Qui pour moi s’appelle,<br>Divin édifice, citadelle des Célestes<br>Selon le vieil adage, où pourtant<br>Décidées en secret tant de choses encore<br>Parviennent aux hommes; d’où<br>Je perçus sans présage<br>Un destin, car à peine encore<br>Dans la chaleur de l’ombre mon âme<br>S’entretenant de tant de choses<br>Avait vagué vers l’Italie,<br>Au loin jusqu’aux rivages moréens.</p><p>Mais à présent, au-dedans de la montagne,<br>Profondément enfoui sous les cimes d’argent<br>Et sous l’émeraude radieuse,<br>Où les forêts frémissantes<br>Et les crêtes des rochers en terrasses<br>Plongent leurs regards vers lui, jour après jour, là-bas<br>Dans l’abîme glacial, je l’entendais<br>Pousser des lamentations le jouvenceau<br>Pour sa délivrance, ils l’entendaient<br>Se déchaîner, accuser la terre-mère<br>Et le dieu tonnerre qui l’engendra,<br>Ses parents pris de pitié, pourtant<br>Les mortels s’enfuirent de ce lieu,<br>Car elle semait l’effroi, tandis que privé de lumière<br>Il se débattait dans les chaînes,<br>La fureur du demi-dieu.</p><p>C’était la voix du Rhin libre de naissance,<br>Le plus noble des fleuves,<br>Et c’est tout autre chose qu’il espérait, quand là-haut<br>De ses frères, du Tessin et du Rhône<br>Il se sépara avec désir migrant, et impatiente<br>Son âme royale le poussait vers l’Asie.<br>Pourtant il est déraisonnable<br>De former des vœux face au destin.<br>Mais de tous, les plus aveugles<br>Sont les fils des dieux. Car l’homme connaît<br>Sa maison, il est échu à l’animal<br>Le lieu où gîter, pourtant à ceux-là<br>Il leur est donné dans l’âme inexpérimentée<br>Cette faille de ne savoir où aller.</p><p>Une énigme, pur jaillissement. Même<br>Le chant, il lui est à peine permis de la dévoiler. Car<br>Tel fut ton commencement, telle sera ta demeure,<br>L’extrême nécessité, et le dressage<br>Ont beau provoquer leur plein effet,<br>La naissance, et le rayon de lumière<br>Qui touche le nouveau-né<br>N’en disposent pas moins de la toute-puissance.<br>Mais qui donc<br>Surgi de ces hauteurs propices,<br>Est à même de rester libre<br>Tout au long de sa vie et d’accomplir<br>Seul le vœu du cœur, si ce n’est le Rhin,<br>Né d’un giron sacré<br>D’une naissance aussi fortunée que celui-là?<br>C’est pourquoi sa parole est d’exulter.<br>Il n’aime guère comme d’autres enfants<br>Pleurer dans les langes;<br>Car, là où d’abord les rives<br>Se faufilent sur son flanc, tortueuses,<br>L’enserrant assoiffées,<br>Avides d’attirer l’écervelé<br>Et de le sauvegarder<br>Sous leurs crocs, dans un éclat de rire<br>Il déchiquette les serpents et se précipite<br>Avec sa proie et si dans la hâte<br>Un supérieur [variante : Plus grand que lui ]ne le dompte pas,<br>Le laisse s’accroître, comme l’éclair il doit<br>Fendre la terre, et comme des ensorcelées s’enfuient<br>A sa poursuite les forêts et dans un écroulement les montagnes.</p><p>Mais un dieu désire épargner à ses fils<br>La vie hâtive et se prend à sourire<br>Quand irrépressibles, mais entravés<br>Par le sanctuaire des Alpes, contre lui<br>Dans les abysses, pareils à celui-là se courroucent les fleuves.<br>C’est dans une telle forge qu’on forge<br>Tout ce qui est de pure trempe,<br>Et il est beau de le voir,<br>Sitôt après avoir quitté les montagnes,<br>Dans sa course tranquille se contenter<br>En terre allemande, étancher sa nostalgie<br>Par la bonne besogne, quand il cultive la terre<br>Notre père le Rhin, et nourrit ses chers enfants<br>Dans les cités qu’il a fondées.</p><p>Pourtant jamais, au grand jamais il n’oubliera.<br>Car, plutôt le séjour s’abolisse<br>Et le statut, et se dénature<br>Le jour dévolu aux hommes, qu’il<br>Soit permis à un Tel d’oublier l’origine<br>Et la voix pure de la jeunesse !<br>Qui donc a le premier<br>Altéré les liens d’amour<br>Pour en tresser des lacets?<br>Alors, de leur propre droit</p><p>Ils se sont gaussés sûrs du feu céleste<br>Les impudents, c’est alors<br>Que dédaignant les sentiers mortels,<br>Aspirant à devenir l’égal des dieux<br>Ils ont choisi un chemin dévoyé.</p><p>Mais les dieux ont leur<br>Content d’immortalité et si les Célestes<br>Ont besoin de quelque chose,<br>C’est bien des héros et des hommes<br>Ou à défaut d’autres mortels. Car, puisque<br>Les tout-bienheureux ne sentent rien par eux-mêmes,<br>Il faut bien qu’un autre sente, s’il est permis<br>De tenir un tel propos, en commensal<br>Au nom des dieux,</p><p>Qui font usage de lui, cependant leur sentence<br>Est que celui-ci fracasse<br>Sa propre maison et traite en ennemi</p><p>Ce qu’il a de plus cher et pour soi-même, le père et l’enfant<br>Il les ensevelisse sous les décombres,<br>Si quelqu’un désire être tel qu’ils sont et refuse<br>De tolérer tout ce qui est inégal, tête exaltée.<br>C’est pourquoi heureux soit-il, qui trouva<br>Un destin favorablement départi<br>Où s’élève encore le souvenir</p><p>Des errances et des souffrances,<br>Douce rumeur au havre du rivage,<br>Qu’il puisse porter son regard de bon gré<br>Çà et là jusqu’aux frontières<br>Qu’à sa naissance dieu<br>Lui assigna pour résidence.<br>Alors il repose, bienheureux dans sa modestie,<br>Car tout ce qu’il a désiré,<br>Le céleste, de soi-même l’enveloppe<br>Indompté, souriant,<br>A présent qu’il repose, le téméraire.</p><p>Je songe aux demi-dieux à présent,<br>Et je dois les connaître ces êtres chers,<br>Parce que souvent leur vie me met<br>En un tel émoi le cœur nostalgique.<br>Mais pour qui, tel toi, Rousseau,<br>II advint une âme invincible,<br>A toute épreuve<br>Et un sens très sûr<br>Et un don suave d’ouïr,<br>De dire, en sorte que par plénitude sacrale<br>Telle dieu de vigne, divinement insensé<br>Et hors la loi il la donne, la langue des purs, la rend<br>Compréhensible aux bons, mais de droit<br>II frappe d’aveuglement les sans-égards,<br>Les serfs sacrilèges, comment nommerai-je l’étranger ?</p><p>Les fils de la terre sont comme la mère<br>Tout amour, de même ils reçoivent<br>Sans peine toutes choses, les fortunés.<br>C’est pourquoi il est surpris de même,<br>Effrayé, l’homme mortel,<br>Quand il considère le ciel<br>Qu’il s’est chargé sur les épaules<br>De ses bras d’amour<br>Et le fardeau de la joie;<br>Alors le meilleur lui semble souvent<br>D’être là, presque totalement oublié,<br>Où le rayon n’embrase,<br>A l’ombre de la forêt<br>Au lac de Bienne dans la fraîcheur verdoyante,<br>Pauvre en accents, dans l’insouciance,<br>Tels les commençants d’apprendre auprès des rossignols.</p><p>Chose splendide, de ressusciter alors<br>D’un sommeil sacré, s’éveillant<br>A la fraîche dans la forêt, sur le soir<br>D’aller à la rencontre d’une lumière plus clémente<br>Quand le bâtisseur des montagnes,<br>Traceur du sentier des fleuves,</p><p>Après qu’il a gouverné, toujours souriant,<br>Comme la voilure avec ses brises,<br>Pauvre en souffle la vie humaine<br>Dans son affairement,<br>Il repose de même le démiurge,<br>Qui découvre davantage de bien<br>Que de mal, le jour s’incline<br>A présent vers son élève, vers la terre d’aujourd’hui.</p><p>Alors les hommes et les dieux célèbrent la fête nuptiale,<br>Tous les vivants sont en fête,<br>Et pour un temps<br>Le destin est en équilibre.<br>Et les fugitifs cherchent refuge<br>Et doux sommeilles vaillants,<br>Mais les aimants<br>Sont ce qu’ils étaient, ils sont<br>A la maison, où la fleur se réjouit<br>De l’innocente braise et les bois ténébreux,<br>L’esprit les entoure de son murmure, mais les irréconciliables<br>Sont comme métamorphosés et hâtent le pas<br>Pour se tendre la main<br>Avant qu’une lumière amie<br>Ne soit à son couchant et que vienne la nuit.</p><p>Pourtant, ce n’est là pour certains<br>Qu’un instant fugace, d’autres<br>Le retiennent plus longuement.<br>De tout temps, les dieux éternels<br>Sont gorgés de vie, mais jusque dans la mort<br>Même un homme est capable pourtant<br>De garder en mémoire le meilleur,<br>C’est alors qu’il fait l’expérience du très haut.<br>Toutefois à chacun selon sa mesure.<br>Car il est lourd à porter<br>Le malheur, mais plus lourd encore le bonheur.<br>Mais un sage a eu ce pouvoir,<br>De midi jusqu’à minuit<br>Et jusqu’à l’aurore du jour<br>De rester dans la clarté tout au long du banquet.</p><p>O toi, sur un sentier ardent parmi les sapins<br>Ou dans le sombre de la forêt de chênes, revêtu<br>D’acier, mon Sinclair, ou de nuages<br>Que dieu t’apparaisse, tu le connais, car tu connais, juvénile<br>La force du bien, et jamais le sourire du seigneur<br>Ne te reste caché<br>Le jour, quand paraît<br>Fébrile et enchaîné<br>Le vivant, ou encore<br>La nuit, quand tout s’entremêle<br>En désordre, et qu’il est de retour<br>L’antique chaos.</p><p class="tsrc">Friedrich Hölderlin</p></div></details>
+  </div>
+</section>
 <section class="block" aria-labelledby="h-th">
   <div class="wrap">
     <div class="sec-head"><h2 id="h-th">Le problème et la thèse</h2></div>
@@ -263,7 +333,6 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);op
 <!--/quiz-->
 
 <nav class="pn" aria-label="Pages de la section Technique"><a class="pv" href="technique-heidegger.html" rel="prev"><small>← Page précédente</small><b>Heidegger : le Rhin, de fleuve à ressource</b></a><a class="nx" href="technique-arendt.html" rel="next"><small>Page suivante →</small><b>Arendt : animal laborans et homo faber</b></a><a class="hm" href="accueil.html">Retour à l’accueil</a></nav>
-<footer><div class="wrap"><p>Page réalisée à partir de l’hymne <i>Le Rhin</i> de Friedrich Hölderlin (extrait du poème, présentation sans reproduction intégrale). Les citations sont de courts extraits du texte étudié ; la présentation de l’argumentation, les exercices et les pistes de discussion sont rédigés pour cette page. Portrait de fond : Pastel de Franz Karl Hiemer, 1792, domaine public.</p></div></footer>
 <script>
 (function(){
 function $(s){return document.querySelector(s)}
@@ -312,5 +381,27 @@ sorter('#s1','#sc1','#r1',[["Le Rhin du poème est libre dès sa naissance.", 0,
 })();
 </script>
 <script src="quiz.js" defer></script>
+<script>
+(function(){var r=document.documentElement,K='texte-seul',KL='mode-lecture';
+var btn=document.getElementById('a11y-btn'),menu=document.getElementById('a11y-menu'),opts=menu.querySelectorAll('.a11y-opt'),closed=[],mode='orig';
+function apply(m){
+  var ts=m==='ts',lc=m==='lect',was=r.classList.contains('lect');
+  r.classList.toggle('ts',ts);r.classList.toggle('lect',lc);
+  var ds=document.querySelectorAll('main details');
+  if(lc&&!was){closed=[];ds.forEach(function(d){if(!d.open){closed.push(d);d.open=true}});document.querySelectorAll('#stp li').forEach(function(x){x.hidden=false})}
+  if(!lc&&was){closed.forEach(function(d){d.open=false});closed=[]}
+  mode=m;opts.forEach(function(o){o.setAttribute('aria-checked',o.getAttribute('data-mode')===m?'true':'false')});
+  try{localStorage.setItem(K,ts?'1':'0');localStorage.setItem(KL,lc?'1':'0')}catch(e){}
+}
+function open(on){menu.hidden=!on;btn.setAttribute('aria-expanded',on?'true':'false')}
+btn.addEventListener('click',function(e){e.stopPropagation();open(menu.hidden)});
+opts.forEach(function(o){o.addEventListener('click',function(){apply(o.getAttribute('data-mode'));open(false);btn.focus()})});
+document.addEventListener('click',function(e){if(!menu.hidden&&!menu.contains(e.target)&&e.target!==btn)open(false)});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!menu.hidden){open(false);btn.focus()}});
+var v='orig';try{if(localStorage.getItem(KL)==='1')v='lect';else if(localStorage.getItem(K)==='1'&&menu.querySelector('[data-mode="ts"]'))v='ts'}catch(e){}
+if(v==='ts')apply('ts');
+if(v==='lect')window.addEventListener('load',function(){apply('lect')});
+})();
+</script>
 </body>
 </html>

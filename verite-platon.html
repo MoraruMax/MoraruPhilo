@@ -43,7 +43,7 @@ p{margin:0 0 1em}
 .btn.primary{background:var(--ink);color:var(--bg)}
 .btn.primary:hover{background:var(--ink);filter:brightness(1.2)}
 .note{font:500 .92rem/1.5 var(--sans);color:var(--muted)}
-section.block{border-top:1px solid var(--line);padding:clamp(2.2rem,6vw,3.8rem) 0}
+section.block{border-top:0;padding:clamp(2.2rem,6vw,3.8rem) 0}
 .sec-head{max-width:46rem;margin-bottom:1.6rem}
 .src{font:600 .85rem/1.35 var(--sans);color:var(--muted)}
 blockquote{margin:0}
@@ -174,6 +174,58 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);op
 
 .pdfbtn{display:inline-flex;align-items:center;gap:.5rem;font:600 .88rem/1 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--surface);border:1.5px solid var(--ink);border-radius:999px;padding:.55rem .95rem;cursor:pointer}
 .pdfbtn:hover{background:var(--ink);color:var(--bg)}.pdfbtn:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:2px}
+
+/* Texte seul */
+html.ts body::before,html.ts body::after{display:none!important}
+html.ts body{background:var(--bg)!important}
+html.ts .hero h1,html.ts .hero p,html.ts section.block h2,html.ts section.block > .wrap > p,html.ts .sec-head p,html.ts footer p{text-shadow:none!important}
+
+/* Mode lecture */
+html.lect body::before,html.lect body::after{display:none!important}
+html.lect body{background:var(--bg)!important}
+html.lect .pn,html.lect #quiz,html.lect section[aria-labelledby="h-ex"],html.lect section[aria-labelledby="h-video"],html.lect .sec-head p,html.lect .score{display:none!important}
+html.lect .hero h1,html.lect .hero p,html.lect section.block h2,html.lect footer p{text-shadow:none!important}
+html.lect .hero,html.lect section.block{padding-block:1.2rem!important;border:0!important}
+html.lect .wrap,html.lect .sec-head{max-width:40rem!important;margin-inline:auto}
+html.lect .hgrid,html.lect .two{display:block!important}
+html.lect main,html.lect .hero{font-family:var(--serif)}
+html.lect .hero h1{font-size:clamp(1.9rem,5vw,2.6rem)!important}
+html.lect .lead,html.lect p,html.lect li{font-size:1.15rem!important;line-height:1.8!important}
+html.lect .lead{max-width:none!important}
+html.lect .must,html.lect .qc,html.lect .lim,html.lect .terms details,html.lect .txb,html.lect .stp li{background:none!important;border:0!important;box-shadow:none!important;padding:0!important;margin:0 0 1rem!important;display:block!important;border-radius:0!important}
+html.lect .must p{margin:.4rem 0!important}
+html.lect .must .q,html.lect .must .src{font-style:normal}
+html.lect .stp li[hidden]{display:block!important}
+html.lect .stp li::before{display:none!important}
+html.lect .stp h3{display:block!important;margin:0 0 .1rem!important}
+html.lect .qc h3,html.lect .terms summary,html.lect .lim b{display:inline;font:700 1.15rem/1.8 var(--sans);color:var(--ink)!important;margin:0}
+html.lect .stp h3{font:700 1.15rem/1.8 var(--sans);color:var(--ink)!important}
+html.lect .terms summary::after{content:" \2014  "}
+html.lect .qc h3::after{content:" : "}
+html.lect .stp div{display:block}
+html.lect .terms summary{cursor:default;list-style:none;padding:0}
+html.lect .terms summary::-webkit-details-marker,html.lect .terms summary::marker{display:none;content:""}
+html.lect .terms details p{display:inline;margin:0}
+html.lect .qc p{display:inline}
+html.lect .qc{margin-bottom:.6rem!important}
+html.lect .tx summary{cursor:default;pointer-events:none;padding:0}
+html.lect .tx summary::before{display:none!important}
+html.lect .txb{margin-top:.6rem!important}
+html.lect .txb .tsrc:not(:last-child){border:0!important}
+html.lect .recap li{border:0!important;padding:.2rem 0!important}
+html.lect .recap{max-width:none}
+
+/* Accessibilité */
+.a11y{position:relative;display:inline-block}
+.a11y-menu{position:absolute;right:0;top:calc(100% + .4rem);z-index:60;min-width:14rem;background:var(--bg);color:var(--ink);border:1.5px solid var(--ink);border-radius:14px;padding:.35rem;box-shadow:0 8px 24px rgba(0,0,0,.18);text-shadow:none}
+.a11y-menu[hidden]{display:none}
+.a11y-menu p{margin:0;padding:.45rem .7rem .3rem;font:700 .72rem/1 system-ui,-apple-system,sans-serif;letter-spacing:.06em;text-transform:uppercase;opacity:.65}
+.a11y-opt{display:flex;align-items:center;gap:.6rem;width:100%;text-align:left;font:600 .92rem/1.2 system-ui,-apple-system,sans-serif;color:inherit;background:none;border:0;border-radius:9px;padding:.6rem .7rem;cursor:pointer}
+.a11y-opt:hover{background:var(--surface)}
+.a11y-opt:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:-2px}
+.a11y-opt .dot{flex:none;width:1rem;height:1rem;border:2px solid currentColor;border-radius:50%;position:relative}
+.a11y-opt[aria-checked="true"] .dot::after{content:"";position:absolute;inset:2px;background:currentColor;border-radius:50%}
+.a11y-opt small{display:block;font-weight:500;opacity:.7;font-size:.78rem;margin-top:.15rem}
 @media print{
   :root{--bg:#fff!important;--surface:#fff!important;--ink:#111!important;--muted:#444!important;--line:#bbb!important;color-scheme:light!important}
   *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
@@ -191,11 +243,24 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);op
   footer{break-before:avoid;border-top:1px solid #999;margin-top:1rem}
 }
 @page{size:A4;margin:16mm 14mm}
+.tx summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:.7rem;font:800 clamp(1.4rem,3vw,1.9rem)/1.2 var(--sans);padding:.3rem 0}
+.tx summary::-webkit-details-marker{display:none}
+.tx summary::before{content:"";width:.6em;height:.6em;border-right:.2em solid currentColor;border-bottom:.2em solid currentColor;transform:rotate(-45deg);transition:transform .15s;flex:none;margin-right:.2rem}
+.tx[open] summary::before{transform:rotate(45deg)}
+@media (prefers-reduced-motion:reduce){.tx summary::before{transition:none}}
+.txb{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--k,var(--ink));padding:1.2rem clamp(1rem,3vw,1.8rem);margin-top:.9rem;max-width:46rem;font:400 1.1rem/1.75 var(--serif)}
+.txb p{margin:0 0 1em}
+.txb h3{font:700 1rem/1.3 var(--sans);margin:1.2em 0 .5em}
+.txb .vs{font:700 .72rem/1 var(--sans);color:var(--muted);margin-right:.15em}
+.txb .tsrc{font:600 .88rem/1.4 var(--sans);color:var(--muted);text-align:right;margin:1.1em 0 0}
+.txb .tsrc:not(:last-child){margin-bottom:1.4em;padding-bottom:1.2em;border-bottom:1px solid var(--line)}
 </style>
 <link rel="stylesheet" href="quiz.css">
+<script>try{history.scrollRestoration="manual"}catch(e){}(function(){function t(){if(!location.hash)window.scrollTo(0,0)}t();document.addEventListener("DOMContentLoaded",t);window.addEventListener("load",function(){t();setTimeout(t,60)});window.addEventListener("pageshow",t)})();</script>
+<script src="confort.js"></script>
 </head>
 <body style="--k:var(--rai);--ks:var(--rai-soft)">
-<nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
+<nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><span style="display:inline-flex;gap:.6rem;flex-wrap:wrap;align-items:center"><span class="a11y"><button type="button" class="pdfbtn" id="a11y-btn" aria-haspopup="true" aria-expanded="false" aria-controls="a11y-menu"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="1.6"/><path d="M5 8.5l7 1.5 7-1.5M12 10v4.5M8.5 21l3.5-6.5 3.5 6.5"/></svg><span>Accessibilité</span></button><div class="a11y-menu" id="a11y-menu" role="radiogroup" aria-label="Affichage de la page" hidden><p>Affichage</p><button type="button" role="radio" class="a11y-opt" data-mode="orig" aria-checked="true"><span class="dot"></span><span>Page d’origine<small>Image de fond et mise en page habituelle</small></span></button><button type="button" role="radio" class="a11y-opt" data-mode="ts" aria-checked="false"><span class="dot"></span><span>Texte seul<small>Sans image de fond</small></span></button><button type="button" role="radio" class="a11y-opt" data-mode="lect" aria-checked="false"><span class="dot"></span><span>Mode lecture<small>Texte continu, sans cadres ni exercices</small></span></button></div></span><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></span></nav>
 <header class="hero">
   <div class="wrap hgrid">
     <div>
@@ -210,6 +275,11 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);op
   </div>
 </header>
 <main>
+<section class="block" aria-labelledby="h-tx">
+  <div class="wrap">
+    <details class="tx"><summary id="h-tx">Le texte</summary><div class="txb"><p>Socrate. - Apprends à découvrir dans la nature des choses qui vont être dites une vue sur l'essence de la formation et sur celle de la non-formation qui ensemble concernent le fondement de la condition humaine. Considère ceci : des hommes séjournant sous terre dans une demeure en forme de caverne.</p><p>Celle-ci possède en guise d'entrée un long passage menant vers la lumière du jour, en direction duquel toute la caverne se rassemble.</p><p>Les hommes sont dans la caverne depuis leur enfance, enchaînés par le cou et par les cuisses.</p><p>C'est pourquoi ils demeurent tous au même endroit, ne pouvant se mouvoir ni voir autre chose que ce qui se montre à eux : étant enchaînés ils sont hors d'état de tourner la tête.</p><p>Une lumière cependant leur est accordée : elle vient d'un feu qui brûle au loin, derrière eux et au-dessus d'eux.</p><p>Entre le feu et les hommes enchaînés (dans leur dos par conséquent) un chemin s'élève.</p><p>Imagine-toi que le long de ce chemin une murette a été dressée, semblable à celles au-dessus desquelles les saltimbanques montrent leurs merveilles aux spectateurs.</p><p>Glaucon. - Je vois.</p><p>- Imagine donc comment, le long de ce petit mur, des hommes passent, portant toutes sortes de choses visibles au-dessus du mur : statues, figures de pierre ou de bois, bref, toutes sortes de choses fabriquées par la main de l'homme.</p><p>Comme on peut s'y attendre, de ces porteurs, les uns parlent entre eux et les autres se taisent.</p><p>- Tu nous présentes là un tableau extraordinaire et des prisonniers extraordinaires.</p><p>- Il nous sont semblables.</p><p>Réfléchis bien : jamais encore de tels hommes n'ont déjà vu, soit par leurs propres yeux, soit par les yeux d'autrui, autre chose que les ombres projetées sans cesse par le feu sur la paroi de la caverne qui leur fait face.</p><p>- Comment en serait-il autrement s'ils sont contraints de conserver toute leur vie la tête immobile ?</p><p>- Or que voient-ils des choses qui sont transportées et qui passent derrière eux ? Ne voient-ils pas justement rien d'autre que les ombres ?</p><p>- Effectivement.</p><p>- Maintenant s'ils pouvaient parler entre eux de ce qu'ils voient, ne penses-tu pas que ce qu'ils voient ils le prendraient pour ce qui est ?</p><p>- Nécessairement.</p><p>- Qu'en serait-il alors si cette prison avait en outre un écho venant de la paroi qui leur fait face et qui est la seule chose qu'ils puissent voir ? Chaque fois que l'un des porteurs qui passent derrière eux dirait un mot, crois-tu que les prisonniers attribueraient ce mot à autre chose qu'à l'ombre qui passe devant eux ?</p><p>- A rien d'autre, ma foi !</p><p>- Donc, pour les hommes ainsi enchaînés, les ombres des choses seraient la vérité même et ils ne la verraient absolument que dans les ombres.</p><p>- De toute nécessité.</p><p>- Considère alors la manière dont ils pourraient être délivrés et guérir de leur égarement : que deviendraient-ils s'il leur arrivait ce que je vais dire ?</p><p>Chaque fois que l'un d'eux serait libéré de ses chaînes et obligé tout d'un coup de se lever, de tourner la tête, de se mettre en marche et de regarder la lumière, tous ces actes le feraient souffrir et l'éclat de la lumière l'empêcherait de voir les choses dont il observait jusque-là les ombres.</p><p>Si tout cela lui arrivait, que répondrait-il, à ton avis, si quelqu'un lui affirmait qu'il n'avait vu jusqu'alors que des formes sans être, vides de tout contenu, et qu'il était maintenant beaucoup plus près de ce qui est, et que tourné désormais vers des choses ayant plus d'être, il voyait aussi d'une façon plus exacte ?</p><p>Et si quelqu'un lui montrait alors chacune des choses transportées et lui demandait ce que c'est, ne crois-tu pas qu'il serait troublé et qu'il estimerait que ce qu'il voyait auparavant de ses propres yeux était plus vrai que ce qu'on lui montrerait à présent ?</p><p>- Je le crois, certes, fermement.</p><p>- Et si on l'obligeait à regarder le feu lui-même, est-ce que les yeux ne lui feraient pas mal et ne voudrait-il pas s'en détourner pour revenir à ce qu'il est dans ses forces de regarder ?</p><p>Et ne jugerait-il pas que ce qui est pour lui immédiatement visible est en fait plus clair que ce qu'on veut lui montrer.</p><p>- Il en serait ainsi</p><p>- Si maintenant on le tirait de force sur le chemin difficile qui s'élève hors de la caverne et qu'on ne le lâchât pas avant d'être à la lumière du soleil, ne serait-il pas rempli de douleur et d'indignation ?</p><p>Une fois parvenu à la lumière du jour, les yeux pleins de son éclat, ne lui serait-il pas impossible de rien voir des objets qu'on lui présenterait maintenant comme véritables ?</p><p>- Il ne le pourrait aucunement, du moins pas tout de suite.</p><p>- Il est clair, à mon avis, qu'une accoutumance serait nécessaire s'il devait parvenir à voir, hors de la caverne, ce qui est à la lumière du jour. Et, cette accoutumance une fois acquise, ce qu'il pourrait regarder le plus facilement, ce serait d'abord les ombres, et, après elles, les images reflétées dans l'eau des hommes et des autres choses, et seulement plus tard les hommes et les choses elles-mêmes, c'est-à-dire enfin ce qui est au lieu de reflets affaiblis.</p><p>Et parmi celles-ci, il contemplerait sans doute plus facilement pendant la nuit, les choses du ciel et le ciel lui-même, en tournant son regard vers la lumière des astres et de la lune, qu'il ne le ferait pendant le jour du soleil et de son éclat.</p><p>- Sans aucun doute.</p><p>- Mais je pense aussi qu'au bout d'un certain temps il se trouverait en état de regarder le soleil lui-même.</p><p>Non pas son reflet dans l'eau ou dans d'autres milieux, mais le soleil tel qu'il est, où il est, afin de considérer comment il est.</p><p>- Il en serait ainsi nécessairement.</p><p>- Et après toutes ces épreuves, il pourrait enfin aussi rassembler toutes ces pensées au sujet du soleil et se rendre compte que c'est lui qui accorde saisons et années, qui gouverne tout ce qui se trouve dans le monde à la lumière du jour et qui est encore la cause de tout ce qui est dans la caverne.</p><p>- Manifestement, il ne parviendrait à ces pensées sur le soleil et sur tout ce qu'il éclaire et fait vivre qu'après les avoir distinguées de ce qui n'est qu'ombre ou reflet.</p><p>- Maintenant, s'il parvenait à se rappeler le "savoir" qui avait cours au fond de la caverne, et ses compagnons enchaînés comme lui alors, ne crois-tu pas qu'il se féliciterait du changement qui s'est opéré en lui et qu'il aurait pitié d'eux ?</p><p>- Certes, et dans une grande mesure.</p><p>- Suppose maintenant qu'on ait institué dans la caverne des récompenses et des honneurs pour ceux qui reconnaîtraient le mieux parmi les ombres qui défilent celles qui arrivent chaque jour, mémoriseraient celles d'entre elles qui se présentent habituellement les premières, ou à la suite, ou ensemble et qui pourraient ainsi prédire l'ordre même de leurs apparitions. Crois-tu que notre homme les envierait et voudrait rivaliser avec les plus forts d'entre eux ? Ne préférerait-il pas prendre sur lui, comme dit Homère, d'être un vrai valet de labour au service d'un étranger sans fortune, plutôt que devenir un faux-maître de vérité, et ne supporterait-il pas n'importe quoi plutôt que se mettre à la mode de la caverne.</p><p>- Je crois qu'il souffrirait tous les maux plutôt que d'être un homme comme on l'est là-bas.</p><p>- Et maintenant considère enfin ceci : si l'homme ainsi élevé redescendait dans la caverne et regagnait son ancienne place, est-ce que ses yeux, à lui qui vient de quitter le soleil, ne se rempliraient pas de ténèbres ?</p><p>- Absolument.</p><p>- S'il devait maintenant entrer en compétition avec les prisonniers quant à l'appréciation de ce qu'il faut penser des ombres, et cela alors que ses yeux ne se sont pas encore réaccoutumés à l'obscurité (ce qui ne demande pas peu de temps) ne serait-il pas rendu ridicule et ne lui ferait-on pas comprendre que son voyage vers les régions supérieures ne lui a rapporté rien d'autre que la ruine de ses yeux (la seule richesse qu'il possédait) et qu'il ne vaut donc pas la peine de chercher à s'élever sur le chemin ?</p><p>Et s'il entreprenait de délivrer les prisonniers de leurs chaînes et de les conduire voir ce qui est, ne crois-tu pas qu'ils le tueraient ?</p><p>- Sans aucun doute.</p><p class="tsrc">Platon, La République, VII</p></div></details>
+  </div>
+</section>
 <section class="block" aria-labelledby="h-th">
   <div class="wrap">
     <div class="sec-head"><h2 id="h-th">Le problème et la thèse</h2></div>
@@ -263,7 +333,6 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);op
 <!--/quiz-->
 
 <nav class="pn" aria-label="Pages de la section Vérité"><a class="nx" href="descartes-du-doute-au-cogito.html" rel="next"><small>Page suivante →</small><b>Descartes : du doute au cogito</b></a><a class="hm" href="accueil.html">Retour à l’accueil</a></nav>
-<footer><div class="wrap"><p>Page réalisée à partir de l’extrait de <i>La République</i> (livre VII) de Platon. Les citations sont de courts extraits du texte étudié ; la présentation de l’argumentation, les exercices et les pistes de discussion sont rédigés pour cette page. Portrait de fond : Buste de Platon (copie romaine), musées du Vatican.</p></div></footer>
 <script>
 (function(){
 function $(s){return document.querySelector(s)}
@@ -312,5 +381,27 @@ sorter('#s1','#sc1','#r1',[["Les prisonniers prennent les ombres pour la réalit
 })();
 </script>
 <script src="quiz.js" defer></script>
+<script>
+(function(){var r=document.documentElement,K='texte-seul',KL='mode-lecture';
+var btn=document.getElementById('a11y-btn'),menu=document.getElementById('a11y-menu'),opts=menu.querySelectorAll('.a11y-opt'),closed=[],mode='orig';
+function apply(m){
+  var ts=m==='ts',lc=m==='lect',was=r.classList.contains('lect');
+  r.classList.toggle('ts',ts);r.classList.toggle('lect',lc);
+  var ds=document.querySelectorAll('main details');
+  if(lc&&!was){closed=[];ds.forEach(function(d){if(!d.open){closed.push(d);d.open=true}});document.querySelectorAll('#stp li').forEach(function(x){x.hidden=false})}
+  if(!lc&&was){closed.forEach(function(d){d.open=false});closed=[]}
+  mode=m;opts.forEach(function(o){o.setAttribute('aria-checked',o.getAttribute('data-mode')===m?'true':'false')});
+  try{localStorage.setItem(K,ts?'1':'0');localStorage.setItem(KL,lc?'1':'0')}catch(e){}
+}
+function open(on){menu.hidden=!on;btn.setAttribute('aria-expanded',on?'true':'false')}
+btn.addEventListener('click',function(e){e.stopPropagation();open(menu.hidden)});
+opts.forEach(function(o){o.addEventListener('click',function(){apply(o.getAttribute('data-mode'));open(false);btn.focus()})});
+document.addEventListener('click',function(e){if(!menu.hidden&&!menu.contains(e.target)&&e.target!==btn)open(false)});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!menu.hidden){open(false);btn.focus()}});
+var v='orig';try{if(localStorage.getItem(KL)==='1')v='lect';else if(localStorage.getItem(K)==='1'&&menu.querySelector('[data-mode="ts"]'))v='ts'}catch(e){}
+if(v==='ts')apply('ts');
+if(v==='lect')window.addEventListener('load',function(){apply('lect')});
+})();
+</script>
 </body>
 </html>

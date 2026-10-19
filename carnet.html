@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mon carnet de suivi</title>
+<style>
+:root{--bg:#F5F7F9;--surface:#fff;--ink:#17212B;--muted:#55636F;--line:#D8E0E6;--acc:#1F4FA3;--ok:#1B7F3B;--focus:#06c;--serif:Georgia,"Times New Roman",serif;--sans:system-ui,-apple-system,"Segoe UI",sans-serif;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#10171D;--surface:#18222A;--ink:#E7EDF2;--muted:#A1B0BC;--line:#2A3641;--acc:#8FB0FF;--ok:#6fd18b;--focus:#5FD0D6;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.05rem/1.6 var(--serif)}
+.wrap{width:min(860px,100% - 2.5rem);margin-inline:auto}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
+nav.top{font:500 .92rem/1 var(--sans);padding:.9rem 1.25rem}
+nav.top a{color:inherit}
+h1{font:800 clamp(2rem,6vw,3rem)/1.1 var(--sans);margin:1rem 0 .6rem;letter-spacing:-.02em}
+.lead{font-size:1.2rem;max-width:40rem;margin:0 0 .6rem}
+.note{font:500 .92rem/1.5 var(--sans);color:var(--muted);margin:0 0 1.4rem}
+.sum{display:grid;grid-template-columns:repeat(auto-fit,minmax(11rem,1fr));gap:.8rem;margin:1.2rem 0 1.6rem}
+.sum>div{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:.9rem 1rem}
+.sum b{display:block;font:800 1.9rem/1.1 var(--sans)}
+.sum span{font:500 .88rem/1.3 var(--sans);color:var(--muted)}
+.bar{display:block;height:8px;border-radius:99px;background:var(--line);overflow:hidden;margin-top:.5rem}
+.bar i{display:block;height:100%;background:var(--acc);border-radius:99px;transition:width .25s}
+h2.sec{font:700 1.3rem/1.3 var(--sans);margin:2rem 0 .8rem}
+details.th{background:var(--surface);border:1px solid var(--line);border-radius:10px;margin:0 0 .6rem}
+details.th>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:.8rem;padding:.85rem 1rem;font:700 1.1rem/1.3 var(--sans)}
+details.th>summary::-webkit-details-marker{display:none}
+details.th>summary::before{content:"";width:.55rem;height:.55rem;border-right:3px solid var(--muted);border-bottom:3px solid var(--muted);transform:rotate(-45deg);transition:transform .15s;flex:none}
+details.th[open]>summary::before{transform:rotate(45deg)}
+.cnt{margin-left:auto;font:600 .85rem/1 var(--sans);color:var(--muted);white-space:nowrap}
+.mini{width:5rem;flex:none;margin-top:0}
+ul.fl{list-style:none;margin:0;padding:0 1rem .6rem}
+ul.fl li{display:flex;align-items:center;gap:.7rem;padding:.55rem 0;border-top:1px solid var(--line)}
+ul.fl label{display:flex;align-items:center;gap:.6rem;flex:1;min-width:0;cursor:pointer}
+ul.fl input{width:1.2rem;height:1.2rem;flex:none;accent-color:var(--acc)}
+ul.fl a{color:inherit;text-underline-offset:3px}
+ul.fl li.on a{color:var(--muted)}
+.qb{flex:none;font:700 .78rem/1 var(--sans);border:1.5px solid var(--line);border-radius:99px;padding:.3rem .55rem;color:var(--muted);white-space:nowrap}
+.qb.ok{color:var(--ok);border-color:var(--ok)}
+.sj{list-style:none;margin:0;padding:0}
+.sj li{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:.8rem 1rem;margin:0 0 .6rem}
+.sj a{font:600 1rem/1.4 var(--sans);color:inherit;text-underline-offset:3px}
+.steps{display:flex;gap:.3rem;margin:.55rem 0 0}
+.steps i{flex:1;height:8px;border-radius:99px;background:var(--line)}
+.steps i.on{background:var(--acc)}
+.sjn{font:500 .85rem/1.3 var(--sans);color:var(--muted);margin-top:.35rem}
+.act{display:flex;flex-wrap:wrap;gap:.6rem;margin:1.6rem 0 3rem}
+button.b{font:600 .9rem/1 var(--sans);color:var(--ink);background:var(--surface);border:1.5px solid var(--ink);border-radius:999px;padding:.65rem 1rem;cursor:pointer}
+button.b:hover{background:var(--ink);color:var(--bg)}
+button.b.warn{border-color:#b3261e;color:#b3261e}
+button.b.warn:hover{background:#b3261e;color:#fff}
+.sub{margin:0 0 .6rem}.sub>summary{font-size:1.1rem}.sub details.th{margin:0 0 .5rem 1.6rem}@media (max-width:600px){.sub details.th{margin-left:.8rem}}.sub details.th>summary{font-size:1rem;padding:.7rem .9rem}.sub ul.fl{padding:0 .9rem .5rem}.sj li{margin:0 0 .5rem}
+nav.top{display:flex;align-items:center;gap:1rem}
+.a11y{position:relative;display:inline-block;margin-left:auto}
+.lcbtn{display:inline-flex;align-items:center;gap:.45rem;font:600 .88rem/1 var(--sans);color:var(--ink);background:var(--surface);border:1.5px solid var(--ink);border-radius:999px;padding:.55rem .85rem;cursor:pointer}
+.lcbtn:hover{background:var(--ink);color:var(--bg)}
+.a11y-menu{position:absolute;right:0;top:calc(100% + .4rem);z-index:60;min-width:14rem;background:var(--bg);color:var(--ink);border:1.5px solid var(--ink);border-radius:14px;padding:.35rem;box-shadow:0 8px 24px rgba(0,0,0,.18);text-align:left}
+.a11y-menu[hidden]{display:none}
+.a11y-menu p{margin:0;padding:.45rem .7rem .3rem;font:700 .72rem/1 var(--sans);letter-spacing:.06em;text-transform:uppercase;opacity:.65}
+.a11y-opt{display:flex;align-items:center;gap:.6rem;width:100%;text-align:left;font:600 .92rem/1.2 var(--sans);color:inherit;background:none;border:0;border-radius:9px;padding:.6rem .7rem;cursor:pointer}
+.a11y-opt:hover{background:var(--surface)}
+.a11y-opt .dot{flex:none;width:1rem;height:1rem;border:2px solid currentColor;border-radius:50%;position:relative}
+.a11y-opt[aria-checked="true"] .dot::after{content:"";position:absolute;inset:2px;background:currentColor;border-radius:50%}
+.a11y-opt small{display:block;font-weight:500;opacity:.7;font-size:.78rem;margin-top:.15rem}
+@media (max-width:600px){.sum{grid-template-columns:1fr}.mini{display:none}}
+</style>
+<script src="confort.js"></script>
+</head>
+<body>
+<nav class="top"><a href="accueil.html">Retour à l’accueil</a><span class="a11y"><button type="button" class="lcbtn" id="a11y-btn" aria-haspopup="true" aria-expanded="false" aria-controls="a11y-menu"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="1.6"/><path d="M5 8.5l7 1.5 7-1.5M12 10v4.5M8.5 21l3.5-6.5 3.5 6.5"/></svg><span>Accessibilité</span></button><div class="a11y-menu" id="a11y-menu" role="radiogroup" aria-label="Affichage de la page" hidden><p>Affichage</p><button type="button" role="radio" class="a11y-opt" data-mode="orig" aria-checked="true"><span class="dot"></span><span>Page d’origine<small>Thèmes repliés</small></span></button><button type="button" role="radio" class="a11y-opt" data-mode="lect" aria-checked="false"><span class="dot"></span><span>Mode lecture<small>Tous les thèmes dépliés</small></span></button></div></span></nav>
+<header class="wrap">
+  <h1>Mon carnet de suivi</h1>
+  <p class="lead">Cochez les fiches que vous avez lues, retrouvez vos scores aux quiz et voyez où vous en êtes dans les ateliers de dissertation et d’explication de texte.</p>
+  <p class="note">Ces informations restent sur cet appareil : rien n’est envoyé, et votre professeur n’y a pas accès. Changer d’appareil ou vider les données du navigateur les efface.</p>
+</header>
+<main class="wrap">
+  <div class="sum" aria-live="polite">
+    <div><b id="s-read">0 / 0</b><span>fiches lues</span><span class="bar"><i id="s-bar" style="width:0"></i></span></div>
+    <div><b id="s-quiz">—</b><span>score moyen aux quiz</span></div>
+    <div><b id="s-d">0 / 0</b><span>dissertations terminées</span></div>
+    <div><b id="s-e">0 / 0</b><span>explications terminées</span></div>
+  </div>
+  <h2 class="sec">Les fiches, thème par thème</h2>
+  <div id="themes"></div>
+  <div id="ateliers"></div>
+  <div class="act">
+    <button class="b warn" id="reset" type="button">Effacer mon carnet</button>
+    <span class="note" id="rmsg" role="status" style="margin:0;align-self:center"></span>
+  </div>
+</main>
+<script>
+(function(){
+var TH=[["Art", [["art-hume-sentiment.html", "Hume : opinion et sentiment"], ["art-bourdieu.html", "Bourdieu : l’idéologie charismatique"], ["art-kant.html", "Kant : le jugement de goût"], ["art-arendt.html", "Arendt : l’œuvre d’art"], ["art-hume-delicatesse.html", "Hume : la délicatesse du goût"]]], ["Bonheur", [["bonheur-kant-difficulte.html", "Kant : la difficulté de définir le bonheur"], ["bonheur-callicles.html", "Calliclès et Socrate : l’image des tonneaux"], ["bonheur-epicure.html", "Épicure : les différents désirs"], ["bonheur-epictete.html", "Épictète : les opinions troublent les hommes"], ["epictete.html", "Epictète : ce qui dépend de nous"], ["bonheur-descartes-epictete.html", "Épictète et Descartes : acceptation et grandeur d’âme"], ["bonheur-kant-digne.html", "Kant : se rendre digne du bonheur"], ["bonheur-aristophane.html", "Aristophane : le mythe des moitiés séparées"], ["bonheur-bergson.html", "Bergson : la joie, signe de la création"]]], ["Conscience", [["descartes-du-doute-au-cogito.html", "Descartes : du doute au cogito"], ["conscience-hobbes.html", "Hobbes : objection au cogito de Descartes"], ["conscience-hume.html", "Hume : le moi n’est qu’un faisceau de perceptions"], ["conscience-sartre.html", "Sartre : condamné à être libre"]]], ["Devoir", [["le-devoir.html", "Le devoir"], ["devoir-kant.html", "Kant : la bonne volonté et le devoir"], ["devoir-rousseau-pitie.html", "Rousseau : la pitié, sentiment naturel"], ["devoir-rousseau-conscience.html", "Rousseau : la conscience, instinct divin"], ["devoir-holbach.html", "D’Holbach : fonder la morale sur la nature"], ["devoir-durkheim.html", "Durkheim : le devoir comme fait social"], ["devoir-nietzsche.html", "Nietzsche : morale du troupeau et mauvaise conscience"], ["devoir-kropotkine.html", "Kropotkine : pourquoi serais-je moral ?"], ["devoir-sartre.html", "Sartre : le dilemme moral d’un jeune homme"], ["devoir-eichmann.html", "Arendt : Eichmann et l’impératif catégorique"]]], ["État", [["etat-hobbes.html", "Hobbes : l’état de nature, guerre de tous contre tous"], ["etat-nietzsche.html", "Nietzsche : l’État, le plus froid des monstres froids"], ["devoir-eichmann.html", "Arendt : Eichmann et l’impératif catégorique"], ["etat-chapoutot.html", "Chapoutot : les nazis, ennemis de l’État ?"]]], ["Inconscient", [["inconscient-leibniz.html", "Leibniz : les petites perceptions"], ["inconscient-freud.html", "Freud : l’hypothèse de l’inconscient"], ["inconscient-freud-elisabeth.html", "Freud : le cas d’Élisabeth"], ["conscience-sartre.html", "Sartre : condamné à être libre"]]], ["Justice", [["justice-platon-gyges.html", "Platon : le mythe de l’anneau de Gygès"], ["justice-platon-lois.html", "Platon : pourquoi avoir des lois ?"], ["justice-hobbes.html", "Hobbes : qu’est-ce qu’une bonne loi ?"], ["justice-smith.html", "Smith : la justice et la négligence"], ["justice-rawls.html", "Rawls : l’intuitionnisme en matière de justice"]]], ["Langage", [["langage-descartes.html", "Descartes : le langage, propre de l’homme"], ["langage-saussure.html", "Saussure : l’arbitraire du signe"], ["langage-wittgenstein.html", "Wittgenstein : usage et signification"], ["langage-austin.html", "Austin : la performativité"], ["langage-klemperer.html", "Klemperer : la langue du Troisième Reich"]]], ["Liberté", [["ane-de-buridan.html", "L’âne de Buridan"], ["determinisme-social.html", "Le déterminisme social"], ["spinoza-lettre-a-schuller.html", "Spinoza : l’ignorance des causes déterminantes"], ["les-stereotypes.html", "Les stéréotypes"], ["epictete.html", "Epictète : ce qui dépend de nous"]]], ["Nature", [["nature-genese.html", "Genèse : la domination de l’homme sur la nature"], ["nature-aristote.html", "Aristote : voix, parole et langage animal"], ["nature-pascal.html", "Pascal : ruches et hommes"], ["nature-descartes.html", "Descartes : maîtres et possesseurs de la nature"], ["nature-galilee.html", "Galilée : l’univers, un livre écrit en langue mathématique"], ["nature-mill.html", "Mill : faut-il suivre la nature ?"], ["nature-jacob.html", "Jacob : le refus de la finalité comme principe explicatif"], ["nature-descola.html", "Descola : la nature des Modernes"]]], ["Religion", [["religion-kant.html", "Kant : l’existence de Dieu comme nécessité morale"], ["religion-marx.html", "Marx : la religion est l’opium du peuple"], ["religion-nietzsche.html", "Nietzsche : la mort de Dieu"]]], ["Technique", [["technique-bacon.html", "Bacon : vaincre la nature en lui obéissant"], ["technique-heidegger.html", "Heidegger : le Rhin, de fleuve à ressource"], ["technique-hoelderlin.html", "Hölderlin : le Rhin, fleuve libre"], ["technique-arendt.html", "Arendt : animal laborans et homo faber"], ["technique-levinas.html", "Lévinas : défendre l’homme contre la technique ?"]]], ["Temps", [["temps-bergson.html", "Bergson : l’exemple de l’eau sucrée"], ["temps-proust.html", "Proust : l’extra-temporalité"], ["temps-einstein.html", "Einstein : temps du physicien et temps psychologique"], ["temps-sartre.html", "Sartre : passé et présent"]]], ["Travail", [["travail-alienation-emancipation.html", "Le travail : aliénation ou émancipation ?"], ["le-travail.html", "Le travail"], ["travail-genese.html", "Genèse 3 : le travail comme punition"], ["travail-aristote.html", "Aristote : citoyen et travail"], ["travail-hegel.html", "Hegel : le maître et le serviteur"], ["travail-marx-specificite.html", "Marx : la spécificité du travail humain"], ["travail-marx-alienation.html", "Marx : l’aliénation par le travail"], ["travail-russell.html", "Russell : éloge de l’oisiveté"]]], ["Vérité", [["verite-platon.html", "Platon : le mythe de la caverne"], ["descartes-du-doute-au-cogito.html", "Descartes : du doute au cogito"], ["pascal.html", "Pascal : le cœur et le pari"], ["verite-kant.html", "Kant : mensonge et devoir"], ["verite-rousseau.html", "Rousseau : dire faux et mentir"], ["verite-hume.html", "Hume : croyance raisonnable"], ["art-et-verite.html", "L’art et la vérité"]]]];
+var AT=[{"h": "Atelier dissertation", "b": [{"n": "Série générale", "k": "atelier-dissertation-v1", "kd": "diss", "u": "atelier-dissertation.html", "i": [["etat", "Revient-il à l'État de décider ce qui est juste ?", "État"], ["circ", "Sommes-nous libres en toutes circonstances ?", "Liberté"], ["choix", "Suffit-il d'avoir le choix pour être libre ?", "Liberté"], ["fardeau", "La conscience peut-elle être un fardeau ?", "Conscience"], ["artv", "L'art est-il un moyen d'accéder à la vérité ?", "Art"], ["bonh", "Peut-on décider d'être heureux ?", "Bonheur"], ["ia_travail", "Le travail nous rend-il libres ?", "Travail"], ["ia_parler", "Le langage permet-il d'agir ?", "Langage"], ["ia_temps", "Le temps est-il notre ennemi ?", "Temps"], ["ia_nature", "La technique fait-elle de nous les maîtres de la nature ?", "Technique"], ["ia_devoir", "Faire son devoir, est-ce renoncer à sa liberté ?", "Devoir"], ["ia_religion", "La religion est-elle nécessaire à la morale ?", "Religion"], ["ia_conscience", "La conscience de soi est-elle une connaissance de soi ?", "Conscience"], ["ia_inconscient", "L'inconscient est-il une simple hypothèse ?", "Inconscient"], ["ia_bonheur2", "Le bonheur consiste-t-il à satisfaire tous ses désirs ?", "Bonheur"], ["ia_justice2", "La justice se réduit-elle à la loi ?", "Justice"]], "m": 7}, {"n": "Séries technologiques", "k": "atelier-dissertation-tech-v1", "kd": "diss", "u": "atelier-dissertation-tech.html", "i": [["choix", "Suffit-il d'avoir le choix pour être libre ?", "Liberté"], ["artv", "L'art est-il un moyen d'accéder à la vérité ?", "Art"], ["ia_nature", "La technique fait-elle de nous les maîtres de la nature ?", "Technique"], ["ia_religion", "La religion est-elle nécessaire à la morale ?", "Religion"], ["ia_justice2", "La justice se réduit-elle à la loi ?", "Justice"]], "m": 7}]}, {"h": "Atelier explication de texte", "b": [{"n": "Série générale", "k": "atelier-explication-v3", "kd": "eg", "u": "atelier-explication.html", "i": [["art-arendt", "Arendt : l’œuvre d’art", "Art"], ["art-bourdieu", "Bourdieu : l’idéologie charismatique", "Art"], ["art-hume-delicatesse", "Hume : la délicatesse du goût", "Art"], ["art-hume-sentiment", "Hume : opinion et sentiment", "Art"], ["art-kant", "Kant : le jugement de goût", "Art"], ["bonheur-aristophane", "Aristophane : le mythe des moitiés séparées", "Bonheur"], ["bonheur-bergson", "Bergson : la joie, signe de la création", "Bonheur"], ["bonheur-callicles", "Calliclès et Socrate : l’image des tonneaux", "Bonheur"], ["bonheur-kant-difficulte", "Kant : la difficulté de définir le bonheur", "Bonheur"], ["bonheur-kant-digne", "Kant : se rendre digne du bonheur", "Bonheur"], ["bonheur-epictete", "Épictète : les opinions troublent les hommes", "Bonheur"], ["bonheur-descartes-epictete", "Épictète et Descartes : acceptation et grandeur d’âme", "Bonheur"], ["bonheur-epicure", "Épicure : les différents désirs", "Bonheur"], ["conscience-hobbes", "Hobbes : objection au cogito de Descartes", "Conscience"], ["conscience-hume", "Hume : le moi n’est qu’un faisceau de perceptions", "Conscience"], ["conscience-sartre", "Sartre : condamné à être libre", "Conscience"], ["devoir-eichmann", "Arendt : Eichmann et l’impératif catégorique", "Devoir"], ["devoir-durkheim", "Durkheim : le devoir comme fait social", "Devoir"], ["devoir-holbach", "D’Holbach : fonder la morale sur la nature", "Devoir"], ["devoir-kant", "Kant : la bonne volonté et le devoir", "Devoir"], ["devoir-kropotkine", "Kropotkine : pourquoi serais-je moral ?", "Devoir"], ["devoir-nietzsche", "Nietzsche : morale du troupeau et mauvaise conscience", "Devoir"], ["devoir-rousseau-conscience", "Rousseau : la conscience, instinct divin", "Devoir"], ["devoir-rousseau-pitie", "Rousseau : la pitié, sentiment naturel", "Devoir"], ["devoir-sartre", "Sartre : le dilemme moral d’un jeune homme", "Devoir"], ["etat-chapoutot", "Chapoutot : les nazis, ennemis de l’État ?", "État"], ["etat-hobbes", "Hobbes : l’état de nature, guerre de tous contre tous", "État"], ["etat-nietzsche", "Nietzsche : l’État, le plus froid des monstres froids", "État"], ["dem-alain", "Alain, Propos (les citoyens contre le pouvoir)", "Démocratie"], ["dem-aristote", "Aristote, Les Politiques (principes de la démocratie)", "Démocratie"], ["dem-bergson", "Bergson, Les deux sources de la morale et de la religion (la démocratie)", "Démocratie"], ["dem-herodote", "Hérodote, Histoire (la démocratie contre la monarchie)", "Démocratie"], ["dem-platon", "Platon, La République (le régime démocratique)", "Démocratie"], ["dem-tocqueville1", "Tocqueville, De la démocratie en Amérique (1) (les limites de la majorité)", "Démocratie"], ["dem-tocqueville2", "Tocqueville, De la démocratie en Amérique (2) (le despotisme doux)", "Démocratie"], ["justice-hobbes", "Hobbes : qu’est-ce qu’une bonne loi ?", "Justice"], ["justice-platon-gyges", "Platon : le mythe de l’anneau de Gygès", "Justice"], ["justice-platon-lois", "Platon : pourquoi avoir des lois ?", "Justice"], ["justice-rawls", "Rawls : l’intuitionnisme en matière de justice", "Justice"], ["justice-smith", "Smith : la justice et la négligence", "Justice"], ["spinoza-lettre-a-schuller", "Spinoza : l’ignorance des causes déterminantes", "Liberté"], ["epictete", "Épictète : ce qui dépend de nous", "Liberté"], ["inconscient-freud-elisabeth", "Freud : le cas d’Élisabeth", "Inconscient"], ["inconscient-freud", "Freud : l’hypothèse de l’inconscient", "Inconscient"], ["inconscient-leibniz", "Leibniz : les petites perceptions", "Inconscient"], ["langage-austin", "Austin : la performativité", "Langage"], ["langage-descartes", "Descartes : le langage, propre de l’homme", "Langage"], ["langage-klemperer", "Klemperer : la langue du Troisième Reich", "Langage"], ["langage-saussure", "Saussure : l’arbitraire du signe", "Langage"], ["langage-wittgenstein", "Wittgenstein : usage et signification", "Langage"], ["nature-aristote", "Aristote : voix, parole et langage animal", "Nature"], ["nature-descartes", "Descartes : maîtres et possesseurs de la nature", "Nature"], ["nature-descola", "Descola : la nature des Modernes", "Nature"], ["nature-galilee", "Galilée : l’univers, un livre écrit en langue mathématique", "Nature"], ["nature-genese", "Genèse : la domination de l’homme sur la nature", "Nature"], ["nature-jacob", "Jacob : le refus de la finalité comme principe explicatif", "Nature"], ["nature-mill", "Mill : faut-il suivre la nature ?", "Nature"], ["nature-pascal", "Pascal : ruches et hommes", "Nature"], ["religion-kant", "Kant : l’existence de Dieu comme nécessité morale", "Religion"], ["religion-marx", "Marx : la religion est l’opium du peuple", "Religion"], ["religion-nietzsche", "Nietzsche : la mort de Dieu", "Religion"], ["technique-arendt", "Arendt : animal laborans et homo faber", "Technique"], ["technique-bacon", "Bacon : vaincre la nature en lui obéissant", "Technique"], ["technique-heidegger", "Heidegger : le Rhin, de fleuve à ressource", "Technique"], ["technique-levinas", "Lévinas : défendre l’homme contre la technique ?", "Technique"], ["temps-bergson", "Bergson : l’exemple de l’eau sucrée", "Temps"], ["temps-einstein", "Einstein : temps du physicien et temps psychologique", "Temps"], ["temps-proust", "Proust : l’extra-temporalité", "Temps"], ["temps-sartre", "Sartre : passé et présent", "Temps"], ["travail-aristote", "Aristote : citoyen et travail", "Travail"], ["travail-genese", "Genèse 3 : le travail comme punition", "Travail"], ["travail-hegel", "Hegel : le maître et le serviteur", "Travail"], ["travail-marx-specificite", "Marx : la spécificité du travail humain", "Travail"], ["travail-marx-alienation", "Marx : l’aliénation par le travail", "Travail"], ["travail-russell", "Russell : éloge de l’oisiveté", "Travail"], ["verite-hume", "Hume : croyance raisonnable", "Vérité"], ["verite-kant", "Kant : mensonge et devoir", "Vérité"], ["verite-platon", "Platon : le mythe de la caverne", "Vérité"], ["verite-rousseau", "Rousseau : dire faux et mentir", "Vérité"]], "m": 9}, {"n": "Séries technologiques", "k": "atelier-explication-tech-v1", "kd": "et", "u": "atelier-explication-tech.html", "i": [["art-arendt", "Arendt : l’œuvre d’art", "Art"], ["art-bourdieu", "Bourdieu : l’idéologie charismatique", "Art"], ["art-hume-delicatesse", "Hume : la délicatesse du goût", "Art"], ["art-hume-sentiment", "Hume : opinion et sentiment", "Art"], ["art-kant", "Kant : le jugement de goût", "Art"], ["justice-hobbes", "Hobbes : qu’est-ce qu’une bonne loi ?", "Justice"], ["justice-platon-gyges", "Platon : le mythe de l’anneau de Gygès", "Justice"], ["justice-platon-lois", "Platon : pourquoi avoir des lois ?", "Justice"], ["justice-rawls", "Rawls : l’intuitionnisme en matière de justice", "Justice"], ["justice-smith", "Smith : la justice et la négligence", "Justice"], ["conscience-sartre", "Sartre : condamné à être libre", "Liberté"], ["spinoza-lettre-a-schuller", "Spinoza : l’ignorance des causes déterminantes", "Liberté"], ["epictete", "Épictète : ce qui dépend de nous", "Liberté"], ["nature-aristote", "Aristote : voix, parole et langage animal", "Nature"], ["nature-descartes", "Descartes : maîtres et possesseurs de la nature", "Nature"], ["nature-descola", "Descola : la nature des Modernes", "Nature"], ["nature-galilee", "Galilée : l’univers, un livre écrit en langue mathématique", "Nature"], ["nature-genese", "Genèse : la domination de l’homme sur la nature", "Nature"], ["nature-jacob", "Jacob : le refus de la finalité comme principe explicatif", "Nature"], ["nature-mill", "Mill : faut-il suivre la nature ?", "Nature"], ["nature-pascal", "Pascal : ruches et hommes", "Nature"], ["religion-kant", "Kant : l’existence de Dieu comme nécessité morale", "Religion"], ["religion-marx", "Marx : la religion est l’opium du peuple", "Religion"], ["religion-nietzsche", "Nietzsche : la mort de Dieu", "Religion"], ["technique-arendt", "Arendt : animal laborans et homo faber", "Technique"], ["technique-bacon", "Bacon : vaincre la nature en lui obéissant", "Technique"], ["technique-heidegger", "Heidegger : le Rhin, de fleuve à ressource", "Technique"], ["technique-levinas", "Lévinas : défendre l’homme contre la technique ?", "Technique"], ["verite-hume", "Hume : croyance raisonnable", "Vérité"], ["verite-kant", "Kant : mensonge et devoir", "Vérité"], ["verite-platon", "Platon : le mythe de la caverne", "Vérité"], ["verite-rousseau", "Rousseau : dire faux et mentir", "Vérité"]], "m": 5}]}];
+var ORD=["Art", "Bonheur", "Conscience", "Démocratie", "Devoir", "État", "Inconscient", "Justice", "Langage", "Liberté", "Nature", "Religion", "Technique", "Temps", "Travail", "Vérité"];
+var KR='carnet-lues',KQ='carnet-quiz';
+function load(k,d){try{var v=JSON.parse(localStorage.getItem(k)||'null');return v&&typeof v==='object'?v:d}catch(e){return d}}
+function save(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+var KF='carnet-fait',R=load(KR,{}),Q=load(KQ,{}),F=load(KF,{});
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;')}
+var total=0;TH.forEach(function(t){total+=t[1].length});
+var PD=[/^def\d/,/^(oui|non)/,/^a\d/,/^pb\d/,/^p\d/,/^concl$/,/^intro$/];
+var PG=[/^l_/,/^t_(these|arg)$/,/^e\d/,/^c\d/,/^p_/,/^i\d/,/^d\d/,/^k\d/,'red'];
+var PT=[/^l_/,/^a\d/,/^b\d/,/^c\d/,'red'];
+function has(d,p){if(p==='red')return !!(d&&d.red&&d.red.some(Boolean));return Object.keys(d||{}).some(function(k){return p.test(k)&&String(d[k]||'').trim()})}
+function stepsOf(d,kd){return (kd==='diss'?PD:kd==='eg'?PG:PT).map(function(p){return has(d,p)})}
+function drafts(b){var s=load(b.k,{});return (b.kd==='diss'?s.drafts:s.d)||{}}
+function render(){
+  var read=0,out='',openIds={};
+  [].forEach.call(document.querySelectorAll('details.th[open]'),function(d){openIds[d.id]=1});
+  TH.forEach(function(t,ti){
+    var n=0;t[1].forEach(function(f){if(R[f[0]])n++});read+=n;
+    out+='<details class="th" id="th'+ti+'"'+(openIds['th'+ti]?' open':'')+'><summary>'+esc(t[0])+'<span class="cnt">'+n+' / '+t[1].length+'</span><span class="bar mini"><i style="width:'+Math.round(100*n/t[1].length)+'%"></i></span></summary><ul class="fl">';
+    t[1].forEach(function(f){
+      var q=Q[f[0]];
+      out+='<li class="'+(R[f[0]]?'on':'')+'"><label><input type="checkbox" data-f="'+esc(f[0])+'"'+(R[f[0]]?' checked':'')+'><a href="'+esc(f[0])+'">'+esc(f[1])+'</a></label>'+
+        (q?'<span class="qb'+(q[0]===q[1]?' ok':'')+'" title="Dernier score au quiz">Quiz '+q[0]+'/'+q[1]+'</span>':'')+'</li>';
+    });
+    out+='</ul></details>';
+  });
+  document.getElementById('themes').innerHTML=out;
+  document.getElementById('s-read').textContent=read+' / '+total;
+  document.getElementById('s-bar').style.width=Math.round(100*read/total)+'%';
+  var qs=Object.keys(Q),avg='—';
+  if(qs.length){var a=0;qs.forEach(function(k){a+=Q[k][0]/Q[k][1]});avg=Math.round(100*a/qs.length)+' %'}
+  document.getElementById('s-quiz').textContent=avg;
+  var sa=0,sD=0,sE=0,so='';
+  AT.forEach(function(g,gi){
+    so+='<h2 class="sec">'+esc(g.h)+'</h2>';
+    g.b.forEach(function(b,bi){
+      var D=drafts(b),bid='at'+gi+'_'+bi,done=0,inner='';
+      ORD.forEach(function(th,ti){
+        var L=b.i.filter(function(x){return x[2]===th});if(!L.length)return;
+        var tid=bid+'_'+ti,tc=0,li='',nd=0;
+        L.forEach(function(x){
+          var st=stepsOf(D[x[0]],b.kd),c=st.filter(Boolean).length,fk=b.k+'#'+x[0],auto=c>=b.m,ok=(fk in F)?!!F[fk]:auto;tc+=c;if(ok)nd++;
+          li+='<li class="'+(ok?'on':'')+'"><label><input type="checkbox" data-a="'+esc(fk)+'" data-auto="'+(auto?1:0)+'"'+(ok?' checked':'')+' aria-label="Travail terminé"><a href="'+esc(b.u)+'#'+esc(x[0])+'">'+esc(x[1])+'</a></label><span class="qb'+(ok?' ok':'')+'" title="Étapes remplies">'+(c?c+'/'+b.m+' étapes':'Pas commencé')+'</span></li>';
+        });
+        done+=tc;if(g.h==='Atelier dissertation')sD+=nd;else sE+=nd;
+        inner+='<details class="th" id="'+tid+'"'+(openIds[tid]?' open':'')+'><summary>'+esc(th)+'<span class="cnt">'+nd+' / '+L.length+'</span><span class="bar mini"><i style="width:'+Math.round(100*nd/L.length)+'%"></i></span></summary><ul class="fl">'+li+'</ul></details>';
+      });
+      sa+=done;
+      so+='<details class="th sub" id="'+bid+'"'+(openIds[bid]?' open':'')+'><summary>'+esc(b.n)+'<span class="cnt">'+b.i.length+' '+(g.h==='Atelier dissertation'?'sujets':'textes')+'</span></summary>'+inner+'</details>';
+    });
+  });
+  document.getElementById('ateliers').innerHTML=so;
+  var tD=0,tE=0;AT.forEach(function(g){g.b.forEach(function(b){if(g.h==='Atelier dissertation')tD+=b.i.length;else tE+=b.i.length})});
+  document.getElementById('s-d').textContent=sD+' / '+tD;
+  document.getElementById('s-e').textContent=sE+' / '+tE;
+}
+document.getElementById('ateliers').addEventListener('change',function(e){
+  var f=e.target.getAttribute&&e.target.getAttribute('data-a');if(!f)return;
+  var on=e.target.checked,auto=e.target.getAttribute('data-auto')==='1';
+  if(on===auto)delete F[f];else F[f]=on?1:0;save(KF,F);render();
+});
+document.getElementById('themes').addEventListener('change',function(e){
+  var f=e.target.getAttribute&&e.target.getAttribute('data-f');if(!f)return;
+  if(e.target.checked)R[f]=1;else delete R[f];save(KR,R);render();
+});
+var rb=document.getElementById('reset'),armed=false;
+rb.addEventListener('click',function(){
+  if(!armed){armed=true;rb.textContent='Confirmer : tout effacer';document.getElementById('rmsg').textContent='Cela efface aussi vos brouillons des ateliers.';setTimeout(function(){armed=false;rb.textContent='Effacer mon carnet';document.getElementById('rmsg').textContent=''},5000);return}
+  R={};Q={};F={};save(KR,R);save(KQ,Q);save(KF,F);AT.forEach(function(g){g.b.forEach(function(b){try{localStorage.removeItem(b.k)}catch(e){}})});
+  armed=false;rb.textContent='Effacer mon carnet';document.getElementById('rmsg').textContent='Carnet effacé.';render();
+});
+render();
+(function(){
+  var K='carnet-lecture',btn=document.getElementById('a11y-btn'),menu=document.getElementById('a11y-menu'),opts=menu.querySelectorAll('.a11y-opt'),lect=false;
+  function all(on){[].forEach.call(document.querySelectorAll('main details'),function(d){d.open=on})}
+  function apply(m,keep){
+    lect=m==='lect';
+    opts.forEach(function(o){o.setAttribute('aria-checked',o.getAttribute('data-mode')===m?'true':'false')});
+    document.documentElement.classList.toggle('lect',lect);all(lect);
+    try{localStorage.setItem(K,lect?'1':'0')}catch(e){}
+  }
+  function open(on){menu.hidden=!on;btn.setAttribute('aria-expanded',on?'true':'false')}
+  btn.addEventListener('click',function(e){e.stopPropagation();open(menu.hidden)});
+  opts.forEach(function(o){o.addEventListener('click',function(){apply(o.getAttribute('data-mode'));open(false);btn.focus()})});
+  document.addEventListener('click',function(e){if(!menu.hidden&&!menu.contains(e.target)&&e.target!==btn)open(false)});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!menu.hidden){open(false);btn.focus()}});
+  /* en mode lecture, les rendus suivants gardent les thèmes dépliés */
+  var rr=render;render=function(){rr();if(lect)all(true)};
+  try{if(localStorage.getItem(K)==='1')apply('lect')}catch(e){}
+})();
+})();
+</script>
+</body>
+</html>

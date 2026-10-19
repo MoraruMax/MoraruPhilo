@@ -67,6 +67,48 @@ footer p{margin:0}
 
 .pdfbtn{display:inline-flex;align-items:center;gap:.5rem;font:600 .88rem/1 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--surface);border:1.5px solid var(--ink);border-radius:999px;padding:.55rem .95rem;cursor:pointer}
 .pdfbtn:hover{background:var(--ink);color:var(--bg)}.pdfbtn:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:2px}
+
+/* Mode lecture (pages à structure libre) */
+html.lect body::before,html.lect body::after{display:none!important}
+html.lect body{background:var(--bg)!important}
+html.lect .pn,html.lect #quiz,html.lect section[aria-labelledby="h-video"],html.lect video,html.lect .score,html.lect .lc-skip,html.lect [role="tablist"],html.lect main button,html.lect main input,html.lect main select,html.lect main textarea,html.lect .sec-head p.lc-x{display:none!important}
+html.lect .hero h1,html.lect .hero p,html.lect section.block h2,html.lect footer p{text-shadow:none!important}
+html.lect .hero,html.lect section.block{padding-block:1.2rem!important;border:0!important}
+html.lect .wrap,html.lect .sec-head{max-width:40rem!important;margin-inline:auto}
+html.lect .hgrid,html.lect .two,html.lect .cols{display:block!important}
+html.lect main,html.lect .hero{font-family:var(--serif)}
+html.lect .hero h1{font-size:clamp(1.9rem,5vw,2.6rem)!important}
+html.lect main p,html.lect main li,html.lect .lead{font-size:1.12rem!important;line-height:1.75!important}
+html.lect :is(main,.hero) :is(div,li,blockquote,article,aside,p,ul,ol,section,details,summary,figure,span):not(table *){background:none!important;border:0!important;box-shadow:none!important;border-radius:0!important}
+html.lect main [hidden]{display:revert!important}
+html.lect :is(main,.hero) div:not(.wrap):not(.sec-head):not(table *){display:block!important;grid-template-columns:none!important;float:none!important;max-width:none!important;width:auto!important;margin-inline:0}
+html.lect main li{display:list-item!important}
+html.lect .must{margin:1rem 0}
+html.lect .lead{max-width:none!important}
+html.lect .wrap{padding-inline:0}
+html.lect main details>summary{cursor:default;pointer-events:none;list-style:none}
+html.lect main details>summary::-webkit-details-marker,html.lect main details>summary::before{display:none!important}
+html.lect main blockquote{margin:.8rem 0;padding:0 0 0 1rem!important;border-left:3px solid var(--line)!important}
+html.lect main .panel{display:block!important;margin-bottom:1rem}
+html.lect main h3,html.lect main h4{margin-top:1.4rem}
+html.lect .nav,html.lect .hero .note{display:none!important}
+html.lect .thesis{border:0!important;padding-left:0!important;max-width:none!important}
+html.lect .args li{padding-left:0!important}
+html.lect .args li::before{display:none!important}
+html.lect .args{list-style:decimal;padding-left:1.4rem!important}
+html.lect .txt{padding-block:1.2rem!important}
+
+/* Accessibilité */
+.a11y{position:relative;display:inline-block}
+.a11y-menu{position:absolute;right:0;top:calc(100% + .4rem);z-index:60;min-width:14rem;background:var(--bg);color:var(--ink);border:1.5px solid var(--ink);border-radius:14px;padding:.35rem;box-shadow:0 8px 24px rgba(0,0,0,.18);text-shadow:none}
+.a11y-menu[hidden]{display:none}
+.a11y-menu p{margin:0;padding:.45rem .7rem .3rem;font:700 .72rem/1 system-ui,-apple-system,sans-serif;letter-spacing:.06em;text-transform:uppercase;opacity:.65}
+.a11y-opt{display:flex;align-items:center;gap:.6rem;width:100%;text-align:left;font:600 .92rem/1.2 system-ui,-apple-system,sans-serif;color:inherit;background:none;border:0;border-radius:9px;padding:.6rem .7rem;cursor:pointer}
+.a11y-opt:hover{background:var(--surface)}
+.a11y-opt:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:-2px}
+.a11y-opt .dot{flex:none;width:1rem;height:1rem;border:2px solid currentColor;border-radius:50%;position:relative}
+.a11y-opt[aria-checked="true"] .dot::after{content:"";position:absolute;inset:2px;background:currentColor;border-radius:50%}
+.a11y-opt small{display:block;font-weight:500;opacity:.7;font-size:.78rem;margin-top:.15rem}
 @media print{
   :root{--bg:#fff!important;--surface:#fff!important;--ink:#111!important;--muted:#444!important;--line:#bbb!important;color-scheme:light!important}
   *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
@@ -84,11 +126,39 @@ footer p{margin:0}
   footer{break-before:avoid;border-top:1px solid #999;margin-top:1rem}
 }
 @page{size:A4;margin:16mm 14mm}
+/* Texte */
+.tx summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:.7rem;font:800 clamp(1.4rem,3vw,1.9rem)/1.2 var(--sans);padding:.3rem 0}
+.tx summary::-webkit-details-marker{display:none}
+.tx summary::before{content:"";width:.6em;height:.6em;border-right:.2em solid currentColor;border-bottom:.2em solid currentColor;transform:rotate(-45deg);transition:transform .15s;flex:none;margin-right:.2rem}
+.tx[open] summary::before{transform:rotate(45deg)}
+@media (prefers-reduced-motion:reduce){.tx summary::before{transition:none}}
+.txb{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--c,var(--ink));padding:1.2rem clamp(1rem,3vw,1.8rem);margin-top:.9rem;max-width:46rem;font:400 1.1rem/1.75 var(--serif)}
+.txb p{margin:0 0 1em}
+.txb h3{font:700 1rem/1.3 var(--sans);margin:1.2em 0 .5em}
+.txb .vs{font:700 .72rem/1 var(--sans);color:var(--muted);margin-right:.15em}
+.txb .tsrc{font:600 .88rem/1.4 var(--sans);color:var(--muted);text-align:right;margin:1.1em 0 0}
+.txb .tsrc:not(:last-child){margin-bottom:1.4em;padding-bottom:1.2em;border-bottom:1px solid var(--line)}
+
+/* Sujets de dissertation */
+.sjd ul{list-style:none;margin:.6rem 0 0;padding:0;max-width:46rem}
+.sjd li{margin:0;padding:.55rem 0;border-top:1px solid var(--line)}
+.sjd li:last-child{border-bottom:1px solid var(--line)}
+.sjd a{color:inherit;font:600 1.05rem/1.4 var(--sans,system-ui);text-underline-offset:3px}
+.sjd p{margin:.4rem 0 0}
+html.lect .sjd li{border:0!important;padding:.25rem 0!important}
+html.lect .sjd a{font:600 1.12rem/1.6 var(--serif,Georgia,serif)}
+@media print{.sjd a{font-weight:600}.sjd li{border-color:#999}}
+.ln{font:700 .66rem/1 var(--sans);color:var(--muted);margin:0 .2em 0 .1em;vertical-align:super}
+.txb .tsrcline{font:600 .9rem/1.4 var(--sans);color:var(--muted)}
+.txn{font:500 .85rem/1.4 var(--sans);color:var(--muted);margin:.2rem 0 1rem}
+html.lect .txb{padding:0!important}
 </style>
 <link rel="stylesheet" href="quiz.css">
+<script>try{history.scrollRestoration="manual"}catch(e){}(function(){function t(){if(!location.hash)window.scrollTo(0,0)}t();document.addEventListener("DOMContentLoaded",t);window.addEventListener("load",function(){t();setTimeout(t,60)});window.addEventListener("pageshow",t)})();</script>
+<script src="confort.js"></script>
 </head>
 <body>
-<nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
+<nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><span style="display:inline-flex;gap:.6rem;flex-wrap:wrap;align-items:center"><span class="a11y"><button type="button" class="pdfbtn" id="a11y-btn" aria-haspopup="true" aria-expanded="false" aria-controls="a11y-menu"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="1.6"/><path d="M5 8.5l7 1.5 7-1.5M12 10v4.5M8.5 21l3.5-6.5 3.5 6.5"/></svg><span>Accessibilité</span></button><div class="a11y-menu" id="a11y-menu" role="radiogroup" aria-label="Affichage de la page" hidden><p>Affichage</p><button type="button" role="radio" class="a11y-opt" data-mode="orig" aria-checked="true"><span class="dot"></span><span>Page d’origine<small>Image de fond et mise en page habituelle</small></span></button><button type="button" role="radio" class="a11y-opt" data-mode="lect" aria-checked="false"><span class="dot"></span><span>Mode lecture<small>Texte continu, sans cadres ni exercices</small></span></button></div></span><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></span></nav>
 
 <header class="hero">
   <div class="wrap">
@@ -108,7 +178,6 @@ footer p{margin:0}
 </section>
 <!--/quiz-->
 
-<footer><div class="wrap"><p>Page réalisée à partir du document « Textes Démocratie ». Les arguments sont reformulés ; les extraits renvoient au texte complet de votre document.</p></div></footer>
 
 <script>
 (function(){
@@ -165,6 +234,7 @@ footer p{margin:0}
    q:[['la plus éloignée de la nature','l. 4'],['législateur et sujet','l. 9'],['la démocratie est d’essence évangélique, et qu’elle a pour moteur l’amour','l. 14-15']]}
   ];
   function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;')}
+  var TX=["<p class=\"tsrcline\">Hérodote, Histoire, III, 445 av. J.-C.</p><p>Otanès [nom attribué régulièrement par Hérodote] exhorta les Perses à mettre l’autorité en commun.</p><p>« Je crois, dit-il, que l’on ne doit plus désormais confier l’administration de l’État à un seul homme, le gouvernement monarchique n’étant ni agréable ni bon. Vous savez à quel point d’insolence en était venu Cambyse [roi perse et pharaon d’Egypte, successeur de Cyrus le Grand, 6ème siècle avant JC] , et vous avez éprouvé vous-mêmes celle du mage. Comment, en effet, la monarchie pourrait-elle être un bon gouvernement ? Le monarque fait ce qu’il veut, sans rendre compte de sa conduite. L’homme le plus vertueux, élevé à cette haute dignité, perdrait bientôt toutes ses bonnes qualités. Car l’envie naît avec tous les hommes, et les avantages dont jouit un monarque le portent à l’insolence. Or, quiconque a ces deux vices a tous les vices ensemble : tantôt il commet, dans l’ivresse de l’insolence, les actions les plus atroces, et tantôt par envie. Un roi devrait être exempt d’envie, du moins parce qu’il jouit de toutes sortes de biens ; mais c’est tout le contraire, et ses sujets ne le savent que trop par expérience. Il hait les plus honnêtes gens, et semble chagrin de ce qu’ils existent encore. Il n’est bien qu’avec les plus méchants. Il prête volontiers l’oreille à la calomnie ; il accueille les délateurs : mais ce qu’il y a de plus bizarre, si on le loue modestement, il s’en offense ; si, au contraire, on le recherche avec empressement, il en est pareillement blessé, et ne l’impute qu’à la plus basse flatterie ; enfin, et c’est le plus terrible de tous les inconvénients, il renverse les lois de la patrie, il attaque l’honneur des femmes, et fait mourir qui bon lui semble, sans observer aucune formalité. Il n’en est pas de même du gouvernement démocratique. Premièrement on l’appelle isonomie ; c’est le plus beau de tous les noms : secondement, il ne s’y commet aucun de ces désordres qui sont inséparables de l’État monarchique. Le magistrat s’y élit au sort ; il est comptable de son administration, et toutes les délibérations s’y font en commun. Je suis donc d’avis d’abolir le gouvernement monarchique, et d’établir le démocratique, parce que tout se trouve dans le peuple. » Telle fut l’opinion d’Otanès.</p>", "<p class=\"tsrcline\">Platon, La République, VIII, 384-377 av. J.-C.</p><p>Eh bien ! A mon avis, la démocratie apparaît lorsque les pauvres, ayant emporté la victoire sur les riches, massacrent les uns, bannissent les autres, et partagent également avec ceux qui restent le gouvernement et les charges publiques ; et le plus souvent ces charges sont tirées au sort. (…) Maintenant, voyons de quelle manière ces gens-là s’administrent, et ce que peut être une telle constitution. Aussi bien est-il que l’individu qui lui ressemble nous découvrira les traits de l’homme démocratique. En premier lieu, n’est-il pas vrai qu’ils sont libres, que la cité déborde de liberté et de franc-parler, et qu’on y a licence de faire tout ce qu’on veut ? Or il est clair que partout où règne cette licence chacun organise sa vie comme il lui plaît. On trouvera donc, j’imagine, des hommes de toute sorte dans ce gouvernement plus que dans aucun autre. Ainsi, il y a chance qu’il soit le plus beau de tous. Comme un vêtement bigarré qui offre toute la variété des couleurs, offrant toute la variété des caractères, il pourra paraître d’une beauté achevée. Et peut-être beaucoup de gens, pareils aux enfants et aux femmes qui admirent les bigarrures, décideront-ils qu’il est le plus beau. Et c’est là qu’il est commode de chercher une constitution, parce qu’on les y trouve toutes, grâce à la licence qui y règne ; et il semble que celui qui veut fonder une cité, ce que nous faisions tout à l’heure, soit obligé de se rendre dans un Etat démocratique, comme dans un bazar de constitutions, pour choisir celle qu’il préfère, et d’après ce modèle, réaliser ensuite son projet. Dans cet Etat, on n’est pas contraint de commander si l’on en est capable, ni d’obéir si l’on ne veut pas, non plus que de faire la guerre quand les autres la font, ni de rester en paix quand les autres y restent, si l’on ne désire point la paix ; d’autre part, la loi vous interdit-elle d’être magistrat ou juge, vous n’en pouvez pas moins exercer ces fonctions, si la fantaisie vous en prend. N’est-ce pas une condition divine et délicieuse au premier abord ? (…) Tels sont les avantages de la démocratie. C’est un gouvernement agréable, anarchique et bigarré, qui dispense une sorte d’égalité aussi bien à ce qui est inégal qu’à ce qui est égal</p>", "<p class=\"tsrcline\">Aristote, Les Politiques, 350 av. J.-C.</p><p>Le principe de base de la constitution démocratique, c’est la liberté (c’est, en effet, ce qu’on a coutume de dire, parce que c’est seulement dans une telle constitution que les citoyens ont la liberté en partage ; c’est à cela, en effet, que tend, dit-on, toute démocratie), et l’une des formes de la liberté, c’est d’être tour à tour gouverné et gouvernant. En effet, le juste selon la constitution démocratique, c’est que chacun ait une part égale numériquement et non selon son mérite, et avec une telle conception du juste, il est nécessaire que la masse soit souveraine, et ce qui semble bon à la majorité sera quelque chose d’indépassable, et c’est cela qui sera le juste, car ils disent qu’il faut que chaque citoyen ait une part égale. De sorte que dans les démocraties il se trouve que les gens modestes ont la souveraineté sur les gens aisés; ils sont en effet plus nombreux, et c’est l’opinion de la majorité qui est souveraine. [...] Ces bases étant posées, c’est-à-dire le principe de la démocratie étant celui que l’on vient de dire, voici les traits caractéristiques du régime populaire : choix de tous les magistrats parmi tous les citoyens ; gouvernement de chacun par tous et de tous par chacun à tour de rôle ; tirage au sort des magistratures, soit de toutes, soit de toutes celles qui ne demandent ni expérience ni savoir ; magistratures ne dépendant d’aucun cens ou d’un cens très petit ; impossibilité pour un même citoyen d’exercer en dehors des fonctions militaires, deux fois la même magistrature, ou seulement un petit nombre de fois et pour toutes celles pour lesquelles c’est possible ; fonctions judiciaires ouvertes à tous, tous jugeant de tout, ou des causes les plus nombreuses, les plus importantes et les plus décisives, par exemple la vérification des comptes, les affaires politiques, les contrats privés ; souveraineté de l’assemblée dans tous les domaines, aucune magistrature ne l’emportant en aucun domaine, ou seulement en très peu de domaines, ou souveraineté de l’assemblée sur les affaires les plus importantes. [...] Telles sont donc les caractéristiques communes aux démocraties.</p>", "<p class=\"tsrcline\">Tocqueville, De la démocratie en Amérique, 1835</p><p>Je regarde comme […] détestable cette maxime, qu’en matière de gouvernement la majorité d’un peuple a le droit de tout faire, et pourtant je place dans les volontés de la majorité l’origine de tous les pouvoirs. Suis-je en contradiction avec moi-même ?</p><p>Il existe une loi générale qui a été faite ou du moins adoptée, non pas seulement par la majorité de tel ou tel peuple, mais par la majorité de tous les hommes. Cette loi, c’est la justice.</p><p>La justice forme donc la borne du droit de chaque peuple.</p><p>Une nation est comme un jury chargé de représenter la société universelle et d’appliquer la justice, qui est sa loi. Le jury, qui représente la société, doit-il avoir plus de puissance que la société elle-même dont il applique les lois ?</p><p>Quand donc je refuse d’obéir à une loi injuste, je ne dénie point à la majorité le droit de commander ; j’en appelle seulement de la souveraineté du peuple à la souveraineté du genre humain. […]</p><p>Qu’est-ce donc qu’une majorité prise collectivement, sinon un individu qui a des opinions et le plus souvent des intérêts contraires à un autre individu qu’on nomme la minorité ? Or, si vous admettez qu’un homme revêtu de la toute-puissance peut en abuser contre ses adversaires, pourquoi n’admettez-vous pas la même chose pour une majorité ? Les hommes, en se réunissant, ont-ils changé de caractère ? Sont-ils devenus plus patients dans les obstacles en devenant plus forts ? Pour moi, je ne saurais le croire ; et le pouvoir de tout faire, que je refuse à un seul de mes semblables, je ne l’accorderai jamais à plusieurs.</p>", "<p class=\"tsrcline\">Tocqueville, De la démocratie en Amérique, 1835</p><p>Je veux imaginer sous quels traits nouveaux le despotisme pourrait se produire dans le monde : je vois une foule innombrable d’hommes semblables et égaux qui tournent sans repos sur eux-mêmes pour se procurer de petits et vulgaires plaisirs, dont ils emplissent leur âme. Chacun d’eux, retiré à l’écart, est comme étranger à la destinée de tous les autres : ses enfants et ses amis particuliers forment pour lui toute l’espèce humaine ; quant au demeurant de ses concitoyens, il est à côté d’eux, mais il ne les voit pas ; il les touche et ne les sent point ; il n’existe qu’en lui-même et pour lui seul, et, s’il lui reste encore une famille, on peut dire du moins qu’il n’a plus de patrie.</p><p>Au-dessus de ceux-là s’élève un pouvoir immense et tutélaire, qui se charge seul d’assurer leur jouissance et de veiller sur leur sort. Il est absolu, prévoyant, régulier et doux. Il ressemblerait à la puissance paternelle si, comme elle, il avait pour objet de préparer les hommes à l’âge viril ; mais il ne cherche, au contraire, qu’à les fixer irrévocablement dans l’enfance ; il aime que les citoyens se réjouissent pourvu qu’ils ne songent qu’à se réjouir. Il travaille volontiers à leur bonheur ; mais il veut en être l’unique agent et le seul arbitre ; il pourvoit à leur sécurité, prévoit et assure leurs besoins, facilite leurs plaisirs, conduit leurs principales affaires, dirige leur industrie, règle leurs successions, divise leurs héritages ; que ne peut-il leur ôter entièrement le trouble de penser et la peine de vivre ?</p>", "<p class=\"tsrcline\">Alain, Propos, les citoyens contre le pouvoir, 1925</p><p>Voter, ce n’est pas précisément un des droits de l’Homme ; on vivrait très bien sans voter, si l’on avait la sûreté, l’égalité, la liberté. Le vote n’est qu’un moyen de conserver tous ces biens. L’expérience a fait voir cent fois qu’une élite gouvernante, qu’elle gouverne d’après l’hérédité, ou par la science acquise, arrive très vite à priver les citoyens de toute liberté, si le peuple n’exerce pas un pouvoir de contrôle, de blâme et enfin de renvoi. Quand je vote, je n’exerce pas un droit, je défends tous mes droits. Il ne s’agit donc pas de savoir si mon vote est perdu ou non, mais bien de savoir si le résultat cherché est atteint, c’est-à-dire si les pouvoirs sont contrôlés, blâmés et enfin détrônés dès qu’ils méconnaissent les droits des citoyens.</p><p>On conçoit très bien un système politique, par exemple le plébiscite, où chaque citoyen votera une fois librement, sans que ses droits soient pour cela bien gardés. Aussi je ne tiens pas tant à choisir effectivement, et pour ma part, tel ou tel maître, qu’à être assuré que le maître n’est pas le maître, mais seulement le serviteur du peuple. C’est dire que je ne changerai pas mes droits réels pour un droit fictif.</p>", "<p class=\"tsrcline\">Bergson, Les deux sources de la morale et de la religion, 1932</p><p>On comprend donc que l’humanité ne soit venue à la démocratie que sur le tard (car ce furent de fausses démocraties que les cités antiques, bâties sur l’esclavage, débarrassées par cette iniquité fondamentale des plus gros et des plus angoissants problèmes). De toutes les conceptions politiques c’est en effet la plus éloignée de la nature, la seule qui transcende, en intention au moins, les conditions de la « société close ». Elle attribue à l’homme des droits inviolables. Ces droits, pour rester inviolés, exigent de la part de tous une fidélité inaltérable au devoir. Elle prend donc pour matière un homme idéal, respectueux des autres comme de lui-même, s’insérant dans des obligations qu’il tient pour absolues, coïncidant si bien avec cet absolu qu’on ne peut plus dire si c’est le devoir qui confère le droit ou le droit qui impose le devoir. Le citoyen ainsi défini est à la fois « législateur et sujet », pour parler comme Kant. L’ensemble des citoyens, c’est-à-dire le peuple, est donc souverain. Telle est la démocratie théorique. Elle proclame la liberté, réclame l’égalité, et réconcilie ces deux sœurs ennemies en leur rappelant qu’elles sont sœurs, en mettant au-dessus de tout la fraternité. Qu’on prenne de ce biais la devise républicaine, on trouvera que le troisième terme lève la contradiction si souvent signalée entre les deux autres, et que la fraternité est l’essentiel : ce qui permettrait de dire que la démocratie est d’essence évangélique, et qu’elle a pour moteur l’amour.</p>"];
   var nav='',html='';
   T.forEach(function(t,i){
     var n=i+1,k=K[t.k];
@@ -172,6 +242,7 @@ footer p{margin:0}
     html+='<section class="txt" id="t'+n+'" aria-labelledby="h'+n+'" style="--c:'+k[1]+'"><div class="wrap">'+
       '<div class="meta"><span>Texte '+n+'</span><span class="tag">'+k[0]+'</span><span>'+esc(t.d)+'</span></div>'+
       '<h2 id="h'+n+'">'+esc(t.a)+'<span style="font-weight:400;font-size:.62em;color:var(--muted)"> — '+esc(t.w)+'</span></h2>'+
+      '<details class="tx"><summary>Le texte</summary><div class="txb">'+TX[i]+'</div></details>'+
       '<p class="thesis">'+esc(t.th)+'</p>'+
       '<div class="cols"><div><h3>Les arguments</h3><ol class="args">'+t.ar.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ol></div>'+
       '<div><h3>Extraits</h3><div class="quotes">'+t.q.map(function(x){return '<blockquote><p>« '+esc(x[0])+' »</p><cite>'+esc(t.a)+', '+x[1]+'</cite></blockquote>'}).join('')+'</div></div></div>'+
@@ -180,20 +251,51 @@ footer p{margin:0}
   document.getElementById('nav').innerHTML=nav;
   document.getElementById('main').innerHTML=html;
   var links=[].slice.call(document.querySelectorAll('#nav a'));
-  if('IntersectionObserver' in window){
-    var io=new IntersectionObserver(function(es){
-      es.forEach(function(e){
-        if(!e.isIntersecting)return;
-        var i=parseInt(e.target.id.slice(1),10)-1;
-        links.forEach(function(a,k){if(k===i)a.setAttribute('aria-current','true');else a.removeAttribute('aria-current')});
-        var a=links[i],box=a.parentNode.parentNode;
-        if(box.scrollWidth>box.clientWidth&&box.scrollTo)box.scrollTo({left:a.offsetLeft-20});
-      });
-    },{rootMargin:'-30% 0px -60% 0px'});
-    [].slice.call(document.querySelectorAll('.txt')).forEach(function(s){io.observe(s)});
+  var secs=[].slice.call(document.querySelectorAll('.txt')),lock=null,ticking=false;
+  function setCur(i){
+    links.forEach(function(a,k){if(k===i)a.setAttribute('aria-current','true');else a.removeAttribute('aria-current')});
+    var a=links[i],box=a.parentNode.parentNode;
+    if(box.scrollWidth>box.clientWidth&&box.scrollTo)box.scrollTo({left:a.offsetLeft-20});
   }
+  function upd(){
+    ticking=false;
+    if(lock!==null){setCur(lock);return}
+    var nb=document.querySelector('.nav'),y=(nb?nb.getBoundingClientRect().bottom:0)+24,cur=0;
+    secs.forEach(function(s,k){if(s.getBoundingClientRect().top<=y)cur=k});
+    setCur(cur);
+  }
+  function req(){if(!ticking){ticking=true;requestAnimationFrame(upd)}}
+  links.forEach(function(a,k){a.addEventListener('click',function(){lock=k;setCur(k)})});
+  ['wheel','touchstart','mousedown','keydown'].forEach(function(ev){window.addEventListener(ev,function(){lock=null},{passive:true})});
+  window.addEventListener('scroll',req,{passive:true});window.addEventListener('resize',req);
+  upd();
 })();
 </script>
 <script src="quiz.js" defer></script>
+<script>
+(function(){var r=document.documentElement,K='texte-seul',KL='mode-lecture';
+var btn=document.getElementById('a11y-btn'),menu=document.getElementById('a11y-menu'),opts=menu.querySelectorAll('.a11y-opt'),closed=[],shown=[],skipped=[];
+function apply(m){
+  var ts=m==='ts',lc=m==='lect',was=r.classList.contains('lect');
+  r.classList.toggle('ts',ts);r.classList.toggle('lect',lc);
+  if(lc&&!was){closed=[];shown=[];skipped=[];
+    document.querySelectorAll('main details').forEach(function(d){if(!d.open){closed.push(d);d.open=true}});
+    document.querySelectorAll('main [hidden]').forEach(function(x){if(!x.closest('[aria-labelledby="h-video"]')&&!x.matches('video,[role="tablist"]')){shown.push(x);x.hidden=false}});
+    document.querySelectorAll('main section').forEach(function(sc){var h=sc.querySelector('h2');
+      if(sc.querySelector('input,select,textarea')||(h&&/^(Exercice|Faites le tri|En vid)/i.test(h.textContent.trim()))){sc.classList.add('lc-skip');skipped.push(sc)}});}
+  if(!lc&&was){closed.forEach(function(d){d.open=false});shown.forEach(function(x){x.hidden=true});skipped.forEach(function(s){s.classList.remove('lc-skip')});closed=[];shown=[];skipped=[]}
+  opts.forEach(function(o){o.setAttribute('aria-checked',o.getAttribute('data-mode')===m?'true':'false')});
+  try{localStorage.setItem(K,ts?'1':'0');localStorage.setItem(KL,lc?'1':'0')}catch(e){}
+}
+function open(on){menu.hidden=!on;btn.setAttribute('aria-expanded',on?'true':'false')}
+btn.addEventListener('click',function(e){e.stopPropagation();open(menu.hidden)});
+opts.forEach(function(o){o.addEventListener('click',function(){apply(o.getAttribute('data-mode'));open(false);btn.focus()})});
+document.addEventListener('click',function(e){if(!menu.hidden&&!menu.contains(e.target)&&e.target!==btn)open(false)});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!menu.hidden){open(false);btn.focus()}});
+var v='orig';try{if(localStorage.getItem(KL)==='1')v='lect';else if(localStorage.getItem(K)==='1'&&menu.querySelector('[data-mode="ts"]'))v='ts'}catch(e){}
+if(v==='ts')apply('ts');
+if(v==='lect')window.addEventListener('load',function(){apply('lect')});
+})();
+</script>
 </body>
 </html>

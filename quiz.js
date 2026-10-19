@@ -17,6 +17,7 @@ function show(){theme();
  if(i>=Q.length){var m=score===Q.length?'Parfait : vous avez tout retenu.':score>=Q.length-1?'Très bien. Relisez le point qui vous a échappé.':score>=Math.ceil(Q.length/2)?'Bien. Relisez les passages des questions manquées.':'Relisez la fiche, puis recommencez.';
   box.innerHTML='<p class="qmeta"><span>Terminé</span></p><div class="qbar"><i style="width:100%"></i></div><p class="score" tabindex="-1">'+score+' / '+Q.length+'</p><p>'+m+'</p><div class="qact"><button type="button" id="rs">Recommencer</button></div>';
   box.querySelector('.score').focus({preventScroll:true});
+  try{var pg=location.pathname.split('/').pop();if(pg){var ob=JSON.parse(localStorage.getItem('carnet-quiz')||'null')||{};ob[pg]=[score,Q.length];localStorage.setItem('carnet-quiz',JSON.stringify(ob))}}catch(e){}
   document.getElementById('rs').onclick=function(){i=0;score=0;show();focusLegend()};return}
  var q=Q[i];order=sh(q.a);
  var h='<p class="qmeta"><span>Question '+(i+1)+' sur '+Q.length+'</span><span>Score : '+score+'</span></p><div class="qbar"><i style="width:'+(i/Q.length*100)+'%"></i></div><fieldset><legend tabindex="-1">'+esc(q.q)+'</legend>';

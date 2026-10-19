@@ -120,60 +120,101 @@ footer{margin-top:auto;border-top:0;color:var(--ink);font-weight:500}
 /* Fine barre verticale à l'ouverture d'une sous-section */
 .notion[open] > .list,.sub-n[open] > .list{border-left:2px solid var(--ink);padding-left:clamp(.9rem,2.5vw,1.4rem);margin-left:.15rem;padding-bottom:0;margin-bottom:clamp(2rem,5vw,3rem)}
 .sub-n[open] > .list{margin-bottom:1rem}
-</style>
+.tsbar{margin:0 0 .6rem;text-align:right;text-shadow:none}
+.tsbtn{display:inline-flex;align-items:center;gap:.5rem;font:600 .88rem/1 var(--head,system-ui);color:var(--ink);background:var(--bg);border:1.5px solid var(--ink);border-radius:999px;padding:.55rem .95rem;cursor:pointer}
+.tsbtn:hover{background:var(--ink);color:var(--bg)}.tsbtn:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:2px}
+html.ts body::before{display:none!important}
+html.ts body::after{opacity:1!important}
+html.ts h1,html.ts .lead,html.ts h2.sec,html.ts .notion > summary,html.ts footer p,html.ts .grp > summary,html.ts .find label,html.ts .find .n{text-shadow:none!important}
+html.ts #credit{display:none}
+
+/* Accessibilité */
+.a11y{position:relative;display:inline-block}
+.a11y-menu{position:absolute;right:0;top:calc(100% + .4rem);z-index:60;min-width:14rem;background:var(--bg);color:var(--ink);border:1.5px solid var(--ink);border-radius:14px;padding:.35rem;box-shadow:0 8px 24px rgba(0,0,0,.18);text-shadow:none}
+.a11y-menu[hidden]{display:none}
+.a11y-menu p{margin:0;padding:.45rem .7rem .3rem;font:700 .72rem/1 system-ui,-apple-system,sans-serif;letter-spacing:.06em;text-transform:uppercase;opacity:.65}
+.a11y-opt{display:flex;align-items:center;gap:.6rem;width:100%;text-align:left;font:600 .92rem/1.2 system-ui,-apple-system,sans-serif;color:inherit;background:none;border:0;border-radius:9px;padding:.6rem .7rem;cursor:pointer}
+.a11y-opt:hover{background:var(--surface)}
+.a11y-opt:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:-2px}
+.a11y-opt .dot{flex:none;width:1rem;height:1rem;border:2px solid currentColor;border-radius:50%;position:relative}
+.a11y-opt[aria-checked="true"] .dot::after{content:"";position:absolute;inset:2px;background:currentColor;border-radius:50%}
+.a11y-opt small{display:block;font-weight:500;opacity:.7;font-size:.78rem;margin-top:.15rem}
+.a11y-menu{text-align:left}.tsbar .a11y-menu p{margin:0}
+/* Mode lecture accueil */
+html.lect body::before,html.lect body::after{display:none!important}
+html.lect body{background:var(--bg)!important}
+html.lect .find,html.lect .item svg,html.lect .item .pt,html.lect .item .go,html.lect .item .vu,html.lect #credit{display:none!important}
+html.lect h1,html.lect .sub,html.lect h2.sec,html.lect .notion > summary,html.lect footer p{text-shadow:none!important}
+html.lect header .wrap,html.lect main .wrap{max-width:42rem}
+html.lect .grp > summary::before,html.lect .notion > summary::before,html.lect .sub-n > summary::before{display:none!important}
+html.lect summary{pointer-events:none;cursor:default}
+html.lect .grp > summary{padding:2rem 0 .3rem;border-bottom:2px solid var(--ink);margin-bottom:.6rem}
+html.lect h2.sec{font-size:1.9rem}
+html.lect .notion > summary{font:700 1.2rem/1.3 var(--head);padding:1.1rem 0 .2rem}
+html.lect .sub-n > summary{font:700 1.05rem/1.3 var(--head);padding:.7rem 0 .1rem;color:var(--muted)}
+html.lect .notion,html.lect .notion .list,html.lect .sub-n,html.lect .grp > details{margin-left:0!important;padding-left:0!important;border:0!important}
+html.lect .list{display:block!important;padding:0 0 .4rem!important}
+html.lect .item{display:block;background:none!important;border:0!important;border-radius:0;padding:.35rem 0!important;transform:none!important}
+html.lect .item h2{display:inline;font:600 1.12rem/1.6 var(--serif,Georgia,serif);letter-spacing:0;text-decoration:underline;text-underline-offset:3px;margin:0}
+html.lect .item p{display:inline;font-size:1.05rem;line-height:1.6;margin:0 0 0 .2rem;color:var(--muted)}
+html.lect .item p::before{content:"\2014\00a0"}
+.carnet-l{margin:.2rem 0 1rem;font:600 .95rem/1.4 var(--head,system-ui)}.carnet-l a{color:inherit;text-underline-offset:3px}html.lect .carnet-l{display:block}
+.notion>summary .ser{font-weight:400;font-size:.8em;opacity:.7}</style>
+<script src="confort.js"></script>
 </head>
 <body>
 <header>
   <div class="wrap">
+    <div class="tsbar"><span class="a11y"><button type="button" class="tsbtn" id="a11y-btn" aria-haspopup="true" aria-expanded="false" aria-controls="a11y-menu"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="1.6"/><path d="M5 8.5l7 1.5 7-1.5M12 10v4.5M8.5 21l3.5-6.5 3.5 6.5"/></svg><span>Accessibilité</span></button><div class="a11y-menu" id="a11y-menu" role="radiogroup" aria-label="Affichage de la page" hidden><p>Affichage</p><button type="button" role="radio" class="a11y-opt" data-mode="orig" aria-checked="true"><span class="dot"></span><span>Page d’origine<small>Image de fond et cartes habituelles</small></span></button><button type="button" role="radio" class="a11y-opt" data-mode="ts" aria-checked="false"><span class="dot"></span><span>Texte seul<small>Sans image de fond</small></span></button><button type="button" role="radio" class="a11y-opt" data-mode="lect" aria-checked="false"><span class="dot"></span><span>Mode lecture<small>Liste simple, sans images ni cartes</small></span></button></div></span></div>
     <h1>Fiches de cours</h1>
     <p class="sub">Des contenus générés à l’aide de l’IA consacrés aux thèmes de notre année, et des outils pour réviser et s’entraîner.</p>
-    <p class="prog" id="prog" hidden></p>
+    <p class="carnet-l"><a href="carnet.html">Mon carnet de suivi</a></p>
     <div class="find" role="search"><label for="q">Chercher un auteur, une notion, un texte</label><input id="q" type="search" placeholder="Ex. : Kant, liberté, mensonge…" autocomplete="off"><p class="n" id="qn" aria-live="polite"></p><button type="button" class="more" id="qm" hidden></button></div>
   </div>
 </header>
 
 <main>
   <details class="grp wrap"><summary><h2 class="sec">Les thèmes</h2></summary>
-  <details class="notion"><summary>Art</summary>
+  <details class="notion"><summary><span>Art <span class="ser">: série générale et technologiques</span></span></summary>
   <div class="list">
-    <a class="item" href="art-kant.html" style="--c:var(--a4)"><img class="pt" src="images/kant.jpg" alt="" loading="lazy" style="object-position:50% 25%">
-      <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="14" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".4"/><rect x="47" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".7"/><rect x="80" y="8" width="26" height="32" rx="3" fill="var(--c)"/></svg>
-      <h2>Kant : le jugement de goût</h2>
-      <p>« C’est beau pour moi » : peut-on dire cela du beau ?</p>
-      <span class="go">Ouvrir la page</span>
-    </a>
-    <a class="item" href="art-hume-sentiment.html" style="--c:var(--a5)"><img class="pt" src="images/hume.jpg" alt="" loading="lazy" style="object-position:50% 25%">
+    <a class="item" href="art-hume-sentiment.html" style="--c:var(--a4)"><img class="pt" src="images/hume.jpg" alt="" loading="lazy" style="object-position:50% 25%">
       <svg viewBox="0 0 120 48" aria-hidden="true"><circle cx="30" cy="24" r="14" fill="var(--muted)" opacity=".4"/><circle cx="78" cy="24" r="14" fill="var(--c)"/></svg>
       <h2>Hume : opinion et sentiment</h2>
       <p>Peut-on se tromper sur la beauté ? Hume distingue l’opinion du sentiment.</p>
       <span class="go">Ouvrir la page</span>
     </a>
-    <a class="item" href="art-hume-delicatesse.html" style="--c:var(--a6)"><img class="pt" src="images/hume.jpg" alt="" loading="lazy" style="object-position:50% 25%">
-      <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M14 40 L60 8 L106 40Z" fill="var(--muted)" opacity=".4"/><circle cx="60" cy="18" r="7" fill="var(--c)"/></svg>
-      <h2>Hume : la délicatesse du goût</h2>
-      <p>Si tous les goûts ne se valent pas, qui est un bon juge ?</p>
-      <span class="go">Ouvrir la page</span>
-    </a>
-    <a class="item" href="art-bourdieu.html" style="--c:var(--a7)">
+    <a class="item" href="art-bourdieu.html" style="--c:var(--a5)"><img class="pt" src="images/bourdieu.jpg" alt="" loading="lazy" style="object-position:50% 25%">
       <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M10 36 C30 6 50 44 70 20 S100 12 110 18" stroke="var(--c)" stroke-width="4" fill="none" stroke-linecap="round"/><rect x="10" y="40" width="100" height="3" rx="1.5" fill="var(--muted)" opacity=".4"/></svg>
       <h2>Bourdieu : l’idéologie charismatique</h2>
       <p>Le goût est-il un don naturel ou le produit de l’éducation ?</p>
       <span class="go">Ouvrir la page</span>
     </a>
-    <a class="item" href="art-arendt.html" style="--c:var(--a8)"><img class="pt" src="images/arendt.jpg" alt="" loading="lazy" style="object-position:50% 25%">
+    <a class="item" href="art-kant.html" style="--c:var(--a6)"><img class="pt" src="images/kant.jpg" alt="" loading="lazy" style="object-position:50% 25%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="14" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".4"/><rect x="47" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".7"/><rect x="80" y="8" width="26" height="32" rx="3" fill="var(--c)"/></svg>
+      <h2>Kant : le jugement de goût</h2>
+      <p>« C’est beau pour moi » : peut-on dire cela du beau ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="art-arendt.html" style="--c:var(--a7)"><img class="pt" src="images/arendt.jpg" alt="" loading="lazy" style="object-position:50% 25%">
       <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="14" y="10" width="92" height="6" rx="3" fill="var(--c)"/><rect x="14" y="22" width="70" height="6" rx="3" fill="var(--muted)" opacity=".5"/><rect x="14" y="34" width="82" height="6" rx="3" fill="var(--muted)" opacity=".35"/></svg>
       <h2>Arendt : l’œuvre d’art</h2>
       <p>Qu’est-ce qui distingue une œuvre d’art d’un objet d’usage ?</p>
       <span class="go">Ouvrir la page</span>
     </a>
+    <a class="item" href="art-hume-delicatesse.html" style="--c:var(--a8)"><img class="pt" src="images/hume.jpg" alt="" loading="lazy" style="object-position:50% 25%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M14 40 L60 8 L106 40Z" fill="var(--muted)" opacity=".4"/><circle cx="60" cy="18" r="7" fill="var(--c)"/></svg>
+      <h2>Hume : la délicatesse du goût</h2>
+      <p>Si tous les goûts ne se valent pas, qui est un bon juge ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
   </div>
   </details>
-  <details class="notion"><summary>Bonheur</summary>
+  <details class="notion"><summary><span>Bonheur <span class="ser">: série générale</span></span></summary>
   <div class="list">
-    <a class="item" href="bonheur-aristophane.html" style="--c:var(--a4)"><img class="pt" src="images/platon.jpg" alt="" loading="lazy" style="object-position:50% 25%">
-      <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="14" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".4"/><rect x="47" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".7"/><rect x="80" y="8" width="26" height="32" rx="3" fill="var(--c)"/></svg>
-      <h2>Aristophane : le mythe des moitiés séparées</h2>
-      <p>Pourquoi cherchons-nous quelqu’un d’autre pour être heureux ?</p>
+    <a class="item" href="bonheur-kant-difficulte.html" style="--c:var(--a4)"><img class="pt" src="images/kant.jpg" alt="" loading="lazy" style="object-position:50% 25%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M20 40 L20 14 L60 6 L100 14 L100 40Z" fill="none" stroke="var(--c)" stroke-width="3.5" stroke-linejoin="round"/><circle cx="60" cy="26" r="6" fill="var(--muted)" opacity=".5"/></svg>
+      <h2>Kant : la difficulté de définir le bonheur</h2>
+      <p>Tout le monde veut être heureux, mais personne ne sait précisément ce qu’il veut.</p>
       <span class="go">Ouvrir la page</span>
     </a>
     <a class="item" href="bonheur-callicles.html" style="--c:var(--a5)"><img class="pt" src="images/platon.jpg" alt="" loading="lazy" style="object-position:50% 25%">
@@ -182,28 +223,28 @@ footer{margin-top:auto;border-top:0;color:var(--ink);font-weight:500}
       <p>Vivre en comblant sans cesse ses désirs, est-ce vivre heureux ?</p>
       <span class="go">Ouvrir la page</span>
     </a>
-    <a class="item" href="bonheur-epicure.html" style="--c:var(--a6)">
+    <a class="item" href="bonheur-epicure.html" style="--c:var(--a6)"><img class="pt" src="images/epicure.jpg" alt="" loading="lazy" style="object-position:50% 25%">
       <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M14 40 L60 8 L106 40Z" fill="var(--muted)" opacity=".4"/><circle cx="60" cy="18" r="7" fill="var(--c)"/></svg>
       <h2>Épicure : les différents désirs</h2>
       <p>Pour être heureux, faut-il tout désirer ou apprendre à trier ses désirs ?</p>
       <span class="go">Ouvrir la page</span>
     </a>
-    <a class="item" href="bonheur-epictete.html" style="--c:var(--a7)">
+    <a class="item" href="bonheur-epictete.html" style="--c:var(--a7)"><img class="pt" src="images/epictete.jpg" alt="" loading="lazy" style="object-position:50% 25%">
       <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M10 36 C30 6 50 44 70 20 S100 12 110 18" stroke="var(--c)" stroke-width="4" fill="none" stroke-linecap="round"/><rect x="10" y="40" width="100" height="3" rx="1.5" fill="var(--muted)" opacity=".4"/></svg>
       <h2>Épictète : les opinions troublent les hommes</h2>
       <p>Ce ne sont pas les choses qui nous troublent, mais l’idée que nous nous en faisons.</p>
       <span class="go">Ouvrir la page</span>
     </a>
-    <a class="item" href="bonheur-descartes-epictete.html" style="--c:var(--a8)"><img class="pt" src="images/descartes.jpg" alt="" loading="lazy" style="object-position:50% 25%">
+    <a class="item" href="epictete.html" style="--c:var(--a8)"><img class="pt" src="images/epictete.jpg" alt="" loading="lazy" style="object-position:50% 40%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><circle cx="60" cy="24" r="22" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5" stroke-dasharray="2 5" opacity=".8"/><circle cx="60" cy="24" r="12" fill="var(--c)" opacity=".2" stroke="var(--c)" stroke-width="3.5"/><circle cx="60" cy="24" r="4" fill="var(--c)"/><g fill="var(--muted)" opacity=".55"><rect x="14" y="20" width="8" height="8" rx="2"/><rect x="98" y="20" width="8" height="8" rx="2"/><rect x="56" y="1" width="8" height="6" rx="2"/><rect x="56" y="41" width="8" height="6" rx="2"/></g></svg>
+      <h2>Epictète : ce qui dépend de nous</h2>
+      <p>Liberté et bonheur selon le <i>Manuel</i> : la frontière entre ce que nous maîtrisons et ce qui nous échappe.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="bonheur-descartes-epictete.html" style="--c:var(--a9)"><img class="pt" src="images/descartes.jpg" alt="" loading="lazy" style="object-position:50% 25%">
       <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="14" y="10" width="92" height="6" rx="3" fill="var(--c)"/><rect x="14" y="22" width="70" height="6" rx="3" fill="var(--muted)" opacity=".5"/><rect x="14" y="34" width="82" height="6" rx="3" fill="var(--muted)" opacity=".35"/></svg>
       <h2>Épictète et Descartes : acceptation et grandeur d’âme</h2>
       <p>Faut-il vouloir que les choses arrivent comme elles arrivent ? Descartes y répond avec Élisabeth.</p>
-      <span class="go">Ouvrir la page</span>
-    </a>
-    <a class="item" href="bonheur-kant-difficulte.html" style="--c:var(--a9)"><img class="pt" src="images/kant.jpg" alt="" loading="lazy" style="object-position:50% 25%">
-      <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M20 40 L20 14 L60 6 L100 14 L100 40Z" fill="none" stroke="var(--c)" stroke-width="3.5" stroke-linejoin="round"/><circle cx="60" cy="26" r="6" fill="var(--muted)" opacity=".5"/></svg>
-      <h2>Kant : la difficulté de définir le bonheur</h2>
-      <p>Tout le monde veut être heureux, mais personne ne sait précisément ce qu’il veut.</p>
       <span class="go">Ouvrir la page</span>
     </a>
     <a class="item" href="bonheur-kant-digne.html" style="--c:var(--a10)"><img class="pt" src="images/kant.jpg" alt="" loading="lazy" style="object-position:50% 25%">
@@ -212,21 +253,21 @@ footer{margin-top:auto;border-top:0;color:var(--ink);font-weight:500}
       <p>La morale nous apprend-elle à être heureux ?</p>
       <span class="go">Ouvrir la page</span>
     </a>
-    <a class="item" href="bonheur-bergson.html" style="--c:var(--a11)">
+    <a class="item" href="bonheur-aristophane.html" style="--c:var(--a11)"><img class="pt" src="images/aristophane.jpg" alt="" loading="lazy" style="object-position:50% 25%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="14" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".4"/><rect x="47" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".7"/><rect x="80" y="8" width="26" height="32" rx="3" fill="var(--c)"/></svg>
+      <h2>Aristophane : le mythe des moitiés séparées</h2>
+      <p>Pourquoi cherchons-nous quelqu’un d’autre pour être heureux ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="bonheur-bergson.html" style="--c:var(--a12)"><img class="pt" src="images/bergson.jpg" alt="" loading="lazy" style="object-position:50% 25%">
       <svg viewBox="0 0 120 48" aria-hidden="true"><circle cx="30" cy="24" r="14" fill="var(--muted)" opacity=".4"/><circle cx="78" cy="24" r="14" fill="var(--c)"/></svg>
       <h2>Bergson : la joie, signe de la création</h2>
       <p>Quelle différence entre plaisir et joie ?</p>
       <span class="go">Ouvrir la page</span>
     </a>
-    <a class="item" href="epictete.html" style="--c:var(--a9)"><img class="pt" src="images/epictete.jpg" alt="" loading="lazy" style="object-position:50% 40%">
-      <svg viewBox="0 0 120 48" aria-hidden="true"><circle cx="60" cy="24" r="22" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5" stroke-dasharray="2 5" opacity=".8"/><circle cx="60" cy="24" r="12" fill="var(--c)" opacity=".2" stroke="var(--c)" stroke-width="3.5"/><circle cx="60" cy="24" r="4" fill="var(--c)"/><g fill="var(--muted)" opacity=".55"><rect x="14" y="20" width="8" height="8" rx="2"/><rect x="98" y="20" width="8" height="8" rx="2"/><rect x="56" y="1" width="8" height="6" rx="2"/><rect x="56" y="41" width="8" height="6" rx="2"/></g></svg>
-      <h2>Epictète : ce qui dépend de nous</h2>
-      <p>Liberté et bonheur selon le <i>Manuel</i> : la frontière entre ce que nous maîtrisons et ce qui nous échappe.</p>
-      <span class="go">Ouvrir la page</span>
-    </a>
   </div>
   </details>
-  <details class="notion"><summary>Conscience</summary>
+  <details class="notion"><summary><span>Conscience <span class="ser">: série générale</span></span></summary>
   <div class="list">
     <a class="item" href="descartes-du-doute-au-cogito.html" style="--c:var(--a3)"><img class="pt" src="images/descartes.jpg" alt="" loading="lazy" style="object-position:50% 28%">
       <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="14" y="10" width="26" height="26" rx="3" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="3" stroke-dasharray="3 5" opacity=".6"/><rect x="26" y="20" width="26" height="26" rx="3" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="3" stroke-dasharray="3 5" opacity=".4" transform="rotate(12 39 33)"/><path d="M60 24 H74" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="3" opacity=".6"/><circle cx="96" cy="24" r="16" fill="none" stroke="var(--c)" stroke-width="3"/><circle cx="96" cy="24" r="6" fill="var(--c)"/></svg>
@@ -234,7 +275,7 @@ footer{margin-top:auto;border-top:0;color:var(--ink);font-weight:500}
       <p>Du doute des sens au mauvais génie, jusqu’à la première certitude : « je pense, donc je suis ».</p>
       <span class="go">Ouvrir la page</span>
     </a>
-    <a class="item" href="conscience-hobbes.html" style="--c:var(--a4)">
+    <a class="item" href="conscience-hobbes.html" style="--c:var(--a4)"><img class="pt" src="images/hobbes.jpg" alt="" loading="lazy" style="object-position:50% 25%">
       <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="14" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".4"/><rect x="47" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".7"/><rect x="80" y="8" width="26" height="32" rx="3" fill="var(--c)"/></svg>
       <h2>Hobbes : objection au cogito de Descartes</h2>
       <p>« Je pense, donc je suis » : peut-on en conclure que je suis une pensée, un esprit, une âme ?</p>
@@ -246,7 +287,7 @@ footer{margin-top:auto;border-top:0;color:var(--ink);font-weight:500}
       <p>En regardant en moi-même, que trouve-t-on ? Un moi simple et continu, ou seulement des perceptions ?</p>
       <span class="go">Ouvrir la page</span>
     </a>
-    <a class="item" href="conscience-sartre.html" style="--c:var(--a6)">
+    <a class="item" href="conscience-sartre.html" style="--c:var(--a6)"><img class="pt" src="images/sartre.jpg" alt="" loading="lazy" style="object-position:50% 25%">
       <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M14 40 L60 8 L106 40Z" fill="var(--muted)" opacity=".4"/><circle cx="60" cy="18" r="7" fill="var(--c)"/></svg>
       <h2>Sartre : condamné à être libre</h2>
       <p>Si Dieu n’existe pas, l’homme est-il libre ou perdu ? Peut-il invoquer ses passions comme excuses ?</p>
@@ -254,7 +295,7 @@ footer{margin-top:auto;border-top:0;color:var(--ink);font-weight:500}
     </a>
   </div>
   </details>
-  <details class="notion"><summary>Devoir</summary>
+  <details class="notion"><summary><span>Devoir <span class="ser">: série générale</span></span></summary>
   <div class="list">
     <a class="item" href="le-devoir.html" style="--c:var(--a7)">
       <svg viewBox="0 0 120 48" aria-hidden="true">
@@ -284,13 +325,13 @@ footer{margin-top:auto;border-top:0;color:var(--ink);font-weight:500}
       <p>Faut-il être savant pour être moral ? Rousseau confie à la conscience le jugement du bien et du mal.</p>
       <span class="go">Ouvrir la page</span>
     </a>
-    <a class="item" href="devoir-holbach.html" style="--c:var(--a7)">
+    <a class="item" href="devoir-holbach.html" style="--c:var(--a7)"><img class="pt" src="images/holbach.jpg" alt="" loading="lazy" style="object-position:50% 25%">
       <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M10 36 C30 6 50 44 70 20 S100 12 110 18" stroke="var(--c)" stroke-width="4" fill="none" stroke-linecap="round"/><rect x="10" y="40" width="100" height="3" rx="1.5" fill="var(--muted)" opacity=".4"/></svg>
       <h2>D’Holbach : fonder la morale sur la nature</h2>
       <p>Faut-il un dieu pour fonder la morale ?</p>
       <span class="go">Ouvrir la page</span>
     </a>
-    <a class="item" href="devoir-durkheim.html" style="--c:var(--a8)">
+    <a class="item" href="devoir-durkheim.html" style="--c:var(--a8)"><img class="pt" src="images/durkheim.jpg" alt="" loading="lazy" style="object-position:50% 25%">
       <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="14" y="10" width="92" height="6" rx="3" fill="var(--c)"/><rect x="14" y="22" width="70" height="6" rx="3" fill="var(--muted)" opacity=".5"/><rect x="14" y="34" width="82" height="6" rx="3" fill="var(--muted)" opacity=".35"/></svg>
       <h2>Durkheim : le devoir comme fait social</h2>
       <p>Quand ma conscience me parle, qui parle en moi ?</p>
@@ -302,19 +343,19 @@ footer{margin-top:auto;border-top:0;color:var(--ink);font-weight:500}
       <p>La morale est-elle l’expression de l’instinct du troupeau ? D’où vient la mauvaise conscience ?</p>
       <span class="go">Ouvrir la page</span>
     </a>
-    <a class="item" href="devoir-kropotkine.html" style="--c:var(--a10)">
+    <a class="item" href="devoir-kropotkine.html" style="--c:var(--a10)"><img class="pt" src="images/kropotkine.jpg" alt="" loading="lazy" style="object-position:50% 25%">
       <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="14" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".4"/><rect x="47" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".7"/><rect x="80" y="8" width="26" height="32" rx="3" fill="var(--c)"/></svg>
       <h2>Kropotkine : pourquoi serais-je moral ?</h2>
       <p>Quelles raisons ai-je d’être moral, si l’on réfute une à une les autorités qui l’exigent ?</p>
       <span class="go">Ouvrir la page</span>
     </a>
-    <a class="item" href="devoir-sartre.html" style="--c:var(--a11)">
+    <a class="item" href="devoir-sartre.html" style="--c:var(--a11)"><img class="pt" src="images/sartre.jpg" alt="" loading="lazy" style="object-position:50% 25%">
       <svg viewBox="0 0 120 48" aria-hidden="true"><circle cx="30" cy="24" r="14" fill="var(--muted)" opacity=".4"/><circle cx="78" cy="24" r="14" fill="var(--c)"/></svg>
       <h2>Sartre : le dilemme moral d’un jeune homme</h2>
       <p>Rester auprès de sa mère ou rejoindre la Résistance : qui peut aider à choisir ?</p>
       <span class="go">Ouvrir la page</span>
     </a>
-    <a class="item" href="devoir-eichmann.html" style="--c:var(--a1)">
+    <a class="item" href="devoir-eichmann.html" style="--c:var(--a1)"><img class="pt" src="images/arendt.jpg" alt="" loading="lazy" style="object-position:50% 25%">
       <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M14 40 L60 8 L106 40Z" fill="var(--muted)" opacity=".4"/><circle cx="60" cy="18" r="7" fill="var(--c)"/></svg>
       <h2>Arendt : Eichmann et l’impératif catégorique</h2>
       <p>Eichmann s’est réclamé de Kant. Qu’a-t-il fait de l’idée de devoir ?</p>
@@ -322,9 +363,9 @@ footer{margin-top:auto;border-top:0;color:var(--ink);font-weight:500}
     </a>
   </div>
   </details>
-  <details class="notion"><summary>État</summary>
+  <details class="notion"><summary><span>État <span class="ser">: série générale</span></span></summary>
   <div class="list">
-    <a class="item" href="etat-hobbes.html" style="--c:var(--a4)">
+    <a class="item" href="etat-hobbes.html" style="--c:var(--a4)"><img class="pt" src="images/hobbes.jpg" alt="" loading="lazy" style="object-position:50% 25%">
       <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="14" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".4"/><rect x="47" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".7"/><rect x="80" y="8" width="26" height="32" rx="3" fill="var(--c)"/></svg>
       <h2>Hobbes : l’état de nature, guerre de tous contre tous</h2>
       <p>Que serait la vie des hommes sans pouvoir commun ?</p>
@@ -336,23 +377,23 @@ footer{margin-top:auto;border-top:0;color:var(--ink);font-weight:500}
       <p>L’État prétend être le peuple : n’est-ce pas un mensonge ?</p>
       <span class="go">Ouvrir la page</span>
     </a>
-    <a class="item" href="etat-chapoutot.html" style="--c:var(--a6)">
-      <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M14 40 L60 8 L106 40Z" fill="var(--muted)" opacity=".4"/><circle cx="60" cy="18" r="7" fill="var(--c)"/></svg>
-      <h2>Chapoutot : les nazis, ennemis de l’État ?</h2>
-      <p>Le IIIe Reich était-il un État fort ? Pourquoi les nazis se disent-ils hostiles à l’État ?</p>
-      <span class="go">Ouvrir la page</span>
-    </a>
-    <a class="item" href="devoir-eichmann.html" style="--c:var(--a7)">
+    <a class="item" href="devoir-eichmann.html" style="--c:var(--a6)"><img class="pt" src="images/arendt.jpg" alt="" loading="lazy" style="object-position:50% 25%">
       <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M10 36 C30 6 50 44 70 20 S100 12 110 18" stroke="var(--c)" stroke-width="4" fill="none" stroke-linecap="round"/><rect x="10" y="40" width="100" height="3" rx="1.5" fill="var(--muted)" opacity=".4"/></svg>
       <h2>Arendt : Eichmann et l’impératif catégorique</h2>
       <p>Eichmann s’est réclamé de Kant. Qu’a-t-il fait de l’idée de devoir ?</p>
       <span class="go">Ouvrir la page</span>
     </a>
+    <a class="item" href="etat-chapoutot.html" style="--c:var(--a7)"><img class="pt" src="images/chapoutot.jpg" alt="" loading="lazy" style="object-position:50% 25%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M14 40 L60 8 L106 40Z" fill="var(--muted)" opacity=".4"/><circle cx="60" cy="18" r="7" fill="var(--c)"/></svg>
+      <h2>Chapoutot : les nazis, ennemis de l’État ?</h2>
+      <p>Le IIIe Reich était-il un État fort ? Pourquoi les nazis se disent-ils hostiles à l’État ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
   </div>
   </details>
-  <details class="notion"><summary>Inconscient</summary>
+  <details class="notion"><summary><span>Inconscient <span class="ser">: série générale</span></span></summary>
   <div class="list">
-    <a class="item" href="inconscient-leibniz.html" style="--c:var(--a4)">
+    <a class="item" href="inconscient-leibniz.html" style="--c:var(--a4)"><img class="pt" src="images/leibniz.jpg" alt="" loading="lazy" style="object-position:50% 25%">
       <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="14" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".4"/><rect x="47" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".7"/><rect x="80" y="8" width="26" height="32" rx="3" fill="var(--c)"/></svg>
       <h2>Leibniz : les petites perceptions</h2>
       <p>Entendre la mer : comment percevoir un bruit dont aucune vague ne se distingue ?</p>
@@ -370,7 +411,7 @@ footer{margin-top:auto;border-top:0;color:var(--ink);font-weight:500}
       <p>Des douleurs aux jambes sans cause organique : que révèle l’analyse ?</p>
       <span class="go">Ouvrir la page</span>
     </a>
-    <a class="item" href="conscience-sartre.html" style="--c:var(--a7)">
+    <a class="item" href="conscience-sartre.html" style="--c:var(--a7)"><img class="pt" src="images/sartre.jpg" alt="" loading="lazy" style="object-position:50% 25%">
       <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M10 36 C30 6 50 44 70 20 S100 12 110 18" stroke="var(--c)" stroke-width="4" fill="none" stroke-linecap="round"/><rect x="10" y="40" width="100" height="3" rx="1.5" fill="var(--muted)" opacity=".4"/></svg>
       <h2>Sartre : condamné à être libre</h2>
       <p>Si Dieu n’existe pas, l’homme est-il libre ou perdu ? Peut-il invoquer ses passions comme excuses ?</p>
@@ -378,7 +419,7 @@ footer{margin-top:auto;border-top:0;color:var(--ink);font-weight:500}
     </a>
   </div>
   </details>
-  <details class="notion"><summary>Justice</summary>
+  <details class="notion"><summary><span>Justice <span class="ser">: série générale et technologiques</span></span></summary>
   <div class="list">
     <a class="item" href="justice-platon-gyges.html" style="--c:var(--a4)"><img class="pt" src="images/platon.jpg" alt="" loading="lazy" style="object-position:50% 25%">
       <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="14" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".4"/><rect x="47" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".7"/><rect x="80" y="8" width="26" height="32" rx="3" fill="var(--c)"/></svg>
@@ -392,19 +433,19 @@ footer{margin-top:auto;border-top:0;color:var(--ink);font-weight:500}
       <p>Même un homme habile ne peut gouverner sans lois : pourquoi ?</p>
       <span class="go">Ouvrir la page</span>
     </a>
-    <a class="item" href="justice-hobbes.html" style="--c:var(--a6)">
+    <a class="item" href="justice-hobbes.html" style="--c:var(--a6)"><img class="pt" src="images/hobbes.jpg" alt="" loading="lazy" style="object-position:50% 25%">
       <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M14 40 L60 8 L106 40Z" fill="var(--muted)" opacity=".4"/><circle cx="60" cy="18" r="7" fill="var(--c)"/></svg>
       <h2>Hobbes : qu’est-ce qu’une bonne loi ?</h2>
       <p>Une loi peut-elle être injuste ? Et à quoi reconnaît-on une bonne loi ?</p>
       <span class="go">Ouvrir la page</span>
     </a>
-    <a class="item" href="justice-smith.html" style="--c:var(--a7)">
+    <a class="item" href="justice-smith.html" style="--c:var(--a7)"><img class="pt" src="images/smith.jpg" alt="" loading="lazy" style="object-position:50% 25%">
       <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M10 36 C30 6 50 44 70 20 S100 12 110 18" stroke="var(--c)" stroke-width="4" fill="none" stroke-linecap="round"/><rect x="10" y="40" width="100" height="3" rx="1.5" fill="var(--muted)" opacity=".4"/></svg>
       <h2>Smith : la justice et la négligence</h2>
       <p>Faut-il punir celui qui n’a fait de mal à personne mais aurait pu en faire ?</p>
       <span class="go">Ouvrir la page</span>
     </a>
-    <a class="item" href="justice-rawls.html" style="--c:var(--a8)">
+    <a class="item" href="justice-rawls.html" style="--c:var(--a8)"><img class="pt" src="images/rawls.jpg" alt="" loading="lazy" style="object-position:50% 25%">
       <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="14" y="10" width="92" height="6" rx="3" fill="var(--c)"/><rect x="14" y="22" width="70" height="6" rx="3" fill="var(--muted)" opacity=".5"/><rect x="14" y="34" width="82" height="6" rx="3" fill="var(--muted)" opacity=".35"/></svg>
       <h2>Rawls : l’intuitionnisme en matière de justice</h2>
       <p>Comment arbitrer entre plusieurs principes de justice qui s’opposent ?</p>
@@ -412,7 +453,7 @@ footer{margin-top:auto;border-top:0;color:var(--ink);font-weight:500}
     </a>
   </div>
   </details>
-  <details class="notion"><summary>Langage</summary>
+  <details class="notion"><summary><span>Langage <span class="ser">: série générale</span></span></summary>
   <div class="list">
     <a class="item" href="langage-descartes.html" style="--c:var(--a4)"><img class="pt" src="images/descartes.jpg" alt="" loading="lazy" style="object-position:50% 25%">
       <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="14" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".4"/><rect x="47" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".7"/><rect x="80" y="8" width="26" height="32" rx="3" fill="var(--c)"/></svg>
@@ -420,13 +461,13 @@ footer{margin-top:auto;border-top:0;color:var(--ink);font-weight:500}
       <p>Les animaux ne parlent pas : est-ce faute d’organes, ou faute de pensée ?</p>
       <span class="go">Ouvrir la page</span>
     </a>
-    <a class="item" href="langage-saussure.html" style="--c:var(--a5)">
+    <a class="item" href="langage-saussure.html" style="--c:var(--a5)"><img class="pt" src="images/saussure.jpg" alt="" loading="lazy" style="object-position:50% 25%">
       <svg viewBox="0 0 120 48" aria-hidden="true"><circle cx="30" cy="24" r="14" fill="var(--muted)" opacity=".4"/><circle cx="78" cy="24" r="14" fill="var(--c)"/></svg>
       <h2>Saussure : l’arbitraire du signe</h2>
       <p>Pourquoi le mot « sœur » ? Y a-t-il un lien naturel entre un mot et ce qu’il désigne ?</p>
       <span class="go">Ouvrir la page</span>
     </a>
-    <a class="item" href="langage-wittgenstein.html" style="--c:var(--a6)">
+    <a class="item" href="langage-wittgenstein.html" style="--c:var(--a6)"><img class="pt" src="images/wittgenstein.jpg" alt="" loading="lazy" style="object-position:50% 25%">
       <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M14 40 L60 8 L106 40Z" fill="var(--muted)" opacity=".4"/><circle cx="60" cy="18" r="7" fill="var(--c)"/></svg>
       <h2>Wittgenstein : usage et signification</h2>
       <p>D’où les mots tirent-ils leur sens ?</p>
@@ -438,7 +479,7 @@ footer{margin-top:auto;border-top:0;color:var(--ink);font-weight:500}
       <p>Dire « oui » au mariage : est-ce décrire ou accomplir quelque chose ?</p>
       <span class="go">Ouvrir la page</span>
     </a>
-    <a class="item" href="langage-klemperer.html" style="--c:var(--a8)">
+    <a class="item" href="langage-klemperer.html" style="--c:var(--a8)"><img class="pt" src="images/klemperer.jpg" alt="" loading="lazy" style="object-position:50% 25%">
       <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="14" y="10" width="92" height="6" rx="3" fill="var(--c)"/><rect x="14" y="22" width="70" height="6" rx="3" fill="var(--muted)" opacity=".5"/><rect x="14" y="34" width="82" height="6" rx="3" fill="var(--muted)" opacity=".35"/></svg>
       <h2>Klemperer : la langue du Troisième Reich</h2>
       <p>La propagande agit-elle par les discours ou par les mots eux-mêmes ?</p>
@@ -446,7 +487,7 @@ footer{margin-top:auto;border-top:0;color:var(--ink);font-weight:500}
     </a>
   </div>
   </details>
-  <details class="notion"><summary>Liberté</summary>
+  <details class="notion"><summary><span>Liberté <span class="ser">: série générale et technologiques</span></span></summary>
   <div class="list">
     <a class="item" href="ane-de-buridan.html" style="--c:var(--a5)">
       <svg viewBox="0 0 120 48" aria-hidden="true">
@@ -504,7 +545,7 @@ footer{margin-top:auto;border-top:0;color:var(--ink);font-weight:500}
     </a>
   </div>
   </details>
-  <details class="notion"><summary>Nature</summary>
+  <details class="notion"><summary><span>Nature <span class="ser">: série générale et technologiques</span></span></summary>
   <div class="list">
     <a class="item" href="nature-genese.html" style="--c:var(--a4)">
       <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="14" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".4"/><rect x="47" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".7"/><rect x="80" y="8" width="26" height="32" rx="3" fill="var(--c)"/></svg>
@@ -512,51 +553,51 @@ footer{margin-top:auto;border-top:0;color:var(--ink);font-weight:500}
       <p>L’homme est créé à l’image de Dieu : cette ressemblance lui donne-t-elle un droit sur tout le vivant ?</p>
       <span class="go">Ouvrir la page</span>
     </a>
-    <a class="item" href="nature-descola.html" style="--c:var(--a5)">
-      <svg viewBox="0 0 120 48" aria-hidden="true"><circle cx="30" cy="24" r="14" fill="var(--muted)" opacity=".4"/><circle cx="78" cy="24" r="14" fill="var(--c)"/></svg>
-      <h2>Descola : la nature des Modernes</h2>
-      <p>Comment l’Occident a-t-il inventé « la nature » en séparant l’homme du monde ?</p>
-      <span class="go">Ouvrir la page</span>
-    </a>
-    <a class="item" href="nature-descartes.html" style="--c:var(--a6)"><img class="pt" src="images/descartes.jpg" alt="" loading="lazy" style="object-position:50% 25%">
-      <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M14 40 L60 8 L106 40Z" fill="var(--muted)" opacity=".4"/><circle cx="60" cy="18" r="7" fill="var(--c)"/></svg>
-      <h2>Descartes : maîtres et possesseurs de la nature</h2>
-      <p>La connaissance physique doit-elle seulement expliquer le monde, ou aussi nous rendre utiles à tous ?</p>
-      <span class="go">Ouvrir la page</span>
-    </a>
-    <a class="item" href="nature-galilee.html" style="--c:var(--a7)">
-      <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M10 36 C30 6 50 44 70 20 S100 12 110 18" stroke="var(--c)" stroke-width="4" fill="none" stroke-linecap="round"/><rect x="10" y="40" width="100" height="3" rx="1.5" fill="var(--muted)" opacity=".4"/></svg>
-      <h2>Galilée : l’univers, un livre écrit en langue mathématique</h2>
-      <p>Comment lire la nature ? En apprenant d’abord la langue dans laquelle elle est écrite.</p>
-      <span class="go">Ouvrir la page</span>
-    </a>
-    <a class="item" href="nature-pascal.html" style="--c:var(--a8)"><img class="pt" src="images/pascal.jpg" alt="" loading="lazy" style="object-position:50% 25%">
-      <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="14" y="10" width="92" height="6" rx="3" fill="var(--c)"/><rect x="14" y="22" width="70" height="6" rx="3" fill="var(--muted)" opacity=".5"/><rect x="14" y="34" width="82" height="6" rx="3" fill="var(--muted)" opacity=".35"/></svg>
-      <h2>Pascal : ruches et hommes</h2>
-      <p>Les abeilles construisent leurs ruches sans les perfectionner. L’homme, lui, progresse. Pourquoi ?</p>
-      <span class="go">Ouvrir la page</span>
-    </a>
-    <a class="item" href="nature-aristote.html" style="--c:var(--a9)">
+    <a class="item" href="nature-aristote.html" style="--c:var(--a5)"><img class="pt" src="images/aristote.jpg" alt="" loading="lazy" style="object-position:50% 25%">
       <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M20 40 L20 14 L60 6 L100 14 L100 40Z" fill="none" stroke="var(--c)" stroke-width="3.5" stroke-linejoin="round"/><circle cx="60" cy="26" r="6" fill="var(--muted)" opacity=".5"/></svg>
       <h2>Aristote : voix, parole et langage animal</h2>
       <p>Les animaux communiquent : en quoi la parole de l’homme est-elle différente ?</p>
       <span class="go">Ouvrir la page</span>
     </a>
-    <a class="item" href="nature-jacob.html" style="--c:var(--a10)">
-      <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="14" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".4"/><rect x="47" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".7"/><rect x="80" y="8" width="26" height="32" rx="3" fill="var(--c)"/></svg>
-      <h2>Jacob : le refus de la finalité comme principe explicatif</h2>
-      <p>Les êtres vivants semblent orientés vers un but : faut-il y voir un dessein ?</p>
+    <a class="item" href="nature-pascal.html" style="--c:var(--a6)"><img class="pt" src="images/pascal.jpg" alt="" loading="lazy" style="object-position:50% 25%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="14" y="10" width="92" height="6" rx="3" fill="var(--c)"/><rect x="14" y="22" width="70" height="6" rx="3" fill="var(--muted)" opacity=".5"/><rect x="14" y="34" width="82" height="6" rx="3" fill="var(--muted)" opacity=".35"/></svg>
+      <h2>Pascal : ruches et hommes</h2>
+      <p>Les abeilles construisent leurs ruches sans les perfectionner. L’homme, lui, progresse. Pourquoi ?</p>
       <span class="go">Ouvrir la page</span>
     </a>
-    <a class="item" href="nature-mill.html" style="--c:var(--a11)">
+    <a class="item" href="nature-descartes.html" style="--c:var(--a7)"><img class="pt" src="images/descartes.jpg" alt="" loading="lazy" style="object-position:50% 25%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M14 40 L60 8 L106 40Z" fill="var(--muted)" opacity=".4"/><circle cx="60" cy="18" r="7" fill="var(--c)"/></svg>
+      <h2>Descartes : maîtres et possesseurs de la nature</h2>
+      <p>La connaissance physique doit-elle seulement expliquer le monde, ou aussi nous rendre utiles à tous ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="nature-galilee.html" style="--c:var(--a8)"><img class="pt" src="images/galilee.jpg" alt="" loading="lazy" style="object-position:50% 25%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M10 36 C30 6 50 44 70 20 S100 12 110 18" stroke="var(--c)" stroke-width="4" fill="none" stroke-linecap="round"/><rect x="10" y="40" width="100" height="3" rx="1.5" fill="var(--muted)" opacity=".4"/></svg>
+      <h2>Galilée : l’univers, un livre écrit en langue mathématique</h2>
+      <p>Comment lire la nature ? En apprenant d’abord la langue dans laquelle elle est écrite.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="nature-mill.html" style="--c:var(--a9)"><img class="pt" src="images/mill.jpg" alt="" loading="lazy" style="object-position:50% 25%">
       <svg viewBox="0 0 120 48" aria-hidden="true"><circle cx="30" cy="24" r="14" fill="var(--muted)" opacity=".4"/><circle cx="78" cy="24" r="14" fill="var(--c)"/></svg>
       <h2>Mill : faut-il suivre la nature ?</h2>
       <p>La nature doit-elle servir de modèle à nos actions ?</p>
       <span class="go">Ouvrir la page</span>
     </a>
+    <a class="item" href="nature-jacob.html" style="--c:var(--a10)"><img class="pt" src="images/jacob.jpg" alt="" loading="lazy" style="object-position:50% 25%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="14" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".4"/><rect x="47" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".7"/><rect x="80" y="8" width="26" height="32" rx="3" fill="var(--c)"/></svg>
+      <h2>Jacob : le refus de la finalité comme principe explicatif</h2>
+      <p>Les êtres vivants semblent orientés vers un but : faut-il y voir un dessein ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="nature-descola.html" style="--c:var(--a11)"><img class="pt" src="images/descola.jpg" alt="" loading="lazy" style="object-position:50% 25%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><circle cx="30" cy="24" r="14" fill="var(--muted)" opacity=".4"/><circle cx="78" cy="24" r="14" fill="var(--c)"/></svg>
+      <h2>Descola : la nature des Modernes</h2>
+      <p>Comment l’Occident a-t-il inventé « la nature » en séparant l’homme du monde ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
   </div>
   </details>
-  <details class="notion"><summary>Religion</summary>
+  <details class="notion"><summary><span>Religion <span class="ser">: série générale et technologiques</span></span></summary>
   <div class="list">
     <a class="item" href="religion-kant.html" style="--c:var(--a4)"><img class="pt" src="images/kant.jpg" alt="" loading="lazy" style="object-position:50% 25%">
       <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="14" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".4"/><rect x="47" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".7"/><rect x="80" y="8" width="26" height="32" rx="3" fill="var(--c)"/></svg>
@@ -578,7 +619,7 @@ footer{margin-top:auto;border-top:0;color:var(--ink);font-weight:500}
     </a>
   </div>
   </details>
-  <details class="notion"><summary>Technique</summary>
+  <details class="notion"><summary><span>Technique <span class="ser">: série générale et technologiques</span></span></summary>
   <div class="list">
     <a class="item" href="technique-bacon.html" style="--c:var(--a5)"><img class="pt" src="images/bacon.jpg" alt="" loading="lazy" style="object-position:50% 25%">
       <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M58 44 L66 31 L74 44Z" fill="var(--muted)" opacity=".5"/><path d="M14 42 L108 24" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="4"/><circle cx="96" cy="12" r="8" fill="var(--c)"/></svg>
@@ -612,27 +653,27 @@ footer{margin-top:auto;border-top:0;color:var(--ink);font-weight:500}
     </a>
   </div>
   </details>
-  <details class="notion"><summary>Temps</summary>
+  <details class="notion"><summary><span>Temps <span class="ser">: série générale</span></span></summary>
   <div class="list">
-    <a class="item" href="temps-bergson.html" style="--c:var(--a4)">
+    <a class="item" href="temps-bergson.html" style="--c:var(--a4)"><img class="pt" src="images/bergson.jpg" alt="" loading="lazy" style="object-position:50% 25%">
       <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="14" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".4"/><rect x="47" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".7"/><rect x="80" y="8" width="26" height="32" rx="3" fill="var(--c)"/></svg>
       <h2>Bergson : l’exemple de l’eau sucrée</h2>
       <p>Attendre que le sucre fonde : que nous apprend ce petit fait sur le temps ?</p>
       <span class="go">Ouvrir la page</span>
     </a>
-    <a class="item" href="temps-einstein.html" style="--c:var(--a5)">
-      <svg viewBox="0 0 120 48" aria-hidden="true"><circle cx="30" cy="24" r="14" fill="var(--muted)" opacity=".4"/><circle cx="78" cy="24" r="14" fill="var(--c)"/></svg>
-      <h2>Einstein : temps du physicien et temps psychologique</h2>
-      <p>Le temps du philosophe est-il le même que celui du physicien ?</p>
-      <span class="go">Ouvrir la page</span>
-    </a>
-    <a class="item" href="temps-proust.html" style="--c:var(--a6)">
+    <a class="item" href="temps-proust.html" style="--c:var(--a5)"><img class="pt" src="images/proust.jpg" alt="" loading="lazy" style="object-position:50% 25%">
       <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M14 40 L60 8 L106 40Z" fill="var(--muted)" opacity=".4"/><circle cx="60" cy="18" r="7" fill="var(--c)"/></svg>
       <h2>Proust : l’extra-temporalité</h2>
       <p>Comment un goût de madeleine peut-il nous faire échapper au temps ?</p>
       <span class="go">Ouvrir la page</span>
     </a>
-    <a class="item" href="temps-sartre.html" style="--c:var(--a7)">
+    <a class="item" href="temps-einstein.html" style="--c:var(--a6)"><img class="pt" src="images/einstein.jpg" alt="" loading="lazy" style="object-position:50% 25%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><circle cx="30" cy="24" r="14" fill="var(--muted)" opacity=".4"/><circle cx="78" cy="24" r="14" fill="var(--c)"/></svg>
+      <h2>Einstein : temps du physicien et temps psychologique</h2>
+      <p>Le temps du philosophe est-il le même que celui du physicien ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="temps-sartre.html" style="--c:var(--a7)"><img class="pt" src="images/sartre.jpg" alt="" loading="lazy" style="object-position:50% 25%">
       <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M10 36 C30 6 50 44 70 20 S100 12 110 18" stroke="var(--c)" stroke-width="4" fill="none" stroke-linecap="round"/><rect x="10" y="40" width="100" height="3" rx="1.5" fill="var(--muted)" opacity=".4"/></svg>
       <h2>Sartre : passé et présent</h2>
       <p>Le passé est-il fixé une fois pour toutes ? Ou son sens dépend-il de ce que je projette ?</p>
@@ -640,7 +681,7 @@ footer{margin-top:auto;border-top:0;color:var(--ink);font-weight:500}
     </a>
   </div>
   </details>
-  <details class="notion"><summary>Travail</summary>
+  <details class="notion"><summary><span>Travail <span class="ser">: série générale</span></span></summary>
   <div class="list">
     <a class="item" href="travail-alienation-emancipation.html" style="--c:var(--a4)">
       <svg viewBox="0 0 120 48" aria-hidden="true">
@@ -664,13 +705,13 @@ footer{margin-top:auto;border-top:0;color:var(--ink);font-weight:500}
       <p>Dans le récit biblique, le travail n’est pas un don : il suit la faute. Que dit cette origine du travail ?</p>
       <span class="go">Ouvrir la page</span>
     </a>
-    <a class="item" href="travail-aristote.html" style="--c:var(--a5)">
+    <a class="item" href="travail-aristote.html" style="--c:var(--a5)"><img class="pt" src="images/aristote.jpg" alt="" loading="lazy" style="object-position:50% 25%">
       <svg viewBox="0 0 120 48" aria-hidden="true"><circle cx="30" cy="24" r="14" fill="var(--muted)" opacity=".4"/><circle cx="78" cy="24" r="14" fill="var(--c)"/></svg>
       <h2>Aristote : citoyen et travail</h2>
       <p>Peut-on être citoyen quand on doit travailler pour vivre ?</p>
       <span class="go">Ouvrir la page</span>
     </a>
-    <a class="item" href="travail-hegel.html" style="--c:var(--a6)">
+    <a class="item" href="travail-hegel.html" style="--c:var(--a6)"><img class="pt" src="images/hegel.jpg" alt="" loading="lazy" style="object-position:50% 25%">
       <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M14 40 L60 8 L106 40Z" fill="var(--muted)" opacity=".4"/><circle cx="60" cy="18" r="7" fill="var(--c)"/></svg>
       <h2>Hegel : le maître et le serviteur</h2>
       <p>Le maître qui jouit sans travailler est-il libre ? Le serviteur qui travaille est-il vraiment asservi ?</p>
@@ -688,7 +729,7 @@ footer{margin-top:auto;border-top:0;color:var(--ink);font-weight:500}
       <p>Plus l’ouvrier produit, plus il s’appauvrit : comment le travail peut-il se retourner contre le travailleur ?</p>
       <span class="go">Ouvrir la page</span>
     </a>
-    <a class="item" href="travail-russell.html" style="--c:var(--a9)">
+    <a class="item" href="travail-russell.html" style="--c:var(--a9)"><img class="pt" src="images/russell.jpg" alt="" loading="lazy" style="object-position:50% 25%">
       <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M20 40 L20 14 L60 6 L100 14 L100 40Z" fill="none" stroke="var(--c)" stroke-width="3.5" stroke-linejoin="round"/><circle cx="60" cy="26" r="6" fill="var(--muted)" opacity=".5"/></svg>
       <h2>Russell : éloge de l’oisiveté</h2>
       <p>Et si l’on travaillait quatre heures par jour ? Que ferions-nous du temps libre ?</p>
@@ -696,7 +737,7 @@ footer{margin-top:auto;border-top:0;color:var(--ink);font-weight:500}
     </a>
   </div>
   </details>
-  <details class="notion"><summary>Vérité</summary>
+  <details class="notion"><summary><span>Vérité <span class="ser">: série générale et technologiques</span></span></summary>
   <div class="list">
     <a class="item" href="verite-platon.html" style="--c:var(--a9)"><img class="pt" src="images/platon.jpg" alt="" loading="lazy" style="object-position:50% 32%">
       <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M12 46 V24 C12 2 108 2 108 24 V46" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="3" opacity=".7"/><path d="M26 44 q-4 -10 2 -16 q6 6 2 16Z" fill="var(--c)"/><circle cx="52" cy="40" r="3" fill="var(--muted)"/><circle cx="64" cy="40" r="3" fill="var(--muted)"/><ellipse cx="94" cy="28" rx="3" ry="7" fill="var(--muted)" opacity=".5"/><ellipse cx="102" cy="30" rx="2.5" ry="5" fill="var(--muted)" opacity=".5"/></svg>
@@ -965,7 +1006,8 @@ footer{margin-top:auto;border-top:0;color:var(--ink);font-weight:500}
     </a>
   </div>
   </details>
-  <details class="grp wrap"><summary><h2 class="sec">Pour s'entraîner à la dissertation</h2></summary>
+  <details class="grp wrap"><summary><h2 class="sec">S'entraîner aux épreuves du bac</h2></summary>
+  <details class="sub-n"><summary>Série générale</summary>
   <div class="list">
     <a class="item" href="atelier-dissertation.html" style="--c:var(--a7)">
       <svg viewBox="0 0 120 48" aria-hidden="true">
@@ -979,7 +1021,48 @@ footer{margin-top:auto;border-top:0;color:var(--ink);font-weight:500}
       <p>Un cahier de brouillon guidé : choisissez un sujet et construisez votre dissertation étape par étape.</p>
       <span class="go">Ouvrir la page</span>
     </a>
+    <a class="item" href="atelier-explication.html" style="--c:var(--a3)">
+      <svg viewBox="0 0 120 48" aria-hidden="true">
+        <rect x="14" y="4" width="70" height="40" rx="4" fill="none" stroke="var(--muted)" stroke-width="2.5" opacity=".6"/>
+        <line x1="22" y1="14" x2="76" y2="14" stroke="var(--muted)" stroke-width="2" opacity=".5"/>
+        <rect x="22" y="19" width="48" height="6" rx="2" fill="var(--c)" opacity=".7"/>
+        <line x1="22" y1="32" x2="58" y2="32" stroke="var(--muted)" stroke-width="2" opacity=".5"/>
+        <circle cx="96" cy="30" r="9" fill="none" stroke="var(--c)" stroke-width="3"/><line x1="102" y1="37" x2="110" y2="45" stroke="var(--c)" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+      <h2>Atelier explication de texte</h2>
+      <p>Choisissez un texte et construisez votre explication en neuf étapes, avec le texte sous les yeux et un corrigé.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
   </div>
+  </details>
+  <details class="sub-n"><summary>Séries technologiques</summary>
+  <div class="list">
+    <a class="item" href="atelier-dissertation-tech.html" style="--c:var(--a7)">
+      <svg viewBox="0 0 120 48" aria-hidden="true">
+        <rect x="14" y="4" width="70" height="40" rx="4" fill="none" stroke="var(--muted)" stroke-width="2.5" opacity=".6"/>
+        <line x1="22" y1="14" x2="76" y2="14" stroke="var(--muted)" stroke-width="2" opacity=".5"/>
+        <line x1="22" y1="22" x2="76" y2="22" stroke="var(--muted)" stroke-width="2" opacity=".5"/>
+        <line x1="22" y1="30" x2="58" y2="30" stroke="var(--muted)" stroke-width="2" opacity=".5"/>
+        <path d="M80 40 L100 12 L108 18 L88 46 L78 48 Z" fill="var(--c)"/>
+      </svg>
+      <h2>Atelier dissertation</h2>
+      <p>Un cahier de brouillon guidé : choisissez un sujet et construisez votre dissertation étape par étape (sujets des séries technologiques).</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="atelier-explication-tech.html" style="--c:var(--a3)">
+      <svg viewBox="0 0 120 48" aria-hidden="true">
+        <rect x="14" y="4" width="70" height="40" rx="4" fill="none" stroke="var(--muted)" stroke-width="2.5" opacity=".6"/>
+        <line x1="22" y1="14" x2="76" y2="14" stroke="var(--muted)" stroke-width="2" opacity=".5"/>
+        <rect x="22" y="19" width="48" height="6" rx="2" fill="var(--c)" opacity=".7"/>
+        <line x1="22" y1="32" x2="58" y2="32" stroke="var(--muted)" stroke-width="2" opacity=".5"/>
+        <circle cx="96" cy="30" r="9" fill="none" stroke="var(--c)" stroke-width="3"/><line x1="102" y1="37" x2="110" y2="45" stroke="var(--c)" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+      <h2>Atelier explication de texte</h2>
+      <p>Choisissez un texte et répondez aux questions de l’épreuve (analyse, synthèse, commentaire), avec le texte sous les yeux et un corrigé.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+  </div>
+  </details>
   </details>
   <details class="grp wrap"><summary><h2 class="sec">EMC</h2></summary>
   <details class="notion"><summary>Démocratie</summary>
@@ -1054,17 +1137,6 @@ q.addEventListener('focus',load);
 q.addEventListener('input',function(){load();run()});})();
 </script>
 <script>
-(function(){var K='fiches-vues',items=[].slice.call(document.querySelectorAll('a.item')),prog=document.getElementById('prog'),seen={};
-try{seen=JSON.parse(localStorage.getItem(K)||'{}')}catch(e){}
-function save(){try{localStorage.setItem(K,JSON.stringify(seen))}catch(e){}}
-function paint(){var n=0;items.forEach(function(a){var h=a.getAttribute('href'),on=!!seen[h];a.classList.toggle('seen',on);if(on)n++});
- if(!n){prog.hidden=true;return}prog.hidden=false;prog.textContent=n+' page'+(n>1?'s':'')+' vue'+(n>1?'s':'')+' sur '+items.length+' ';
- var b=document.createElement('button');b.type='button';b.textContent='Effacer';b.onclick=function(){seen={};save();paint()};prog.appendChild(b)}
-items.forEach(function(a){var s=document.createElement('span');s.className='vu';s.textContent='✓ Vu';a.insertBefore(s,a.querySelector('h2'));
- a.addEventListener('click',function(){seen[a.getAttribute('href')]=1;save()})});
-paint();})();
-</script>
-<script>
 (function(){var B=[
  {img:'images/ecole-athenes.jpg',cap:'Raphaël, <i>L’École d’Athènes</i> (1509-1511), Vatican.'},
  {img:'images/nietzsche.jpg',portrait:1,fill:'#d3bab4',cap:'Portrait de Friedrich Nietzsche'},
@@ -1088,6 +1160,27 @@ function pick(){var q=location.search.match(/fond=(\d+)/);if(q&&B[+q[1]]){show(+
  var l=last(),i;do{i=Math.floor(Math.random()*B.length)}while(B.length>1&&i===l);show(i)}
 pick();
 window.addEventListener('pageshow',function(e){if(e.persisted)pick()});
+})();
+</script>
+<script>
+(function(){var r=document.documentElement,K='texte-seul',KL='mode-lecture';
+var btn=document.getElementById('a11y-btn'),menu=document.getElementById('a11y-menu'),opts=menu.querySelectorAll('.a11y-opt'),closed=[];
+function apply(m){
+  var ts=m==='ts',lc=m==='lect',was=r.classList.contains('lect');
+  r.classList.toggle('ts',ts);r.classList.toggle('lect',lc);
+  if(lc&&!was){closed=[];document.querySelectorAll('main details').forEach(function(d){if(!d.open){closed.push(d);d.open=true}})}
+  if(!lc&&was){closed.forEach(function(d){d.open=false});closed=[]}
+  opts.forEach(function(o){o.setAttribute('aria-checked',o.getAttribute('data-mode')===m?'true':'false')});
+  try{localStorage.setItem(K,ts?'1':'0');localStorage.setItem(KL,lc?'1':'0')}catch(e){}
+}
+function open(on){menu.hidden=!on;btn.setAttribute('aria-expanded',on?'true':'false')}
+btn.addEventListener('click',function(e){e.stopPropagation();open(menu.hidden)});
+opts.forEach(function(o){o.addEventListener('click',function(){apply(o.getAttribute('data-mode'));open(false);btn.focus()})});
+document.addEventListener('click',function(e){if(!menu.hidden&&!menu.contains(e.target)&&e.target!==btn)open(false)});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!menu.hidden){open(false);btn.focus()}});
+var v='orig';try{if(localStorage.getItem(KL)==='1')v='lect';else if(localStorage.getItem(K)==='1')v='ts'}catch(e){}
+if(v==='ts')apply('ts');
+if(v==='lect')window.addEventListener('load',function(){apply('lect')});
 })();
 </script>
 </body>
