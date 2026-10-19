@@ -563,6 +563,8 @@ var X={"Absolu – Relatif": [["Kant", "Fondements de la métaphysique des mœur
     $('#knew').addEventListener('click',function(){
       queue.shift();stats.known++;
       if(!missed.has(t))stats.first++;
+      /* « Je savais » retire le repère du paquet « À revoir » */
+      if(flags.has(t.g)&&(scope==='flag'||missed.has(t))){flags.delete(t.g);saveFlags();syncFlags();if(typeof filter==='function')filter()}
       renderCard();
     });
     $('#again').addEventListener('click',function(){
