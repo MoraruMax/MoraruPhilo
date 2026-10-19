@@ -192,6 +192,7 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);op
 }
 @page{size:A4;margin:16mm 14mm}
 </style>
+<link rel="stylesheet" href="quiz.css">
 </head>
 <body style="--k:var(--rai);--ks:var(--rai-soft)">
 <nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
@@ -252,6 +253,15 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);op
   </div>
 </section>
 </main>
+<!--quiz-->
+<section id="quiz" aria-labelledby="h-quiz">
+<h2 id="h-quiz">Quiz de révision</h2>
+<p class="qintro">5 questions pour vérifier l’essentiel. Les réponses s’affichent tout de suite, avec une explication. Rien n’est enregistré ni envoyé.</p>
+<div class="qz" id="qz"></div>
+<script type="application/json" id="quizdata">[{"q":"Dans le mythe de la caverne, que voient les prisonniers ?","a":["Seulement les ombres d’objets portés derrière eux, qu’ils prennent pour la réalité","Le soleil, mais de façon floue","Les objets eux-mêmes","Des reflets dans l’eau"],"e":"Enchaînés face à la paroi depuis l’enfance, ils ne voient que les ombres projetées par le feu : elles sont pour eux « la vérité même »."},{"q":"Que ressent le prisonnier libéré quand on le force à regarder la lumière ?","a":["Il souffre, est ébloui et juge plus vrai ce qu’il voyait avant","Il est immédiatement heureux","Il comprend tout aussitôt","Il refuse de sortir par paresse"],"e":"La libération est une épreuve : tiré de force vers la sortie, il est « rempli de douleur et d’indignation »."},{"q":"Pourquoi Platon insiste-t-il sur l’accoutumance progressive ?","a":["On ne comprend pas la vérité d’un coup : il faut y habituer son regard, des ombres jusqu’au soleil","Parce que la caverne est très grande","Parce que le prisonnier est paresseux","Parce que le soleil est dangereux"],"e":"Hors de la caverne, il voit d’abord les ombres, puis les reflets, les choses, les astres, enfin le soleil « tel qu’il est »."},{"q":"Que risque celui qui revient dans la caverne pour libérer les autres ?","a":["Être rejeté, voire tué","Être acclamé comme un héros","Être aussitôt cru par ses compagnons","Être puni par les dieux"],"e":"Ses yeux pleins de ténèbres le rendent ridicule ; s’il voulait délivrer les prisonniers, « ils le tueraient »."},{"q":"Que représentent les ombres dans le mythe ?","a":["Les apparences et les opinions reçues, que l’on prend pour la réalité","Les Idées éternelles","Les œuvres d’art","Les dieux grecs"],"e":"Celui qui n’a connu que les ombres les prend pour le réel. Éduquer, c’est détourner le regard vers ce qui est vrai."}]</script>
+</section>
+<!--/quiz-->
+
 <nav class="pn" aria-label="Pages de la section Vérité"><a class="nx" href="descartes-du-doute-au-cogito.html" rel="next"><small>Page suivante →</small><b>Descartes : du doute au cogito</b></a><a class="hm" href="accueil.html">Retour à l’accueil</a></nav>
 <footer><div class="wrap"><p>Page réalisée à partir de l’extrait de <i>La République</i> (livre VII) de Platon. Les citations sont de courts extraits du texte étudié ; la présentation de l’argumentation, les exercices et les pistes de discussion sont rédigés pour cette page. Portrait de fond : Buste de Platon (copie romaine), musées du Vatican.</p></div></footer>
 <script>
@@ -301,5 +311,6 @@ lab();
 sorter('#s1','#sc1','#r1',[["Les prisonniers prennent les ombres pour la réalité.", 0, "Oui : pour eux, les ombres « seraient la vérité même »."], ["La libération du prisonnier est immédiate et agréable.", 1, "Non : elle fait souffrir, éblouit, et demande une longue accoutumance."], ["Le prisonnier libéré commence par regarder le soleil.", 1, "Non : il voit d’abord les ombres, puis les reflets, puis les choses, et seulement ensuite le soleil."], ["Une fois instruit, il envierait les honneurs de la caverne.", 1, "Non : il préférerait tout souffrir plutôt que de « se mettre à la mode de la caverne »."], ["Revenu dans la caverne, il risque d’être ridiculisé, voire tué.", 0, "Oui : s’il voulait délivrer les prisonniers, « ils le tueraient »."]],[["Selon l’auteur", "var(--nat)"], ["Pas selon l’auteur", "var(--soc)"]]);
 })();
 </script>
+<script src="quiz.js" defer></script>
 </body>
 </html>

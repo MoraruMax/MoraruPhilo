@@ -98,6 +98,7 @@ footer p{margin:0}
 }
 @page{size:A4;margin:16mm 14mm}
 </style>
+<link rel="stylesheet" href="quiz.css">
 </head>
 <body>
 <nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
@@ -142,6 +143,15 @@ footer p{margin:0}
   </div>
 </section>
 </main>
+<!--quiz-->
+<section id="quiz" aria-labelledby="h-quiz">
+<h2 id="h-quiz">Quiz de révision</h2>
+<p class="qintro">5 questions pour vérifier l’essentiel. Les réponses s’affichent tout de suite, avec une explication. Rien n’est enregistré ni envoyé.</p>
+<div class="qz" id="qz"></div>
+<script type="application/json" id="quizdata">[{"q":"Pour saint Paul (texte 1), que doit-on faire de celui qui ne veut pas travailler ?","a":["Il ne doit pas manger non plus","Il doit être puni par la justice","Il doit être soutenu par la communauté","Il doit être éduqué par la contrainte"],"e":"« Celui qui ne veut pas travailler ne doit pas manger non plus » : le travail est un devoir moral."},{"q":"Pour Kant (Traité de pédagogie), pourquoi faut-il habituer l’enfant au travail, même par la contrainte ?","a":["L’homme est le seul animal voué au travail, et l’école cultive ce penchant par une contrainte que l’enfant reconnaîtra plus tard utile","Parce que le travail est toujours un plaisir","Parce que Dieu l’ordonne explicitement","Parce que la contrainte est un but en soi"],"e":"Pour Kant, le travail éduque : « l’école est une culture forcée »."},{"q":"Que dit Nietzsche (Aurore) de la glorification du travail ?","a":["Elle cache la peur de l’individuel : le labeur tient chacun en bride et entrave le développement de l’indépendance","Elle libère l’individu","Elle est le signe de la grâce divine","Elle est une invention des artistes"],"e":"Le travail est « la meilleure des polices » : une société qui travaille dur est plus sûre, et l’on adore la sécurité."},{"q":"Selon Dejours, qu’attend chacun en échange de sa contribution au travail ?","a":["La reconnaissance, qui nourrit son identité","Uniquement un salaire","La peur de perdre son emploi","Du temps libre"],"e":"La rétribution la plus importante est symbolique : grâce à elle, le sujet tire de son effort un bénéfice pour son identité."},{"q":"Que montre l’exemple de la fabrication des épingles chez Smith ?","a":["Diviser une tâche en une dizaine d’opérations simples multiplie fortement la production","Qu’un ouvrier seul produit plus qu’un groupe","Que le travail est un devoir religieux","Que les ouvriers deviennent plus indépendants"],"e":"Un ouvrier isolé ferait à peine une épingle par jour : la fabrication est divisée en dix-huit opérations environ."}]</script>
+</section>
+<!--/quiz-->
+
 <nav class="pn" aria-label="Pages de la section Travail"><a class="pv" href="travail-alienation-emancipation.html" rel="prev"><small>← Page précédente</small><b>Le travail : aliénation ou émancipation ?</b></a><a class="hm" href="accueil.html">Retour à l’accueil</a></nav>
 <footer><div class="wrap"><p>Page réalisée à partir du document « Révisions : le travail ».</p></div></footer>
 
@@ -223,5 +233,6 @@ footer p{margin:0}
   line.innerHTML=s;
 })();
 </script>
+<script src="quiz.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Auto-évaluation dissertation</title><style>
+/* Layout : un cahier de brouillon. Colonne d'étapes à gauche, feuille Seyes au centre, corrections au stylo rouge. */
+:root{
+  --paper:#fbfcff; --paper-2:#eef2fa; --ink:#1b2340; --ink-soft:#56607d;
+  --blue:#1f4fb8; --blue-soft:#dbe5fb; --rule:#c9d6f0; --rule-strong:#a9bde6;
+  --red:#c2312b; --red-soft:#fbe7e5; --ok:#2f7a4a; --line:#d8deec;
+  --f-display:Georgia, "Times New Roman", serif;
+  --f-body:system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --f-hand:"Segoe Print", "Bradley Hand", "Chalkboard SE", "Comic Sans MS", cursive;
+  --lh:28px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#141a2b; --paper-2:#1b2236; --ink:#e6e9f4; --ink-soft:#9aa3bd;
+  --blue:#8fb0ff; --blue-soft:#24345e; --rule:#26304a; --rule-strong:#34415f;
+  --red:#ff8a80; --red-soft:#3a2025; --ok:#7fd29b; --line:#2b3550; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#141a2b; --paper-2:#1b2236; --ink:#e6e9f4; --ink-soft:#9aa3bd;
+  --blue:#8fb0ff; --blue-soft:#24345e; --rule:#26304a; --rule-strong:#34415f;
+  --red:#ff8a80; --red-soft:#3a2025; --ok:#7fd29b; --line:#2b3550; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--paper-2);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 48px}
+.wrap{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:230px minmax(0,1fr);gap:28px}
+header.top{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;border-bottom:2px solid var(--ink);padding-bottom:14px}
+.brand small{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);font-weight:700}
+.brand h1{font-family:var(--f-display);font-weight:700;font-size:clamp(28px,4vw,40px);line-height:1.1;margin:2px 0 0;text-wrap:balance}
+.sujet-pick{display:flex;flex-direction:column;gap:6px;min-width:0;flex:1 1 360px;max-width:560px}
+.sujet-pick label{font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--ink-soft)}
+select,input[type=text]{font:inherit;color:var(--ink);background:var(--paper);border:1px solid var(--rule-strong);border-radius:6px;padding:9px 10px;width:100%}
+.sujet-box{grid-column:1/-1;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:18px 22px;display:flex;flex-wrap:wrap;gap:10px 24px;align-items:baseline;justify-content:space-between}
+.sujet-box q{font-family:var(--f-display);font-size:clamp(21px,2.6vw,27px);font-weight:500;quotes:"« " " »";text-wrap:balance;min-width:0}
+.tags{display:flex;gap:6px;flex-wrap:wrap;align-items:flex-start;align-content:flex-start}
+.tag{font-size:12.5px;padding:3px 9px;border-radius:99px;background:var(--blue-soft);color:var(--blue);font-weight:700}
+.tag.corr{background:var(--red-soft);color:var(--red)}
+nav.steps{position:sticky;top:calc(env(safe-area-inset-top,0px) + 16px);align-self:start}
+nav.steps ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+nav.steps button{all:unset;cursor:pointer;display:grid;grid-template-columns:28px 1fr;align-items:center;gap:8px;width:100%;padding:8px 10px;border-radius:8px;color:var(--ink-soft);box-sizing:border-box}
+nav.steps button:hover{background:var(--paper)}
+nav.steps button:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
+nav.steps .n{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--rule-strong);display:grid;place-items:center;font-size:13px;font-weight:700;font-variant-numeric:tabular-nums}
+nav.steps button.done .n{background:var(--blue-soft);border-color:var(--blue);color:var(--blue)}
+nav.steps button[aria-current="step"]{background:var(--paper);color:var(--ink);font-weight:700;box-shadow:inset 3px 0 0 var(--blue)}
+nav.steps button[aria-current="step"] .n{background:var(--blue);border-color:var(--blue);color:var(--paper)}
+.side-note{margin-top:18px;font-size:13.5px;color:var(--ink-soft);border-top:1px solid var(--line);padding-top:14px}
+main{min-width:0}
+.sheet{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:26px clamp(16px,3vw,34px) 30px}
+.sheet h2{font-family:var(--f-display);font-size:26px;margin:0 0 6px;font-weight:700}
+.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--blue)}
+.consigne{color:var(--ink-soft);max-width:66ch;margin:4px 0 22px}
+.field{display:flex;flex-direction:column;gap:4px;margin-bottom:16px;min-width:0}
+.field>label,.field>.lab{font-weight:700;font-size:14.5px}
+.field .hint{font-size:13px;color:var(--ink-soft);font-weight:400}
+textarea{font:inherit;font-size:16px;color:var(--ink);width:100%;resize:vertical;border:0;border-left:2px solid var(--red);
+  background-color:var(--paper);background-image:linear-gradient(to bottom,transparent calc(var(--lh) - 1px),var(--rule) calc(var(--lh) - 1px));
+  background-size:100% var(--lh);background-attachment:local;line-height:var(--lh);padding:0 10px 0 14px;min-height:calc(var(--lh)*2)}
+textarea:focus{outline:2px solid var(--blue);outline-offset:2px;border-radius:2px}
+.row2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 22px}
+.term{display:grid;grid-template-columns:minmax(120px,190px) minmax(0,1fr);gap:8px 16px;align-items:start;margin-bottom:14px}
+.term input{font-weight:700}
+.frame{font-family:var(--f-display);font-size:18px;font-style:italic;color:var(--ink-soft);margin:6px 0}
+.part{border:1px solid var(--line);border-radius:8px;margin-bottom:14px;background:var(--paper)}
+.part>summary{cursor:pointer;padding:12px 16px;font-weight:700;display:flex;gap:10px;align-items:baseline;list-style:none}
+.part>summary::-webkit-details-marker{display:none}
+.part>summary::before{content:"▸";color:var(--blue);transition:transform .15s}
+.part[open]>summary::before{transform:rotate(90deg)}
+.part>summary .num{font-family:var(--f-display);color:var(--blue);font-size:19px}
+.part .inner{padding:4px 16px 12px}
+.sub{border-top:1px dashed var(--rule-strong);padding-top:12px;margin-top:6px}
+.sub h4{margin:0 0 8px;font-size:14px;color:var(--ink-soft);letter-spacing:.04em}
+.sub.opt h4::after{content:" (facultative)";font-weight:400}
+.trans{background:var(--paper-2);border-radius:6px;padding:12px 14px 2px;margin-top:10px}
+.trans textarea{background-color:var(--paper-2)}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px;align-items:center}
+.btn{font:inherit;font-weight:700;font-size:15px;border-radius:8px;padding:10px 16px;cursor:pointer;border:1.5px solid var(--blue);background:var(--paper);color:var(--blue)}
+.btn.primary{background:var(--blue);color:var(--paper)}
+.btn.red{border-color:var(--red);color:var(--red)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.btn.ghost{border-color:transparent;color:var(--ink-soft);padding-inline:8px}
+.spacer{flex:1}
+.pen{margin-top:22px;border-left:3px solid var(--red);background:var(--red-soft);border-radius:0 8px 8px 0;padding:14px 18px}
+.pen .who{font-family:var(--f-hand);color:var(--red);font-size:21px;font-weight:700;line-height:1.2;margin-bottom:6px}
+.pen p{margin:0 0 10px;max-width:68ch}
+.pen ul{margin:0 0 10px;padding-left:20px}
+.pen li{margin-bottom:4px}
+.pen .muted{color:var(--ink-soft);font-size:14px}
+.model{margin-top:22px;border:1.5px solid var(--red);border-radius:8px;padding:16px 20px;background:var(--paper)}
+.model .who{font-family:var(--f-hand);color:var(--red);font-size:21px;font-weight:700}
+.model .warn{font-size:13.5px;color:var(--ink-soft);margin:0 0 10px}
+.model p{max-width:68ch}
+.model .mpart{margin:14px 0 6px;font-family:var(--f-display);font-weight:700;font-size:17.5px}
+.model .msub{margin:8px 0 8px 14px;font-size:15px}
+.model .msub b{color:var(--ink)}
+.model dl{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:2px 12px;margin:4px 0 0}
+.model dt{color:var(--ink-soft);font-size:13.5px}
+.model dd{margin:0}
+.model .mtrans{background:var(--paper-2);border-radius:6px;padding:8px 12px;margin:10px 0 0 14px;font-size:15px}
+.grille{display:flex;flex-direction:column;gap:10px;margin-top:6px}
+.palier{border:1px solid var(--line);border-radius:8px;padding:12px 16px;display:grid;grid-template-columns:96px minmax(0,1fr);gap:12px}
+.palier .lvl{font-family:var(--f-display);font-weight:700;font-size:17px;color:var(--ink-soft);font-variant-numeric:tabular-nums;line-height:1.25}
+.palier.reached{border-color:var(--ok)}
+.palier.reached .lvl{color:var(--ok)}
+.palier label{display:flex;gap:9px;align-items:flex-start;font-size:15px;margin-bottom:5px;cursor:pointer}
+.palier input{margin-top:4px;accent-color:var(--blue);width:17px;height:17px;flex:none}
+.verdict{margin-top:16px;padding:14px 18px;border-radius:8px;background:var(--blue-soft);color:var(--ink);font-size:16px}
+.verdict b{font-family:var(--f-display);font-size:20px;color:var(--blue)}
+.valorise{font-size:14.5px;color:var(--ink-soft);max-width:70ch;margin:0 0 14px}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:8px;font-weight:700;font-size:14px}
+.copy-fallback{width:100%;min-height:160px;margin-top:10px;font-size:13px;background-image:none;border:1px solid var(--line)}
+@media (max-width:820px){
+  .wrap{grid-template-columns:minmax(0,1fr);gap:16px}
+  nav.steps{position:static;overflow-x:auto;margin-inline:-4px}
+  nav.steps ol{flex-direction:row;gap:4px;padding:2px 4px 6px}
+  nav.steps button{grid-template-columns:auto;padding:6px 8px;width:auto;justify-items:center;text-align:center}
+  nav.steps .lbl{font-size:12px;white-space:nowrap}
+  nav.steps button[aria-current="step"]{box-shadow:inset 0 -3px 0 var(--blue)}
+  .side-note{display:none}
+  .row2,.term{grid-template-columns:minmax(0,1fr)}
+  .palier{grid-template-columns:minmax(0,1fr);gap:6px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+.wrap2{max-width:900px;margin:0 auto}
+h1.t{font-family:var(--f-display);font-size:clamp(28px,4vw,40px);line-height:1.1;margin:2px 0 0}
+.kick{font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--ink-soft)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:22px clamp(16px,3vw,30px);margin:18px 0}
+.card h2{font-family:var(--f-display);font-size:24px;margin:0 0 6px}
+.card h3{font-size:17px;margin:18px 0 6px}
+.lead{color:var(--ink-soft);max-width:68ch;margin:0 0 14px}
+.meth{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:10px}
+.meth>div{border:1px solid var(--line);border-radius:8px;padding:12px 14px;background:var(--paper-2)}
+.meth b{display:block;font-family:var(--f-display);font-size:17px;margin-bottom:4px;color:var(--blue)}
+.meth ul{margin:0;padding-left:18px;font-size:14.5px}.meth li{margin-bottom:3px}
+.comp{border:1px solid var(--line);border-radius:8px;margin:14px 0;padding:14px 16px}
+.comp h3{margin:0 0 2px}.comp .q{font-size:13px;color:var(--ink-soft);margin:0 0 8px}
+.chk label,.lvl label{display:flex;gap:9px;align-items:flex-start;font-size:15px;margin-bottom:5px;cursor:pointer}
+.chk input,.lvl input{margin-top:4px;accent-color:var(--blue);width:17px;height:17px;flex:none}
+.lvl{display:grid;gap:8px;margin-top:10px}
+.lvl label{border:1px solid var(--line);border-radius:8px;padding:10px 12px;background:var(--paper-2)}
+.lvl label:has(input:checked){border-color:var(--blue);background:var(--blue-soft)}
+.lvl .tag{margin-right:2px}
+.alert{border-left:4px solid var(--red);background:var(--red-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:8px 0}
+.ok{color:var(--ok);font-weight:700}
+.bar{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+@media (max-width:760px){.meth{grid-template-columns:minmax(0,1fr)}}
+@media print{.noprint{display:none!important}body{background:#fff}.card,.comp{break-inside:avoid}}
+.cnt{margin:6px 0 0;font-size:13px;color:var(--ink-soft)}</style></head><body>
+<nav style="font:500 .92rem/1 system-ui,-apple-system,'Segoe UI',sans-serif;max-width:900px;margin:0 auto 14px;display:flex;align-items:center" class="noprint"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a></nav>
+<div class="wrap2">
+<header class="top" style="display:block"><div class="kick">Philosophie · Terminale</div><h1 class="t">Auto-évaluation de ma dissertation</h1></header>
+<div class="card"><h2>Comment l'utiliser</h2><p class="lead">Relisez votre brouillon, puis votre copie, avec la méthode puis la grille nationale. Cochez uniquement ce que votre travail réalise réellement. Les cases restent enregistrées sur cet appareil.</p></div>
+<div class="card"><h2>1. La méthode en un coup d'œil</h2><p class="lead">La dissertation est une réflexion écrite organisée et progressive, en vue de proposer une réponse argumentée à un problème. Il ne s'agit pas de donner son opinion, mais de réfléchir sur l'opinion pour formuler une position argumentée. Il n'y a pas de bonne ou de mauvaise réponse attendue : c'est la qualité du questionnement qui prime.</p>
+<div class="meth">
+<div><b>Au brouillon (1h30 à 2h)</b><ul><li>1. Définir les termes</li><li>2. Identifier les deux grandes thèses</li><li>3. Un argument et un exemple pour chaque idée</li><li>4. Construire le problème</li></ul></div>
+<div><b>Le plan et les parties</b><ul><li>5. Deux ou trois parties, deux à trois arguments par partie, un exemple ou une référence par argument</li><li>Une transition (bilan + problème) entre les parties</li></ul></div>
+<div><b>Conclure, introduire, écrire</b><ul><li>6. Conclusion : reprendre chaque bilan, répondre clairement</li><li>7. Introduction : définitions, problème, plan</li><li>8. Écrire la copie</li></ul></div></div></div>
+<div class="card"><h2>2. Grille académique : cinq compétences</h2><p class="lead">Pour chaque compétence, vérifiez les points, puis choisissez la description qui correspond le mieux à votre copie. Chaque compétence est notée sur 4 dans la grille.</p><div id="comps"></div><p id="sumc" class="lead" style="margin-top:12px"></p></div>
+<div class="card"><h2>3. Grille nationale : les paliers</h2><p class="lead">Ce qui est valorisé : une problématisation du sujet, une argumentation cohérente et progressive, l'analyse de concepts et d'exemples précisément étudiés, la mobilisation d'éléments de culture philosophique au service du traitement du sujet, la capacité de la réflexion à entrer en dialogue avec elle-même. Chaque palier suppose les précédents.</p><div class="grille" id="pals"></div>
+<h3>Signaux d'alerte (copie qui risque de rester entre 6 et 9)</h3><div class="chk" id="alerts"></div><div id="verdict"></div>
+<div class="bar noprint"><button class="btn primary" id="print" type="button">Imprimer ou enregistrer en PDF</button><button class="btn ghost" id="reset" type="button">Tout effacer</button></div></div>
+</div><script>
+const D={"CRIT": [["Organiser et exprimer sa pensée", "Étape 5 (plan, transitions), étapes 6 et 7 (conclusion, introduction), étape 8 (écriture)", ["Mon développement a deux ou trois grandes parties, chacune définie par une idée ou une question directrice formulée en une phrase complète", "Mes transitions récapitulent ce qui précède (bilan) et relancent le questionnement (problème, objection ou difficulté)", "Mon introduction amène le sujet, explique le problème et annonce la démarche, en quelques lignes", "Ma conclusion est un bilan, non un résumé de la copie : elle rappelle le problème et montre en quoi la réflexion a progressé", "Les parties et les sous-parties sont directement identifiables, et chaque sous-partie se termine par une synthèse", "Mon expression est claire, fluide et correcte (orthographe, syntaxe), ma copie est soignée"], ["Plan absent ou confus, expression maladroite.", "Structure visible mais déséquilibrée ; expression correcte avec fautes.", "Plan clair (introduction, développement, transition, conclusion), expression fluide et correcte."]], ["Conceptualiser", "Étape 1 : définir les termes", ["J'ai défini les termes importants du sujet, en indiquant leurs différents sens avant de retenir les plus importants", "Je distingue clairement ces sens (distinctions pertinentes)", "J'utilise ou je reconstruis des définitions philosophiques, y compris des définitions d'auteur quand c'est utile", "J'utilise des notions et des repères du cours pour clarifier le sujet"], ["Notions vagues, pas de définitions ni de distinctions.", "Tentatives de définition ou de distinction, mais incomplètes ou imprécises.", "Notions définies, distinctions pertinentes, recours possible à des définitions d'auteur."]], ["Mobiliser des références", "Étapes 3 et 5 : un exemple et une référence pour chaque argument", ["J'utilise des exemples, des auteurs ou des doctrines pertinents pour le sujet", "Mes références sont contextualisées et intégrées à l'argumentation, au lieu d'être juxtaposées", "Je les analyse : toute citation est commentée", "Un exemple me sert à faire comprendre une idée, une référence à l'approfondir : ni l'un ni l'autre n'est un argument", "Je ne commence jamais une sous-partie par « selon Untel » : la référence nourrit ma réflexion, elle ne s'y substitue pas", "Mes exemples sont précisément étudiés, non sommaires ni anecdotiques"], ["Aucune référence, ou usage hors de propos.", "Références présentes mais peu intégrées ou mal comprises.", "Références pertinentes, analysées et mises au service de l'argumentation."]], ["Argumenter", "Étapes 2, 3 et 5 : thèses, arguments, progression", ["Je défends une thèse de manière structurée, et je discute d'autres positions", "Dans chaque sous-partie, je formule d'abord l'idée, puis je la développe par une analyse argumentée", "Je vais du plus général au plus particulier, du plus simple au plus complexe, du plus évident au plus profond", "Mes sous-parties se relient entre elles : ce n'est pas une liste d'idées ou de cas jetés en vrac", "Mes affirmations sont justifiées et mon raisonnement respecte des règles logiques de base", "Ma réponse est cohérente avec le développement : position claire et ferme, sans dogmatisme"], ["Pas de raisonnement clair, affirmations juxtaposées. Éventuellement, propos hors sujet.", "Propos dans l'ensemble en lien avec le sujet. Présence de thèses et d'exemples, mais articulation maladroite ou incomplète.", "Propos en lien avec le sujet. Défense structurée d'une thèse, discussion argumentée, raisonnement cohérent."]], ["Problématiser", "Étapes 2 à 4 : thèses, alternative, problème", ["J'ai compris le sujet : sur quoi il porte et pourquoi la question peut se poser", "J'ai mis le sujet à l'affirmative puis à la négative, et fait apparaître la tension entre les deux idées", "Mon problème est une question qui soulève deux alternatives sérieuses et crédibles : on ne peut y répondre directement par oui ou par non", "J'ai suspendu mon opinion première pour montrer que la réponse n'a rien d'évident", "J'explicite l'enjeu de la question, dans l'introduction"], ["Le sujet est mal compris, voire pas compris (hors sujet), et aucune difficulté n'est identifiée.", "Le sujet est compris. Une difficulté ou une tension est esquissée, mais de manière confuse ou partielle.", "Le sujet est bien compris. Une tension claire est identifiée, orientant une question structurante pour le devoir."]]], "PAL": [["10", ["Je fais un effort de problématisation et de définition des notions", "J'examine des réponses possibles, et mon propos est globalement cohérent"]], ["12", ["Je mobilise des références et des exemples pertinents pour le sujet"]], ["14", ["Mon raisonnement est construit et progressif", "Les affirmations que je pose sont rigoureusement justifiées"]], ["16", ["Je maîtrise des concepts philosophiques utiles pour le sujet (notions, repères)", "Ma démarche témoigne d'un souci de recherche et des enjeux de la question", "J'utilise ma culture avec précision, au service du traitement du sujet"]]], "ALERT": ["Mon propos est excessivement général, ou reste sans rapport avec la question posée", "Je juxtapose des exemples sommaires ou anecdotiques", "J'accumule des lieux communs", "Je récite mon cours sans traiter le sujet", "Ma copie aurait pu être rédigée au début de l'année, sans aucun cours de philosophie"]};const $=q=>document.querySelector(q);const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const L=["Insuffisante","Partielle","Satisfaisante"];let st={};const K="grille-dissertation-v1";
+try{st=JSON.parse(localStorage.getItem(K)||"{}")}catch(e){}
+function save(){try{localStorage.setItem(K,JSON.stringify(st))}catch(e){}}
+$("#comps").innerHTML=D.CRIT.map((c,i)=>`<div class="comp"><h3>${esc(c[0])}</h3><p class="q">${esc(c[1])}</p><div class="chk">${c[2].map((t,j)=>`<label><input type="checkbox" data-k="c${i}_${j}"${st["c"+i+"_"+j]?" checked":""}><span>${esc(t)}</span></label>`).join("")}</div><p class="cnt" id="cnt${i}"></p><div class="lvl" role="radiogroup" aria-label="Niveau de maîtrise : ${esc(c[0])}">${c[3].map((t,j)=>`<label><input type="radio" name="n${i}" value="${j}" data-k="n${i}"${st["n"+i]===String(j)?" checked":""}><span><span class="tag${j==2?"":" corr"}">${L[j]}</span> ${esc(t)}</span></label>`).join("")}</div></div>`).join("");
+$("#pals").innerHTML=D.PAL.map((p,i)=>`<div class="palier" id="pal${i}"><div class="lvl2"><b>Pas moins de ${p[0]}</b></div><div>${p[1].map((t,j)=>`<label><input type="checkbox" data-k="p${i}_${j}"${st["p"+i+"_"+j]?" checked":""}><span>${esc(t)}</span></label>`).join("")}</div></div>`).join("");
+$("#alerts").innerHTML=D.ALERT.map((t,j)=>`<label><input type="checkbox" data-k="a${j}"${st["a"+j]?" checked":""}><span>${esc(t)}</span></label>`).join("");
+function upd(){
+ D.CRIT.forEach((c,i)=>{const n=c[2].filter((_,j)=>st["c"+i+"_"+j]).length;$("#cnt"+i).textContent=n+" point"+(n>1?"s":"")+" sur "+c[2].length+" vérifié"+(n>1?"s":"")});
+ const lv=D.CRIT.map((c,i)=>st["n"+i]).filter(x=>x!==undefined);if(lv.length){const n=[0,0,0];lv.forEach(x=>n[+x]++);$("#sumc").textContent=`Satisfaisante : ${n[2]} · Partielle : ${n[1]} · Insuffisante : ${n[0]} (sur ${lv.length} compétence${lv.length>1?"s":""} évaluée${lv.length>1?"s":""}).`}else $("#sumc").textContent="Choisissez un niveau pour chaque compétence.";
+ let reached=-1;for(let i=0;i<D.PAL.length;i++){if(D.PAL[i][1].every((_,j)=>st["p"+i+"_"+j]))reached=i;else break}
+ D.PAL.forEach((p,i)=>$("#pal"+i).classList.toggle("reached",i<=reached));
+ const al=D.ALERT.some((_,j)=>st["a"+j]);
+ $("#verdict").innerHTML=(al?`<div class="alert"><b>Signaux d'alerte cochés.</b> Une copie intelligible qui présente ces défauts se situe plutôt entre 6 et 9. Reprenez d'abord ces points.</div>`:"")+(al?"":reached>=0?`<div class="verdict"><b>Palier atteint : pas moins de ${D.PAL[reached][0]}.</b> Ce palier est un plancher, pas un plafond : si d'autres éléments positifs le justifient, la copie peut valoir davantage.</div>`:`<div class="verdict">Cochez ce que votre copie réalise vraiment, en commençant par le palier « pas moins de 10 ».</div>`);
+}
+document.addEventListener("change",e=>{const k=e.target.dataset.k;if(!k)return;st[k]=e.target.type==="radio"?e.target.value:e.target.checked;save();upd()});
+$("#reset").addEventListener("click",()=>{if(!confirm("Effacer toutes les cases cochées ?"))return;st={};save();document.querySelectorAll("input").forEach(i=>{i.checked=false});upd()});
+$("#print").addEventListener("click",()=>window.print());
+upd();
+</script></body></html>

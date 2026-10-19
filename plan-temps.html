@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Le temps : plan de cours</title><style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+  --bg:#F6F4F9; --surface:#FFFFFF; --ink:#22192B; --muted:#62566E; --line:#DDD6E6; --focus:#8A1850;
+  --k:#8A1850; --k-soft:#F7E3EE; --b:#7A1BB5; --b-soft:#EEDFF8; --p:#9A5200; --q:#2F4FA8;
+  --serif:Georgia,"Times New Roman",serif;
+  --sans:system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#16111C; --surface:#201929; --ink:#EEE8F5; --muted:#B0A3BF; --line:#352B42; --focus:#FF8CC0;
+    --k:#FF8CC0; --k-soft:#3A1830; --b:#C99BFF; --b-soft:#2D1A44; --p:#F0B45C; --q:#9DB2FF;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#16111C; --surface:#201929; --ink:#EEE8F5; --muted:#B0A3BF; --line:#352B42; --focus:#FF8CC0;
+  --k:#FF8CC0; --k-soft:#3A1830; --b:#C99BFF; --b-soft:#2D1A44; --p:#F0B45C; --q:#9DB2FF;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:calc(4rem + env(safe-area-inset-top,0px));-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.08rem/1.6 var(--serif)}
+.wrap{width:min(900px,100% - 2.5rem);margin-inline:auto}
+h1,h2,h3{margin:0;font-family:var(--serif)}
+h1{font-weight:700;font-size:clamp(2.4rem,7.5vw,4.6rem);line-height:1.05;letter-spacing:-.02em}
+h2{font-weight:700;font-size:clamp(1.6rem,3.4vw,2.2rem);line-height:1.15;margin-bottom:1.2rem}
+p{margin:0 0 1em}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
+.hero{padding:clamp(2.2rem,6vw,4.5rem) 0 1.6rem}
+.def{margin:1.6rem 0 1.2rem;padding:1rem 1.2rem;background:var(--k-soft);border-left:5px solid var(--k);border-radius:0 8px 8px 0;font-weight:600;max-width:46ch}
+.def span{display:block;font:700 .8rem/1 var(--sans);color:var(--k);margin-bottom:.4rem}
+.btn{font:700 .92rem/1.2 var(--sans);color:var(--ink);background:transparent;border:1.5px solid var(--ink);border-radius:8px;padding:.6rem .95rem;cursor:pointer}
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--bg);border-bottom:1px solid var(--line)}
+.nav ol{display:flex;gap:.3rem;list-style:none;margin:0;padding:.5rem 0;overflow-x:auto}
+.nav a{display:block;white-space:nowrap;text-decoration:none;color:var(--muted);font:700 .88rem/1.2 var(--sans);padding:.5rem .75rem;border-radius:6px}
+.nav a:hover{color:var(--ink)}
+.nav a[aria-current="true"]{background:var(--ink);color:var(--bg)}
+.part{padding:clamp(2.2rem,5vw,3.4rem) 0;border-bottom:1px solid var(--line)}
+.gt{font:700 1rem/1.3 var(--sans);color:var(--muted);margin:1.6rem 0 .6rem}
+.branches{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr));align-items:start}
+details.br{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:0 1rem}
+details.br summary{cursor:pointer;font:700 1rem/1.35 var(--sans);padding:.9rem 0;list-style:none}
+details.br summary::-webkit-details-marker{display:none}
+details.br summary::before{content:"";display:inline-block;width:.5rem;height:.5rem;border-right:3px solid var(--k);border-bottom:3px solid var(--k);transform:rotate(-45deg);margin-right:.7rem;vertical-align:.1em;transition:transform .2s}
+details.br[open] summary::before{transform:rotate(45deg)}
+ol.st{list-style:none;margin:0;padding:0 0 .9rem}
+.s{margin:0 0 .6rem;padding:.6rem .8rem;border-left:4px solid var(--line);background:var(--bg);border-radius:0 6px 6px 0}
+.lb{display:block;font:700 .75rem/1 var(--sans);margin-bottom:.3rem;color:var(--muted)}
+.s-q{border-left-color:var(--q)} .s-q .lb{color:var(--q)}
+.s-p{border-left-color:var(--p)} .s-p .lb{color:var(--p)}
+.s-k{border-left-color:var(--k);background:var(--k-soft);font-weight:600} .s-k .lb{color:var(--k)}
+.s-b{border-left-color:var(--b);background:var(--b-soft);font-weight:600} .s-b .lb{color:var(--b)}
+.who{font-weight:700;color:var(--k)}
+.bridge{margin:1.6rem 0 0;padding:.9rem 1.1rem;border:2px dashed var(--p);border-radius:8px;font:700 1rem/1.4 var(--sans);color:var(--p)}
+.final{background:var(--b-soft);border:2px solid var(--b);border-radius:12px;padding:1.4rem 1.5rem;font:600 clamp(1.2rem,2.6vw,1.5rem)/1.45 var(--serif);margin-top:1.4rem}
+.final span{display:block;font:700 .8rem/1 var(--sans);color:var(--b);margin-bottom:.6rem}
+footer{padding:1.6rem 0 2.5rem;font:500 .92rem/1.5 var(--sans);color:var(--muted)}
+footer p{margin:0}
+
+.pn{display:flex;gap:1rem;flex-wrap:wrap;margin:2.5rem auto 0;max-width:980px;padding:0 1.25rem;box-sizing:content-box}
+.pn a{flex:1 1 16rem;display:flex;flex-direction:column;gap:.25rem;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--k,var(--ink));padding:.9rem 1.1rem;border-radius:0 0 8px 8px}
+.pn a:hover{border-color:var(--k,var(--ink))}.pn a:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.pn small{font:600 .78rem/1 system-ui,-apple-system,sans-serif;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.pn b{font:700 1.1rem/1.25 system-ui,-apple-system,sans-serif}
+.pn .nx{text-align:right}
+.pn .nx:first-child{margin-left:auto;max-width:calc(50% - .5rem)}
+.pn .hm{flex:0 0 100%;text-align:center;font:500 .92rem/1 system-ui,-apple-system,sans-serif;background:none;border:0;padding:.4rem;color:var(--ink);text-decoration:underline}
+
+.pdfbtn{display:inline-flex;align-items:center;gap:.5rem;font:600 .88rem/1 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--surface);border:1.5px solid var(--ink);border-radius:999px;padding:.55rem .95rem;cursor:pointer}
+.pdfbtn:hover{background:var(--ink);color:var(--bg)}.pdfbtn:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:2px}
+@media print{
+  :root{--bg:#fff!important;--surface:#fff!important;--ink:#111!important;--muted:#444!important;--line:#bbb!important;color-scheme:light!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:#fff!important;color:#111!important}
+  body::before,body::after{display:none!important}
+  nav,.pdfbtn,.pn,video,section[aria-labelledby="h-video"]{display:none!important}
+  .rev,.js .rev{opacity:1!important;transform:none!important}
+  .stp li[hidden]{display:list-item!important}
+  details>*{display:block!important}
+  article,li,.card,figure,.stage{break-inside:avoid}
+  h1,h2,h3{break-after:avoid;text-shadow:none!important}
+  *{text-shadow:none!important}
+  a{color:inherit;text-decoration:none}
+  section.block,.part{padding-top:1.2rem!important;padding-bottom:1.2rem!important}
+  footer{break-before:avoid;border-top:1px solid #999;margin-top:1rem}
+}
+@page{size:A4;margin:16mm 14mm}
+
+.eyebrow{font:700 .8rem/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--k);margin:0 0 .8rem}
+.sub{font:500 1rem/1.5 var(--sans);color:var(--muted);max-width:60ch;margin:1rem 0 1.2rem}
+.lead{margin:0 0 1rem}
+details.br,.s,.final{min-width:0;overflow-wrap:anywhere}
+.branches{grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr))}
+.branches.nest{grid-template-columns:minmax(0,1fr);margin:.4rem 0 .6rem}
+details.br details.br{background:var(--bg)}
+details.br summary .sl{display:block;font:700 .75rem/1 var(--sans);color:var(--muted);margin-bottom:.25rem;text-transform:uppercase;letter-spacing:.05em}
+details.br summary{font-weight:700}
+.s-x{border-left-color:var(--q);border-left-style:dashed} .s-x .lb{color:var(--q)} .s-x .t{font-style:italic;color:var(--muted)}
+.s-p{border-left-style:dashed}
+.s-x .lb::before,.s-p .lb::before{content:""}
+.final{margin:.8rem 0}
+.pls{list-style:none;padding:0;margin:1.6rem 0;display:grid;gap:1rem;grid-template-columns:repeat(auto-fill,minmax(15rem,1fr))}
+.pls a{display:flex;flex-direction:column;gap:.3rem;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--k);padding:1rem 1.1rem;border-radius:0 0 10px 10px;min-height:5.5rem}
+.pls a:hover{border-color:var(--k)}
+.pls b{font:700 1.25rem/1.2 var(--serif)} .pls small{font:600 .8rem/1 var(--sans);color:var(--muted)}
+</style></head><body>
+<nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
+<header class="hero"><div class="wrap"><p class="eyebrow">Plan de cours</p><h1>Le temps</h1>
+<p class="sub">Les étiquettes indiquent le rôle de chaque idée (justification, problème, conséquence, exemple…). Chaque branche se plie et se déplie.</p>
+<button class="btn" id="tog" type="button">Tout replier</button></div></header>
+<nav class="nav" aria-label="Les parties du plan"><div class="wrap"><ol id="nav"><li><a href="#p1">1. Constat</a></li><li><a href="#p2">I. Le temps, principe de…</a></li><li><a href="#p3">II. Temps objectif et…</a></li><li><a href="#p4">III. L&#x27;espace et le temps</a></li><li><a href="#p5">5. Conclusion</a></li></ol></div></nav>
+<main id="main"><section class="part" id="p1" aria-labelledby="h-p1"><div class="wrap"><h2 id="h-p1">1. Constat</h2><ol class="st"><li class="s"><span class="t">Nous faisons tous l'expérience du temps : nous sentons qu'il « passe », nous le mesurons, nous le fractionnons (années, semaines, heures, minutes, secondes)</span></li></ol><div class="branches nest"><ol class="st"><li class="s"><span class="lb">Conséquence</span><span class="t">Ce découpage façonne nos vies : il y aurait « un temps pour tout » (temps de travail, de loisir, temps « libre »)</span></li></ol><details class="br" open><summary><span class="sl">Première idée</span>Ce découpage est arbitraire et artificiel : nous l'avons fait parce que nous « sentons » que le temps passe</summary><ol class="st"><li class="s s-k"><span class="lb">Définition</span><span class="t">Le temps comme principe de génération et de corruption : tout ce qui existe est soumis à la décomposition et au vieillissement</span></li></ol><ol class="st"><li class="s s-p"><span class="lb">Exemple</span><span class="t">Les anniversaires marquent ce passage</span></li><li class="s"><span class="lb">Conséquence</span><span class="t">Le temps semble s'écouler de manière irréversible : pas de retour en arrière</span></li></ol><ol class="st"><li class="s"><span class="lb">Conception classique</span><span class="t">La temporalité comme flèche : le passé derrière nous, le présent ici et maintenant, le futur à venir</span></li></ol></details><details class="br" open><summary><span class="sl">Problème</span>Le découpage se veut objectif, mais intègre nécessairement une importante subjectivité</summary><div class="branches nest"><details class="br" open><summary><span class="sl">Constat</span>Notre perception du temps semble modifier son écoulement</summary><ol class="st"><li class="s s-p"><span class="lb">Exemple</span><span class="t">Le temps long : le moment de solitude, le cours interminable</span></li><li class="s s-p"><span class="lb">Exemple</span><span class="t">Le temps qui file : la passion dévorante, le jeu vidéo qui dure encore « cinq minutes »</span></li></ol></details><details class="br" open><summary><span class="sl">Second problème</span>Ce découpage est aujourd'hui remis en question, notamment par de nouvelles théories physiques</summary><ol class="st"><li class="s s-b"><span class="lb">Problématique</span><span class="t">Le temps est-il objectif, scientifique, ou ce découpage arbitraire ne sera-t-il toujours qu'imparfait ? Faut-il intégrer à sa définition la perception que nous en avons ?</span></li></ol></details></div></details></div></div></section><section class="part" id="p2" aria-labelledby="h-p2"><div class="wrap"><h2 id="h-p2">I. Le temps, principe de génération et de corruption</h2><ol class="st"><li class="s s-k"><span class="t">Rendre compte de la conception classique du temps : un écoulement du passé vers un futur, en passant par le présent</span></li></ol><div class="branches nest"><details class="br" open><summary><span class="sl">Aristote</span>Le temps comme mesure du mouvement : le nombre du mouvement selon l'antérieur et le postérieur</summary><ol class="st"><li class="s"><span class="lb">Explication</span><span class="t">Le temps marque le passage d'un état à un autre : c'est parce que nous percevons un changement que nous disons que le temps passe</span></li></ol><ol class="st"><li class="s s-p"><span class="lb">Exemple</span><span class="t">La position du Soleil change dans le ciel ; la fleur fermée ce matin est éclose</span></li><li class="s"><span class="lb">Conséquence</span><span class="t">Si rien ne changeait jamais, si tout était figé, nous ne pourrions pas dire que le temps passe</span></li></ol></details><details class="br" open><summary><span class="sl">Héraclite</span>« On ne se baigne jamais deux fois dans le même fleuve » : tout s'écoule, au sens propre</summary><ol class="st"><li class="s"><span class="lb">Explication</span><span class="t">L'eau n'est plus la même, mais nous non plus : notre humeur, nos pensées, nos sentiments ont changé</span></li></ol><ol class="st"><li class="s"><span class="lb">Conséquence</span><span class="t">Le temps comme principe de mouvement perpétuel, de changement constant</span></li></ol><div class="branches nest"><details class="br" open><summary><span class="sl">Problème</span>Si tout change en permanence, y compris nous, comment trouver une quelconque stabilité ?</summary><ol class="st"><li class="s s-p"><span class="lb">Exemple</span><span class="t">Comment reprocher à l'élève de ne pas avoir fait ses devoirs, si c'est son « moi » du passé qui est à blâmer ?</span></li><li class="s s-p"><span class="lb">Exemple</span><span class="t">Comment reconnaître l'ami que nous ne voyons qu'une fois par semaine, dont les sentiments, les pensées et même certaines cellules ont changé ?</span></li></ol></details><details class="br" open><summary><span class="sl">Solution</span>Distinguer la forme et la matière. <em>Cf.</em> Aristote</summary><ol class="st"><li class="s"><span class="lb">Explication</span><span class="t">La matière de l'eau du fleuve change, mais pas sa forme, sa géographie, sa structure, sa substance</span></li></ol><ol class="st"><li class="s"><span class="lb">Conséquence</span><span class="t">Nous changeons en permanence, mais notre identité profonde resterait stable</span></li></ol><ol class="st"><li class="s"><span class="lb">Précision</span><span class="t">Cette identité est enrichie par le passé, ou plutôt par l'interprétation que nous en faisons, qui donne sens au présent</span></li></ol></details></div></details><details class="br" open><summary><span class="sl">Proust</span>Le souvenir fait ressurgir dans le présent l'expérience passée : la « madeleine »</summary><ol class="st"><li class="s"><span class="lb">Explication</span><span class="t">Le passé « empiète » sur le présent : le présent est enrichi par le passé, qui fait irruption en lui</span></li></ol><ol class="st"><li class="s s-p"><span class="lb">Remarque (exemple)</span><span class="t">Pour les HLP : réinvestir les réflexions sur la nature du moi, sur ce qui fait sa permanence</span></li><li class="s"><span class="lb">Référence</span><span class="t"><em>Cf.</em> texte de Proust, <em>A la recherche du temps perdu</em> (la madeleine)</span></li></ol></details><details class="br" open><summary><span class="sl">Sartre</span>La signification du passé dépend de mon projet présent</summary><ol class="st"><li class="s"><span class="lb">Explication</span><span class="t">Je ne peux pas faire varier au gré de mes caprices le sens de mes actes antérieurs, mais le projet fondamental que je suis décide de la signification que le passé a pour moi et pour les autres</span></li></ol><ol class="st"><li class="s"><span class="lb">Conséquence</span><span class="t">Je choisis le sens du passé, et les ordres qu'il me donne, par le projet de ma fin</span></li></ol><div class="branches nest"><ol class="st"><li class="s"><span class="lb">Référence</span><span class="t"><em>Cf.</em> Sartre, <em>L'Être et le Néant</em></span></li></ol><details class="br" open><summary><span class="sl">Bilan</span>Le sens du passé ne peut être défini que par nous : le passé est toujours présent en nous, puisque…</summary><ol class="st"><li class="s s-k"><span class="lb">Bilan</span><span class="t">Le sens du passé ne peut être défini que par nous : le passé est toujours présent en nous, puisque ce que nous sommes résulte de ce que nous étions et présage ce que nous serons</span></li></ol><ol class="st"><li class="s s-b"><span class="lb">Transition</span><span class="t">Le temps ne semble jamais pouvoir se séparer de la signification que nous lui donnons : faut-il distinguer un temps objectif, celui de la science, et un temps subjectif, celui que nous ressentons ?</span></li></ol></details></div></details></div></div></section><section class="part" id="p3" aria-labelledby="h-p3"><div class="wrap"><h2 id="h-p3">II. Temps objectif et temps subjectif</h2><ol class="st"><li class="s s-k"><span class="t">Faut-il distinguer le temps du scientifique et le temps du philosophe ? Le même terme désignerait-il deux réalités différentes ?</span></li></ol><div class="branches nest"><ol class="st"><li class="s"><span class="lb">Temps objectif</span><span class="t">Celui de la science : mesurable, quantifiable (secondes, minutes, heures). Objectif car mesuré, même si les unités de mesure sont arbitraires</span></li></ol><ol class="st"><li class="s"><span class="lb">Temps subjectif</span><span class="t">Un temps vécu, ressenti, dont l'écoulement dépendrait de nous : un temps qui n'est plus simplement pensé, mais ressenti</span></li></ol><details class="br" open><summary><span class="sl">Einstein et Bergson</span>Le temps du philosophe est-il le même que celui du physicien ?</summary><ol class="st"><li class="s"><span class="lb">Position d&#x27;Einstein</span><span class="t">Le temps physique peut être dérivé du temps de la conscience : de la simultanéité des perceptions, on est passé à celle des événements eux-mêmes</span></li></ol><ol class="st"><li class="s"><span class="lb">Conséquence</span><span class="t">Rien dans notre conscience ne permet de conclure à la simultanéité des événements, qui ne sont que des constructions mentales. Il n'y a donc pas un temps des philosophes, mais un temps psychologique différent de celui du physicien</span></li></ol><ol class="st"><li class="s"><span class="lb">Référence</span><span class="t"><em>Cf.</em> Bergson-Einstein, <em>Bulletin de la Société française de philosophie</em></span></li></ol></details><details class="br" open><summary><span class="sl">Bergson</span>Le « temps du philosophe » est le temps de la conscience, le temps vécu : la durée</summary><div class="branches nest"><details class="br" open><summary><span class="sl">Image de la mélodie</span>Contre l'idée d'un temps fait de simultanéités, Bergson préfère l'image de la mélodie : une pure impression de succession</summary><ol class="st"><li class="s"><span class="lb">Explication</span><span class="t">Ce qui fait la mélodie, c'est l'impossibilité de la découper : chaque note porte la signification de la précédente et les germes de la suivante</span></li></ol><ol class="st"><li class="s"><span class="lb">Conséquence</span><span class="t">Le temps « psychologique » est un temps indivisible, celui de la conscience et de la vie : nous percevons sa durée, la manière dont les événements s'insèrent dans une mélodie qui leur donne sens</span></li></ol></details><details class="br" open><summary><span class="sl">Exemple du morceau de sucre</span>Pour préparer un verre d'eau sucrée, je dois attendre que le sucre fonde</summary><ol class="st"><li class="s"><span class="lb">Explication</span><span class="t">Ce temps d'attente n'est pas le temps mathématique : il coïncide avec mon impatience, une portion de ma durée, qui n'est ni allongeable ni rétrécissable à volonté</span></li></ol><ol class="st"><li class="s s-k"><span class="lb">Définition</span><span class="t">Ce n'est plus du pensé, c'est du vécu : la durée est « l'expérience de la succession dans sa continuité »</span></li></ol><div class="branches nest"><ol class="st"><li class="s"><span class="lb">Référence</span><span class="t"><em>Cf.</em> Bergson, <em>L'Évolution créatrice</em></span></li></ol><details class="br" open><summary><span class="sl">Bilan</span>Le temps « vécu » ne se saisit pas seul : la perception du temps dépend de notre état d'esprit</summary><ol class="st"><li class="s s-b"><span class="lb">Transition</span><span class="t">Il faudrait donc adjoindre au temps un autre élément pour le saisir véritablement : l'espace ?</span></li></ol></details></div></details></div></details></div></div></section><section class="part" id="p4" aria-labelledby="h-p4"><div class="wrap"><h2 id="h-p4">III. L&#x27;espace et le temps</h2><ol class="st"><li class="s s-k"><span class="t">Les théories contre lesquelles s'érige Bergson : celles qui tentent de spatialiser le temps</span></li></ol><ol class="st"><li class="s"><span class="lb">Physique moderne</span><span class="t">Depuis un peu plus d'un siècle, le temps devient une variable intégrée à un système de représentations</span></li></ol><ol class="st"><li class="s"><span class="lb">Quatrième dimension</span><span class="t">Aux trois variables (largeur, profondeur, hauteur) s'ajoute le temps : le continuum espace-temps</span></li></ol><ol class="st"><li class="s s-p"><span class="lb">Exemple</span><span class="t">Le Soleil se situe à environ 8 minutes-lumière de la Terre : le temps devient une mesure des distances</span></li><li class="s"><span class="lb">Implication</span><span class="t">La théorie de la relativité (générale ou restreinte) fait intervenir le temps comme une quatrième variable</span></li></ol><ol class="st"><li class="s"><span class="lb">Conséquence</span><span class="t">Cette variable dépend de la position de l'observateur et des ondes gravitationnelles</span></li></ol><ol class="st"><li class="s s-p"><span class="lb">Exemple</span><span class="t">La gravitation perturbe l'écoulement du temps : c'est une déformation de l'espace-temps</span></li><li class="s s-k"><span class="lb">Bilan</span><span class="t">Le temps n'est plus une flèche linéaire mais une variable influencée par des circonstances extérieures : le temps qui se voulait objectif est sujet à des changements</span></li></ol></div></section><section class="part" id="p5" aria-labelledby="h-p5"><div class="wrap"><h2 id="h-p5">5. Conclusion</h2><ol class="st"><li class="s"><span class="t">Il faut distinguer deux manières de considérer le temps : un vécu subjectif, ou une réalité objective</span></li></ol><div class="branches nest"><ol class="st"><li class="s"><span class="lb">Temps objectif</span><span class="t">En faire une réalité objective, c'est réduire notre rôle à celui d'un observateur du temps qui passe</span></li></ol><details class="br" open><summary><span class="sl">Durée</span>Si le temps passe, c&#x27;est peut-être parce que nous le sentons passer : la durée est le marqueur…</summary><ol class="st"><li class="s"><span class="lb">Durée</span><span class="t">Si le temps passe, c'est peut-être parce que nous le sentons passer : la durée est le marqueur subjectif du temps qui passe, influencé par nos perceptions</span></li></ol><ol class="st"><li class="s"><span class="lb">Explication</span><span class="t">Le passé est toujours présent en nous, sous forme de souvenir, et le présent est toujours un à-venir (la madeleine de Proust, l'analyse de Sartre)</span></li></ol></details><div class="final"><span>Conclusion</span>Même le temps « objectif » est influencé par des circonstances extérieures : en devenant une variable, il varie. La distinction serait mal posée : il faudrait plutôt distinguer un temps subjectif, vécu (la durée, le temps de la conscience, dont la perception dépend de nous) et un temps-variable (l'espace-temps, dont la perception dépend de la position de l'observateur et des ondes gravitationnelles)</div></div></div></section></main>
+<nav class="pn" aria-label="Pages de la section Plans de cours"><a class="pv" href="plan-technique.html" rel="prev"><small>← Page précédente</small><b>La technique</b></a><a class="nx" href="plan-travail.html" rel="next"><small>Page suivante →</small><b>Le travail</b></a><a class="hm" href="accueil.html">Retour à l’accueil</a></nav>
+<footer><div class="wrap"><p>Page réalisée à partir du plan de cours « Le temps ».</p></div></footer>
+<script>
+(function(){
+ var det=[].slice.call(document.querySelectorAll('details.br')),tog=document.getElementById('tog'),open=true;
+ tog.addEventListener('click',function(){open=!open;det.forEach(function(d){d.open=open});tog.textContent=open?'Tout replier':'Tout déplier'});
+ var links=[].slice.call(document.querySelectorAll('#nav a'));
+ if('IntersectionObserver' in window){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;links.forEach(function(a){if(a.getAttribute('href')==='#'+e.target.id)a.setAttribute('aria-current','true');else a.removeAttribute('aria-current')})})},{rootMargin:'-30% 0px -60% 0px'});
+  [].slice.call(document.querySelectorAll('.part')).forEach(function(s){io.observe(s)});
+ }
+ window.addEventListener('beforeprint',function(){det.forEach(function(d){d.open=true})});
+})();
+</script></body></html>

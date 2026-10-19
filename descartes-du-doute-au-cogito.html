@@ -180,6 +180,7 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);op
 }
 @page{size:A4;margin:16mm 14mm}
 </style>
+<link rel="stylesheet" href="quiz.css">
 </head>
 <body>
 <nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
@@ -351,6 +352,15 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);op
   </div>
 </section>
 </main>
+<!--quiz-->
+<section id="quiz" aria-labelledby="h-quiz">
+<h2 id="h-quiz">Quiz de révision</h2>
+<p class="qintro">5 questions pour vérifier l’essentiel. Les réponses s’affichent tout de suite, avec une explication. Rien n’est enregistré ni envoyé.</p>
+<div class="qz" id="qz"></div>
+<script type="application/json" id="quizdata">[{"q":"Descartes imagine qu’on lui objecte : les sens ne trompent que sur des choses lointaines, mais il est bien ici, assis près du feu. Quel argument oppose-t-il ?","a":["L’argument du rêve : il lui arrive de rêver qu’il est habillé près du feu alors qu’il est nu dans son lit","L’hypothèse du mauvais génie","Le cogito : « je pense, donc je suis »","L’argument de la folie : seuls les insensés se trompent sur leur corps"],"e":"Il écarte d’abord l’exemple des insensés (« ce sont des fous »), puis répond par le rêve : il n’existe aucun indice certain pour distinguer la veille du sommeil."},{"q":"Pourquoi Descartes juge-t-il d’abord l’arithmétique et la géométrie plus certaines que la physique ou la médecine ?","a":["Elles traitent de choses simples et générales, sans se demander si elles existent dans la nature","Parce qu’elles sont enseignées depuis l’Antiquité","Parce qu’elles viennent des sens, qui ne trompent jamais","Parce qu’elles ont été démontrées par Dieu"],"e":"Que je veille ou que je dorme, deux et trois font cinq. Mais cette certitude sera à son tour ébranlée par l’hypothèse d’un Dieu tout-puissant qui me ferait me tromper."},{"q":"Quelle est la fonction de l’hypothèse du mauvais génie ?","a":["Pousser le doute à son comble : puisque je peux me tromper sur tout, je suspends mon jugement","Prouver que Dieu est bon","Démontrer que les sens sont fiables","Remplacer le cogito par une autre certitude"],"e":"Le mauvais génie est une fiction volontaire. Elle permet de ne recevoir aucune fausseté en sa croyance : le trompeur « ne pourra alors rien lui imposer »."},{"q":"Selon Descartes, que ne peut-il pas feindre ?","a":["Qu’il n’est pas : de cela même qu’il pense à douter, il suit qu’il est","Qu’il n’a aucun corps","Qu’il n’y a aucun monde ni aucun lieu où il soit","Que les choses extérieures existent"],"e":"Il peut feindre qu’il n’a pas de corps et qu’il n’y a pas de monde. Mais pour feindre, il faut penser, donc être : c’est la première certitude."},{"q":"Que découvre Descartes sur la nature du moi ?","a":["C’est une substance dont toute l’essence est de penser, distincte du corps","C’est un corps animé par des sensations","C’est une illusion produite par le mauvais génie","C’est un ensemble d’habitudes acquises par l’expérience"],"e":"Le moi n’a besoin d’aucun lieu ni d’aucune chose matérielle pour être : il est plus aisé à connaître que le corps, qui reste pour l’instant douteux."}]</script>
+</section>
+<!--/quiz-->
+
 
 <nav class="pn" aria-label="Pages de la section Vérité"><a class="pv" href="verite-platon.html" rel="prev"><small>← Page précédente</small><b>Platon : le mythe de la caverne</b></a><a class="nx" href="pascal.html" rel="next"><small>Page suivante →</small><b>Pascal : le cœur et le pari</b></a><a class="hm" href="accueil.html">Retour à l’accueil</a></nav>
 <footer>
@@ -449,5 +459,6 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);op
   }
 })();
 </script>
+<script src="quiz.js" defer></script>
 </body>
 </html>

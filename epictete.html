@@ -178,6 +178,7 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);op
 }
 @page{size:A4;margin:16mm 14mm}
 </style>
+<link rel="stylesheet" href="quiz.css">
 </head>
 <body>
 <nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
@@ -330,8 +331,17 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);op
   </div>
 </section>
 </main>
+<!--quiz-->
+<section id="quiz" aria-labelledby="h-quiz">
+<h2 id="h-quiz">Quiz de révision</h2>
+<p class="qintro">5 questions pour vérifier l’essentiel. Les réponses s’affichent tout de suite, avec une explication. Rien n’est enregistré ni envoyé.</p>
+<div class="qz" id="qz"></div>
+<script type="application/json" id="quizdata">[{"q":"Quelle est la thèse principale d’Épictète dans le Manuel ?","a":["Il faut distinguer strictement ce qui dépend de nous et ce qui n’en dépend pas","Il faut chercher le plaisir avant tout","Il faut obéir aux lois de la cité","Il faut agir sur tout ce qui nous entoure"],"e":"Épictète est un philosophe stoïcien : toute sa pensée s’appuie sur cette séparation."},{"q":"Parmi ces éléments, lequel dépend de nous, selon Épictète ?","a":["Nos désirs","Notre corps","Notre richesse","Notre réputation"],"e":"Dépendent de nous : pensées, impulsions, désirs, aversions. Ne dépendent pas de nous : corps, richesse, réputation, charges publiques."},{"q":"Pourquoi vouloir agir sur ce qui ne dépend pas de nous est-il une erreur ?","a":["On place la réussite hors de nos mains","Parce que c’est interdit par les dieux","Parce que cela demande trop d’efforts","Parce que cela fait perdre de l’argent"],"e":"Nous ne pouvons agir que sur ce qui dépend de nous : le reste est soumis à des obstacles extérieurs."},{"q":"Où se trouve donc la liberté, selon Épictète ?","a":["À l’intérieur de nous : dans ce que nous contrôlons","Dans la possession de richesses","Dans la réputation auprès des autres","Dans le pouvoir sur autrui"],"e":"Tout ce qui est sous mon contrôle est libre naturellement."},{"q":"Que risque celui qui place son bonheur dans des choses qui ne dépendent pas de lui ?","a":["S’en remettre au hasard pour être heureux, et vivre contrarié, chagriné, tourmenté","Ne rien ressentir du tout","Devenir plus vertueux","Gagner en indépendance"],"e":"Si l’on tient pour sien ce qui nous est étranger, on vit tourmenté et l’on en veut aux hommes comme aux dieux."}]</script>
+</section>
+<!--/quiz-->
 
-<nav class="pn" aria-label="Pages de la section Liberté"><a class="pv" href="les-stereotypes.html" rel="prev"><small>← Page précédente</small><b>Les stéréotypes</b></a><a class="nx" href="plan-liberte.html" rel="next"><small>Page suivante →</small><b>Sommes-nous véritablement libres ?</b></a><a class="hm" href="accueil.html">Retour à l’accueil</a></nav>
+
+<nav class="pn" aria-label="Pages de la section Liberté"><a class="pv" href="les-stereotypes.html" rel="prev"><small>← Page précédente</small><b>Les stéréotypes</b></a><a class="hm" href="accueil.html">Retour à l’accueil</a></nav>
 <footer>
   <div class="wrap"><p>Page réalisée à partir de la fiche « Epictète » et de l’extrait du <i>Manuel</i> (§ 1 à 3). Portrait de fond : Gravure représentant Épictète.</p></div>
 </footer>
@@ -422,5 +432,6 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);op
   resetSim();
 })();
 </script>
+<script src="quiz.js" defer></script>
 </body>
 </html>

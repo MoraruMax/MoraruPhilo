@@ -192,6 +192,7 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);op
 }
 @page{size:A4;margin:16mm 14mm}
 </style>
+<link rel="stylesheet" href="quiz.css">
 </head>
 <body style="--k:var(--soc);--ks:var(--soc-soft)">
 <nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
@@ -252,6 +253,15 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);op
   </div>
 </section>
 </main>
+<!--quiz-->
+<section id="quiz" aria-labelledby="h-quiz">
+<h2 id="h-quiz">Quiz de révision</h2>
+<p class="qintro">5 questions pour vérifier l’essentiel. Les réponses s’affichent tout de suite, avec une explication. Rien n’est enregistré ni envoyé.</p>
+<div class="qz" id="qz"></div>
+<script type="application/json" id="quizdata">[{"q":"Que reconnaît Lévinas à propos de la technique ?","a":["Qu’elle est dangereuse : elle menace l’identité des personnes et peut « faire éclater la planète »","Qu’elle est sans danger","Qu’elle est une invention récente","Qu’elle est inutile"],"e":"« Il y a du vrai dans cette déclamation » : le danger est réel."},{"q":"Que reproche Lévinas aux ennemis de la société industrielle ?","a":["D’être la plupart du temps des « réactionnaires », qui oublient les grands espoirs de l’époque","D’être trop favorables aux machines","D’être trop pauvres","D’être trop jeunes"],"e":"Ils détestent ou oublient la foi en la libération de l’homme."},{"q":"Selon Lévinas, d’où vient la foi en la libération de l’homme ?","a":["De l’ébranlement des civilisations sédentaires et de l’effritement des « lourdes épaisseurs du passé »","Des facilités des machines","Du pouvoir politique","Des jouets mécaniques"],"e":"Elle ne tient ni aux facilités des machines, ni aux « jouets mécaniques »."},{"q":"Quelle est la relation entre technique et « allègement de la substance humaine » ?","a":["La technique est l’effet de cet allègement plus que sa cause","La technique en est la cause unique","La technique n’a aucun rapport avec lui","La technique l’empêche"],"e":"Revendiquer les particularismes, c’est être « sous-développé »."},{"q":"Comment la position de Lévinas se compare-t-elle à celle de Heidegger ?","a":["Lévinas critique l’enracinement et la nostalgie des particularismes que prolonge, vraisemblablement, la pensée de Heidegger","Lévinas approuve Heidegger entièrement","Lévinas défend les racines contre la technique","Lévinas ne parle pas de technique"],"e":"L’extrait ne nomme pas Heidegger : le rapprochement est une lecture proposée, à vérifier dans le texte complet."}]</script>
+</section>
+<!--/quiz-->
+
 <nav class="pn" aria-label="Pages de la section Technique"><a class="pv" href="technique-arendt.html" rel="prev"><small>← Page précédente</small><b>Arendt : animal laborans et homo faber</b></a><a class="hm" href="accueil.html">Retour à l’accueil</a></nav>
 <footer><div class="wrap"><p>Page réalisée à partir de l’extrait de <i>Difficile liberté</i> d’Emmanuel Lévinas. Les citations sont de courts extraits du texte étudié ; la présentation de l’argumentation, les exercices et les pistes de discussion sont rédigés pour cette page. Portrait de fond : Photographie d’Emmanuel Lévinas.</p></div></footer>
 <script>
@@ -301,5 +311,6 @@ lab();
 sorter('#s1','#sc1','#r1',[["Lévinas pense que la technique n’est pas dangereuse.", 1, "Non : « la technique est dangereuse », pour les personnes et pour la planète."], ["Il juge que les adversaires de la société industrielle sont souvent des réactionnaires.", 0, "Oui, c’est l’objet de sa critique."], ["La foi en la libération de l’homme tient aux jouets mécaniques.", 1, "Non : elle n’y tient pas, mais à l’ébranlement des civilisations sédentaires."], ["La technique est plutôt l’effet d’un allègement de la substance humaine que sa cause.", 0, "Oui : le développement de la technique « est déjà l’effet » de cet allègement."], ["Les particularismes locaux sont la valeur à défendre en priorité.", 1, "Non : revendiquer ces particularismes, c’est être « sous-développé », dit-il."]],[['Selon l’auteur','var(--nat)'],['Pas selon l’auteur','var(--soc)']]);
 })();
 </script>
+<script src="quiz.js" defer></script>
 </body>
 </html>

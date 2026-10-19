@@ -192,6 +192,7 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);op
 }
 @page{size:A4;margin:16mm 14mm}
 </style>
+<link rel="stylesheet" href="quiz.css">
 </head>
 <body style="--k:var(--gold);--ks:var(--gold-soft)">
 <nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
@@ -252,6 +253,15 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);op
   </div>
 </section>
 </main>
+<!--quiz-->
+<section id="quiz" aria-labelledby="h-quiz">
+<h2 id="h-quiz">Quiz de révision</h2>
+<p class="qintro">5 questions pour vérifier l’essentiel. Les réponses s’affichent tout de suite, avec une explication. Rien n’est enregistré ni envoyé.</p>
+<div class="qz" id="qz"></div>
+<script type="application/json" id="quizdata">[{"q":"Pour Rousseau, qu’est-ce qui fait qu’une parole fausse est un mensonge ?","a":["L’intention de tromper","Le fait qu’elle soit fausse","Le préjudice causé à autrui","Le fait qu’elle soit dite en public"],"e":"« Dire faux n’est mentir que par l’intention de tromper. » Une erreur involontaire n’est pas un mensonge."},{"q":"Quelle est la différence entre imposture, fraude et calomnie ?","a":["Imposture : tromper pour son avantage. Fraude : pour celui d’autrui. Calomnie : pour nuire","Ce sont trois noms du même mensonge","Imposture : pour nuire. Fraude : pour soi. Calomnie : pour autrui","Ce sont trois degrés de gravité d’un seul mensonge"],"e":"Rousseau qualifie la calomnie de « pire espèce de mensonge »."},{"q":"Pourquoi le mensonge parfaitement innocent est-il rare ?","a":["Il faudrait la certitude que l’erreur ne peut nuire à personne, et cette certitude est rare","Parce que tout le monde ment par intérêt","Parce que la loi l’interdit","Parce que le mensonge est toujours découvert"],"e":"Ne pas vouloir nuire ne suffit pas : il faut être certain que l’erreur ne peut nuire à personne."},{"q":"Pourquoi la fiction n’est-elle pas un mensonge, selon Rousseau ?","a":["Elle est dite sans profit ni préjudice, pour soi comme pour autrui : elle ne trompe personne","Parce qu’elle est toujours vraie","Parce qu’elle est écrite","Parce que le romancier est de bonne foi, quoi qu’il arrive"],"e":"Le roman, le conte : mentir sans profit ni préjudice, ce n’est pas mentir."},{"q":"Tromper est-il toujours nuire ?","a":["Non : l’intention de tromper n’est pas toujours jointe à celle de nuire","Oui : toute tromperie est un préjudice","Oui, sauf dans la fiction","Non, car tromper n’existe pas sans fiction"],"e":"Elle peut même avoir un but tout contraire à nuire. D’où la nécessité de distinguer plusieurs sortes de mensonges."}]</script>
+</section>
+<!--/quiz-->
+
 <nav class="pn" aria-label="Pages de la section Vérité"><a class="pv" href="verite-kant.html" rel="prev"><small>← Page précédente</small><b>Kant : mensonge et devoir</b></a><a class="nx" href="verite-hume.html" rel="next"><small>Page suivante →</small><b>Hume : croyance raisonnable</b></a><a class="hm" href="accueil.html">Retour à l’accueil</a></nav>
 <footer><div class="wrap"><p>Page réalisée à partir de l’extrait des <i>Rêveries du promeneur solitaire</i> de Jean-Jacques Rousseau. Les citations sont de courts extraits du texte étudié ; la présentation de l’argumentation, les exercices et les pistes de discussion sont rédigés pour cette page. Portrait de fond : Pastel de Maurice Quentin de La Tour, domaine public.</p></div></footer>
 <script>
@@ -301,5 +311,6 @@ lab();
 sorter('#s1','#sc1','#r1',[["Un candidat exagère ses diplômes pour obtenir un poste.", 0, "Imposture : il ment pour son propre avantage."], ["Un vendeur gonfle les mérites d’un produit pour faire gagner de l’argent à son employeur.", 1, "Fraude : ici on ment pour l’avantage d’autrui (l’employeur)."], ["Une personne répand une rumeur inventée pour ruiner la réputation d’un rival.", 2, "Calomnie : mentir pour nuire, « la pire espèce »."], ["Un conteur invente une histoire pour distraire des enfants, sans que personne soit trompé.", 3, "Fiction : ni profit ni préjudice."], ["Un élève invente une excuse pour éviter une punition.", 0, "Imposture : il ment pour son propre avantage."]],[["Imposture", "var(--soc)"], ["Fraude", "var(--rai)"], ["Calomnie", "var(--bad)"], ["Fiction", "var(--nat)"]]);
 })();
 </script>
+<script src="quiz.js" defer></script>
 </body>
 </html>

@@ -164,6 +164,7 @@ footer p{font-size:.92rem;color:var(--muted);margin:0}
 @page{size:A4;margin:16mm 14mm}
 @media print{.opts,#run,#reset,#caption,#status{display:none!important}}
 </style>
+<link rel="stylesheet" href="quiz.css">
 </head>
 <body>
 <nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
@@ -336,6 +337,15 @@ footer p{font-size:.92rem;color:var(--muted);margin:0}
   </div>
 </section>
 </main>
+<!--quiz-->
+<section id="quiz" aria-labelledby="h-quiz">
+<h2 id="h-quiz">Quiz de révision</h2>
+<p class="qintro">5 questions pour vérifier l’essentiel. Les réponses s’affichent tout de suite, avec une explication. Rien n’est enregistré ni envoyé.</p>
+<div class="qz" id="qz"></div>
+<script type="application/json" id="quizdata">[{"q":"L’âne de Buridan est une expérience de pensée. Qu’est-ce que cela signifie ?","a":["Une situation imaginaire qu’on analyse pour réfléchir","Une expérience menée en laboratoire sur un véritable âne","Un récit historique sur la vie de Buridan","Un exemple tiré d’une fable de La Fontaine"],"e":"Une expérience de pensée est une situation imaginaire. Ici, l’âne est placé dans des conditions parfaitement symétriques."},{"q":"Dans l’expérience, quelle est la situation de l’âne ?","a":["Il a autant faim que soif et se trouve à égale distance d’un seau d’eau et d’un seau de nourriture","Il a très faim mais n’a pas soif","Il est plus proche du seau d’eau que de la nourriture","Il est attaché et ne peut atteindre aucun seau"],"e":"La symétrie est parfaite : autant de faim que de soif, à équidistance des deux seaux."},{"q":"Pourquoi la plupart des arguments « pour manger » ou « pour boire » ne tiennent-ils pas ?","a":["Ils modifient les conditions de l’expérience ou prêtent des pensées à l’âne","Parce qu’ils sont trop compliqués","Parce que l’âne ne peut pas bouger","Parce qu’ils contredisent Descartes"],"e":"Ils ajoutent un élément absent de l’expérience (une odeur, un besoin plus urgent) ou attribuent à l’âne une préférence ou un instinct injustifiés."},{"q":"Quel est le seul argument qui tient ?","a":["N’ayant aucune raison de choisir, l’âne ne parvient pas à se décider","L’âne choisit toujours le seau de droite","L’âne boit d’abord, car la soif est plus urgente","L’âne choisit au hasard et agit librement"],"e":"Sans raison de préférer une option à une autre, l’âne reste paralysé : c’est ce que la fiche appelle l’argument qui tient."},{"q":"Que dit Descartes de la liberté d’indifférence ?","a":["Elle est le « plus bas degré de la liberté » : elle peut conduire à l’inaction","Elle est la forme la plus haute de la liberté","Elle prouve que l’homme est déterminé","Elle n’existe que chez les animaux"],"e":"Être indifférent entre deux options peut empêcher d’agir : une liberté qui paralyse."}]</script>
+</section>
+<!--/quiz-->
+
 
 <nav class="pn" aria-label="Pages de la section Liberté"><a class="nx" href="determinisme-social.html" rel="next"><small>Page suivante →</small><b>Le déterminisme social</b></a><a class="hm" href="accueil.html">Retour à l’accueil</a></nav>
 <footer>
@@ -502,5 +512,6 @@ footer p{font-size:.92rem;color:var(--muted);margin:0}
   }
 })();
 </script>
+<script src="quiz.js" defer></script>
 </body>
 </html>

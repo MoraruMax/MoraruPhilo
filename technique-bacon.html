@@ -192,6 +192,7 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);op
 }
 @page{size:A4;margin:16mm 14mm}
 </style>
+<link rel="stylesheet" href="quiz.css">
 </head>
 <body style="--k:var(--nat);--ks:var(--nat-soft)">
 <nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
@@ -252,6 +253,15 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);op
   </div>
 </section>
 </main>
+<!--quiz-->
+<section id="quiz" aria-labelledby="h-quiz">
+<h2 id="h-quiz">Quiz de révision</h2>
+<p class="qintro">5 questions pour vérifier l’essentiel. Les réponses s’affichent tout de suite, avec une explication. Rien n’est enregistré ni envoyé.</p>
+<div class="qz" id="qz"></div>
+<script type="application/json" id="quizdata">[{"q":"Quelle est la formule de Bacon sur le rapport de l’homme à la nature ?","a":["On ne peut vaincre la nature qu’en lui obéissant","Il faut dominer la nature sans la connaître","Il faut laisser la nature intacte","La nature n’obéit à aucune loi"],"e":"La puissance de l’homme ne s’oppose pas aux lois de la nature : elle en découle."},{"q":"Que veut dire Bacon par « ministre et interprète de la nature » ?","a":["L’homme sert la nature en la lisant et en la traduisant pour agir","L’homme commande à la nature","L’homme est un prêtre de la nature","L’homme est un juge de la nature"],"e":"Le ministre est un serviteur, l’interprète est celui qui lit et traduit : l’homme n’étend son savoir et son action qu’en découvrant l’ordre naturel."},{"q":"Pourquoi la main nue et l’esprit seul sont-ils faibles ?","a":["Ils ont un pouvoir très limité : ce sont les instruments et les secours qui font presque tout","Parce que l’homme est naturellement paresseux","Parce que la nature est hostile","Parce que Dieu l’a voulu ainsi"],"e":"Il y a des instruments pour la main (outils) et pour l’esprit (méthode, expérience, raisonnement)."},{"q":"Quel lien Bacon établit-il entre science et puissance ?","a":["Connaître la cause, c’est pouvoir produire l’effet : savoir et pouvoir vont ensemble","La science est inutile en pratique","La puissance précède toujours la science","La science et la technique s’opposent"],"e":"Ignorer la cause nous prive de l’effet. La science est la source de la technique."},{"q":"Quel point du texte pourrait être discuté en le comparant avec Heidegger ?","a":["Le mot « vaincre » présente la nature comme une chose à soumettre, voire comme une simple ressource","L’idée que les outils sont inutiles","L’idée que la technique est sans conséquences","L’idée que la nature est une divinité"],"e":"Heidegger se demandera si la nature, ainsi comprise, n’est pas réduite à un stock à exploiter."}]</script>
+</section>
+<!--/quiz-->
+
 <nav class="pn" aria-label="Pages de la section Technique"><a class="nx" href="technique-heidegger.html" rel="next"><small>Page suivante →</small><b>Heidegger : le Rhin, de fleuve à ressource</b></a><a class="hm" href="accueil.html">Retour à l’accueil</a></nav>
 <footer><div class="wrap"><p>Page réalisée à partir de l’extrait du <i>Novum organum</i> de Bacon. Les citations sont de courts extraits du texte étudié ; la présentation de l’argumentation, les exercices et les pistes de discussion sont rédigés pour cette page. Portrait de fond : Portrait attribué à Paul van Somer, 1617, domaine public.</p></div></footer>
 <script>
@@ -301,5 +311,6 @@ lab();
 sorter('#s1','#sc1','#r1',[["Pour agir sur la nature, il faut d’abord connaître ses lois.", 0, "Oui : on ne peut ce que l’on ne sait pas."], ["L’homme est le maître de la nature et peut en faire ce qu’il veut, sans la connaître.", 1, "Non : il ne peut rien de plus que ce qu’il découvre de l’ordre naturel."], ["Les instruments aident aussi l’esprit, pas seulement la main.", 0, "Oui : les instruments de l’esprit l’aident à saisir la vérité ou à éviter l’erreur."], ["Vaincre la nature suppose de lui désobéir.", 1, "Non : on ne peut la vaincre qu’en lui obéissant."], ["La théorie et la pratique sont liées : la cause connue devient un moyen d’action.", 0, "Oui : ce qui était cause dans la théorie devient règle ou moyen dans la pratique."]],[['Selon l’auteur','var(--nat)'],['Pas selon l’auteur','var(--soc)']]);
 })();
 </script>
+<script src="quiz.js" defer></script>
 </body>
 </html>

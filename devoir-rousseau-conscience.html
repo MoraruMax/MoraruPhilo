@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rousseau : la conscience, instinct divin</title>
+<style>
+:root{
+  color-scheme:light;
+  --bg:#F7F4EF; --surface:#FFFFFF; --ink:#1E1A16; --muted:#5E564D; --line:#DED6CB; --focus:#0B5CAD; --on:#FFFFFF;
+  --soc:#9A3412; --soc-soft:#FBE7DC;
+  --nat:#1B6B4A; --nat-soft:#DDF1E7;
+  --rai:#2B4C9B; --rai-soft:#E1E8F8;
+  --gold:#8A5A00; --gold-soft:#F6E8C8; --bad:#B3261E;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --serif:Charter,"Bitstream Charter","Sitka Text",Cambria,Georgia,serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#16130F; --surface:#211D18; --ink:#F2ECE4; --muted:#B5AA9C; --line:#3A332B; --focus:#8CC2FF; --on:#16130F;
+    --soc:#FF9E6B; --soc-soft:#45220F; --nat:#74DDA7; --nat-soft:#143826; --rai:#9DB8FF; --rai-soft:#1C2A52; --gold:#F2C36B; --gold-soft:#3F3112; --bad:#FF8F86;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#16130F; --surface:#211D18; --ink:#F2ECE4; --muted:#B5AA9C; --line:#3A332B; --focus:#8CC2FF; --on:#16130F;
+  --soc:#FF9E6B; --soc-soft:#45220F; --nat:#74DDA7; --nat-soft:#143826; --rai:#9DB8FF; --rai-soft:#1C2A52; --gold:#F2C36B; --gold-soft:#3F3112; --bad:#FF8F86;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.1rem/1.65 var(--serif)}
+.wrap{width:min(980px,100% - 2.5rem);margin-inline:auto}
+h1,h2,h3{margin:0}
+h1{font:800 clamp(2.6rem,8vw,5rem)/1.02 var(--sans);letter-spacing:-.025em}
+h2{font:800 clamp(1.5rem,3.2vw,2.1rem)/1.2 var(--sans);margin-bottom:.8rem}
+h3{font:700 1.08rem/1.35 var(--sans)}
+p{margin:0 0 1em}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
+.btn{font:600 .95rem/1.2 var(--sans);color:var(--ink);background:transparent;border:1.5px solid var(--ink);border-radius:8px;padding:.65rem 1rem;cursor:pointer}
+.btn:hover{background:var(--line)}
+.btn.primary{background:var(--ink);color:var(--bg)}
+.btn.primary:hover{background:var(--ink);filter:brightness(1.2)}
+.note{font:500 .92rem/1.5 var(--sans);color:var(--muted)}
+section.block{border-top:1px solid var(--line);padding:clamp(2.2rem,6vw,3.8rem) 0}
+.sec-head{max-width:46rem;margin-bottom:1.6rem}
+.src{font:600 .85rem/1.35 var(--sans);color:var(--muted)}
+blockquote{margin:0}
+
+/* Hero */
+.hero{padding:clamp(2rem,6vw,4rem) 0 clamp(2rem,5vw,3rem)}
+.hgrid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:2rem clamp(2rem,5vw,4rem);align-items:center}
+.lead{font-size:clamp(1.2rem,2.4vw,1.45rem);line-height:1.5;margin:1.3rem 0 0;max-width:34ch}
+.must{background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--ink);padding:1.2rem 1.3rem}
+.must p{margin:0 0 .7rem;font-size:1.05rem}
+.must .q{font:700 1.3rem/1.3 var(--serif)}
+.must .chain{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;margin:.8rem 0}
+.must .chain span{font:700 .85rem/1.2 var(--sans);padding:.35rem .55rem;background:var(--bg);border:1px solid var(--line)}
+.must .chain i{font-style:normal;color:var(--muted)}
+
+/* Questions */
+.qs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+.qc{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--k);padding:1rem 1.2rem}
+.qc h3{color:var(--k);margin-bottom:.4rem}
+.qc p{margin:0;font-size:1rem}
+
+/* Parcours */
+.path{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem;margin-bottom:1rem}
+.path button{font:700 .98rem/1.3 var(--sans);text-align:left;color:var(--ink);background:var(--surface);border:2px solid var(--line);border-radius:8px;padding:.8rem .9rem;cursor:pointer}
+.path button small{display:block;font:600 .8rem/1.3 var(--sans);color:var(--muted);margin-top:.15rem}
+.path button[aria-selected="true"]{border-color:var(--k);background:var(--ks)}
+.panel{background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--k);padding:clamp(1rem,3vw,1.7rem)}
+.panel[hidden]{display:none}
+.panel > h3{font-size:1.3rem;color:var(--k);margin-bottom:.3rem}
+.panel .thesis{font:700 1.2rem/1.35 var(--serif);margin:.2rem 0 1rem}
+.panel h4{font:800 .8rem/1 var(--sans);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin:1.3rem 0 .5rem}
+.panel ul{margin:0;padding-left:1.15rem}
+.panel li{margin-bottom:.5rem;font-size:1.02rem}
+.auth{background:var(--ks);border-left:5px solid var(--k);padding:.8rem 1rem;margin:0 0 .8rem}
+.auth b{font:700 .95rem/1.3 var(--sans);color:var(--k);display:block;margin-bottom:.25rem}
+.auth blockquote{font-size:1rem;font-style:italic;margin:.3rem 0}
+.auth p{margin:.3rem 0 0;font-size:1rem}
+.lim{background:var(--bg);border-left:5px solid var(--gold);padding:.8rem 1rem;font:500 .98rem/1.55 var(--sans)}
+.lim b{color:var(--gold)}
+
+/* Sorters */
+.sorter{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.5rem 1rem;align-items:center;padding:.8rem 0;border-bottom:1px solid var(--line)}
+.row .name{font:600 1rem/1.45 var(--sans)}
+.row .name i{font:italic 400 1rem/1.45 var(--serif)}
+.pick{display:flex;flex-wrap:wrap;gap:.4rem}
+.pick button{font:700 .9rem/1.15 var(--sans);color:var(--ink);background:var(--surface);border:2px solid var(--line);border-radius:8px;padding:.55rem .75rem;cursor:pointer}
+.pick button[disabled]{cursor:default}
+.pick button:hover:not([disabled]){border-color:var(--c)}
+.pick button[aria-pressed="true"]{background:var(--c);border-color:var(--c);color:var(--on)}
+.fb{grid-column:1/-1;margin:0;font:500 .95rem/1.45 var(--sans);padding:.5rem .8rem;border-left:5px solid var(--line);background:var(--surface)}
+.fb[hidden]{display:none}
+.row.good .fb{border-left-color:var(--nat)} .row.bad .fb{border-left-color:var(--bad)}
+.score{display:flex;flex-wrap:wrap;gap:.8rem 1.2rem;align-items:center;margin-top:1.1rem}
+.score p{margin:0;font:600 1rem/1.4 var(--sans);flex:1 1 16rem}
+
+/* Test d'universalisation */
+.lab{background:var(--surface);border:1px solid var(--line);padding:clamp(1rem,3vw,1.6rem)}
+.maxims{display:flex;flex-wrap:wrap;gap:.5rem;margin:.8rem 0 1.2rem}
+.maxims button{font:600 .98rem/1.3 var(--sans);color:var(--ink);background:var(--bg);border:2px solid var(--line);border-radius:8px;padding:.7rem .95rem;cursor:pointer;text-align:left}
+.maxims button[aria-pressed="true"]{border-color:var(--rai);background:var(--rai-soft)}
+.world{display:grid;grid-template-columns:repeat(8,1fr);gap:.4rem;max-width:30rem;margin:.6rem 0 1rem}
+.world span{aspect-ratio:1;border-radius:50%;background:var(--rai);opacity:.85;display:flex;align-items:center;justify-content:center;font:700 .8rem/1 var(--sans);color:var(--on)}
+.world.broken span{background:var(--bad);opacity:.7}
+@media (prefers-reduced-motion:no-preference){.world span{transition:background .4s,opacity .4s}}
+.steps{margin:0;padding:0;list-style:none;counter-reset:s}
+.steps li{counter-increment:s;display:grid;grid-template-columns:2rem 1fr;gap:.5rem;padding:.5rem 0;border-top:1px solid var(--line);font:500 1rem/1.5 var(--sans)}
+.steps li::before{content:counter(s);font:800 1.3rem/1 var(--sans);color:var(--rai)}
+.steps[hidden]{display:none}
+.verdict{margin:1rem 0 0;padding:.8rem 1rem;border-left:6px solid var(--bad);background:var(--bg);font:600 1rem/1.5 var(--sans)}
+.verdict[hidden]{display:none}
+
+/* Dilemme */
+.dil{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.opt{background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--k);padding:1rem 1.2rem;font:500 1rem/1.55 var(--sans)}
+.opt h3{color:var(--k);margin-bottom:.4rem}
+.opt ul{margin:.4rem 0 .8rem;padding-left:1.1rem}
+.opt li{margin-bottom:.35rem}
+.opt .m{font-weight:700}
+.pickd{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+.after{margin-top:1rem;padding:1rem 1.2rem;background:var(--surface);border-left:6px solid var(--gold);font:500 1rem/1.55 var(--sans)}
+.after[hidden]{display:none}
+
+/* Fil */
+.recap{margin:0;padding:0;list-style:none;max-width:48rem}
+.recap li{padding:.9rem 0;border-top:1px solid var(--line)}
+.recap li:last-child{border-bottom:1px solid var(--line)}
+.recap b{font-family:var(--sans)}
+footer{padding:1.6rem 0 2.5rem;font:500 .9rem/1.5 var(--sans);color:var(--muted)}
+footer p{margin:0}
+@media (max-width:820px){
+  .hgrid,.qs,.dil{grid-template-columns:1fr}
+  .path{grid-template-columns:1fr}
+  .row{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
+
+.stp{list-style:none;margin:0;padding:0;counter-reset:s}
+.stp li{counter-increment:s;display:grid;grid-template-columns:2.4rem 1fr;gap:.6rem;background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--k,var(--ink));padding:.9rem 1.1rem;margin-bottom:.7rem}
+.stp li::before{content:counter(s);font:800 1.6rem/1 var(--sans);color:var(--k)}
+.stp li[hidden]{display:none}
+.stp h3{font-size:1.02rem;margin-bottom:.2rem}
+.stp p{margin:0;font-size:1.02rem}
+@media (prefers-reduced-motion:no-preference){.stp li.new{animation:in .5s ease both}@keyframes in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}}
+.terms details{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--k);margin-bottom:.6rem;padding:.2rem 1rem}
+.terms summary{font:700 1.02rem/1.4 var(--sans);cursor:pointer;padding:.7rem 0}
+.terms details p{margin:0 0 .9rem;font-size:1.02rem}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media (max-width:820px){.two{grid-template-columns:1fr}}
+.links a{color:var(--k);font-weight:700}
+
+/* Fond : portrait */
+body::before{content:"";position:fixed;inset:0;z-index:-2;background:url("images/rousseau.jpg") center top/cover no-repeat}
+@media (min-aspect-ratio:1/1){body::before{background:#211c17 url("images/rousseau.jpg") right center/auto 100% no-repeat}}
+body::after{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);opacity:.77;pointer-events:none}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) body::after{opacity:.87}}
+:root[data-theme="dark"] body::after{opacity:.87}
+.hero h1,.hero p,section.block h2,section.block > .wrap > p,.sec-head p,footer p{text-shadow:0 0 .4em var(--bg),0 0 .9em var(--bg)}
+
+.pn{display:flex;gap:1rem;flex-wrap:wrap;margin:2.5rem auto 0;max-width:980px;padding:0 1.25rem;box-sizing:content-box}
+.pn a{flex:1 1 16rem;display:flex;flex-direction:column;gap:.25rem;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--k,var(--ink));padding:.9rem 1.1rem;border-radius:0 0 8px 8px}
+.pn a:hover{border-color:var(--k,var(--ink))}.pn a:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.pn small{font:600 .78rem/1 system-ui,-apple-system,sans-serif;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.pn b{font:700 1.1rem/1.25 system-ui,-apple-system,sans-serif}
+.pn .nx{text-align:right;margin-left:auto;max-width:calc(50% - .5rem)}
+.pn .nx:first-child{margin-left:auto;max-width:calc(50% - .5rem)}
+.pn .hm{flex:0 0 100%;text-align:center;font:500 .92rem/1 system-ui,-apple-system,sans-serif;background:none;border:0;padding:.4rem;color:var(--ink);text-decoration:underline}
+
+.pdfbtn{display:inline-flex;align-items:center;gap:.5rem;font:600 .88rem/1 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--surface);border:1.5px solid var(--ink);border-radius:999px;padding:.55rem .95rem;cursor:pointer}
+.pdfbtn:hover{background:var(--ink);color:var(--bg)}.pdfbtn:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:2px}
+@media print{
+  :root{--bg:#fff!important;--surface:#fff!important;--ink:#111!important;--muted:#444!important;--line:#bbb!important;color-scheme:light!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:#fff!important;color:#111!important}
+  body::before,body::after{display:none!important}
+  nav,.pdfbtn,.pn,video,section[aria-labelledby="h-video"]{display:none!important}
+  .rev,.js .rev{opacity:1!important;transform:none!important}
+  .stp li[hidden]{display:list-item!important}
+  details>*{display:block!important}
+  article,li,.card,figure,.stage{break-inside:avoid}
+  h1,h2,h3{break-after:avoid;text-shadow:none!important}
+  *{text-shadow:none!important}
+  a{color:inherit;text-decoration:none}
+  section.block,.part{padding-top:1.2rem!important;padding-bottom:1.2rem!important}
+  footer{break-before:avoid;border-top:1px solid #999;margin-top:1rem}
+}
+@page{size:A4;margin:16mm 14mm}
+
+/* Texte */
+.tx summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:.7rem;font:800 clamp(1.4rem,3vw,1.9rem)/1.2 var(--sans);padding:.3rem 0}
+.tx summary::-webkit-details-marker{display:none}
+.tx summary::before{content:"";width:.6em;height:.6em;border-right:.2em solid currentColor;border-bottom:.2em solid currentColor;transform:rotate(-45deg);transition:transform .15s;flex:none;margin-right:.2rem}
+.tx[open] summary::before{transform:rotate(45deg)}
+@media (prefers-reduced-motion:reduce){.tx summary::before{transition:none}}
+.txb{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--k,var(--ink));padding:1.2rem clamp(1rem,3vw,1.8rem);margin-top:.9rem;max-width:46rem;font:400 1.1rem/1.75 var(--serif)}
+.txb p{margin:0 0 1em}
+.txb h3{font:700 1rem/1.3 var(--sans);margin:1.2em 0 .5em}
+.txb .vs{font:700 .72rem/1 var(--sans);color:var(--muted);margin-right:.15em}
+.txb .tsrc{font:600 .88rem/1.4 var(--sans);color:var(--muted);text-align:right;margin:1.1em 0 0}
+.txb .tsrc:not(:last-child){margin-bottom:1.4em;padding-bottom:1.2em;border-bottom:1px solid var(--line)}
+</style>
+<link rel="stylesheet" href="quiz.css">
+</head>
+<body style="--k:var(--nat);--ks:var(--nat-soft)">
+<nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
+<header class="hero">
+  <div class="wrap hgrid">
+    <div>
+      <h1>Rousseau : la conscience</h1>
+      <p class="lead">Faut-il être savant pour être moral ? Rousseau confie à la conscience le jugement du bien et du mal.</p>
+    </div>
+    <div class="must" style="border-top-color:var(--k)">
+      <p class="src">Rousseau, <i>Émile</i>, livre IV, profession de foi du vicaire savoyard</p>
+      <p class="q">« Conscience ! conscience ! instinct divin, immortelle et céleste voix. »</p>
+      <p>La conscience est un guide sûr, qui parle à tous les cœurs, mais que les préjugés étouffent. Sans Dieu, la vertu n’aurait pas de fondement solide.</p>
+    </div>
+  </div>
+</header>
+<main>
+<section class="block" aria-labelledby="h-tx">
+  <div class="wrap">
+    <details class="tx"><summary id="h-tx">Le texte</summary><div class="txb"><p>Conscience ! conscience ! instinct divin, immortelle et céleste voix ; guide assuré d’un être ignorant et borné, mais intelligent et libre ; juge infaillible du bien et du mal, qui rends l’homme semblable à Dieu, c’est toi qui fais l’excellence de sa nature et la moralité de ses actions ; sans toi je ne sens rien en moi qui m’élève au-dessus des bêtes, que le triste privilège de m’égarer d’erreur en erreur à l’aide d’un entendement sans règle et d’une raison sans principes. Grâce au ciel, nous voilà délivrés de tout cet effrayant appareil de philosophie : nous pouvons être hommes sans être savants ; dispensés de consumer notre vie à l’étude de la morale, nous avons à moindres frais un guide plus assuré dans ce dédale immense des opinions humaines.</p><p>Mais ce n’est pas assez que ce guide existe, il faut savoir le reconnaître et le suivre. S’il parle à tous les cœurs, pourquoi donc y en a-t-il si peu qui l’entendent ? Eh ! c’est qu’il nous parle la langue de la nature, que tout nous a fait oublier. La conscience est timide, elle aime la retraite et la paix ; le monde et le bruit l’épouvantent : les préjugés dont on la fait naître sont ses plus cruels ennemis ; elle fuit ou se tait devant eux : leur voix bruyante étouffe la sienne et l’empêche de se faire entendre ; le fanatisme ose la contrefaire, et dicter le crime en son nom. Elle se rebute enfin à force d’être éconduite ; elle ne nous parle plus, elle ne nous répond plus, et, après de si longs mépris pour elle, il en coûte autant de la rappeler qu’il en coûta de la bannir.</p><p>Combien de fois je me suis lassé dans mes recherches de la froideur que je sentais en moi ! Combien de fois la tristesse et l’ennui, versant leur poison sur mes premières méditations, me les rendirent insupportables ? Mon cœur aride ne donnait qu’un zèle languissant et tiède à l’amour de la vérité. Je me disais : Pourquoi me tourmenter à chercher ce qui n’est pas ? Le bien moral n’est qu’une chimère ; il n’y a rien de bon que les plaisirs des sens. O quand on a une fois perdu le goût des plaisirs de l’âme, qu’il est difficile de le reprendre ! Qu’il est plus difficile encore de le prendre quand on ne l’a jamais eu ! S’il existait un homme assez misérable pour n’avoir rien fait en toute sa vie dont le souvenir le rendît content de lui-même et bien aise d’avoir vécu, cet homme serait incapable de jamais se connaître ; et, faute de sentir quelle bonté convient à sa nature, il resterait méchant par force et serait éternellement malheureux.</p><p>Mais croyez-vous qu’il y ait sur la terre entière un seul homme assez dépravé pour n’avoir jamais livré son cœur à la tentation de bien faire ? Cette tentation est si naturelle et si douce, qu’il est impossible de lui résister toujours ; et le souvenir du plaisir qu’elle a produit une fois suffit pour la rappeler sans cesse. Malheureusement elle est d’abord pénible à satisfaire ; on a mille raisons pour se refuser au penchant de son cœur ; la fausse prudence le resserre dans les bornes du moi humain ; il faut mille efforts de courage pour oser les franchir. Se plaire à bien faire est le prix d’avoir bien fait, et ce prix ne s’obtient qu’après l’avoir mérité.</p><p>Rien n’est plus aimable que la vertu ; mais il en faut jouir pour la trouver telle. Quand on la veut embrasser, semblable au Protée de la fable, elle prend d’abord mille formes effrayantes, et ne se montre enfin sous la sienne qu’à ceux qui n’ont point lâché prise. Combattu sans cesse par mes sentiments naturels qui parlaient pour l’intérêt commun, et par ma raison qui rapportait tout à moi, j’aurais flotté toute ma vie dans cette continuelle alternative, faisant le mal, aimant le bien, et toujours contraire à moi-même, si de nouvelles lumières n’eussent éclairé mon cœur, si la vérité, qui fixa mes opinions, n’eût encore assuré ma conduite et ne m’eût mis d’accord avec moi.</p><p>On a beau vouloir établir la vertu par la raison seule, quelle solide base peut-on lui donner ? La vertu, disent-ils, est l’amour de l’ordre. Mais cet amour peut-il donc et doit-il l’emporter en moi sur celui de mon bien-être ? Qu’ils me donnent une raison claire et suffisante pour le préférer. Dans le fond leur prétendu principe est un pur jeu de mots ; car je dis aussi, moi, que le vice est l’amour de l’ordre, pris dans un sens différent. Il y a quelque ordre moral partout où il y a sentiment et intelligence. La différence est que le bon s’ordonne par rapport au tout, et que le méchant ordonne le tout par rapport à lui. Celui-ci se fait le centre de toutes choses ; l’autre mesure son rayon et se tient à la circonférence.</p><p>Alors il est ordonné par rapport au centre commun, qui est Dieu, et par rapport à tous les cercles concentriques, qui sont les créatures. Si la Divinité n’est pas, il n’y a que le méchant qui raisonne, le bon n’est qu’un insensé. O mon enfant, puissiez-vous sentir un jour de quel poids on est soulagé, quand, après avoir épuisé la vanité des opinions humaines et goûté l’amertume des passions, on trouve enfin si près de soi la route de la sagesse, le prix des travaux de cette vie, et la source du bonheur dont on a désespéré !</p><p>Tous les devoirs de la loi naturelle, presque effacés de mon cœur par l’injustice des hommes, s’y retracent au nom de l’éternelle justice qui me les impose et qui me les voit remplir. Je ne sens plus en moi que l’ouvrage et l’instrument du grand Être qui veut le bien, qui le fait, qui fera le mien par le concours de mes volontés aux siennes et par le bon usage de ma liberté : j’acquiesce à l’ordre qu’il établit, sûr de jouir moi-même un jour de cet ordre et d’y trouver ma félicité ; car quelle félicité plus douce que de se sentir ordonné dans un système où tout est bien ? En proie à la douleur, je la supporte avec patience, en songeant qu’elle est passagère et qu’elle vient d’un corps qui n’est point à moi.</p><p>Si je fais une bonne action sans témoin, je sais qu’elle est vue, et je prends acte pour l’autre vie de ma conduite en celle-ci. En souffrant une injustice, je me dis : l’Etre juste qui régit tout saura bien m’en dédommager, les besoins de mon corps, les misères de ma vie me rendent l’idée de la mort plus supportable. Ce seront autant de liens de moins à rompre quand il faudra tout quitter. Pourquoi mon âme est-elle soumise à mes sens et enchaînée à ce corps qui l’asservit et la gêne ? Je n’en sais rien : suis-je entré dans les décrets de Dieu ? Mais je puis, sans témérité, former de modestes conjectures. Je me dis : Si l’esprit de l’homme fût resté libre et pur, quel mérite aurait-il d’aimer et suivre l’ordre qu’il verrait établi et qu’il n’aurait nul intérêt à troubler ?</p><p>Il serait heureux, il est vrai ; mais il manquerait à son bonheur le degré le plus sublime, la gloire de la vertu et le bon témoignage de soi ; il ne serait que comme les anges ; et sans doute l’homme vertueux sera plus qu’eux. Unie à un corps mortel par des liens non moins puissants qu’incompréhensibles, le soin de la conservation de ce corps excite l’âme à rapporter tout à lui, et lui donne un intérêt contraire à l’ordre général, qu’elle est pourtant capable de voir et d’aimer ; c’est alors que le bon usage de sa liberté devient à la fois le mérite et la récompense, et qu’elle se prépare un bonheur inaltérable en combattant ses passions terrestres et se maintenant dans sa première volonté.</p><p class="tsrc">Rousseau, Emile, Livre IV, profession de foi du vicaire savoyard</p></div></details>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-th">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="h-th">Le problème et la thèse</h2></div>
+    <div class="two">
+      <div class="qc" style="--k:var(--gold)"><h3>La question</h3><p>Sur quoi repose la moralité : sur la raison ou sur la conscience ?</p></div>
+      <div class="qc" style="--k:var(--k)"><h3>La thèse</h3><p>La conscience est un instinct divin, juge infaillible du bien et du mal, qui rend l’homme semblable à Dieu. La raison seule ne peut pas fonder la vertu : il faut le sentiment, et la croyance en un ordre divin.</p></div>
+    </div>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-arg">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="h-arg">Le fil de l’argumentation</h2><p>Faites avancer le raisonnement étape par étape.</p></div>
+    <ol class="stp" id="stp" aria-live="polite"><li hidden><div><h3>Un guide sûr</h3><p>La conscience est un instinct divin, un guide assuré d’un être ignorant et borné, mais intelligent et libre.</p></div></li><li hidden><div><h3>Pas besoin d’être savant</h3><p>Grâce à elle, on peut être homme sans être savant, dispensé de l’appareil de la philosophie.</p></div></li><li hidden><div><h3>Pourquoi l’entend-on si peu ?</h3><p>Elle parle la langue de la nature, qu’on a oubliée. Timide, elle fuit le bruit du monde. Les préjugés, le fanatisme l’étouffent ou la contrefont.</p></div></li><li hidden><div><h3>La raison seule ne fonde pas la vertu</h3><p>Définir la vertu par l’amour de l’ordre est un jeu de mots : le vice aussi. Le bon s’ordonne par rapport au tout, le méchant par rapport à lui.</p></div></li><li hidden><div><h3>Une vertu qui exige Dieu</h3><p>Si la Divinité n’est pas, seul le méchant raisonne et le bon est un insensé. Le bon usage de la liberté est à la fois mérite et récompense.</p></div></li></ol>
+    <div class="score"><button class="btn primary" id="nx" type="button">Première étape</button><button class="btn" id="all" type="button">Tout afficher</button><button class="btn" id="rs" type="button">Recommencer</button></div>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-no">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="h-no">Notions à maîtriser</h2><p>Cliquez sur une notion pour ouvrir sa définition.</p></div>
+    <div class="terms"><details><summary>Conscience morale</summary><p>Faculté de sentir le bien et le mal, antérieure au raisonnement.</p></details><details><summary>Préjugé</summary><p>Opinion reçue qui couvre la voix de la conscience.</p></details><details><summary>Amour de l’ordre</summary><p>Définition rationaliste de la vertu, que Rousseau juge insuffisante.</p></details><details><summary>Profession de foi</summary><p>Exposé de ses croyances : ici celles du vicaire savoyard.</p></details></div>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-ex">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="h-ex">Exercice : est-ce la position de l’auteur ?</h2><p>Pour chaque phrase, dites si elle correspond à la pensée de l’auteur dans ce texte. <span class="note">Exercice et corrections rédigés pour cette page.</span></p></div>
+    <ul class="sorter" id="s1"></ul>
+    <div class="score"><p id="sc1" aria-live="polite"></p><button class="btn" id="r1" type="button">Recommencer</button></div>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-di">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="h-di">Pour discuter</h2></div>
+    <div class="lim" style="margin-bottom:.8rem"><b>Un instinct moral inné ?</b> La conscience est-elle innée ou produite par l’éducation ? (À comparer avec Durkheim.)</div><div class="lim" style="margin-bottom:.8rem"><b>Morale et religion.</b> Rousseau lie vertu et existence de Dieu. D’Holbach soutient l’inverse. Qui a raison ?</div><div class="lim" style="margin-bottom:.8rem"><b>Piste de dissertation.</b> « La conscience morale est-elle un guide fiable ? » Rousseau y voit un juge infaillible.</div>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-re">
+  <div class="wrap">
+    <h2 id="h-re" style="margin-bottom:1.2rem">À retenir</h2>
+    <ul class="recap"><li><b>Thèse :</b> la conscience est un instinct divin, guide infaillible.</li><li><b>Obstacle :</b> les préjugés et le bruit du monde.</li><li><b>Limite de la raison :</b> elle ne fonde pas la vertu.</li><li><b>Appui :</b> la croyance en Dieu.</li></ul>
+  </div>
+</section>
+</main>
+<!--quiz-->
+<section id="quiz" aria-labelledby="h-quiz">
+<h2 id="h-quiz">Quiz de révision</h2>
+<p class="qintro">5 questions pour vérifier l’essentiel. Les réponses s’affichent tout de suite, avec une explication. Rien n’est enregistré ni envoyé.</p>
+<div class="qz" id="qz"></div>
+<script type="application/json" id="quizdata">[{"q": "Qu’est-ce que la conscience pour Rousseau ?", "a": ["Un instinct divin", "Un raisonnement", "Une habitude", "Une loi"], "e": "Un juge infaillible du bien et du mal."}, {"q": "Qu’est-ce qui étouffe sa voix ?", "a": ["Les préjugés", "La raison", "La nature", "Le silence"], "e": "Ils sont ses plus cruels ennemis."}, {"q": "La raison seule fonde-t-elle la vertu ?", "a": ["Non", "Oui", "Seulement en société", "Toujours"], "e": "Cela serait un jeu de mots."}, {"q": "Que serait le bon sans Divinité ?", "a": ["Un insensé", "Un sage", "Un héros", "Un roi"], "e": "Seul le méchant raisonnerait."}, {"q": "Faut-il être savant pour être moral ?", "a": ["Non", "Oui", "Seulement un peu", "Toujours"], "e": "Nous pouvons être hommes sans être savants."}]</script>
+</section>
+<!--/quiz-->
+
+<nav class="pn" aria-label="Pages de la section Devoir"><a class="pv" href="devoir-rousseau-pitie.html" rel="prev"><small>← Page précédente</small><b>Rousseau : la pitié, sentiment naturel</b></a><a class="nx" href="devoir-holbach.html" rel="next"><small>Page suivante →</small><b>D’Holbach : fonder la morale sur la nature</b></a><a class="hm" href="accueil.html">Retour à l’accueil</a></nav>
+<footer><div class="wrap"><p>Page réalisée à partir de l’extrait étudié en cours (Rousseau, <i>Émile</i>, livre IV, profession de foi du vicaire savoyard). Les citations sont de courts extraits du texte ; la présentation de l’argumentation, les exercices et les pistes de discussion sont rédigés pour cette page.</p></div></footer>
+<script>
+(function(){
+function $(s){return document.querySelector(s)}
+function sorter(listSel,scoreSel,resetSel,items,choices){
+    var list=$(listSel),sc=$(scoreSel),rows=[],done=0,right=0;
+    items.forEach(function(it){
+      var li=document.createElement('li');li.className='row';
+      li.innerHTML='<span class="name"></span><div class="pick" role="group"></div><p class="fb" hidden aria-live="polite"></p>';
+      li.querySelector('.name').innerHTML=it[0];
+      var pick=li.querySelector('.pick'),fb=li.querySelector('.fb'),bs=[];
+      pick.setAttribute('aria-label',li.querySelector('.name').textContent);
+      choices.forEach(function(c,k){
+        var b=document.createElement('button');b.type='button';b.textContent=c[0];b.style.setProperty('--c',c[1]);b.setAttribute('aria-pressed','false');
+        b.addEventListener('click',function(){
+          if(li.classList.contains('good')||li.classList.contains('bad'))return;
+          var ok=k===it[1];
+          b.setAttribute('aria-pressed','true');bs.forEach(function(x){x.disabled=true});
+          li.classList.add(ok?'good':'bad');fb.hidden=false;
+          fb.textContent=(ok?'Bien vu. ':'Pas tout à fait. ')+it[2];
+          done++;if(ok)right++;upd();
+        });
+        pick.appendChild(b);bs.push(b);
+      });
+      list.appendChild(li);rows.push(li);
+    });
+    function upd(){
+      var n=items.length,s=function(x){return x>1?'s':''};
+      sc.textContent=!done?n+' à classer.':done<n?done+' classé'+s(done)+' sur '+n+' : '+right+' bonne'+s(right)+' réponse'+s(right)+'.':'Terminé : '+right+' bonne'+s(right)+' réponse'+s(right)+' sur '+n+'.';
+    }
+    $(resetSel).addEventListener('click',function(){
+      rows.forEach(function(li){li.classList.remove('good','bad');li.querySelector('.fb').hidden=true;
+        [].forEach.call(li.querySelectorAll('button'),function(b){b.disabled=false;b.setAttribute('aria-pressed','false')})});
+      done=0;right=0;upd();
+    });
+    upd();
+  }
+
+var L=[].slice.call(document.querySelectorAll('#stp li')),n=0,nx=$('#nx');
+function show(i){L[i].hidden=false;L[i].classList.add('new')}
+function lab(){nx.textContent=n===0?'Première étape':n<L.length?'Étape suivante ('+(n+1)+'/'+L.length+')':'Terminé';nx.disabled=n>=L.length}
+nx.addEventListener('click',function(){if(n<L.length){show(n);n++;lab();}});
+$('#all').addEventListener('click',function(){while(n<L.length){show(n);n++}lab()});
+$('#rs').addEventListener('click',function(){L.forEach(function(l){l.hidden=true;l.classList.remove('new')});n=0;lab()});
+lab();
+sorter('#s1','#sc1','#r1',[["La conscience est un guide sûr, accessible à tous.", 0, "Oui : on peut être homme sans être savant."], ["La raison seule suffit à fonder la vertu.", 1, "Non : l’amour de l’ordre est un jeu de mots."], ["Les préjugés étouffent la voix de la conscience.", 0, "Oui : ils sont ses plus cruels ennemis."], ["Rousseau pense que la morale peut se passer de Dieu.", 1, "Non : sans la Divinité, le bon n’est qu’un insensé."], ["La conscience parle la langue de la nature.", 0, "Oui : que tout nous a fait oublier."]],[['Selon l’auteur','var(--nat)'],['Pas selon l’auteur','var(--soc)']]);
+})();
+</script>
+<script src="quiz.js" defer></script>
+</body>
+</html>

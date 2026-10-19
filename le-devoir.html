@@ -161,6 +161,7 @@ footer p{margin:0}
 }
 @page{size:A4;margin:16mm 14mm}
 </style>
+<link rel="stylesheet" href="quiz.css">
 </head>
 <body>
 <nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
@@ -363,6 +364,15 @@ footer p{margin:0}
   </div>
 </section>
 </main>
+<!--quiz-->
+<section id="quiz" aria-labelledby="h-quiz">
+<h2 id="h-quiz">Quiz de révision</h2>
+<p class="qintro">5 questions pour vérifier l’essentiel. Les réponses s’affichent tout de suite, avec une explication. Rien n’est enregistré ni envoyé.</p>
+<div class="qz" id="qz"></div>
+<script type="application/json" id="quizdata">[{"q":"D’après Wittgenstein, qu’est-ce qui donne sa force à un « tu dois » ?","a":["Quelque chose qui se tient derrière : une récompense ou une punition","La raison pure","Un sentiment naturel de pitié","L’habitude seule"],"e":"« Un “doit” est en soi dépourvu de sens » : « Un enfant doit faire telle chose » signifie que, sinon, telle chose désagréable arrivera."},{"q":"Pour Nietzsche, que traduit la morale du « troupeau » ?","a":["Le bien est ce qui est conforme à l’habitude et à la normalité, par crainte de ce qui sort de l’ordinaire","Le bien est donné par la raison universelle","Le bien est un sentiment naturel inscrit en chaque homme","Le bien est ce qui rend le plus heureux"],"e":"« La moralité est l’instinct du troupeau dans l’individu. » La morale est une affaire de mœurs et de dressage."},{"q":"Pour Rousseau, quel sentiment naturel fonde la répugnance à mal faire ?","a":["La pitié","La peur du châtiment","L’orgueil","Le calcul d’intérêt"],"e":"La pitié nous porte « sans réflexion » au secours de ceux qui souffrent et modère l’amour de soi."},{"q":"Que distingue Kant entre agir « par devoir » et agir « conformément au devoir » ?","a":["Agir par devoir, c’est agir par respect du devoir seul ; agir conformément au devoir peut venir de l’intérêt ou de l’inclination","Il n’y a aucune différence","Agir conformément au devoir est plus moral","Agir par devoir, c’est obéir à la société"],"e":"Celui qui aime la vie la conserve par amour ; celui qui a toutes les raisons d’en finir et la conserve agit par devoir."},{"q":"Quelle est la première formulation de l’impératif catégorique de Kant ?","a":["Agis uniquement d’après la maxime qui peut devenir une loi universelle","Agis de façon à obtenir le plus de plaisir possible","Obéis aux mœurs de ta société","Suis ton cœur en toute circonstance"],"e":"C’est un test d’universalisation de la maxime de l’action, c’est-à-dire de son principe directeur."}]</script>
+</section>
+<!--/quiz-->
+
 
 <footer><div class="wrap"><p>Page réalisée à partir du cours « Le devoir ». Les citations sont de courts extraits. Les intitulés des exercices et leurs corrections sont rédigés pour cette page.</p></div></footer>
 
@@ -468,5 +478,6 @@ footer p{margin:0}
   $('#d1').addEventListener('click',function(){var a=$('#after');a.hidden=!a.hidden;this.textContent=a.hidden?'Que choisiriez-vous ?':'Masquer'});
 })();
 </script>
+<script src="quiz.js" defer></script>
 </body>
 </html>

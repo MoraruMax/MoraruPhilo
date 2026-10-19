@@ -192,6 +192,7 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);op
 }
 @page{size:A4;margin:16mm 14mm}
 </style>
+<link rel="stylesheet" href="quiz.css">
 </head>
 <body style="--k:var(--soc);--ks:var(--soc-soft)">
 <nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
@@ -252,6 +253,15 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);op
   </div>
 </section>
 </main>
+<!--quiz-->
+<section id="quiz" aria-labelledby="h-quiz">
+<h2 id="h-quiz">Quiz de révision</h2>
+<p class="qintro">5 questions pour vérifier l’essentiel. Les réponses s’affichent tout de suite, avec une explication. Rien n’est enregistré ni envoyé.</p>
+<div class="qz" id="qz"></div>
+<script type="application/json" id="quizdata">[{"q":"Quelle est la question posée par Kant dans ce texte ?","a":["Peut-on mentir à un meurtrier pour sauver son ami ?","Faut-il toujours obéir à la loi ?","Peut-on connaître les choses en elles-mêmes ?","Le bonheur est-il le but de la vie morale ?"],"e":"La réponse de Kant est non : dire la vérité est un devoir absolu."},{"q":"Quelle est la thèse de Kant ?","a":["Dire la vérité est un devoir sans exception","Il est permis de mentir pour une bonne cause","Le mensonge est un devoir quand il sauve une vie","Seul le résultat d’un acte compte"],"e":"Celui qui ment, même avec de bonnes intentions, répond de toutes les conséquences de son mensonge, y compris imprévisibles."},{"q":"Que risque celui qui ment au meurtrier, selon Kant ?","a":["Être tenu pour responsable de la mort de la victime, si elle sort à son insu et croise le meurtrier","Rien du tout","Être félicité par la justice","Être condamné pour avoir dit la vérité"],"e":"Si tu mens (« non »), la victime peut sortir à ton insu et mourir : tu peux être accusé d’être la cause de sa mort."},{"q":"Pourquoi Kant refuse-t-il toute exception à ce devoir ?","a":["La véracité est la base de tous les devoirs fondés sur un contrat ; une exception rendrait la loi « chancelante et vaine »","Parce que la loi n’admet jamais d’exception, par principe","Parce que les mensonges sont toujours découverts","Parce que Dieu l’interdit"],"e":"Sans exigence de vérité, aucun contrat n’est possible."},{"q":"Comment la position de Kant s’oppose-t-elle à celle de Rousseau ?","a":["Kant juge sans égard pour l’intention ; Rousseau distingue les mensonges selon l’intention et le préjudice","Kant distingue plusieurs sortes de mensonges, pas Rousseau","Les deux pensent qu’il est toujours permis de mentir","Les deux jugent le mensonge d’après ses conséquences"],"e":"Rousseau pèse l’intention et le préjudice ; Kant refuse tout mensonge, même par humanité."}]</script>
+</section>
+<!--/quiz-->
+
 <nav class="pn" aria-label="Pages de la section Vérité"><a class="pv" href="pascal.html" rel="prev"><small>← Page précédente</small><b>Pascal : le cœur et le pari</b></a><a class="nx" href="verite-rousseau.html" rel="next"><small>Page suivante →</small><b>Rousseau : dire faux et mentir</b></a><a class="hm" href="accueil.html">Retour à l’accueil</a></nav>
 <footer><div class="wrap"><p>Page réalisée à partir de l’extrait de <i>Sur un prétendu droit de mentir par humanité</i> d’Emmanuel Kant. Les citations sont de courts extraits du texte étudié ; la présentation de l’argumentation, les exercices et les pistes de discussion sont rédigés pour cette page. Portrait de fond : Portrait de Gottlieb Döbler, 1791 (détail), domaine public.</p></div></footer>
 <script>
@@ -301,5 +311,6 @@ lab();
 sorter('#s1','#sc1','#r1',[["Pour Kant, mentir est permis lorsqu’on veut bien faire.", 1, "Non : « quelque bien intentionné qu’il puisse être », le menteur répond de son mensonge."], ["Celui qui dit la vérité ne peut être poursuivi pour les conséquences imprévues.", 0, "Oui : la justice publique ne peut rien contre lui."], ["Le menteur est responsable des conséquences, même imprévisibles.", 0, "Oui : il doit « en payer le prix »."], ["Une petite exception à la règle de véracité ne ruine pas la règle.", 1, "Non : la loi serait « rendue chancelante et vaine »."], ["Le devoir de véracité est fondé sur un contrat.", 0, "Oui : il est « la base de tous les devoirs » contractuels."]],[["Selon l’auteur", "var(--nat)"], ["Pas selon l’auteur", "var(--soc)"]]);
 })();
 </script>
+<script src="quiz.js" defer></script>
 </body>
 </html>

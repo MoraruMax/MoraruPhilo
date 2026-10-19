@@ -192,6 +192,7 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);op
 }
 @page{size:A4;margin:16mm 14mm}
 </style>
+<link rel="stylesheet" href="quiz.css">
 </head>
 <body style="--k:var(--nat);--ks:var(--nat-soft)">
 <nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
@@ -252,6 +253,15 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);op
   </div>
 </section>
 </main>
+<!--quiz-->
+<section id="quiz" aria-labelledby="h-quiz">
+<h2 id="h-quiz">Quiz de révision</h2>
+<p class="qintro">5 questions pour vérifier l’essentiel. Les réponses s’affichent tout de suite, avec une explication. Rien n’est enregistré ni envoyé.</p>
+<div class="qz" id="qz"></div>
+<script type="application/json" id="quizdata">[{"q":"Pourquoi croyons-nous que le soleil se lèvera demain, selon Hume ?","a":["Parce que nous l’avons toujours vu, non parce que nous pourrions le démontrer","Parce que c’est démontré par la logique","Parce que les astronomes l’ont prouvé a priori","Parce que cela est contradictoire autrement"],"e":"« Le soleil ne se lèvera pas demain » n’implique pas contradiction : on ne peut démontrer sa fausseté."},{"q":"Pourquoi les faits ne se démontrent-ils pas comme les vérités logiques ?","a":["Leur contraire n’implique pas contradiction : il reste concevable","Parce qu’ils sont trop compliqués","Parce qu’on n’a pas assez de mémoire","Parce que les sens ne trompent jamais"],"e":"Une proposition contradictoire (un cercle carré) ne peut être conçue ; un fait, lui, est toujours pensable autrement."},{"q":"Sur quelle relation reposent tous les raisonnements sur les faits ?","a":["La relation de cause à effet","La relation de ressemblance","L’identité logique","La relation de contradiction"],"e":"Exemple : croire que son ami est en France, c’est s’appuyer sur un autre fait, une lettre reçue ou des promesses antérieures."},{"q":"D’où vient notre connaissance de la cause et de l’effet ?","a":["De l’expérience, jamais de raisonnements a priori","Du raisonnement a priori","De l’intuition innée","De la révélation divine"],"e":"Elle naît de l’expérience, quand des objets sont observés « en conjonction constante »."},{"q":"Que signifie « conjonction constante » ?","a":["Deux objets toujours observés ensemble, comme le feu et la chaleur","Deux idées contradictoires","Deux raisonnements qui se confirment","Un accord entre deux témoins"],"e":"C’est ce qui fait croire que l’un est la cause de l’autre : notre confiance dans les faits est une croyance fondée sur l’expérience passée."}]</script>
+</section>
+<!--/quiz-->
+
 <nav class="pn" aria-label="Pages de la section Vérité"><a class="pv" href="verite-rousseau.html" rel="prev"><small>← Page précédente</small><b>Rousseau : dire faux et mentir</b></a><a class="nx" href="art-et-verite.html" rel="next"><small>Page suivante →</small><b>L’art et la vérité</b></a><a class="hm" href="accueil.html">Retour à l’accueil</a></nav>
 <footer><div class="wrap"><p>Page réalisée à partir de l’extrait de l’<i>Enquête sur l’entendement humain</i> de David Hume. Les citations sont de courts extraits du texte étudié ; la présentation de l’argumentation, les exercices et les pistes de discussion sont rédigés pour cette page. Portrait de fond : Portrait d’Allan Ramsay, 1766, domaine public.</p></div></footer>
 <script>
@@ -301,5 +311,6 @@ lab();
 sorter('#s1','#sc1','#r1',[["Le contraire d’un fait est toujours contradictoire.", 1, "Non : « le soleil ne se lèvera pas demain » n’implique pas contradiction."], ["Le raisonnement sur les faits repose sur la relation de cause à effet.", 0, "Oui, c’est la thèse centrale de l’extrait."], ["On peut connaître la cause d’un effet par un raisonnement a priori.", 1, "Non : « en aucun cas », dit Hume."], ["La relation de cause à effet naît de l’expérience.", 0, "Oui : quand des objets se trouvent en conjonction constante."], ["On peut démontrer que le soleil ne se lèvera pas demain.", 1, "Non : on tenterait « en vain d’en démontrer la fausseté »."]],[["Selon l’auteur", "var(--nat)"], ["Pas selon l’auteur", "var(--soc)"]]);
 })();
 </script>
+<script src="quiz.js" defer></script>
 </body>
 </html>

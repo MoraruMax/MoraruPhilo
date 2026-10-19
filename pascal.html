@@ -187,6 +187,7 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);op
 }
 @page{size:A4;margin:16mm 14mm}
 </style>
+<link rel="stylesheet" href="quiz.css">
 </head>
 <body>
 <nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
@@ -297,6 +298,15 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);op
   </div>
 </section>
 </main>
+<!--quiz-->
+<section id="quiz" aria-labelledby="h-quiz">
+<h2 id="h-quiz">Quiz de révision</h2>
+<p class="qintro">5 questions pour vérifier l’essentiel. Les réponses s’affichent tout de suite, avec une explication. Rien n’est enregistré ni envoyé.</p>
+<div class="qz" id="qz"></div>
+<script type="application/json" id="quizdata">[{"q":"Comment Pascal distingue-t-il le cœur et la raison ?","a":["Le cœur sent les premiers principes ; la raison conclut les propositions à partir d’eux","Le cœur est irrationnel, la raison seule est fiable","Le cœur démontre, la raison ressent","Le cœur et la raison s’opposent toujours"],"e":"« Les principes se sentent, les propositions se concluent ; et le tout avec certitude, quoique par différentes voies. »"},{"q":"Que ne peut pas faire la raison, selon Pascal ?","a":["Établir les principes eux-mêmes ni trancher la question de l’existence de Dieu","Faire des démonstrations","Calculer des probabilités","Distinguer le vrai du faux dans les mathématiques"],"e":"Cette impuissance doit humilier la raison, non la discréditer."},{"q":"Pour Pascal, qu’est-ce que la foi ?","a":["Dieu sensible au cœur : un don de Dieu, non un don de raisonnement","Une conclusion démontrée par la raison","Une habitude sociale","Un calcul d’intérêt"],"e":"Le cœur sent Dieu : c’est cela, la foi."},{"q":"Pourquoi faut-il parier, selon Pascal ?","a":["Parce que la raison ne peut trancher et que nous sommes embarqués : le choix n’est pas volontaire","Parce que Dieu l’exige explicitement","Parce que les joueurs gagnent toujours","Parce qu’on peut éviter de choisir"],"e":"Par raison, on ne peut défendre ni « Dieu est » ni « Dieu n’est pas », et il faut pourtant choisir."},{"q":"Si l’on gage que Dieu est (croix), que gagne-t-on ou perd-on ?","a":["Si l’on gagne, on gagne tout ; si l’on perd, on ne perd rien","Si l’on gagne, on gagne un peu ; si l’on perd, on perd tout","On gagne et on perd autant dans les deux cas","On perd toujours quelque chose"],"e":"Pascal conclut : « gagez qu’il est, sans hésiter ». Le texte étudié ne pèse que ce pari-là."}]</script>
+</section>
+<!--/quiz-->
+
 
 <nav class="pn" aria-label="Pages de la section Vérité"><a class="pv" href="descartes-du-doute-au-cogito.html" rel="prev"><small>← Page précédente</small><b>Descartes : du doute au cogito</b></a><a class="nx" href="verite-kant.html" rel="next"><small>Page suivante →</small><b>Kant : mensonge et devoir</b></a><a class="hm" href="accueil.html">Retour à l’accueil</a></nav>
 <footer>
@@ -487,5 +497,6 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);op
   });
 })();
 </script>
+<script src="quiz.js" defer></script>
 </body>
 </html>

@@ -192,6 +192,7 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);op
 }
 @page{size:A4;margin:16mm 14mm}
 </style>
+<link rel="stylesheet" href="quiz.css">
 </head>
 <body style="--k:var(--soc);--ks:var(--soc-soft)">
 <nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
@@ -252,6 +253,15 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);op
   </div>
 </section>
 </main>
+<!--quiz-->
+<section id="quiz" aria-labelledby="h-quiz">
+<h2 id="h-quiz">Quiz de révision</h2>
+<p class="qintro">5 questions pour vérifier l’essentiel. Les réponses s’affichent tout de suite, avec une explication. Rien n’est enregistré ni envoyé.</p>
+<div class="qz" id="qz"></div>
+<script type="application/json" id="quizdata">[{"q":"Comment Arendt caractérise-t-elle l’homo faber ?","a":["Un fabricant d’outils, qui bâtit un monde d’objets durables en choisissant des fins et des moyens","Un travailleur soumis aux besoins de la vie","Un philosophe contemplatif","Un citoyen engagé en politique"],"e":"Elle cite Benjamin Franklin : « L’homme est un fabricant d’outils. »"},{"q":"Qui est l’animal laborans ?","a":["L’homme en tant que travailleur, pris dans le cycle produire pour consommer, consommer pour produire","Un animal domestique","Un artisan indépendant","Un savant"],"e":"Soumis aux processus « dévorants » de la vie, il produit pour consommer, dans un cycle qui recommence sans cesse."},{"q":"Qu’est-ce qui, selon Arendt, perd son sens dans le travail pur ?","a":["La distinction entre fin et moyens","La distinction entre vrai et faux","La distinction entre le bien et le mal","La distinction entre outil et machine"],"e":"Dans le processus vital, produire, c’est se préparer à consommer : fins et moyens se confondent."},{"q":"À qui revient la faute, selon Arendt, si les hommes paraissent « esclaves des machines » ?","a":["À la situation de l’animal laborans enfermé dans le cycle de la vie, non à l’outil lui-même","Aux outils, qui pervertissent les fins","Aux ingénieurs, qui trompent les hommes","À la nature humaine mauvaise"],"e":"Ce n’est pas l’outil qui pervertit les fins et les moyens : Arendt replace le problème dans le mode de vie."},{"q":"Pourquoi la question « vit-on pour travailler ou travaille-t-on pour vivre ? » est-elle « vaine » ?","a":["Dans le cycle de la vie, il n’y a pas de fin extérieure au cycle","Parce que personne ne peut y répondre sans philosophie","Parce que le travail est toujours un plaisir","Parce que les machines travaillent à notre place"],"e":"Production et consommation se renvoient l’une à l’autre sans fin ultime."}]</script>
+</section>
+<!--/quiz-->
+
 <nav class="pn" aria-label="Pages de la section Technique"><a class="pv" href="technique-hoelderlin.html" rel="prev"><small>← Page précédente</small><b>Hölderlin : le Rhin, fleuve libre</b></a><a class="nx" href="technique-levinas.html" rel="next"><small>Page suivante →</small><b>Lévinas : défendre l’homme contre la technique ?</b></a><a class="hm" href="accueil.html">Retour à l’accueil</a></nav>
 <footer><div class="wrap"><p>Page réalisée à partir de l’extrait de <i>Condition de l’homme moderne</i> d’Hannah Arendt. Les citations sont de courts extraits du texte étudié ; la présentation de l’argumentation, les exercices et les pistes de discussion sont rédigés pour cette page. Portrait de fond : Photographie de Hannah Arendt.</p></div></footer>
 <script>
@@ -301,5 +311,6 @@ lab();
 sorter('#s1','#sc1','#r1',[["Les outils de l’homo faber servent à édifier un monde d’objets.", 0, "Oui, c’est la première idée du texte."], ["Pour Arendt, la technique elle-même est responsable de la perversion des fins et des moyens.", 1, "Non : c’est la situation de l’activité de travail qui l’explique, non l’outil en lui-même."], ["Dans le processus vital, la distinction entre fin et moyens perd son sens.", 0, "Oui : produire prépare à consommer, et consommer à reproduire la force de travail."], ["Les hommes travaillent pour consommer, et la question de savoir pourquoi ils consomment a une réponse simple.", 1, "Non : elle est jugée vaine, dans le cycle de la vie il n’y a pas de fin extérieure."], ["Les outils peuvent dépasser leur simple fonction d’instrument dans une société de travailleurs.", 0, "Oui : ils risquent d’acquérir des caractères qui dépassent l’instrumentalité."]],[['Selon l’auteur','var(--nat)'],['Pas selon l’auteur','var(--soc)']]);
 })();
 </script>
+<script src="quiz.js" defer></script>
 </body>
 </html>

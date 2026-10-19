@@ -1,0 +1,261 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Construire une explication de texte</title><style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+  --bg:#FBFBFD; --surface:#FFFFFF; --ink:#1A2340; --muted:#566080; --line:#D9DEEC; --grid:#E3EAF8;
+  --a:#2B55C6; --r:#C42B1A; --g:#0F7A5F; --on:#FFFFFF; --focus:#2B55C6;
+  --head:system-ui,-apple-system,"Segoe UI",sans-serif;
+  --text:Georgia,"Times New Roman",serif;
+  --hand:"Segoe Print","Bradley Hand",cursive;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0F1422; --surface:#161C2F; --ink:#E8ECF8; --muted:#9EA8C6; --line:#2A3250; --grid:#18203A;
+    --a:#8FA8FF; --r:#FF7A66; --g:#4FD1A8; --on:#0F1422; --focus:#8FA8FF;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0F1422; --surface:#161C2F; --ink:#E8ECF8; --muted:#9EA8C6; --line:#2A3250; --grid:#18203A;
+  --a:#8FA8FF; --r:#FF7A66; --g:#4FD1A8; --on:#0F1422; --focus:#8FA8FF;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:calc(4.2rem + env(safe-area-inset-top,0px));-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.125rem/1.65 var(--text)}
+.wrap{width:min(1000px,100% - 2.5rem);margin-inline:auto}
+h1,h2,h3,h4{margin:0}
+h1{font:800 clamp(2.4rem,7.5vw,4.8rem)/1.02 var(--head);letter-spacing:-.03em}
+h2{font:800 clamp(1.5rem,3.2vw,2.1rem)/1.12 var(--head);letter-spacing:-.02em}
+h3{font:800 1.15rem/1.25 var(--head)}
+p{margin:0 0 1em}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.btn{font:700 .95rem/1.2 var(--head);color:var(--ink);background:transparent;border:1.5px solid var(--ink);border-radius:8px;padding:.65rem 1rem;cursor:pointer}
+.btn:hover{background:var(--grid)}
+.btn.primary{background:var(--ink);color:var(--bg)}
+.btn.danger{border-color:var(--r);color:var(--r)}
+
+/* En-tête sur papier quadrillé */
+.hero{padding:clamp(2.2rem,6vw,4.5rem) 0 clamp(2rem,5vw,3.2rem);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:28px 28px}
+.uline{position:relative;display:inline-block}
+.wave{position:absolute;left:0;bottom:-.14em;width:100%;height:.26em;overflow:visible}
+.wave path{fill:none;stroke:var(--r);stroke-width:4;stroke-linecap:round;vector-effect:non-scaling-stroke;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.1s cubic-bezier(.3,.7,.2,1) .3s}
+.wave.on path{stroke-dashoffset:0}
+.lead{font:400 clamp(1.2rem,2.4vw,1.5rem)/1.45 var(--text);max-width:36ch;margin:1.8rem 0 1.8rem}
+.stats{display:flex;flex-wrap:wrap;gap:1rem 2.4rem}
+.stat{max-width:19rem}
+.stat .n{display:block;font:600 clamp(2.2rem,5vw,3.2rem)/1 var(--hand);color:var(--r)}
+.stat .l{display:block;font-size:1rem;color:var(--muted);line-height:1.4}
+
+/* Navigation des étapes */
+.stepnav{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--bg);border-bottom:1px solid var(--line)}
+.stepnav ol{display:flex;gap:.3rem;list-style:none;margin:0;padding:.5rem 0;overflow-x:auto}
+.stepnav a{display:flex;align-items:center;gap:.45rem;white-space:nowrap;padding:.45rem .7rem;border-radius:8px;text-decoration:none;color:var(--muted);font:700 .9rem/1.2 var(--head)}
+.stepnav a:hover{color:var(--ink)}
+.stepnav b{display:inline-flex;align-items:center;justify-content:center;width:1.6rem;height:1.6rem;border-radius:50%;border:1.5px solid currentColor;font-size:.85rem}
+.stepnav li.done b{background:var(--g);border-color:var(--g);color:var(--on)}
+.stepnav a[aria-current="true"]{background:var(--ink);color:var(--bg)}
+.stepnav li.done a[aria-current="true"] b{border-color:var(--bg)}
+
+/* Étapes */
+.step{border-bottom:1px solid var(--line);padding:clamp(2.6rem,6vw,4rem) 0}
+.step-grid{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.6fr);gap:1.5rem clamp(2rem,5vw,4rem)}
+.num{display:block;font:800 clamp(4rem,9vw,6.5rem)/.9 var(--head);color:var(--r);margin-bottom:.6rem}
+.instr{max-width:60ch}
+.work{background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--wc,var(--ink));border-radius:8px;padding:1.1rem 1.2rem 1.3rem;margin:1.2rem 0 0}
+.work + .work{margin-top:1rem}
+.work-t{font:600 1.45rem/1 var(--hand);color:var(--r);margin:0 0 .8rem}
+.f{margin-bottom:.9rem}
+.f:last-child{margin-bottom:0}
+.f label{display:block;font:700 .88rem/1.3 var(--head);margin-bottom:.3rem}
+input[type="text"],textarea{display:block;width:100%;font:400 1rem/1.5 var(--text);color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:6px;padding:.6rem .75rem;resize:vertical}
+input[type="text"]:focus,textarea:focus{border-color:var(--focus)}
+textarea{min-height:3.2rem;overflow:hidden}
+.trow{display:grid;grid-template-columns:minmax(0,.6fr) minmax(0,1.4fr);gap:.9rem;margin-bottom:.9rem}
+.trow:last-child{margin-bottom:0}
+.trow .f{margin:0}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1rem}
+.a{--wc:var(--a)} .a .work-t,.a .tag{color:var(--a)}
+.r{--wc:var(--r)}
+.g{--wc:var(--g)}
+.tag{font:800 .85rem/1 var(--head);margin:0 0 .7rem;display:block}
+.tag.a{color:var(--a)} .tag.r{color:var(--r)} .tag.g{color:var(--g)}
+.recall{font:700 .95rem/1.4 var(--head);margin:0 0 .8rem}
+.ph{color:var(--muted);font-style:italic;font-weight:400}
+.problem{font:500 clamp(1.15rem,2.4vw,1.4rem)/1.5 var(--text);margin:0;padding-left:1rem;border-left:5px solid var(--r)}
+.note{font-size:1rem;color:var(--muted)}
+
+/* Plan */
+.ptabs{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.2rem 0 1rem}
+.ptabs button{font:800 .98rem/1.2 var(--head);color:var(--c);background:transparent;border:2px solid var(--c);border-radius:8px;padding:.6rem .9rem;cursor:pointer}
+.ptabs button[aria-selected="true"]{background:var(--c);color:var(--on)}
+.ppanel[hidden]{display:none}
+.sub{background:var(--surface);border:1px solid var(--line);border-top:5px solid var(--c);border-radius:0 0 8px 8px;padding:1rem 1.1rem 1.2rem;margin-bottom:1rem}
+.sub h4{font:800 1rem/1.3 var(--head);margin-bottom:.8rem;color:var(--c)}
+.trans{border:2px dashed var(--c);border-radius:8px;padding:1rem 1.1rem 1.2rem}
+.trans h4{font:600 1.45rem/1 var(--hand);color:var(--c);margin-bottom:.8rem}
+
+/* Conclusion, introduction */
+.list{list-style:none;margin:0 0 1rem;padding:0}
+.list li{padding:.6rem 0;border-top:1px solid var(--line)}
+.list li:last-child{border-bottom:1px solid var(--line)}
+.list strong{font-family:var(--head)}
+.ingr{display:flex;flex-direction:column;gap:.8rem;margin-bottom:1rem}
+.ingr > div{background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--r);border-radius:0 8px 8px 0;padding:.8rem 1rem}
+.ingr h4{font:800 .88rem/1.3 var(--head);margin-bottom:.2rem}
+.ingr p{margin:0;font-size:1.02rem}
+
+/* Écrire */
+.checks{list-style:none;margin:1rem 0 0;padding:0}
+.checks li{border-top:1px solid var(--line)}
+.checks li:last-child{border-bottom:1px solid var(--line)}
+.checks label{display:flex;align-items:flex-start;gap:.7rem;padding:.7rem 0;cursor:pointer}
+.checks input{width:1.3rem;height:1.3rem;margin-top:.2rem;flex:none;accent-color:var(--g)}
+.export{margin-top:2.4rem;padding-top:1.6rem;border-top:1px solid var(--line)}
+.export h3{margin-bottom:.4rem}
+.export textarea{min-height:16rem;font:400 .92rem/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;overflow:auto}
+.btns{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin-top:.8rem}
+.msg{font:700 .9rem/1.3 var(--head);color:var(--g);margin:0}
+footer{padding:1.6rem 0 2.5rem;color:var(--muted);font-size:.95rem}
+footer p{margin:0 0 .3rem}
+
+@media (max-width:820px){
+  .step-grid{grid-template-columns:1fr}
+  .trow,.two{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition:none!important;animation:none!important}
+  .wave path{stroke-dashoffset:0}
+}
+
+.pdfbtn{display:inline-flex;align-items:center;gap:.5rem;font:600 .88rem/1 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--surface);border:1.5px solid var(--ink);border-radius:999px;padding:.55rem .95rem;cursor:pointer}
+.pdfbtn:hover{background:var(--ink);color:var(--bg)}.pdfbtn:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:2px}
+@media print{
+  :root{--bg:#fff!important;--surface:#fff!important;--ink:#111!important;--muted:#444!important;--line:#bbb!important;color-scheme:light!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:#fff!important;color:#111!important}
+  body::before,body::after{display:none!important}
+  nav,.pdfbtn,.pn,video,section[aria-labelledby="h-video"]{display:none!important}
+  .rev,.js .rev{opacity:1!important;transform:none!important}
+  .stp li[hidden]{display:list-item!important}
+  details>*{display:block!important}
+  article,li,.card,figure,.stage{break-inside:avoid}
+  h1,h2,h3{break-after:avoid;text-shadow:none!important}
+  *{text-shadow:none!important}
+  a{color:inherit;text-decoration:none}
+  section.block,.part{padding-top:1.2rem!important;padding-bottom:1.2rem!important}
+  footer{break-before:avoid;border-top:1px solid #999;margin-top:1rem}
+}
+@page{size:A4;margin:16mm 14mm}
+</style><link rel="stylesheet" href="quiz.css"></head><body><nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav><header class="hero"><div class="wrap"><h1>Construire une <span class="uline">explication de texte<svg class="wave" id="wave" viewBox="0 0 400 12" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M2 7 Q 22 0 42 7 T 82 7 T 122 7 T 162 7 T 202 7 T 242 7 T 282 7 T 322 7 T 362 7 T 398 7"/></svg></span></h1>
+<p class="lead">Expliquer, c’est « déplier » les difficultés d’un texte pour faire voir ce qu’il donne à penser. Les trois premiers temps se font au brouillon.</p>
+<div class="stats"><div class="stat"><span class="n">1 h</span><span class="l">de lecture analytique (étapes 1 à 5)</span></div><div class="stat"><span class="n">1 h</span><span class="l">pour organiser le plan (étapes 6 à 8)</span></div><div class="stat"><span class="n">2 h</span><span class="l">pour rédiger (étape 9)</span></div></div></div></header>
+<nav class="stepnav" aria-label="Les neuf étapes"><div class="wrap"><ol id="stepnav"><li><a href="#s1"><b>1</b>Lire</a></li><li><a href="#s2"><b>2</b>Thèse</a></li><li><a href="#s3"><b>3</b>Étapes</a></li><li><a href="#s4"><b>4</b>Concepts</a></li><li><a href="#s5"><b>5</b>Problème</a></li><li><a href="#s6"><b>6</b>Introduire</a></li><li><a href="#s7"><b>7</b>Développer</a></li><li><a href="#s8"><b>8</b>Conclure</a></li><li><a href="#s9"><b>9</b>Rédiger</a></li></ol></div></nav><main><section class="step" id="s1" aria-labelledby="h-s1"><div class="wrap step-grid"><div><span class="num" aria-hidden="true">1</span><h2 id="h-s1">Prendre connaissance du texte</h2></div><div><p class="instr">Lisez et relisez le texte dans l’ordre, patiemment, et prenez des notes au brouillon. Ne craignez pas de ne pas tout saisir à la première lecture ; méfiez-vous, inversement, du sentiment d’avoir tout compris. Assurez-vous de comprendre le vocabulaire et les expressions, et identifiez les difficultés.</p>
+<div class="work"><p class="work-t">À faire au brouillon</p><div class="f"><label for="src">Auteur et œuvre</label><input type="text" id="src" data-f></div><div class="f"><label for="obj">De quoi parle le texte ? Son objet, son thème principal</label><textarea id="obj" data-f rows="2"></textarea></div><div class="f"><label for="notion">La ou les notions du programme auxquelles il se rattache</label><textarea id="notion" data-f rows="2"></textarea></div><div class="f"><label for="vocab">Vocabulaire et expressions à éclaircir</label><textarea id="vocab" data-f rows="2"></textarea></div><div class="f"><label for="diff">Difficultés repérées</label><textarea id="diff" data-f rows="2"></textarea></div></div></div></div></section>
+<section class="step" id="s2" aria-labelledby="h-s2"><div class="wrap step-grid"><div><span class="num" aria-hidden="true">2</span><h2 id="h-s2">Identifier la thèse du texte</h2></div><div><p class="instr">La thèse est l’idée principale que le texte soutient : qu’affirme-t-il sur le thème dont il parle ? Elle apparaît parfois dans le texte, mais le plus souvent elle doit être synthétisée en une ou deux phrases. Distinguez-la de l’argumentation qui s’y rattache (prémisses, conséquences, remarques, nuances) : tout n’est pas sur le même plan.</p>
+<div class="work a"><span class="tag a">La thèse</span><div class="f"><label for="these">La thèse du texte, en une ou deux phrases</label><textarea id="these" data-f rows="3"></textarea></div></div><div class="work"><p class="work-t">À faire au brouillon</p><div class="f"><label for="argu">L’argumentation qui s’y rattache : prémisses, conséquences, remarques, nuances</label><textarea id="argu" data-f rows="3"></textarea></div><ul class="checks" aria-label="Vérification de la thèse"><li><label><input type="checkbox" id="k1" data-f>Je me suis demandé, en relisant l’ensemble du texte, si ma formulation de la thèse se confirme ou doit être précisée.</label></li><li><label><input type="checkbox" id="k2" data-f>Tous les moments et toutes les idées du texte prennent sens par rapport à cette thèse, de manière cohérente.</label></li></ul></div></div></div></section>
+<section class="step" id="s3" aria-labelledby="h-s3"><div class="wrap step-grid"><div><span class="num" aria-hidden="true">3</span><h2 id="h-s3">Saisir les grandes étapes du texte</h2></div><div><p class="instr">Par quelles étapes le texte passe-t-il pour établir sa thèse ? En général, on doit pouvoir repérer deux ou trois grandes étapes dans le raisonnement. Repérez-les précisément (de telle ligne à telle ligne), identifiez les arguments et les exemples, reformulez synthétiquement le contenu de chaque étape et indiquez le lien logique entre elles. Pas de « d’abord… ensuite… puis… » : demandez-vous pourquoi on passe d’une étape à une autre.</p><div class="work a"><span class="tag a">Étape 1</span><div class="two"><div class="f"><label for="e1l">De la ligne … à la ligne …</label><input type="text" id="e1l" data-f></div><div></div></div><div class="f"><label for="e1i">L’idée de l’étape, reformulée synthétiquement</label><textarea id="e1i" data-f rows="2"></textarea></div><div class="f"><label for="e1a">Les arguments et exemples du texte (ou un exemple qui les éclaire)</label><textarea id="e1a" data-f rows="2"></textarea></div><div class="f"><label for="e1t">Pourquoi passe-t-on de cette étape à la suivante ? Le lien logique</label><textarea id="e1t" data-f rows="2"></textarea></div></div><div class="work r"><span class="tag r">Étape 2</span><div class="two"><div class="f"><label for="e2l">De la ligne … à la ligne …</label><input type="text" id="e2l" data-f></div><div></div></div><div class="f"><label for="e2i">L’idée de l’étape, reformulée synthétiquement</label><textarea id="e2i" data-f rows="2"></textarea></div><div class="f"><label for="e2a">Les arguments et exemples du texte (ou un exemple qui les éclaire)</label><textarea id="e2a" data-f rows="2"></textarea></div><div class="f"><label for="e2t">Pourquoi passe-t-on de cette étape à la suivante ? Le lien logique</label><textarea id="e2t" data-f rows="2"></textarea></div></div><div class="work g"><span class="tag g">Étape 3 (si le texte en compte une troisième)</span><div class="two"><div class="f"><label for="e3l">De la ligne … à la ligne …</label><input type="text" id="e3l" data-f></div><div></div></div><div class="f"><label for="e3i">L’idée de l’étape, reformulée synthétiquement</label><textarea id="e3i" data-f rows="2"></textarea></div><div class="f"><label for="e3a">Les arguments et exemples du texte (ou un exemple qui les éclaire)</label><textarea id="e3a" data-f rows="2"></textarea></div><div class="f"><label for="e3t">Le lien de cette étape avec la thèse globale</label><textarea id="e3t" data-f rows="2"></textarea></div></div></div></div></section>
+<section class="step" id="s4" aria-labelledby="h-s4"><div class="wrap step-grid"><div><span class="num" aria-hidden="true">4</span><h2 id="h-s4">Saisir les concepts du texte</h2></div><div><p class="instr">Tous les mots du texte comptent, mais tous ne jouent pas le même rôle ni n’ont la même importance. Quels sont les concepts principaux, ou les distinctions conceptuelles, qu’il faut expliquer pour faire comprendre le texte ? Analysez-les : montrez leur sens et leur importance dans le texte.</p><div class="work"><p class="work-t">À faire au brouillon</p><div class="trow"><div class="f"><label for="c1n">Concept 1</label><input type="text" id="c1n" data-f></div><div class="f"><label for="c1s">Son sens dans le texte et son importance</label><textarea id="c1s" data-f rows="2"></textarea></div></div><div class="trow"><div class="f"><label for="c2n">Concept 2</label><input type="text" id="c2n" data-f></div><div class="f"><label for="c2s">Son sens dans le texte et son importance</label><textarea id="c2s" data-f rows="2"></textarea></div></div><div class="trow"><div class="f"><label for="c3n">Concept 3</label><input type="text" id="c3n" data-f></div><div class="f"><label for="c3s">Son sens dans le texte et son importance</label><textarea id="c3s" data-f rows="2"></textarea></div></div></div></div></div></section>
+<section class="step" id="s5" aria-labelledby="h-s5"><div class="wrap step-grid"><div><span class="num" aria-hidden="true">5</span><h2 id="h-s5">Rendre compte du problème dont il est question</h2></div><div><p class="instr">À quelle question ou problème philosophique la thèse du texte entend-elle répondre ? Quel est l’enjeu du texte ? Qu’a-t-il de paradoxal : quelle opinion, implicite ou explicite, remet-il en cause ? Quel est l’intérêt philosophique de la position exprimée, qu’on soit d’accord ou non ?</p>
+<div class="work"><p class="work-t">À faire au brouillon</p><div class="f"><label for="opi">L’opinion que le texte remet en cause, ou ce qu’il a de paradoxal</label><textarea id="opi" data-f rows="2"></textarea></div><div class="f"><label for="pb">Le problème : la question à laquelle la thèse répond</label><textarea id="pb" data-f rows="2"></textarea></div><div class="f"><label for="enj">L’enjeu et l’intérêt philosophique du texte</label><textarea id="enj" data-f rows="2"></textarea></div></div><p class="instr" style="margin-top:1.2rem">Une formule pour commencer à formuler le problème, à adapter :</p>
+<p class="problem" aria-live="polite">« On dit souvent que <span data-bind="opi" data-ph="l’opinion remise en cause"></span>, mais <span data-bind="pb" data-ph="le problème"></span> »</p>
+<div class="work g" style="margin-top:1.2rem"><div class="f"><label for="res">La thèse appelle-t-elle une discussion ou une réserve ? (Ne critiquez pas sans être sûr d’avoir compris : vous n’analysez qu’un extrait d’une œuvre plus large, qui répond peut-être ailleurs aux objections.)</label><textarea id="res" data-f rows="3"></textarea></div></div></div></div></section>
+<section class="step" id="s6" aria-labelledby="h-s6"><div class="wrap step-grid"><div><span class="num" aria-hidden="true">6</span><h2 id="h-s6">Construire l’introduction</h2></div><div><p class="instr">L’introduction compte trois paragraphes. Voici les éléments que vos étapes précédentes fournissent :</p>
+<div class="ingr"><div><h4>Le problème</h4><p id="i-pb"></p></div><div><h4>La thèse</h4><p id="i-th"></p></div><div><h4>Les étapes, avec les lignes</h4><p id="i-et"></p></div></div>
+<div class="work g"><p class="work-t">À faire au brouillon</p><div class="f"><label for="i1">§ 1. Ce qui justifie de lire et d’expliquer le texte : l’objet du texte, et le problème à partir duquel il prend son sens (« On dit souvent que… mais… »)</label><textarea id="i1" data-f rows="3"></textarea></div><div class="f"><label for="i2">§ 2. La thèse du texte, et en quoi elle n’est pas forcément évidente : paradoxale, susceptible de plusieurs interprétations, donc à expliquer</label><textarea id="i2" data-f rows="3"></textarea></div><div class="f"><label for="i3">§ 3. Les étapes du texte, non comme une succession d’idées mais comme un cheminement logique, avec obligatoirement les lignes ou les passages</label><textarea id="i3" data-f rows="3"></textarea></div></div></div></div></section>
+<section class="step" id="s7" aria-labelledby="h-s7"><div class="wrap step-grid"><div><span class="num" aria-hidden="true">7</span><h2 id="h-s7">Construire le développement</h2></div><div><p class="instr">Une partie par grande étape du texte. Pour chacune : un objet, deux ou trois sous-parties, une transition. Trois remarques à garder en tête :</p>
+<ul class="list"><li><strong>Pas de mot à mot.</strong> Suivre les étapes du texte ne veut pas dire le prendre mot à mot ou phrase par phrase.</li><li><strong>Du général au particulier,</strong> du plus évident au plus complexe, du sens premier à la nuance. Faites apparaître le questionnement, l’étonnement, la difficulté.</li><li><strong>Citer pour expliquer.</strong> Citer le texte ne vaut pas explication : toute citation doit être expliquée. Les exemples concrets, les connaissances de cours et, éventuellement, d’autres auteurs peuvent éclairer un point du texte.</li></ul>
+<div class="ptabs" id="ptabs" role="tablist" aria-label="Les parties du développement"></div><div id="ppanels"></div></div></div></section>
+<section class="step" id="s8" aria-labelledby="h-s8"><div class="wrap step-grid"><div><span class="num" aria-hidden="true">8</span><h2 id="h-s8">Conclure</h2></div><div><p class="instr">La conclusion ne résume pas : elle montre ce que l’explication a permis de comprendre.</p>
+<div class="work g"><p class="work-t">À faire au brouillon</p><div class="f"><label for="k_1">Je rappelle le problème auquel le texte se confronte et la thèse qu’il soutient</label><textarea id="k_1" data-f rows="3"></textarea></div><div class="f"><label for="k_2">Je montre en quoi l’analyse a permis de préciser le sens et les nuances de la thèse</label><textarea id="k_2" data-f rows="3"></textarea></div><div class="f"><label for="k_3">J’éclaire l’originalité de la thèse et ses enjeux (même s’il s’agit de formuler d’éventuelles critiques ou de discuter la portée du texte)</label><textarea id="k_3" data-f rows="3"></textarea></div></div></div></div></section>
+<section class="step" id="s9" aria-labelledby="h-s9"><div class="wrap step-grid"><div><span class="num" aria-hidden="true">9</span><h2 id="h-s9">Rédiger</h2></div><div><p class="instr">Il reste à rédiger l’ensemble de la composition. Une explication doit questionner méthodiquement le propos du texte pour essayer de le faire comprendre. Une bonne explication n’est pas celle qui ne voit aucune difficulté dans le texte ou tente de la masquer : c’est celle qui la met en évidence et cherche à formuler des hypothèses fondées sur l’analyse du texte pour y répondre.</p><ul class="checks" aria-label="Liste de vérification de la copie"><li><label><input type="checkbox" id="w0" data-f>J’ai soigné l’orthographe et la syntaxe.</label></li><li><label><input type="checkbox" id="w1" data-f>J’indique les lignes des passages du texte que je cite.</label></li><li><label><input type="checkbox" id="w2" data-f>Je saute une ligne entre l’introduction, chaque partie et la conclusion.</label></li><li><label><input type="checkbox" id="w3" data-f>Je fais apparaître les sous-parties par des alinéas.</label></li><li><label><input type="checkbox" id="w4" data-f>Chaque citation est expliquée : je cite pour expliquer, je n’explique pas en citant.</label></li><li><label><input type="checkbox" id="w5" data-f>Je ne paraphrase pas : je ne me contente pas de répéter ce que le texte dit avec d’autres mots.</label></li><li><label><input type="checkbox" id="w6" data-f>Je n’utilise pas le texte comme prétexte pour étaler mes connaissances sur l’auteur ou sur la notion.</label></li><li><label><input type="checkbox" id="w7" data-f>J’analyse des idées et des arguments, pas le style du texte, et je ne juge pas l’auteur.</label></li></ul>
+<div class="export"><h3>Mon brouillon en texte</h3><p class="note">Tout ce que vous avez écrit sur cette page est rassemblé ici. Il reste dans votre navigateur : il n’est envoyé nulle part.</p><textarea id="compiled" readonly aria-label="Brouillon rassemblé"></textarea><div class="btns"><button class="btn primary" id="copy" type="button">Copier mon brouillon</button><button class="btn danger" id="clear" type="button">Effacer mon brouillon</button><p class="msg" id="msg" aria-live="polite"></p></div></div></div></div></section>
+</main><!--quiz--><section id="quiz" aria-labelledby="h-quiz"><h2 id="h-quiz">Quiz de révision</h2><p class="qintro">5 questions pour vérifier l’essentiel. Les réponses s’affichent tout de suite, avec une explication. Rien n’est enregistré ni envoyé.</p><div class="qz" id="qz"></div><script type="application/json" id="quizdata">[{"q": "Qu’est-ce que la thèse d’un texte ?", "a": ["L’idée principale qu’il soutient, qu’il faut le plus souvent synthétiser en une ou deux phrases", "Une citation recopiée du début du texte", "Le résumé de chaque ligne", "L’opinion de l’élève sur l’auteur"], "e": "Distinguez la thèse de l’argumentation qui s’y rattache (prémisses, conséquences, nuances) : tout n’est pas sur le même plan."}, {"q": "Combien de grandes étapes repère-t-on en général dans un texte ?", "a": ["Deux ou trois, repérées précisément (de telle ligne à telle ligne)", "Une par phrase", "Une seule", "Autant que de paragraphes du manuel"], "e": "Pour chaque étape, identifiez les arguments, les exemples, et le lien logique avec la suivante."}, {"q": "Que doit-on faire de chaque citation du texte ?", "a": ["L’expliquer : on cite pour expliquer, on n’explique pas en citant", "La laisser parler d’elle-même", "La remplacer par un exemple personnel", "La recopier en entier"], "e": "Citer ne vaut pas expliquer : toute citation doit être expliquée, avec les lignes indiquées."}, {"q": "Que contient le troisième paragraphe de l’introduction ?", "a": ["Les étapes du texte, comme un cheminement logique, avec obligatoirement les lignes", "Ma critique de l’auteur", "La biographie de l’auteur", "Un résumé de mon cours"], "e": "§1 : le problème ; §2 : la thèse, et en quoi elle n’est pas évidente ; §3 : les étapes avec les lignes."}, {"q": "À quoi sert la transition entre deux parties du développement ?", "a": ["À récapituler le sens de l’étape expliquée et à justifier ce qui reste à expliquer, en formulant la question qui conduit à la suivante", "À répéter l’introduction", "À changer de sujet", "À donner mon avis"], "e": "La transition montre ce qui reste à expliquer à partir du point où l’on en est."}]</script></section><!--/quiz-->
+<footer><div class="wrap"><p>Page réalisée à partir de la fiche « L’explication d’un texte philosophique au baccalauréat ».</p></div></footer>
+<script>(function(){
+function $(s){return document.querySelector(s)}
+function $$(s,r){return [].slice.call((r||document).querySelectorAll(s))}
+var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+var PARTS=[{k:1,t:'Étape 1',c:'var(--a)'},{k:2,t:'Étape 2',c:'var(--r)'},{k:3,t:'Étape 3',c:'var(--g)'}];
+function ta(id,label,ph,rows){return '<div class="f"><label for="'+id+'">'+label+'</label><textarea id="'+id+'" data-f rows="'+(rows||2)+'" placeholder="'+(ph||'')+'"></textarea></div>'}
+var tabsEl=$('#ptabs'),panelsEl=$('#ppanels'),tabBtns=[],panels=[];
+PARTS.forEach(function(p,pi){
+ var b=document.createElement('button');b.type='button';b.setAttribute('role','tab');b.id='pt'+p.k;b.setAttribute('aria-controls','pp'+p.k);b.style.setProperty('--c',p.c);
+ b.textContent='Partie '+p.k+' (étape '+p.k+' du texte)';b.setAttribute('aria-selected',pi===0?'true':'false');
+ b.addEventListener('click',function(){showPart(pi)});
+ b.addEventListener('keydown',function(e){if(e.key==='ArrowRight'){e.preventDefault();showPart((pi+1)%3,true)}else if(e.key==='ArrowLeft'){e.preventDefault();showPart((pi+2)%3,true)}});
+ tabsEl.appendChild(b);tabBtns.push(b);
+ var pan=document.createElement('div');pan.className='ppanel';pan.id='pp'+p.k;pan.setAttribute('role','tabpanel');pan.setAttribute('aria-labelledby','pt'+p.k);pan.style.setProperty('--c',p.c);if(pi!==0)pan.hidden=true;
+ var h='<p class="recall">Étape '+p.k+' du texte : <span data-bind="e'+p.k+'l" data-ph="lignes, à repérer à l’étape 3"></span> — <span data-bind="e'+p.k+'i" data-ph="idée de l’étape"></span></p>';
+ h+=ta('d'+p.k+'_o','Objet de la partie : l’idée centrale de l’étape, reliée aux enjeux posés dans l’introduction','',2);
+ for(var s=1;s<=3;s++){
+  h+='<div class="sub"><h4>Sous-partie '+s+(s===3?' (facultative)':'')+'</h4>';
+  h+=ta('d'+p.k+'_'+s+'q','La question qui guide l’explication','Que signifie cet argument, cette affirmation, ce concept ? Comment le comprendre, et pourquoi ?');
+  h+=ta('d'+p.k+'_'+s+'e','L’explication','Je pars de ce qu’il faut expliquer en premier pour faire comprendre la suite');
+  h+=ta('d'+p.k+'_'+s+'c','La citation expliquée (avec les lignes)','');
+  h+=ta('d'+p.k+'_'+s+'x','Un exemple, une connaissance de cours ou une référence (facultatif)','');
+  h+='</div>';
+ }
+ h+='<div class="trans"><h4>'+(p.k<3?'Transition':'Bilan avant la conclusion')+'</h4>';
+ if(p.k<3){h+=ta('d'+p.k+'_t1','Le sens de l’étape expliquée, par rapport au texte','');h+=ta('d'+p.k+'_t2','Ce qui reste à expliquer : la question qui conduit à l’étape suivante','')}
+ else h+=ta('d3_t1','Le sens de la dernière étape, et ce qu’elle apporte à la thèse','');
+ h+='</div>';
+ pan.innerHTML=h;panelsEl.appendChild(pan);panels.push(pan);
+});
+function showPart(i,focus){tabBtns.forEach(function(b,k){b.setAttribute('aria-selected',k===i?'true':'false');b.setAttribute('tabindex',k===i?'0':'-1');panels[k].hidden=k!==i});if(focus)tabBtns[i].focus();$$('textarea',panels[i]).forEach(fit)}
+tabBtns.forEach(function(b,k){b.setAttribute('tabindex',k===0?'0':'-1')});
+
+var KEY='methode-explication-brouillon';
+var inputs=$$('[data-f]'),byId={};inputs.forEach(function(el){byId[el.id]=el});
+function fit(t){if(t.tagName!=='TEXTAREA'||t.readOnly)return;if(!t.offsetParent&&!t.getClientRects().length)return;t.style.height='auto';if(t.scrollHeight>0)t.style.height=(t.scrollHeight+2)+'px'}
+function getVal(el){return el.type==='checkbox'?(el.checked?'1':''):el.value}
+function val(id){var el=byId[id];return el&&el.type!=='checkbox'?el.value.trim():''}
+function clean(s){return s.replace(/\s+/g,' ').trim().replace(/[.\s…]+$/,'')}
+function save(){try{var o={};inputs.forEach(function(el){var v=getVal(el);if(v)o[el.id]=v});localStorage.setItem(KEY,JSON.stringify(o))}catch(e){}}
+function restore(){try{var o=JSON.parse(localStorage.getItem(KEY)||'{}');Object.keys(o).forEach(function(id){var el=byId[id];if(!el)return;if(el.type==='checkbox')el.checked=true;else el.value=o[id]})}catch(e){}}
+function ph(id,p){var v=clean(val(id));return v||'['+p+']'}
+function etapesText(){var L=[];[1,2,3].forEach(function(k){var l=val('e'+k+'l'),i=val('e'+k+'i');if(l||i)L.push(k+'. '+(l?'lignes '+l.replace(/^(de la )?(ligne|lignes)\s*/i,'')+' : ':'')+(i?clean(i):''))});return L.length?L.join(' — '):'[les étapes repérées à l’étape 3]'}
+function updateBinds(){
+ $$('[data-bind]').forEach(function(el){var v=clean(val(el.getAttribute('data-bind')));if(v){el.textContent=v;el.classList.remove('ph')}else{el.textContent=el.getAttribute('data-ph');el.classList.add('ph')}});
+ $('#i-pb').textContent=ph('pb','le problème, à formuler à l’étape 5');
+ $('#i-th').textContent=ph('these','la thèse, à formuler à l’étape 2');
+ $('#i-et').textContent=etapesText();
+}
+var compiled=$('#compiled');
+function compile(){
+ var L=[];
+ function head(t){if(L.length)L.push('');L.push(t)}
+ function line(label,id){var v=val(id);if(v)L.push(label+v.replace(/\n+/g,' '))}
+ function block(t,fn){var n=L.length;head(t);var m=L.length;fn();if(L.length===m){L.length=n;if(L[L.length-1]==='')L.pop()}}
+ block('1. LECTURE DU TEXTE',function(){line('Auteur et œuvre : ','src');line('Objet : ','obj');line('Notion(s) : ','notion');line('Vocabulaire : ','vocab');line('Difficultés : ','diff')});
+ block('2. THÈSE',function(){line('Thèse : ','these');line('Argumentation : ','argu')});
+ block('3. GRANDES ÉTAPES',function(){[1,2,3].forEach(function(k){var a=val('e'+k+'l'),b=val('e'+k+'i'),c=val('e'+k+'a'),d=val('e'+k+'t');if(a||b||c||d){L.push('Étape '+k+(a?' (lignes '+a+')':'')+(b?' : '+b.replace(/\n+/g,' '):''));if(c)L.push('  Arguments et exemples : '+c.replace(/\n+/g,' '));if(d)L.push('  Lien logique : '+d.replace(/\n+/g,' '))}})});
+ block('4. CONCEPTS',function(){[1,2,3].forEach(function(k){var n=val('c'+k+'n'),s=val('c'+k+'s');if(n||s)L.push('- '+(n||'Concept '+k)+(s?' : '+s.replace(/\n+/g,' '):''))})});
+ block('5. PROBLÈME',function(){line('Opinion remise en cause : ','opi');line('Problème : ','pb');line('Enjeu : ','enj');line('Discussion ou réserve : ','res')});
+ block('6. INTRODUCTION',function(){line('§ 1. ','i1');line('§ 2. ','i2');line('§ 3. ','i3')});
+ block('7. DÉVELOPPEMENT',function(){PARTS.forEach(function(p){var S=[];var o=val('d'+p.k+'_o');if(o)S.push('  Objet : '+o.replace(/\n+/g,' '));for(var s=1;s<=3;s++){var X=[];[['q','Question'],['e','Explication'],['c','Citation expliquée'],['x','Exemple ou référence']].forEach(function(f){var v=val('d'+p.k+'_'+s+f[0]);if(v)X.push('    '+f[1]+' : '+v.replace(/\n+/g,' '))});if(X.length){S.push('  Sous-partie '+s);S=S.concat(X)}}['t1','t2'].forEach(function(t){var v=val('d'+p.k+'_'+t);if(v)S.push('  '+(t==='t1'?(p.k<3?'Transition – sens de l’étape : ':'Bilan : '):'Transition – question suivante : ')+v.replace(/\n+/g,' '))});if(S.length){L.push('Partie '+p.k);L=L.concat(S)}})});
+ block('8. CONCLUSION',function(){line('Problème et thèse rappelés : ','k_1');line('Sens et nuances de la thèse : ','k_2');line('Originalité et enjeux : ','k_3')});
+ return L.join('\n');
+}
+var STEPN=9,navItems=$$('#stepnav li');
+function updateDone(){for(var n=1;n<=STEPN;n++){var s=$('#s'+n),any=false;$$('[data-f]',s).forEach(function(el){if(getVal(el))any=true});if(n===9){any=false;$$('input[type=checkbox]',s).forEach(function(el){if(el.checked)any=true})}navItems[n-1].classList.toggle('done',any)}}
+function updateAll(){updateBinds();compiled.value=compile();updateDone()}
+function setCurrent(i){navItems.forEach(function(li,k){var a=li.firstChild;if(k===i)a.setAttribute('aria-current','true');else a.removeAttribute('aria-current')});var a=navItems[i].firstChild,box=a.parentNode.parentNode;if(box.scrollWidth>box.clientWidth){box.scrollTo?box.scrollTo({left:a.offsetLeft-20,behavior:reduce?'auto':'smooth'}):0}}
+if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)setCurrent(parseInt(e.target.id.slice(1),10)-1)})},{rootMargin:'-30% 0px -60% 0px'});for(var n=1;n<=STEPN;n++)io.observe(document.getElementById('s'+n))}
+inputs.forEach(function(el){el.addEventListener('input',function(){fit(el);save();updateAll()});el.addEventListener('change',function(){save();updateAll()})});
+restore();inputs.forEach(fit);updateAll();
+window.addEventListener('resize',function(){inputs.forEach(fit)});
+var msg=$('#msg');function say(t){msg.textContent=t;setTimeout(function(){if(msg.textContent===t)msg.textContent=''},4000)}
+$('#copy').addEventListener('click',function(){var text=compiled.value;if(!text){say('Il n’y a encore rien à copier.');return}
+ function fallback(){compiled.focus();compiled.select();var ok=false;try{ok=document.execCommand('copy')}catch(e){}say(ok?'Brouillon copié.':'Sélectionnez le texte puis copiez-le (Ctrl+C).')}
+ if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(function(){say('Brouillon copié.')},fallback)}else fallback()});
+var clearBtn=$('#clear'),armed=false,timer=0;
+clearBtn.addEventListener('click',function(){if(!armed){armed=true;clearBtn.textContent='Confirmer l’effacement';timer=setTimeout(function(){armed=false;clearBtn.textContent='Effacer mon brouillon'},4000);return}
+ clearTimeout(timer);armed=false;clearBtn.textContent='Effacer mon brouillon';inputs.forEach(function(el){if(el.type==='checkbox')el.checked=false;else{el.value='';el.style.height=''}});try{localStorage.removeItem(KEY)}catch(e){}updateAll();say('Brouillon effacé.')});
+var wave=$('#wave');if(reduce){wave.classList.add('on')}else{requestAnimationFrame(function(){requestAnimationFrame(function(){wave.classList.add('on')})})}
+})();
+</script><script src="quiz.js" defer></script></body></html>

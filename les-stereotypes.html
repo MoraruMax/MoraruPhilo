@@ -163,6 +163,7 @@ footer p{font-size:.92rem;color:var(--muted);margin:0}
 }
 @page{size:A4;margin:16mm 14mm}
 </style>
+<link rel="stylesheet" href="quiz.css">
 </head>
 <body>
 <nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
@@ -315,6 +316,15 @@ footer p{font-size:.92rem;color:var(--muted);margin:0}
   </div>
 </section>
 </main>
+<!--quiz-->
+<section id="quiz" aria-labelledby="h-quiz">
+<h2 id="h-quiz">Quiz de révision</h2>
+<p class="qintro">5 questions pour vérifier l’essentiel. Les réponses s’affichent tout de suite, avec une explication. Rien n’est enregistré ni envoyé.</p>
+<div class="qz" id="qz"></div>
+<script type="application/json" id="quizdata">[{"q":"D’où vient le mot « stéréotype » et que signifie-t-il ?","a":["Du grec stereos (ferme, solide) et typos (empreinte) : une image préconçue","Du latin stare : un état durable","Du grec stereo : un son enregistré","De l’anglais stereo : une double image"],"e":"Un stéréotype est une image préconçue : on juge d’abord, on regarde ensuite."},{"q":"Qu’appelle-t-on la menace du stéréotype ?","a":["Des personnes visées par un stéréotype adaptent leur comportement à ce que l’on attend d’elles","Le fait de craindre de rencontrer des étrangers","L’interdiction légale des préjugés","Le risque de se tromper en jugeant autrui"],"e":"Chacun est regardé à travers l’image de son groupe et finit par s’y conformer."},{"q":"Dans l’expérience de Steele et Aronson (1995), que font les chercheurs à l’un des groupes ?","a":["Ils lui rappellent qu’il serait « normal », voire « attendu », que les étudiants noirs ne réussissent pas pleinement les tests","Ils leur font passer un test plus difficile","Ils les récompensent s’ils réussissent","Ils leur cachent le but du test"],"e":"Il s’agit de tester l’effet d’un simple rappel du stéréotype."},{"q":"Quel est le résultat de cette expérience ?","a":["Le groupe à qui l’on a rappelé le stéréotype obtient des résultats bien plus faibles","Aucune différence entre les groupes","Ce groupe obtient de meilleurs résultats","Les résultats dépendent uniquement du niveau scolaire"],"e":"La fiche présente un schéma qualitatif, sans chiffres : le stéréotype rappelé fait baisser les résultats."},{"q":"Quel lien la fiche fait-elle avec la liberté ?","a":["Nous ne serions jamais totalement libres de nos actions : nous risquons de nous comporter comme on l’attend de nous","Les stéréotypes n’ont aucun effet sur nos actes","Les stéréotypes nous rendent plus libres","Seuls les stéréotypes négatifs influencent nos actes"],"e":"Cette influence est inconsciente : elle modifie le comportement sans que les personnes s’en rendent compte."}]</script>
+</section>
+<!--/quiz-->
+
 
 <nav class="pn" aria-label="Pages de la section Liberté"><a class="pv" href="spinoza-lettre-a-schuller.html" rel="prev"><small>← Page précédente</small><b>Spinoza : l’ignorance des causes déterminantes</b></a><a class="nx" href="epictete.html" rel="next"><small>Page suivante →</small><b>Epictète : ce qui dépend de nous</b></a><a class="hm" href="accueil.html">Retour à l’accueil</a></nav>
 <footer>
@@ -412,5 +422,6 @@ footer p{font-size:.92rem;color:var(--muted);margin:0}
   }
 })();
 </script>
+<script src="quiz.js" defer></script>
 </body>
 </html>

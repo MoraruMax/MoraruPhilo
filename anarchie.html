@@ -161,6 +161,7 @@ footer p{margin:0}
 }
 @page{size:A4;margin:16mm 14mm}
 </style>
+<link rel="stylesheet" href="quiz.css">
 </head>
 <body>
 <nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
@@ -304,6 +305,15 @@ footer p{margin:0}
   </div>
 </section>
 </main>
+<!--quiz-->
+<section id="quiz" aria-labelledby="h-quiz">
+<h2 id="h-quiz">Quiz de révision</h2>
+<p class="qintro">5 questions pour vérifier l’essentiel. Les réponses s’affichent tout de suite, avec une explication. Rien n’est enregistré ni envoyé.</p>
+<div class="qz" id="qz"></div>
+<script type="application/json" id="quizdata">[{"q":"Que signifie l’étymologie du mot « anarchie » ?","a":["An-archè : « sans commandement » ; archè désigne à la fois le commencement et le commandement","Absence de loi et de morale","Désordre et violence","Gouvernement par le peuple"],"e":"L’anarchie, au sens des auteurs étudiés, n’est pas l’absence d’ordre mais l’absence de domination imposée d’en haut."},{"q":"Quel raisonnement Bakounine applique-t-il à Dieu puis à l’État ?","a":["Un maître suprême et absolu rend impossibles la liberté, la justice et l’égalité : l’homme ne peut être libre sous un maître","Dieu et l’État sont indispensables à l’ordre","L’homme est naturellement mauvais","La liberté s’obtient par l’obéissance"],"e":"« Si Dieu est, l’homme est esclave ; or l’homme peut, doit être libre ; donc Dieu n’existe pas. » Bakounine range l’Église et l’État parmi ses « deux bêtes noires »."},{"q":"Bakounine rejette-t-il toute autorité ?","a":["Non : il accepte librement l’autorité du savoir, sans en reconnaître aucune comme infaillible","Oui, toute autorité sans exception","Oui, sauf celle de l’État","Non, il accepte toute autorité"],"e":"On consulte le cordonnier pour des bottes, l’architecte pour une maison : une autorité librement acceptée, avec un droit de critique et de contrôle."},{"q":"Selon Kropotkine, d’où naît la morale ?","a":["De la sympathie et de l’entraide, c’est-à-dire de la vie en société","De la religion","De la peur du gendarme","D’un commandement de l’État"],"e":"Voir souffrir quelqu’un, c’est souffrir un peu avec lui : devenu habitude, ce sentiment se développe en solidarité."},{"q":"Pourquoi Louise Michel se dit-elle anarchiste ?","a":["Parce que des hommes dévoués et énergiques, une fois au pouvoir, ont vu leur énergie annulée par lui","Parce que la Commune a triomphé","Parce qu’elle déteste la science","Parce qu’elle croit au gouvernement des meilleurs"],"e":"« Le pouvoir est maudit, et c’est pour cela que je suis anarchiste. » Une pensée née de l’expérience de la Commune de Paris."}]</script>
+</section>
+<!--/quiz-->
+
 <footer><div class="wrap"><p>Synthèse construite à partir des quatre textes : Bakounine, <i>Dieu et l’État</i> ; Kropotkine, <i>La morale anarchiste</i> ; Reclus, <i>L’Anarchie</i> ; Louise Michel, <i>La Commune</i>. Les citations viennent des textes ; les formulations de synthèse, les exercices (dont les cas imaginés de l’exercice) et les pistes de débat sont de moi.</p></div></footer>
 <script>
 (function(){
@@ -365,5 +375,6 @@ footer p{margin:0}
   ],[['Imposée','var(--soc)'],['Librement acceptée','var(--nat)']]);
 })();
 </script>
+<script src="quiz.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>L’État : plan de cours</title><style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+  --bg:#F6F4F9; --surface:#FFFFFF; --ink:#22192B; --muted:#62566E; --line:#DDD6E6; --focus:#8A1850;
+  --k:#8A1850; --k-soft:#F7E3EE; --b:#7A1BB5; --b-soft:#EEDFF8; --p:#9A5200; --q:#2F4FA8;
+  --serif:Georgia,"Times New Roman",serif;
+  --sans:system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#16111C; --surface:#201929; --ink:#EEE8F5; --muted:#B0A3BF; --line:#352B42; --focus:#FF8CC0;
+    --k:#FF8CC0; --k-soft:#3A1830; --b:#C99BFF; --b-soft:#2D1A44; --p:#F0B45C; --q:#9DB2FF;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#16111C; --surface:#201929; --ink:#EEE8F5; --muted:#B0A3BF; --line:#352B42; --focus:#FF8CC0;
+  --k:#FF8CC0; --k-soft:#3A1830; --b:#C99BFF; --b-soft:#2D1A44; --p:#F0B45C; --q:#9DB2FF;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:calc(4rem + env(safe-area-inset-top,0px));-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.08rem/1.6 var(--serif)}
+.wrap{width:min(900px,100% - 2.5rem);margin-inline:auto}
+h1,h2,h3{margin:0;font-family:var(--serif)}
+h1{font-weight:700;font-size:clamp(2.4rem,7.5vw,4.6rem);line-height:1.05;letter-spacing:-.02em}
+h2{font-weight:700;font-size:clamp(1.6rem,3.4vw,2.2rem);line-height:1.15;margin-bottom:1.2rem}
+p{margin:0 0 1em}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
+.hero{padding:clamp(2.2rem,6vw,4.5rem) 0 1.6rem}
+.def{margin:1.6rem 0 1.2rem;padding:1rem 1.2rem;background:var(--k-soft);border-left:5px solid var(--k);border-radius:0 8px 8px 0;font-weight:600;max-width:46ch}
+.def span{display:block;font:700 .8rem/1 var(--sans);color:var(--k);margin-bottom:.4rem}
+.btn{font:700 .92rem/1.2 var(--sans);color:var(--ink);background:transparent;border:1.5px solid var(--ink);border-radius:8px;padding:.6rem .95rem;cursor:pointer}
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--bg);border-bottom:1px solid var(--line)}
+.nav ol{display:flex;gap:.3rem;list-style:none;margin:0;padding:.5rem 0;overflow-x:auto}
+.nav a{display:block;white-space:nowrap;text-decoration:none;color:var(--muted);font:700 .88rem/1.2 var(--sans);padding:.5rem .75rem;border-radius:6px}
+.nav a:hover{color:var(--ink)}
+.nav a[aria-current="true"]{background:var(--ink);color:var(--bg)}
+.part{padding:clamp(2.2rem,5vw,3.4rem) 0;border-bottom:1px solid var(--line)}
+.gt{font:700 1rem/1.3 var(--sans);color:var(--muted);margin:1.6rem 0 .6rem}
+.branches{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr));align-items:start}
+details.br{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:0 1rem}
+details.br summary{cursor:pointer;font:700 1rem/1.35 var(--sans);padding:.9rem 0;list-style:none}
+details.br summary::-webkit-details-marker{display:none}
+details.br summary::before{content:"";display:inline-block;width:.5rem;height:.5rem;border-right:3px solid var(--k);border-bottom:3px solid var(--k);transform:rotate(-45deg);margin-right:.7rem;vertical-align:.1em;transition:transform .2s}
+details.br[open] summary::before{transform:rotate(45deg)}
+ol.st{list-style:none;margin:0;padding:0 0 .9rem}
+.s{margin:0 0 .6rem;padding:.6rem .8rem;border-left:4px solid var(--line);background:var(--bg);border-radius:0 6px 6px 0}
+.lb{display:block;font:700 .75rem/1 var(--sans);margin-bottom:.3rem;color:var(--muted)}
+.s-q{border-left-color:var(--q)} .s-q .lb{color:var(--q)}
+.s-p{border-left-color:var(--p)} .s-p .lb{color:var(--p)}
+.s-k{border-left-color:var(--k);background:var(--k-soft);font-weight:600} .s-k .lb{color:var(--k)}
+.s-b{border-left-color:var(--b);background:var(--b-soft);font-weight:600} .s-b .lb{color:var(--b)}
+.who{font-weight:700;color:var(--k)}
+.bridge{margin:1.6rem 0 0;padding:.9rem 1.1rem;border:2px dashed var(--p);border-radius:8px;font:700 1rem/1.4 var(--sans);color:var(--p)}
+.final{background:var(--b-soft);border:2px solid var(--b);border-radius:12px;padding:1.4rem 1.5rem;font:600 clamp(1.2rem,2.6vw,1.5rem)/1.45 var(--serif);margin-top:1.4rem}
+.final span{display:block;font:700 .8rem/1 var(--sans);color:var(--b);margin-bottom:.6rem}
+footer{padding:1.6rem 0 2.5rem;font:500 .92rem/1.5 var(--sans);color:var(--muted)}
+footer p{margin:0}
+
+.pn{display:flex;gap:1rem;flex-wrap:wrap;margin:2.5rem auto 0;max-width:980px;padding:0 1.25rem;box-sizing:content-box}
+.pn a{flex:1 1 16rem;display:flex;flex-direction:column;gap:.25rem;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--k,var(--ink));padding:.9rem 1.1rem;border-radius:0 0 8px 8px}
+.pn a:hover{border-color:var(--k,var(--ink))}.pn a:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.pn small{font:600 .78rem/1 system-ui,-apple-system,sans-serif;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.pn b{font:700 1.1rem/1.25 system-ui,-apple-system,sans-serif}
+.pn .nx{text-align:right}
+.pn .nx:first-child{margin-left:auto;max-width:calc(50% - .5rem)}
+.pn .hm{flex:0 0 100%;text-align:center;font:500 .92rem/1 system-ui,-apple-system,sans-serif;background:none;border:0;padding:.4rem;color:var(--ink);text-decoration:underline}
+
+.pdfbtn{display:inline-flex;align-items:center;gap:.5rem;font:600 .88rem/1 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--surface);border:1.5px solid var(--ink);border-radius:999px;padding:.55rem .95rem;cursor:pointer}
+.pdfbtn:hover{background:var(--ink);color:var(--bg)}.pdfbtn:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:2px}
+@media print{
+  :root{--bg:#fff!important;--surface:#fff!important;--ink:#111!important;--muted:#444!important;--line:#bbb!important;color-scheme:light!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:#fff!important;color:#111!important}
+  body::before,body::after{display:none!important}
+  nav,.pdfbtn,.pn,video,section[aria-labelledby="h-video"]{display:none!important}
+  .rev,.js .rev{opacity:1!important;transform:none!important}
+  .stp li[hidden]{display:list-item!important}
+  details>*{display:block!important}
+  article,li,.card,figure,.stage{break-inside:avoid}
+  h1,h2,h3{break-after:avoid;text-shadow:none!important}
+  *{text-shadow:none!important}
+  a{color:inherit;text-decoration:none}
+  section.block,.part{padding-top:1.2rem!important;padding-bottom:1.2rem!important}
+  footer{break-before:avoid;border-top:1px solid #999;margin-top:1rem}
+}
+@page{size:A4;margin:16mm 14mm}
+
+.eyebrow{font:700 .8rem/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--k);margin:0 0 .8rem}
+.sub{font:500 1rem/1.5 var(--sans);color:var(--muted);max-width:60ch;margin:1rem 0 1.2rem}
+.lead{margin:0 0 1rem}
+details.br,.s,.final{min-width:0;overflow-wrap:anywhere}
+.branches{grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr))}
+.branches.nest{grid-template-columns:minmax(0,1fr);margin:.4rem 0 .6rem}
+details.br details.br{background:var(--bg)}
+details.br summary .sl{display:block;font:700 .75rem/1 var(--sans);color:var(--muted);margin-bottom:.25rem;text-transform:uppercase;letter-spacing:.05em}
+details.br summary{font-weight:700}
+.s-x{border-left-color:var(--q);border-left-style:dashed} .s-x .lb{color:var(--q)} .s-x .t{font-style:italic;color:var(--muted)}
+.s-p{border-left-style:dashed}
+.s-x .lb::before,.s-p .lb::before{content:""}
+.final{margin:.8rem 0}
+.pls{list-style:none;padding:0;margin:1.6rem 0;display:grid;gap:1rem;grid-template-columns:repeat(auto-fill,minmax(15rem,1fr))}
+.pls a{display:flex;flex-direction:column;gap:.3rem;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--k);padding:1rem 1.1rem;border-radius:0 0 10px 10px;min-height:5.5rem}
+.pls a:hover{border-color:var(--k)}
+.pls b{font:700 1.25rem/1.2 var(--serif)} .pls small{font:600 .8rem/1 var(--sans);color:var(--muted)}
+</style></head><body>
+<nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
+<header class="hero"><div class="wrap"><p class="eyebrow">Plan de cours</p><h1>L’État</h1>
+<p class="sub">Les étiquettes indiquent le rôle de chaque idée (justification, problème, conséquence, exemple…). Chaque branche se plie et se déplie.</p>
+<button class="btn" id="tog" type="button">Tout replier</button></div></header>
+<nav class="nav" aria-label="Les parties du plan"><div class="wrap"><ol id="nav"><li><a href="#p1">1. Premier constat</a></li><li><a href="#p2">2. Deuxième constat</a></li></ol></div></nav>
+<main id="main"><section class="part" id="p1" aria-labelledby="h-p1"><div class="wrap"><h2 id="h-p1">1. Premier constat</h2><ol class="st"><li class="s"><span class="t">Les premières formes d'Etat apparaissent il y a environ 5000 ans</span></li></ol><ol class="st"><li class="s s-x"><span class="lb">Question</span><span class="t">→ L'Etat, une dénaturation de l'homme ? (voir ci-dessous)</span></li></ol></div></section><section class="part" id="p2" aria-labelledby="h-p2"><div class="wrap"><h2 id="h-p2">2. Deuxième constat</h2><ol class="st"><li class="s"><span class="t">La <em>fiction</em> la plus utilisée pour expliquer l'apparition de l'Etat est la sortie de l'état de nature</span></li></ol><ol class="st"><li class="s s-k"><span class="lb">Question</span><span class="t">L'Etat, une dénaturation de l'homme ?</span></li></ol><ol class="st"><li class="s"><span class="lb">L&#x27;état de nature</span><span class="t">L'Etat comme construction artificielle, donc non-naturelle</span></li></ol><div class="branches nest"><details class="br" open><summary><span class="sl">Rousseau</span>L'état de nature comme équilibre heureux avec la nature</summary><div class="branches nest"><ol class="st"><li class="s"><span class="lb">Caractéristiques</span><span class="t">L'homme vit d'abord seul</span></li></ol><ol class="st"><li class="s"><span class="lb">Caractéristiques</span><span class="t">Il ne reconnaît pas encore ses semblables</span></li></ol><ol class="st"><li class="s"><span class="lb">Caractéristiques</span><span class="t">La nature lui fournit tout ce dont il a besoin</span></li></ol><ol class="st"><li class="s"><span class="lb">Caractéristiques</span><span class="t">L'homme est <em>oisif</em>, donc heureux</span></li></ol><details class="br" open><summary><span class="sl">Problème</span>Expansion démographique</summary><ol class="st"><li class="s"><span class="lb">Conséquence : raréfaction des ressources</span><span class="t">Expansion géographique</span></li></ol><ol class="st"><li class="s"><span class="lb">Conséquence : nouveaux biomes</span><span class="t">Nécessité de s'adapter pour survivre</span></li></ol><div class="branches nest"><details class="br" open><summary><span class="sl">Technique</span>Apparition de la technique, comprise comme <em>manière de transformer</em> la nature</summary><ol class="st"><li class="s s-p"><span class="lb">Exemple</span><span class="t">Vêtements chauds pour s'adapter à des climats plus froids</span></li><li class="s"><span class="lb">Problème</span><span class="t">"L'art périt avec l'inventeur" : aucune transmission de savoir possible</span></li></ol></details><details class="br" open><summary><span class="sl">Premières idées</span>L'homme développe des idées de <em>relation</em> entre les choses</summary><ol class="st"><li class="s s-p"><span class="lb">Exemple</span><span class="t">Pour savoir quoi chasser, l'homme développe des ordres de grandeur : tel animal est plus gros que tel autre, donc peut-être plus dangereux</span></li><li class="s"><span class="lb">Conséquence</span><span class="t">L'homme va finir par identifier ses semblables</span></li></ol><ol class="st"><li class="s"><span class="lb">Conséquence</span><span class="t">Accélération du processus de sortie de l'état de nature</span></li></ol><ol class="st"><li class="s"><span class="lb">Qui se ressemble s&#x27;assemble</span><span class="t">Apparition du langage et des premières formes de coopération et de cohabitation</span></li></ol><ol class="st"><li class="s"><span class="lb">Apparition des premiers maux</span><span class="t">L'homme découvre de nouveaux sentiments</span></li></ol><div class="branches nest"><details class="br" open><summary><span class="sl">Négatifs</span>Jalousie, envie, cupidité, <em>etc.</em></summary><ol class="st"><li class="s s-p"><span class="lb">Cf. conscience de soi comme construction collective (exemple)</span><span class="t">Confrontation aux autres, compétition, volonté d'être meilleur que l'autre</span></li></ol></details><ol class="st"><li class="s"><span class="lb">Positifs</span><span class="t">Amitié, affection, amour, <em>etc.</em></span></li></ol><details class="br" open><summary><span class="sl">Aboutissement</span>Dernier terme de l'état de nature : la propriété privée de la terre</summary><ol class="st"><li class="s s-p"><span class="lb">Exemple</span><span class="t">Agriculture, métallurgie</span></li><li class="s s-k"><span class="lb">Sortie de l&#x27;état de nature</span><span class="t">Apparition de l'Etat : sortie accidentelle de l'état de nature</span></li></ol><ol class="st"><li class="s s-b"><span class="lb">Contractualisation</span><span class="t">Etat comme résultat du Contrat Social : chacun accepte de placer sa puissance sous la suprême direction de la volonté générale</span></li></ol><ol class="st"><li class="s s-x"><span class="lb">Bilan</span><span class="t">→ Théories contractualistes : l'Etat est le résultat d'un contrat (voir plus bas)</span></li></ol></details></div></details></div></details></div></details><details class="br" open><summary><span class="sl">Hobbes</span>Etat de nature comme état de misère, de guerre de tous contre tous et chacun contre chacun</summary><div class="branches nest"><ol class="st"><li class="s"><span class="lb">Justification</span><span class="t">Egalité quasi parfaite</span></li></ol><ol class="st"><li class="s"><span class="lb">Justification</span><span class="t">Droit naturel illimité de chacun à jouir de toutes choses</span></li></ol><details class="br" open><summary><span class="sl">Justification</span>Méchanceté naturelle de l'homme</summary><ol class="st"><li class="s s-p"><span class="lb">Cf. critique de Rousseau (exemple)</span><span class="t">Hobbes prétendrait dépeindre l'homme naturel, mais sans véritablement le dépouiller des maux sociaux</span></li></ol></details><details class="br" open><summary><span class="sl">Conséquence</span>Impossibilité pour l'homme de vivre heureux dans ces conditions : il est nécessaire de sortir de l'état de nature</summary><ol class="st"><li class="s"><span class="lb">Comment ?</span><span class="t">La multitude se réunit, choisit un représentant et des lois : naissance du peuple</span></li></ol><ol class="st"><li class="s"><span class="lb">Finalité</span><span class="t">Nécessité de se doter d'une justice coercitive, capable de punir ceux qui ne respectent pas la parole donnée</span></li></ol><ol class="st"><li class="s s-k"><span class="lb">Conséquence</span><span class="t">Apparition de l'Etat, solution à l'impossibilité de vivre à l'état de nature</span></li></ol><ol class="st"><li class="s s-b"><span class="lb">Contractualisation</span><span class="t">Etat comme résultat du Contrat Social : chacun accepte de renoncer à son droit illimité à jouir de toutes choses, à condition que tous en fassent autant</span></li></ol><div class="branches nest"><details class="br" open><summary><span class="sl">Conséquence</span>Etat compris comme limite à la liberté naturelle et à notre droit naturel, au profit de la sécurité</summary><ol class="st"><li class="s s-p"><span class="lb">Cf. Rousseau (exemple)</span><span class="t">Critique par Rousseau : la liberté est inaliénable, nous ne pouvons y renoncer. Si nous cherchions véritablement la sécurité, alors nous serions heureux dans un cachot</span></li></ol></details><details class="br" open><summary><span class="sl">Bilan</span>Théories contractualistes : l'Etat est le résultat d'un contrat</summary><ol class="st"><li class="s s-k"><span class="lb">Définition philosophique : Weber</span><span class="t">Etat comme ce qui "revendique avec succès, pour son propre compte, le monopole de la contrainte physique légitime"</span></li></ol><div class="branches nest"><ol class="st"><li class="s"><span class="lb">Justification</span><span class="t">Constat de Trotski : tout Etat est fondé par la force</span></li></ol><ol class="st"><li class="s"><span class="lb">Justification</span><span class="t">Héritage du pouvoir du <em>Pater Familias</em>, qui traite les membres de sa maisonnée comme des objets</span></li></ol><details class="br" open><summary><span class="sl">Un grand pouvoir implique de grandes responsabilités</span>Etat compris principalement comme pouvoir de contrainte</summary><ol class="st"><li class="s"><span class="lb">Problème</span><span class="t">A qui confier ce pouvoir ?</span></li></ol><div class="branches nest"><details class="br" open><summary><span class="sl">Platon</span>Le philosophe-roi</summary><div class="branches nest"><ol class="st"><li class="s"><span class="lb">Justification</span><span class="t">Pour éviter les injustices (<em>Cf.</em> mise à mort de Socrate), il faut confier le pouvoir à ceux qui cherchent la véritable justice</span></li></ol><ol class="st"><li class="s"><span class="lb">Problème moral</span><span class="t">Mensonge</span></li></ol><ol class="st"><li class="s"><span class="lb">Problème éthique</span><span class="t">Eugénisme</span></li></ol></div></details><details class="br" open><summary><span class="sl">Contractualistes</span>Peuple comme origine du pouvoir</summary><div class="branches nest"><ol class="st"><li class="s"><span class="lb">Conséquence</span><span class="t">Souveraineté du peuple : démocratie</span></li></ol><ol class="st"><li class="s"><span class="lb">Conséquence</span><span class="t">Le peuple abandonne la souveraineté par le contrat : figure du Souverain</span></li></ol></div></details></div></details><details class="br" open><summary><span class="sl">Bilan</span>L'Etat semble être une forme de "mal nécessaire"</summary><div class="branches nest"><ol class="st"><li class="s"><span class="lb">Inconvénients</span><span class="t">Contraintes, violences, emprisonnements, bureaucratie, <em>etc.</em></span></li></ol><ol class="st"><li class="s"><span class="lb">Avantages</span><span class="t">Garant de l'effectivité de la liberté politique objective (<em>Cf.</em> Rousseau &amp; Hobbes), et de la sécurité des citoyens (<em>Cf.</em> Hobbes &amp; Chapoutot)</span></li></ol><details class="br" open><summary><span class="sl">Limites et fragilités</span>Etat comme construction rationnelle, mais construction fragile</summary><div class="branches nest"><ol class="st"><li class="s"><span class="lb">Despotisme</span><span class="t">Risque de désintérêt pour la chose publique. <em>Cf.</em> Tocqueville</span></li></ol><ol class="st"><li class="s"><span class="lb">Tentation autoritaire</span><span class="t">Nécessité de fixer à l'Etat des limites, sous peine de verser dans la tyrannie. <em>Cf.</em> Arendt</span></li></ol><ol class="st"><li class="s"><span class="lb">Obéissance aveugle</span><span class="t">Risque de s'en remettre aveuglément à l'Etat : absence de liberté, et donc de responsabilité. <em>Cf.</em> Eichmann</span></li></ol><div class="final"><span>Conclusion</span>L'Etat se présente donc comme une certaine dénaturation de l'homme, mais une dénaturation nécessaire, permettant à chacun de chercher à prospérer en sécurité</div></div></details></div></details></div></details></div></details></div></details></div></div></section></main>
+<nav class="pn" aria-label="Pages de la section Plans de cours"><a class="pv" href="plan-devoir.html" rel="prev"><small>← Page précédente</small><b>Le devoir</b></a><a class="nx" href="plan-inconscient.html" rel="next"><small>Page suivante →</small><b>L’inconscient</b></a><a class="hm" href="accueil.html">Retour à l’accueil</a></nav>
+<footer><div class="wrap"><p>Page réalisée à partir du plan de cours « L’État ».</p></div></footer>
+<script>
+(function(){
+ var det=[].slice.call(document.querySelectorAll('details.br')),tog=document.getElementById('tog'),open=true;
+ tog.addEventListener('click',function(){open=!open;det.forEach(function(d){d.open=open});tog.textContent=open?'Tout replier':'Tout déplier'});
+ var links=[].slice.call(document.querySelectorAll('#nav a'));
+ if('IntersectionObserver' in window){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;links.forEach(function(a){if(a.getAttribute('href')==='#'+e.target.id)a.setAttribute('aria-current','true');else a.removeAttribute('aria-current')})})},{rootMargin:'-30% 0px -60% 0px'});
+  [].slice.call(document.querySelectorAll('.part')).forEach(function(s){io.observe(s)});
+ }
+ window.addEventListener('beforeprint',function(){det.forEach(function(d){d.open=true})});
+})();
+</script></body></html>

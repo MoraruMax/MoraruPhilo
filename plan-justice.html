@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>La justice : plan de cours</title><style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+  --bg:#F6F4F9; --surface:#FFFFFF; --ink:#22192B; --muted:#62566E; --line:#DDD6E6; --focus:#8A1850;
+  --k:#8A1850; --k-soft:#F7E3EE; --b:#7A1BB5; --b-soft:#EEDFF8; --p:#9A5200; --q:#2F4FA8;
+  --serif:Georgia,"Times New Roman",serif;
+  --sans:system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#16111C; --surface:#201929; --ink:#EEE8F5; --muted:#B0A3BF; --line:#352B42; --focus:#FF8CC0;
+    --k:#FF8CC0; --k-soft:#3A1830; --b:#C99BFF; --b-soft:#2D1A44; --p:#F0B45C; --q:#9DB2FF;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#16111C; --surface:#201929; --ink:#EEE8F5; --muted:#B0A3BF; --line:#352B42; --focus:#FF8CC0;
+  --k:#FF8CC0; --k-soft:#3A1830; --b:#C99BFF; --b-soft:#2D1A44; --p:#F0B45C; --q:#9DB2FF;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:calc(4rem + env(safe-area-inset-top,0px));-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.08rem/1.6 var(--serif)}
+.wrap{width:min(900px,100% - 2.5rem);margin-inline:auto}
+h1,h2,h3{margin:0;font-family:var(--serif)}
+h1{font-weight:700;font-size:clamp(2.4rem,7.5vw,4.6rem);line-height:1.05;letter-spacing:-.02em}
+h2{font-weight:700;font-size:clamp(1.6rem,3.4vw,2.2rem);line-height:1.15;margin-bottom:1.2rem}
+p{margin:0 0 1em}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
+.hero{padding:clamp(2.2rem,6vw,4.5rem) 0 1.6rem}
+.def{margin:1.6rem 0 1.2rem;padding:1rem 1.2rem;background:var(--k-soft);border-left:5px solid var(--k);border-radius:0 8px 8px 0;font-weight:600;max-width:46ch}
+.def span{display:block;font:700 .8rem/1 var(--sans);color:var(--k);margin-bottom:.4rem}
+.btn{font:700 .92rem/1.2 var(--sans);color:var(--ink);background:transparent;border:1.5px solid var(--ink);border-radius:8px;padding:.6rem .95rem;cursor:pointer}
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--bg);border-bottom:1px solid var(--line)}
+.nav ol{display:flex;gap:.3rem;list-style:none;margin:0;padding:.5rem 0;overflow-x:auto}
+.nav a{display:block;white-space:nowrap;text-decoration:none;color:var(--muted);font:700 .88rem/1.2 var(--sans);padding:.5rem .75rem;border-radius:6px}
+.nav a:hover{color:var(--ink)}
+.nav a[aria-current="true"]{background:var(--ink);color:var(--bg)}
+.part{padding:clamp(2.2rem,5vw,3.4rem) 0;border-bottom:1px solid var(--line)}
+.gt{font:700 1rem/1.3 var(--sans);color:var(--muted);margin:1.6rem 0 .6rem}
+.branches{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr));align-items:start}
+details.br{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:0 1rem}
+details.br summary{cursor:pointer;font:700 1rem/1.35 var(--sans);padding:.9rem 0;list-style:none}
+details.br summary::-webkit-details-marker{display:none}
+details.br summary::before{content:"";display:inline-block;width:.5rem;height:.5rem;border-right:3px solid var(--k);border-bottom:3px solid var(--k);transform:rotate(-45deg);margin-right:.7rem;vertical-align:.1em;transition:transform .2s}
+details.br[open] summary::before{transform:rotate(45deg)}
+ol.st{list-style:none;margin:0;padding:0 0 .9rem}
+.s{margin:0 0 .6rem;padding:.6rem .8rem;border-left:4px solid var(--line);background:var(--bg);border-radius:0 6px 6px 0}
+.lb{display:block;font:700 .75rem/1 var(--sans);margin-bottom:.3rem;color:var(--muted)}
+.s-q{border-left-color:var(--q)} .s-q .lb{color:var(--q)}
+.s-p{border-left-color:var(--p)} .s-p .lb{color:var(--p)}
+.s-k{border-left-color:var(--k);background:var(--k-soft);font-weight:600} .s-k .lb{color:var(--k)}
+.s-b{border-left-color:var(--b);background:var(--b-soft);font-weight:600} .s-b .lb{color:var(--b)}
+.who{font-weight:700;color:var(--k)}
+.bridge{margin:1.6rem 0 0;padding:.9rem 1.1rem;border:2px dashed var(--p);border-radius:8px;font:700 1rem/1.4 var(--sans);color:var(--p)}
+.final{background:var(--b-soft);border:2px solid var(--b);border-radius:12px;padding:1.4rem 1.5rem;font:600 clamp(1.2rem,2.6vw,1.5rem)/1.45 var(--serif);margin-top:1.4rem}
+.final span{display:block;font:700 .8rem/1 var(--sans);color:var(--b);margin-bottom:.6rem}
+footer{padding:1.6rem 0 2.5rem;font:500 .92rem/1.5 var(--sans);color:var(--muted)}
+footer p{margin:0}
+
+.pn{display:flex;gap:1rem;flex-wrap:wrap;margin:2.5rem auto 0;max-width:980px;padding:0 1.25rem;box-sizing:content-box}
+.pn a{flex:1 1 16rem;display:flex;flex-direction:column;gap:.25rem;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--k,var(--ink));padding:.9rem 1.1rem;border-radius:0 0 8px 8px}
+.pn a:hover{border-color:var(--k,var(--ink))}.pn a:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.pn small{font:600 .78rem/1 system-ui,-apple-system,sans-serif;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.pn b{font:700 1.1rem/1.25 system-ui,-apple-system,sans-serif}
+.pn .nx{text-align:right}
+.pn .nx:first-child{margin-left:auto;max-width:calc(50% - .5rem)}
+.pn .hm{flex:0 0 100%;text-align:center;font:500 .92rem/1 system-ui,-apple-system,sans-serif;background:none;border:0;padding:.4rem;color:var(--ink);text-decoration:underline}
+
+.pdfbtn{display:inline-flex;align-items:center;gap:.5rem;font:600 .88rem/1 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--surface);border:1.5px solid var(--ink);border-radius:999px;padding:.55rem .95rem;cursor:pointer}
+.pdfbtn:hover{background:var(--ink);color:var(--bg)}.pdfbtn:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:2px}
+@media print{
+  :root{--bg:#fff!important;--surface:#fff!important;--ink:#111!important;--muted:#444!important;--line:#bbb!important;color-scheme:light!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:#fff!important;color:#111!important}
+  body::before,body::after{display:none!important}
+  nav,.pdfbtn,.pn,video,section[aria-labelledby="h-video"]{display:none!important}
+  .rev,.js .rev{opacity:1!important;transform:none!important}
+  .stp li[hidden]{display:list-item!important}
+  details>*{display:block!important}
+  article,li,.card,figure,.stage{break-inside:avoid}
+  h1,h2,h3{break-after:avoid;text-shadow:none!important}
+  *{text-shadow:none!important}
+  a{color:inherit;text-decoration:none}
+  section.block,.part{padding-top:1.2rem!important;padding-bottom:1.2rem!important}
+  footer{break-before:avoid;border-top:1px solid #999;margin-top:1rem}
+}
+@page{size:A4;margin:16mm 14mm}
+
+.eyebrow{font:700 .8rem/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--k);margin:0 0 .8rem}
+.sub{font:500 1rem/1.5 var(--sans);color:var(--muted);max-width:60ch;margin:1rem 0 1.2rem}
+.lead{margin:0 0 1rem}
+details.br,.s,.final{min-width:0;overflow-wrap:anywhere}
+.branches{grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr))}
+.branches.nest{grid-template-columns:minmax(0,1fr);margin:.4rem 0 .6rem}
+details.br details.br{background:var(--bg)}
+details.br summary .sl{display:block;font:700 .75rem/1 var(--sans);color:var(--muted);margin-bottom:.25rem;text-transform:uppercase;letter-spacing:.05em}
+details.br summary{font-weight:700}
+.s-x{border-left-color:var(--q);border-left-style:dashed} .s-x .lb{color:var(--q)} .s-x .t{font-style:italic;color:var(--muted)}
+.s-p{border-left-style:dashed}
+.s-x .lb::before,.s-p .lb::before{content:""}
+.final{margin:.8rem 0}
+.pls{list-style:none;padding:0;margin:1.6rem 0;display:grid;gap:1rem;grid-template-columns:repeat(auto-fill,minmax(15rem,1fr))}
+.pls a{display:flex;flex-direction:column;gap:.3rem;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--k);padding:1rem 1.1rem;border-radius:0 0 10px 10px;min-height:5.5rem}
+.pls a:hover{border-color:var(--k)}
+.pls b{font:700 1.25rem/1.2 var(--serif)} .pls small{font:600 .8rem/1 var(--sans);color:var(--muted)}
+</style></head><body>
+<nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
+<header class="hero"><div class="wrap"><p class="eyebrow">Plan de cours</p><h1>La justice</h1>
+<p class="sub">Les étiquettes indiquent le rôle de chaque idée (justification, problème, conséquence, exemple…). Chaque branche se plie et se déplie.</p>
+<button class="btn" id="tog" type="button">Tout replier</button></div></header>
+<nav class="nav" aria-label="Les parties du plan"><div class="wrap"><ol id="nav"><li><a href="#p1">1. Première définition</a></li><li><a href="#p2">2. Deuxième définition</a></li></ol></div></nav>
+<main id="main"><section class="part" id="p1" aria-labelledby="h-p1"><div class="wrap"><h2 id="h-p1">1. Première définition</h2><ol class="st"><li class="s s-k"><span class="t">Justice comme éthique, morale individuelle, vertu</span></li></ol><div class="branches nest"><ol class="st"><li class="s"><span class="lb">Repère</span><span class="t">Légitime</span></li></ol><details class="br" open><summary><span class="sl">Conséquence</span>Être juste, c'est <em>faire</em> ce qui est juste</summary><ol class="st"><li class="s"><span class="lb">Problème</span><span class="t">Comment déterminer ce "juste" ?</span></li></ol><div class="branches nest"><details class="br" open><summary><span class="sl">Rawls</span>La théorie intuitionniste : sentir ce qui est juste</summary><ol class="st"><li class="s"><span class="lb">Conséquence</span><span class="t">Nous n'avons pas besoin de lois pour <em>sentir</em>, <em>percevoir</em> que certaines situations sont justes, et d'autres injustes</span></li></ol><ol class="st"><li class="s s-p"><span class="lb">Cf Rousseau (exemple)</span><span class="t">Nous pouvons ici penser à la <em>pitié naturelle</em>, qui se rapproche de cette intuition du juste</span></li><li class="s s-k"><span class="lb">Problème</span><span class="t">Comment transformer cette intuition en institution ?</span></li></ol><ol class="st"><li class="s s-k"><span class="lb">Problème</span><span class="t">Si nous sentons le juste, si nous sommes capables d'agencer notre âme de manière harmonieuse, quel besoin pour l'institution judiciaire ?</span></li></ol><ol class="st"><li class="s s-b"><span class="lb">Conséquence</span><span class="t">La justice comme institution serait le symbole de notre impuissance à agir de manière juste</span></li></ol><div class="branches nest"><details class="br" open><summary><span class="sl">Première justification</span>Même si nous voulions faire le juste, cela est trop difficile, du fait de nos désirs et intérêts personnels</summary><ol class="st"><li class="s s-p"><span class="lb">Cf Kant (exemple)</span><span class="t">Fonder la justice sur des principes moraux objectifs et universels se révèle <em>presque</em> impossible du fait de nos inclinations</span></li></ol></details><details class="br" open><summary><span class="sl">Deuxième justification</span>Seul le sage serait capable de vouloir et faire le juste</summary><ol class="st"><li class="s"><span class="lb">Conséquence</span><span class="t">Être juste serait réservé à une forme d'élite</span></li></ol></details><ol class="st"><li class="s s-x"><span class="lb">Conséquence : besoin pour la justice comme institution</span><span class="t">→ Retour à la deuxième définition (justice comme institution politique et sociale)</span></li></ol><div class="final"><span>Conclusion</span>La justice comprise comme institution doit permettre l'harmonie de la société, en limitant les instincts égoïstes de l'homme. Mais puisque nous sommes capables de <em>sentir</em> ce qui est juste, elle doit prendre pour modèle ces intuitions</div></div></details><details class="br" open><summary><span class="sl">Platon</span>La justice comme harmonie</summary><ol class="st"><li class="s"><span class="lb">Harmonie individuelle</span><span class="t">Est juste ce qui permet le meilleur agencement possible des parties de notre âme. Justice = santé de l'âme</span></li></ol><ol class="st"><li class="s s-k"><span class="lb">Problème</span><span class="t">Comment appliquer cet agencement à la cité ?</span></li></ol><ol class="st"><li class="s s-x"><span class="lb">Problème</span><span class="t">→ Si nous sentons le juste, si nous sommes capables d'agencer notre âme de manière harmonieuse, quel besoin pour l'institution judiciaire ?</span></li></ol></details></div></details></div></div></section><section class="part" id="p2" aria-labelledby="h-p2"><div class="wrap"><h2 id="h-p2">2. Deuxième définition</h2><ol class="st"><li class="s s-k"><span class="t">Justice comme institution politique et sociale</span></li></ol><div class="branches nest"><ol class="st"><li class="s"><span class="lb">Repère</span><span class="t">Légal</span></li></ol><ol class="st"><li class="s"><span class="lb">Enjeux : fonder l&#x27;une sur l&#x27;autre ?</span><span class="t">Problème : le légitime n'est pas toujours légal (Rosa Parks, <em>etc.</em>), et inversement (esclavage)</span></li></ol><details class="br" open><summary><span class="sl">Justifications du besoin</span>Justifications du besoin de lois</summary><div class="branches nest"><ol class="st"><li class="s"><span class="lb">Platon</span><span class="t">Sans lois, nous ne serions guère différents de bêtes sauvages</span></li></ol><ol class="st"><li class="s"><span class="lb">Hobbes</span><span class="t">Sans justice coercitive, retour à l'état de nature</span></li></ol><ol class="st"><li class="s"><span class="lb">Rousseau</span><span class="t">Sans lois et justice, pas de liberté</span></li></ol><details class="br" open><summary><span class="sl">Conséquence</span>Nous avons besoin de lois pour régler nos comportements</summary><ol class="st"><li class="s"><span class="lb">Problème</span><span class="t">Comment choisir une "bonne" loi, une loi juste ?</span></li></ol><div class="branches nest"><ol class="st"><li class="s"><span class="lb">Platon</span><span class="t">Copier la justice collective sur la justice individuelle</span></li></ol><details class="br" open><summary><span class="sl">Rawls</span>Grâce au <em>voile d'ignorance</em>, nous pouvons parvenir à des principes généraux justes</summary><ol class="st"><li class="s"><span class="lb">Rappel</span><span class="t">Principe de liberté et d'égalité devant la loi, principe de différence</span></li></ol></details><details class="br" open><summary><span class="sl">Hobbes</span>Une loi ne peut être injuste, puisqu&#x27;elle résulte de l&#x27;accord collectif. La bonne loi est celle qui…</summary><ol class="st"><li class="s"><span class="lb">Hobbes</span><span class="t">Une loi ne peut être injuste, puisqu'elle résulte de l'accord collectif. La bonne loi est celle qui avantage le peuple, et non uniquement le souverain</span></li></ol><ol class="st"><li class="s s-p"><span class="lb">Cf état de nature (exemple)</span><span class="t">La bonne loi est celle qui guide l'individu, le maintient sur le droit chemin</span></li></ol></details><details class="br" open><summary><span class="sl">Rousseau</span>La loi juste est celle qui émane de la <em>volonté générale</em></summary><ol class="st"><li class="s"><span class="lb">Rappel</span><span class="t">La volonté générale est la volonté qui a pour objet l'intérêt commun</span></li></ol></details><details class="br" open><summary><span class="sl">Conséquence</span>La loi juste est celle qui permet à la société de fonctionner au mieux, tout en respectant les droits de chacun</summary><div class="final"><span>Conclusion</span>→ La justice comprise comme institution doit permettre l'harmonie de la société… (même conclusion que ci-dessus)</div></details></div></details></div></details></div></div></section></main>
+<nav class="pn" aria-label="Pages de la section Plans de cours"><a class="pv" href="plan-inconscient.html" rel="prev"><small>← Page précédente</small><b>L’inconscient</b></a><a class="nx" href="plan-langage.html" rel="next"><small>Page suivante →</small><b>Le langage</b></a><a class="hm" href="accueil.html">Retour à l’accueil</a></nav>
+<footer><div class="wrap"><p>Page réalisée à partir du plan de cours « La justice ».</p></div></footer>
+<script>
+(function(){
+ var det=[].slice.call(document.querySelectorAll('details.br')),tog=document.getElementById('tog'),open=true;
+ tog.addEventListener('click',function(){open=!open;det.forEach(function(d){d.open=open});tog.textContent=open?'Tout replier':'Tout déplier'});
+ var links=[].slice.call(document.querySelectorAll('#nav a'));
+ if('IntersectionObserver' in window){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;links.forEach(function(a){if(a.getAttribute('href')==='#'+e.target.id)a.setAttribute('aria-current','true');else a.removeAttribute('aria-current')})})},{rootMargin:'-30% 0px -60% 0px'});
+  [].slice.call(document.querySelectorAll('.part')).forEach(function(s){io.observe(s)});
+ }
+ window.addEventListener('beforeprint',function(){det.forEach(function(d){d.open=true})});
+})();
+</script></body></html>

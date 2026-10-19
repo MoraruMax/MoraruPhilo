@@ -167,6 +167,7 @@ footer p{font-size:.92rem;color:var(--muted);max-width:70ch;margin-bottom:.6rem}
 }
 @page{size:A4;margin:16mm 14mm}
 </style>
+<link rel="stylesheet" href="quiz.css">
 </head>
 <body>
 <nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
@@ -309,6 +310,15 @@ footer p{font-size:.92rem;color:var(--muted);max-width:70ch;margin-bottom:.6rem}
   </div>
 </section>
 </main>
+<!--quiz-->
+<section id="quiz" aria-labelledby="h-quiz">
+<h2 id="h-quiz">Quiz de révision</h2>
+<p class="qintro">5 questions pour vérifier l’essentiel. Les réponses s’affichent tout de suite, avec une explication. Rien n’est enregistré ni envoyé.</p>
+<div class="qz" id="qz"></div>
+<script type="application/json" id="quizdata">[{"q":"Que désigne la reproduction sociale ?","a":["Le fait d’appartenir au même groupe socioprofessionnel que ses ascendants","Le fait de changer de profession au cours de sa vie","Le fait d’avoir le même salaire que ses collègues","La transmission d’un patrimoine par héritage uniquement"],"e":"La table de mobilité la mesure sur sa diagonale : les fils qui sont dans le même groupe que leur père."},{"q":"Quelle part des fils de cadres est elle-même cadre, d’après les données de 2024 (Insee) ?","a":["53,4 %","13,5 %","9,6 %","90 %"],"e":"53,4 % des fils de cadres sont eux aussi cadres et professions intellectuelles supérieures, contre 13,5 % des fils d’employés et d’ouvriers peu qualifiés."},{"q":"Que désigne le capital culturel ?","a":["Ce que notre groupe d’origine nous transmet en références culturelles (lecture, sorties, aisance avec le vocabulaire scolaire)","L’argent que l’on gagne grâce à ses études","Le nombre de diplômes obtenus","Le budget d’une famille consacré à la culture"],"e":"Le capital culturel est transmis par le milieu d’origine, souvent sans que l’on s’en rende compte."},{"q":"Que désigne l’habitus ?","a":["L’ensemble des codes et comportements intériorisés depuis l’enfance","Une habitude que l’on choisit consciemment","Un règlement intérieur d’une entreprise","Le costume propre à une profession"],"e":"Une façon de parler, de se tenir ou d’envisager ses études paraît naturelle parce qu’elle a été acquise très tôt."},{"q":"Déterminisme social veut-il dire fatalité ?","a":["Non : 46,6 % des fils de cadres ne sont pas cadres ; le tableau décrit des tendances statistiques","Oui : le milieu d’origine décide de tout","Oui, sauf pour les professions intellectuelles","Non, car le milieu d’origine n’a aucune influence"],"e":"Il s’agit d’une corrélation importante, pas d’un destin individuel. La méritocratie doit néanmoins être nuancée."}]</script>
+</section>
+<!--/quiz-->
+
 
 <nav class="pn" aria-label="Pages de la section Liberté"><a class="pv" href="ane-de-buridan.html" rel="prev"><small>← Page précédente</small><b>L’âne de Buridan</b></a><a class="nx" href="spinoza-lettre-a-schuller.html" rel="next"><small>Page suivante →</small><b>Spinoza : l’ignorance des causes déterminantes</b></a><a class="hm" href="accueil.html">Retour à l’accueil</a></nav>
 <footer>
@@ -473,5 +483,6 @@ footer p{font-size:.92rem;color:var(--muted);max-width:70ch;margin-bottom:.6rem}
   compare();
 })();
 </script>
+<script src="quiz.js" defer></script>
 </body>
 </html>

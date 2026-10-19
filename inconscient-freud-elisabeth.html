@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Freud : le cas d’Élisabeth</title>
+<style>
+:root{
+  color-scheme:light;
+  --bg:#F7F4EF; --surface:#FFFFFF; --ink:#1E1A16; --muted:#5E564D; --line:#DED6CB; --focus:#0B5CAD; --on:#FFFFFF;
+  --soc:#9A3412; --soc-soft:#FBE7DC;
+  --nat:#1B6B4A; --nat-soft:#DDF1E7;
+  --rai:#2B4C9B; --rai-soft:#E1E8F8;
+  --gold:#8A5A00; --gold-soft:#F6E8C8; --bad:#B3261E;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --serif:Charter,"Bitstream Charter","Sitka Text",Cambria,Georgia,serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#16130F; --surface:#211D18; --ink:#F2ECE4; --muted:#B5AA9C; --line:#3A332B; --focus:#8CC2FF; --on:#16130F;
+    --soc:#FF9E6B; --soc-soft:#45220F; --nat:#74DDA7; --nat-soft:#143826; --rai:#9DB8FF; --rai-soft:#1C2A52; --gold:#F2C36B; --gold-soft:#3F3112; --bad:#FF8F86;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#16130F; --surface:#211D18; --ink:#F2ECE4; --muted:#B5AA9C; --line:#3A332B; --focus:#8CC2FF; --on:#16130F;
+  --soc:#FF9E6B; --soc-soft:#45220F; --nat:#74DDA7; --nat-soft:#143826; --rai:#9DB8FF; --rai-soft:#1C2A52; --gold:#F2C36B; --gold-soft:#3F3112; --bad:#FF8F86;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.1rem/1.65 var(--serif)}
+.wrap{width:min(980px,100% - 2.5rem);margin-inline:auto}
+h1,h2,h3{margin:0}
+h1{font:800 clamp(2.6rem,8vw,5rem)/1.02 var(--sans);letter-spacing:-.025em}
+h2{font:800 clamp(1.5rem,3.2vw,2.1rem)/1.2 var(--sans);margin-bottom:.8rem}
+h3{font:700 1.08rem/1.35 var(--sans)}
+p{margin:0 0 1em}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
+.btn{font:600 .95rem/1.2 var(--sans);color:var(--ink);background:transparent;border:1.5px solid var(--ink);border-radius:8px;padding:.65rem 1rem;cursor:pointer}
+.btn:hover{background:var(--line)}
+.btn.primary{background:var(--ink);color:var(--bg)}
+.btn.primary:hover{background:var(--ink);filter:brightness(1.2)}
+.note{font:500 .92rem/1.5 var(--sans);color:var(--muted)}
+section.block{border-top:1px solid var(--line);padding:clamp(2.2rem,6vw,3.8rem) 0}
+.sec-head{max-width:46rem;margin-bottom:1.6rem}
+.src{font:600 .85rem/1.35 var(--sans);color:var(--muted)}
+blockquote{margin:0}
+
+/* Hero */
+.hero{padding:clamp(2rem,6vw,4rem) 0 clamp(2rem,5vw,3rem)}
+.hgrid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:2rem clamp(2rem,5vw,4rem);align-items:center}
+.lead{font-size:clamp(1.2rem,2.4vw,1.45rem);line-height:1.5;margin:1.3rem 0 0;max-width:34ch}
+.must{background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--ink);padding:1.2rem 1.3rem}
+.must p{margin:0 0 .7rem;font-size:1.05rem}
+.must .q{font:700 1.3rem/1.3 var(--serif)}
+.must .chain{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;margin:.8rem 0}
+.must .chain span{font:700 .85rem/1.2 var(--sans);padding:.35rem .55rem;background:var(--bg);border:1px solid var(--line)}
+.must .chain i{font-style:normal;color:var(--muted)}
+
+/* Questions */
+.qs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+.qc{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--k);padding:1rem 1.2rem}
+.qc h3{color:var(--k);margin-bottom:.4rem}
+.qc p{margin:0;font-size:1rem}
+
+/* Parcours */
+.path{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem;margin-bottom:1rem}
+.path button{font:700 .98rem/1.3 var(--sans);text-align:left;color:var(--ink);background:var(--surface);border:2px solid var(--line);border-radius:8px;padding:.8rem .9rem;cursor:pointer}
+.path button small{display:block;font:600 .8rem/1.3 var(--sans);color:var(--muted);margin-top:.15rem}
+.path button[aria-selected="true"]{border-color:var(--k);background:var(--ks)}
+.panel{background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--k);padding:clamp(1rem,3vw,1.7rem)}
+.panel[hidden]{display:none}
+.panel > h3{font-size:1.3rem;color:var(--k);margin-bottom:.3rem}
+.panel .thesis{font:700 1.2rem/1.35 var(--serif);margin:.2rem 0 1rem}
+.panel h4{font:800 .8rem/1 var(--sans);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin:1.3rem 0 .5rem}
+.panel ul{margin:0;padding-left:1.15rem}
+.panel li{margin-bottom:.5rem;font-size:1.02rem}
+.auth{background:var(--ks);border-left:5px solid var(--k);padding:.8rem 1rem;margin:0 0 .8rem}
+.auth b{font:700 .95rem/1.3 var(--sans);color:var(--k);display:block;margin-bottom:.25rem}
+.auth blockquote{font-size:1rem;font-style:italic;margin:.3rem 0}
+.auth p{margin:.3rem 0 0;font-size:1rem}
+.lim{background:var(--bg);border-left:5px solid var(--gold);padding:.8rem 1rem;font:500 .98rem/1.55 var(--sans)}
+.lim b{color:var(--gold)}
+
+/* Sorters */
+.sorter{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.5rem 1rem;align-items:center;padding:.8rem 0;border-bottom:1px solid var(--line)}
+.row .name{font:600 1rem/1.45 var(--sans)}
+.row .name i{font:italic 400 1rem/1.45 var(--serif)}
+.pick{display:flex;flex-wrap:wrap;gap:.4rem}
+.pick button{font:700 .9rem/1.15 var(--sans);color:var(--ink);background:var(--surface);border:2px solid var(--line);border-radius:8px;padding:.55rem .75rem;cursor:pointer}
+.pick button[disabled]{cursor:default}
+.pick button:hover:not([disabled]){border-color:var(--c)}
+.pick button[aria-pressed="true"]{background:var(--c);border-color:var(--c);color:var(--on)}
+.fb{grid-column:1/-1;margin:0;font:500 .95rem/1.45 var(--sans);padding:.5rem .8rem;border-left:5px solid var(--line);background:var(--surface)}
+.fb[hidden]{display:none}
+.row.good .fb{border-left-color:var(--nat)} .row.bad .fb{border-left-color:var(--bad)}
+.score{display:flex;flex-wrap:wrap;gap:.8rem 1.2rem;align-items:center;margin-top:1.1rem}
+.score p{margin:0;font:600 1rem/1.4 var(--sans);flex:1 1 16rem}
+
+/* Test d'universalisation */
+.lab{background:var(--surface);border:1px solid var(--line);padding:clamp(1rem,3vw,1.6rem)}
+.maxims{display:flex;flex-wrap:wrap;gap:.5rem;margin:.8rem 0 1.2rem}
+.maxims button{font:600 .98rem/1.3 var(--sans);color:var(--ink);background:var(--bg);border:2px solid var(--line);border-radius:8px;padding:.7rem .95rem;cursor:pointer;text-align:left}
+.maxims button[aria-pressed="true"]{border-color:var(--rai);background:var(--rai-soft)}
+.world{display:grid;grid-template-columns:repeat(8,1fr);gap:.4rem;max-width:30rem;margin:.6rem 0 1rem}
+.world span{aspect-ratio:1;border-radius:50%;background:var(--rai);opacity:.85;display:flex;align-items:center;justify-content:center;font:700 .8rem/1 var(--sans);color:var(--on)}
+.world.broken span{background:var(--bad);opacity:.7}
+@media (prefers-reduced-motion:no-preference){.world span{transition:background .4s,opacity .4s}}
+.steps{margin:0;padding:0;list-style:none;counter-reset:s}
+.steps li{counter-increment:s;display:grid;grid-template-columns:2rem 1fr;gap:.5rem;padding:.5rem 0;border-top:1px solid var(--line);font:500 1rem/1.5 var(--sans)}
+.steps li::before{content:counter(s);font:800 1.3rem/1 var(--sans);color:var(--rai)}
+.steps[hidden]{display:none}
+.verdict{margin:1rem 0 0;padding:.8rem 1rem;border-left:6px solid var(--bad);background:var(--bg);font:600 1rem/1.5 var(--sans)}
+.verdict[hidden]{display:none}
+
+/* Dilemme */
+.dil{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.opt{background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--k);padding:1rem 1.2rem;font:500 1rem/1.55 var(--sans)}
+.opt h3{color:var(--k);margin-bottom:.4rem}
+.opt ul{margin:.4rem 0 .8rem;padding-left:1.1rem}
+.opt li{margin-bottom:.35rem}
+.opt .m{font-weight:700}
+.pickd{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+.after{margin-top:1rem;padding:1rem 1.2rem;background:var(--surface);border-left:6px solid var(--gold);font:500 1rem/1.55 var(--sans)}
+.after[hidden]{display:none}
+
+/* Fil */
+.recap{margin:0;padding:0;list-style:none;max-width:48rem}
+.recap li{padding:.9rem 0;border-top:1px solid var(--line)}
+.recap li:last-child{border-bottom:1px solid var(--line)}
+.recap b{font-family:var(--sans)}
+footer{padding:1.6rem 0 2.5rem;font:500 .9rem/1.5 var(--sans);color:var(--muted)}
+footer p{margin:0}
+@media (max-width:820px){
+  .hgrid,.qs,.dil{grid-template-columns:1fr}
+  .path{grid-template-columns:1fr}
+  .row{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
+
+.stp{list-style:none;margin:0;padding:0;counter-reset:s}
+.stp li{counter-increment:s;display:grid;grid-template-columns:2.4rem 1fr;gap:.6rem;background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--k,var(--ink));padding:.9rem 1.1rem;margin-bottom:.7rem}
+.stp li::before{content:counter(s);font:800 1.6rem/1 var(--sans);color:var(--k)}
+.stp li[hidden]{display:none}
+.stp h3{font-size:1.02rem;margin-bottom:.2rem}
+.stp p{margin:0;font-size:1.02rem}
+@media (prefers-reduced-motion:no-preference){.stp li.new{animation:in .5s ease both}@keyframes in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}}
+.terms details{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--k);margin-bottom:.6rem;padding:.2rem 1rem}
+.terms summary{font:700 1.02rem/1.4 var(--sans);cursor:pointer;padding:.7rem 0}
+.terms details p{margin:0 0 .9rem;font-size:1.02rem}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media (max-width:820px){.two{grid-template-columns:1fr}}
+.links a{color:var(--k);font-weight:700}
+
+/* Fond : portrait */
+body::before{content:"";position:fixed;inset:0;z-index:-2;background:url("images/freud.jpg") center top/cover no-repeat}
+@media (min-aspect-ratio:1/1){body::before{background:#2d2d2d url("images/freud.jpg") right center/auto 100% no-repeat}}
+body::after{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);opacity:.77;pointer-events:none}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) body::after{opacity:.87}}
+:root[data-theme="dark"] body::after{opacity:.87}
+.hero h1,.hero p,section.block h2,section.block > .wrap > p,.sec-head p,footer p{text-shadow:0 0 .4em var(--bg),0 0 .9em var(--bg)}
+
+.pn{display:flex;gap:1rem;flex-wrap:wrap;margin:2.5rem auto 0;max-width:980px;padding:0 1.25rem;box-sizing:content-box}
+.pn a{flex:1 1 16rem;display:flex;flex-direction:column;gap:.25rem;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--k,var(--ink));padding:.9rem 1.1rem;border-radius:0 0 8px 8px}
+.pn a:hover{border-color:var(--k,var(--ink))}.pn a:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.pn small{font:600 .78rem/1 system-ui,-apple-system,sans-serif;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.pn b{font:700 1.1rem/1.25 system-ui,-apple-system,sans-serif}
+.pn .nx{text-align:right;margin-left:auto;max-width:calc(50% - .5rem)}
+.pn .nx:first-child{margin-left:auto;max-width:calc(50% - .5rem)}
+.pn .hm{flex:0 0 100%;text-align:center;font:500 .92rem/1 system-ui,-apple-system,sans-serif;background:none;border:0;padding:.4rem;color:var(--ink);text-decoration:underline}
+
+.pdfbtn{display:inline-flex;align-items:center;gap:.5rem;font:600 .88rem/1 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--surface);border:1.5px solid var(--ink);border-radius:999px;padding:.55rem .95rem;cursor:pointer}
+.pdfbtn:hover{background:var(--ink);color:var(--bg)}.pdfbtn:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:2px}
+@media print{
+  :root{--bg:#fff!important;--surface:#fff!important;--ink:#111!important;--muted:#444!important;--line:#bbb!important;color-scheme:light!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:#fff!important;color:#111!important}
+  body::before,body::after{display:none!important}
+  nav,.pdfbtn,.pn,video,section[aria-labelledby="h-video"]{display:none!important}
+  .rev,.js .rev{opacity:1!important;transform:none!important}
+  .stp li[hidden]{display:list-item!important}
+  details>*{display:block!important}
+  article,li,.card,figure,.stage{break-inside:avoid}
+  h1,h2,h3{break-after:avoid;text-shadow:none!important}
+  *{text-shadow:none!important}
+  a{color:inherit;text-decoration:none}
+  section.block,.part{padding-top:1.2rem!important;padding-bottom:1.2rem!important}
+  footer{break-before:avoid;border-top:1px solid #999;margin-top:1rem}
+}
+@page{size:A4;margin:16mm 14mm}
+
+/* Texte */
+.tx summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:.7rem;font:800 clamp(1.4rem,3vw,1.9rem)/1.2 var(--sans);padding:.3rem 0}
+.tx summary::-webkit-details-marker{display:none}
+.tx summary::before{content:"";width:.6em;height:.6em;border-right:.2em solid currentColor;border-bottom:.2em solid currentColor;transform:rotate(-45deg);transition:transform .15s;flex:none;margin-right:.2rem}
+.tx[open] summary::before{transform:rotate(45deg)}
+@media (prefers-reduced-motion:reduce){.tx summary::before{transition:none}}
+.txb{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--k,var(--ink));padding:1.2rem clamp(1rem,3vw,1.8rem);margin-top:.9rem;max-width:46rem;font:400 1.1rem/1.75 var(--serif)}
+.txb p{margin:0 0 1em}
+.txb h3{font:700 1rem/1.3 var(--sans);margin:1.2em 0 .5em}
+.txb .vs{font:700 .72rem/1 var(--sans);color:var(--muted);margin-right:.15em}
+.txb .tsrc{font:600 .88rem/1.4 var(--sans);color:var(--muted);text-align:right;margin:1.1em 0 0}
+.txb .tsrc:not(:last-child){margin-bottom:1.4em;padding-bottom:1.2em;border-bottom:1px solid var(--line)}
+</style>
+<link rel="stylesheet" href="quiz.css">
+</head>
+<body style="--k:var(--nat);--ks:var(--nat-soft)">
+<nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
+<header class="hero">
+  <div class="wrap hgrid">
+    <div>
+      <h1>Freud : Élisabeth</h1>
+      <p class="lead">Des douleurs aux jambes sans cause organique : que révèle l’analyse ?</p>
+    </div>
+    <div class="must" style="border-top-color:var(--k)">
+      <p class="src">Freud et Breuer, <i>Études sur l’hystérie</i>, 1895</p>
+      <p class="q">« Elle s’était créé des douleurs par une conversion réussie de psychique en somatique. »</p>
+      <p>Une jeune femme souffre de douleurs aux jambes : l’analyse montre qu’elle a refoulé son amour pour son beau-frère, et que le symptôme est la conversion de ce désir inacceptable.</p>
+    </div>
+  </div>
+</header>
+<main>
+<section class="block" aria-labelledby="h-tx">
+  <div class="wrap">
+    <details class="tx"><summary id="h-tx">Le texte</summary><div class="txb"><p>Freud commence donc ses analyses et les relate dans ses manuscrits. Nous trouverons ici un des exemples : le cas d’Élisabeth.</p><p>(Élisabeth s'appelait en réalité Ilona Weiss. Hongroise d'origine, cette jeune fille âgée de 29 ans vient consulter Freud en 1892. Elle souffre de douleurs aux jambes que Freud attribue à des causes sexuelles. C'est l'occasion pour lui de proposer une méthode d'analyse nouvelle qui deviendra bientôt « la psychanalyse ».)</p><h3>Texte</h3><p>Je l'interrogeai donc sur les circonstances et les causes de la première apparition des douleurs. Ses pensées s'attachèrent alors à des vacances dans la ville d'eaux où elle était allée avant son voyage à Gastein et certaines scènes surgirent, que nous avions déjà plus superficiellement traitées auparavant. Elle parla de son état d'âme à cette époque, de sa lassitude après tous les soucis que lui avaient causés la maladie ophtalmique de sa mère et les soins qu'elle lui avait donnés à l'époque de l'opération ; elle parla enfin de son découragement final en pensant qu'il lui faudrait, vieille fille solitaire, renoncer à profiter de l'existence et à réaliser quelque chose dans la vie. Jusqu'alors, elle s'était trouvée assez forte pour se passer de l'aide d'un homme ; maintenant, le sentiment de sa faiblesse féminine l'avait envahie, ainsi que le besoin d'amour, et alors, suivant ses propres paroles, son être figé commença à fondre.</p><h3>Naissance du désir</h3><p>En proie à un pareil état d'âme, l'heureux mariage de sa sœur cadette fit sur elle la plus grande impression ; elle fut témoin de tous les tendres soins dont le beau-frère entourait sa femme, de la façon dont ils se comprenaient d'un seul regard, de leur confiance mutuelle. On pouvait évidemment regretter que la deuxième grossesse succédât aussi rapidement à la première, mais sa sœur qui savait que c'était là la cause de sa maladie supportait allègrement son mal en pensant que l'être aimé en était la cause. Au moment de la promenade qui était étroitement liée aux douleurs d'Elisabeth, le beau-frère avait tout d'abord refusé de sortir, préférant rester auprès de sa femme malade, mais un regard de celle-ci, pensant qu'Elisabeth s'en réjouirait, le décida à faire cette excursion.</p><p>La jeune fille resta tout le temps en compagnie de son beau-frère, ils parlèrent d'une foule de choses intimes et tout ce qu'il lui dit correspondait si bien à ses propres sentiments qu'un désir l'envahit alors : celui de posséder un mari ressemblant à celui-là. Puis ce fut le matin qui suivit le départ de la sur et du beau-frère qu'elle se rendit à ce site, promenade préférée de ceux qui venaient de partir. Là, elle s'assit sur une pierre, et rêva à nouveau d'une vie heureuse comme celle de sa sœur, et d'un homme, comme son beau-frère, qui saurait capter son cœur. En se relevant, elle ressentit une douleur qui disparut cette fois-là encore, et ce ne fut que dans l'après-midi qui suivit un bain chaud pris dans cet endroit que les douleurs réapparurent pour ne plus la quitter.</p><p>J'essayai de savoir quelles pensées l'avaient préoccupée dans son bain ; je ne pus apprendre qu'une seule chose, c'est que l'établissement de bains l'avait fait se souvenir de ce que le jeune ménage y avait habité. J'avais compris depuis longtemps de quoi il s'agissait. La malade, plongée dans ses souvenirs à la fois doux et amers, paraissait ne pas saisir la sorte d'explication qu'elle me suggérait, et continuait à rapporter ses réminiscences. Elle dépeignait son séjour à Gastein et l'état d'anxiété où la plongeait l'arrivée de chacune des lettres; enfin lui parvint la nouvelle de l'état alarmant de sa sœur, et Elisabeth décrivit la longue attente, le départ du train, le voyage fait dans une angoissante incertitude, la nuit sans sommeil, tout cela accompagné d'une violente recrudescence des douleurs.</p><h3>Rejet du désir illicite</h3><p>Je lui demandai si elle s'était représentée pendant le trajet la tragique possibilité qu'elle trouva réalisée à son arrivée. Elle me dit avoir fait l'impossible pour chasser cette idée, mais sa mère, croyait-elle, s'était dès le début attendue au pire. Suivit le récit de son arrivée à Vienne. Elle décrivit l'impression causée par les parents qui les attendaient à la gare, le petit trajet de Vienne à la proche banlieue où habitait sa sur, l'arrivée le soir, la traversée rapide du jardin jusqu'à la porte du petit pavillon, la maison silencieuse et plongée dans une angoissante obscurité, le fait que le beau-frère ne vint pas à leur rencontre. Puis l'entrée dans la chambre où reposait la morte, et tout d'un coup, l'horrible certitude que cette sur bien aimée était partie sans leur dire adieu, sans que leurs soins eussent pu alléger ses derniers moments.</p><p>Au même instant une autre pensée avait traversé l'esprit d'Élisabeth, une pensée qui, à la manière d'un éclair rapide, avait traversé les ténèbres : l'idée qu'il était redevenu libre, et qu'elle pourrait l'épouser. Tout s'éclairait. Les efforts de l'analyste étaient couronnés de succès. À cette minute, ce que j'avais supposé se confirmait à mes yeux, l'idée du « rejet » d'une représentation insupportable, l'apparition des symptômes hystériques par conversion d'une excitation psychique en symptômes somatiques, la formation - par un acte volontaire aboutissant à une défense d'un groupe psychique isolé. C'était ainsi et non autrement que les choses s'étaient ici passées.</p><p>Cette jeune fille avait éprouvé pour son beau-frère une tendre inclination, mais toute sa personne morale révoltée avait refusé de prendre conscience de ce sentiment. Enfin, lorsque cette certitude s'était imposée à elle (pendant la promenade faite avec lui, pendant sa rêverie matinale, au bain et devant le lit de sa sœur), elle s'était créé des douleurs par une conversion réussie de psychique en somatique.</p><h3>Les résistances</h3><p>À l'époque où j'entrepris son traitement, l'isolement du groupe d'associations relatives à cet amour était déjà fait accompli ; sans cela, je crois qu'elle ne se serait jamais prêtée au traitement, la résistance qu'elle opposa maintes fois à la reproduction des scènes traumatisantes correspondant réellement à l'énergie mise en œuvre pour rejeter hors des associations l'idée intenable. Toutefois, le thérapeute4 fut en proie à bien des difficultés dans le temps qui suivit. Pour cette pauvre enfant, l'effet de la prise de conscience d'une représentation refoulée fut bouleversante. Elle poussa les hauts cris, lorsqu'en termes précis, je lui exposai les faits en lui montrant que depuis longtemps, elle était amoureuse de son beau-frère. À cet instant, elle se plaignit des plus affreuses douleurs et fit encore un effort désespéré pour rejeter mes explications : « Ce n'était pas vrai, c'était moi qui le lui avais suggéré, c'était impossible, elle n'était pas capable de tant de vilenies, ce serait impardonnable, etc. »</p><p>Il ne fut pas difficile de lui démontrer que ses propres paroles ne laissaient place à aucune autre interprétation, mais il me fallut longtemps pour lui faire accepter mes deux arguments consolateurs, à savoir que l'on n'est pas responsable de ses sentiments et que, dans ces circonstances, son comportement, son attitude, sa maladie, témoignaient suffisamment de sa haute moralité.</p><p class="tsrc">S.Freud et J.Breuer, Études sur l’hystérie, 1895</p></div></details>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-th">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="h-th">Le problème et la thèse</h2></div>
+    <div class="two">
+      <div class="qc" style="--k:var(--gold)"><h3>La question</h3><p>Comment un désir refoulé peut-il produire un symptôme corporel ?</p></div>
+      <div class="qc" style="--k:var(--k)"><h3>La thèse</h3><p>Élisabeth a refoulé un désir moralement insupportable (aimer son beau-frère). L’excitation psychique s’est convertie en douleurs. La prise de conscience provoque une résistance violente, ce qui confirme le refoulement.</p></div>
+    </div>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-arg">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="h-arg">Le fil de l’argumentation</h2><p>Faites avancer le raisonnement étape par étape.</p></div>
+    <ol class="stp" id="stp" aria-live="polite"><li hidden><div><h3>Une patiente et ses douleurs</h3><p>Une jeune femme de 29 ans souffre de douleurs aux jambes. Freud l’interroge sur la première apparition des douleurs.</p></div></li><li hidden><div><h3>Naissance du désir</h3><p>Elle assiste au bonheur de sa sœur cadette et de son beau-frère. Une promenade avec lui éveille le désir d’un mari semblable à lui.</p></div></li><li hidden><div><h3>Les douleurs reviennent</h3><p>Les douleurs liées à ces scènes (promenade, bain) réapparaissent pour ne plus la quitter.</p></div></li><li hidden><div><h3>Le rejet du désir illicite</h3><p>À la mort de sa sœur, une pensée la traverse comme un éclair : il est libre, elle pourrait l’épouser. Son moi moral la rejette aussitôt.</p></div></li><li hidden><div><h3>Conversion et résistance</h3><p>Freud conclut à une conversion hystérique. Quand il le lui dit, elle proteste violemment : c’est la résistance. Il la rassure : on n’est pas responsable de ses sentiments.</p></div></li></ol>
+    <div class="score"><button class="btn primary" id="nx" type="button">Première étape</button><button class="btn" id="all" type="button">Tout afficher</button><button class="btn" id="rs" type="button">Recommencer</button></div>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-no">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="h-no">Notions à maîtriser</h2><p>Cliquez sur une notion pour ouvrir sa définition.</p></div>
+    <div class="terms"><details><summary>Conversion</summary><p>Transformation d’une excitation psychique en symptôme corporel.</p></details><details><summary>Refoulement</summary><p>Rejet hors de la conscience d’une représentation insupportable.</p></details><details><summary>Résistance</summary><p>Opposition du patient à la prise de conscience du refoulé.</p></details><details><summary>Hystérie</summary><p>Névrose dont les symptômes physiques n’ont pas de cause organique.</p></details></div>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-ex">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="h-ex">Exercice : est-ce la position de l’auteur ?</h2><p>Pour chaque phrase, dites si elle correspond à la pensée de l’auteur dans ce texte. <span class="note">Exercice et corrections rédigés pour cette page.</span></p></div>
+    <ul class="sorter" id="s1"></ul>
+    <div class="score"><p id="sc1" aria-live="polite"></p><button class="btn" id="r1" type="button">Recommencer</button></div>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-di">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="h-di">Pour discuter</h2></div>
+    <div class="lim" style="margin-bottom:.8rem"><b>Guérir en comprenant ?</b> La prise de conscience suffit-elle à soulager le symptôme ? (À comparer avec Sartre.)</div><div class="lim" style="margin-bottom:.8rem"><b>Peut-on vérifier une interprétation ?</b> Si la patiente proteste, Freud y voit la résistance. L’interprétation est-elle réfutable ?</div><div class="lim" style="margin-bottom:.8rem"><b>Piste de dissertation.</b> « Le corps parle-t-il de ce que nous cachons ? » Le cas Élisabeth montre un symptôme comme expression d’un désir refoulé.</div>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-re">
+  <div class="wrap">
+    <h2 id="h-re" style="margin-bottom:1.2rem">À retenir</h2>
+    <ul class="recap"><li><b>Cas :</b> Élisabeth, douleurs aux jambes.</li><li><b>Cause :</b> désir refoulé pour son beau-frère.</li><li><b>Mécanisme :</b> conversion psychique en somatique.</li><li><b>Preuve :</b> la résistance à l’interprétation.</li></ul>
+  </div>
+</section>
+</main>
+<!--quiz-->
+<section id="quiz" aria-labelledby="h-quiz">
+<h2 id="h-quiz">Quiz de révision</h2>
+<p class="qintro">5 questions pour vérifier l’essentiel. Les réponses s’affichent tout de suite, avec une explication. Rien n’est enregistré ni envoyé.</p>
+<div class="qz" id="qz"></div>
+<script type="application/json" id="quizdata">[{"q": "De quoi souffre Élisabeth ?", "a": ["Douleurs aux jambes", "Maux de tête", "Cécité", "Insomnie"], "e": "Sans cause organique."}, {"q": "Pour qui éprouve-t-elle un désir refoulé ?", "a": ["Son beau-frère", "Son médecin", "Son père", "Un voisin"], "e": "Elle l’avait refusé en conscience."}, {"q": "Qu’est-ce que la conversion ?", "a": ["La transformation du psychique en somatique", "Un changement de religion", "Un rêve", "Une cure"], "e": "Le symptôme exprime le désir refoulé."}, {"q": "Comment Élisabeth réagit-elle à l’explication ?", "a": ["Par une violente résistance", "Par la joie", "Par l’indifférence", "Par la gratitude"], "e": "Elle proteste que c’est impossible."}, {"q": "Quel argument consolateur Freud emploie-t-il ?", "a": ["On n’est pas responsable de ses sentiments", "Elle est malade", "C’est normal", "C’est guérissable"], "e": "Son comportement témoignait de sa haute moralité."}]</script>
+</section>
+<!--/quiz-->
+
+<nav class="pn" aria-label="Pages de la section Inconscient"><a class="pv" href="inconscient-freud.html" rel="prev"><small>← Page précédente</small><b>Freud : l’hypothèse de l’inconscient</b></a><a class="hm" href="accueil.html">Retour à l’accueil</a></nav>
+<footer><div class="wrap"><p>Page réalisée à partir de l’extrait étudié en cours (Freud et Breuer, <i>Études sur l’hystérie</i>, 1895). Les citations sont de courts extraits du texte ; la présentation de l’argumentation, les exercices et les pistes de discussion sont rédigés pour cette page.</p></div></footer>
+<script>
+(function(){
+function $(s){return document.querySelector(s)}
+function sorter(listSel,scoreSel,resetSel,items,choices){
+    var list=$(listSel),sc=$(scoreSel),rows=[],done=0,right=0;
+    items.forEach(function(it){
+      var li=document.createElement('li');li.className='row';
+      li.innerHTML='<span class="name"></span><div class="pick" role="group"></div><p class="fb" hidden aria-live="polite"></p>';
+      li.querySelector('.name').innerHTML=it[0];
+      var pick=li.querySelector('.pick'),fb=li.querySelector('.fb'),bs=[];
+      pick.setAttribute('aria-label',li.querySelector('.name').textContent);
+      choices.forEach(function(c,k){
+        var b=document.createElement('button');b.type='button';b.textContent=c[0];b.style.setProperty('--c',c[1]);b.setAttribute('aria-pressed','false');
+        b.addEventListener('click',function(){
+          if(li.classList.contains('good')||li.classList.contains('bad'))return;
+          var ok=k===it[1];
+          b.setAttribute('aria-pressed','true');bs.forEach(function(x){x.disabled=true});
+          li.classList.add(ok?'good':'bad');fb.hidden=false;
+          fb.textContent=(ok?'Bien vu. ':'Pas tout à fait. ')+it[2];
+          done++;if(ok)right++;upd();
+        });
+        pick.appendChild(b);bs.push(b);
+      });
+      list.appendChild(li);rows.push(li);
+    });
+    function upd(){
+      var n=items.length,s=function(x){return x>1?'s':''};
+      sc.textContent=!done?n+' à classer.':done<n?done+' classé'+s(done)+' sur '+n+' : '+right+' bonne'+s(right)+' réponse'+s(right)+'.':'Terminé : '+right+' bonne'+s(right)+' réponse'+s(right)+' sur '+n+'.';
+    }
+    $(resetSel).addEventListener('click',function(){
+      rows.forEach(function(li){li.classList.remove('good','bad');li.querySelector('.fb').hidden=true;
+        [].forEach.call(li.querySelectorAll('button'),function(b){b.disabled=false;b.setAttribute('aria-pressed','false')})});
+      done=0;right=0;upd();
+    });
+    upd();
+  }
+
+var L=[].slice.call(document.querySelectorAll('#stp li')),n=0,nx=$('#nx');
+function show(i){L[i].hidden=false;L[i].classList.add('new')}
+function lab(){nx.textContent=n===0?'Première étape':n<L.length?'Étape suivante ('+(n+1)+'/'+L.length+')':'Terminé';nx.disabled=n>=L.length}
+nx.addEventListener('click',function(){if(n<L.length){show(n);n++;lab();}});
+$('#all').addEventListener('click',function(){while(n<L.length){show(n);n++}lab()});
+$('#rs').addEventListener('click',function(){L.forEach(function(l){l.hidden=true;l.classList.remove('new')});n=0;lab()});
+lab();
+sorter('#s1','#sc1','#r1',[["Les douleurs d’Élisabeth ont une cause organique démontrée.", 1, "Non : Freud y voit une conversion."], ["Élisabeth avait refoulé un sentiment pour son beau-frère.", 0, "Oui : son moral le refusait."], ["Élisabeth accepte aussitôt l’explication de Freud.", 1, "Non : elle pousse les hauts cris."], ["La résistance est un signe du refoulement.", 0, "Oui : elle protège contre l’idée intolérable."], ["Freud rassure sa patiente sur sa responsabilité.", 0, "Oui : on n’est pas responsable de ses sentiments."]],[['Selon l’auteur','var(--nat)'],['Pas selon l’auteur','var(--soc)']]);
+})();
+</script>
+<script src="quiz.js" defer></script>
+</body>
+</html>

@@ -119,6 +119,7 @@ footer p{margin:0}
 }
 @page{size:A4;margin:16mm 14mm}
 </style>
+<link rel="stylesheet" href="quiz.css">
 </head>
 <body>
 <nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
@@ -163,6 +164,15 @@ footer p{margin:0}
   </div>
 </section>
 </main>
+<!--quiz-->
+<section id="quiz" aria-labelledby="h-quiz">
+<h2 id="h-quiz">Quiz de révision</h2>
+<p class="qintro">5 questions pour vérifier l’essentiel. Les réponses s’affichent tout de suite, avec une explication. Rien n’est enregistré ni envoyé.</p>
+<div class="qz" id="qz"></div>
+<script type="application/json" id="quizdata">[{"q":"Pour Platon (La République, livre X), pourquoi l’art est-il « bien éloigné du vrai » ?","a":["Il imite seulement l’apparence de ce qui paraît, non ce qui est","Parce que les artistes sont des menteurs conscients","Parce que l’art est trop coûteux","Parce qu’il révèle des vérités dangereuses"],"e":"Le peintre peut représenter un artisan sans rien connaître de son métier et faire illusion aux enfants et aux ignorants."},{"q":"Selon Heidegger, qu’est-ce qui fait « advenir la vérité » dans le tableau de Van Gogh représentant des souliers ?","a":["L’œuvre manifeste l’être de l’objet produit et, à travers lui, le monde et la terre","L’exactitude de la copie des souliers","Le prix de l’œuvre","L’intention du peintre de raconter une anecdote"],"e":"La vérité n’advient pas parce qu’un objet serait dépeint en toute exactitude, mais parce que l’œuvre dévoile ce qu’il est."},{"q":"Pourquoi Schopenhauer fait-il de la musique un art privilégié ?","a":["Elle est à la fois parfaitement intelligible et inexplicable : elle exprime directement les mouvements cachés de notre être","Parce qu’elle imite fidèlement la nature","Parce qu’elle est la plus facile à comprendre","Parce qu’elle est la plus ancienne des arts"],"e":"Elle a directement pour objet la volonté : elle fait ressentir ce que les mots ne peuvent pas dire."},{"q":"Que veut dire Klee quand il écrit que « l’art ne reproduit pas le visible ; il rend visible » ?","a":["Le visible n’est qu’un cas particulier : l’art fait voir autre chose, des vérités latentes","L’art doit copier le plus exactement possible","L’art n’a aucun rapport avec la vue","L’art est inutile pour comprendre le réel"],"e":"Le visible n’est qu’un cas particulier dans un univers qu’habitent d’innombrables vérités latentes."},{"q":"Selon Goodman, qu’est-ce qui n’est « pas innocent » ?","a":["L’œil : il choisit, organise et construit ce qu’il voit","L’artiste, qui veut tromper","Le spectateur, qui juge mal","L’œuvre, qui est toujours fausse"],"e":"Rien n’est vu « tout simplement, à nu » : l’œil saisit et fabrique plutôt qu’il ne reflète."}]</script>
+</section>
+<!--/quiz-->
+
 <nav class="pn" aria-label="Pages de la section Vérité"><a class="pv" href="verite-hume.html" rel="prev"><small>← Page précédente</small><b>Hume : croyance raisonnable</b></a><a class="hm" href="accueil.html">Retour à l’accueil</a></nav>
 <footer><div class="wrap"><p>Page réalisée à partir du document « Révisions : l’art est-il un moyen d’accéder à la vérité ? ».</p></div></footer>
 
@@ -255,5 +265,6 @@ footer p{margin:0}
   }).join('');
 })();
 </script>
+<script src="quiz.js" defer></script>
 </body>
 </html>

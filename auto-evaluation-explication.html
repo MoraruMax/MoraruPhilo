@@ -1,0 +1,186 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Auto-évaluation explication de texte</title><style>
+/* Layout : un cahier de brouillon. Colonne d'étapes à gauche, feuille Seyes au centre, corrections au stylo rouge. */
+:root{
+  --paper:#fbfcff; --paper-2:#eef2fa; --ink:#1b2340; --ink-soft:#56607d;
+  --blue:#1f4fb8; --blue-soft:#dbe5fb; --rule:#c9d6f0; --rule-strong:#a9bde6;
+  --red:#c2312b; --red-soft:#fbe7e5; --ok:#2f7a4a; --line:#d8deec;
+  --f-display:Georgia, "Times New Roman", serif;
+  --f-body:system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --f-hand:"Segoe Print", "Bradley Hand", "Chalkboard SE", "Comic Sans MS", cursive;
+  --lh:28px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#141a2b; --paper-2:#1b2236; --ink:#e6e9f4; --ink-soft:#9aa3bd;
+  --blue:#8fb0ff; --blue-soft:#24345e; --rule:#26304a; --rule-strong:#34415f;
+  --red:#ff8a80; --red-soft:#3a2025; --ok:#7fd29b; --line:#2b3550; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#141a2b; --paper-2:#1b2236; --ink:#e6e9f4; --ink-soft:#9aa3bd;
+  --blue:#8fb0ff; --blue-soft:#24345e; --rule:#26304a; --rule-strong:#34415f;
+  --red:#ff8a80; --red-soft:#3a2025; --ok:#7fd29b; --line:#2b3550; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--paper-2);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 48px}
+.wrap{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:230px minmax(0,1fr);gap:28px}
+header.top{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;border-bottom:2px solid var(--ink);padding-bottom:14px}
+.brand small{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);font-weight:700}
+.brand h1{font-family:var(--f-display);font-weight:700;font-size:clamp(28px,4vw,40px);line-height:1.1;margin:2px 0 0;text-wrap:balance}
+.sujet-pick{display:flex;flex-direction:column;gap:6px;min-width:0;flex:1 1 360px;max-width:560px}
+.sujet-pick label{font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--ink-soft)}
+select,input[type=text]{font:inherit;color:var(--ink);background:var(--paper);border:1px solid var(--rule-strong);border-radius:6px;padding:9px 10px;width:100%}
+.sujet-box{grid-column:1/-1;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:18px 22px;display:flex;flex-wrap:wrap;gap:10px 24px;align-items:baseline;justify-content:space-between}
+.sujet-box q{font-family:var(--f-display);font-size:clamp(21px,2.6vw,27px);font-weight:500;quotes:"« " " »";text-wrap:balance;min-width:0}
+.tags{display:flex;gap:6px;flex-wrap:wrap;align-items:flex-start;align-content:flex-start}
+.tag{font-size:12.5px;padding:3px 9px;border-radius:99px;background:var(--blue-soft);color:var(--blue);font-weight:700}
+.tag.corr{background:var(--red-soft);color:var(--red)}
+nav.steps{position:sticky;top:calc(env(safe-area-inset-top,0px) + 16px);align-self:start}
+nav.steps ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+nav.steps button{all:unset;cursor:pointer;display:grid;grid-template-columns:28px 1fr;align-items:center;gap:8px;width:100%;padding:8px 10px;border-radius:8px;color:var(--ink-soft);box-sizing:border-box}
+nav.steps button:hover{background:var(--paper)}
+nav.steps button:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
+nav.steps .n{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--rule-strong);display:grid;place-items:center;font-size:13px;font-weight:700;font-variant-numeric:tabular-nums}
+nav.steps button.done .n{background:var(--blue-soft);border-color:var(--blue);color:var(--blue)}
+nav.steps button[aria-current="step"]{background:var(--paper);color:var(--ink);font-weight:700;box-shadow:inset 3px 0 0 var(--blue)}
+nav.steps button[aria-current="step"] .n{background:var(--blue);border-color:var(--blue);color:var(--paper)}
+.side-note{margin-top:18px;font-size:13.5px;color:var(--ink-soft);border-top:1px solid var(--line);padding-top:14px}
+main{min-width:0}
+.sheet{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:26px clamp(16px,3vw,34px) 30px}
+.sheet h2{font-family:var(--f-display);font-size:26px;margin:0 0 6px;font-weight:700}
+.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--blue)}
+.consigne{color:var(--ink-soft);max-width:66ch;margin:4px 0 22px}
+.field{display:flex;flex-direction:column;gap:4px;margin-bottom:16px;min-width:0}
+.field>label,.field>.lab{font-weight:700;font-size:14.5px}
+.field .hint{font-size:13px;color:var(--ink-soft);font-weight:400}
+textarea{font:inherit;font-size:16px;color:var(--ink);width:100%;resize:vertical;border:0;border-left:2px solid var(--red);
+  background-color:var(--paper);background-image:linear-gradient(to bottom,transparent calc(var(--lh) - 1px),var(--rule) calc(var(--lh) - 1px));
+  background-size:100% var(--lh);background-attachment:local;line-height:var(--lh);padding:0 10px 0 14px;min-height:calc(var(--lh)*2)}
+textarea:focus{outline:2px solid var(--blue);outline-offset:2px;border-radius:2px}
+.row2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 22px}
+.term{display:grid;grid-template-columns:minmax(120px,190px) minmax(0,1fr);gap:8px 16px;align-items:start;margin-bottom:14px}
+.term input{font-weight:700}
+.frame{font-family:var(--f-display);font-size:18px;font-style:italic;color:var(--ink-soft);margin:6px 0}
+.part{border:1px solid var(--line);border-radius:8px;margin-bottom:14px;background:var(--paper)}
+.part>summary{cursor:pointer;padding:12px 16px;font-weight:700;display:flex;gap:10px;align-items:baseline;list-style:none}
+.part>summary::-webkit-details-marker{display:none}
+.part>summary::before{content:"▸";color:var(--blue);transition:transform .15s}
+.part[open]>summary::before{transform:rotate(90deg)}
+.part>summary .num{font-family:var(--f-display);color:var(--blue);font-size:19px}
+.part .inner{padding:4px 16px 12px}
+.sub{border-top:1px dashed var(--rule-strong);padding-top:12px;margin-top:6px}
+.sub h4{margin:0 0 8px;font-size:14px;color:var(--ink-soft);letter-spacing:.04em}
+.sub.opt h4::after{content:" (facultative)";font-weight:400}
+.trans{background:var(--paper-2);border-radius:6px;padding:12px 14px 2px;margin-top:10px}
+.trans textarea{background-color:var(--paper-2)}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px;align-items:center}
+.btn{font:inherit;font-weight:700;font-size:15px;border-radius:8px;padding:10px 16px;cursor:pointer;border:1.5px solid var(--blue);background:var(--paper);color:var(--blue)}
+.btn.primary{background:var(--blue);color:var(--paper)}
+.btn.red{border-color:var(--red);color:var(--red)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.btn.ghost{border-color:transparent;color:var(--ink-soft);padding-inline:8px}
+.spacer{flex:1}
+.pen{margin-top:22px;border-left:3px solid var(--red);background:var(--red-soft);border-radius:0 8px 8px 0;padding:14px 18px}
+.pen .who{font-family:var(--f-hand);color:var(--red);font-size:21px;font-weight:700;line-height:1.2;margin-bottom:6px}
+.pen p{margin:0 0 10px;max-width:68ch}
+.pen ul{margin:0 0 10px;padding-left:20px}
+.pen li{margin-bottom:4px}
+.pen .muted{color:var(--ink-soft);font-size:14px}
+.model{margin-top:22px;border:1.5px solid var(--red);border-radius:8px;padding:16px 20px;background:var(--paper)}
+.model .who{font-family:var(--f-hand);color:var(--red);font-size:21px;font-weight:700}
+.model .warn{font-size:13.5px;color:var(--ink-soft);margin:0 0 10px}
+.model p{max-width:68ch}
+.model .mpart{margin:14px 0 6px;font-family:var(--f-display);font-weight:700;font-size:17.5px}
+.model .msub{margin:8px 0 8px 14px;font-size:15px}
+.model .msub b{color:var(--ink)}
+.model dl{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:2px 12px;margin:4px 0 0}
+.model dt{color:var(--ink-soft);font-size:13.5px}
+.model dd{margin:0}
+.model .mtrans{background:var(--paper-2);border-radius:6px;padding:8px 12px;margin:10px 0 0 14px;font-size:15px}
+.grille{display:flex;flex-direction:column;gap:10px;margin-top:6px}
+.palier{border:1px solid var(--line);border-radius:8px;padding:12px 16px;display:grid;grid-template-columns:96px minmax(0,1fr);gap:12px}
+.palier .lvl{font-family:var(--f-display);font-weight:700;font-size:17px;color:var(--ink-soft);font-variant-numeric:tabular-nums;line-height:1.25}
+.palier.reached{border-color:var(--ok)}
+.palier.reached .lvl{color:var(--ok)}
+.palier label{display:flex;gap:9px;align-items:flex-start;font-size:15px;margin-bottom:5px;cursor:pointer}
+.palier input{margin-top:4px;accent-color:var(--blue);width:17px;height:17px;flex:none}
+.verdict{margin-top:16px;padding:14px 18px;border-radius:8px;background:var(--blue-soft);color:var(--ink);font-size:16px}
+.verdict b{font-family:var(--f-display);font-size:20px;color:var(--blue)}
+.valorise{font-size:14.5px;color:var(--ink-soft);max-width:70ch;margin:0 0 14px}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:8px;font-weight:700;font-size:14px}
+.copy-fallback{width:100%;min-height:160px;margin-top:10px;font-size:13px;background-image:none;border:1px solid var(--line)}
+@media (max-width:820px){
+  .wrap{grid-template-columns:minmax(0,1fr);gap:16px}
+  nav.steps{position:static;overflow-x:auto;margin-inline:-4px}
+  nav.steps ol{flex-direction:row;gap:4px;padding:2px 4px 6px}
+  nav.steps button{grid-template-columns:auto;padding:6px 8px;width:auto;justify-items:center;text-align:center}
+  nav.steps .lbl{font-size:12px;white-space:nowrap}
+  nav.steps button[aria-current="step"]{box-shadow:inset 0 -3px 0 var(--blue)}
+  .side-note{display:none}
+  .row2,.term{grid-template-columns:minmax(0,1fr)}
+  .palier{grid-template-columns:minmax(0,1fr);gap:6px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+.wrap2{max-width:900px;margin:0 auto}
+h1.t{font-family:var(--f-display);font-size:clamp(28px,4vw,40px);line-height:1.1;margin:2px 0 0}
+.kick{font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--ink-soft)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:22px clamp(16px,3vw,30px);margin:18px 0}
+.card h2{font-family:var(--f-display);font-size:24px;margin:0 0 6px}
+.card h3{font-size:17px;margin:18px 0 6px}
+.lead{color:var(--ink-soft);max-width:68ch;margin:0 0 14px}
+.meth{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:10px}
+.meth>div{border:1px solid var(--line);border-radius:8px;padding:12px 14px;background:var(--paper-2)}
+.meth b{display:block;font-family:var(--f-display);font-size:17px;margin-bottom:4px;color:var(--blue)}
+.meth ul{margin:0;padding-left:18px;font-size:14.5px}.meth li{margin-bottom:3px}
+.comp{border:1px solid var(--line);border-radius:8px;margin:14px 0;padding:14px 16px}
+.comp h3{margin:0 0 2px}.comp .q{font-size:13px;color:var(--ink-soft);margin:0 0 8px}
+.chk label,.lvl label{display:flex;gap:9px;align-items:flex-start;font-size:15px;margin-bottom:5px;cursor:pointer}
+.chk input,.lvl input{margin-top:4px;accent-color:var(--blue);width:17px;height:17px;flex:none}
+.lvl{display:grid;gap:8px;margin-top:10px}
+.lvl label{border:1px solid var(--line);border-radius:8px;padding:10px 12px;background:var(--paper-2)}
+.lvl label:has(input:checked){border-color:var(--blue);background:var(--blue-soft)}
+.lvl .tag{margin-right:2px}
+.alert{border-left:4px solid var(--red);background:var(--red-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:8px 0}
+.ok{color:var(--ok);font-weight:700}
+.bar{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+@media (max-width:760px){.meth{grid-template-columns:minmax(0,1fr)}}
+@media print{.noprint{display:none!important}body{background:#fff}.card,.comp{break-inside:avoid}}
+</style></head><body>
+<nav style="font:500 .92rem/1 system-ui,-apple-system,'Segoe UI',sans-serif;max-width:900px;margin:0 auto 14px;display:flex;align-items:center" class="noprint"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a></nav>
+<div class="wrap2">
+<header class="top" style="display:block"><div class="kick">Philosophie · Terminale générale</div><h1 class="t">Auto-évaluation de mon explication de texte</h1></header>
+<div class="card"><h2>Comment l'utiliser</h2><p class="lead">Relisez votre copie, ou votre brouillon, avec la méthode puis les deux grilles : la grille académique, qui détaille quatre compétences, et la grille nationale, qui donne des paliers. Cochez uniquement ce que votre copie réalise réellement. Les cases restent enregistrées sur cet appareil.</p></div>
+<div class="card"><h2>1. La méthode en un coup d'œil</h2><p class="lead">Expliquer, c'est « déplier » les difficultés du texte, rendre explicite son sens, pour faire voir ce qu'il donne à penser. La connaissance de la doctrine de l'auteur n'est pas requise : il faut et il suffit que l'explication rende compte, par la compréhension précise du texte, du problème dont il est question.</p>
+<div class="meth">
+<div><b>I. Lecture analytique (environ 1 h)</b><ul><li>00. Prendre connaissance du texte : vocabulaire, objet, notion du programme</li><li>01. Identifier la thèse</li><li>02. Saisir les grandes étapes (lignes, arguments, exemples, liens logiques)</li><li>03. Saisir les concepts</li><li>04. Rendre compte du problème et de l'enjeu</li></ul></div>
+<div><b>II. Organisation du plan (environ 1 h)</b><ul><li>Introduction : le problème, la thèse, les étapes avec les lignes</li><li>Développement : une partie par grande étape (objet, sous-parties, transition)</li><li>Conclusion : problème et thèse rappelés, sens et nuances précisés, originalité et enjeux</li></ul></div>
+<div><b>III. Rédaction (environ 2 h)</b><ul><li>Soigner l'orthographe et la syntaxe</li><li>Indiquer les lignes des passages cités</li><li>Sauts de ligne entre les parties, alinéas pour les sous-parties</li></ul></div></div>
+<h3>À éviter, à faire</h3>
+<p class="lead">Éviter la paraphrase, le mot à mot, le prétexte (étalage de connaissances), le commentaire stylistique, les impressions subjectives. Préférer : questionner le texte, aller des parties au tout et du tout aux parties, l'analyser pour lui-même, analyser des idées, se mettre à l'écoute d'une pensée autre que la sienne.</p></div>
+<div class="card"><h2>2. Grille académique : quatre compétences</h2><p class="lead">Pour chaque compétence, vérifiez les points, puis choisissez la description qui correspond le mieux à votre copie.</p><div id="comps"></div><p id="sumc" class="lead" style="margin-top:12px"></p></div>
+<div class="card"><h2>3. Grille nationale : les paliers</h2><p class="lead">Ce qui est valorisé : la détermination du problème du texte, l'explication de ses éléments signifiants et de ses articulations, la caractérisation de la position philosophique de l'auteur. Chaque palier suppose les précédents.</p><div class="grille" id="pals"></div>
+<h3>Signaux d'alerte (copie qui risque de rester entre 6 et 9)</h3><div class="chk" id="alerts"></div><div id="verdict"></div>
+<div class="bar noprint"><button class="btn primary" id="print" type="button">Imprimer ou enregistrer en PDF</button><button class="btn ghost" id="reset" type="button">Tout effacer</button></div></div>
+</div><script>
+const D={"COMP": [["Compréhension de la thèse", "Étape 01 de la lecture analytique, et conclusion", ["J'ai formulé la thèse en une ou deux phrases : l'idée principale que le texte soutient", "Je distingue la thèse de l'argumentation qui s'y rattache (prémisses, conséquences, remarques, nuances)", "Tous les moments et toutes les idées du texte prennent sens par rapport à cette thèse", "Je montre en quoi cette thèse n'est pas évidente : paradoxale, ou susceptible de plusieurs interprétations", "Dans la conclusion, j'explicite le sens, les nuances et la portée de la thèse"], ["L'élève n'a pas repéré la thèse.", "L'élève semble avoir identifié la thèse mais ne parvient pas à la formuler clairement (mauvaise formulation, contresens, hors-sujet partiel…) ni à en expliciter la portée.", "L'élève a identifié la thèse, il est capable de la formuler et d'en expliciter la portée."]], ["Organisation et expression", "Étape 02 de la lecture analytique, plan, et rédaction", ["J'ai repéré les grandes étapes du texte (en général deux ou trois), avec les lignes concernées", "Une partie du développement correspond à chaque grande étape, reformulée synthétiquement", "Mes transitions expliquent pourquoi on passe d'une étape à la suivante (pas de simples « d'abord… ensuite… puis… »)", "Mon introduction a trois paragraphes : le problème, la thèse, les étapes du texte avec les lignes", "Ma conclusion rappelle le problème et la thèse, précise le sens de la thèse, éclaire son originalité et ses enjeux", "Ma copie est soignée : orthographe, syntaxe, sauts de ligne entre les parties, alinéas pour les sous-parties"], ["Devoir désorganisé ou illisible, aucune structure apparente.", "Développement structuré, qui propose un plan du texte sans que cela soit abouti. La stratégie argumentative de l'auteur est en partie identifiée mais pas toujours bien restituée. Expression dans l'ensemble compréhensible.", "Développement structuré qui propose un plan du texte respectant et explicitant sa logique, la fonction de ses parties et leur articulation. Expression pleinement intelligible."]], ["Analyse", "Étape 03 de la lecture analytique, et développement", ["J'ai repéré les concepts principaux et les distinctions conceptuelles, et je les analyse : sens et importance dans le texte", "Je questionne le texte méthodiquement : je pars de ce qu'il faut expliquer en premier pour faire comprendre la suite", "Je cite le texte pour l'expliquer, et non pour m'en dispenser : chaque citation est expliquée, avec les lignes indiquées", "Mes sous-parties ne suivent pas le texte mot à mot ni phrase par phrase", "Je vais du plus général au plus particulier, du sens premier à la nuance, et je laisse apparaître les difficultés du texte", "J'utilise des exemples concrets pour faire comprendre un point du texte"], ["L'élève ne prête pas attention au détail du texte, il se contente de le citer sans l'expliquer ou de le répéter.", "L'élève prête attention au détail du texte : il s'y réfère, le cite et cherche à l'expliciter, même si cela demeure maladroit et inabouti.", "L'élève prête attention et rend justice au détail du texte : il s'y réfère, le cite et l'explicite. L'explication est précise, contextualisée, et met en valeur la spécificité du vocabulaire utilisé."]], ["Problématisation et examen du problème", "Étape 04 de la lecture analytique, introduction, et mobilisation du cours", ["Je formule la question ou le problème philosophique auquel la thèse répond (« On dit souvent que… mais… »)", "J'explicite l'enjeu du texte : quelle opinion, implicite ou explicite, remet-il en cause ?", "Je mobilise mes connaissances de cours pour éclairer un enjeu du texte", "Si je convoque un autre auteur, c'est pour montrer ce qui les distingue et faire comprendre l'originalité du texte, pas pour le réduire à cet auteur", "Je discute la thèse avec prudence : je ne critique pas sans avoir compris, et je rends justice à ce que dit le texte", "Je replace le problème dans le champ d'un problème classique de la philosophie"], ["L'élève n'a pas repéré le problème du texte, ou celui qu'il propose est hors-sujet. Il ne met pas le texte en perspective avec des connaissances philosophiques.", "L'élève semble avoir repéré le problème et a cherché à le formuler, même si cela demeure maladroit et inabouti. Il essaie de l'examiner en mobilisant ses connaissances philosophiques.", "L'élève a repéré le problème et l'a correctement formulé. Il explicite l'enjeu, le met en perspective avec ses connaissances philosophiques et le replace dans le champ d'un problème classique de la philosophie."]]], "PAL": [["10", ["Je fais l'effort de réaliser l'exercice, même si l'explication reste maladroite", "Je ne fais aucun contresens majeur sur le propos et la démarche de l'auteur"]], ["12", ["J'interroge le texte avec attention au détail de son propos", "Je rends compte de sa structure logique"]], ["14", ["Je mets les éléments du texte en perspective, avec des connaissances", "Ces connaissances me permettent de déterminer et d'examiner le problème"]], ["16", ["Mon explication est développée avec amplitude et justesse : l'ensemble du texte est examiné", "Le texte est bien situé dans une problématique et un questionnement pertinents"]]], "ALERT": ["Je paraphrase le texte : je répète ce qu'il dit avec d'autres mots, ou je me contente de « l'auteur dit que… »", "Je prends le texte mot à mot ou phrase après phrase, en isolant les expressions du reste du texte", "Je prends le texte pour prétexte à parler des notions en général, à plaquer une interprétation toute faite ou à étaler mes connaissances sur l'auteur ou son époque", "Je commente le style du texte (axes, figures de style) au lieu d'analyser ses idées", "Je m'en tiens à mes impressions ou je juge l'auteur sans avoir compris sa pensée", "J'accumule des lieux communs ou des exemples sommaires ou anecdotiques", "Ma copie aurait pu être écrite au début de l'année, sans cours de philosophie"]};const $=q=>document.querySelector(q);const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+let st={};const K="grille-explication-v1";
+try{st=JSON.parse(localStorage.getItem(K)||"{}")}catch(e){}
+function save(){try{localStorage.setItem(K,JSON.stringify(st))}catch(e){}}
+const L=["Insuffisant","Partiel","Suffisant"];
+$("#comps").innerHTML=D.COMP.map((c,i)=>`<div class="comp"><h3>${esc(c[0])}</h3><p class="q">${esc(c[1])}</p><div class="chk">${c[2].map((t,j)=>`<label><input type="checkbox" data-k="c${i}_${j}"${st["c"+i+"_"+j]?" checked":""}><span>${esc(t)}</span></label>`).join("")}</div><div class="lvl" role="radiogroup" aria-label="Niveau de maîtrise : ${esc(c[0])}">${c[3].map((t,j)=>`<label><input type="radio" name="n${i}" value="${j}" data-k="n${i}"${st["n"+i]===String(j)?" checked":""}><span><span class="tag${j==2?"":" corr"}">${L[j]}</span> ${esc(t)}</span></label>`).join("")}</div></div>`).join("");
+$("#pals").innerHTML=D.PAL.map((p,i)=>`<div class="palier" id="pal${i}"><div class="lvl2"><b>Pas moins de ${p[0]}</b></div><div>${p[1].map((t,j)=>`<label><input type="checkbox" data-k="p${i}_${j}"${st["p"+i+"_"+j]?" checked":""}><span>${esc(t)}</span></label>`).join("")}</div></div>`).join("");
+$("#alerts").innerHTML=D.ALERT.map((t,j)=>`<label><input type="checkbox" data-k="a${j}"${st["a"+j]?" checked":""}><span>${esc(t)}</span></label>`).join("");
+function upd(){
+ const lv=D.COMP.map((c,i)=>st["n"+i]);const done=lv.filter(x=>x!==undefined);
+ let s="";
+ if(done.length){const n=[0,0,0];done.forEach(x=>n[+x]++);s=`Suffisant : ${n[2]} · Partiel : ${n[1]} · Insuffisant : ${n[0]} (sur ${done.length} compétence${done.length>1?"s":""} évaluée${done.length>1?"s":""}).`}
+ $("#sumc").textContent=s||"Cochez un niveau pour chaque compétence.";
+ let reached=-1;for(let i=0;i<D.PAL.length;i++){if(D.PAL[i][1].every((_,j)=>st["p"+i+"_"+j]))reached=i;else break}
+ D.PAL.forEach((p,i)=>$("#pal"+i).classList.toggle("reached",i<=reached));
+ const al=D.ALERT.some((_,j)=>st["a"+j]);
+ $("#verdict").innerHTML=(al?`<div class="alert"><b>Signaux d'alerte cochés.</b> Une copie qui paraphrase le texte ou récite le cours se situe plutôt entre 6 et 9, même si elle est intelligible. Reprenez d'abord ces points.</div>`:"")+(al?"":reached>=0?`<div class="verdict"><b>Palier atteint : pas moins de ${D.PAL[reached][0]}.</b> Ce palier est un plancher, pas un plafond : si d'autres éléments positifs le justifient, la copie peut valoir davantage.</div>`:`<div class="verdict">Cochez ce que votre copie réalise vraiment, en commençant par le palier « pas moins de 10 ».</div>`);
+}
+document.addEventListener("change",e=>{const k=e.target.dataset.k;if(!k)return;if(e.target.type==="radio")st[k]=e.target.value;else st[k]=e.target.checked;save();upd()});
+$("#reset").addEventListener("click",()=>{if(!confirm("Effacer toutes les cases cochées ?"))return;st={};save();document.querySelectorAll("input").forEach(i=>{i.checked=false});upd()});
+$("#print").addEventListener("click",()=>window.print());
+upd();
+</script></body></html>

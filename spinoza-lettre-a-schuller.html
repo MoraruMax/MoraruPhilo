@@ -157,6 +157,7 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);op
 }
 @page{size:A4;margin:16mm 14mm}
 </style>
+<link rel="stylesheet" href="quiz.css">
 </head>
 <body>
 <nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
@@ -320,6 +321,15 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);op
   </div>
 </section>
 </main>
+<!--quiz-->
+<section id="quiz" aria-labelledby="h-quiz">
+<h2 id="h-quiz">Quiz de révision</h2>
+<p class="qintro">5 questions pour vérifier l’essentiel. Les réponses s’affichent tout de suite, avec une explication. Rien n’est enregistré ni envoyé.</p>
+<div class="qz" id="qz"></div>
+<script type="application/json" id="quizdata">[{"q":"Quelle est la thèse de Spinoza dans la lettre à Schuller ?","a":["La liberté humaine est une illusion : nous croyons être libres sans l’être","L’homme est entièrement libre de ses choix","Seuls les animaux sont déterminés","La liberté se prouve par l’expérience intérieure"],"e":"Nous avons conscience de nos désirs, mais pas des causes qui nous déterminent."},{"q":"Dans l’exemple de Spinoza, que se passe-t-il si la pierre lancée devient consciente ?","a":["Elle se croit libre, car elle ignore la cause de son mouvement","Elle comprend qu’elle a été lancée","Elle choisit de s’arrêter","Elle devient réellement libre"],"e":"Elle connaît son « appétit » (elle veut se déplacer) mais ignore la cause déterminante : le lancer."},{"q":"Quelle cause ignore le nourrisson qui croit désirer librement le lait ?","a":["Son instinct, qui le détermine","La volonté de sa mère","Une décision rationnelle","L’habitude acquise à l’école"],"e":"Le nourrisson croit désirer se nourrir de lait, alors que son instinct le détermine."},{"q":"Quelle cause ignore l’ivrogne qui croit dire librement ce qu’il pense ?","a":["L’alcool, qui le fait parler","Sa mauvaise éducation","Son désir sincère de vérité","Sa fatigue"],"e":"Il croit que sa parole vient de lui, alors qu’elle est produite par l’alcool."},{"q":"Que conclut Spinoza à propos de l’homme ?","a":["Ses actions sont les conséquences de causes qu’il ne connaît pas","Ses actions ne dépendent que de sa volonté","Il est libre tant qu’il connaît ses désirs","Il est libre dès qu’il est adulte"],"e":"L’homme se « vante » d’être libre parce qu’il a conscience de ses désirs, mais il ignore les causes qui le déterminent."}]</script>
+</section>
+<!--/quiz-->
+
 
 <nav class="pn" aria-label="Pages de la section Liberté"><a class="pv" href="determinisme-social.html" rel="prev"><small>← Page précédente</small><b>Le déterminisme social</b></a><a class="nx" href="les-stereotypes.html" rel="next"><small>Page suivante →</small><b>Les stéréotypes</b></a><a class="hm" href="accueil.html">Retour à l’accueil</a></nav>
 <footer>
@@ -421,5 +431,6 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);op
   });
 })();
 </script>
+<script src="quiz.js" defer></script>
 </body>
 </html>

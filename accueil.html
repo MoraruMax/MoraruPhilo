@@ -95,6 +95,7 @@ h1,.lead,h2.sec,.notion > summary,footer p{text-shadow:0 0 .35em var(--bg),0 0 .
 .grp > summary h2.sec{margin:0;font:800 clamp(1.4rem,3.2vw,1.9rem)/1.2 var(--head);color:var(--ink)}
 .grp > summary:hover h2.sec{color:var(--muted)}
 .grp > .notion{width:auto;margin-inline:0}
+.grp > .notion,.grp > .list,.grp > .sub-n{margin-left:clamp(1.4rem,4.5vw,2.8rem)}
 .grp > summary{text-shadow:0 0 .35em var(--bg),0 0 .8em var(--bg),0 0 1.2em var(--bg)}
 @media (prefers-reduced-motion:reduce){.grp > summary::before{transition:none}}
 
@@ -107,22 +108,152 @@ footer{margin-top:auto;border-top:0;color:var(--ink);font-weight:500}
 .find label{display:block;font:600 .9rem/1.2 var(--head);margin-bottom:.4rem;text-shadow:0 0 .35em var(--bg),0 0 .8em var(--bg)}
 .find input{width:100%;box-sizing:border-box;font:500 1.05rem/1.3 var(--head);color:var(--ink);background:var(--surface);border:1.5px solid var(--line);border-radius:999px;padding:.75rem 1.1rem}
 .find input:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.snip{margin:.5rem 0 0;font:400 .85rem/1.45 var(--body,inherit);color:var(--muted);border-left:3px solid var(--line);padding-left:.6rem}
+.snip mark{background:#ffe27a;color:#111;border-radius:2px;padding:0 .1em}
+:root[data-theme=dark] .snip mark{background:#7a5f00;color:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .snip mark{background:#7a5f00;color:#fff}}
+.find .more{margin:.4rem 0 0;font:600 .9rem/1.3 var(--head);color:var(--ink);background:var(--surface);border:1.5px solid var(--line);border-radius:999px;padding:.45rem .9rem;cursor:pointer}
+.find .more:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
 .find .n{margin:.5rem 0 0;font:500 .9rem/1.3 var(--head);text-shadow:0 0 .35em var(--bg),0 0 .8em var(--bg)}
 :root{--img:url("images/ecole-athenes.jpg")}
+
+/* Fine barre verticale à l'ouverture d'une sous-section */
+.notion[open] > .list,.sub-n[open] > .list{border-left:2px solid var(--ink);padding-left:clamp(.9rem,2.5vw,1.4rem);margin-left:.15rem;padding-bottom:0;margin-bottom:clamp(2rem,5vw,3rem)}
+.sub-n[open] > .list{margin-bottom:1rem}
 </style>
 </head>
 <body>
 <header>
   <div class="wrap">
     <h1>Fiches de cours</h1>
-    <p class="sub">Des pages conçues par IA consacrées aux thèmes de notre année, et des outils pour réviser.</p>
+    <p class="sub">Des contenus générés à l’aide de l’IA consacrés aux thèmes de notre année, et des outils pour réviser et s’entraîner.</p>
     <p class="prog" id="prog" hidden></p>
-    <div class="find" role="search"><label for="q">Chercher un auteur, une notion, un texte</label><input id="q" type="search" placeholder="Ex. : Kant, liberté, mensonge…" autocomplete="off"><p class="n" id="qn" aria-live="polite"></p></div>
+    <div class="find" role="search"><label for="q">Chercher un auteur, une notion, un texte</label><input id="q" type="search" placeholder="Ex. : Kant, liberté, mensonge…" autocomplete="off"><p class="n" id="qn" aria-live="polite"></p><button type="button" class="more" id="qm" hidden></button></div>
   </div>
 </header>
 
 <main>
   <details class="grp wrap"><summary><h2 class="sec">Les thèmes</h2></summary>
+  <details class="notion"><summary>Art</summary>
+  <div class="list">
+    <a class="item" href="art-kant.html" style="--c:var(--a4)"><img class="pt" src="images/kant.jpg" alt="" loading="lazy" style="object-position:50% 25%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="14" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".4"/><rect x="47" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".7"/><rect x="80" y="8" width="26" height="32" rx="3" fill="var(--c)"/></svg>
+      <h2>Kant : le jugement de goût</h2>
+      <p>« C’est beau pour moi » : peut-on dire cela du beau ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="art-hume-sentiment.html" style="--c:var(--a5)"><img class="pt" src="images/hume.jpg" alt="" loading="lazy" style="object-position:50% 25%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><circle cx="30" cy="24" r="14" fill="var(--muted)" opacity=".4"/><circle cx="78" cy="24" r="14" fill="var(--c)"/></svg>
+      <h2>Hume : opinion et sentiment</h2>
+      <p>Peut-on se tromper sur la beauté ? Hume distingue l’opinion du sentiment.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="art-hume-delicatesse.html" style="--c:var(--a6)"><img class="pt" src="images/hume.jpg" alt="" loading="lazy" style="object-position:50% 25%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M14 40 L60 8 L106 40Z" fill="var(--muted)" opacity=".4"/><circle cx="60" cy="18" r="7" fill="var(--c)"/></svg>
+      <h2>Hume : la délicatesse du goût</h2>
+      <p>Si tous les goûts ne se valent pas, qui est un bon juge ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="art-bourdieu.html" style="--c:var(--a7)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M10 36 C30 6 50 44 70 20 S100 12 110 18" stroke="var(--c)" stroke-width="4" fill="none" stroke-linecap="round"/><rect x="10" y="40" width="100" height="3" rx="1.5" fill="var(--muted)" opacity=".4"/></svg>
+      <h2>Bourdieu : l’idéologie charismatique</h2>
+      <p>Le goût est-il un don naturel ou le produit de l’éducation ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="art-arendt.html" style="--c:var(--a8)"><img class="pt" src="images/arendt.jpg" alt="" loading="lazy" style="object-position:50% 25%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="14" y="10" width="92" height="6" rx="3" fill="var(--c)"/><rect x="14" y="22" width="70" height="6" rx="3" fill="var(--muted)" opacity=".5"/><rect x="14" y="34" width="82" height="6" rx="3" fill="var(--muted)" opacity=".35"/></svg>
+      <h2>Arendt : l’œuvre d’art</h2>
+      <p>Qu’est-ce qui distingue une œuvre d’art d’un objet d’usage ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+  </div>
+  </details>
+  <details class="notion"><summary>Bonheur</summary>
+  <div class="list">
+    <a class="item" href="bonheur-aristophane.html" style="--c:var(--a4)"><img class="pt" src="images/platon.jpg" alt="" loading="lazy" style="object-position:50% 25%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="14" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".4"/><rect x="47" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".7"/><rect x="80" y="8" width="26" height="32" rx="3" fill="var(--c)"/></svg>
+      <h2>Aristophane : le mythe des moitiés séparées</h2>
+      <p>Pourquoi cherchons-nous quelqu’un d’autre pour être heureux ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="bonheur-callicles.html" style="--c:var(--a5)"><img class="pt" src="images/platon.jpg" alt="" loading="lazy" style="object-position:50% 25%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><circle cx="30" cy="24" r="14" fill="var(--muted)" opacity=".4"/><circle cx="78" cy="24" r="14" fill="var(--c)"/></svg>
+      <h2>Calliclès et Socrate : l’image des tonneaux</h2>
+      <p>Vivre en comblant sans cesse ses désirs, est-ce vivre heureux ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="bonheur-epicure.html" style="--c:var(--a6)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M14 40 L60 8 L106 40Z" fill="var(--muted)" opacity=".4"/><circle cx="60" cy="18" r="7" fill="var(--c)"/></svg>
+      <h2>Épicure : les différents désirs</h2>
+      <p>Pour être heureux, faut-il tout désirer ou apprendre à trier ses désirs ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="bonheur-epictete.html" style="--c:var(--a7)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M10 36 C30 6 50 44 70 20 S100 12 110 18" stroke="var(--c)" stroke-width="4" fill="none" stroke-linecap="round"/><rect x="10" y="40" width="100" height="3" rx="1.5" fill="var(--muted)" opacity=".4"/></svg>
+      <h2>Épictète : les opinions troublent les hommes</h2>
+      <p>Ce ne sont pas les choses qui nous troublent, mais l’idée que nous nous en faisons.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="bonheur-descartes-epictete.html" style="--c:var(--a8)"><img class="pt" src="images/descartes.jpg" alt="" loading="lazy" style="object-position:50% 25%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="14" y="10" width="92" height="6" rx="3" fill="var(--c)"/><rect x="14" y="22" width="70" height="6" rx="3" fill="var(--muted)" opacity=".5"/><rect x="14" y="34" width="82" height="6" rx="3" fill="var(--muted)" opacity=".35"/></svg>
+      <h2>Épictète et Descartes : acceptation et grandeur d’âme</h2>
+      <p>Faut-il vouloir que les choses arrivent comme elles arrivent ? Descartes y répond avec Élisabeth.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="bonheur-kant-difficulte.html" style="--c:var(--a9)"><img class="pt" src="images/kant.jpg" alt="" loading="lazy" style="object-position:50% 25%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M20 40 L20 14 L60 6 L100 14 L100 40Z" fill="none" stroke="var(--c)" stroke-width="3.5" stroke-linejoin="round"/><circle cx="60" cy="26" r="6" fill="var(--muted)" opacity=".5"/></svg>
+      <h2>Kant : la difficulté de définir le bonheur</h2>
+      <p>Tout le monde veut être heureux, mais personne ne sait précisément ce qu’il veut.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="bonheur-kant-digne.html" style="--c:var(--a10)"><img class="pt" src="images/kant.jpg" alt="" loading="lazy" style="object-position:50% 25%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="14" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".4"/><rect x="47" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".7"/><rect x="80" y="8" width="26" height="32" rx="3" fill="var(--c)"/></svg>
+      <h2>Kant : se rendre digne du bonheur</h2>
+      <p>La morale nous apprend-elle à être heureux ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="bonheur-bergson.html" style="--c:var(--a11)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><circle cx="30" cy="24" r="14" fill="var(--muted)" opacity=".4"/><circle cx="78" cy="24" r="14" fill="var(--c)"/></svg>
+      <h2>Bergson : la joie, signe de la création</h2>
+      <p>Quelle différence entre plaisir et joie ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="epictete.html" style="--c:var(--a9)"><img class="pt" src="images/epictete.jpg" alt="" loading="lazy" style="object-position:50% 40%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><circle cx="60" cy="24" r="22" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5" stroke-dasharray="2 5" opacity=".8"/><circle cx="60" cy="24" r="12" fill="var(--c)" opacity=".2" stroke="var(--c)" stroke-width="3.5"/><circle cx="60" cy="24" r="4" fill="var(--c)"/><g fill="var(--muted)" opacity=".55"><rect x="14" y="20" width="8" height="8" rx="2"/><rect x="98" y="20" width="8" height="8" rx="2"/><rect x="56" y="1" width="8" height="6" rx="2"/><rect x="56" y="41" width="8" height="6" rx="2"/></g></svg>
+      <h2>Epictète : ce qui dépend de nous</h2>
+      <p>Liberté et bonheur selon le <i>Manuel</i> : la frontière entre ce que nous maîtrisons et ce qui nous échappe.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+  </div>
+  </details>
+  <details class="notion"><summary>Conscience</summary>
+  <div class="list">
+    <a class="item" href="descartes-du-doute-au-cogito.html" style="--c:var(--a3)"><img class="pt" src="images/descartes.jpg" alt="" loading="lazy" style="object-position:50% 28%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="14" y="10" width="26" height="26" rx="3" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="3" stroke-dasharray="3 5" opacity=".6"/><rect x="26" y="20" width="26" height="26" rx="3" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="3" stroke-dasharray="3 5" opacity=".4" transform="rotate(12 39 33)"/><path d="M60 24 H74" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="3" opacity=".6"/><circle cx="96" cy="24" r="16" fill="none" stroke="var(--c)" stroke-width="3"/><circle cx="96" cy="24" r="6" fill="var(--c)"/></svg>
+      <h2>Descartes : du doute au cogito</h2>
+      <p>Du doute des sens au mauvais génie, jusqu’à la première certitude : « je pense, donc je suis ».</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="conscience-hobbes.html" style="--c:var(--a4)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="14" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".4"/><rect x="47" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".7"/><rect x="80" y="8" width="26" height="32" rx="3" fill="var(--c)"/></svg>
+      <h2>Hobbes : objection au cogito de Descartes</h2>
+      <p>« Je pense, donc je suis » : peut-on en conclure que je suis une pensée, un esprit, une âme ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="conscience-hume.html" style="--c:var(--a5)"><img class="pt" src="images/hume.jpg" alt="" loading="lazy" style="object-position:50% 25%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><circle cx="30" cy="24" r="14" fill="var(--muted)" opacity=".4"/><circle cx="78" cy="24" r="14" fill="var(--c)"/></svg>
+      <h2>Hume : le moi n’est qu’un faisceau de perceptions</h2>
+      <p>En regardant en moi-même, que trouve-t-on ? Un moi simple et continu, ou seulement des perceptions ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="conscience-sartre.html" style="--c:var(--a6)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M14 40 L60 8 L106 40Z" fill="var(--muted)" opacity=".4"/><circle cx="60" cy="18" r="7" fill="var(--c)"/></svg>
+      <h2>Sartre : condamné à être libre</h2>
+      <p>Si Dieu n’existe pas, l’homme est-il libre ou perdu ? Peut-il invoquer ses passions comme excuses ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+  </div>
+  </details>
   <details class="notion"><summary>Devoir</summary>
   <div class="list">
     <a class="item" href="le-devoir.html" style="--c:var(--a7)">
@@ -133,6 +264,184 @@ footer{margin-top:auto;border-top:0;color:var(--ink);font-weight:500}
       </svg>
       <h2>Le devoir</h2>
       <p>Société, nature humaine ou raison : d’où vient le « je dois » ? De Nietzsche à Kant et Sartre.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="devoir-kant.html" style="--c:var(--a4)"><img class="pt" src="images/kant.jpg" alt="" loading="lazy" style="object-position:50% 25%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="14" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".4"/><rect x="47" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".7"/><rect x="80" y="8" width="26" height="32" rx="3" fill="var(--c)"/></svg>
+      <h2>Kant : la bonne volonté et le devoir</h2>
+      <p>Qu’est-ce qui est bon sans restriction ? Et comment savoir si l’on agit par devoir ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="devoir-rousseau-pitie.html" style="--c:var(--a5)"><img class="pt" src="images/rousseau.jpg" alt="" loading="lazy" style="object-position:50% 25%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><circle cx="30" cy="24" r="14" fill="var(--muted)" opacity=".4"/><circle cx="78" cy="24" r="14" fill="var(--c)"/></svg>
+      <h2>Rousseau : la pitié, sentiment naturel</h2>
+      <p>Avant toute loi, qu’est-ce qui retient l’homme de faire du mal à autrui ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="devoir-rousseau-conscience.html" style="--c:var(--a6)"><img class="pt" src="images/rousseau.jpg" alt="" loading="lazy" style="object-position:50% 25%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M14 40 L60 8 L106 40Z" fill="var(--muted)" opacity=".4"/><circle cx="60" cy="18" r="7" fill="var(--c)"/></svg>
+      <h2>Rousseau : la conscience, instinct divin</h2>
+      <p>Faut-il être savant pour être moral ? Rousseau confie à la conscience le jugement du bien et du mal.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="devoir-holbach.html" style="--c:var(--a7)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M10 36 C30 6 50 44 70 20 S100 12 110 18" stroke="var(--c)" stroke-width="4" fill="none" stroke-linecap="round"/><rect x="10" y="40" width="100" height="3" rx="1.5" fill="var(--muted)" opacity=".4"/></svg>
+      <h2>D’Holbach : fonder la morale sur la nature</h2>
+      <p>Faut-il un dieu pour fonder la morale ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="devoir-durkheim.html" style="--c:var(--a8)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="14" y="10" width="92" height="6" rx="3" fill="var(--c)"/><rect x="14" y="22" width="70" height="6" rx="3" fill="var(--muted)" opacity=".5"/><rect x="14" y="34" width="82" height="6" rx="3" fill="var(--muted)" opacity=".35"/></svg>
+      <h2>Durkheim : le devoir comme fait social</h2>
+      <p>Quand ma conscience me parle, qui parle en moi ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="devoir-nietzsche.html" style="--c:var(--a9)"><img class="pt" src="images/nietzsche.jpg" alt="" loading="lazy" style="object-position:50% 25%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M20 40 L20 14 L60 6 L100 14 L100 40Z" fill="none" stroke="var(--c)" stroke-width="3.5" stroke-linejoin="round"/><circle cx="60" cy="26" r="6" fill="var(--muted)" opacity=".5"/></svg>
+      <h2>Nietzsche : morale du troupeau et mauvaise conscience</h2>
+      <p>La morale est-elle l’expression de l’instinct du troupeau ? D’où vient la mauvaise conscience ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="devoir-kropotkine.html" style="--c:var(--a10)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="14" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".4"/><rect x="47" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".7"/><rect x="80" y="8" width="26" height="32" rx="3" fill="var(--c)"/></svg>
+      <h2>Kropotkine : pourquoi serais-je moral ?</h2>
+      <p>Quelles raisons ai-je d’être moral, si l’on réfute une à une les autorités qui l’exigent ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="devoir-sartre.html" style="--c:var(--a11)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><circle cx="30" cy="24" r="14" fill="var(--muted)" opacity=".4"/><circle cx="78" cy="24" r="14" fill="var(--c)"/></svg>
+      <h2>Sartre : le dilemme moral d’un jeune homme</h2>
+      <p>Rester auprès de sa mère ou rejoindre la Résistance : qui peut aider à choisir ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="devoir-eichmann.html" style="--c:var(--a1)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M14 40 L60 8 L106 40Z" fill="var(--muted)" opacity=".4"/><circle cx="60" cy="18" r="7" fill="var(--c)"/></svg>
+      <h2>Arendt : Eichmann et l’impératif catégorique</h2>
+      <p>Eichmann s’est réclamé de Kant. Qu’a-t-il fait de l’idée de devoir ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+  </div>
+  </details>
+  <details class="notion"><summary>État</summary>
+  <div class="list">
+    <a class="item" href="etat-hobbes.html" style="--c:var(--a4)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="14" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".4"/><rect x="47" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".7"/><rect x="80" y="8" width="26" height="32" rx="3" fill="var(--c)"/></svg>
+      <h2>Hobbes : l’état de nature, guerre de tous contre tous</h2>
+      <p>Que serait la vie des hommes sans pouvoir commun ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="etat-nietzsche.html" style="--c:var(--a5)"><img class="pt" src="images/nietzsche.jpg" alt="" loading="lazy" style="object-position:50% 25%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><circle cx="30" cy="24" r="14" fill="var(--muted)" opacity=".4"/><circle cx="78" cy="24" r="14" fill="var(--c)"/></svg>
+      <h2>Nietzsche : l’État, le plus froid des monstres froids</h2>
+      <p>L’État prétend être le peuple : n’est-ce pas un mensonge ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="etat-chapoutot.html" style="--c:var(--a6)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M14 40 L60 8 L106 40Z" fill="var(--muted)" opacity=".4"/><circle cx="60" cy="18" r="7" fill="var(--c)"/></svg>
+      <h2>Chapoutot : les nazis, ennemis de l’État ?</h2>
+      <p>Le IIIe Reich était-il un État fort ? Pourquoi les nazis se disent-ils hostiles à l’État ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="devoir-eichmann.html" style="--c:var(--a7)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M10 36 C30 6 50 44 70 20 S100 12 110 18" stroke="var(--c)" stroke-width="4" fill="none" stroke-linecap="round"/><rect x="10" y="40" width="100" height="3" rx="1.5" fill="var(--muted)" opacity=".4"/></svg>
+      <h2>Arendt : Eichmann et l’impératif catégorique</h2>
+      <p>Eichmann s’est réclamé de Kant. Qu’a-t-il fait de l’idée de devoir ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+  </div>
+  </details>
+  <details class="notion"><summary>Inconscient</summary>
+  <div class="list">
+    <a class="item" href="inconscient-leibniz.html" style="--c:var(--a4)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="14" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".4"/><rect x="47" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".7"/><rect x="80" y="8" width="26" height="32" rx="3" fill="var(--c)"/></svg>
+      <h2>Leibniz : les petites perceptions</h2>
+      <p>Entendre la mer : comment percevoir un bruit dont aucune vague ne se distingue ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="inconscient-freud.html" style="--c:var(--a5)"><img class="pt" src="images/freud.jpg" alt="" loading="lazy" style="object-position:50% 25%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><circle cx="30" cy="24" r="14" fill="var(--muted)" opacity=".4"/><circle cx="78" cy="24" r="14" fill="var(--c)"/></svg>
+      <h2>Freud : l’hypothèse de l’inconscient</h2>
+      <p>Comment affirmer l’existence d’un psychisme dont nous ne sommes pas conscients ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="inconscient-freud-elisabeth.html" style="--c:var(--a6)"><img class="pt" src="images/freud.jpg" alt="" loading="lazy" style="object-position:50% 25%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M14 40 L60 8 L106 40Z" fill="var(--muted)" opacity=".4"/><circle cx="60" cy="18" r="7" fill="var(--c)"/></svg>
+      <h2>Freud : le cas d’Élisabeth</h2>
+      <p>Des douleurs aux jambes sans cause organique : que révèle l’analyse ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="conscience-sartre.html" style="--c:var(--a7)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M10 36 C30 6 50 44 70 20 S100 12 110 18" stroke="var(--c)" stroke-width="4" fill="none" stroke-linecap="round"/><rect x="10" y="40" width="100" height="3" rx="1.5" fill="var(--muted)" opacity=".4"/></svg>
+      <h2>Sartre : condamné à être libre</h2>
+      <p>Si Dieu n’existe pas, l’homme est-il libre ou perdu ? Peut-il invoquer ses passions comme excuses ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+  </div>
+  </details>
+  <details class="notion"><summary>Justice</summary>
+  <div class="list">
+    <a class="item" href="justice-platon-gyges.html" style="--c:var(--a4)"><img class="pt" src="images/platon.jpg" alt="" loading="lazy" style="object-position:50% 25%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="14" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".4"/><rect x="47" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".7"/><rect x="80" y="8" width="26" height="32" rx="3" fill="var(--c)"/></svg>
+      <h2>Platon : le mythe de l’anneau de Gygès</h2>
+      <p>Si vous pouviez agir sans être vu, resteriez-vous juste ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="justice-platon-lois.html" style="--c:var(--a5)"><img class="pt" src="images/platon.jpg" alt="" loading="lazy" style="object-position:50% 25%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><circle cx="30" cy="24" r="14" fill="var(--muted)" opacity=".4"/><circle cx="78" cy="24" r="14" fill="var(--c)"/></svg>
+      <h2>Platon : pourquoi avoir des lois ?</h2>
+      <p>Même un homme habile ne peut gouverner sans lois : pourquoi ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="justice-hobbes.html" style="--c:var(--a6)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M14 40 L60 8 L106 40Z" fill="var(--muted)" opacity=".4"/><circle cx="60" cy="18" r="7" fill="var(--c)"/></svg>
+      <h2>Hobbes : qu’est-ce qu’une bonne loi ?</h2>
+      <p>Une loi peut-elle être injuste ? Et à quoi reconnaît-on une bonne loi ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="justice-smith.html" style="--c:var(--a7)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M10 36 C30 6 50 44 70 20 S100 12 110 18" stroke="var(--c)" stroke-width="4" fill="none" stroke-linecap="round"/><rect x="10" y="40" width="100" height="3" rx="1.5" fill="var(--muted)" opacity=".4"/></svg>
+      <h2>Smith : la justice et la négligence</h2>
+      <p>Faut-il punir celui qui n’a fait de mal à personne mais aurait pu en faire ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="justice-rawls.html" style="--c:var(--a8)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="14" y="10" width="92" height="6" rx="3" fill="var(--c)"/><rect x="14" y="22" width="70" height="6" rx="3" fill="var(--muted)" opacity=".5"/><rect x="14" y="34" width="82" height="6" rx="3" fill="var(--muted)" opacity=".35"/></svg>
+      <h2>Rawls : l’intuitionnisme en matière de justice</h2>
+      <p>Comment arbitrer entre plusieurs principes de justice qui s’opposent ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+  </div>
+  </details>
+  <details class="notion"><summary>Langage</summary>
+  <div class="list">
+    <a class="item" href="langage-descartes.html" style="--c:var(--a4)"><img class="pt" src="images/descartes.jpg" alt="" loading="lazy" style="object-position:50% 25%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="14" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".4"/><rect x="47" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".7"/><rect x="80" y="8" width="26" height="32" rx="3" fill="var(--c)"/></svg>
+      <h2>Descartes : le langage, propre de l’homme</h2>
+      <p>Les animaux ne parlent pas : est-ce faute d’organes, ou faute de pensée ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="langage-saussure.html" style="--c:var(--a5)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><circle cx="30" cy="24" r="14" fill="var(--muted)" opacity=".4"/><circle cx="78" cy="24" r="14" fill="var(--c)"/></svg>
+      <h2>Saussure : l’arbitraire du signe</h2>
+      <p>Pourquoi le mot « sœur » ? Y a-t-il un lien naturel entre un mot et ce qu’il désigne ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="langage-wittgenstein.html" style="--c:var(--a6)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M14 40 L60 8 L106 40Z" fill="var(--muted)" opacity=".4"/><circle cx="60" cy="18" r="7" fill="var(--c)"/></svg>
+      <h2>Wittgenstein : usage et signification</h2>
+      <p>D’où les mots tirent-ils leur sens ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="langage-austin.html" style="--c:var(--a7)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M10 36 C30 6 50 44 70 20 S100 12 110 18" stroke="var(--c)" stroke-width="4" fill="none" stroke-linecap="round"/><rect x="10" y="40" width="100" height="3" rx="1.5" fill="var(--muted)" opacity=".4"/></svg>
+      <h2>Austin : la performativité</h2>
+      <p>Dire « oui » au mariage : est-ce décrire ou accomplir quelque chose ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="langage-klemperer.html" style="--c:var(--a8)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="14" y="10" width="92" height="6" rx="3" fill="var(--c)"/><rect x="14" y="22" width="70" height="6" rx="3" fill="var(--muted)" opacity=".5"/><rect x="14" y="34" width="82" height="6" rx="3" fill="var(--muted)" opacity=".35"/></svg>
+      <h2>Klemperer : la langue du Troisième Reich</h2>
+      <p>La propagande agit-elle par les discours ou par les mots eux-mêmes ?</p>
       <span class="go">Ouvrir la page</span>
     </a>
   </div>
@@ -193,10 +502,78 @@ footer{margin-top:auto;border-top:0;color:var(--ink);font-weight:500}
       <p>Liberté et bonheur selon le <i>Manuel</i> : la frontière entre ce que nous maîtrisons et ce qui nous échappe.</p>
       <span class="go">Ouvrir la page</span>
     </a>
-    <a class="item" href="plan-liberte.html" style="--c:var(--a8)">
-      <svg viewBox="0 0 120 48" aria-hidden="true"><circle cx="60" cy="9" r="6" fill="var(--c)"/><circle cx="25" cy="38" r="6" fill="var(--muted)" opacity=".6"/><circle cx="95" cy="38" r="6" fill="var(--muted)" opacity=".6"/><line x1="56" y1="14" x2="28" y2="33" stroke="var(--c)" stroke-width="2.5"/><line x1="64" y1="14" x2="92" y2="33" stroke="var(--c)" stroke-width="2.5"/></svg>
-      <h2>Sommes-nous véritablement libres ?</h2>
-      <p>Le plan de cours sur la liberté : choisir, déterminismes, objectivité et autonomie.</p>
+  </div>
+  </details>
+  <details class="notion"><summary>Nature</summary>
+  <div class="list">
+    <a class="item" href="nature-genese.html" style="--c:var(--a4)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="14" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".4"/><rect x="47" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".7"/><rect x="80" y="8" width="26" height="32" rx="3" fill="var(--c)"/></svg>
+      <h2>Genèse : la domination de l’homme sur la nature</h2>
+      <p>L’homme est créé à l’image de Dieu : cette ressemblance lui donne-t-elle un droit sur tout le vivant ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="nature-descola.html" style="--c:var(--a5)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><circle cx="30" cy="24" r="14" fill="var(--muted)" opacity=".4"/><circle cx="78" cy="24" r="14" fill="var(--c)"/></svg>
+      <h2>Descola : la nature des Modernes</h2>
+      <p>Comment l’Occident a-t-il inventé « la nature » en séparant l’homme du monde ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="nature-descartes.html" style="--c:var(--a6)"><img class="pt" src="images/descartes.jpg" alt="" loading="lazy" style="object-position:50% 25%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M14 40 L60 8 L106 40Z" fill="var(--muted)" opacity=".4"/><circle cx="60" cy="18" r="7" fill="var(--c)"/></svg>
+      <h2>Descartes : maîtres et possesseurs de la nature</h2>
+      <p>La connaissance physique doit-elle seulement expliquer le monde, ou aussi nous rendre utiles à tous ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="nature-galilee.html" style="--c:var(--a7)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M10 36 C30 6 50 44 70 20 S100 12 110 18" stroke="var(--c)" stroke-width="4" fill="none" stroke-linecap="round"/><rect x="10" y="40" width="100" height="3" rx="1.5" fill="var(--muted)" opacity=".4"/></svg>
+      <h2>Galilée : l’univers, un livre écrit en langue mathématique</h2>
+      <p>Comment lire la nature ? En apprenant d’abord la langue dans laquelle elle est écrite.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="nature-pascal.html" style="--c:var(--a8)"><img class="pt" src="images/pascal.jpg" alt="" loading="lazy" style="object-position:50% 25%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="14" y="10" width="92" height="6" rx="3" fill="var(--c)"/><rect x="14" y="22" width="70" height="6" rx="3" fill="var(--muted)" opacity=".5"/><rect x="14" y="34" width="82" height="6" rx="3" fill="var(--muted)" opacity=".35"/></svg>
+      <h2>Pascal : ruches et hommes</h2>
+      <p>Les abeilles construisent leurs ruches sans les perfectionner. L’homme, lui, progresse. Pourquoi ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="nature-aristote.html" style="--c:var(--a9)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M20 40 L20 14 L60 6 L100 14 L100 40Z" fill="none" stroke="var(--c)" stroke-width="3.5" stroke-linejoin="round"/><circle cx="60" cy="26" r="6" fill="var(--muted)" opacity=".5"/></svg>
+      <h2>Aristote : voix, parole et langage animal</h2>
+      <p>Les animaux communiquent : en quoi la parole de l’homme est-elle différente ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="nature-jacob.html" style="--c:var(--a10)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="14" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".4"/><rect x="47" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".7"/><rect x="80" y="8" width="26" height="32" rx="3" fill="var(--c)"/></svg>
+      <h2>Jacob : le refus de la finalité comme principe explicatif</h2>
+      <p>Les êtres vivants semblent orientés vers un but : faut-il y voir un dessein ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="nature-mill.html" style="--c:var(--a11)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><circle cx="30" cy="24" r="14" fill="var(--muted)" opacity=".4"/><circle cx="78" cy="24" r="14" fill="var(--c)"/></svg>
+      <h2>Mill : faut-il suivre la nature ?</h2>
+      <p>La nature doit-elle servir de modèle à nos actions ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+  </div>
+  </details>
+  <details class="notion"><summary>Religion</summary>
+  <div class="list">
+    <a class="item" href="religion-kant.html" style="--c:var(--a4)"><img class="pt" src="images/kant.jpg" alt="" loading="lazy" style="object-position:50% 25%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="14" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".4"/><rect x="47" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".7"/><rect x="80" y="8" width="26" height="32" rx="3" fill="var(--c)"/></svg>
+      <h2>Kant : l’existence de Dieu comme nécessité morale</h2>
+      <p>Pourquoi la raison pratique doit-elle postuler l’existence de Dieu, alors que la loi morale n’en a pas besoin ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="religion-marx.html" style="--c:var(--a5)"><img class="pt" src="images/marx.jpg" alt="" loading="lazy" style="object-position:50% 25%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><circle cx="30" cy="24" r="14" fill="var(--muted)" opacity=".4"/><circle cx="78" cy="24" r="14" fill="var(--c)"/></svg>
+      <h2>Marx : la religion est l’opium du peuple</h2>
+      <p>La religion console les opprimés : est-ce une aide ou une illusion qui entretient l’oppression ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="religion-nietzsche.html" style="--c:var(--a6)"><img class="pt" src="images/nietzsche.jpg" alt="" loading="lazy" style="object-position:50% 25%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M14 40 L60 8 L106 40Z" fill="var(--muted)" opacity=".4"/><circle cx="60" cy="18" r="7" fill="var(--c)"/></svg>
+      <h2>Nietzsche : la mort de Dieu</h2>
+      <p>Si Dieu est mort, que reste-t-il de l’égalité et de l’homme ?</p>
       <span class="go">Ouvrir la page</span>
     </a>
   </div>
@@ -235,6 +612,34 @@ footer{margin-top:auto;border-top:0;color:var(--ink);font-weight:500}
     </a>
   </div>
   </details>
+  <details class="notion"><summary>Temps</summary>
+  <div class="list">
+    <a class="item" href="temps-bergson.html" style="--c:var(--a4)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="14" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".4"/><rect x="47" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".7"/><rect x="80" y="8" width="26" height="32" rx="3" fill="var(--c)"/></svg>
+      <h2>Bergson : l’exemple de l’eau sucrée</h2>
+      <p>Attendre que le sucre fonde : que nous apprend ce petit fait sur le temps ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="temps-einstein.html" style="--c:var(--a5)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><circle cx="30" cy="24" r="14" fill="var(--muted)" opacity=".4"/><circle cx="78" cy="24" r="14" fill="var(--c)"/></svg>
+      <h2>Einstein : temps du physicien et temps psychologique</h2>
+      <p>Le temps du philosophe est-il le même que celui du physicien ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="temps-proust.html" style="--c:var(--a6)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M14 40 L60 8 L106 40Z" fill="var(--muted)" opacity=".4"/><circle cx="60" cy="18" r="7" fill="var(--c)"/></svg>
+      <h2>Proust : l’extra-temporalité</h2>
+      <p>Comment un goût de madeleine peut-il nous faire échapper au temps ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="temps-sartre.html" style="--c:var(--a7)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M10 36 C30 6 50 44 70 20 S100 12 110 18" stroke="var(--c)" stroke-width="4" fill="none" stroke-linecap="round"/><rect x="10" y="40" width="100" height="3" rx="1.5" fill="var(--muted)" opacity=".4"/></svg>
+      <h2>Sartre : passé et présent</h2>
+      <p>Le passé est-il fixé une fois pour toutes ? Ou son sens dépend-il de ce que je projette ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+  </div>
+  </details>
   <details class="notion"><summary>Travail</summary>
   <div class="list">
     <a class="item" href="travail-alienation-emancipation.html" style="--c:var(--a4)">
@@ -251,6 +656,42 @@ footer{margin-top:auto;border-top:0;color:var(--ink);font-weight:500}
       <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="12" y="32" width="16" height="12" fill="var(--c)" opacity=".5"/><rect x="34" y="24" width="16" height="20" fill="var(--c)" opacity=".65"/><rect x="56" y="16" width="16" height="28" fill="var(--c)" opacity=".8"/><rect x="78" y="6" width="16" height="38" fill="var(--c)"/></svg>
       <h2>Le travail</h2>
       <p>Onze textes, de saint Paul à Arendt, sur le devoir, la contrainte et la division du travail.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="travail-genese.html" style="--c:var(--a4)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="14" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".4"/><rect x="47" y="8" width="26" height="32" rx="3" fill="var(--c)" opacity=".7"/><rect x="80" y="8" width="26" height="32" rx="3" fill="var(--c)"/></svg>
+      <h2>Genèse 3 : le travail comme punition</h2>
+      <p>Dans le récit biblique, le travail n’est pas un don : il suit la faute. Que dit cette origine du travail ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="travail-aristote.html" style="--c:var(--a5)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><circle cx="30" cy="24" r="14" fill="var(--muted)" opacity=".4"/><circle cx="78" cy="24" r="14" fill="var(--c)"/></svg>
+      <h2>Aristote : citoyen et travail</h2>
+      <p>Peut-on être citoyen quand on doit travailler pour vivre ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="travail-hegel.html" style="--c:var(--a6)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M14 40 L60 8 L106 40Z" fill="var(--muted)" opacity=".4"/><circle cx="60" cy="18" r="7" fill="var(--c)"/></svg>
+      <h2>Hegel : le maître et le serviteur</h2>
+      <p>Le maître qui jouit sans travailler est-il libre ? Le serviteur qui travaille est-il vraiment asservi ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="travail-marx-specificite.html" style="--c:var(--a7)"><img class="pt" src="images/marx.jpg" alt="" loading="lazy" style="object-position:50% 25%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M10 36 C30 6 50 44 70 20 S100 12 110 18" stroke="var(--c)" stroke-width="4" fill="none" stroke-linecap="round"/><rect x="10" y="40" width="100" height="3" rx="1.5" fill="var(--muted)" opacity=".4"/></svg>
+      <h2>Marx : la spécificité du travail humain</h2>
+      <p>L’abeille construit des cellules admirables. Qu’est-ce qui distingue pourtant le pire architecte ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="travail-marx-alienation.html" style="--c:var(--a8)"><img class="pt" src="images/marx.jpg" alt="" loading="lazy" style="object-position:50% 25%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="14" y="10" width="92" height="6" rx="3" fill="var(--c)"/><rect x="14" y="22" width="70" height="6" rx="3" fill="var(--muted)" opacity=".5"/><rect x="14" y="34" width="82" height="6" rx="3" fill="var(--muted)" opacity=".35"/></svg>
+      <h2>Marx : l’aliénation par le travail</h2>
+      <p>Plus l’ouvrier produit, plus il s’appauvrit : comment le travail peut-il se retourner contre le travailleur ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="travail-russell.html" style="--c:var(--a9)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M20 40 L20 14 L60 6 L100 14 L100 40Z" fill="none" stroke="var(--c)" stroke-width="3.5" stroke-linejoin="round"/><circle cx="60" cy="26" r="6" fill="var(--muted)" opacity=".5"/></svg>
+      <h2>Russell : éloge de l’oisiveté</h2>
+      <p>Et si l’on travaillait quatre heures par jour ? Que ferions-nous du temps libre ?</p>
       <span class="go">Ouvrir la page</span>
     </a>
   </div>
@@ -333,7 +774,20 @@ footer{margin-top:auto;border-top:0;color:var(--ink);font-weight:500}
       <p>Les huit étapes de la méthode, avec un brouillon interactif pour préparer sa copie.</p>
       <span class="go">Ouvrir la page</span>
     </a>
-    <a class="item" href="explication-texte-bac.html" style="--c:var(--a6)">
+    <a class="item" href="auto-evaluation-dissertation.html" style="--c:var(--a7)">
+      <svg viewBox="0 0 120 48" aria-hidden="true">
+        <rect x="14" y="8" width="8" height="8" rx="2" fill="none" stroke="var(--muted)" stroke-width="2.5"/>
+        <rect x="30" y="10" width="56" height="4" rx="2" fill="var(--muted)" opacity=".4"/>
+        <rect x="14" y="22" width="8" height="8" rx="2" fill="var(--c)"/>
+        <rect x="30" y="24" width="44" height="4" rx="2" fill="var(--c)"/>
+        <rect x="14" y="36" width="8" height="8" rx="2" fill="none" stroke="var(--muted)" stroke-width="2.5"/>
+        <rect x="30" y="38" width="66" height="4" rx="2" fill="var(--muted)" opacity=".4"/>
+      </svg>
+      <h2>Auto-évaluer sa dissertation</h2>
+      <p>Les cinq compétences de la grille académique et les paliers de la grille nationale, pour relire sa copie.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="methode-explication-texte.html" style="--c:var(--a6)">
       <svg viewBox="0 0 120 48" aria-hidden="true">
         <rect x="14" y="6" width="40" height="5" rx="2" fill="var(--muted)" opacity=".4"/>
         <rect x="14" y="16" width="52" height="5" rx="2" fill="var(--c)"/>
@@ -341,8 +795,21 @@ footer{margin-top:auto;border-top:0;color:var(--ink);font-weight:500}
         <rect x="14" y="36" width="60" height="5" rx="2" fill="var(--c)" opacity=".6"/>
         <circle cx="94" cy="24" r="14" fill="none" stroke="var(--c)" stroke-width="3"/>
       </svg>
-      <h2>L’explication d’un texte philosophique</h2>
-      <p>Ce qu’il faut faire et éviter, la lecture analytique, le plan et la rédaction en quatre heures.</p>
+      <h2>Construire une explication de texte</h2>
+      <p>Les neuf étapes de la méthode, de la lecture analytique à la rédaction, avec un brouillon interactif.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="auto-evaluation-explication.html" style="--c:var(--a9)">
+      <svg viewBox="0 0 120 48" aria-hidden="true">
+        <rect x="14" y="8" width="8" height="8" rx="2" fill="none" stroke="var(--muted)" stroke-width="2.5"/>
+        <rect x="30" y="10" width="56" height="4" rx="2" fill="var(--muted)" opacity=".4"/>
+        <rect x="14" y="22" width="8" height="8" rx="2" fill="var(--c)"/>
+        <rect x="30" y="24" width="44" height="4" rx="2" fill="var(--c)"/>
+        <rect x="14" y="36" width="8" height="8" rx="2" fill="none" stroke="var(--muted)" stroke-width="2.5"/>
+        <rect x="30" y="38" width="66" height="4" rx="2" fill="var(--muted)" opacity=".4"/>
+      </svg>
+      <h2>Auto-évaluer son explication de texte</h2>
+      <p>Les quatre compétences de la grille académique et les paliers de la grille nationale, pour relire sa copie.</p>
       <span class="go">Ouvrir la page</span>
     </a>
   </div>
@@ -360,6 +827,19 @@ footer{margin-top:auto;border-top:0;color:var(--ink);font-weight:500}
       <p>Les huit étapes de la méthode, avec un brouillon interactif pour préparer sa copie.</p>
       <span class="go">Ouvrir la page</span>
     </a>
+    <a class="item" href="auto-evaluation-dissertation.html" style="--c:var(--a7)">
+      <svg viewBox="0 0 120 48" aria-hidden="true">
+        <rect x="14" y="8" width="8" height="8" rx="2" fill="none" stroke="var(--muted)" stroke-width="2.5"/>
+        <rect x="30" y="10" width="56" height="4" rx="2" fill="var(--muted)" opacity=".4"/>
+        <rect x="14" y="22" width="8" height="8" rx="2" fill="var(--c)"/>
+        <rect x="30" y="24" width="44" height="4" rx="2" fill="var(--c)"/>
+        <rect x="14" y="36" width="8" height="8" rx="2" fill="none" stroke="var(--muted)" stroke-width="2.5"/>
+        <rect x="30" y="38" width="66" height="4" rx="2" fill="var(--muted)" opacity=".4"/>
+      </svg>
+      <h2>Auto-évaluer sa dissertation</h2>
+      <p>Les cinq compétences de la grille académique et les paliers de la grille nationale, pour relire sa copie.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
     <a class="item" href="methode-explication-de-texte.html" style="--c:var(--a8)">
       <svg viewBox="0 0 120 48" aria-hidden="true">
         <rect x="14" y="6" width="26" height="36" rx="3" fill="var(--c)" opacity=".85"/>
@@ -368,6 +848,19 @@ footer{margin-top:auto;border-top:0;color:var(--ink);font-weight:500}
       </svg>
       <h2>Séries technologiques : explication de texte</h2>
       <p>Analyse, synthèse, commentaire : comment répondre aux questions de l’épreuve.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="auto-evaluation-explication-tech.html" style="--c:var(--a7)">
+      <svg viewBox="0 0 120 48" aria-hidden="true">
+        <rect x="14" y="8" width="8" height="8" rx="2" fill="none" stroke="var(--muted)" stroke-width="2.5"/>
+        <rect x="30" y="10" width="56" height="4" rx="2" fill="var(--muted)" opacity=".4"/>
+        <rect x="14" y="22" width="8" height="8" rx="2" fill="var(--c)"/>
+        <rect x="30" y="24" width="44" height="4" rx="2" fill="var(--c)"/>
+        <rect x="14" y="36" width="8" height="8" rx="2" fill="none" stroke="var(--muted)" stroke-width="2.5"/>
+        <rect x="30" y="38" width="66" height="4" rx="2" fill="var(--muted)" opacity=".4"/>
+      </svg>
+      <h2>Auto-évaluer son explication de texte</h2>
+      <p>Les quatre compétences de la grille académique et les paliers de la grille nationale, pour relire ses réponses aux questions.</p>
       <span class="go">Ouvrir la page</span>
     </a>
   </div>
@@ -383,6 +876,110 @@ footer{margin-top:auto;border-top:0;color:var(--ink);font-weight:500}
     </a>
   </div>
   </details>
+  </details>
+  <details class="grp wrap"><summary><h2 class="sec">Plans de cours</h2></summary>
+  <div class="list">
+    <a class="item" href="plan-bonheur.html" style="--c:var(--a1)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M36 36 A24 24 0 0 1 84 36" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5"/><path d="M46 36 A14 14 0 0 1 74 36" stroke="var(--c)" stroke-width="2.5" fill="none" stroke-linecap="round"/><line x1="24" y1="40" x2="96" y2="40" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5"/><line x1="40" y1="45" x2="80" y2="45" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5" opacity=".4"/></svg>
+      <h2>Le bonheur</h2>
+      <p>Hédonisme, amour, stoïcisme et morale : qu’est-ce qu’une vie heureuse ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="plan-conscience.html" style="--c:var(--a2)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><circle cx="60" cy="24" r="21" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5" opacity=".4"/><circle cx="60" cy="24" r="13" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5"/><circle cx="60" cy="24" r="4" fill="var(--c)"/></svg>
+      <h2>La conscience</h2>
+      <p>Conscience de soi et connaissance de soi : sommes-nous transparents à nous-mêmes ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="plan-devoir.html" style="--c:var(--a3)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M38 8 H30 V40 H38" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5"/><path d="M82 8 H90 V40 H82" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5"/><circle cx="60" cy="24" r="8" fill="var(--c)"/><line x1="44" y1="24" x2="49" y2="24" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5"/><line x1="71" y1="24" x2="76" y2="24" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5"/></svg>
+      <h2>Le devoir</h2>
+      <p>Obligation, désir et morale : d’où vient le devoir, et que nous commande-t-il ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="plan-etat.html" style="--c:var(--a4)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M30 42 L60 8 L90 42Z" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5"/><line x1="42" y1="28" x2="78" y2="28" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5" opacity=".5"/><circle cx="60" cy="8" r="3.5" fill="var(--c)"/><line x1="22" y1="42" x2="98" y2="42" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5"/></svg>
+      <h2>L’État</h2>
+      <p>L’état de nature, le contrat social et la place de l’État : une dénaturation nécessaire ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="plan-inconscient.html" style="--c:var(--a5)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M40 22 A20 20 0 0 1 80 22" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5"/><path d="M40 22 A20 20 0 0 0 80 22" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5" stroke-dasharray="1 5" stroke-width="2.5"/><line x1="26" y1="22" x2="94" y2="22" stroke="var(--c)" stroke-width="2.5" stroke-linecap="round"/></svg>
+      <h2>L’inconscient</h2>
+      <p>Ce qui échappe à la conscience : une hypothèse, ses preuves et ses critiques.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="plan-justice.html" style="--c:var(--a6)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><line x1="60" y1="6" x2="60" y2="42" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5"/><line x1="26" y1="14" x2="94" y2="14" stroke="var(--c)" stroke-width="2.5" stroke-linecap="round"/><path d="M26 14 L18 30 H34Z" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5"/><path d="M94 14 L86 30 H102Z" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5"/><line x1="48" y1="42" x2="72" y2="42" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5"/></svg>
+      <h2>La justice</h2>
+      <p>La justice comme vertu et comme institution : harmonie de la société et sentiment du juste.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="plan-langage.html" style="--c:var(--a7)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><line x1="24" y1="21" x2="24" y2="27" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5" stroke-width="3" /><line x1="33" y1="17" x2="33" y2="31" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5" stroke-width="3" /><line x1="42" y1="12" x2="42" y2="36" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5" stroke-width="3" /><line x1="51" y1="18" x2="51" y2="30" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5" stroke-width="3" /><line x1="60" y1="8" x2="60" y2="40"  stroke-width="3" stroke='var(--c)' stroke-linecap='round'/><line x1="69" y1="15" x2="69" y2="33" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5" stroke-width="3" /><line x1="78" y1="11" x2="78" y2="37" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5" stroke-width="3" /><line x1="87" y1="19" x2="87" y2="29" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5" stroke-width="3" /><line x1="96" y1="21" x2="96" y2="27" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5" stroke-width="3" /></svg>
+      <h2>Le langage</h2>
+      <p>Langage et langue, signe arbitraire, performatif, et la langue comme arme.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="plan-liberte.html" style="--c:var(--a8)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M72 14 A18 18 0 1 0 72 34" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5" stroke-width="2.5"/><line x1="76" y1="24" x2="104" y2="24" stroke="var(--c)" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="1 6"/><circle cx="104" cy="24" r="4" fill="var(--c)"/></svg>
+      <h2>La liberté</h2>
+      <p>Le plan de cours sur la liberté : choisir, déterminismes, objectivité et autonomie.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="plan-nature.html" style="--c:var(--a9)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M14 18 C34 8 46 28 66 18 S94 12 106 18" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5"/><path d="M14 28 C34 18 46 38 66 28 S94 22 106 28" stroke="var(--c)" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M14 38 C34 28 46 48 66 38 S94 32 106 38" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5" opacity=".4"/></svg>
+      <h2>La nature</h2>
+      <p>L’homme est-il un être naturel comme les autres ? Exception, maîtrise et limites de l’action sur la nature.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="plan-religion.html" style="--c:var(--a10)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M42 44 V26 A18 18 0 0 1 78 26 V44" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5"/><line x1="30" y1="44" x2="90" y2="44" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5"/><circle cx="60" cy="8" r="3.5" fill="var(--c)"/><line x1="60" y1="14" x2="60" y2="20" stroke="var(--c)" stroke-width="2" stroke-linecap="round"/></svg>
+      <h2>La religion</h2>
+      <p>Définir la religion, prouver Dieu ou le sentir : raison, foi et critiques de la religion.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="plan-verite.html" style="--c:var(--a11)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><ellipse cx="60" cy="24" rx="34" ry="14" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5" transform="rotate(-18 60 24)"/><circle cx="60" cy="24" r="4" fill="var(--c)"/><circle cx="88" cy="16" r="2.5" fill="var(--muted)" opacity=".8"/></svg>
+      <h2>Science et vérité</h2>
+      <p>Correspondance, cohérence, idéalisme, induction et paradigmes : la science produit-elle la vérité ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="plan-technique.html" style="--c:var(--a1)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><line x1="60" y1="6" x2="60" y2="11" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5" stroke-width="3" transform="rotate(0 60 24)"/><line x1="60" y1="6" x2="60" y2="11" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5" stroke-width="3" transform="rotate(30 60 24)"/><line x1="60" y1="6" x2="60" y2="11" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5" stroke-width="3" transform="rotate(60 60 24)"/><line x1="60" y1="6" x2="60" y2="11" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5" stroke-width="3" transform="rotate(90 60 24)"/><line x1="60" y1="6" x2="60" y2="11" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5" stroke-width="3" transform="rotate(120 60 24)"/><line x1="60" y1="6" x2="60" y2="11" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5" stroke-width="3" transform="rotate(150 60 24)"/><line x1="60" y1="6" x2="60" y2="11" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5" stroke-width="3" transform="rotate(180 60 24)"/><line x1="60" y1="6" x2="60" y2="11" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5" stroke-width="3" transform="rotate(210 60 24)"/><line x1="60" y1="6" x2="60" y2="11" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5" stroke-width="3" transform="rotate(240 60 24)"/><line x1="60" y1="6" x2="60" y2="11" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5" stroke-width="3" transform="rotate(270 60 24)"/><line x1="60" y1="6" x2="60" y2="11" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5" stroke-width="3" transform="rotate(300 60 24)"/><line x1="60" y1="6" x2="60" y2="11" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5" stroke-width="3" transform="rotate(330 60 24)"/><circle cx="60" cy="24" r="12" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5"/><circle cx="60" cy="24" r="4" fill="var(--c)"/></svg>
+      <h2>La technique</h2>
+      <p>Transformer la nature selon nos fins : définition, pouvoir et limites de la technique.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="plan-temps.html" style="--c:var(--a2)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><circle cx="60" cy="24" r="19" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5"/><line x1="60" y1="24" x2="60" y2="12" stroke="var(--c)" stroke-width="2.5" stroke-linecap="round"/><line x1="60" y1="24" x2="70" y2="29" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5" stroke-width="2.5"/><circle cx="60" cy="24" r="2" fill="var(--c)"/></svg>
+      <h2>Le temps</h2>
+      <p>Principe de génération et de corruption, durée vécue, temps objectif et espace-temps.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="plan-travail.html" style="--c:var(--a3)">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M22 20 L32 10 L44 14 L48 26 L40 38 L26 36 L18 28Z" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5" stroke-dasharray="1 5" stroke-width="2.5"/><line x1="54" y1="24" x2="68" y2="24" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5"/><path d="M64 19 L69 24 L64 29" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5"/><rect x="76" y="10" width="28" height="28" rx="1" stroke="var(--c)" stroke-width="2.5" fill="none"/><line x1="76" y1="24" x2="104" y2="24" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5" opacity=".4"/></svg>
+      <h2>Le travail</h2>
+      <p>Entre aliénation et émancipation : contrainte, réalisation de soi et éloge de l’oisiveté.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+  </div>
+  </details>
+  <details class="grp wrap"><summary><h2 class="sec">Pour s'entraîner à la dissertation</h2></summary>
+  <div class="list">
+    <a class="item" href="atelier-dissertation.html" style="--c:var(--a7)">
+      <svg viewBox="0 0 120 48" aria-hidden="true">
+        <rect x="14" y="4" width="70" height="40" rx="4" fill="none" stroke="var(--muted)" stroke-width="2.5" opacity=".6"/>
+        <line x1="22" y1="14" x2="76" y2="14" stroke="var(--muted)" stroke-width="2" opacity=".5"/>
+        <line x1="22" y1="22" x2="76" y2="22" stroke="var(--muted)" stroke-width="2" opacity=".5"/>
+        <line x1="22" y1="30" x2="58" y2="30" stroke="var(--muted)" stroke-width="2" opacity=".5"/>
+        <path d="M80 40 L100 12 L108 18 L88 46 L78 48 Z" fill="var(--c)"/>
+      </svg>
+      <h2>Atelier dissertation</h2>
+      <p>Un cahier de brouillon guidé : choisissez un sujet et construisez votre dissertation étape par étape.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+  </div>
   </details>
   <details class="grp wrap"><summary><h2 class="sec">EMC</h2></summary>
   <details class="notion"><summary>Démocratie</summary>
@@ -412,16 +1009,49 @@ footer{margin-top:auto;border-top:0;color:var(--ink);font-weight:500}
   <div class="wrap"><p id="credit">Raphaël, <i>L’École d’Athènes</i> (1509-1511), Vatican.</p></div>
 </footer>
 <script>
-(function(){var q=document.getElementById('q'),n=document.getElementById('qn'),items=[].slice.call(document.querySelectorAll('a.item')),dets=[].slice.call(document.querySelectorAll('main details')),saved=null;
-function norm(s){return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')}
+(function(){var q=document.getElementById('q'),n=document.getElementById('qn'),items=[].slice.call(document.querySelectorAll('a.item')),dets=[].slice.call(document.querySelectorAll('main details')),saved=null,loading=false;
+function norm(s){return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'')}
 var idx=items.map(function(a){return norm(a.textContent)});
-q.addEventListener('input',function(){var v=norm(q.value.trim());
- if(!v){items.forEach(function(a){a.hidden=false});dets.forEach(function(d,i){d.hidden=false;if(saved)d.open=saved[i]});saved=null;n.textContent='';return}
+var files=items.map(function(a){return (a.getAttribute('href')||'').split('#')[0].split('?')[0]});
+var ptxt=[],pnorm=[];
+function prep(){if(!window.IDX||ptxt.length)return;files.forEach(function(f,i){var t=window.IDX[f]||'';ptxt[i]=t;pnorm[i]=norm(t)})}
+function pat(w){return '(^|[^a-z0-9])'+w.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+(w.length<=4?'(?![a-z0-9])':'')}
+function rx(w){return new RegExp(pat(w))}
+function has(h,w){return rx(w).test(h)}
+function pos(h,w,from){var r=new RegExp(pat(w),'g');r.lastIndex=from||0;var m=r.exec(h);return m?m.index+m[1].length:-1}
+function esc(t){return t.replace(/&/g,'&amp;').replace(/</g,'&lt;')}
+function clearSnip(a){var o=a.querySelector('.snip');if(o)o.remove()}
+function snip(a,i,words){clearSnip(a);if(!ptxt[i])return;var t=pnorm[i],p=-1,w=words[0];
+ for(var k=0;k<words.length;k++){var x=pos(t,words[k],220);if(x<0)x=pos(t,words[k],0);if(x>-1){p=x;w=words[k];break}}
+ if(p<0)return;var from=Math.max(0,p-60),to=Math.min(ptxt[i].length,p+w.length+90);
+ var part=ptxt[i].slice(from,to),pn=norm(part),out='',last=0,re=[];
+ words.forEach(function(x){var y=pos(pn,x,0);while(y>-1){re.push([y,y+x.length]);y=pos(pn,x,y+x.length)}});
+ re.sort(function(a,b){return a[0]-b[0]});
+ re.forEach(function(r){if(r[0]<last)return;out+=esc(part.slice(last,r[0]))+'<mark>'+esc(part.slice(r[0],r[1]))+'</mark>';last=r[1]});
+ out+=esc(part.slice(last));
+ var e=document.createElement('p');e.className='snip';e.innerHTML=(from>0?'… ':'')+out+(to<ptxt[i].length?' …':'');
+ var g=a.querySelector('.go');if(g)a.insertBefore(e,g);else a.appendChild(e)}
+function cnt(h,w){var m=h.match(new RegExp(pat(w),'g'));return m?m.length:0}
+var tit=items.map(function(a){var h=a.querySelector('h2');return norm(h?h.textContent:'')}),des=items.map(function(a){var p=a.querySelector('p');return norm(p?p.textContent:'')}),qm=document.getElementById('qm'),showAll=false,lastQ='';
+function score(i,words){var s=0;words.forEach(function(w){if(has(tit[i],w))s+=60;if(has(des[i],w))s+=25;s+=Math.min(cnt(pnorm[i]||'',w),10)*1.5});return s}
+function run(){var v=norm(q.value.trim());
+ if(!v){items.forEach(function(a){a.hidden=false;clearSnip(a)});dets.forEach(function(d,i){d.hidden=false;if(saved)d.open=saved[i]});saved=null;n.textContent='';qm.hidden=true;showAll=false;lastQ='';return}
+ if(v!==lastQ){showAll=false;lastQ=v}
  if(!saved)saved=dets.map(function(d){return d.open});
- var words=v.split(/\s+/),c=0;
- items.forEach(function(a,i){var ok=words.every(function(w){return idx[i].indexOf(w)>-1});a.hidden=!ok;if(ok)c++});
+ var words=v.split(/\s+/),m=[];
+ items.forEach(function(a,i){var h=idx[i]+' '+(pnorm[i]||'');if(words.every(function(w){return has(h,w)}))m.push({i:i,s:score(i,words)})});
+ var top=m.reduce(function(x,y){return Math.max(x,y.s)},0),cut=top*0.4,main=m.filter(function(x){return x.s>=cut}).sort(function(x,y){return y.s-x.s}).slice(0,8),ok={};
+ main.forEach(function(x){ok[x.i]=1});var rest=m.length-main.length;
+ if(showAll)m.forEach(function(x){ok[x.i]=1});
+ items.forEach(function(a,i){var on=!!ok[i];a.hidden=!on;if(on)snip(a,i,words);else clearSnip(a)});
  dets.slice().reverse().forEach(function(d){var has=d.querySelector('a.item:not([hidden])');d.hidden=!has;if(has)d.open=true});
- n.textContent=c?c+' page'+(c>1?'s':'')+' trouvée'+(c>1?'s':''):'Aucune page trouvée.';});})();
+ var shown=showAll?m.length:main.length;
+ n.textContent=m.length?(showAll?m.length+' pages trouvées.':shown+' page'+(shown>1?'s':'')+' principale'+(shown>1?'s':'')+(rest>0?' sur '+m.length:'')+'.'):'Aucune page trouvée.';
+ if(rest>0||showAll){qm.hidden=false;qm.textContent=showAll?'Ne garder que les pages principales':'Voir les '+rest+' autres page'+(rest>1?'s':'')+' qui en parlent'}else qm.hidden=true}
+qm.addEventListener('click',function(){showAll=!showAll;run()});
+function load(){if(window.IDX){prep();return}if(loading)return;loading=true;var s=document.createElement('script');s.src='recherche-index.js';s.onload=function(){prep();run()};document.head.appendChild(s)}
+q.addEventListener('focus',load);
+q.addEventListener('input',function(){load();run()});})();
 </script>
 <script>
 (function(){var K='fiches-vues',items=[].slice.call(document.querySelectorAll('a.item')),prog=document.getElementById('prog'),seen={};
@@ -438,7 +1068,7 @@ paint();})();
 (function(){var B=[
  {img:'images/ecole-athenes.jpg',cap:'Raphaël, <i>L’École d’Athènes</i> (1509-1511), Vatican.'},
  {img:'images/nietzsche.jpg',portrait:1,fill:'#d3bab4',cap:'Portrait de Friedrich Nietzsche'},
- {img:'images/freud.jpg',portrait:1,fill:'#6d6d6d',cap:'Photographie de Sigmund Freud'},
+ {img:'images/freud.jpg',portrait:1,fill:'#878787',cap:'Photographie de Sigmund Freud'},
  {img:'images/voltaire.jpg',portrait:1,fill:'#363430',cap:'Portrait de Voltaire, attribué à Nicolas de Largillière (vers 1724), musée Carnavalet.'},
  {img:'images/machiavel.jpg',portrait:1,fill:'#52301f',cap:'Santi di Tito, <i>Portrait de Nicolas Machiavel</i> (XVIᵉ siècle), Palazzo Vecchio, Florence.'},
  {img:'images/schopenhauer.jpg',portrait:1,fill:'#818181',cap:'Photographie d’Arthur Schopenhauer, Johann Schäfer (1859).'},

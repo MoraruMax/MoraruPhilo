@@ -144,6 +144,7 @@ footer p{margin:0}
 }
 @page{size:A4;margin:16mm 14mm}
 </style>
+<link rel="stylesheet" href="quiz.css">
 </head>
 <body>
 <nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
@@ -262,6 +263,15 @@ footer p{margin:0}
   </div>
 </section>
 </main>
+<!--quiz-->
+<section id="quiz" aria-labelledby="h-quiz">
+<h2 id="h-quiz">Quiz de révision</h2>
+<p class="qintro">5 questions pour vérifier l’essentiel. Les réponses s’affichent tout de suite, avec une explication. Rien n’est enregistré ni envoyé.</p>
+<div class="qz" id="qz"></div>
+<script type="application/json" id="quizdata">[{"q":"Quelles sont les trois catégories de questions de l’épreuve ?","a":["Éléments d’analyse, éléments de synthèse et commentaire","Résumé, discussion et conclusion","Définition, exemple et objection","Lecture, plan et rédaction"],"e":"Analyse (3 questions), synthèse (3 questions), commentaire (en général 2 questions)."},{"q":"Comment répondre à une question d’analyse portant sur une citation ?","a":["En l’expliquant avec ce qui la précède et ce qui la suit, dans le contexte global du texte","En paraphrasant seulement la citation","En ignorant le reste du texte","En donnant une définition de dictionnaire"],"e":"Une phrase ne s’éclaire que lorsqu’elle est ramenée au contexte dans lequel elle s’insère."},{"q":"À quoi correspond la question B1 ?","a":["À la question à laquelle l’auteur tente de répondre","À la thèse de l’auteur","À la structure des arguments","À un commentaire personnel"],"e":"B2 porte sur la structure argumentative, B3 sur la thèse : la réponse que l’auteur donne à la question."},{"q":"Comment structurer une réponse de commentaire (catégorie C) ?","a":["Introduction, première partie sur le texte, seconde partie sur votre avis, conclusion courte","Une introduction puis la liste de vos exemples","Uniquement votre avis personnel","Le résumé du texte phrase par phrase"],"e":"La seconde partie est celle où vous utilisez votre cours : exemples, repères, références philosophiques, raisonnement personnel."},{"q":"Comment organiser les quatre heures de l’épreuve ?","a":["La première moitié pour le choix du sujet et le brouillon, la seconde pour la rédaction","Rédiger tout de suite, sans brouillon","Passer trois heures sur le brouillon","Quitter la salle après une heure"],"e":"Utilisez le temps dans sa totalité ; chacun adapte la division selon sa facilité à rédiger."}]</script>
+</section>
+<!--/quiz-->
+
 
 <footer><div class="wrap"><p>Page réalisée à partir du document « Les principes de l’explication de texte ».</p></div></footer>
 
@@ -344,5 +354,6 @@ footer p{margin:0}
   pg();
 })();
 </script>
+<script src="quiz.js" defer></script>
 </body>
 </html>

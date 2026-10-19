@@ -85,6 +85,7 @@ footer p{margin:0}
 }
 @page{size:A4;margin:16mm 14mm}
 </style>
+<link rel="stylesheet" href="quiz.css">
 </head>
 <body>
 <nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
@@ -98,6 +99,15 @@ footer p{margin:0}
 </header>
 <nav class="nav" aria-label="Les sept textes"><div class="wrap"><ol id="nav"></ol></div></nav>
 <main id="main"><noscript><div class="wrap"><p>Cette page a besoin de JavaScript pour afficher les textes.</p></div></noscript></main>
+<!--quiz-->
+<section id="quiz" aria-labelledby="h-quiz">
+<h2 id="h-quiz">Quiz de révision</h2>
+<p class="qintro">5 questions pour vérifier l’essentiel. Les réponses s’affichent tout de suite, avec une explication. Rien n’est enregistré ni envoyé.</p>
+<div class="qz" id="qz"></div>
+<script type="application/json" id="quizdata">[{"q":"Dans le texte d’Hérodote, pourquoi Otanès veut-il abolir la monarchie ?","a":["Le pouvoir d’un seul n’est soumis à aucun contrôle et corrompt, même le plus vertueux","Parce que le roi est trop pauvre","Parce que le peuple est toujours sage","Parce que la monarchie est trop récente"],"e":"Le monarque fait ce qu’il veut sans rendre de comptes ; la démocratie, elle, tire les magistrats au sort et les rend comptables de leur administration."},{"q":"Comment Platon décrit-il la démocratie dans La République (livre VIII) ?","a":["Un régime séduisant par sa liberté et sa variété, mais anarchique et sans règle ; le ton est ironique","Le meilleur régime possible, sans défaut","Un régime où seuls les sages gouvernent","Un régime né de la victoire des riches"],"e":"La démocratie naît de la victoire des pauvres. Les « avantages » qu’il énumère (liberté, diversité, absence de contrainte) sont autant de défauts."},{"q":"Quel principe Aristote pose-t-il pour la démocratie ?","a":["La liberté, dont l’une des formes est d’être tour à tour gouverné et gouvernant","La naissance noble","La richesse","Le savoir philosophique"],"e":"Chacun a une part égale numériquement, et la majorité fait loi : la masse est souveraine."},{"q":"Pourquoi Tocqueville refuse-t-il à la majorité « le droit de tout faire » ?","a":["Parce qu’il existe une loi supérieure, la justice, qui borne le droit de chaque peuple ; la majorité n’est qu’un individu collectif","Parce que la majorité se trompe toujours","Parce que la minorité est plus sage","Parce que le peuple est incapable de voter"],"e":"« Le pouvoir de tout faire, que je refuse à un seul de mes semblables, je ne l’accorderai jamais à plusieurs. »"},{"q":"Quel danger Tocqueville décrit-il avec le « pouvoir immense et tutélaire » ?","a":["Un despotisme doux, qui maintiendrait des citoyens égaux mais repliés sur eux-mêmes dans l’enfance","Une dictature violente et sanglante","Une monarchie héréditaire","Une anarchie sans loi"],"e":"Ce pouvoir absolu, prévoyant et doux voudrait même leur ôter « le trouble de penser et la peine de vivre »."}]</script>
+</section>
+<!--/quiz-->
+
 <footer><div class="wrap"><p>Page réalisée à partir du document « Textes Démocratie ». Les arguments sont reformulés ; les extraits renvoient au texte complet de votre document.</p></div></footer>
 
 <script>
@@ -184,5 +194,6 @@ footer p{margin:0}
   }
 })();
 </script>
+<script src="quiz.js" defer></script>
 </body>
 </html>

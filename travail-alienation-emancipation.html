@@ -168,6 +168,7 @@ footer p{margin:0}
 }
 @page{size:A4;margin:16mm 14mm}
 </style>
+<link rel="stylesheet" href="quiz.css">
 </head>
 <body>
 <nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
@@ -400,6 +401,15 @@ footer p{margin:0}
   </div>
 </section>
 </main>
+<!--quiz-->
+<section id="quiz" aria-labelledby="h-quiz">
+<h2 id="h-quiz">Quiz de révision</h2>
+<p class="qintro">5 questions pour vérifier l’essentiel. Les réponses s’affichent tout de suite, avec une explication. Rien n’est enregistré ni envoyé.</p>
+<div class="qz" id="qz"></div>
+<script type="application/json" id="quizdata">[{"q":"Que signifie l’étymologie du mot « travail » évoquée dans la fiche ?","a":["Le tripalium, un instrument de torture","Le latin labor, qui désigne l’effort joyeux","Le grec ergon, qui désigne l’œuvre","Le mot latin otium, qui désigne le repos"],"e":"L’étymologie renvoie à la peine : le travail comme punition, comme souffrance."},{"q":"Pour Marx (Manuscrits de 1844), que vit l’ouvrier dans le travail ?","a":["Il se sent « en dehors de soi » : le travail est le lieu de sa négation plutôt que de son affirmation","Il s’y sent pleinement chez lui","Il y trouve sa liberté absolue","Il y est protégé de toute contrainte"],"e":"« L’ouvrier n’a le sentiment d’être auprès de lui-même qu’en dehors du travail. »"},{"q":"Que montre l’image de l’architecte et de l’abeille (Marx, Le Capital) ?","a":["Le travail humain est intentionnel : le résultat existe d’abord dans la tête du travailleur","Les animaux travaillent mieux que les hommes","Le travail humain est instinctif","Le travail est une punition divine"],"e":"Le plus mauvais architecte se distingue de l’abeille la plus experte par la cellule construite d’abord « dans sa tête »."},{"q":"Dans la dialectique hégélienne, pourquoi le serviteur devient-il libre ?","a":["En travaillant, il transforme les choses et se transforme lui-même, tandis que le maître ne produit rien de stable","Parce qu’il refuse de travailler","Parce qu’il devient le maître à son tour par la force","Parce que son maître le libère"],"e":"Le serviteur refoule son désir, affronte la résistance de la matière et imprime la marque de sa conscience sur les choses."},{"q":"Quelle est la différence entre travail (labor) et œuvre (work) chez Arendt ?","a":["Le travail produit des biens de consommation en perpétuel recommencement ; l’œuvre produit des objets durables","Le travail est manuel, l’œuvre est intellectuelle","Le travail est libre, l’œuvre est contrainte","Il n’y a aucune différence"],"e":"Le travail est le fait de l’animal laborans ; l’œuvre est le fait de l’homo faber, créateur d’outils et d’œuvres qui résistent au temps."}]</script>
+</section>
+<!--/quiz-->
+
 
 <nav class="pn" aria-label="Pages de la section Travail"><a class="nx" href="le-travail.html" rel="next"><small>Page suivante →</small><b>Le travail</b></a><a class="hm" href="accueil.html">Retour à l’accueil</a></nav>
 <footer><div class="wrap"><p>Page réalisée à partir du cours « Le travail ». Les citations sont de courts extraits. Les exercices, leurs corrections et le curseur de la journée et les exemples de loisirs sont rédigés pour cette page.</p></div></footer>
@@ -506,5 +516,6 @@ footer p{margin:0}
   wh.addEventListener('input',day);day();
 })();
 </script>
+<script src="quiz.js" defer></script>
 </body>
 </html>

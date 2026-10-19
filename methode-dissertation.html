@@ -158,6 +158,7 @@ footer p{margin:0 0 .3rem}
 }
 @page{size:A4;margin:16mm 14mm}
 </style>
+<link rel="stylesheet" href="quiz.css">
 </head>
 <body>
 <nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
@@ -334,6 +335,15 @@ footer p{margin:0 0 .3rem}
 </section>
 
 </main>
+<!--quiz-->
+<section id="quiz" aria-labelledby="h-quiz">
+<h2 id="h-quiz">Quiz de révision</h2>
+<p class="qintro">5 questions pour vérifier l’essentiel. Les réponses s’affichent tout de suite, avec une explication. Rien n’est enregistré ni envoyé.</p>
+<div class="qz" id="qz"></div>
+<script type="application/json" id="quizdata">[{"q":"Quelle est la première étape pour construire une dissertation ?","a":["Définir les termes importants, en commençant par des définitions larges","Rédiger l’introduction","Choisir le plan","Écrire la conclusion"],"e":"Indiquez les différents sens de chaque terme ; c’est seulement ensuite que vous déterminez les plus importants pour le sujet."},{"q":"Pourquoi met-on le sujet à l’affirmative puis à la négative ?","a":["Parce qu’on peut toujours répondre par « oui » ou par « non » : cela fait apparaître deux grandes thèses","Pour montrer qu’on a lu le sujet","Pour allonger l’introduction","Pour éviter de choisir une position"],"e":"Idée 1 : le sujet à l’affirmative, avec sa conséquence. Idée 2 : cette phrase à la négative."},{"q":"Qu’est-ce qu’un problème en dissertation ?","a":["Une question soulevant deux alternatives sérieuses et crédibles, à laquelle on ne peut répondre directement par oui ou par non","Une difficulté de vocabulaire","Une simple reformulation du sujet","Une objection finale"],"e":"Il se forme ainsi : « Est-ce que…, puisque…, ou bien…, puisque… ? »"},{"q":"Dans le plan, que correspond à une sous-partie ?","a":["Un argument, accompagné d’un exemple ou d’une référence philosophique (une au maximum)","Une citation entière","Une définition","Une conclusion partielle"],"e":"Pour chaque grande idée, identifiez deux à trois arguments : un argument = une sous-partie."},{"q":"Quel temps consacrer au brouillon, selon la fiche ?","a":["Environ 1h30 à 2h : l’essentiel du travail est fait quand toutes les étapes sont respectées","Quinze minutes","La moitié de la copie","Aucun brouillon, on écrit directement"],"e":"Le reste est « que » de l’écriture : 99 % du travail est déjà fait."}]</script>
+</section>
+<!--/quiz-->
+
 
 <footer>
   <div class="wrap">
@@ -577,5 +587,6 @@ footer p{margin:0 0 .3rem}
   else{requestAnimationFrame(function(){requestAnimationFrame(function(){wave.classList.add('on')})})}
 })();
 </script>
+<script src="quiz.js" defer></script>
 </body>
 </html>

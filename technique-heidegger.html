@@ -192,6 +192,7 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);op
 }
 @page{size:A4;margin:16mm 14mm}
 </style>
+<link rel="stylesheet" href="quiz.css">
 </head>
 <body style="--k:var(--rai);--ks:var(--rai-soft)">
 <nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
@@ -252,6 +253,15 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);op
   </div>
 </section>
 </main>
+<!--quiz-->
+<section id="quiz" aria-labelledby="h-quiz">
+<h2 id="h-quiz">Quiz de révision</h2>
+<p class="qintro">5 questions pour vérifier l’essentiel. Les réponses s’affichent tout de suite, avec une explication. Rien n’est enregistré ni envoyé.</p>
+<div class="qz" id="qz"></div>
+<script type="application/json" id="quizdata">[{"q":"Quelle image Heidegger utilise-t-il dans « La question de la technique » ?","a":["Une centrale hydroélectrique dans le Rhin","Un barrage dans le Nil","Une usine de papier","Un pont suspendu moderne"],"e":"« C’est bien plutôt le fleuve qui est muré dans la centrale. »"},{"q":"En quoi le vieux pont de bois s’oppose-t-il à la centrale ?","a":["Le pont s’intègre au fleuve ; la centrale le met « en demeure » de fournir de l’énergie","Le pont détruit le fleuve ; la centrale le respecte","Le pont est plus utile que la centrale","Ils sont équivalents"],"e":"La différence tient moins aux outils qu’au rapport à la nature."},{"q":"Que devient le Rhin dans la centrale, selon Heidegger ?","a":["Un élément de la chaîne de production, « quelque chose de commis », qui n’existe plus que pour fournir de l’énergie","Un fleuve libre et sauvage","Un symbole poétique","Une frontière naturelle"],"e":"La centrale somme le fleuve de livrer sa pression hydraulique, qui fait tourner les turbines puis produit le courant."},{"q":"Que montre l’exemple de l’agence de voyage et de l’« industrie de vacances » ?","a":["Même le paysage est commandé : le fleuve devient l’objet d’une visite organisée","Que le tourisme sauve la nature","Que le Rhin reste intact","Que la technique n’a pas d’effet sur le paysage"],"e":"On objectera que le Rhin reste le fleuve du paysage ; oui, mais comme objet de tourisme."},{"q":"Quelle est la thèse de Heidegger sur la technique moderne ?","a":["Elle n’est pas qu’un moyen neutre : c’est une manière de considérer le réel comme un stock disponible","Elle est un simple outil, bon ou mauvais selon l’usage","Elle est un progrès sans danger","Elle est apparue avec l’écriture"],"e":"La technique moderne réduit la nature à un stock d’énergie « commis » à la production."}]</script>
+</section>
+<!--/quiz-->
+
 <nav class="pn" aria-label="Pages de la section Technique"><a class="pv" href="technique-bacon.html" rel="prev"><small>← Page précédente</small><b>Bacon : vaincre la nature en lui obéissant</b></a><a class="nx" href="technique-hoelderlin.html" rel="next"><small>Page suivante →</small><b>Hölderlin : le Rhin, fleuve libre</b></a><a class="hm" href="accueil.html">Retour à l’accueil</a></nav>
 <footer><div class="wrap"><p>Page réalisée à partir de l’extrait de « La question de la technique » de Martin Heidegger. Les citations sont de courts extraits du texte étudié ; la présentation de l’argumentation, les exercices et les pistes de discussion sont rédigés pour cette page. Portrait de fond : Photographie de Martin Heidegger.</p></div></footer>
 <script>
@@ -301,5 +311,6 @@ lab();
 sorter('#s1','#sc1','#r1',[["La centrale s’intègre au Rhin comme le vieux pont de bois.", 1, "Non : la centrale est l’opposé du pont, c’est le fleuve qui est muré en elle."], ["Le Rhin devient un fournisseur de pression hydraulique.", 0, "Oui : c’est son statut dans la centrale."], ["Le Rhin « paysage » échappe à la logique technique.", 1, "Non : lui aussi devient un objet commandé, pour les voyagistes."], ["Le Rhin de Hölderlin et celui de la centrale s’opposent.", 0, "Oui : l’œuvre d’art et l’usine proposent deux rapports au fleuve."], ["La technique moderne n’est qu’un moyen neutre au service de l’homme.", 1, "Non : le texte montre qu’elle transforme notre manière de voir la nature."]],[['Selon l’auteur','var(--nat)'],['Pas selon l’auteur','var(--soc)']]);
 })();
 </script>
+<script src="quiz.js" defer></script>
 </body>
 </html>

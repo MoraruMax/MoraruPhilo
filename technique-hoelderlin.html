@@ -192,6 +192,7 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);op
 }
 @page{size:A4;margin:16mm 14mm}
 </style>
+<link rel="stylesheet" href="quiz.css">
 </head>
 <body style="--k:var(--gold);--ks:var(--gold-soft)">
 <nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
@@ -252,6 +253,15 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);op
   </div>
 </section>
 </main>
+<!--quiz-->
+<section id="quiz" aria-labelledby="h-quiz">
+<h2 id="h-quiz">Quiz de révision</h2>
+<p class="qintro">5 questions pour vérifier l’essentiel. Les réponses s’affichent tout de suite, avec une explication. Rien n’est enregistré ni envoyé.</p>
+<div class="qz" id="qz"></div>
+<script type="application/json" id="quizdata">[{"q":"Comment Hölderlin présente-t-il le Rhin à sa source ?","a":["Un torrent libre de naissance, « fureur du demi-dieu », qui veut sa délivrance","Un fleuve calme et fertile","Un fleuve dompté par les hommes","Un ruisseau sans importance"],"e":"Le poète entend le jeune Rhin se plaindre au cœur de la montagne : sa fureur effraie les mortels."},{"q":"Que devient le fleuve une fois sorti des montagnes ?","a":["Il s’apaise, cultive la terre et nourrit les cités qu’il a fondées","Il se perd dans le désert","Il disparaît sous terre","Il devient plus sauvage encore"],"e":"Contenu par les Alpes, un dieu modère sa course."},{"q":"Quelle leçon le poème tire-t-il sur l’origine ?","a":["Il ne faut jamais oublier l’origine : « tel fut ton commencement, telle sera ta demeure »","Il faut rompre avec ses origines","L’origine n’a aucune importance","Seul le progrès compte"],"e":"Le fleuve n’oublie pas sa source."},{"q":"Qu’est-ce que la démesure pour le poème ?","a":["Vouloir être l’égal des dieux : elle mène à un « chemin dévoyé »","Vouloir cultiver la terre","Honorer les dieux","Respecter la nature"],"e":"Ceux qui ont altéré les liens d’amour pour en faire des lacets, ou voulu égaler les dieux, s’égarent."},{"q":"Quel est le lien entre ce poème et Heidegger ?","a":["Heidegger oppose le Rhin du poème, œuvre d’art, au Rhin de la centrale","Heidegger est l’auteur du poème","Heidegger critique Hölderlin","Hölderlin répond à Heidegger"],"e":"Le Rhin de la centrale est une ressource ; celui de l’hymne est un fleuve vivant, chanté."}]</script>
+</section>
+<!--/quiz-->
+
 <nav class="pn" aria-label="Pages de la section Technique"><a class="pv" href="technique-heidegger.html" rel="prev"><small>← Page précédente</small><b>Heidegger : le Rhin, de fleuve à ressource</b></a><a class="nx" href="technique-arendt.html" rel="next"><small>Page suivante →</small><b>Arendt : animal laborans et homo faber</b></a><a class="hm" href="accueil.html">Retour à l’accueil</a></nav>
 <footer><div class="wrap"><p>Page réalisée à partir de l’hymne <i>Le Rhin</i> de Friedrich Hölderlin (extrait du poème, présentation sans reproduction intégrale). Les citations sont de courts extraits du texte étudié ; la présentation de l’argumentation, les exercices et les pistes de discussion sont rédigés pour cette page. Portrait de fond : Pastel de Franz Karl Hiemer, 1792, domaine public.</p></div></footer>
 <script>
@@ -301,5 +311,6 @@ lab();
 sorter('#s1','#sc1','#r1',[["Le Rhin du poème est libre dès sa naissance.", 0, "Oui : « libre de naissance », il se débat contre ses chaînes."], ["Le fleuve du poème n’est qu’une ressource utile aux hommes.", 1, "Non : il est un demi-dieu, doté d’une destinée propre."], ["Une fois dans la plaine, le Rhin s’apaise et nourrit les cités.", 0, "Oui : sa force se tourne vers « la bonne besogne »."], ["Pour le poème, vouloir égaler les dieux est un chemin sûr.", 1, "Non : c’est « un chemin dévoyé »."], ["Le poème oppose, comme Heidegger, un fleuve vivant et chanté à un fleuve réduit à l’énergie.", 0, "Oui : c’est ce contraste que Heidegger exploite dans son texte."]],[['Selon l’auteur','var(--nat)'],['Pas selon l’auteur','var(--soc)']]);
 })();
 </script>
+<script src="quiz.js" defer></script>
 </body>
 </html>
