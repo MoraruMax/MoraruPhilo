@@ -1157,8 +1157,24 @@ html.lect .item p::before{content:"\2014\00a0"}
 </main>
 
 <footer>
-  <div class="wrap"><p id="credit">Raphaël, <i>L’École d’Athènes</i> (1509-1511), Vatican.</p></div>
+  <div class="wrap"><p id="credit">Raphaël, <i>L’École d’Athènes</i> (1509-1511), Vatican.</p>
+  <p class="maj" style="margin:.9rem 0 0;font-size:.92rem">Une page s’affiche mal ou un exercice bloque ? <button type="button" id="maj" style="font:inherit;background:none;color:inherit;border:1px solid currentColor;border-radius:999px;padding:.3rem .9rem;cursor:pointer;margin-left:.4rem">Actualiser le site</button> <span id="maj-s" role="status" aria-live="polite" style="margin-left:.4rem"></span></p></div>
 </footer>
+<script>
+(function(){var b=document.getElementById('maj'),s=document.getElementById('maj-s');if(!b)return;
+function get(u){return fetch(u,{cache:'reload'}).then(function(r){return r.ok?r:null}).catch(function(){return null})}
+b.addEventListener('click',function(){
+  b.disabled=true;s.textContent='Mise à jour…';
+  try{if(navigator.serviceWorker)navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister()})})}catch(e){}
+  try{if(window.caches)caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k)})})}catch(e){}
+  get('recherche-index.js').then(function(r){return r?r.text():''}).then(function(t){
+    var pages=[];try{pages=Object.keys(JSON.parse(t.replace(/^window\.IDX=/,'').replace(/;\s*$/,'')))}catch(e){}
+    var all=['accueil.html','index.html','carnet.html','quiz.js','quiz.css','confort.js'].concat(pages),n=all.length,i=0,done=0;
+    function worker(){if(i>=n)return Promise.resolve();var u=all[i++];return get(u).then(function(){done++;s.textContent='Mise à jour… '+done+' / '+n;return worker()})}
+    return Promise.all([worker(),worker(),worker(),worker()]).then(function(){s.textContent='Terminé. Rechargement…';setTimeout(function(){location.reload()},400)})
+  }).catch(function(){s.textContent='La mise à jour a échoué.';b.disabled=false});
+});})();
+</script>
 <script>
 (function(){var q=document.getElementById('q'),n=document.getElementById('qn'),items=[].slice.call(document.querySelectorAll('a.item')),dets=[].slice.call(document.querySelectorAll('main details')),saved=null,loading=false;
 function norm(s){return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'')}
