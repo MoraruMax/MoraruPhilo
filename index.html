@@ -68,7 +68,7 @@ h1{margin:0;font:700 clamp(2.6rem,8vw,5.2rem)/1 var(--head);letter-spacing:-.03e
 .sub-n summary::before{content:"";width:.5rem;height:.5rem;border-right:2.5px solid var(--muted);border-bottom:2.5px solid var(--muted);transform:rotate(-45deg);transition:transform .2s;flex:none}
 .sub-n[open] summary::before{transform:rotate(45deg)}
 .sub-n summary:hover{color:var(--muted)}
-.sub-n .list{padding-bottom:1rem}
+.sub-n .list{padding-bottom:1rem}.sub-n .sub-n summary{font-size:1.05rem}
 @media (prefers-reduced-motion:reduce){.sub-n summary::before{transition:none}}
 .sec{margin:0 0 1rem;font:700 1.15rem/1.2 var(--head);color:var(--muted)}
 .list{padding-bottom:clamp(2rem,5vw,3rem)}
@@ -159,7 +159,7 @@ html.lect .item h2{display:inline;font:600 1.12rem/1.6 var(--serif,Georgia,serif
 html.lect .item p{display:inline;font-size:1.05rem;line-height:1.6;margin:0 0 0 .2rem;color:var(--muted)}
 html.lect .item p::before{content:"\2014\00a0"}
 .carnet-l{margin:.2rem 0 1rem;font:600 .95rem/1.4 var(--head,system-ui)}.carnet-l a{color:inherit;text-underline-offset:3px}html.lect .carnet-l{display:block}
-.notion>summary .ser{font-weight:400;font-size:.8em;opacity:.7}</style>
+.notion>summary .ser{font-weight:400;font-size:.8em;opacity:.7}.sub-n>summary .ser{font-weight:400;font-size:.8em;opacity:.7}</style>
 <script src="confort.js"></script>
 </head>
 <body>
@@ -227,6 +227,12 @@ html.lect .item p::before{content:"\2014\00a0"}
       <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M14 40 L60 8 L106 40Z" fill="var(--muted)" opacity=".4"/><circle cx="60" cy="18" r="7" fill="var(--c)"/></svg>
       <h2>Épicure : les différents désirs</h2>
       <p>Pour être heureux, faut-il tout désirer ou apprendre à trier ses désirs ?</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="bonheur-rousseau.html" style="--c:var(--a6)"><img class="pt" src="images/rousseau.jpg" alt="" loading="lazy" style="object-position:50% 25%">
+      <svg viewBox="0 0 120 48" aria-hidden="true"><rect x="14" y="10" width="92" height="6" rx="3" fill="var(--c)"/><rect x="14" y="22" width="60" height="6" rx="3" fill="var(--muted)" opacity=".5"/><rect x="14" y="34" width="60" height="6" rx="3" fill="var(--muted)" opacity=".35"/></svg>
+      <h2>Rousseau : les désirs et les facultés</h2>
+      <p>Pourquoi sommes-nous malheureux, et comment le devenir moins ?</p>
       <span class="go">Ouvrir la page</span>
     </a>
     <a class="item" href="bonheur-epictete.html" style="--c:var(--a7)"><img class="pt" src="images/epictete.jpg" alt="" loading="lazy" style="object-position:50% 25%">
@@ -739,6 +745,17 @@ html.lect .item p::before{content:"\2014\00a0"}
   </details>
   <details class="notion"><summary><span>Vérité <span class="ser">: série générale et technologiques</span></span></summary>
   <div class="list">
+    <a class="item" href="croyance-certitude-conviction.html" style="--c:var(--a5)">
+      <svg viewBox="0 0 120 48" aria-hidden="true">
+        <circle cx="26" cy="24" r="11" fill="var(--muted)" opacity=".35"/>
+        <circle cx="50" cy="24" r="11" fill="none" stroke="var(--muted)" stroke-width="3" opacity=".7"/>
+        <circle cx="74" cy="24" r="11" fill="var(--muted)" opacity=".6"/>
+        <circle cx="98" cy="24" r="11" fill="var(--c)"/>
+      </svg>
+      <h2>Croyance, certitude, connaissance, conviction</h2>
+      <p>Quatre façons de tenir une idée pour vraie : ce qui les distingue, et comment ne pas les confondre.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
     <a class="item" href="verite-platon.html" style="--c:var(--a9)"><img class="pt" src="images/platon.jpg" alt="" loading="lazy" style="object-position:50% 32%">
       <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M12 46 V24 C12 2 108 2 108 24 V46" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="3" opacity=".7"/><path d="M26 44 q-4 -10 2 -16 q6 6 2 16Z" fill="var(--c)"/><circle cx="52" cy="40" r="3" fill="var(--muted)"/><circle cx="64" cy="40" r="3" fill="var(--muted)"/><ellipse cx="94" cy="28" rx="3" ry="7" fill="var(--muted)" opacity=".5"/><ellipse cx="102" cy="30" rx="2.5" ry="5" fill="var(--muted)" opacity=".5"/></svg>
       <h2>Platon : le mythe de la caverne</h2>
@@ -1006,7 +1023,57 @@ html.lect .item p::before{content:"\2014\00a0"}
     </a>
   </div>
   </details>
-  <details class="grp wrap"><summary><h2 class="sec">S'entraîner aux épreuves du bac</h2></summary>
+  <details class="grp wrap"><summary><h2 class="sec">Se préparer et s’entraîner aux épreuves du bac</h2></summary>
+  <details class="sub-n"><summary><span>Pour se préparer <span class="ser">: série générale et technologiques</span></span></summary>
+  <div class="list">
+    <a class="item" href="comprendre-la-consigne.html" style="--c:var(--a1)">
+      <svg viewBox="0 0 120 48" aria-hidden="true">
+        <rect x="14" y="6" width="92" height="36" rx="5" fill="none" stroke="var(--muted)" stroke-width="2.5" opacity=".6"/>
+        <line x1="24" y1="18" x2="62" y2="18" stroke="var(--muted)" stroke-width="3" stroke-linecap="round" opacity=".6"/>
+        <line x1="24" y1="30" x2="48" y2="30" stroke="var(--muted)" stroke-width="3" stroke-linecap="round" opacity=".6"/>
+        <rect x="66" y="12" width="30" height="12" rx="3" fill="var(--c)"/>
+      </svg>
+      <h2>Lire un sujet de dissertation</h2>
+      <p>Formulations, petits mots et verbes de consigne : comprendre ce que le sujet demande avant d’y répondre.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="construire-une-problematique.html" style="--c:var(--a4)">
+      <svg viewBox="0 0 120 48" aria-hidden="true">
+        <rect x="8" y="6" width="34" height="14" rx="4" fill="var(--muted)" opacity=".5"/>
+        <rect x="8" y="28" width="34" height="14" rx="4" fill="var(--muted)" opacity=".7"/>
+        <path d="M44 13 H62 V35 H44 M62 24 H78" fill="none" stroke="var(--muted)" stroke-width="2.5" stroke-linecap="round" opacity=".7"/>
+        <rect x="80" y="14" width="32" height="20" rx="5" fill="var(--c)"/>
+      </svg>
+      <h2>Construire une problématique</h2>
+      <p>De la question du sujet au problème : deux réponses sérieuses, chacune appuyée sur un argument.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="argumentation.html" style="--c:var(--a2)">
+      <svg viewBox="0 0 120 48" aria-hidden="true">
+        <rect x="10" y="30" width="30" height="12" rx="3" fill="var(--muted)" opacity=".45"/>
+        <rect x="45" y="18" width="30" height="12" rx="3" fill="var(--muted)" opacity=".7"/>
+        <rect x="80" y="6" width="30" height="12" rx="3" fill="var(--c)"/>
+        <path d="M25 28 V24 H60 V16 M60 16 V12 H95 V16" fill="none" stroke="var(--muted)" stroke-width="2" opacity=".6"/>
+      </svg>
+      <h2>Argumenter</h2>
+      <p>Thèse, arguments, exemples, raisonnements et erreurs à éviter : comment défendre une idée par des raisons.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="construire-le-plan.html" style="--c:var(--a4)">
+      <svg viewBox="0 0 120 48" aria-hidden="true">
+        <rect x="8" y="6" width="30" height="10" rx="3" fill="var(--muted)" opacity=".5"/>
+        <rect x="8" y="19" width="30" height="10" rx="3" fill="var(--muted)" opacity=".7"/>
+        <rect x="8" y="32" width="30" height="10" rx="3" fill="var(--c)"/>
+        <path d="M42 11 H58 M42 24 H58 M42 37 H58" fill="none" stroke="var(--muted)" stroke-width="2.5" stroke-linecap="round" opacity=".7"/>
+        <rect x="62" y="12" width="50" height="24" rx="5" fill="var(--muted)" opacity=".25"/>
+      </svg>
+      <h2>Construire le plan</h2>
+      <p>Trois parties qui répondent au problème, des arguments classés du plus faible au plus fort, et six sujets travaillés pas à pas.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+  </div>
+  </details>
+  <details class="sub-n"><summary>Pour s’entraîner</summary>
   <details class="sub-n"><summary>Série générale</summary>
   <div class="list">
     <a class="item" href="atelier-dissertation.html" style="--c:var(--a7)">
@@ -1063,7 +1130,8 @@ html.lect .item p::before{content:"\2014\00a0"}
     </a>
   </div>
   </details>
-  </details>
+    </details>
+</details>
   <details class="grp wrap"><summary><h2 class="sec">EMC</h2></summary>
   <details class="notion"><summary>Démocratie</summary>
   <div class="list">

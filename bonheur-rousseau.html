@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rousseau : les désirs et les facultés</title>
+<style>
+:root{
+  color-scheme:light;
+  --bg:#F7F4EF; --surface:#FFFFFF; --ink:#1E1A16; --muted:#5E564D; --line:#DED6CB; --focus:#0B5CAD; --on:#FFFFFF;
+  --soc:#9A3412; --soc-soft:#FBE7DC;
+  --nat:#1B6B4A; --nat-soft:#DDF1E7;
+  --rai:#2B4C9B; --rai-soft:#E1E8F8;
+  --gold:#8A5A00; --gold-soft:#F6E8C8; --bad:#B3261E;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --serif:Charter,"Bitstream Charter","Sitka Text",Cambria,Georgia,serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#16130F; --surface:#211D18; --ink:#F2ECE4; --muted:#B5AA9C; --line:#3A332B; --focus:#8CC2FF; --on:#16130F;
+    --soc:#FF9E6B; --soc-soft:#45220F; --nat:#74DDA7; --nat-soft:#143826; --rai:#9DB8FF; --rai-soft:#1C2A52; --gold:#F2C36B; --gold-soft:#3F3112; --bad:#FF8F86;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#16130F; --surface:#211D18; --ink:#F2ECE4; --muted:#B5AA9C; --line:#3A332B; --focus:#8CC2FF; --on:#16130F;
+  --soc:#FF9E6B; --soc-soft:#45220F; --nat:#74DDA7; --nat-soft:#143826; --rai:#9DB8FF; --rai-soft:#1C2A52; --gold:#F2C36B; --gold-soft:#3F3112; --bad:#FF8F86;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.1rem/1.65 var(--serif)}
+.wrap{width:min(980px,100% - 2.5rem);margin-inline:auto}
+h1,h2,h3{margin:0}
+h1{font:800 clamp(2.6rem,8vw,5rem)/1.02 var(--sans);letter-spacing:-.025em}
+h2{font:800 clamp(1.5rem,3.2vw,2.1rem)/1.2 var(--sans);margin-bottom:.8rem}
+h3{font:700 1.08rem/1.35 var(--sans)}
+p{margin:0 0 1em}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
+.btn{font:600 .95rem/1.2 var(--sans);color:var(--ink);background:transparent;border:1.5px solid var(--ink);border-radius:8px;padding:.65rem 1rem;cursor:pointer}
+.btn:hover{background:var(--line)}
+.btn.primary{background:var(--ink);color:var(--bg)}
+.btn.primary:hover{background:var(--ink);filter:brightness(1.2)}
+.note{font:500 .92rem/1.5 var(--sans);color:var(--muted)}
+section.block{border-top:0;padding:clamp(2.2rem,6vw,3.8rem) 0}
+.sec-head{max-width:46rem;margin-bottom:1.6rem}
+.src{font:600 .85rem/1.35 var(--sans);color:var(--muted)}
+blockquote{margin:0}
+
+/* Hero */
+.hero{padding:clamp(2rem,6vw,4rem) 0 clamp(2rem,5vw,3rem)}
+.hgrid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:2rem clamp(2rem,5vw,4rem);align-items:center}
+.lead{font-size:clamp(1.2rem,2.4vw,1.45rem);line-height:1.5;margin:1.3rem 0 0;max-width:34ch}
+.must{background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--ink);padding:1.2rem 1.3rem}
+.must p{margin:0 0 .7rem;font-size:1.05rem}
+.must .q{font:700 1.3rem/1.3 var(--serif)}
+.must .chain{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;margin:.8rem 0}
+.must .chain span{font:700 .85rem/1.2 var(--sans);padding:.35rem .55rem;background:var(--bg);border:1px solid var(--line)}
+.must .chain i{font-style:normal;color:var(--muted)}
+
+/* Questions */
+.qs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+.qc{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--k);padding:1rem 1.2rem}
+.qc h3{color:var(--k);margin-bottom:.4rem}
+.qc p{margin:0;font-size:1rem}
+
+/* Parcours */
+.path{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem;margin-bottom:1rem}
+.path button{font:700 .98rem/1.3 var(--sans);text-align:left;color:var(--ink);background:var(--surface);border:2px solid var(--line);border-radius:8px;padding:.8rem .9rem;cursor:pointer}
+.path button small{display:block;font:600 .8rem/1.3 var(--sans);color:var(--muted);margin-top:.15rem}
+.path button[aria-selected="true"]{border-color:var(--k);background:var(--ks)}
+.panel{background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--k);padding:clamp(1rem,3vw,1.7rem)}
+.panel[hidden]{display:none}
+.panel > h3{font-size:1.3rem;color:var(--k);margin-bottom:.3rem}
+.panel .thesis{font:700 1.2rem/1.35 var(--serif);margin:.2rem 0 1rem}
+.panel h4{font:800 .8rem/1 var(--sans);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin:1.3rem 0 .5rem}
+.panel ul{margin:0;padding-left:1.15rem}
+.panel li{margin-bottom:.5rem;font-size:1.02rem}
+.auth{background:var(--ks);border-left:5px solid var(--k);padding:.8rem 1rem;margin:0 0 .8rem}
+.auth b{font:700 .95rem/1.3 var(--sans);color:var(--k);display:block;margin-bottom:.25rem}
+.auth blockquote{font-size:1rem;font-style:italic;margin:.3rem 0}
+.auth p{margin:.3rem 0 0;font-size:1rem}
+.lim{background:var(--bg);border-left:5px solid var(--gold);padding:.8rem 1rem;font:500 .98rem/1.55 var(--sans)}
+.lim b{color:var(--gold)}
+
+/* Sorters */
+.sorter{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.5rem 1rem;align-items:center;padding:.8rem 0;border-bottom:1px solid var(--line)}
+.row .name{font:600 1rem/1.45 var(--sans)}
+.row .name i{font:italic 400 1rem/1.45 var(--serif)}
+.pick{display:flex;flex-wrap:wrap;gap:.4rem}
+.pick button{font:700 .9rem/1.15 var(--sans);color:var(--ink);background:var(--surface);border:2px solid var(--line);border-radius:8px;padding:.55rem .75rem;cursor:pointer}
+.pick button[disabled]{cursor:default}
+.pick button:hover:not([disabled]){border-color:var(--c)}
+.pick button[aria-pressed="true"]{background:var(--c);border-color:var(--c);color:var(--on)}
+.fb{grid-column:1/-1;margin:0;font:500 .95rem/1.45 var(--sans);padding:.5rem .8rem;border-left:5px solid var(--line);background:var(--surface)}
+.fb[hidden]{display:none}
+.row.good .fb{border-left-color:var(--nat)} .row.bad .fb{border-left-color:var(--bad)}
+.score{display:flex;flex-wrap:wrap;gap:.8rem 1.2rem;align-items:center;margin-top:1.1rem}
+.score p{margin:0;font:600 1rem/1.4 var(--sans);flex:1 1 16rem}
+
+/* Test d'universalisation */
+.lab{background:var(--surface);border:1px solid var(--line);padding:clamp(1rem,3vw,1.6rem)}
+.maxims{display:flex;flex-wrap:wrap;gap:.5rem;margin:.8rem 0 1.2rem}
+.maxims button{font:600 .98rem/1.3 var(--sans);color:var(--ink);background:var(--bg);border:2px solid var(--line);border-radius:8px;padding:.7rem .95rem;cursor:pointer;text-align:left}
+.maxims button[aria-pressed="true"]{border-color:var(--rai);background:var(--rai-soft)}
+.world{display:grid;grid-template-columns:repeat(8,1fr);gap:.4rem;max-width:30rem;margin:.6rem 0 1rem}
+.world span{aspect-ratio:1;border-radius:50%;background:var(--rai);opacity:.85;display:flex;align-items:center;justify-content:center;font:700 .8rem/1 var(--sans);color:var(--on)}
+.world.broken span{background:var(--bad);opacity:.7}
+@media (prefers-reduced-motion:no-preference){.world span{transition:background .4s,opacity .4s}}
+.steps{margin:0;padding:0;list-style:none;counter-reset:s}
+.steps li{counter-increment:s;display:grid;grid-template-columns:2rem 1fr;gap:.5rem;padding:.5rem 0;border-top:1px solid var(--line);font:500 1rem/1.5 var(--sans)}
+.steps li::before{content:counter(s);font:800 1.3rem/1 var(--sans);color:var(--rai)}
+.steps[hidden]{display:none}
+.verdict{margin:1rem 0 0;padding:.8rem 1rem;border-left:6px solid var(--bad);background:var(--bg);font:600 1rem/1.5 var(--sans)}
+.verdict[hidden]{display:none}
+
+/* Dilemme */
+.dil{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.opt{background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--k);padding:1rem 1.2rem;font:500 1rem/1.55 var(--sans)}
+.opt h3{color:var(--k);margin-bottom:.4rem}
+.opt ul{margin:.4rem 0 .8rem;padding-left:1.1rem}
+.opt li{margin-bottom:.35rem}
+.opt .m{font-weight:700}
+.pickd{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+.after{margin-top:1rem;padding:1rem 1.2rem;background:var(--surface);border-left:6px solid var(--gold);font:500 1rem/1.55 var(--sans)}
+.after[hidden]{display:none}
+
+/* Fil */
+.recap{margin:0;padding:0;list-style:none;max-width:48rem}
+.recap li{padding:.9rem 0;border-top:1px solid var(--line)}
+.recap li:last-child{border-bottom:1px solid var(--line)}
+.recap b{font-family:var(--sans)}
+footer{padding:1.6rem 0 2.5rem;font:500 .9rem/1.5 var(--sans);color:var(--muted)}
+footer p{margin:0}
+@media (max-width:820px){
+  .hgrid,.qs,.dil{grid-template-columns:1fr}
+  .path{grid-template-columns:1fr}
+  .row{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
+
+.stp{list-style:none;margin:0;padding:0;counter-reset:s}
+.stp li{counter-increment:s;display:grid;grid-template-columns:2.4rem 1fr;gap:.6rem;background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--k,var(--ink));padding:.9rem 1.1rem;margin-bottom:.7rem}
+.stp li::before{content:counter(s);font:800 1.6rem/1 var(--sans);color:var(--k)}
+.stp li[hidden]{display:none}
+.stp h3{font-size:1.02rem;margin-bottom:.2rem}
+.stp p{margin:0;font-size:1.02rem}
+@media (prefers-reduced-motion:no-preference){.stp li.new{animation:in .5s ease both}@keyframes in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}}
+.terms details{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--k);margin-bottom:.6rem;padding:.2rem 1rem}
+.terms summary{font:700 1.02rem/1.4 var(--sans);cursor:pointer;padding:.7rem 0}
+.terms details p{margin:0 0 .9rem;font-size:1.02rem}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media (max-width:820px){.two{grid-template-columns:1fr}}
+.links a{color:var(--k);font-weight:700}
+
+/* Fond : portrait */
+body::before{content:"";position:fixed;inset:0;z-index:-2;background:url("images/rousseau.jpg") center top/cover no-repeat}
+@media (min-aspect-ratio:1/1){body::before{background:#211c17 url("images/rousseau.jpg") right center/auto 100% no-repeat}}
+body::after{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);opacity:.77;pointer-events:none}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) body::after{opacity:.87}}
+:root[data-theme="dark"] body::after{opacity:.87}
+.hero h1,.hero p,section.block h2,section.block > .wrap > p,.sec-head p,footer p{text-shadow:0 0 .4em var(--bg),0 0 .9em var(--bg)}
+
+.pn{display:flex;gap:1rem;flex-wrap:wrap;margin:2.5rem auto 0;max-width:980px;padding:0 1.25rem;box-sizing:content-box}
+.pn a{flex:1 1 16rem;display:flex;flex-direction:column;gap:.25rem;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--k,var(--ink));padding:.9rem 1.1rem;border-radius:0 0 8px 8px}
+.pn a:hover{border-color:var(--k,var(--ink))}.pn a:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.pn small{font:600 .78rem/1 system-ui,-apple-system,sans-serif;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.pn b{font:700 1.1rem/1.25 system-ui,-apple-system,sans-serif}
+.pn .nx{text-align:right;margin-left:auto;max-width:calc(50% - .5rem)}
+.pn .nx:first-child{margin-left:auto;max-width:calc(50% - .5rem)}
+.pn .hm{flex:0 0 100%;text-align:center;font:500 .92rem/1 system-ui,-apple-system,sans-serif;background:none;border:0;padding:.4rem;color:var(--ink);text-decoration:underline}
+
+.pdfbtn{display:inline-flex;align-items:center;gap:.5rem;font:600 .88rem/1 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--surface);border:1.5px solid var(--ink);border-radius:999px;padding:.55rem .95rem;cursor:pointer}
+.pdfbtn:hover{background:var(--ink);color:var(--bg)}.pdfbtn:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:2px}
+
+/* Texte seul */
+html.ts body::before,html.ts body::after{display:none!important}
+html.ts body{background:var(--bg)!important}
+html.ts .hero h1,html.ts .hero p,html.ts section.block h2,html.ts section.block > .wrap > p,html.ts .sec-head p,html.ts footer p{text-shadow:none!important}
+
+/* Mode lecture */
+html.lect body::before,html.lect body::after{display:none!important}
+html.lect body{background:var(--bg)!important}
+html.lect .pn,html.lect #quiz,html.lect section[aria-labelledby="h-ex"],html.lect section[aria-labelledby="h-video"],html.lect .sec-head p,html.lect .score{display:none!important}
+html.lect .hero h1,html.lect .hero p,html.lect section.block h2,html.lect footer p{text-shadow:none!important}
+html.lect .hero,html.lect section.block{padding-block:1.2rem!important;border:0!important}
+html.lect .wrap,html.lect .sec-head{max-width:40rem!important;margin-inline:auto}
+html.lect .hgrid,html.lect .two{display:block!important}
+html.lect main,html.lect .hero{font-family:var(--serif)}
+html.lect .hero h1{font-size:clamp(1.9rem,5vw,2.6rem)!important}
+html.lect .lead,html.lect p,html.lect li{font-size:1.15rem!important;line-height:1.8!important}
+html.lect .lead{max-width:none!important}
+html.lect .must,html.lect .qc,html.lect .lim,html.lect .terms details,html.lect .txb,html.lect .stp li{background:none!important;border:0!important;box-shadow:none!important;padding:0!important;margin:0 0 1rem!important;display:block!important;border-radius:0!important}
+html.lect .must p{margin:.4rem 0!important}
+html.lect .must .q,html.lect .must .src{font-style:normal}
+html.lect .stp li[hidden]{display:block!important}
+html.lect .stp li::before{display:none!important}
+html.lect .stp h3{display:block!important;margin:0 0 .1rem!important}
+html.lect .qc h3,html.lect .terms summary,html.lect .lim b{display:inline;font:700 1.15rem/1.8 var(--sans);color:var(--ink)!important;margin:0}
+html.lect .stp h3{font:700 1.15rem/1.8 var(--sans);color:var(--ink)!important}
+html.lect .terms summary::after{content:" \2014  "}
+html.lect .qc h3::after{content:" : "}
+html.lect .stp div{display:block}
+html.lect .terms summary{cursor:default;list-style:none;padding:0}
+html.lect .terms summary::-webkit-details-marker,html.lect .terms summary::marker{display:none;content:""}
+html.lect .terms details p{display:inline;margin:0}
+html.lect .qc p{display:inline}
+html.lect .qc{margin-bottom:.6rem!important}
+html.lect .tx summary{cursor:default;pointer-events:none;padding:0}
+html.lect .tx summary::before{display:none!important}
+html.lect .txb{margin-top:.6rem!important}
+html.lect .txb .tsrc:not(:last-child){border:0!important}
+html.lect .recap li{border:0!important;padding:.2rem 0!important}
+html.lect .recap{max-width:none}
+
+/* Accessibilité */
+.a11y{position:relative;display:inline-block}
+.a11y-menu{position:absolute;right:0;top:calc(100% + .4rem);z-index:60;min-width:14rem;background:var(--bg);color:var(--ink);border:1.5px solid var(--ink);border-radius:14px;padding:.35rem;box-shadow:0 8px 24px rgba(0,0,0,.18);text-shadow:none}
+.a11y-menu[hidden]{display:none}
+.a11y-menu p{margin:0;padding:.45rem .7rem .3rem;font:700 .72rem/1 system-ui,-apple-system,sans-serif;letter-spacing:.06em;text-transform:uppercase;opacity:.65}
+.a11y-opt{display:flex;align-items:center;gap:.6rem;width:100%;text-align:left;font:600 .92rem/1.2 system-ui,-apple-system,sans-serif;color:inherit;background:none;border:0;border-radius:9px;padding:.6rem .7rem;cursor:pointer}
+.a11y-opt:hover{background:var(--surface)}
+.a11y-opt:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:-2px}
+.a11y-opt .dot{flex:none;width:1rem;height:1rem;border:2px solid currentColor;border-radius:50%;position:relative}
+.a11y-opt[aria-checked="true"] .dot::after{content:"";position:absolute;inset:2px;background:currentColor;border-radius:50%}
+.a11y-opt small{display:block;font-weight:500;opacity:.7;font-size:.78rem;margin-top:.15rem}
+@media print{
+  :root{--bg:#fff!important;--surface:#fff!important;--ink:#111!important;--muted:#444!important;--line:#bbb!important;color-scheme:light!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:#fff!important;color:#111!important}
+  body::before,body::after{display:none!important}
+  nav,.pdfbtn,.pn,video,section[aria-labelledby="h-video"]{display:none!important}
+  .rev,.js .rev{opacity:1!important;transform:none!important}
+  .stp li[hidden]{display:list-item!important}
+  details>*{display:block!important}
+  article,li,.card,figure,.stage{break-inside:avoid}
+  h1,h2,h3{break-after:avoid;text-shadow:none!important}
+  *{text-shadow:none!important}
+  a{color:inherit;text-decoration:none}
+  section.block,.part{padding-top:1.2rem!important;padding-bottom:1.2rem!important}
+  footer{break-before:avoid;border-top:1px solid #999;margin-top:1rem}
+}
+@page{size:A4;margin:16mm 14mm}
+
+/* Texte */
+.tx summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:.7rem;font:800 clamp(1.4rem,3vw,1.9rem)/1.2 var(--sans);padding:.3rem 0}
+.tx summary::-webkit-details-marker{display:none}
+.tx summary::before{content:"";width:.6em;height:.6em;border-right:.2em solid currentColor;border-bottom:.2em solid currentColor;transform:rotate(-45deg);transition:transform .15s;flex:none;margin-right:.2rem}
+.tx[open] summary::before{transform:rotate(45deg)}
+@media (prefers-reduced-motion:reduce){.tx summary::before{transition:none}}
+.txb{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--k,var(--ink));padding:1.2rem clamp(1rem,3vw,1.8rem);margin-top:.9rem;max-width:46rem;font:400 1.1rem/1.75 var(--serif)}
+.txb p{margin:0 0 1em}
+.txb h3{font:700 1rem/1.3 var(--sans);margin:1.2em 0 .5em}
+.txb .vs{font:700 .72rem/1 var(--sans);color:var(--muted);margin-right:.15em}
+.txb .tsrc{font:600 .88rem/1.4 var(--sans);color:var(--muted);text-align:right;margin:1.1em 0 0}
+.txb .tsrc:not(:last-child){margin-bottom:1.4em;padding-bottom:1.2em;border-bottom:1px solid var(--line)}
+
+/* Sujets de dissertation */
+.sjd ul{list-style:none;margin:.6rem 0 0;padding:0;max-width:46rem}
+.sjd li{margin:0;padding:.55rem 0;border-top:1px solid var(--line)}
+.sjd li:last-child{border-bottom:1px solid var(--line)}
+.sjd a{color:inherit;font:600 1.05rem/1.4 var(--sans,system-ui);text-underline-offset:3px}
+.sjd p{margin:.4rem 0 0}
+html.lect .sjd li{border:0!important;padding:.25rem 0!important}
+html.lect .sjd a{font:600 1.12rem/1.6 var(--serif,Georgia,serif)}
+@media print{.sjd a{font-weight:600}.sjd li{border-color:#999}}
+</style>
+<link rel="stylesheet" href="quiz.css">
+<script>try{history.scrollRestoration="manual"}catch(e){}(function(){function t(){if(!location.hash)window.scrollTo(0,0)}t();document.addEventListener("DOMContentLoaded",t);window.addEventListener("load",function(){t();setTimeout(t,60)});window.addEventListener("pageshow",t)})();</script>
+<script src="confort.js"></script>
+</head>
+<body style="--k:var(--nat);--ks:var(--nat-soft)">
+<nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><span style="display:inline-flex;gap:.6rem;flex-wrap:wrap;align-items:center"><span class="a11y"><button type="button" class="pdfbtn" id="a11y-btn" aria-haspopup="true" aria-expanded="false" aria-controls="a11y-menu"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="1.6"/><path d="M5 8.5l7 1.5 7-1.5M12 10v4.5M8.5 21l3.5-6.5 3.5 6.5"/></svg><span>Accessibilité</span></button><div class="a11y-menu" id="a11y-menu" role="radiogroup" aria-label="Affichage de la page" hidden><p>Affichage</p><button type="button" role="radio" class="a11y-opt" data-mode="orig" aria-checked="true"><span class="dot"></span><span>Page d’origine<small>Image de fond et mise en page habituelle</small></span></button><button type="button" role="radio" class="a11y-opt" data-mode="ts" aria-checked="false"><span class="dot"></span><span>Texte seul<small>Sans image de fond</small></span></button><button type="button" role="radio" class="a11y-opt" data-mode="lect" aria-checked="false"><span class="dot"></span><span>Mode lecture<small>Texte continu, sans cadres ni exercices</small></span></button></div></span><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></span></nav>
+<header class="hero">
+  <div class="wrap hgrid">
+    <div>
+      <h1>Rousseau : les désirs et les facultés</h1>
+      <p class="lead">Pourquoi sommes-nous malheureux, et comment le devenir moins ?</p>
+    </div>
+    <div class="must" style="border-top-color:var(--k)">
+      <p class="src">Rousseau, <i>Émile ou De l’éducation</i>, livre II</p>
+      <p class="q">« C’est donc dans la disproportion de nos désirs et de nos facultés que consiste notre misère. »</p>
+      <p>Tout désir suppose une privation. Le bonheur n’est ni dans la réduction des désirs ni dans l’extension des facultés : il demande que la puissance égale la volonté.</p>
+    </div>
+  </div>
+</header>
+<main>
+<section class="block" aria-labelledby="h-tx">
+  <div class="wrap">
+    <details class="tx"><summary id="h-tx">Le texte</summary><div class="txb"><p>Tout sentiment de peine est inséparable du désir de s’en délivrer ; toute idée de plaisir est inséparable du désir d’en jouir : tout désir suppose privation, et toutes les privations qu’on sent sont pénibles ; c’est donc dans la disproportion de nos désirs et de nos facultés que consiste notre misère. Un être sensible dont les facultés égaleraient les désirs serait un être absolument heureux.</p><p>En quoi donc consiste la sagesse humaine ou la route du vrai bonheur ? Ce n’est pas précisément à diminuer nos désirs ; car, s’ils étaient au-dessous de notre puissance, une partie de nos facultés resterait oisive, et nous ne jouirions pas de tout notre être. Ce n’est pas non plus à étendre nos facultés, car si nos désirs s’étendaient à la fois en plus grand rapport, nous n’en deviendrions que plus misérables : mais c’est à diminuer l’excès des désirs sur les facultés, et à mettre en égalité parfaite la puissance et la volonté. C’est alors seulement que, toutes les forces étant en action, l’âme cependant restera paisible, et que l’homme se trouvera bien ordonné.</p><p>C’est ainsi que la nature, qui fait tout pour le mieux, l’a d’abord institué. Elle ne lui donne immédiatement que les désirs nécessaires à sa conservation et les facultés suffisantes pour les satisfaire.</p></div></details>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-th">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="h-th">Le problème et la thèse</h2></div>
+    <div class="two">
+      <div class="qc" style="--k:var(--gold)"><h3>La question</h3><p>D’où vient notre malheur, et en quoi consiste la sagesse qui permet d’être heureux ?</p></div>
+      <div class="qc" style="--k:var(--k)"><h3>La thèse</h3><p>Notre misère vient de la disproportion entre nos désirs et nos facultés. Le bonheur ne consiste ni à diminuer nos désirs ni à étendre nos facultés, mais à diminuer l’excès des désirs sur les facultés, jusqu’à l’égalité de la puissance et de la volonté.</p></div>
+    </div>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-arg">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="h-arg">Le fil de l’argumentation</h2><p>Faites avancer le raisonnement étape par étape.</p></div>
+    <ol class="stp" id="stp" aria-live="polite"><li hidden><div><h3>Désir et privation</h3><p>Tout désir suppose une privation, et toute privation sentie est pénible : la peine donne le désir de s’en délivrer, le plaisir celui d’en jouir.</p></div></li><li hidden><div><h3>Notre misère</h3><p>Elle ne vient pas du désir en lui-même, mais de la disproportion entre nos désirs et nos facultés : nous voulons plus que nous ne pouvons.</p></div></li><li hidden><div><h3>Le bonheur comme égalité</h3><p>Un être sensible dont les facultés égaleraient les désirs serait absolument heureux : rien ne lui manquerait.</p></div></li><li hidden><div><h3>Deux fausses routes</h3><p>Diminuer nos désirs au-dessous de notre puissance laisse nos facultés oisives. Étendre nos facultés fait croître nos désirs dans un plus grand rapport : nous en deviendrions plus misérables.</p></div></li><li hidden><div><h3>La sagesse</h3><p>Diminuer l’excès des désirs sur les facultés, et mettre en égalité parfaite la puissance et la volonté : toutes les forces agissent, et l’âme reste paisible.</p></div></li><li hidden><div><h3>L’ordre de la nature</h3><p>À l’origine, la nature ne donne à l’homme que les désirs nécessaires à sa conservation et les facultés suffisantes pour les satisfaire.</p></div></li></ol>
+    <div class="score"><button class="btn primary" id="nx" type="button">Première étape</button><button class="btn" id="all" type="button">Tout afficher</button><button class="btn" id="rs" type="button">Recommencer</button></div>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-no">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="h-no">Notions à maîtriser</h2><p>Cliquez sur une notion pour ouvrir sa définition.</p></div>
+    <div class="terms"><details><summary>Désir</summary><p>Tendance vers ce que l’on n’a pas : tout désir suppose un manque.</p></details><details><summary>Privation</summary><p>État de celui à qui manque ce qu’il désire ; elle est toujours pénible.</p></details><details><summary>Facultés</summary><p>Les capacités, les moyens que l’on a de satisfaire ses désirs : la puissance.</p></details><details><summary>Disproportion</summary><p>Écart entre deux choses qui devraient s’équilibrer : ici, trop de désirs pour trop peu de facultés.</p></details><details><summary>Sagesse</summary><p>Art de bien vivre : ici, l’art de maintenir l’égalité entre la puissance et la volonté.</p></details></div>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-ex">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="h-ex">Exercice : est-ce la position de l’auteur ?</h2><p>Pour chaque phrase, dites si elle correspond à la pensée de l’auteur dans ce texte. <span class="note">Exercice et corrections rédigés pour cette page.</span></p></div>
+    <ul class="sorter" id="s1"></ul>
+    <div class="score"><p id="sc1" aria-live="polite"></p><button class="btn" id="r1" type="button">Recommencer</button></div>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-di">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="h-di">Pour discuter</h2></div>
+    <div class="lim" style="margin-bottom:.8rem"><b>Faut-il diminuer ses désirs pour être heureux ?</b> Rousseau répond que non, pas « précisément » : on laisserait une partie de soi inemployée. (À comparer avec <a href="bonheur-epicure.html">Épicure</a>, qui trie les désirs.)</div><div class="lim" style="margin-bottom:.8rem"><b>Peut-on désirer sans manquer ?</b> Si tout désir suppose privation, le bonheur est-il seulement possible ? Rousseau le conçoit comme un équilibre, non comme une absence de désirs.</div><div class="lim" style="margin-bottom:.8rem"><b>Satisfaire tous ses désirs ?</b> Le texte s’oppose à la vie sans limite de <a href="bonheur-callicles.html">Calliclès</a> : plus les désirs croissent, plus l’écart avec nos facultés augmente.</div><div class="lim" style="margin-bottom:.8rem"><b>Piste de dissertation.</b> « Le bonheur consiste-t-il à satisfaire tous ses désirs ? » Rousseau répond que non : il consiste à ajuster ses désirs à ses facultés.</div>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-re">
+  <div class="wrap">
+    <h2 id="h-re" style="margin-bottom:1.2rem">À retenir</h2>
+    <ul class="recap"><li><b>Diagnostic :</b> tout désir suppose privation ; notre misère naît de la disproportion entre désirs et facultés.</li><li><b>Bonheur :</b> l’égalité de la puissance et de la volonté.</li><li><b>Deux fausses routes :</b> diminuer nos désirs (facultés oisives) ou étendre nos facultés (désirs plus grands).</li><li><b>Sagesse :</b> diminuer l’excès des désirs sur les facultés.</li><li><b>Nature :</b> à l’origine, désirs nécessaires et facultés suffisantes.</li></ul>
+  </div>
+</section>
+<section class="block sjd" aria-labelledby="h-sjd">
+  <div class="wrap">
+    <h2 id="h-sjd">Sujets de dissertation</h2>
+    <p>Cette fiche peut servir pour traiter :</p>
+    <ul><li><a href="atelier-dissertation.html#bonh">Peut-on décider d'être heureux ?</a></li></ul>
+  </div>
+</section>
+</main>
+<!--quiz-->
+<section id="quiz" aria-labelledby="h-quiz">
+<h2 id="h-quiz">Quiz de révision</h2>
+<p class="qintro">5 questions pour vérifier l’essentiel. Les réponses s’affichent tout de suite, avec une explication. Rien n’est enregistré ni envoyé.</p>
+<div class="qz" id="qz"></div>
+<script type="application/json" id="quizdata">[{"q": "D’où vient notre misère selon Rousseau ?", "a": ["De la disproportion entre nos désirs et nos facultés", "De la nature humaine", "De la société", "De l’excès de plaisirs"], "e": "Nous voulons plus que nous ne pouvons."}, {"q": "Que suppose tout désir ?", "a": ["Une privation", "Une puissance", "Un plaisir", "Une habitude"], "e": "Et toute privation sentie est pénible."}, {"q": "Pourquoi ne faut-il pas simplement diminuer nos désirs ?", "a": ["Une partie de nos facultés resterait oisive", "Ce serait impossible", "Ce serait immoral", "Nous aurions moins de plaisirs"], "e": "Nous ne jouirions pas de tout notre être."}, {"q": "Pourquoi étendre nos facultés ne suffit-il pas ?", "a": ["Nos désirs s’étendraient en plus grand rapport", "Nos facultés ont des limites", "C’est trop difficile", "C’est réservé aux sages"], "e": "Nous n’en deviendrions que plus misérables."}, {"q": "En quoi consiste la sagesse ?", "a": ["À diminuer l’excès des désirs sur les facultés", "À supprimer tous les désirs", "À satisfaire tous ses désirs", "À étendre sans cesse ses facultés"], "e": "Mettre en égalité parfaite la puissance et la volonté."}]</script>
+</section>
+<!--/quiz-->
+
+<nav class="pn" aria-label="Navigation"><a class="hm" href="accueil.html">Retour à l’accueil</a></nav>
+<script>
+(function(){
+function $(s){return document.querySelector(s)}
+function sorter(listSel,scoreSel,resetSel,items,choices){
+    var list=$(listSel),sc=$(scoreSel),rows=[],done=0,right=0;
+    items.forEach(function(it){
+      var li=document.createElement('li');li.className='row';
+      li.innerHTML='<span class="name"></span><div class="pick" role="group"></div><p class="fb" hidden aria-live="polite"></p>';
+      li.querySelector('.name').innerHTML=it[0];
+      var pick=li.querySelector('.pick'),fb=li.querySelector('.fb'),bs=[];
+      pick.setAttribute('aria-label',li.querySelector('.name').textContent);
+      choices.forEach(function(c,k){
+        var b=document.createElement('button');b.type='button';b.textContent=c[0];b.style.setProperty('--c',c[1]);b.setAttribute('aria-pressed','false');
+        b.addEventListener('click',function(){
+          if(li.classList.contains('good')||li.classList.contains('bad'))return;
+          var ok=k===it[1];
+          b.setAttribute('aria-pressed','true');bs.forEach(function(x){x.disabled=true});
+          li.classList.add(ok?'good':'bad');fb.hidden=false;
+          fb.textContent=(ok?'Bien vu. ':'Pas tout à fait. ')+it[2];
+          done++;if(ok)right++;upd();
+        });
+        pick.appendChild(b);bs.push(b);
+      });
+      list.appendChild(li);rows.push(li);
+    });
+    function upd(){
+      var n=items.length,s=function(x){return x>1?'s':''};
+      sc.textContent=!done?n+' à classer.':done<n?done+' classé'+s(done)+' sur '+n+' : '+right+' bonne'+s(right)+' réponse'+s(right)+'.':'Terminé : '+right+' bonne'+s(right)+' réponse'+s(right)+' sur '+n+'.';
+    }
+    $(resetSel).addEventListener('click',function(){
+      rows.forEach(function(li){li.classList.remove('good','bad');li.querySelector('.fb').hidden=true;
+        [].forEach.call(li.querySelectorAll('button'),function(b){b.disabled=false;b.setAttribute('aria-pressed','false')})});
+      done=0;right=0;upd();
+    });
+    upd();
+  }
+
+var L=[].slice.call(document.querySelectorAll('#stp li')),n=0,nx=$('#nx');
+function show(i){L[i].hidden=false;L[i].classList.add('new')}
+function lab(){nx.textContent=n===0?'Première étape':n<L.length?'Étape suivante ('+(n+1)+'/'+L.length+')':'Terminé';nx.disabled=n>=L.length}
+nx.addEventListener('click',function(){if(n<L.length){show(n);n++;lab();}});
+$('#all').addEventListener('click',function(){while(n<L.length){show(n);n++}lab()});
+$('#rs').addEventListener('click',function(){L.forEach(function(l){l.hidden=true;l.classList.remove('new')});n=0;lab()});
+lab();
+sorter('#s1','#sc1','#r1',[["Tout désir suppose une privation.", 0, "Oui : on ne désire que ce que l’on n’a pas."], ["Notre misère vient du désir en lui-même.", 1, "Non : elle vient de la disproportion entre désirs et facultés."], ["Un être dont les facultés égaleraient les désirs serait absolument heureux.", 0, "Oui : rien ne lui manquerait."], ["Le sage doit diminuer ses désirs le plus possible.", 1, "Non : une partie de ses facultés resterait oisive."], ["Étendre nos facultés suffit à nous rendre heureux.", 1, "Non : nos désirs s’étendraient dans un plus grand rapport."], ["Il faut mettre en égalité la puissance et la volonté.", 0, "Oui : c’est la route du vrai bonheur."]],[['Selon l’auteur','var(--nat)'],['Pas selon l’auteur','var(--soc)']]);
+})();
+</script>
+<script src="quiz.js" defer></script>
+<script>
+(function(){var r=document.documentElement,K='texte-seul',KL='mode-lecture';
+var btn=document.getElementById('a11y-btn'),menu=document.getElementById('a11y-menu'),opts=menu.querySelectorAll('.a11y-opt'),closed=[],mode='orig';
+function apply(m){
+  var ts=m==='ts',lc=m==='lect',was=r.classList.contains('lect');
+  r.classList.toggle('ts',ts);r.classList.toggle('lect',lc);
+  var ds=document.querySelectorAll('main details');
+  if(lc&&!was){closed=[];ds.forEach(function(d){if(!d.open){closed.push(d);d.open=true}});document.querySelectorAll('#stp li').forEach(function(x){x.hidden=false})}
+  if(!lc&&was){closed.forEach(function(d){d.open=false});closed=[]}
+  mode=m;opts.forEach(function(o){o.setAttribute('aria-checked',o.getAttribute('data-mode')===m?'true':'false')});
+  try{localStorage.setItem(K,ts?'1':'0');localStorage.setItem(KL,lc?'1':'0')}catch(e){}
+}
+function open(on){menu.hidden=!on;btn.setAttribute('aria-expanded',on?'true':'false')}
+btn.addEventListener('click',function(e){e.stopPropagation();open(menu.hidden)});
+opts.forEach(function(o){o.addEventListener('click',function(){apply(o.getAttribute('data-mode'));open(false);btn.focus()})});
+document.addEventListener('click',function(e){if(!menu.hidden&&!menu.contains(e.target)&&e.target!==btn)open(false)});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!menu.hidden){open(false);btn.focus()}});
+var v='orig';try{if(localStorage.getItem(KL)==='1')v='lect';else if(localStorage.getItem(K)==='1'&&menu.querySelector('[data-mode="ts"]'))v='ts'}catch(e){}
+if(v==='ts')apply('ts');
+if(v==='lect')window.addEventListener('load',function(){apply('lect')});
+})();
+</script>
+</body>
+</html>

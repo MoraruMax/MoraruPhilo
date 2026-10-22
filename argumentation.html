@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Argumenter</title>
+<script>document.documentElement.classList.add('js')</script>
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+  --bg:#F1F5F4; --surface:#FFFFFF; --ink:#10262B; --muted:#4A6064; --line:#D0DCDA;
+  --stamp:#B3124F; --free:#0B6E6D; --stamp-soft:#FBE3EC;
+  --g1:#0B6E6D; --g2:#B3124F; --g3:#5B3FC4; --focus:#0B6E6D;
+  --display:Georgia,"Times New Roman",serif;
+  --text:system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0C1719; --surface:#142427; --ink:#E6F0EF; --muted:#9DB5B4; --line:#24393C;
+    --stamp:#FF7FAA; --free:#4FD1C5; --stamp-soft:#3A1625;
+    --g1:#4FD1C5; --g2:#FF7FAA; --g3:#A592FF; --focus:#4FD1C5;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0C1719; --surface:#142427; --ink:#E6F0EF; --muted:#9DB5B4; --line:#24393C;
+  --stamp:#FF7FAA; --free:#4FD1C5; --stamp-soft:#3A1625;
+  --g1:#4FD1C5; --g2:#FF7FAA; --g3:#A592FF; --focus:#4FD1C5;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.65 var(--text)}
+.wrap{width:min(1040px,100% - 2.5rem);margin-inline:auto}
+h1,h2,h3{margin:0}
+h1{font:700 clamp(2.8rem,9vw,6rem)/1 var(--display);letter-spacing:-.03em}
+h2{font:700 clamp(1.7rem,3.6vw,2.5rem)/1.1 var(--display);letter-spacing:-.02em}
+h3{font:700 1.15rem/1.3 var(--text)}
+p{margin:0 0 1em;max-width:62ch}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
+.muted{color:var(--muted)}
+.note{font-size:.9rem;color:var(--muted)}
+.btn{font:500 .98rem/1.2 var(--text);color:var(--ink);background:transparent;border:1.5px solid var(--ink);border-radius:6px;padding:.7rem 1.1rem;cursor:pointer}
+.btn.primary{background:var(--ink);color:var(--bg)}
+.btn[aria-pressed="true"]{background:var(--stamp);border-color:var(--stamp);color:var(--bg)}
+
+/* Hero */
+.hero{padding:clamp(2.2rem,6vw,4.5rem) 0 clamp(2.5rem,6vw,4rem)}
+.lead{font:400 clamp(1.25rem,2.4vw,1.6rem)/1.4 var(--display);max-width:38ch;margin:1.6rem 0 2.2rem}
+.stage{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:clamp(1rem,3vw,1.8rem)}
+.groups{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(.6rem,2.5vw,1.8rem)}
+.grp{min-width:0}
+.inds{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(.25rem,1.2vw,.7rem)}
+.ind{aspect-ratio:1;transition:background-color .8s ease,border-radius .8s ease,transform .8s ease}
+.gname{font:700 .95rem/1.2 var(--text);margin:.9rem 0 .15rem}
+.gcap{font-size:.88rem;line-height:1.35;color:var(--muted);margin:0;min-height:2.7em}
+.stage-foot{display:flex;flex-wrap:wrap;gap:.8rem 1.2rem;align-items:center;margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid var(--line)}
+.state{margin:0;font:500 1.05rem/1.4 var(--text);flex:1 1 18rem;max-width:none;min-height:2.8em}
+
+/* Sections */
+section.block{border-top:0;padding:clamp(3rem,7vw,5rem) 0}
+.sec-head{max-width:44rem;margin-bottom:2rem}
+.sec-head .kicker{display:block;font:700 .9rem/1 var(--text);color:var(--stamp);margin-bottom:.8rem}
+.sec-head h2{margin-bottom:1rem}
+
+/* Etymologie */
+.etym{display:flex;flex-wrap:wrap;align-items:stretch;gap:.8rem 1rem;margin:0 0 2rem}
+.word{padding:.9rem 1.2rem;border:1.5px solid var(--ink);border-radius:8px;background:var(--surface)}
+.word b{display:block;font:700 clamp(1.5rem,3.4vw,2.2rem)/1.1 var(--display)}
+.word span{display:block;font-size:.95rem;color:var(--muted)}
+.word.out{border-color:var(--stamp);background:var(--stamp-soft)}
+.word.out b{color:var(--stamp)}
+.op{align-self:center;font:700 1.8rem/1 var(--display);color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;margin:.4rem 0 0;padding:0}
+.chips li{border:1.5px solid var(--line);background:var(--surface);border-radius:6px;padding:.4rem .75rem;font-weight:500;font-size:.98rem}
+
+/* Flux en trois temps */
+.flow{display:flex;flex-wrap:wrap;gap:1rem;list-style:none;margin:0;padding:0;counter-reset:f}
+.flow li{counter-increment:f;flex:1 1 15rem;min-width:0;border-top:4px solid var(--stamp);background:var(--surface);padding:1rem 1.1rem 1.2rem;border-radius:0 0 8px 8px}
+.flow li::before{content:counter(f);display:block;font:700 2rem/1 var(--display);color:var(--stamp);margin-bottom:.5rem}
+.flow p{margin:0}
+
+/* Experience */
+.exp{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:2rem clamp(2rem,5vw,4rem);align-items:start}
+.steps{list-style:none;margin:0;padding:0 0 0 1.4rem;border-left:2px solid var(--line)}
+.steps li{position:relative;padding:0 0 1.5rem}
+.steps li:last-child{padding-bottom:0}
+.steps li::before{content:"";position:absolute;left:calc(-1.4rem - 7px);top:.4rem;width:12px;height:12px;border-radius:50%;background:var(--bg);border:3px solid var(--stamp)}
+.steps h3{margin-bottom:.25rem}
+.steps p{margin:0}
+.chart{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:1.2rem}
+.chart h3{margin-bottom:1rem}
+.bar-row{margin-bottom:1.1rem}
+.bl{display:block;font-size:.92rem;font-weight:500;margin-bottom:.35rem}
+.track{height:2.4rem;background:var(--bg);border-radius:6px;overflow:hidden}
+.fill{height:100%;width:0;display:flex;align-items:center;padding:0 .8rem;font:700 .88rem/1 var(--text);color:var(--bg);white-space:nowrap;transition:width 1.1s cubic-bezier(.2,.7,.2,1)}
+.fill.a{background:var(--free)}
+.fill.b{background:var(--stamp)}
+.chart-foot{display:flex;flex-wrap:wrap;gap:.7rem 1rem;align-items:center;margin-top:1.2rem}
+.chart-foot .note{margin:0;flex:1 1 12rem}
+
+/* Explication */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.two > div{padding:0 2rem 0 0}
+.two > div + div{padding:0 0 0 2rem;border-left:1px solid var(--line)}
+.two h3{margin-bottom:.6rem}
+.two p{margin:0}
+
+/* Consequence */
+.big{font:700 clamp(1.6rem,3.8vw,2.6rem)/1.15 var(--display);letter-spacing:-.02em;max-width:24ch;margin:0 0 1.4rem;padding-left:1.1rem;border-left:5px solid var(--stamp)}
+.example{margin-top:2rem;padding-top:1.6rem;border-top:1px solid var(--line);max-width:46rem}
+
+.recap{margin:0;padding:0;list-style:none;max-width:46rem}
+.recap li{padding:.95rem 0;border-top:1px solid var(--line)}
+.recap li:last-child{border-bottom:1px solid var(--line)}
+footer{border-top:1px solid var(--line);padding:2rem 0 3rem}
+footer p{font-size:.92rem;color:var(--muted);margin:0}
+
+/* Apparition */
+.js .rev{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+.js .rev.in{opacity:1;transform:none}
+
+@media (max-width:820px){
+  .exp{grid-template-columns:1fr}
+  .two{grid-template-columns:1fr}
+  .two > div,.two > div + div{padding:0;border-left:0}
+  .two > div + div{margin-top:1.8rem;padding-top:1.8rem;border-top:1px solid var(--line)}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition:none!important;animation:none!important}
+  .js .rev{opacity:1;transform:none}
+}
+
+.pn{display:flex;gap:1rem;flex-wrap:wrap;margin:2.5rem auto 0;max-width:980px;padding:0 1.25rem;box-sizing:content-box}
+.pn a{flex:1 1 16rem;display:flex;flex-direction:column;gap:.25rem;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--k,var(--ink));padding:.9rem 1.1rem;border-radius:0 0 8px 8px}
+.pn a:hover{border-color:var(--k,var(--ink))}.pn a:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.pn small{font:600 .78rem/1 system-ui,-apple-system,sans-serif;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.pn b{font:700 1.1rem/1.25 system-ui,-apple-system,sans-serif}
+.pn .nx{text-align:right}
+.pn .nx:first-child{margin-left:auto;max-width:calc(50% - .5rem)}
+.pn .hm{flex:0 0 100%;text-align:center;font:500 .92rem/1 system-ui,-apple-system,sans-serif;background:none;border:0;padding:.4rem;color:var(--ink);text-decoration:underline}
+
+.pdfbtn{display:inline-flex;align-items:center;gap:.5rem;font:600 .88rem/1 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--surface);border:1.5px solid var(--ink);border-radius:999px;padding:.55rem .95rem;cursor:pointer}
+.pdfbtn:hover{background:var(--ink);color:var(--bg)}.pdfbtn:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:2px}
+
+/* Mode lecture (pages à structure libre) */
+html.lect body::before,html.lect body::after{display:none!important}
+html.lect body{background:var(--bg)!important}
+html.lect .pn,html.lect #quiz,html.lect section[aria-labelledby="h-video"],html.lect video,html.lect .score,html.lect .lc-skip,html.lect [role="tablist"],html.lect main button,html.lect main input,html.lect main select,html.lect main textarea,html.lect .sec-head p.lc-x{display:none!important}
+html.lect .hero h1,html.lect .hero p,html.lect section.block h2,html.lect footer p{text-shadow:none!important}
+html.lect .hero,html.lect section.block{padding-block:1.2rem!important;border:0!important}
+html.lect .wrap,html.lect .sec-head{max-width:40rem!important;margin-inline:auto}
+html.lect .hgrid,html.lect .two,html.lect .cols{display:block!important}
+html.lect main,html.lect .hero{font-family:var(--serif)}
+html.lect .hero h1{font-size:clamp(1.9rem,5vw,2.6rem)!important}
+html.lect main p,html.lect main li,html.lect .lead{font-size:1.12rem!important;line-height:1.75!important}
+html.lect :is(main,.hero) :is(div,li,blockquote,article,aside,p,ul,ol,section,details,summary,figure,span):not(table *){background:none!important;border:0!important;box-shadow:none!important;border-radius:0!important}
+html.lect main [hidden]{display:revert!important}
+html.lect :is(main,.hero) div:not(.wrap):not(.sec-head):not(table *){display:block!important;grid-template-columns:none!important;float:none!important;max-width:none!important;width:auto!important;margin-inline:0}
+html.lect main li{display:list-item!important}
+html.lect .must{margin:1rem 0}
+html.lect .lead{max-width:none!important}
+html.lect .wrap{padding-inline:0}
+html.lect main details>summary{cursor:default;pointer-events:none;list-style:none}
+html.lect main details>summary::-webkit-details-marker,html.lect main details>summary::before{display:none!important}
+html.lect main blockquote{margin:.8rem 0;padding:0 0 0 1rem!important;border-left:3px solid var(--line)!important}
+html.lect main .panel{display:block!important;margin-bottom:1rem}
+html.lect main h3,html.lect main h4{margin-top:1.4rem}
+
+/* Accessibilité */
+.a11y{position:relative;display:inline-block}
+.a11y-menu{position:absolute;right:0;top:calc(100% + .4rem);z-index:60;min-width:14rem;background:var(--bg);color:var(--ink);border:1.5px solid var(--ink);border-radius:14px;padding:.35rem;box-shadow:0 8px 24px rgba(0,0,0,.18);text-shadow:none}
+.a11y-menu[hidden]{display:none}
+.a11y-menu p{margin:0;padding:.45rem .7rem .3rem;font:700 .72rem/1 system-ui,-apple-system,sans-serif;letter-spacing:.06em;text-transform:uppercase;opacity:.65}
+.a11y-opt{display:flex;align-items:center;gap:.6rem;width:100%;text-align:left;font:600 .92rem/1.2 system-ui,-apple-system,sans-serif;color:inherit;background:none;border:0;border-radius:9px;padding:.6rem .7rem;cursor:pointer}
+.a11y-opt:hover{background:var(--surface)}
+.a11y-opt:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:-2px}
+.a11y-opt .dot{flex:none;width:1rem;height:1rem;border:2px solid currentColor;border-radius:50%;position:relative}
+.a11y-opt[aria-checked="true"] .dot::after{content:"";position:absolute;inset:2px;background:currentColor;border-radius:50%}
+.a11y-opt small{display:block;font-weight:500;opacity:.7;font-size:.78rem;margin-top:.15rem}
+/* Fiche argumentation */
+.demo{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:clamp(1rem,3vw,1.8rem)}
+.demo .tools{display:flex;flex-wrap:wrap;gap:.5rem;margin:0 0 1.2rem}
+.demo .btn{font-size:.95rem;padding:.55rem .9rem}
+.demo .btn[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.txt{font:400 clamp(1.15rem,2.2vw,1.4rem)/1.75 var(--display);max-width:none;margin:0}
+.txt span{border-radius:4px;padding:.1em .15em;-webkit-box-decoration-break:clone;box-decoration-break:clone;transition:background-color .3s,box-shadow .3s}
+.txt span.on{background:color-mix(in srgb,var(--k) 24%,transparent);box-shadow:inset 0 -3px 0 var(--k)}
+.txt .t{--k:var(--g1)}.txt .a{--k:var(--g2)}.txt .e{--k:var(--g3)}.txt .c{--k:var(--ink)}
+.role{margin:1.2rem 0 0;padding:.9rem 1.1rem;border-left:5px solid var(--stamp);background:var(--stamp-soft);border-radius:0 8px 8px 0;max-width:none;min-height:3.2em}
+.defs{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:1rem}
+.defs article{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--k,var(--ink));border-radius:0 0 8px 8px;padding:1.1rem 1.2rem 1.3rem}
+.defs article:nth-child(1){--k:var(--g1)}.defs article:nth-child(2){--k:var(--g2)}.defs article:nth-child(3){--k:var(--g3)}.defs article:nth-child(4){--k:var(--ink)}
+.defs h3{font:700 1.6rem/1.1 var(--display);margin-bottom:.2rem}
+.defs .ety{font-size:.9rem;color:var(--muted);margin:0 0 .8rem}
+.defs p{margin:0 0 .7rem;font-size:1rem}
+.defs .ex{border-top:1px solid var(--line);padding-top:.7rem;margin:.9rem 0 0;color:var(--muted)}
+.cmp{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--line);font-size:.98rem}
+.cmp caption{text-align:left;font:700 .9rem/1.3 var(--text);color:var(--muted);padding:0 0 .6rem}
+.cmp th,.cmp td{text-align:left;vertical-align:top;padding:.7rem .9rem;border-top:1px solid var(--line)}
+.cmp th+th,.cmp td{border-left:1px solid var(--line)}
+.cmp thead th{border-top:0;border-bottom:2px solid var(--ink);font-family:var(--display);font-size:1.1rem}
+.cmp tbody th{font:700 .95rem/1.3 var(--text);width:20%}
+.tw{overflow-x:auto}
+.pitfalls{margin:0;padding:0;list-style:none;max-width:48rem;counter-reset:p}
+.pitfalls li{counter-increment:p;position:relative;padding:1rem 0 1rem 3rem;border-top:1px solid var(--line)}
+.pitfalls li:last-child{border-bottom:1px solid var(--line)}
+.pitfalls li::before{content:counter(p);position:absolute;left:0;top:.9rem;font:700 1.8rem/1 var(--display);color:var(--stamp)}
+.pitfalls h3{margin-bottom:.25rem}.pitfalls h3 small{font:500 .9rem/1.3 var(--text);color:var(--muted)}.pitfalls p{margin:0 0 .35rem}.pitfalls .ex{color:var(--muted);font-size:.98rem}
+.flow li{flex:1 1 11rem}
+.tips{margin:0;padding:0;list-style:none;max-width:48rem}
+.tips li{padding:.9rem 0;border-top:1px solid var(--line)}.tips li:last-child{border-bottom:1px solid var(--line)}
+@media (max-width:820px){.q2{grid-template-columns:1fr}}
+
+@media print{
+  :root{--bg:#fff!important;--surface:#fff!important;--ink:#111!important;--muted:#444!important;--line:#bbb!important;color-scheme:light!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:#fff!important;color:#111!important}
+  body::before,body::after{display:none!important}
+  nav,.pdfbtn,.pn,video,section[aria-labelledby="h-video"]{display:none!important}
+  .rev,.js .rev{opacity:1!important;transform:none!important}
+  .stp li[hidden]{display:list-item!important}
+  details>*{display:block!important}
+  article,li,.card,figure,.stage{break-inside:avoid}
+  h1,h2,h3{break-after:avoid;text-shadow:none!important}
+  *{text-shadow:none!important}
+  a{color:inherit;text-decoration:none}
+  section.block,.part{padding-top:1.2rem!important;padding-bottom:1.2rem!important}
+  footer{break-before:avoid;border-top:1px solid #999;margin-top:1rem}
+}
+@page{size:A4;margin:16mm 14mm}
+</style>
+
+<script>try{history.scrollRestoration="manual"}catch(e){}(function(){function t(){if(!location.hash)window.scrollTo(0,0)}t();document.addEventListener("DOMContentLoaded",t);window.addEventListener("load",function(){t();setTimeout(t,60)});window.addEventListener("pageshow",t)})();</script>
+<script src="confort.js"></script>
+</head>
+<body>
+<nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><span style="display:inline-flex;gap:.6rem;flex-wrap:wrap;align-items:center"><span class="a11y"><button type="button" class="pdfbtn" id="a11y-btn" aria-haspopup="true" aria-expanded="false" aria-controls="a11y-menu"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="1.6"/><path d="M5 8.5l7 1.5 7-1.5M12 10v4.5M8.5 21l3.5-6.5 3.5 6.5"/></svg><span>Accessibilité</span></button><div class="a11y-menu" id="a11y-menu" role="radiogroup" aria-label="Affichage de la page" hidden><p>Affichage</p><button type="button" role="radio" class="a11y-opt" data-mode="orig" aria-checked="true"><span class="dot"></span><span>Page d’origine<small>Image de fond et mise en page habituelle</small></span></button><button type="button" role="radio" class="a11y-opt" data-mode="lect" aria-checked="false"><span class="dot"></span><span>Mode lecture<small>Texte continu, sans cadres ni exercices</small></span></button></div></span><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></span></nav>
+
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Argumenter</h1>
+    <p class="lead">Défendre une idée en donnant des raisons, plutôt que de l’affirmer ou de l’imposer.</p>
+
+    <div class="demo">
+      <div class="tools" role="group" aria-label="Éléments à repérer dans le texte">
+        <button class="btn" type="button" data-k="t" aria-pressed="false">Thèse</button>
+        <button class="btn" type="button" data-k="a" aria-pressed="false">Argument</button>
+        <button class="btn" type="button" data-k="e" aria-pressed="false">Exemple</button>
+        <button class="btn" type="button" data-k="c" aria-pressed="false">Conclusion</button>
+      </div>
+      <p class="txt" id="txt"><span class="t">Il faut parfois désobéir à la loi.</span> <span class="a">En effet, ce qui est légal n’est pas toujours légitime : une loi peut être en vigueur sans être juste, et obéir à une loi illégitime revient à contribuer à l’injustice.</span> <span class="e">Ainsi, en 1955 à Montgomery (Alabama), Rosa Parks refuse de céder sa place à un passager blanc, comme la loi de ségrégation l’y obligeait : elle est arrêtée, et son arrestation déclenche le boycott des bus de la ville.</span> <span class="c">Désobéir peut donc être un devoir.</span></p>
+      <p class="role" id="role" aria-live="polite"></p>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="block" aria-labelledby="h-def">
+  <div class="wrap">
+    <div class="sec-head rev">
+      <span class="kicker">Définition</span>
+      <h2 id="h-def">Donner des raisons</h2>
+    </div>
+    <div class="rev">
+      <p>Un <b>argument</b> est une raison avancée pour soutenir une idée. <b>Argumenter</b>, c’est donc justifier ce que l’on affirme de façon que d’autres puissent l’examiner, l’accepter ou le contester.</p>
+      <p>On distingue souvent <b>convaincre</b>, qui s’adresse à la raison par des arguments, et <b>persuader</b>, qui cherche à obtenir l’adhésion par tous les moyens, y compris l’émotion, la séduction ou l’autorité. Un bon argument vaut pour celui qui l’examine, pas seulement pour celui qui le propose.</p>
+    </div>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-anat">
+  <div class="wrap">
+    <div class="sec-head rev">
+      <span class="kicker">Structure</span>
+      <h2 id="h-anat">Anatomie d’une argumentation</h2>
+    </div>
+    <ol class="flow rev">
+      <li><h3>Une thèse</h3><p>L’idée que l’on défend, formulée clairement.</p></li>
+      <li><h3>Des arguments</h3><p>Les raisons générales qui la soutiennent.</p></li>
+      <li><h3>Des exemples</h3><p>Des cas précis qui éclairent ou mettent à l’épreuve l’argument.</p></li>
+      <li><h3>Une conclusion</h3><p>Ce que l’on peut en tirer, sans répéter la thèse mot pour mot.</p></li>
+      <li><h3>Une transition</h3><p>Le passage vers la suite : ce qu’il reste à examiner, ou les limites de notre thèse.</p></li>
+    </ol>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-cmp">
+  <div class="wrap">
+    <div class="sec-head rev">
+      <span class="kicker">Vocabulaire</span>
+      <h2 id="h-cmp">Argument, exemple, preuve, autorité</h2>
+    </div>
+    <div class="tw rev"><table class="cmp">
+      <caption>Quatre manières de soutenir une idée</caption>
+      <thead><tr><th scope="col"><span style="position:absolute;left:-9999px">Notion</span></th><th scope="col">Argument</th><th scope="col">Exemple</th><th scope="col">Preuve</th><th scope="col">Autorité</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Ce que c’est</th><td>Une raison générale qui soutient la thèse.</td><td>Un cas particulier.</td><td>Ce qui établit la vérité de façon décisive (démonstration, vérification).</td><td>Une référence philosophique : l’appui sur l’argumentation d’un auteur.</td></tr>
+        <tr><th scope="row">Sert à</th><td>Faire comprendre pourquoi la thèse est juste.</td><td>Illustrer, éclairer, mettre à l’épreuve.</td><td>Rendre le doute impossible.</td><td>Appuyer l’argumentation sur un raisonnement philosophique et inscrire notre pensée dans un cadre reconnu.</td></tr>
+        <tr><th scope="row">Limite</th><td>Peut reposer sur une idée fausse ou contestable.</td><td>Un exemple ne prouve pas une règle générale.</td><td>Rare hors des mathématiques et des sciences.</td><td>Ne suffit pas : on peut toujours objecter à un philosophe, à l’aide d’un nouvel argument.</td></tr>
+      </tbody></table></div>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-rais">
+  <div class="wrap">
+    <div class="sec-head rev">
+      <span class="kicker">Raisonnements</span>
+      <h2 id="h-rais">Comment passe-t-on des raisons à la conclusion ?</h2>
+    </div>
+    <div class="defs rev">
+      <article>
+        <h3>Déduction</h3>
+        <p class="ety">du général au particulier</p>
+        <p>Si les prémisses sont vraies et le raisonnement correct, la conclusion est <b>nécessaire</b>.</p>
+        <p class="ex">Tous les humains sont mortels ; or je suis humain ; donc je suis mortel.</p>
+      </article>
+      <article>
+        <h3>Induction</h3>
+        <p class="ety">du particulier au général</p>
+        <p>On généralise à partir de cas observés : la conclusion est seulement <b>probable</b>.</p>
+        <p class="ex">Tous les cygnes que j’ai vus sont blancs ; donc tous les cygnes sont blancs (jusqu’à ce que l’on rencontre un cygne noir).</p>
+      </article>
+      <article>
+        <h3>Analogie</h3>
+        <p class="ety">de ressemblance en ressemblance</p>
+        <p>On transpose ce qui vaut pour un cas à un cas semblable : elle <b>éclaire</b>, mais ne prouve pas.</p>
+        <p class="ex">L’État est comme un navire : il lui faut un seul pilote. (À discuter : en quoi ces deux réalités sont-elles réellement semblables ?)</p>
+      </article>
+      <article>
+        <h3>Raisonnement par l’absurde</h3>
+        <p class="ety">réfuter en montrant une contradiction</p>
+        <p>On suppose le contraire de ce que l’on veut établir et l’on montre que cela mène à une <b>contradiction</b>.</p>
+        <p class="ex">Pour montrer que l’on n’a pas le droit de mentir, supposons le contraire : chacun pourrait mentir quand cela l’arrange. Plus personne ne croirait personne, et mentir ne servirait plus à rien, car on ne trompe que celui qui fait confiance. L’hypothèse se détruit elle-même.</p>
+      </article>
+    </div>
+    <div class="example rev">
+      <h3 style="margin-bottom:.5rem">Valide ou vrai ?</h3>
+      <p>Un raisonnement est <b>valide</b> quand la conclusion découle correctement des prémisses ; il est <b>solide</b> quand il est valide <i>et</i> que les prémisses sont vraies. « Tous les oiseaux volent ; le manchot est un oiseau ; donc le manchot vole » est valide, mais faux, car la première prémisse est fausse.</p>
+    </div>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-pit">
+  <div class="wrap">
+    <div class="sec-head rev">
+      <span class="kicker">Pièges</span>
+      <h2 id="h-pit">Six erreurs de raisonnement fréquentes</h2>
+    </div>
+    <ol class="pitfalls rev">
+      <li><h3>La généralisation hâtive</h3><p>Tirer une règle générale d’un ou de quelques cas.</p><p class="ex">« J’ai connu deux élèves paresseux dans cette classe : donc cette classe est paresseuse. »</p></li>
+      <li><h3>L’argument d’autorité</h3><p>Tenir une idée pour vraie parce que quelqu’un d’important l’affirme, sans examiner ses raisons.</p><p class="ex">« C’est vrai, puisque Platon l’a dit. »</p></li>
+      <li><h3>Le faux dilemme</h3><p>Présenter seulement deux options, comme s’il n’y en avait pas d’autres.</p><p class="ex">« Soit tu es avec moi, soit tu es contre moi. »</p></li>
+      <li><h3>L’attaque contre la personne <small>(dit aussi argument <i>ad hominem</i>)</small></h3><p>Discréditer celui qui parle au lieu de répondre à ce qu’il dit.</p><p class="ex">« Il n’a pas le droit d’en parler : regardez sa vie privée. »</p></li>
+      <li><h3>La caricature</h3><p>Prêter à l’adversaire une thèse caricaturée, plus facile à réfuter que la sienne, puis réfuter cette caricature comme si elle était la sienne.</p><p class="ex">— « Il faudrait limiter le temps d’écran des jeunes enfants. »<br>— « Vous voulez donc interdire toute technologie aux enfants ? C’est absurde. »</p></li>
+      <li><h3>Le cercle vicieux</h3><p>Utiliser comme argument ce que l’on cherche à démontrer.</p><p class="ex">« Ce livre dit la vérité, car il le dit lui-même. »</p></li>
+    </ol>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-use">
+  <div class="wrap">
+    <div class="sec-head rev">
+      <span class="kicker">Application</span>
+      <h2 id="h-use">Dans une dissertation</h2>
+    </div>
+    <ul class="tips rev">
+      <li><b>Chaque partie défend une thèse.</b> Elle s’annonce, s’appuie sur des arguments, et ne se contente pas d’énumérer des idées.</li>
+      <li><b>Un argument d’abord, puis un exemple.</b> L’exemple illustre l’argument : il ne le remplace pas.</li>
+      <li><b>Prévoyez l’objection.</b> Elle fait avancer la réflexion et prépare la partie suivante.</li>
+      <li><b>Relisez-vous en vous demandant :</b> « Pourquoi ? » Si la réponse manque, il manque un argument.</li>
+    </ul>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-r">
+  <div class="wrap">
+    <h2 id="h-r" style="margin-bottom:1.8rem">À retenir</h2>
+    <ul class="recap rev">
+      <li>Argumenter, c’est défendre une thèse en donnant des raisons que d’autres peuvent examiner.</li>
+      <li>Une argumentation articule une thèse, des arguments, des exemples, une conclusion et une transition vers la suite.</li>
+      <li>Un exemple illustre, il ne prouve pas ; l’autorité d’une source ne suffit pas à rendre une idée vraie.</li>
+      <li>La déduction donne une conclusion nécessaire, l’induction une conclusion probable, l’analogie éclaire sans prouver.</li>
+      <li>Un raisonnement peut être valide sans être vrai : il faut aussi examiner les prémisses.</li>
+      <li>Les sophismes ressemblent à des arguments, mais ne justifient pas la conclusion.</li>
+    </ul>
+  </div>
+</section>
+</main>
+
+<nav class="pn" aria-label="Navigation"><a class="hm" href="accueil.html">Retour à l’accueil</a></nav>
+
+<script>
+(function(){
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var R={t:['Thèse','L’idée que l’on défend : ici, qu’il faut parfois désobéir à la loi.'],
+         a:['Argument','La raison générale qui soutient la thèse : le légal n’est pas toujours le légitime, et obéir à une loi illégitime revient à contribuer à l’injustice.'],
+         e:['Exemple','Un cas précis qui illustre l’argument : Rosa Parks désobéit en 1955 à une loi de ségrégation légale, mais illégitime.'],
+         c:['Conclusion','Ce qui découle de l’ensemble : désobéir peut être un devoir.']};
+  var on={t:false,a:false,e:false,c:false},role=document.getElementById('role');
+  function draw(){
+    var shown=[];
+    [].forEach.call(document.querySelectorAll('.demo .btn'),function(b){
+      var k=b.dataset.k;b.setAttribute('aria-pressed',on[k]?'true':'false');
+      var sp=document.querySelector('#txt .'+k);sp.classList.toggle('on',on[k]);
+      if(on[k])shown.push(R[k]);
+    });
+    role.textContent='';
+    if(!shown.length){role.textContent='Activez un bouton pour repérer le rôle de chaque phrase.';return}
+    shown.forEach(function(r){var p=document.createElement('span');p.style.display='block';var b=document.createElement('b');b.textContent=r[0]+' : ';p.appendChild(b);p.appendChild(document.createTextNode(r[1]));role.appendChild(p)});
+  }
+  [].forEach.call(document.querySelectorAll('.demo .btn'),function(b){b.addEventListener('click',function(){on[b.dataset.k]=!on[b.dataset.k];draw()})});
+  draw();
+  var revs=[].slice.call(document.querySelectorAll('.rev'));
+  if(reduce||!('IntersectionObserver' in window)){revs.forEach(function(e){e.classList.add('in')})}
+  else{var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});revs.forEach(function(e){io.observe(e)})}
+})();
+</script>
+<script>
+(function(){var r=document.documentElement,K='texte-seul',KL='mode-lecture';
+var btn=document.getElementById('a11y-btn'),menu=document.getElementById('a11y-menu'),opts=menu.querySelectorAll('.a11y-opt'),closed=[],shown=[],skipped=[];
+function apply(m){
+  var ts=m==='ts',lc=m==='lect',was=r.classList.contains('lect');
+  r.classList.toggle('ts',ts);r.classList.toggle('lect',lc);
+  if(lc&&!was){closed=[];shown=[];skipped=[];
+    document.querySelectorAll('main details').forEach(function(d){if(!d.open){closed.push(d);d.open=true}});
+    document.querySelectorAll('main [hidden]').forEach(function(x){if(!x.closest('[aria-labelledby="h-video"]')&&!x.matches('video,[role="tablist"]')){shown.push(x);x.hidden=false}});
+    document.querySelectorAll('main section').forEach(function(sc){var h=sc.querySelector('h2');
+      if(sc.querySelector('input,select,textarea')||(h&&/^(Exercice|Faites le tri|En vid)/i.test(h.textContent.trim()))){sc.classList.add('lc-skip');skipped.push(sc)}});}
+  if(!lc&&was){closed.forEach(function(d){d.open=false});shown.forEach(function(x){x.hidden=true});skipped.forEach(function(s){s.classList.remove('lc-skip')});closed=[];shown=[];skipped=[]}
+  opts.forEach(function(o){o.setAttribute('aria-checked',o.getAttribute('data-mode')===m?'true':'false')});
+  try{localStorage.setItem(K,ts?'1':'0');localStorage.setItem(KL,lc?'1':'0')}catch(e){}
+}
+function open(on){menu.hidden=!on;btn.setAttribute('aria-expanded',on?'true':'false')}
+btn.addEventListener('click',function(e){e.stopPropagation();open(menu.hidden)});
+opts.forEach(function(o){o.addEventListener('click',function(){apply(o.getAttribute('data-mode'));open(false);btn.focus()})});
+document.addEventListener('click',function(e){if(!menu.hidden&&!menu.contains(e.target)&&e.target!==btn)open(false)});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!menu.hidden){open(false);btn.focus()}});
+var v='orig';try{if(localStorage.getItem(KL)==='1')v='lect';else if(localStorage.getItem(K)==='1'&&menu.querySelector('[data-mode="ts"]'))v='ts'}catch(e){}
+if(v==='ts')apply('ts');
+if(v==='lect')window.addEventListener('load',function(){apply('lect')});
+})();
+</script>
+</body>
+</html>
