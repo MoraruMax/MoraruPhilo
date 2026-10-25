@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Utiliser une référence ou un exemple</title>
+<script>document.documentElement.classList.add('js')</script>
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+  --bg:#F1F5F4; --surface:#FFFFFF; --ink:#10262B; --muted:#4A6064; --line:#D0DCDA;
+  --stamp:#B3124F; --free:#0B6E6D; --stamp-soft:#FBE3EC;
+  --g1:#0B6E6D; --g2:#B3124F; --g3:#5B3FC4; --focus:#0B6E6D;
+  --display:Georgia,"Times New Roman",serif;
+  --text:system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0C1719; --surface:#142427; --ink:#E6F0EF; --muted:#9DB5B4; --line:#24393C;
+    --stamp:#FF7FAA; --free:#4FD1C5; --stamp-soft:#3A1625;
+    --g1:#4FD1C5; --g2:#FF7FAA; --g3:#A592FF; --focus:#4FD1C5;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0C1719; --surface:#142427; --ink:#E6F0EF; --muted:#9DB5B4; --line:#24393C;
+  --stamp:#FF7FAA; --free:#4FD1C5; --stamp-soft:#3A1625;
+  --g1:#4FD1C5; --g2:#FF7FAA; --g3:#A592FF; --focus:#4FD1C5;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.65 var(--text)}
+.wrap{width:min(980px,100% - 2.5rem);margin-inline:auto}
+h1,h2,h3{margin:0}
+h1{font:700 clamp(2.8rem,9vw,6rem)/1 var(--display);letter-spacing:-.03em}
+h2{font:700 clamp(1.7rem,3.6vw,2.5rem)/1.1 var(--display);letter-spacing:-.02em}
+h3{font:700 1.15rem/1.3 var(--text)}
+p{margin:0 0 1em;max-width:62ch}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
+.muted{color:var(--muted)}
+.note{font-size:.9rem;color:var(--muted)}
+.btn{font:500 .98rem/1.2 var(--text);color:var(--ink);background:transparent;border:1.5px solid var(--ink);border-radius:6px;padding:.7rem 1.1rem;cursor:pointer}
+.btn.primary{background:var(--ink);color:var(--bg)}
+.btn[aria-pressed="true"]{background:var(--stamp);border-color:var(--stamp);color:var(--bg)}
+
+/* Hero */
+.hero{padding:clamp(2.2rem,6vw,4.5rem) 0 clamp(2.5rem,6vw,4rem)}
+.lead{font:400 clamp(1.25rem,2.4vw,1.6rem)/1.4 var(--display);max-width:38ch;margin:1.6rem 0 2.2rem}
+.stage{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:clamp(1rem,3vw,1.8rem)}
+.groups{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(.6rem,2.5vw,1.8rem)}
+.grp{min-width:0}
+.inds{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(.25rem,1.2vw,.7rem)}
+.ind{aspect-ratio:1;transition:background-color .8s ease,border-radius .8s ease,transform .8s ease}
+.gname{font:700 .95rem/1.2 var(--text);margin:.9rem 0 .15rem}
+.gcap{font-size:.88rem;line-height:1.35;color:var(--muted);margin:0;min-height:2.7em}
+.stage-foot{display:flex;flex-wrap:wrap;gap:.8rem 1.2rem;align-items:center;margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid var(--line)}
+.state{margin:0;font:500 1.05rem/1.4 var(--text);flex:1 1 18rem;max-width:none;min-height:2.8em}
+
+/* Sections */
+section.block{border-top:0;padding:clamp(3rem,7vw,5rem) 0}
+.sec-head{max-width:44rem;margin-bottom:2rem}
+.sec-head .kicker{display:block;font:700 .9rem/1 var(--text);color:var(--stamp);margin-bottom:.8rem}
+.sec-head h2{margin-bottom:1rem}
+
+/* Etymologie */
+.etym{display:flex;flex-wrap:wrap;align-items:stretch;gap:.8rem 1rem;margin:0 0 2rem}
+.word{padding:.9rem 1.2rem;border:1.5px solid var(--ink);border-radius:8px;background:var(--surface)}
+.word b{display:block;font:700 clamp(1.5rem,3.4vw,2.2rem)/1.1 var(--display)}
+.word span{display:block;font-size:.95rem;color:var(--muted)}
+.word.out{border-color:var(--stamp);background:var(--stamp-soft)}
+.word.out b{color:var(--stamp)}
+.op{align-self:center;font:700 1.8rem/1 var(--display);color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;margin:.4rem 0 0;padding:0}
+.chips li{border:1.5px solid var(--line);background:var(--surface);border-radius:6px;padding:.4rem .75rem;font-weight:500;font-size:.98rem}
+
+/* Flux en trois temps */
+.flow{display:flex;flex-wrap:wrap;gap:1rem;list-style:none;margin:0;padding:0;counter-reset:f}
+.flow li{counter-increment:f;flex:1 1 15rem;min-width:0;border-top:4px solid var(--stamp);background:var(--surface);padding:1rem 1.1rem 1.2rem;border-radius:0 0 8px 8px}
+.flow li::before{content:counter(f);display:block;font:700 2rem/1 var(--display);color:var(--stamp);margin-bottom:.5rem}
+.flow p{margin:0}
+
+/* Experience */
+.exp{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:2rem clamp(2rem,5vw,4rem);align-items:start}
+.steps{list-style:none;margin:0;padding:0 0 0 1.4rem;border-left:2px solid var(--line)}
+.steps li{position:relative;padding:0 0 1.5rem}
+.steps li:last-child{padding-bottom:0}
+.steps li::before{content:"";position:absolute;left:calc(-1.4rem - 7px);top:.4rem;width:12px;height:12px;border-radius:50%;background:var(--bg);border:3px solid var(--stamp)}
+.steps h3{margin-bottom:.25rem}
+.steps p{margin:0}
+.chart{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:1.2rem}
+.chart h3{margin-bottom:1rem}
+.bar-row{margin-bottom:1.1rem}
+.bl{display:block;font-size:.92rem;font-weight:500;margin-bottom:.35rem}
+.track{height:2.4rem;background:var(--bg);border-radius:6px;overflow:hidden}
+.fill{height:100%;width:0;display:flex;align-items:center;padding:0 .8rem;font:700 .88rem/1 var(--text);color:var(--bg);white-space:nowrap;transition:width 1.1s cubic-bezier(.2,.7,.2,1)}
+.fill.a{background:var(--free)}
+.fill.b{background:var(--stamp)}
+.chart-foot{display:flex;flex-wrap:wrap;gap:.7rem 1rem;align-items:center;margin-top:1.2rem}
+.chart-foot .note{margin:0;flex:1 1 12rem}
+
+/* Explication */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.two > div{padding:0 2rem 0 0}
+.two > div + div{padding:0 0 0 2rem;border-left:1px solid var(--line)}
+.two h3{margin-bottom:.6rem}
+.two p{margin:0}
+
+/* Consequence */
+.big{font:700 clamp(1.6rem,3.8vw,2.6rem)/1.15 var(--display);letter-spacing:-.02em;max-width:24ch;margin:0 0 1.4rem;padding-left:1.1rem;border-left:5px solid var(--stamp)}
+.example{margin-top:2rem;padding-top:1.6rem;border-top:1px solid var(--line);max-width:46rem}
+
+.recap{margin:0;padding:0;list-style:none;max-width:46rem}
+.recap li{padding:.95rem 0;border-top:1px solid var(--line)}
+.recap li:last-child{border-bottom:1px solid var(--line)}
+footer{border-top:1px solid var(--line);padding:2rem 0 3rem}
+footer p{font-size:.92rem;color:var(--muted);margin:0}
+
+/* Apparition */
+.js .rev{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+.js .rev.in{opacity:1;transform:none}
+
+@media (max-width:820px){
+  .exp{grid-template-columns:1fr}
+  .two{grid-template-columns:1fr}
+  .two > div,.two > div + div{padding:0;border-left:0}
+  .two > div + div{margin-top:1.8rem;padding-top:1.8rem;border-top:1px solid var(--line)}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition:none!important;animation:none!important}
+  .js .rev{opacity:1;transform:none}
+}
+
+.pn{display:flex;gap:1rem;flex-wrap:wrap;margin:2.5rem auto 0;max-width:980px;padding:0 1.25rem;box-sizing:content-box}
+.pn a{flex:1 1 16rem;display:flex;flex-direction:column;gap:.25rem;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--k,var(--ink));padding:.9rem 1.1rem;border-radius:0 0 8px 8px}
+.pn a:hover{border-color:var(--k,var(--ink))}.pn a:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.pn small{font:600 .78rem/1 system-ui,-apple-system,sans-serif;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.pn b{font:700 1.1rem/1.25 system-ui,-apple-system,sans-serif}
+.pn .nx{text-align:right}
+.pn .nx:first-child{margin-left:auto;max-width:calc(50% - .5rem)}
+.pn .hm{flex:0 0 100%;text-align:center;font:500 .92rem/1 system-ui,-apple-system,sans-serif;background:none;border:0;padding:.4rem;color:var(--ink);text-decoration:underline}
+
+.pdfbtn{display:inline-flex;align-items:center;gap:.5rem;font:600 .88rem/1 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--surface);border:1.5px solid var(--ink);border-radius:999px;padding:.55rem .95rem;cursor:pointer}
+.pdfbtn:hover{background:var(--ink);color:var(--bg)}.pdfbtn:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:2px}
+
+/* Mode lecture (pages à structure libre) */
+html.lect body::before,html.lect body::after{display:none!important}
+html.lect body{background:var(--bg)!important}
+html.lect .pn,html.lect #quiz,html.lect section[aria-labelledby="h-video"],html.lect video,html.lect .score,html.lect .lc-skip,html.lect [role="tablist"],html.lect main button,html.lect main input,html.lect main select,html.lect main textarea,html.lect .sec-head p.lc-x{display:none!important}
+html.lect .hero h1,html.lect .hero p,html.lect section.block h2,html.lect footer p{text-shadow:none!important}
+html.lect .hero,html.lect section.block{padding-block:1.2rem!important;border:0!important}
+html.lect .wrap,html.lect .sec-head{max-width:40rem!important;margin-inline:auto}
+html.lect .hgrid,html.lect .two,html.lect .cols{display:block!important}
+html.lect main,html.lect .hero{font-family:var(--serif)}
+html.lect .hero h1{font-size:clamp(1.9rem,5vw,2.6rem)!important}
+html.lect main p,html.lect main li,html.lect .lead{font-size:1.12rem!important;line-height:1.75!important}
+html.lect :is(main,.hero) :is(div,li,blockquote,article,aside,p,ul,ol,section,details,summary,figure,span):not(table *){background:none!important;border:0!important;box-shadow:none!important;border-radius:0!important}
+html.lect main [hidden]{display:revert!important}
+html.lect :is(main,.hero) div:not(.wrap):not(.sec-head):not(table *){display:block!important;grid-template-columns:none!important;float:none!important;max-width:none!important;width:auto!important;margin-inline:0}
+html.lect main li{display:list-item!important}
+html.lect .must{margin:1rem 0}
+html.lect .lead{max-width:none!important}
+html.lect .wrap{padding-inline:0}
+html.lect main details>summary{cursor:default;pointer-events:none;list-style:none}
+html.lect main details>summary::-webkit-details-marker,html.lect main details>summary::before{display:none!important}
+html.lect main blockquote{margin:.8rem 0;padding:0 0 0 1rem!important;border-left:3px solid var(--line)!important}
+html.lect main .panel{display:block!important;margin-bottom:1rem}
+html.lect main h3,html.lect main h4{margin-top:1.4rem}
+
+/* Accessibilité */
+.a11y{position:relative;display:inline-block}
+.a11y-menu{position:absolute;right:0;top:calc(100% + .4rem);z-index:60;min-width:14rem;background:var(--bg);color:var(--ink);border:1.5px solid var(--ink);border-radius:14px;padding:.35rem;box-shadow:0 8px 24px rgba(0,0,0,.18);text-shadow:none}
+.a11y-menu[hidden]{display:none}
+.a11y-menu p{margin:0;padding:.45rem .7rem .3rem;font:700 .72rem/1 system-ui,-apple-system,sans-serif;letter-spacing:.06em;text-transform:uppercase;opacity:.65}
+.a11y-opt{display:flex;align-items:center;gap:.6rem;width:100%;text-align:left;font:600 .92rem/1.2 system-ui,-apple-system,sans-serif;color:inherit;background:none;border:0;border-radius:9px;padding:.6rem .7rem;cursor:pointer}
+.a11y-opt:hover{background:var(--surface)}
+.a11y-opt:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:-2px}
+.a11y-opt .dot{flex:none;width:1rem;height:1rem;border:2px solid currentColor;border-radius:50%;position:relative}
+.a11y-opt[aria-checked="true"] .dot::after{content:"";position:absolute;inset:2px;background:currentColor;border-radius:50%}
+.a11y-opt small{display:block;font-weight:500;opacity:.7;font-size:.78rem;margin-top:.15rem}
+/* Fiche consigne */
+.demo{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:clamp(1rem,3vw,1.8rem)}
+.demo .tools{display:flex;flex-wrap:wrap;gap:.5rem;margin:0 0 1.2rem}
+.demo .btn{font-size:.95rem;padding:.55rem .9rem}
+.demo .btn[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.txt{font:400 clamp(1.15rem,2.2vw,1.4rem)/1.75 var(--display);max-width:none;margin:0}
+.txt span{border-radius:4px;padding:.1em .15em;-webkit-box-decoration-break:clone;box-decoration-break:clone;transition:background-color .3s,box-shadow .3s}
+.txt span.on{background:color-mix(in srgb,var(--k) 24%,transparent);box-shadow:inset 0 -3px 0 var(--k)}
+.txt .t{--k:var(--g1)}.txt .a{--k:var(--g2)}.txt .e{--k:var(--g3)}.txt .c{--k:var(--ink)}
+.role{margin:1.2rem 0 0;padding:.9rem 1.1rem;border-left:5px solid var(--stamp);background:var(--stamp-soft);border-radius:0 8px 8px 0;max-width:none;min-height:3.2em}
+.defs{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:1rem}
+.defs article{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--k,var(--ink));border-radius:0 0 8px 8px;padding:1.1rem 1.2rem 1.3rem}
+.defs article:nth-child(1){--k:var(--g1)}.defs article:nth-child(2){--k:var(--g2)}.defs article:nth-child(3){--k:var(--g3)}.defs article:nth-child(4){--k:var(--ink)}
+.defs h3{font:700 1.6rem/1.1 var(--display);margin-bottom:.2rem}
+.defs .ety{font-size:.9rem;color:var(--muted);margin:0 0 .8rem}
+.defs p{margin:0 0 .7rem;font-size:1rem}
+.defs .ex{border-top:1px solid var(--line);padding-top:.7rem;margin:.9rem 0 0;color:var(--muted)}
+.cmp{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--line);font-size:.98rem}
+.cmp caption{text-align:left;font:700 .9rem/1.3 var(--text);color:var(--muted);padding:0 0 .6rem}
+.cmp th,.cmp td{text-align:left;vertical-align:top;padding:.7rem .9rem;border-top:1px solid var(--line)}
+.cmp th+th,.cmp td{border-left:1px solid var(--line)}
+.cmp thead th{border-top:0;border-bottom:2px solid var(--ink);font-family:var(--display);font-size:1.1rem}
+.cmp tbody th{font:700 .95rem/1.3 var(--text);width:20%}
+.tw{overflow-x:auto}
+.pitfalls{margin:0;padding:0;list-style:none;max-width:48rem;counter-reset:p}
+.pitfalls li{counter-increment:p;position:relative;padding:1rem 0 1rem 3rem;border-top:1px solid var(--line)}
+.pitfalls li:last-child{border-bottom:1px solid var(--line)}
+.pitfalls li::before{content:counter(p);position:absolute;left:0;top:.9rem;font:700 1.8rem/1 var(--display);color:var(--stamp)}
+.pitfalls h3{margin-bottom:.25rem}.pitfalls h3 small{font:500 .9rem/1.3 var(--text);color:var(--muted)}.pitfalls p{margin:0 0 .35rem}.pitfalls .ex{color:var(--muted);font-size:.98rem}
+.flow li{flex:1 1 11rem}
+.tips{margin:0;padding:0;list-style:none;max-width:48rem}
+.tips li{padding:.9rem 0;border-top:1px solid var(--line)}.tips li:last-child{border-bottom:1px solid var(--line)}
+.subj{display:grid;gap:.5rem;margin:0 0 1.2rem}
+.subj .btn{text-align:left;font-size:1rem;padding:.7rem 1rem;line-height:1.35}
+.subj .btn[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.card{border-left:5px solid var(--stamp);background:var(--stamp-soft);border-radius:0 8px 8px 0;padding:1rem 1.2rem}
+.card dl{margin:0;display:grid;grid-template-columns:minmax(0,11rem) minmax(0,1fr);gap:.55rem 1.2rem}
+.card dt{font:700 .88rem/1.4 var(--text);color:var(--stamp)}
+.card dd{margin:0}
+.pairs{display:grid;grid-template-columns:repeat(auto-fit,minmax(18rem,1fr));gap:1rem}
+.pairs article{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--stamp);border-radius:0 0 8px 8px;padding:1.1rem 1.2rem}
+.pairs h3{font:700 1.3rem/1.2 var(--display);margin-bottom:.5rem}
+.pairs p{margin:0 0 .6rem;font-size:1rem}
+.pairs .vs{border-top:1px solid var(--line);padding-top:.6rem;color:var(--muted)}
+.card dd ol{margin:.4rem 0 .2rem;padding-left:1.2rem}
+.card dd li{margin:0 0 .55rem}
+.card dd p{margin:0 0 .4rem;max-width:none}
+.card .bil{color:var(--muted);font-size:.95rem}
+.card dl{row-gap:1rem}
+@media (max-width:620px){.card dl{grid-template-columns:1fr;gap:.1rem}.card dt{margin-top:.5rem}}
+@media (max-width:820px){.q2{grid-template-columns:1fr}}
+
+@media print{
+  :root{--bg:#fff!important;--surface:#fff!important;--ink:#111!important;--muted:#444!important;--line:#bbb!important;color-scheme:light!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:#fff!important;color:#111!important}
+  body::before,body::after{display:none!important}
+  nav,.pdfbtn,.pn,video,section[aria-labelledby="h-video"]{display:none!important}
+  .rev,.js .rev{opacity:1!important;transform:none!important}
+  .stp li[hidden]{display:list-item!important}
+  details>*{display:block!important}
+  article,li,.card,figure,.stage{break-inside:avoid}
+  h1,h2,h3{break-after:avoid;text-shadow:none!important}
+  *{text-shadow:none!important}
+  a{color:inherit;text-decoration:none}
+  section.block,.part{padding-top:1.2rem!important;padding-bottom:1.2rem!important}
+  footer{break-before:avoid;border-top:1px solid #999;margin-top:1rem}
+}
+@page{size:A4;margin:16mm 14mm}
+
+.gp{margin:0 0 1rem;padding:.8rem 1.1rem 1rem;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+.gp h3{font:700 .95rem/1.3 var(--text);color:var(--muted);margin:0 0 .4rem}
+.gp.tr{border:2px dashed var(--g2);background:color-mix(in srgb,var(--g2) 8%,transparent)}
+.gp.tr h3{color:var(--g2)}
+.gp .txt{font-size:clamp(1.05rem,2vw,1.25rem)}
+</style>
+
+<script>try{history.scrollRestoration="manual"}catch(e){}(function(){function t(){if(!location.hash)window.scrollTo(0,0)}t();document.addEventListener("DOMContentLoaded",t);window.addEventListener("load",function(){t();setTimeout(t,60)});window.addEventListener("pageshow",t)})();</script>
+<script src="sommaire.js" defer></script>
+<script src="confort.js"></script><script src="voix.js" defer></script>
+</head>
+<body>
+<nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><span style="display:inline-flex;gap:.6rem;flex-wrap:wrap;align-items:center"><span class="a11y"><button type="button" class="pdfbtn" id="a11y-btn" aria-haspopup="true" aria-expanded="false" aria-controls="a11y-menu"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="1.6"/><path d="M5 8.5l7 1.5 7-1.5M12 10v4.5M8.5 21l3.5-6.5 3.5 6.5"/></svg><span>Accessibilité</span></button><div class="a11y-menu" id="a11y-menu" role="radiogroup" aria-label="Affichage de la page" hidden><p>Affichage</p><button type="button" role="radio" class="a11y-opt" data-mode="orig" aria-checked="true"><span class="dot"></span><span>Page d’origine<small>Image de fond et mise en page habituelle</small></span></button><button type="button" role="radio" class="a11y-opt" data-mode="lect" aria-checked="false"><span class="dot"></span><span>Mode lecture<small>Texte continu, sans cadres ni exercices</small></span></button></div></span><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></span></nav>
+
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Utiliser une référence ou un exemple</h1>
+    <p class="lead">Une référence ou un exemple n’a de valeur que s’il appuie un argument. Voici comment les utiliser : les choisir, les introduire, les expliquer et en tirer une idée, sur des sous-parties de vos corrigés et de vos fiches de cours.</p>
+
+    <div class="demo">
+      <p class="note" style="margin:0 0 .8rem">Choisissez un sujet, puis avancez : d’abord une sous-partie avec une référence, puis une sous-partie avec un exemple.</p>
+      <div class="subj" id="subj" role="group" aria-label="Sujets"></div>
+      <div class="txt" id="txt" aria-live="off"></div>
+      <p class="role" id="role" aria-live="polite"></p>
+      <div class="tools" style="margin:1rem 0 0">
+        <button class="btn primary" type="button" id="next">Commencer</button>
+        <button class="btn" type="button" id="reset">Recommencer</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="block" aria-labelledby="h-def">
+  <div class="wrap">
+    <div class="sec-head rev">
+      <span class="kicker">Principe</span>
+      <h2 id="h-def">À quoi servent une référence et un exemple ?</h2>
+    </div>
+    <p class="rev">Une référence ou un exemple ne démontre rien à lui seul : il <b>appuie un argument</b>. Chaque sous-partie suit donc le même schéma.</p>
+    <div class="defs rev" style="margin-top:1.4rem">
+      <article><h3>L’argument</h3><p class="ety">l’idée défendue</p><p>La raison pour laquelle la thèse de la partie est vraie.</p></article>
+      <article><h3>La référence</h3><p class="ety">ou l’exemple</p><p>Une idée déjà établie par un auteur du cours, qui appuie l’argument. Un exemple, lui, est un fait précis qui le rend concret.</p></article>
+      <article><h3>La synthèse</h3><p class="ety">ce que l’on en tire</p><p>Ce que la sous-partie a établi, relié au sujet.</p></article>
+    </div>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-cmp">
+  <div class="wrap">
+    <div class="sec-head rev">
+      <span class="kicker">Distinguer</span>
+      <h2 id="h-cmp">Une référence ou un exemple ?</h2>
+    </div>
+    <div class="pairs rev">
+      
+      <article><h3>Une référence philosophique</h3><p>Une idée ou une analyse d’un auteur étudié en cours. Elle appuie l’argument, elle ne le remplace pas.</p><p class="vs">Il faut dire en quoi elle sert l’argument, et ne jamais la citer sans l’expliquer.</p></article>
+          <article><h3>Un exemple</h3><p>Un fait, une situation, une œuvre, un événement. Il illustre l’argument et le rend concret.</p><p class="vs">Les choix d’orientation sur Parcoursup, influencés par le milieu d’origine.</p></article>
+    </div>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-ref">
+  <div class="wrap">
+    <div class="sec-head rev">
+      <span class="kicker">Référence</span>
+      <h2 id="h-ref">Comment utiliser une référence</h2>
+    </div>
+    <p class="rev">Citer un auteur ne suffit jamais : la référence ne vaut que par <b>l’usage que l’on en fait</b>. Elle suit cinq temps, que la démonstration en haut de page illustre pour chacun des trois sujets.</p>
+    <ol class="flow rev" style="margin-top:1.4rem">
+      <li><h3>Choisir</h3><p>Une référence qui soutient précisément l’argument, pas seulement le même thème.</p></li>
+      <li><h3>Introduire</h3><p>Nommer l’auteur et l’œuvre, puis dire en une phrase l’idée retenue.</p></li>
+      <li><h3>Expliquer</h3><p>Reconstituer son raisonnement : pourquoi dit-il cela ? Que veulent dire ses mots ?</p></li>
+      <li><h3>Relier</h3><p>Montrer en quoi cette idée démontre l’argument défendu.</p></li>
+      <li><h3>Conclure</h3><p>La synthèse : ce que la référence permet d’établir pour le sujet.</p></li>
+    </ol>
+    <div class="example rev">
+      <h3>Un schéma de paragraphe</h3>
+      <p>Les crochets sont à remplacer par votre argument, votre auteur et votre idée :</p>
+      <p><b>[Argument].</b> Pour défendre cette idée, nous pouvons nous appuyer sur <b>[auteur]</b>, dans <b>[œuvre]</b>. Il y soutient que <b>[idée, reformulée]</b>. En effet, selon lui, <b>[son raisonnement, en une ou deux phrases]</b>. Cela montre donc que <b>[retour à l’argument]</b>, et par conséquent que <b>[lien avec le sujet]</b>.</p>
+    </div>
+    <div class="pairs rev" style="margin-top:2rem">
+      <article><h3>Un usage faible</h3><p>« Comme le dit Spinoza, nous nous croyons libres parce que nous ignorons les causes. Donc la liberté est une illusion. »</p><p class="vs">L’idée est affirmée sans explication : le lecteur ne voit pas pourquoi elle démontre l’argument.</p></article>
+      <article><h3>Un bon usage</h3><p>« Spinoza imagine une pierre lancée qui, devenue consciente, se croirait libre : elle ignore la cause de son mouvement. Il en va de même pour l’homme : le sentiment de choisir ne prouve pas que nous soyons libres. »</p><p class="vs">L’idée est expliquée avec ses propres mots, puis reliée à l’argument et au sujet.</p></article>
+    </div>
+    <ul class="tips rev" style="margin-top:1.6rem">
+      <li><b>Citer ou reformuler ?</b> Une citation courte et exacte, ou une reformulation fidèle. Jamais une longue citation que l’on ne commente pas.</li>
+      <li><b>Rester fidèle.</b> Ne prêtez pas à l’auteur ce qu’il ne dit pas : si vous hésitez, reformulez plus prudemment.</li>
+      <li><b>Définir ses mots.</b> Si la référence repose sur un terme précis, expliquez-le avant de l’utiliser.</li>
+      <li><b>Une référence par argument.</b> Elle appuie l’argument, elle ne remplace ni l’argument ni le plan.</li>
+    </ul>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-choix">
+  <div class="wrap">
+    <div class="sec-head rev">
+      <span class="kicker">Choisir</span>
+      <h2 id="h-choix">Choisir un bon exemple</h2>
+    </div>
+    <ul class="tips rev">
+      <li><b>Précis.</b> Un fait, une situation, une œuvre : « les choix d’orientation sur Parcoursup », pas « certaines personnes ».</li>
+      <li><b>Pertinent.</b> Il illustre exactement l’argument, pas le sujet en général.</li>
+      <li><b>Maîtrisé.</b> Prenez un exemple que vous connaissez assez bien pour l’expliquer en quelques phrases.</li>
+      <li><b>Unique.</b> Un exemple ou une référence par argument, pas davantage.</li>
+      <li><b>Varié.</b> D’une sous-partie à l’autre, puisez ailleurs : histoire, actualité, œuvres d’art, sciences, vie quotidienne.</li>
+    </ul>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-intro">
+  <div class="wrap">
+    <div class="sec-head rev">
+      <span class="kicker">Utiliser</span>
+      <h2 id="h-intro">Introduire un exemple, en tirer une idée</h2>
+    </div>
+    <ol class="flow rev">
+      <li><h3>Énoncer l’argument</h3><p>L’idée défendue, en une phrase claire.</p></li>
+      <li><h3>Introduire l’exemple</h3><p>« Par exemple », « prenons le cas de… ».</p></li>
+      <li><h3>Expliquer</h3><p>Dire en quoi il illustre l’argument : l’exemple ne parle pas tout seul.</p></li>
+      <li><h3>Conclure</h3><p>La synthèse : ce que l’on a établi, rapporté au sujet.</p></li>
+    </ol>
+    <div class="tw rev" style="margin-top:1.4rem"><table class="cmp">
+      <caption>Quelques formules pour accompagner l’exemple</caption>
+      <thead><tr><th>Ce que l’on fait</th><th>Quelques formules</th></tr></thead>
+      <tbody>
+        <tr><th>Introduire l’exemple</th><td>par exemple, ainsi, prenons le cas de, c’est ce que l’on voit lorsque</td></tr>
+        <tr><th>Revenir à l’argument</th><td>cet exemple montre que, autrement dit, on voit donc que</td></tr>
+        <tr><th>Relier au sujet</th><td>ainsi, il ne suffit donc pas de…, c’est donc parce que…</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-pit">
+  <div class="wrap">
+    <div class="sec-head rev">
+      <span class="kicker">Pièges</span>
+      <h2 id="h-pit">Six façons de rater ses références et ses exemples</h2>
+    </div>
+    <ol class="pitfalls rev">
+      <li><h3>Une référence « parachutée »</h3><p>Citer un auteur sans dire en quoi sa pensée soutient l’argument ne démontre rien.</p></li>
+      <li><h3>Une référence déformée</h3><p>Lui faire dire ce qu’elle ne dit pas : mieux vaut une reformulation prudente.</p></li>
+      <li><h3>Un exemple trop vague</h3><p>« Les gens », « certains pays » : on ne voit pas de quoi l’on parle.</p></li>
+      <li><h3>Un exemple posé sans explication</h3><p>Le lecteur doit voir en quoi il illustre l’argument. Expliquez-le.</p></li>
+      <li><h3>Un catalogue d’exemples</h3><p>Plusieurs exemples pour un seul argument : choisissez le meilleur.</p></li>
+      <li><h3>Un exemple qui ne sert pas l’argument</h3><p>Une anecdote amusante mais hors de propos : elle affaiblit la sous-partie.</p></li>
+    </ol>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-use">
+  <div class="wrap">
+    <div class="sec-head rev">
+      <span class="kicker">Suite</span>
+      <h2 id="h-use">Pour continuer</h2>
+    </div>
+    <ul class="chips big rev"><li><a href="construire-le-plan.html">Construire le plan</a></li><li><a href="argumentation.html">Argumenter</a></li><li><a href="rediger-introduction.html">Rédiger l’introduction</a></li><li><a href="methode-dissertation.html">La méthode de la dissertation</a></li><li><a href="atelier-dissertation.html">L’atelier dissertation</a></li></ul>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-r">
+  <div class="wrap">
+    <h2 id="h-r" style="margin-bottom:1.8rem">À retenir</h2>
+    <ul class="recap rev">
+      <li>Une référence ou un exemple n’a de valeur que s’il appuie un argument.</li>
+      <li>Chaque sous-partie suit un schéma : argument, référence ou exemple, synthèse.</li>
+      <li>Une référence se choisit, s’introduit, s’explique, se relie à l’argument, puis se conclut : citer ne suffit pas.</li>
+      <li>Elle appuie l’argument, elle ne le remplace pas : une référence par argument, fidèle à l’auteur.</li>
+      <li>Un bon exemple est précis, pertinent et maîtrisé ; il ne parle pas tout seul : il faut expliquer en quoi il illustre l’argument.</li>
+    </ul>
+  </div>
+</section>
+</main>
+
+<nav class="pn" aria-label="Parcours dissertation"><a href="construire-le-plan.html" rel="prev"><small>← Étape précédente</small><b>Construire le plan</b></a><a class="nx" href="rediger-introduction.html" rel="next"><small>Étape suivante →</small><b>Rédiger l’introduction</b></a><a class="hm" href="parcours-dissertation.html">Parcours dissertation : étape 5 sur 8</a><a class="hm" href="accueil.html">Retour à l’accueil</a></nav>
+
+<script>
+(function(){
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var D={"choix": {"s": "Suffit-il d’avoir le choix pour être libre ?", "seg": [["t", "L’argument", "Ignorer les causes de nos actions transforme la liberté en illusion, fruit de notre vanité.", "L’idée défendue, en une ou deux phrases.", "Une sous-partie avec une référence : l’ignorance des causes", "p"], ["a", "La référence introduite", "Dans sa Lettre à Schuller (1674), Spinoza soutient que la liberté humaine est une illusion : nous avons conscience de nos désirs, mais nous ignorons les causes qui nous déterminent.", "On nomme l’auteur et l’œuvre, puis on dit l’idée retenue.", "Une sous-partie avec une référence : l’ignorance des causes", "p"], ["e", "L’explication", "Pour le montrer, il imagine une pierre lancée par quelqu’un. Si elle devenait consciente, elle saurait qu’elle se déplace, mais elle ignorerait la cause de son mouvement, le lancer. Elle se croirait donc libre, et penserait se mouvoir parce qu’elle le veut.", "On reconstitue le raisonnement de l’auteur : pourquoi dit-il cela ?", "Une sous-partie avec une référence : l’ignorance des causes", "p"], ["c", "Le lien avec l’argument", "Il en va de même pour l’homme, comme l’ivrogne qui croit dire librement ce qu’il pense : le sentiment de choisir ne prouve donc pas que nous soyons libres.", "On montre en quoi cette idée démontre l’argument défendu.", "Une sous-partie avec une référence : l’ignorance des causes", "p"], ["c", "La synthèse", "Encore faut-il savoir pourquoi nous choisissons, connaître les causes de nos actions. Sinon, la liberté ne serait qu’illusion.", "Ce que la référence a permis d’établir, relié au sujet.", "Une sous-partie avec une référence : l’ignorance des causes", "p"], ["t", "L’argument", "Nous pensons choisir librement parce que nous ne voyons pas ce qui nous influence : le milieu d’origine pèse sur nos choix.", "L’idée défendue, en une ou deux phrases.", "Une sous-partie avec un exemple : le déterminisme social", "p"], ["a", "L’exemple", "Les choix d’orientation sur Parcoursup, influencés par le milieu d’origine.", "Un fait précis, qui illustre exactement l’argument.", "Une sous-partie avec un exemple : le déterminisme social", "p"], ["c", "La synthèse", "Il ne suffit pas de choisir : il faudrait se rendre compte de nos déterminismes.", "Ce que l’exemple a établi, relié au sujet.", "Une sous-partie avec un exemple : le déterminisme social", "p"]]}, "etat": {"s": "Est-ce le rôle de l’État de décider du juste ?", "seg": [["t", "L’argument", "Nous sommes tous capables de ressentir ce qui est bon : avant toute loi, la pitié nous retient de faire du mal à autrui.", "L’idée défendue, en une ou deux phrases.", "Une sous-partie avec une référence : ressentir le juste", "p"], ["a", "La référence introduite", "Dans le Discours sur l’origine et les fondements de l’inégalité parmi les hommes, Rousseau soutient que la pitié est un sentiment naturel, qui modère l’amour de soi.", "On nomme l’auteur et l’œuvre, puis on dit l’idée retenue.", "Une sous-partie avec une référence : ressentir le juste", "p"], ["e", "L’explication", "Cette pitié nous porte sans réflexion au secours de ceux qui souffrent. À l’état de nature, elle tient lieu de lois, de mœurs et de vertu : c’est elle qui détournerait le plus robuste d’enlever à un enfant ou à un vieillard sa subsistance.", "On reconstitue le raisonnement de l’auteur : pourquoi dit-il cela ?", "Une sous-partie avec une référence : ressentir le juste", "p"], ["c", "Le lien avec l’argument", "Avant toute loi, nous ressentons donc déjà qu’il est mal de faire souffrir autrui.", "On montre en quoi cette idée démontre l’argument défendu.", "Une sous-partie avec une référence : ressentir le juste", "p"], ["c", "La synthèse", "Nous sommes capables de ressentir ce qui est juste : l’État n’a pas à nous l’apprendre.", "Ce que la référence a permis d’établir, relié au sujet.", "Une sous-partie avec une référence : ressentir le juste", "p"], ["t", "L’argument", "Sans pouvoir commun, la vie est une guerre de tous contre tous, sans place pour la justice : c’est parce que nous ne pouvons déterminer le juste seuls que nous avons besoin de l’État.", "L’idée défendue, en une ou deux phrases.", "Une sous-partie avec un exemple : l’état de nature", "p"], ["a", "L’exemple", "Sans police ni tribunaux, chacun se fait justice lui-même, par la vengeance.", "Un fait précis, qui illustre exactement l’argument.", "Une sous-partie avec un exemple : l’état de nature", "p"], ["c", "La synthèse", "Si l’État décide du juste, c’est parce que, sans lui, la vie des hommes serait une guerre de tous contre tous.", "Ce que l’exemple a établi, relié au sujet.", "Une sous-partie avec un exemple : l’état de nature", "p"]]}, "consc": {"s": "La conscience est-elle un fardeau ?", "seg": [["t", "L’argument", "Nous n’avons pas le choix d’être conscients de notre liberté : la conscience nous rend responsables, sans excuse.", "L’idée défendue, en une ou deux phrases.", "Une sous-partie avec une référence : conscience et liberté", "p"], ["a", "La référence introduite", "Dans L’existentialisme est un humanisme, Sartre écrit que « l’homme est condamné à être libre ».", "On nomme l’auteur et l’œuvre, puis on dit l’idée retenue.", "Une sous-partie avec une référence : conscience et liberté", "p"], ["e", "L’explication", "Condamné, parce qu’il ne s’est pas créé lui-même ; libre, parce qu’une fois jeté dans le monde, il est responsable de tout ce qu’il fait. Il n’a donc aucune excuse : ni sa nature, ni ses passions ne peuvent le justifier.", "On reconstitue le raisonnement de l’auteur : pourquoi dit-il cela ?", "Une sous-partie avec une référence : conscience et liberté", "p"], ["c", "Le lien avec l’argument", "Être conscient de sa liberté, c’est donc être conscient de sa responsabilité : l’élève qui prend conscience qu’il est responsable de ses notes et de son orientation ne peut plus s’en décharger.", "On montre en quoi cette idée démontre l’argument défendu.", "Une sous-partie avec une référence : conscience et liberté", "p"], ["c", "La synthèse", "La conscience pourrait alors être un fardeau, puisqu’elle ne nous laisse aucun choix.", "Ce que la référence a permis d’établir, relié au sujet.", "Une sous-partie avec une référence : conscience et liberté", "p"], ["t", "L’argument", "La conscience morale nous indique notre devoir et nous fait ressentir des remords.", "L’idée défendue, en une ou deux phrases.", "Une sous-partie avec un exemple : conscience morale et devoir", "p"], ["a", "L’exemple", "L’élève qui triche mais est rongé par le remords.", "Un fait précis, qui illustre exactement l’argument.", "Une sous-partie avec un exemple : conscience morale et devoir", "p"], ["c", "La synthèse", "La conscience morale est alors un fardeau, un poids à porter, qui nous fait prendre conscience que nous avons mal agi.", "Ce que l’exemple a établi, relié au sujet.", "Une sous-partie avec un exemple : conscience morale et devoir", "p"]]}},hint="Une sous-partie suit un schéma : un argument, une référence expliquée ou un exemple, une synthèse. Avancez pour le voir.";
+  var keys=['choix','etat','consc'],cur='choix',step=-1;
+  var wrap=document.getElementById('subj'),txt=document.getElementById('txt'),role=document.getElementById('role'),nx=document.getElementById('next'),rs=document.getElementById('reset'),btns=[];
+  function segs(){return D[cur].seg}
+  function draw(){
+    var sg=segs();txt.innerHTML='';var box=txt,lastg=null;
+    sg.forEach(function(s,i){
+      if(s.length>4&&s[4]!==lastg){lastg=s[4];box=document.createElement('div');box.className='gp '+s[5];var h=document.createElement('h3');h.textContent=s[4];box.appendChild(h);var pp=document.createElement('p');pp.className='txt';box.appendChild(pp);if(s[6]){var rf=document.createElement('p');rf.className='note';rf.style.margin='.2rem 0 0';rf.textContent='Références de la partie : '+s[6]+'.';box.appendChild(rf)}txt.appendChild(box);box=pp}
+      var sp=document.createElement('span');sp.className=s[0]+(i===step?' on':'');sp.textContent=s[2]+' ';sp.tabIndex=0;sp.addEventListener('click',function(){step=i;draw()});sp.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();step=i;draw()}});box.appendChild(sp)});
+    role.innerHTML='';
+    if(step<0){role.textContent=hint}
+    else{var s=sg[step];var b=document.createElement('b');b.textContent=s[1]+' — ';role.appendChild(b);role.appendChild(document.createTextNode(s[3]))}
+    nx.textContent=step<0?'Commencer':(step>=sg.length-1?'Terminé':'Phrase suivante');nx.disabled=step>=sg.length-1;
+    btns.forEach(function(b,i){b.setAttribute('aria-pressed',String(keys[i]===cur))});
+  }
+  keys.forEach(function(k){var b=document.createElement('button');b.type='button';b.className='btn';b.setAttribute('aria-pressed','false');b.textContent=D[k].s;b.addEventListener('click',function(){cur=k;step=-1;draw()});wrap.appendChild(b);btns.push(b)});
+  nx.addEventListener('click',function(){if(step<segs().length-1){step++;draw()}});
+  rs.addEventListener('click',function(){step=-1;draw()});
+  draw();
+  var revs=[].slice.call(document.querySelectorAll('.rev'));
+  if(reduce||!('IntersectionObserver' in window)){revs.forEach(function(e){e.classList.add('in')})}
+  else{var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});revs.forEach(function(e){io.observe(e)})}
+})();
+</script>
+<script>
+(function(){var r=document.documentElement,K='texte-seul',KL='mode-lecture';
+var btn=document.getElementById('a11y-btn'),menu=document.getElementById('a11y-menu'),opts=menu.querySelectorAll('.a11y-opt'),closed=[],shown=[],skipped=[];
+function apply(m){
+  var ts=m==='ts',lc=m==='lect',was=r.classList.contains('lect');
+  r.classList.toggle('ts',ts);r.classList.toggle('lect',lc);
+  if(lc&&!was){closed=[];shown=[];skipped=[];
+    document.querySelectorAll('main details').forEach(function(d){if(!d.open){closed.push(d);d.open=true}});
+    document.querySelectorAll('main [hidden]').forEach(function(x){if(!x.closest('[aria-labelledby="h-video"]')&&!x.matches('video,[role="tablist"]')){shown.push(x);x.hidden=false}});
+    document.querySelectorAll('main section').forEach(function(sc){var h=sc.querySelector('h2');
+      if(sc.querySelector('input,select,textarea')||(h&&/^(Exercice|Faites le tri|En vid)/i.test(h.textContent.trim()))){sc.classList.add('lc-skip');skipped.push(sc)}});}
+  if(!lc&&was){closed.forEach(function(d){d.open=false});shown.forEach(function(x){x.hidden=true});skipped.forEach(function(s){s.classList.remove('lc-skip')});closed=[];shown=[];skipped=[]}
+  opts.forEach(function(o){o.setAttribute('aria-checked',o.getAttribute('data-mode')===m?'true':'false')});
+  try{localStorage.setItem(K,ts?'1':'0');localStorage.setItem(KL,lc?'1':'0')}catch(e){}
+}
+function open(on){menu.hidden=!on;btn.setAttribute('aria-expanded',on?'true':'false')}
+btn.addEventListener('click',function(e){e.stopPropagation();open(menu.hidden)});
+opts.forEach(function(o){o.addEventListener('click',function(){apply(o.getAttribute('data-mode'));open(false);btn.focus()})});
+document.addEventListener('click',function(e){if(!menu.hidden&&!menu.contains(e.target)&&e.target!==btn)open(false)});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!menu.hidden){open(false);btn.focus()}});
+var v='orig';try{if(localStorage.getItem(KL)==='1')v='lect';else if(localStorage.getItem(K)==='1'&&menu.querySelector('[data-mode="ts"]'))v='ts'}catch(e){}
+if(v==='ts')apply('ts');
+if(v==='lect')window.addEventListener('load',function(){apply('lect')});
+})();
+</script>
+</body>
+</html>

@@ -25,12 +25,12 @@
   --blue:#8fb0ff; --blue-soft:#24345e; --rule:#26304a; --rule-strong:#34415f;
   --red:#ff8a80; --red-soft:#3a2025; --ok:#7fd29b; --line:#2b3550; color-scheme:dark}
 *{box-sizing:border-box}
-body{background:var(--paper-2);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;
+body{background:var(--paper-2);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.55;
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 48px}
 .wrap{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:230px minmax(0,1fr);gap:28px}
 header.top{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;border-bottom:2px solid var(--ink);padding-bottom:14px}
 .brand small{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);font-weight:700}
-.brand h1{font-family:var(--f-display);font-weight:700;font-size:clamp(28px,4vw,40px);line-height:1.1;margin:2px 0 0;text-wrap:balance}
+.brand h1{font-family:var(--f-display);font-weight:700;font-size:clamp(32px,5vw,48px);line-height:1.1;margin:2px 0 0;text-wrap:balance}
 .sujet-pick{display:flex;flex-direction:column;gap:6px;min-width:0;flex:1 1 360px;max-width:560px}
 .sujet-pick label{font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--ink-soft)}
 select,input[type=text]{font:inherit;color:var(--ink);background:var(--paper);border:1px solid var(--rule-strong);border-radius:6px;padding:9px 10px;width:100%}
@@ -208,7 +208,7 @@ html.lect #lecture .consigne{font:400 1.12rem/1.7 Georgia,"Times New Roman",seri
 @media print{#lecture,.a11y,.topnav{display:none!important}}
 </style>
 <script>try{history.scrollRestoration="manual"}catch(e){}(function(){function t(){if(!location.hash)window.scrollTo(0,0)}t();document.addEventListener("DOMContentLoaded",t);window.addEventListener("load",function(){t();setTimeout(t,60)});window.addEventListener("pageshow",t)})();</script>
-<script src="confort.js"></script>
+<script src="confort.js"></script><script src="voix.js" defer></script>
 </head>
 <body>
 <nav class="topnav"><a href="accueil.html">Retour à l’accueil</a><span class="a11y"><button type="button" class="lcbtn" id="a11y-btn" aria-haspopup="true" aria-expanded="false" aria-controls="a11y-menu"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="1.6"/><path d="M5 8.5l7 1.5 7-1.5M12 10v4.5M8.5 21l3.5-6.5 3.5 6.5"/></svg><span>Accessibilité</span></button><div class="a11y-menu" id="a11y-menu" role="radiogroup" aria-label="Affichage de la page" hidden><p>Affichage</p><button type="button" role="radio" class="a11y-opt" data-mode="orig" aria-checked="true"><span class="dot"></span><span>Page d’origine<small>Une étape à la fois</small></span></button><button type="button" role="radio" class="a11y-opt" data-mode="lect" aria-checked="false"><span class="dot"></span><span>Mode lecture<small>Toutes les étapes sur une page</small></span></button></div></span></nav>

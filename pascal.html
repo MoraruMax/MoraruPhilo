@@ -12,7 +12,7 @@
   color-scheme:light;
   --bg:#F6F4F8; --surface:#FFFFFF; --ink:#1B1530; --muted:#5A5170; --line:#DAD5E5; --focus:#8A1C5C;
   --heart:#A3195B; --heart-soft:#F8E1EC; --reason:#1F4F94; --reason-soft:#DFE9F8; --gold:#8A6100; --coin:#D4A12A; --coin-ink:#2B1F00; --on:#FFFFFF;
-  --serif:Baskerville,"Baskerville Old Face","Hoefler Text",Garamond,"Palatino Linotype",Georgia,serif;
+  --serif:Charter,"Bitstream Charter","Sitka Text",Cambria,Georgia,serif;
   --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
 }
 @media (prefers-color-scheme: dark){
@@ -32,9 +32,9 @@ html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:10
 @media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 1.12rem/1.65 var(--serif)}
 .wrap{width:min(980px,100% - 2.5rem);margin-inline:auto}
-h1,h2,h3{margin:0;font-family:var(--serif)}
-h1{font-weight:700;font-size:clamp(2.5rem,7.5vw,4.8rem);line-height:1.04;letter-spacing:-.015em}
-h2{font-weight:700;font-size:clamp(1.55rem,3.2vw,2.1rem);line-height:1.15;margin-bottom:1rem}
+h1,h2,h3{margin:0;font-family:var(--sans)}
+h1{font-weight:800;font-size:clamp(2.6rem,8vw,5rem);line-height:1.02;letter-spacing:-.025em}
+h2{font-weight:800;font-size:clamp(1.5rem,3.2vw,2.1rem);line-height:1.2;margin-bottom:1rem}
 h3{font:700 1.02rem/1.35 var(--sans)}
 p{margin:0 0 1em}
 :focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
@@ -230,7 +230,8 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
 </style>
 <link rel="stylesheet" href="quiz.css">
 <script>try{history.scrollRestoration="manual"}catch(e){}(function(){function t(){if(!location.hash)window.scrollTo(0,0)}t();document.addEventListener("DOMContentLoaded",t);window.addEventListener("load",function(){t();setTimeout(t,60)});window.addEventListener("pageshow",t)})();</script>
-<script src="confort.js"></script>
+<script src="sommaire.js" defer></script>
+<script src="confort.js"></script><script src="voix.js" defer></script>
 </head>
 <body>
 <nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><span style="display:inline-flex;gap:.6rem;flex-wrap:wrap;align-items:center"><span class="a11y"><button type="button" class="pdfbtn" id="a11y-btn" aria-haspopup="true" aria-expanded="false" aria-controls="a11y-menu"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="1.6"/><path d="M5 8.5l7 1.5 7-1.5M12 10v4.5M8.5 21l3.5-6.5 3.5 6.5"/></svg><span>Accessibilité</span></button><div class="a11y-menu" id="a11y-menu" role="radiogroup" aria-label="Affichage de la page" hidden><p>Affichage</p><button type="button" role="radio" class="a11y-opt" data-mode="orig" aria-checked="true"><span class="dot"></span><span>Page d’origine<small>Image de fond et mise en page habituelle</small></span></button><button type="button" role="radio" class="a11y-opt" data-mode="ts" aria-checked="false"><span class="dot"></span><span>Texte seul<small>Sans image de fond</small></span></button><button type="button" role="radio" class="a11y-opt" data-mode="lect" aria-checked="false"><span class="dot"></span><span>Mode lecture<small>Texte continu, sans cadres ni exercices</small></span></button></div></span><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></span></nav>

@@ -80,7 +80,7 @@ footer .wrap{max-width:none;padding:0 1rem}
 
 /* Fond : L’École d’Athènes (Raphaël) */
 body::before{content:"";position:fixed;inset:0;z-index:-2;background:var(--fill,transparent) var(--img) center var(--pos,center)/cover no-repeat}
-@media (min-aspect-ratio:1/1){html.bg-portrait body::before{background:var(--fill) var(--img) right center/auto 100% no-repeat}}
+@media (min-aspect-ratio:1/1){html.bg-portrait body::before{background:var(--fill) var(--img) right center/auto var(--sz,100%) no-repeat}}
 body::after{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);opacity:.55;pointer-events:none}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) body::after{opacity:.68}}
 :root[data-theme="dark"] body::after{opacity:.68}
@@ -159,8 +159,20 @@ html.lect .item h2{display:inline;font:600 1.12rem/1.6 var(--serif,Georgia,serif
 html.lect .item p{display:inline;font-size:1.05rem;line-height:1.6;margin:0 0 0 .2rem;color:var(--muted)}
 html.lect .item p::before{content:"\2014\00a0"}
 .carnet-l{margin:.2rem 0 1rem;font:600 .95rem/1.4 var(--head,system-ui)}.carnet-l a{color:inherit;text-underline-offset:3px}html.lect .carnet-l{display:block}
-.notion>summary .ser{font-weight:400;font-size:.8em;opacity:.7}.sub-n>summary .ser{font-weight:400;font-size:.8em;opacity:.7}</style>
-<script src="confort.js"></script>
+.notion>summary .ser{font-weight:400;font-size:.8em;opacity:.7}.sub-n>summary .ser{font-weight:400;font-size:.8em;opacity:.7}
+/* Que voulez-vous faire ? */
+.orient{padding-bottom:clamp(1.6rem,4vw,2.4rem)}
+.orient h2{margin:0 0 .8rem;font:800 clamp(1.4rem,3.2vw,1.9rem)/1.2 var(--head);text-shadow:0 0 .35em var(--bg),0 0 .8em var(--bg),0 0 1.2em var(--bg)}
+.oc{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,14.5rem),1fr));gap:1rem}
+.oc a{display:flex;flex-direction:column;gap:.35rem;height:100%;text-decoration:none;color:inherit;background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--c);border-radius:0 0 8px 8px;padding:1rem 1.2rem 1.1rem;transition:transform .25s ease,border-color .25s ease}
+.oc a:hover{transform:translateY(-3px);border-color:var(--c)}
+.oc b{font:800 1.2rem/1.25 var(--head)}
+.oc span{font-size:.95rem;line-height:1.4;color:var(--muted)}
+.oc em{margin-top:auto;padding-top:.4rem;font:700 .9rem/1 var(--head);font-style:normal;color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+@media (prefers-reduced-motion:reduce){.oc a{transition:none}}
+html.ts h2.sec,html.ts .orient h2{text-shadow:none}
+</style>
+<script src="confort.js"></script><script src="voix.js" defer></script>
 </head>
 <body>
 <header>
@@ -172,6 +184,16 @@ html.lect .item p::before{content:"\2014\00a0"}
     <div class="find" role="search"><label for="q">Chercher un auteur, une notion, un texte</label><input id="q" type="search" placeholder="Ex. : Kant, liberté, mensonge…" autocomplete="off"><p class="n" id="qn" aria-live="polite"></p><button type="button" class="more" id="qm" hidden></button></div>
   </div>
 </header>
+
+<section class="orient wrap" aria-labelledby="h-orient">
+  <h2 id="h-orient">Que voulez-vous faire ?</h2>
+  <ul class="oc">
+    <li><a href="parcours-notion.html" style="--c:var(--a5)"><b>Je révise une notion</b><span>Choisissez la notion : plan de cours, fiches dans l’ordre, repères.</span><em>Choisir une notion</em></a></li>
+    <li><a href="reperes-conceptuels.html" style="--c:var(--a3)"><b>Je révise les repères conceptuels</b><span>Trente et un repères à parcourir, à mémoriser avec des cartes et à tester par un quiz.</span><em>Ouvrir les repères</em></a></li>
+    <li><a href="parcours-dissertation.html" style="--c:var(--a7)"><b>Je prépare la dissertation</b><span>Huit étapes, du sujet à la copie, puis les ateliers pour s’entraîner.</span><em>Ouvrir le parcours</em></a></li>
+    <li><a href="parcours-explication.html" style="--c:var(--a9)"><b>Je prépare l’explication de texte</b><span>La méthode, l’atelier, puis l’auto-évaluation, selon votre série.</span><em>Ouvrir le parcours</em></a></li>
+  </ul>
+</section>
 
 <main>
   <details class="grp wrap"><summary><h2 class="sec">Les thèmes</h2></summary>
@@ -821,6 +843,15 @@ html.lect .item p::before{content:"\2014\00a0"}
   <details class="notion"><summary>Méthodologies</summary>
   <details class="sub-n"><summary>Série générale</summary>
   <div class="list">
+    <a class="item" href="le-jour-de-l-epreuve.html" style="--c:var(--a7)">
+      <svg viewBox="0 0 120 48" aria-hidden="true">
+        <circle cx="60" cy="24" r="17" fill="none" stroke="var(--muted)" stroke-width="3" opacity=".6"/>
+        <path d="M60 12v12l9 6" fill="none" stroke="var(--c)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <h2>Le jour de l’épreuve</h2>
+      <p>Répartir les quatre heures, choisir son sujet, éviter les pièges et relire sa copie.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
     <a class="item" href="methode-dissertation.html" style="--c:var(--a7)">
       <svg viewBox="0 0 120 48" aria-hidden="true">
         <line x1="10" y1="10" x2="110" y2="10" stroke="var(--muted)" stroke-width="3" stroke-linecap="round" opacity=".5"/>
@@ -830,6 +861,18 @@ html.lect .item p::before{content:"\2014\00a0"}
       </svg>
       <h2>Construire une dissertation</h2>
       <p>Les huit étapes de la méthode, avec un brouillon interactif pour préparer sa copie.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="dissertation-commentee.html" style="--c:var(--a7)">
+      <svg viewBox="0 0 120 48" aria-hidden="true">
+        <line x1="10" y1="10" x2="70" y2="10" stroke="var(--muted)" stroke-width="3" stroke-linecap="round" opacity=".5"/>
+        <line x1="10" y1="22" x2="70" y2="22" stroke="var(--muted)" stroke-width="3" stroke-linecap="round" opacity=".5"/>
+        <line x1="10" y1="34" x2="56" y2="34" stroke="var(--muted)" stroke-width="3" stroke-linecap="round" opacity=".5"/>
+        <rect x="80" y="8" width="30" height="12" rx="3" fill="none" stroke="var(--c)" stroke-width="2.5"/>
+        <rect x="80" y="28" width="30" height="12" rx="3" fill="none" stroke="var(--c)" stroke-width="2.5"/>
+      </svg>
+      <h2>Une dissertation commentée</h2>
+      <p>Une copie complète sur « Le devoir est-il une contrainte ? », avec en marge ce que fait chaque passage.</p>
       <span class="go">Ouvrir la page</span>
     </a>
     <a class="item" href="auto-evaluation-dissertation.html" style="--c:var(--a7)">
@@ -874,6 +917,15 @@ html.lect .item p::before{content:"\2014\00a0"}
   </details>
   <details class="sub-n"><summary>Séries technologiques</summary>
   <div class="list">
+    <a class="item" href="le-jour-de-l-epreuve.html" style="--c:var(--a7)">
+      <svg viewBox="0 0 120 48" aria-hidden="true">
+        <circle cx="60" cy="24" r="17" fill="none" stroke="var(--muted)" stroke-width="3" opacity=".6"/>
+        <path d="M60 12v12l9 6" fill="none" stroke="var(--c)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <h2>Le jour de l’épreuve</h2>
+      <p>Répartir les quatre heures, choisir son sujet, éviter les pièges et relire sa copie.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
     <a class="item" href="methode-dissertation.html" style="--c:var(--a7)">
       <svg viewBox="0 0 120 48" aria-hidden="true">
         <line x1="10" y1="10" x2="110" y2="10" stroke="var(--muted)" stroke-width="3" stroke-linecap="round" opacity=".5"/>
@@ -883,6 +935,18 @@ html.lect .item p::before{content:"\2014\00a0"}
       </svg>
       <h2>Construire une dissertation</h2>
       <p>Les huit étapes de la méthode, avec un brouillon interactif pour préparer sa copie.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="dissertation-commentee.html" style="--c:var(--a7)">
+      <svg viewBox="0 0 120 48" aria-hidden="true">
+        <line x1="10" y1="10" x2="70" y2="10" stroke="var(--muted)" stroke-width="3" stroke-linecap="round" opacity=".5"/>
+        <line x1="10" y1="22" x2="70" y2="22" stroke="var(--muted)" stroke-width="3" stroke-linecap="round" opacity=".5"/>
+        <line x1="10" y1="34" x2="56" y2="34" stroke="var(--muted)" stroke-width="3" stroke-linecap="round" opacity=".5"/>
+        <rect x="80" y="8" width="30" height="12" rx="3" fill="none" stroke="var(--c)" stroke-width="2.5"/>
+        <rect x="80" y="28" width="30" height="12" rx="3" fill="none" stroke="var(--c)" stroke-width="2.5"/>
+      </svg>
+      <h2>Une dissertation commentée</h2>
+      <p>Une copie complète sur « Le devoir est-il une contrainte ? », avec en marge ce que fait chaque passage.</p>
       <span class="go">Ouvrir la page</span>
     </a>
     <a class="item" href="auto-evaluation-dissertation.html" style="--c:var(--a7)">
@@ -1026,6 +1090,15 @@ html.lect .item p::before{content:"\2014\00a0"}
   <details class="grp wrap"><summary><h2 class="sec">Se préparer et s’entraîner aux épreuves du bac</h2></summary>
   <details class="sub-n"><summary><span>Pour se préparer <span class="ser">: série générale et technologiques</span></span></summary>
   <div class="list">
+    <a class="item" href="parcours-dissertation.html" style="--c:var(--a1)">
+      <svg viewBox="0 0 120 48" aria-hidden="true">
+        <circle cx="16" cy="38" r="6" fill="var(--c)"/><circle cx="46" cy="24" r="6" fill="var(--muted)" opacity=".6"/><circle cx="76" cy="14" r="6" fill="var(--muted)" opacity=".6"/><circle cx="104" cy="8" r="5" fill="var(--muted)" opacity=".4"/>
+        <path d="M22 36 L40 27 M52 21 L70 16 M82 12 L99 9" stroke="var(--muted)" stroke-width="2.5" stroke-linecap="round" opacity=".6"/>
+      </svg>
+      <h2>Parcours dissertation</h2>
+      <p>Les huit étapes pour passer du sujet à la copie, dans l’ordre, avec un suivi de votre progression.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
     <a class="item" href="comprendre-la-consigne.html" style="--c:var(--a1)">
       <svg viewBox="0 0 120 48" aria-hidden="true">
         <rect x="14" y="6" width="92" height="36" rx="5" fill="none" stroke="var(--muted)" stroke-width="2.5" opacity=".6"/>
@@ -1037,17 +1110,6 @@ html.lect .item p::before{content:"\2014\00a0"}
       <p>Formulations, petits mots et verbes de consigne : comprendre ce que le sujet demande avant d’y répondre.</p>
       <span class="go">Ouvrir la page</span>
     </a>
-    <a class="item" href="construire-une-problematique.html" style="--c:var(--a4)">
-      <svg viewBox="0 0 120 48" aria-hidden="true">
-        <rect x="8" y="6" width="34" height="14" rx="4" fill="var(--muted)" opacity=".5"/>
-        <rect x="8" y="28" width="34" height="14" rx="4" fill="var(--muted)" opacity=".7"/>
-        <path d="M44 13 H62 V35 H44 M62 24 H78" fill="none" stroke="var(--muted)" stroke-width="2.5" stroke-linecap="round" opacity=".7"/>
-        <rect x="80" y="14" width="32" height="20" rx="5" fill="var(--c)"/>
-      </svg>
-      <h2>Construire une problématique</h2>
-      <p>De la question du sujet au problème : deux réponses sérieuses, chacune appuyée sur un argument.</p>
-      <span class="go">Ouvrir la page</span>
-    </a>
     <a class="item" href="argumentation.html" style="--c:var(--a2)">
       <svg viewBox="0 0 120 48" aria-hidden="true">
         <rect x="10" y="30" width="30" height="12" rx="3" fill="var(--muted)" opacity=".45"/>
@@ -1057,6 +1119,17 @@ html.lect .item p::before{content:"\2014\00a0"}
       </svg>
       <h2>Argumenter</h2>
       <p>Thèse, arguments, exemples, raisonnements et erreurs à éviter : comment défendre une idée par des raisons.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="construire-une-problematique.html" style="--c:var(--a4)">
+      <svg viewBox="0 0 120 48" aria-hidden="true">
+        <rect x="8" y="6" width="34" height="14" rx="4" fill="var(--muted)" opacity=".5"/>
+        <rect x="8" y="28" width="34" height="14" rx="4" fill="var(--muted)" opacity=".7"/>
+        <path d="M44 13 H62 V35 H44 M62 24 H78" fill="none" stroke="var(--muted)" stroke-width="2.5" stroke-linecap="round" opacity=".7"/>
+        <rect x="80" y="14" width="32" height="20" rx="5" fill="var(--c)"/>
+      </svg>
+      <h2>Construire une problématique</h2>
+      <p>De la question du sujet au problème : deux réponses sérieuses, chacune appuyée sur un argument.</p>
       <span class="go">Ouvrir la page</span>
     </a>
     <a class="item" href="construire-le-plan.html" style="--c:var(--a4)">
@@ -1071,11 +1144,63 @@ html.lect .item p::before{content:"\2014\00a0"}
       <p>Trois parties qui répondent au problème, des arguments classés du plus faible au plus fort, et six sujets travaillés pas à pas.</p>
       <span class="go">Ouvrir la page</span>
     </a>
+    <a class="item" href="utiliser-un-exemple.html" style="--c:var(--a2)">
+      <svg viewBox="0 0 120 48" aria-hidden="true">
+        <rect x="8" y="6" width="104" height="9" rx="3" fill="var(--muted)" opacity=".5"/>
+        <rect x="24" y="19" width="88" height="9" rx="3" fill="var(--c)"/>
+        <rect x="8" y="32" width="104" height="9" rx="3" fill="var(--muted)" opacity=".7"/>
+      </svg>
+      <h2>Utiliser une référence ou un exemple</h2>
+      <p>Choisir une référence ou un exemple, l’introduire, l’expliquer et en tirer une synthèse, sur des sous-parties de corrigés.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="rediger-introduction.html" style="--c:var(--a5)">
+      <svg viewBox="0 0 120 48" aria-hidden="true">
+        <rect x="8" y="6" width="104" height="9" rx="3" fill="var(--c)"/>
+        <rect x="8" y="19" width="80" height="9" rx="3" fill="var(--muted)" opacity=".4"/>
+        <rect x="8" y="32" width="60" height="9" rx="3" fill="var(--muted)" opacity=".6"/>
+      </svg>
+      <h2>Rédiger l’introduction</h2>
+      <p>De la première réponse au problème, puis à l’annonce du plan, sur trois corrigés.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="rediger-transitions.html" style="--c:var(--a5)">
+      <svg viewBox="0 0 120 48" aria-hidden="true">
+        <rect x="8" y="6" width="40" height="12" rx="3" fill="var(--muted)" opacity=".5"/>
+        <rect x="72" y="30" width="40" height="12" rx="3" fill="var(--muted)" opacity=".5"/>
+        <path d="M30 18 C30 30 50 18 72 36" fill="none" stroke="var(--c)" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+      <h2>Relier les parties : les transitions</h2>
+      <p>Le bilan et le problème qui font passer d’une partie à la suivante.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+    <a class="item" href="rediger-conclusion.html" style="--c:var(--a5)">
+      <svg viewBox="0 0 120 48" aria-hidden="true">
+        <rect x="8" y="6" width="60" height="9" rx="3" fill="var(--muted)" opacity=".6"/>
+        <rect x="8" y="19" width="80" height="9" rx="3" fill="var(--muted)" opacity=".4"/>
+        <rect x="8" y="32" width="104" height="9" rx="3" fill="var(--c)"/>
+      </svg>
+      <h2>Rédiger la conclusion</h2>
+      <p>Reprendre les bilans des parties pour donner une réponse claire.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
   </div>
   </details>
   <details class="sub-n"><summary>Pour s’entraîner</summary>
   <details class="sub-n"><summary>Série générale</summary>
   <div class="list">
+    <a class="item" href="atelier-introduction.html" style="--c:var(--a5)">
+      <svg viewBox="0 0 120 48" aria-hidden="true">
+        <rect x="14" y="4" width="70" height="40" rx="4" fill="none" stroke="var(--muted)" stroke-width="2.5" opacity=".6"/>
+        <rect x="22" y="11" width="54" height="7" rx="2" fill="var(--c)"/>
+        <line x1="22" y1="26" x2="76" y2="26" stroke="var(--muted)" stroke-width="2" opacity=".5"/>
+        <line x1="22" y1="34" x2="58" y2="34" stroke="var(--muted)" stroke-width="2" opacity=".5"/>
+        <path d="M80 40 L100 12 L108 18 L88 46 L78 48 Z" fill="var(--c)"/>
+      </svg>
+      <h2>Atelier : l’introduction de la dissertation</h2>
+      <p>Écrivez une introduction étape par étape, évaluez-la avec une grille, comparez-la à un corrigé, puis enregistrez-la en PDF.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
     <a class="item" href="atelier-dissertation.html" style="--c:var(--a7)">
       <svg viewBox="0 0 120 48" aria-hidden="true">
         <rect x="14" y="4" width="70" height="40" rx="4" fill="none" stroke="var(--muted)" stroke-width="2.5" opacity=".6"/>
@@ -1104,6 +1229,18 @@ html.lect .item p::before{content:"\2014\00a0"}
   </details>
   <details class="sub-n"><summary>Séries technologiques</summary>
   <div class="list">
+    <a class="item" href="atelier-introduction.html" style="--c:var(--a5)">
+      <svg viewBox="0 0 120 48" aria-hidden="true">
+        <rect x="14" y="4" width="70" height="40" rx="4" fill="none" stroke="var(--muted)" stroke-width="2.5" opacity=".6"/>
+        <rect x="22" y="11" width="54" height="7" rx="2" fill="var(--c)"/>
+        <line x1="22" y1="26" x2="76" y2="26" stroke="var(--muted)" stroke-width="2" opacity=".5"/>
+        <line x1="22" y1="34" x2="58" y2="34" stroke="var(--muted)" stroke-width="2" opacity=".5"/>
+        <path d="M80 40 L100 12 L108 18 L88 46 L78 48 Z" fill="var(--c)"/>
+      </svg>
+      <h2>Atelier : l’introduction de la dissertation</h2>
+      <p>Écrivez une introduction étape par étape, évaluez-la avec une grille, comparez-la à un corrigé, puis enregistrez-la en PDF.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
     <a class="item" href="atelier-dissertation-tech.html" style="--c:var(--a7)">
       <svg viewBox="0 0 120 48" aria-hidden="true">
         <rect x="14" y="4" width="70" height="40" rx="4" fill="none" stroke="var(--muted)" stroke-width="2.5" opacity=".6"/>
@@ -1232,12 +1369,15 @@ q.addEventListener('input',function(){load();run()});})();
  {img:'images/delacroix.jpg',pos:'8%',cap:'Eugène Delacroix, <i>La Liberté guidant le peuple</i> (1830), musée du Louvre.'},
  {img:'images/friedrich.jpg',cap:'Caspar David Friedrich, <i>Le Voyageur au-dessus de la mer de nuages</i> (vers 1818), Kunsthalle de Hambourg.'},
  {img:'images/rembrandt.jpg',cap:'Rembrandt, <i>Le Philosophe en méditation</i> (1632), musée du Louvre.'},
- {img:'images/david.jpg',cap:'Jacques-Louis David, <i>La Mort de Socrate</i> (1787), Metropolitan Museum of Art, New York.'}];
+ {img:'images/david.jpg',cap:'Jacques-Louis David, <i>La Mort de Socrate</i> (1787), Metropolitan Museum of Art, New York.'},
+ {img:'images/durkheim-fond.jpg',portrait:1,fill:'#838383',cap:'Photographie d’Émile Durkheim (auteur inconnu)'},
+ {img:'images/nietzsche-ree-salome.jpg',portrait:1,fill:'#858585',size:'78%',cap:'Photographie de Lou Andreas-Salomé, Paul Rée et Friedrich Nietzsche (Lucerne, 1882).'}];
 var r=document.documentElement,cr=document.getElementById('credit'),K='fond-accueil';
 function last(){try{return +localStorage.getItem(K)}catch(e){return -1}}
 function show(i){var b=B[i];r.style.setProperty('--img','url("'+b.img+'")');
  if(b.fill)r.style.setProperty('--fill',b.fill);else r.style.removeProperty('--fill');
  if(b.pos)r.style.setProperty('--pos',b.pos);else r.style.removeProperty('--pos');
+ if(b.size)r.style.setProperty('--sz',b.size);else r.style.removeProperty('--sz');
  r.classList.toggle('bg-portrait',!!b.portrait);cr.innerHTML=b.cap;
  try{localStorage.setItem(K,i)}catch(e){}}
 function pick(){var q=location.search.match(/fond=(\d+)/);if(q&&B[+q[1]]){show(+q[1]);return}

@@ -32,7 +32,7 @@
 html{scroll-padding-top:calc(4.2rem + env(safe-area-inset-top,0px));-webkit-text-size-adjust:100%}
 @media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 1.125rem/1.65 var(--text)}
-.wrap{width:min(1000px,100% - 2.5rem);margin-inline:auto}
+.wrap{width:min(980px,100% - 2.5rem);margin-inline:auto}
 h1,h2,h3,h4{margin:0}
 h1{font:800 clamp(2.4rem,7.5vw,4.8rem)/1.02 var(--head);letter-spacing:-.03em}
 h2{font:800 clamp(1.5rem,3.2vw,2.1rem)/1.12 var(--head);letter-spacing:-.02em}
@@ -160,7 +160,9 @@ footer p{margin:0 0 .3rem}
 </style>
 <link rel="stylesheet" href="quiz.css">
 <script>try{history.scrollRestoration="manual"}catch(e){}(function(){function t(){if(!location.hash)window.scrollTo(0,0)}t();document.addEventListener("DOMContentLoaded",t);window.addEventListener("load",function(){t();setTimeout(t,60)});window.addEventListener("pageshow",t)})();</script>
-<script src="confort.js"></script>
+<script src="sommaire.js" defer></script>
+<script src="accessibilite.js" defer></script>
+<script src="confort.js"></script><script src="voix.js" defer></script>
 </head>
 <body>
 <nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
@@ -294,7 +296,7 @@ footer p{margin:0 0 .3rem}
   <div class="wrap step-grid">
     <div><span class="num" aria-hidden="true">7</span><h2 id="h-s7">Introduire</h2></div>
     <div>
-      <p class="instr">Écrivez au brouillon votre introduction, intégrant les définitions importantes, le problème et le plan. Voici les trois éléments, tels que vos étapes précédentes les fournissent :</p>
+      <p class="instr">Écrivez au brouillon votre introduction : une accroche (un fait précis, un exemple historique, une référence culturelle comme une œuvre d’art), puis les définitions importantes, le problème et le plan. Voici les trois derniers éléments, tels que vos étapes précédentes les fournissent. Pour vous entraîner : <a href="rediger-introduction.html">Rédiger l’introduction</a>.</p>
       <div class="ingr">
         <div><h4>Les définitions importantes</h4><p id="i-defs"></p></div>
         <div><h4>Le problème</h4><p id="i-pb"></p></div>

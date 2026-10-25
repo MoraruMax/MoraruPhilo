@@ -35,11 +35,21 @@
   document.addEventListener('DOMContentLoaded',function(){
     if(document.getElementById('sheet'))document.body.classList.add('px');
     var menu=document.getElementById('a11y-menu');if(!menu)return;
+    /* garder le menu entièrement visible : l'aligner à gauche s'il dépasse de l'écran */
+    var ab=document.getElementById('a11y-btn');
+    if(ab)ab.addEventListener('click',function(){
+      menu.style.left='';menu.style.right='';
+      setTimeout(function(){
+        if(menu.hidden)return;
+        var r=menu.getBoundingClientRect();
+        if(r.left<8){menu.style.right='auto';menu.style.left='0'}
+      },0);
+    });
     /* regrouper les options d'affichage dans leur propre groupe radio */
-    var g=document.createElement('div');g.setAttribute('role','radiogroup');g.setAttribute('aria-label','Affichage de la page');
-    [].slice.call(menu.children).forEach(function(c){g.appendChild(c)});
+    var kids=[].slice.call(menu.children);
     menu.removeAttribute('role');menu.removeAttribute('aria-label');menu.setAttribute('role','group');menu.setAttribute('aria-label','Accessibilité');
-    menu.appendChild(g);
+    if(kids.length){var g=document.createElement('div');g.setAttribute('role','radiogroup');g.setAttribute('aria-label','Affichage de la page');
+      kids.forEach(function(c){g.appendChild(c)});menu.appendChild(g)}
     var sec=document.createElement('div');sec.className='cf-sec';sec.setAttribute('role','group');sec.setAttribute('aria-label','Confort de lecture');
     sec.innerHTML='<p>Confort de lecture</p>';
     function row(label,key,opts){

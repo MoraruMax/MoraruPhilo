@@ -27,7 +27,7 @@
 html{scroll-padding-top:calc(4rem + env(safe-area-inset-top,0px));-webkit-text-size-adjust:100%}
 @media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 1.08rem/1.6 var(--serif)}
-.wrap{width:min(900px,100% - 2.5rem);margin-inline:auto}
+.wrap{width:min(980px,100% - 2.5rem);margin-inline:auto}
 h1,h2,h3{margin:0;font-family:var(--serif)}
 h1{font-weight:700;font-size:clamp(2.4rem,7.5vw,4.6rem);line-height:1.05;letter-spacing:-.02em}
 h2{font-weight:700;font-size:clamp(1.6rem,3.4vw,2.2rem);line-height:1.15;margin-bottom:1.2rem}
@@ -111,7 +111,9 @@ details.br summary{font-weight:700}
 .pls a:hover{border-color:var(--k)}
 .pls b{font:700 1.25rem/1.2 var(--serif)} .pls small{font:600 .8rem/1 var(--sans);color:var(--muted)}
 </style><script>try{history.scrollRestoration="manual"}catch(e){}(function(){function t(){if(!location.hash)window.scrollTo(0,0)}t();document.addEventListener("DOMContentLoaded",t);window.addEventListener("load",function(){t();setTimeout(t,60)});window.addEventListener("pageshow",t)})();</script>
-<script src="confort.js"></script>
+<script src="sommaire.js" defer></script>
+<script src="accessibilite.js" defer></script>
+<script src="confort.js"></script><script src="voix.js" defer></script>
 </head><body>
 <nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
 <header class="hero"><div class="wrap"><p class="eyebrow">Plan de cours</p><h1>Le langage</h1>
