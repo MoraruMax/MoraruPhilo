@@ -660,14 +660,9 @@ var X={"Absolu – Relatif": [["Kant", "Fondements de la métaphysique des mœur
       });
       html+='</ul><button class="btn" id="flagMissed" type="button">Marquer ces repères à revoir</button> ';
     }
-    html+='<button class="btn" id="copyB" type="button">Copier mon bilan</button> <button class="btn primary" id="replay" type="button">Rejouer</button><div id="flagMsg" class="muted" aria-live="polite" style="margin-top:.8rem"></div></div>';
+    html+='<button class="btn primary" id="replay" type="button">Rejouer</button><div id="flagMsg" class="muted" aria-live="polite" style="margin-top:.8rem"></div></div>';
     quizArea.innerHTML=html;
     requestAnimationFrame(function(){requestAnimationFrame(function(){var f=$('#bfg');if(f)f.style.strokeDashoffset=264*(1-pct)})});
-    var txt='Repères conceptuels, quiz : '+Q.score+'/'+n+(Q.wrong.length?'\nÀ revoir : '+Q.wrong.map(function(t){return t.n}).join(', '):'');
-    $('#copyB').addEventListener('click',function(){
-      var m=$('#flagMsg');
-      try{navigator.clipboard.writeText(txt).then(function(){m.textContent='Bilan copié : collez-le dans un message pour votre professeur.'},function(){m.textContent='Copie impossible : recopiez le résultat à la main.'})}catch(e){m.textContent='Copie impossible : recopiez le résultat à la main.'}
-    });
     $('#replay').addEventListener('click',startQuiz);
     var fm=$('#flagMissed');
     if(fm)fm.addEventListener('click',function(){
