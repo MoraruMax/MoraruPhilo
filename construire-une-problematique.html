@@ -191,7 +191,7 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
 .txt span.on{background:color-mix(in srgb,var(--k) 24%,transparent);box-shadow:inset 0 -3px 0 var(--k)}
 .txt .t{--k:var(--g1)}.txt .a{--k:var(--g2)}.txt .e{--k:var(--g3)}.txt .c{--k:var(--ink)}
 .role{margin:1.2rem 0 0;padding:.9rem 1.1rem;border-left:5px solid var(--stamp);background:var(--stamp-soft);border-radius:0 8px 8px 0;max-width:none;min-height:3.2em}
-.defs{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:1rem}
+.defs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr));gap:1rem}
 .defs article{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--k,var(--ink));border-radius:0 0 8px 8px;padding:1.1rem 1.2rem 1.3rem}
 .defs article:nth-child(1){--k:var(--g1)}.defs article:nth-child(2){--k:var(--g2)}.defs article:nth-child(3){--k:var(--g3)}.defs article:nth-child(4){--k:var(--ink)}
 .defs h3{font:700 1.6rem/1.1 var(--display);margin-bottom:.2rem}
@@ -220,7 +220,7 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
 .card dl{margin:0;display:grid;grid-template-columns:minmax(0,11rem) minmax(0,1fr);gap:.55rem 1.2rem}
 .card dt{font:700 .88rem/1.4 var(--text);color:var(--stamp)}
 .card dd{margin:0}
-.pairs{display:grid;grid-template-columns:repeat(auto-fit,minmax(18rem,1fr));gap:1rem}
+.pairs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,18rem),1fr));gap:1rem}
 .pairs article{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--stamp);border-radius:0 0 8px 8px;padding:1.1rem 1.2rem}
 .pairs h3{font:700 1.3rem/1.2 var(--display);margin-bottom:.5rem}
 .pairs p{margin:0 0 .6rem;font-size:1rem}
@@ -283,7 +283,7 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
       <article>
         <h3>Le sujet</h3>
         <p class="ety">la question posée</p>
-        <p>Il est donné : on peut y répondre par « oui » ou par « non ».</p>
+        <p>Il est donné : on peut y répondre par « oui » ou par « non ».</p>
       </article>
       <article>
         <h3>La problématique</h3>
@@ -297,7 +297,7 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
       </article>
     </div>
     <div class="example rev" style="margin-top:1.6rem">
-      <p>Une question à laquelle on répond immédiatement n’est pas encore un problème. C’est parce que « oui » et « non » semblent <i>tous les deux</i> défendables que la réflexion commence.</p>
+      <p>Une question à laquelle on répond immédiatement n’est pas encore un problème. C’est parce que « oui » et « non » semblent <i>tous les deux</i> défendables que la réflexion commence.</p>
     </div>
   </div>
 </section>
@@ -309,13 +309,13 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
     </div>
     <ol class="flow rev">
       <li><h3>Définir les termes</h3><p>Chercher les différents sens de chaque mot important du sujet.</p></li>
-      <li><h3>Dire « oui » puis « non »</h3><p>Mettre le sujet à l’affirmative, puis à la négative, et en tirer les conséquences.</p></li>
-      <li><h3>Trouver un argument pour chacune</h3><p>« Oui, car… » et « non, car… », avec un exemple pour chaque réponse.</p></li>
-      <li><h3>Formuler le problème</h3><p>« Est-ce que…, puisque…, ou bien…, puisque… ? »</p></li>
+      <li><h3>Dire « oui » puis « non »</h3><p>Mettre le sujet à l’affirmative, puis à la négative, et en tirer les conséquences.</p></li>
+      <li><h3>Trouver un argument pour chacune</h3><p>« Oui, car… » et « non, car… », avec un exemple pour chaque réponse.</p></li>
+      <li><h3>Formuler le problème</h3><p>« Est-ce que…, puisque…, ou bien…, puisque… ? »</p></li>
     </ol>
     <div class="example rev">
       <h3 style="margin-bottom:.5rem">La formule du problème</h3>
-      <p style="max-width:none"><b>Est-ce que</b> <i>première réponse</i>, <b>puisque</b> <i>argument</i>, <b>ou bien</b> <i>seconde réponse</i>, <b>puisque</b> <i>argument</i> ?</p>
+      <p style="max-width:none"><b>Est-ce que</b> <i>première réponse</i>, <b>puisque</b> <i>argument</i>, <b>ou bien</b> <i>seconde réponse</i>, <b>puisque</b> <i>argument</i> ?</p>
     </div>
   </div>
 </section>
@@ -323,12 +323,12 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
   <div class="wrap">
     <div class="sec-head rev">
       <span class="kicker">Critères</span>
-      <h2 id="h-good">Qu’est-ce qu’une bonne problématique ?</h2>
+      <h2 id="h-good">Qu’est-ce qu’une bonne problématique ?</h2>
     </div>
     <ul class="tips rev">
       <li><b>Deux réponses sérieuses.</b> Chacune doit pouvoir être défendue par de vrais arguments, pas par une caricature.</li>
       <li><b>Une opposition réelle.</b> Les deux réponses ne peuvent pas être vraies en même temps, ou pas de la même manière.</li>
-      <li><b>Des raisons.</b> Chaque réponse est appuyée par un « puisque » : sans lui, ce n’est qu’une opinion.</li>
+      <li><b>Des raisons.</b> Chaque réponse est appuyée par un « puisque » : sans lui, ce n’est qu’une opinion.</li>
       <li><b>Les mots du sujet.</b> Le problème reprend les notions du sujet, sans en changer.</li>
     </ul>
   </div>
@@ -340,10 +340,10 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
       <h2 id="h-pit">Quatre fausses problématiques</h2>
     </div>
     <ol class="pitfalls rev">
-      <li><h3>La reformulation du sujet</h3><p>Redire le sujet sous forme de « oui ou non », sans raison.</p><p class="ex">« La religion est-elle nécessaire à la morale, ou ne l’est-elle pas ? »</p></li>
-      <li><h3>Une réponse caricaturale</h3><p>Opposer une thèse sérieuse à une thèse qu’aucun auteur ne défendrait.</p><p class="ex">« Faut-il des lois, ou bien vaut-il mieux le chaos total ? »</p></li>
+      <li><h3>La reformulation du sujet</h3><p>Redire le sujet sous forme de « oui ou non », sans raison.</p><p class="ex">« La religion est-elle nécessaire à la morale, ou ne l’est-elle pas ? »</p></li>
+      <li><h3>Une réponse caricaturale</h3><p>Opposer une thèse sérieuse à une thèse qu’aucun auteur ne défendrait.</p><p class="ex">« Faut-il des lois, ou bien vaut-il mieux le chaos total ? »</p></li>
       <li><h3>Un changement de notion</h3><p>Glisser vers un autre sujet, voisin du sujet donné.</p><p class="ex">Sujet sur la liberté, problème sur le bonheur.</p></li>
-      <li><h3>Une question trop vague</h3><p>Une question générale à laquelle le sujet ne demande pas de répondre.</p><p class="ex">« Qu’est-ce que la liberté ? »</p></li>
+      <li><h3>Une question trop vague</h3><p>Une question générale à laquelle le sujet ne demande pas de répondre.</p><p class="ex">« Qu’est-ce que la liberté ? »</p></li>
     </ol>
   </div>
 </section>
@@ -354,11 +354,11 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
       <h2 id="h-plan">De la problématique au plan</h2>
     </div>
     <div class="rev">
-      <p>Chaque réponse du problème devient une <b>partie</b> : la première défend le « oui », la seconde défend le « non ». Une troisième partie cherche à <b>dépasser l’opposition</b>, par exemple en distinguant deux sens d’un mot ou en précisant une condition.</p>
+      <p>Chaque réponse du problème devient une <b>partie</b> : la première défend le « oui », la seconde défend le « non ». Une troisième partie cherche à <b>dépasser l’opposition</b>, par exemple en distinguant deux sens d’un mot ou en précisant une condition.</p>
     </div>
     <div class="example rev">
       <h3 style="margin-bottom:.5rem">Pour s’entraîner</h3>
-      <ul class="chips big"><li><a href="comprendre-la-consigne.html">Avant : lire le sujet</a></li><li><a href="argumentation.html">Avant : argumenter</a></li><li><a href="methode-dissertation.html">La méthode de la dissertation</a></li><li><a href="atelier-dissertation.html">L’atelier dissertation</a></li></ul>
+      <ul class="chips big"><li><a href="comprendre-la-consigne.html">Avant : lire le sujet</a></li><li><a href="argumentation.html">Avant : argumenter</a></li><li><a href="methode-dissertation.html">La méthode de la dissertation</a></li><li><a href="atelier-dissertation.html">L’atelier dissertation</a></li></ul>
     </div>
   </div>
 </section>
@@ -366,17 +366,17 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
   <div class="wrap">
     <h2 id="h-r" style="margin-bottom:1.8rem">À retenir</h2>
     <ul class="recap rev">
-      <li>Le sujet est une question ; la problématique montre pourquoi on ne peut pas y répondre directement par « oui » ou par « non ».</li>
-      <li>Pour la construire : définir les termes, dire « oui » puis « non », trouver un argument pour chaque réponse.</li>
-      <li>Formule : « Est-ce que…, puisque…, ou bien…, puisque… ? »</li>
+      <li>Le sujet est une question ; la problématique montre pourquoi on ne peut pas y répondre directement par « oui » ou par « non ».</li>
+      <li>Pour la construire : définir les termes, dire « oui » puis « non », trouver un argument pour chaque réponse.</li>
+      <li>Formule : « Est-ce que…, puisque…, ou bien…, puisque… ? »</li>
       <li>Une bonne problématique oppose deux réponses sérieuses, appuyées sur des raisons et formulées avec les mots du sujet.</li>
-      <li>Le plan répond au problème : une partie pour chaque réponse, puis un dépassement de l’opposition.</li>
+      <li>Le plan répond au problème : une partie pour chaque réponse, puis un dépassement de l’opposition.</li>
     </ul>
   </div>
 </section>
 </main>
 
-<nav class="pn" aria-label="Parcours dissertation"><a href="argumentation.html" rel="prev"><small>← Étape précédente</small><b>Argumenter</b></a><a class="nx" href="construire-le-plan.html" rel="next"><small>Étape suivante →</small><b>Construire le plan</b></a><a class="hm" href="parcours-dissertation.html">Parcours dissertation : étape 3 sur 8</a><a class="hm" href="accueil.html">Retour à l’accueil</a></nav>
+<nav class="pn" aria-label="Parcours dissertation"><a href="argumentation.html" rel="prev"><small>← Étape précédente</small><b>Argumenter</b></a><a class="nx" href="construire-le-plan.html" rel="next"><small>Étape suivante →</small><b>Construire le plan</b></a><a class="hm" href="parcours-dissertation.html">Parcours dissertation : étape 3 sur 8</a><a class="hm" href="accueil.html">Retour à l’accueil</a></nav>
 
 <script>
 (function(){

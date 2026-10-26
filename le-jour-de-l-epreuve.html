@@ -191,7 +191,7 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
 .txt span.on{background:color-mix(in srgb,var(--k) 24%,transparent);box-shadow:inset 0 -3px 0 var(--k)}
 .txt .t{--k:var(--g1)}.txt .a{--k:var(--g2)}.txt .e{--k:var(--g3)}.txt .c{--k:var(--ink)}
 .role{margin:1.2rem 0 0;padding:.9rem 1.1rem;border-left:5px solid var(--stamp);background:var(--stamp-soft);border-radius:0 8px 8px 0;max-width:none;min-height:3.2em}
-.defs{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:1rem}
+.defs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr));gap:1rem}
 .defs article{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--k,var(--ink));border-radius:0 0 8px 8px;padding:1.1rem 1.2rem 1.3rem}
 .defs article:nth-child(1){--k:var(--g1)}.defs article:nth-child(2){--k:var(--g2)}.defs article:nth-child(3){--k:var(--g3)}.defs article:nth-child(4){--k:var(--ink)}
 .defs h3{font:700 1.6rem/1.1 var(--display);margin-bottom:.2rem}
@@ -220,7 +220,7 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
 .card dl{margin:0;display:grid;grid-template-columns:minmax(0,11rem) minmax(0,1fr);gap:.55rem 1.2rem}
 .card dt{font:700 .88rem/1.4 var(--text);color:var(--stamp)}
 .card dd{margin:0}
-.pairs{display:grid;grid-template-columns:repeat(auto-fit,minmax(18rem,1fr));gap:1rem}
+.pairs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,18rem),1fr));gap:1rem}
 .pairs article{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--stamp);border-radius:0 0 8px 8px;padding:1.1rem 1.2rem}
 .pairs h3{font:700 1.3rem/1.2 var(--display);margin-bottom:.5rem}
 .pairs p{margin:0 0 .6rem;font-size:1rem}
@@ -303,7 +303,7 @@ html.lect .tl{display:block}html.lect .tl li{display:list-item}
 <header class="hero">
   <div class="wrap">
     <h1>Le jour de l’épreuve</h1>
-    <p class="lead">Quatre heures, trois sujets au choix, une seule copie : des conseils pour bien s’organiser.</p>
+    <p class="lead">Quatre heures, trois sujets au choix, une seule copie : des conseils pour bien s’organiser.</p>
     <div class="demo">
       <p class="note" style="margin:0 0 .8rem">Une répartition possible des quatre heures, la même pour la dissertation et pour l’explication de texte.</p>
       <div class="tlg">
@@ -325,7 +325,7 @@ html.lect .tl{display:block}html.lect .tl li{display:list-item}
           </ol>
         </div>
       </div>
-      <p class="note" style="margin:1rem 0 0">Ces durées sont données à titre indicatif : le bac blanc vous permettra de vous ajuster.</p>
+      <p class="note" style="margin:1rem 0 0">Ces durées sont données à titre indicatif : le bac blanc vous permettra de vous ajuster.</p>
     </div>
   </div>
 </header>
@@ -338,8 +338,8 @@ html.lect .tl{display:block}html.lect .tl li{display:list-item}
       <h2 id="h-av">La veille et le matin</h2>
     </div>
     <ul class="tips rev">
-      <li><h3>Ne pas se tromper de jour</h3><p>Relire la convocation plusieurs jours à l’avance : date, heure et lieu de l’épreuve.</p></li>
-      <li><h3>Préparer le matériel</h3><p>Convocation et pièce d’identité, plusieurs stylos de la même couleur, une règle, une montre simple. Téléphones et objets connectés seront éteints et rangés, comme l’exige le règlement : la convocation et les consignes du centre d’examen font foi.</p></li>
+      <li><h3>Ne pas se tromper de jour</h3><p>Relire la convocation plusieurs jours à l’avance : date, heure et lieu de l’épreuve.</p></li>
+      <li><h3>Préparer le matériel</h3><p>Convocation et pièce d’identité, plusieurs stylos de la même couleur, une règle, une montre simple. Téléphones et objets connectés seront éteints et rangés, comme l’exige le règlement : la convocation et les consignes du centre d’examen font foi.</p></li>
       <li><h3>Arriver sans courir</h3><p>Prévoir de la marge pour le trajet. Ne surtout pas arriver en retard ou stressé.</p></li>
     </ul>
   </div>
@@ -350,18 +350,18 @@ html.lect .tl{display:block}html.lect .tl li{display:list-item}
     <div class="sec-head rev">
       <span class="kicker">Pendant</span>
       <h2 id="h-t">Les quatre heures, étape par étape</h2>
-      <p>Les deux épreuves suivent la même logique : <b>comprendre avant d’écrire</b>, puis écrire avec un plan que l’on possède. Près de la moitié du temps est consacrée à la préparation et à l’introduction, ce qui est normal.</p>
+      <p>Les deux épreuves suivent la même logique : <b>comprendre avant d’écrire</b>, puis écrire avec un plan que l’on possède. Près de la moitié du temps est consacrée à la préparation et à l’introduction, ce qui est normal.</p>
     </div>
     <div class="tw rev">
       <table class="cmp">
         <caption>Emploi du temps indicatif (4 heures)</caption>
         <thead><tr><th scope="col">Étape</th><th scope="col">Dissertation</th><th scope="col">Explication de texte</th></tr></thead>
         <tbody>
-          <tr class="b"><th scope="row">Choisir <small class="muted">20 min</small><small class="tag b">Brouillon</small></th><td>Lire les trois sujets, repérer les mots à examiner, esquisser une problématique pour chacun des deux sujets de dissertation.</td><td>Lire le texte au moins deux fois : thèse, mouvement, vocabulaire. Décider si on le comprend assez pour l’expliquer.</td></tr>
+          <tr class="b"><th scope="row">Choisir <small class="muted">20 min</small><small class="tag b">Brouillon</small></th><td>Lire les trois sujets, repérer les mots à examiner, esquisser une problématique pour chacun des deux sujets de dissertation.</td><td>Lire le texte au moins deux fois : thèse, mouvement, vocabulaire. Décider si on le comprend assez pour l’expliquer.</td></tr>
           <tr class="b"><th scope="row">Analyser <small class="muted">30 min</small><small class="tag b">Brouillon</small></th><td>Définir les termes, reformuler la question, formuler une problématique.</td><td>Dégager la question à laquelle répond le texte, sa thèse et les grandes étapes de son argumentation.</td></tr>
-          <tr class="b"><th scope="row">Plan <small class="muted">40 min</small><small class="tag b">Brouillon</small></th><td>Plan détaillé au brouillon : parties, arguments, exemples, références. Vérifier que les parties répondent à la problématique.</td><td>Plan de l’explication : suivre le texte étape par étape, noter pour chacune l’idée, le lien avec la précédente et l’enjeu.</td></tr>
+          <tr class="b"><th scope="row">Plan <small class="muted">40 min</small><small class="tag b">Brouillon</small></th><td>Plan détaillé au brouillon : parties, arguments, exemples, références. Vérifier que les parties répondent à la problématique.</td><td>Plan de l’explication : suivre le texte étape par étape, noter pour chacune l’idée, le lien avec la précédente et l’enjeu.</td></tr>
           <tr class="b"><th scope="row">Introduction <small class="muted">20 min</small><small class="tag b">Brouillon</small></th><td>Accroche, analyse du sujet, problématique, annonce du plan. Elle se rédige avec soin, au brouillon.</td><td>Présentation du texte, de sa thèse, de sa question, annonce des étapes.</td></tr>
-          <tr class="c"><th scope="row">Développement <small class="muted">1 h 40</small><small class="tag c">Copie</small></th><td>Recopier l’introduction au propre, puis rédiger chaque partie avec ses transitions. Garder du temps pour la dernière, qui est souvent bâclée.</td><td>Recopier l’introduction au propre, puis expliquer le texte dans son ordre, sans le paraphraser : dire ce que l’auteur fait, pourquoi, et ce que cela suppose.</td></tr>
+          <tr class="c"><th scope="row">Développement <small class="muted">1 h 40</small><small class="tag c">Copie</small></th><td>Recopier l’introduction au propre, puis rédiger chaque partie avec ses transitions. Garder du temps pour la dernière, qui est souvent bâclée.</td><td>Recopier l’introduction au propre, puis expliquer le texte dans son ordre, sans le paraphraser : dire ce que l’auteur fait, pourquoi, et ce que cela suppose.</td></tr>
           <tr class="c"><th scope="row">Conclusion <small class="muted">10 min</small><small class="tag c">Copie</small></th><td>Les bilans des parties, puis une réponse claire à la question.</td><td>Bilan de la thèse, puis un jugement sur sa portée, argumenté.</td></tr>
           <tr class="c"><th scope="row">Relecture <small class="muted">20 min</small><small class="tag c">Copie</small></th><td colspan="2" class="all">Orthographe, phrases incomplètes, citations entre guillemets, transitions, lisibilité de l’écriture, copie numérotée.</td></tr>
         </tbody>
@@ -381,13 +381,13 @@ html.lect .tl{display:block}html.lect .tl li{display:list-item}
         <h3>Une dissertation si…</h3>
         <p>On peut dire, en une phrase, quel est le problème posé par la question.</p>
         <p>On a deux ou trois idées différentes, avec chacune au moins un exemple précis et une référence maîtrisée.</p>
-        <p class="vs">Méfiance : un sujet qui « parle » parce que le mot est familier mais dont on ne sait pas définir les termes.</p>
+        <p class="vs">Méfiance : un sujet qui « parle » parce que le mot est familier mais dont on ne sait pas définir les termes.</p>
       </article>
       <article>
         <h3>Une explication si…</h3>
         <p>À la troisième ou quatrième lecture, on peut résumer la thèse du texte avec ses propres mots.</p>
         <p>On repère les étapes, les connecteurs, les exemples et les termes importants du texte.</p>
-        <p class="vs">Méfiance : choisir l’explication parce qu’on croit avoir « moins de cours à connaître ». Le texte exige une lecture précise, et le cours sert à en éclairer l’enjeu.</p>
+        <p class="vs">Méfiance : choisir l’explication parce qu’on croit avoir « moins de cours à connaître ». Le texte exige une lecture précise, et le cours sert à en éclairer l’enjeu.</p>
       </article>
     </div>
   </div>
@@ -401,7 +401,7 @@ html.lect .tl{display:block}html.lect .tl li{display:list-item}
     </div>
     <ol class="pitfalls rev">
       <li><h3>Commencer à écrire trop tôt</h3><p>Un plan découvert pendant la rédaction produit des parties qui se répètent et une conclusion improvisée. Mieux vaut passer plus de temps au brouillon.</p></li>
-      <li><h3>Réciter un cours</h3><p>Le sujet n’est pas un prétexte pour déposer tout ce qu’on sait sur la notion : chaque idée doit servir à répondre à la question posée.</p></li>
+      <li><h3>Réciter un cours</h3><p>Le sujet n’est pas un prétexte pour déposer tout ce qu’on sait sur la notion : chaque idée doit servir à répondre à la question posée.</p></li>
       <li><h3>Glisser hors sujet</h3><p>Revenir régulièrement au libellé exact du sujet, recopié en haut du brouillon.</p></li>
       <li><h3>Bâcler la fin</h3><p>Une troisième partie rédigée en dix minutes ou une conclusion absente coûtent plus cher que trois lignes supprimées dans la première partie. Si le temps manque, on abrège les premières parties, jamais la dernière.</p></li>
       <li><h3>Vouloir à tout prix écrire pendant quatre heures</h3><p>Ménagez-vous des temps de pause de quelques minutes, vous laissant le temps de souffler et de recentrer votre réflexion.</p></li>
@@ -417,7 +417,7 @@ html.lect .tl{display:block}html.lect .tl li{display:list-item}
       <h2 id="h-fin">Les dernières minutes</h2>
     </div>
     <ol class="flow rev">
-      <li><h3>Relire la fin</h3><p>La conclusion répond-elle bien à la question posée ?</p></li>
+      <li><h3>Relire la fin</h3><p>La conclusion répond-elle bien à la question posée ?</p></li>
       <li><h3>Corriger</h3><p>Phrases inachevées, mots oubliés, accords, citations entre guillemets.</p></li>
       <li><h3>Vérifier la copie</h3><p>Pages numérotées, en-tête complété selon les consignes du surveillant.</p></li>
     </ol>

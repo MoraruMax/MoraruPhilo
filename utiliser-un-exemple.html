@@ -191,7 +191,7 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
 .txt span.on{background:color-mix(in srgb,var(--k) 24%,transparent);box-shadow:inset 0 -3px 0 var(--k)}
 .txt .t{--k:var(--g1)}.txt .a{--k:var(--g2)}.txt .e{--k:var(--g3)}.txt .c{--k:var(--ink)}
 .role{margin:1.2rem 0 0;padding:.9rem 1.1rem;border-left:5px solid var(--stamp);background:var(--stamp-soft);border-radius:0 8px 8px 0;max-width:none;min-height:3.2em}
-.defs{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:1rem}
+.defs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr));gap:1rem}
 .defs article{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--k,var(--ink));border-radius:0 0 8px 8px;padding:1.1rem 1.2rem 1.3rem}
 .defs article:nth-child(1){--k:var(--g1)}.defs article:nth-child(2){--k:var(--g2)}.defs article:nth-child(3){--k:var(--g3)}.defs article:nth-child(4){--k:var(--ink)}
 .defs h3{font:700 1.6rem/1.1 var(--display);margin-bottom:.2rem}
@@ -220,7 +220,7 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
 .card dl{margin:0;display:grid;grid-template-columns:minmax(0,11rem) minmax(0,1fr);gap:.55rem 1.2rem}
 .card dt{font:700 .88rem/1.4 var(--text);color:var(--stamp)}
 .card dd{margin:0}
-.pairs{display:grid;grid-template-columns:repeat(auto-fit,minmax(18rem,1fr));gap:1rem}
+.pairs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,18rem),1fr));gap:1rem}
 .pairs article{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--stamp);border-radius:0 0 8px 8px;padding:1.1rem 1.2rem}
 .pairs h3{font:700 1.3rem/1.2 var(--display);margin-bottom:.5rem}
 .pairs p{margin:0 0 .6rem;font-size:1rem}
@@ -269,10 +269,10 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
 <header class="hero">
   <div class="wrap">
     <h1>Utiliser une référence ou un exemple</h1>
-    <p class="lead">Une référence ou un exemple n’a de valeur que s’il appuie un argument. Voici comment les utiliser : les choisir, les introduire, les expliquer et en tirer une idée, sur des sous-parties de vos corrigés et de vos fiches de cours.</p>
+    <p class="lead">Une référence ou un exemple n’a de valeur que s’il appuie un argument. Voici comment les utiliser : les choisir, les introduire, les expliquer et en tirer une idée, sur des sous-parties de vos corrigés et de vos fiches de cours.</p>
 
     <div class="demo">
-      <p class="note" style="margin:0 0 .8rem">Choisissez un sujet, puis avancez : d’abord une sous-partie avec une référence, puis une sous-partie avec un exemple.</p>
+      <p class="note" style="margin:0 0 .8rem">Choisissez un sujet, puis avancez : d’abord une sous-partie avec une référence, puis une sous-partie avec un exemple.</p>
       <div class="subj" id="subj" role="group" aria-label="Sujets"></div>
       <div class="txt" id="txt" aria-live="off"></div>
       <p class="role" id="role" aria-live="polite"></p>
@@ -291,7 +291,7 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
       <span class="kicker">Principe</span>
       <h2 id="h-def">À quoi servent une référence et un exemple ?</h2>
     </div>
-    <p class="rev">Une référence ou un exemple ne démontre rien à lui seul : il <b>appuie un argument</b>. Chaque sous-partie suit donc le même schéma.</p>
+    <p class="rev">Une référence ou un exemple ne démontre rien à lui seul : il <b>appuie un argument</b>. Chaque sous-partie suit donc le même schéma.</p>
     <div class="defs rev" style="margin-top:1.4rem">
       <article><h3>L’argument</h3><p class="ety">l’idée défendue</p><p>La raison pour laquelle la thèse de la partie est vraie.</p></article>
       <article><h3>La référence</h3><p class="ety">ou l’exemple</p><p>Une idée déjà établie par un auteur du cours, qui appuie l’argument. Un exemple, lui, est un fait précis qui le rend concret.</p></article>
@@ -318,26 +318,26 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
       <span class="kicker">Référence</span>
       <h2 id="h-ref">Comment utiliser une référence</h2>
     </div>
-    <p class="rev">Citer un auteur ne suffit jamais : la référence ne vaut que par <b>l’usage que l’on en fait</b>. Elle suit cinq temps, que la démonstration en haut de page illustre pour chacun des trois sujets.</p>
+    <p class="rev">Citer un auteur ne suffit jamais : la référence ne vaut que par <b>l’usage que l’on en fait</b>. Elle suit cinq temps, que la démonstration en haut de page illustre pour chacun des trois sujets.</p>
     <ol class="flow rev" style="margin-top:1.4rem">
       <li><h3>Choisir</h3><p>Une référence qui soutient précisément l’argument, pas seulement le même thème.</p></li>
       <li><h3>Introduire</h3><p>Nommer l’auteur et l’œuvre, puis dire en une phrase l’idée retenue.</p></li>
-      <li><h3>Expliquer</h3><p>Reconstituer son raisonnement : pourquoi dit-il cela ? Que veulent dire ses mots ?</p></li>
+      <li><h3>Expliquer</h3><p>Reconstituer son raisonnement : pourquoi dit-il cela ? Que veulent dire ses mots ?</p></li>
       <li><h3>Relier</h3><p>Montrer en quoi cette idée démontre l’argument défendu.</p></li>
-      <li><h3>Conclure</h3><p>La synthèse : ce que la référence permet d’établir pour le sujet.</p></li>
+      <li><h3>Conclure</h3><p>La synthèse : ce que la référence permet d’établir pour le sujet.</p></li>
     </ol>
     <div class="example rev">
       <h3>Un schéma de paragraphe</h3>
-      <p>Les crochets sont à remplacer par votre argument, votre auteur et votre idée :</p>
+      <p>Les crochets sont à remplacer par votre argument, votre auteur et votre idée :</p>
       <p><b>[Argument].</b> Pour défendre cette idée, nous pouvons nous appuyer sur <b>[auteur]</b>, dans <b>[œuvre]</b>. Il y soutient que <b>[idée, reformulée]</b>. En effet, selon lui, <b>[son raisonnement, en une ou deux phrases]</b>. Cela montre donc que <b>[retour à l’argument]</b>, et par conséquent que <b>[lien avec le sujet]</b>.</p>
     </div>
     <div class="pairs rev" style="margin-top:2rem">
-      <article><h3>Un usage faible</h3><p>« Comme le dit Spinoza, nous nous croyons libres parce que nous ignorons les causes. Donc la liberté est une illusion. »</p><p class="vs">L’idée est affirmée sans explication : le lecteur ne voit pas pourquoi elle démontre l’argument.</p></article>
-      <article><h3>Un bon usage</h3><p>« Spinoza imagine une pierre lancée qui, devenue consciente, se croirait libre : elle ignore la cause de son mouvement. Il en va de même pour l’homme : le sentiment de choisir ne prouve pas que nous soyons libres. »</p><p class="vs">L’idée est expliquée avec ses propres mots, puis reliée à l’argument et au sujet.</p></article>
+      <article><h3>Un usage faible</h3><p>« Comme le dit Spinoza, nous nous croyons libres parce que nous ignorons les causes. Donc la liberté est une illusion. »</p><p class="vs">L’idée est affirmée sans explication : le lecteur ne voit pas pourquoi elle démontre l’argument.</p></article>
+      <article><h3>Un bon usage</h3><p>« Spinoza imagine une pierre lancée qui, devenue consciente, se croirait libre : elle ignore la cause de son mouvement. Il en va de même pour l’homme : le sentiment de choisir ne prouve pas que nous soyons libres. »</p><p class="vs">L’idée est expliquée avec ses propres mots, puis reliée à l’argument et au sujet.</p></article>
     </div>
     <ul class="tips rev" style="margin-top:1.6rem">
-      <li><b>Citer ou reformuler ?</b> Une citation courte et exacte, ou une reformulation fidèle. Jamais une longue citation que l’on ne commente pas.</li>
-      <li><b>Rester fidèle.</b> Ne prêtez pas à l’auteur ce qu’il ne dit pas : si vous hésitez, reformulez plus prudemment.</li>
+      <li><b>Citer ou reformuler ?</b> Une citation courte et exacte, ou une reformulation fidèle. Jamais une longue citation que l’on ne commente pas.</li>
+      <li><b>Rester fidèle.</b> Ne prêtez pas à l’auteur ce qu’il ne dit pas : si vous hésitez, reformulez plus prudemment.</li>
       <li><b>Définir ses mots.</b> Si la référence repose sur un terme précis, expliquez-le avant de l’utiliser.</li>
       <li><b>Une référence par argument.</b> Elle appuie l’argument, elle ne remplace ni l’argument ni le plan.</li>
     </ul>
@@ -350,11 +350,11 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
       <h2 id="h-choix">Choisir un bon exemple</h2>
     </div>
     <ul class="tips rev">
-      <li><b>Précis.</b> Un fait, une situation, une œuvre : « les choix d’orientation sur Parcoursup », pas « certaines personnes ».</li>
+      <li><b>Précis.</b> Un fait, une situation, une œuvre : « les choix d’orientation sur Parcoursup », pas « certaines personnes ».</li>
       <li><b>Pertinent.</b> Il illustre exactement l’argument, pas le sujet en général.</li>
       <li><b>Maîtrisé.</b> Prenez un exemple que vous connaissez assez bien pour l’expliquer en quelques phrases.</li>
       <li><b>Unique.</b> Un exemple ou une référence par argument, pas davantage.</li>
-      <li><b>Varié.</b> D’une sous-partie à l’autre, puisez ailleurs : histoire, actualité, œuvres d’art, sciences, vie quotidienne.</li>
+      <li><b>Varié.</b> D’une sous-partie à l’autre, puisez ailleurs : histoire, actualité, œuvres d’art, sciences, vie quotidienne.</li>
     </ul>
   </div>
 </section>
@@ -366,9 +366,9 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
     </div>
     <ol class="flow rev">
       <li><h3>Énoncer l’argument</h3><p>L’idée défendue, en une phrase claire.</p></li>
-      <li><h3>Introduire l’exemple</h3><p>« Par exemple », « prenons le cas de… ».</p></li>
-      <li><h3>Expliquer</h3><p>Dire en quoi il illustre l’argument : l’exemple ne parle pas tout seul.</p></li>
-      <li><h3>Conclure</h3><p>La synthèse : ce que l’on a établi, rapporté au sujet.</p></li>
+      <li><h3>Introduire l’exemple</h3><p>« Par exemple », « prenons le cas de… ».</p></li>
+      <li><h3>Expliquer</h3><p>Dire en quoi il illustre l’argument : l’exemple ne parle pas tout seul.</p></li>
+      <li><h3>Conclure</h3><p>La synthèse : ce que l’on a établi, rapporté au sujet.</p></li>
     </ol>
     <div class="tw rev" style="margin-top:1.4rem"><table class="cmp">
       <caption>Quelques formules pour accompagner l’exemple</caption>
@@ -388,12 +388,12 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
       <h2 id="h-pit">Six façons de rater ses références et ses exemples</h2>
     </div>
     <ol class="pitfalls rev">
-      <li><h3>Une référence « parachutée »</h3><p>Citer un auteur sans dire en quoi sa pensée soutient l’argument ne démontre rien.</p></li>
-      <li><h3>Une référence déformée</h3><p>Lui faire dire ce qu’elle ne dit pas : mieux vaut une reformulation prudente.</p></li>
-      <li><h3>Un exemple trop vague</h3><p>« Les gens », « certains pays » : on ne voit pas de quoi l’on parle.</p></li>
+      <li><h3>Une référence « parachutée »</h3><p>Citer un auteur sans dire en quoi sa pensée soutient l’argument ne démontre rien.</p></li>
+      <li><h3>Une référence déformée</h3><p>Lui faire dire ce qu’elle ne dit pas : mieux vaut une reformulation prudente.</p></li>
+      <li><h3>Un exemple trop vague</h3><p>« Les gens », « certains pays » : on ne voit pas de quoi l’on parle.</p></li>
       <li><h3>Un exemple posé sans explication</h3><p>Le lecteur doit voir en quoi il illustre l’argument. Expliquez-le.</p></li>
-      <li><h3>Un catalogue d’exemples</h3><p>Plusieurs exemples pour un seul argument : choisissez le meilleur.</p></li>
-      <li><h3>Un exemple qui ne sert pas l’argument</h3><p>Une anecdote amusante mais hors de propos : elle affaiblit la sous-partie.</p></li>
+      <li><h3>Un catalogue d’exemples</h3><p>Plusieurs exemples pour un seul argument : choisissez le meilleur.</p></li>
+      <li><h3>Un exemple qui ne sert pas l’argument</h3><p>Une anecdote amusante mais hors de propos : elle affaiblit la sous-partie.</p></li>
     </ol>
   </div>
 </section>
@@ -411,16 +411,16 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
     <h2 id="h-r" style="margin-bottom:1.8rem">À retenir</h2>
     <ul class="recap rev">
       <li>Une référence ou un exemple n’a de valeur que s’il appuie un argument.</li>
-      <li>Chaque sous-partie suit un schéma : argument, référence ou exemple, synthèse.</li>
-      <li>Une référence se choisit, s’introduit, s’explique, se relie à l’argument, puis se conclut : citer ne suffit pas.</li>
-      <li>Elle appuie l’argument, elle ne le remplace pas : une référence par argument, fidèle à l’auteur.</li>
-      <li>Un bon exemple est précis, pertinent et maîtrisé ; il ne parle pas tout seul : il faut expliquer en quoi il illustre l’argument.</li>
+      <li>Chaque sous-partie suit un schéma : argument, référence ou exemple, synthèse.</li>
+      <li>Une référence se choisit, s’introduit, s’explique, se relie à l’argument, puis se conclut : citer ne suffit pas.</li>
+      <li>Elle appuie l’argument, elle ne le remplace pas : une référence par argument, fidèle à l’auteur.</li>
+      <li>Un bon exemple est précis, pertinent et maîtrisé ; il ne parle pas tout seul : il faut expliquer en quoi il illustre l’argument.</li>
     </ul>
   </div>
 </section>
 </main>
 
-<nav class="pn" aria-label="Parcours dissertation"><a href="construire-le-plan.html" rel="prev"><small>← Étape précédente</small><b>Construire le plan</b></a><a class="nx" href="rediger-introduction.html" rel="next"><small>Étape suivante →</small><b>Rédiger l’introduction</b></a><a class="hm" href="parcours-dissertation.html">Parcours dissertation : étape 5 sur 8</a><a class="hm" href="accueil.html">Retour à l’accueil</a></nav>
+<nav class="pn" aria-label="Parcours dissertation"><a href="construire-le-plan.html" rel="prev"><small>← Étape précédente</small><b>Construire le plan</b></a><a class="nx" href="rediger-introduction.html" rel="next"><small>Étape suivante →</small><b>Rédiger l’introduction</b></a><a class="hm" href="parcours-dissertation.html">Parcours dissertation : étape 5 sur 8</a><a class="hm" href="accueil.html">Retour à l’accueil</a></nav>
 
 <script>
 (function(){

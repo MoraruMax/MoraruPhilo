@@ -191,7 +191,7 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
 .txt span.on{background:color-mix(in srgb,var(--k) 24%,transparent);box-shadow:inset 0 -3px 0 var(--k)}
 .txt .t{--k:var(--g1)}.txt .a{--k:var(--g2)}.txt .e{--k:var(--g3)}.txt .c{--k:var(--ink)}
 .role{margin:1.2rem 0 0;padding:.9rem 1.1rem;border-left:5px solid var(--stamp);background:var(--stamp-soft);border-radius:0 8px 8px 0;max-width:none;min-height:3.2em}
-.defs{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:1rem}
+.defs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr));gap:1rem}
 .defs article{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--k,var(--ink));border-radius:0 0 8px 8px;padding:1.1rem 1.2rem 1.3rem}
 .defs article:nth-child(1){--k:var(--g1)}.defs article:nth-child(2){--k:var(--g2)}.defs article:nth-child(3){--k:var(--g3)}.defs article:nth-child(4){--k:var(--ink)}
 .defs h3{font:700 1.6rem/1.1 var(--display);margin-bottom:.2rem}
@@ -220,7 +220,7 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
 .card dl{margin:0;display:grid;grid-template-columns:minmax(0,11rem) minmax(0,1fr);gap:.55rem 1.2rem}
 .card dt{font:700 .88rem/1.4 var(--text);color:var(--stamp)}
 .card dd{margin:0}
-.pairs{display:grid;grid-template-columns:repeat(auto-fit,minmax(18rem,1fr));gap:1rem}
+.pairs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,18rem),1fr));gap:1rem}
 .pairs article{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--stamp);border-radius:0 0 8px 8px;padding:1.1rem 1.2rem}
 .pairs h3{font:700 1.3rem/1.2 var(--display);margin-bottom:.5rem}
 .pairs p{margin:0 0 .6rem;font-size:1rem}
@@ -276,15 +276,15 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
       <h2 id="h-def">Un sujet se lit mot à mot</h2>
     </div>
     <div class="rev">
-      <p>La <b>consigne</b>, c’est ce que le sujet vous demande de faire. Elle tient dans trois éléments :</p>
+      <p>La <b>consigne</b>, c’est ce que le sujet vous demande de faire. Elle tient dans trois éléments :</p>
       <ul class="chips">
-        <li>les <b>notions</b> : les mots-clés à définir</li>
-        <li>la <b>forme de la question</b> : ce qu’on attend de vous</li>
-        <li>les <b>petits mots</b> : ceux qui précisent ou limitent</li>
+        <li>les <b>notions</b> : les mots-clés à définir</li>
+        <li>la <b>forme de la question</b> : ce qu’on attend de vous</li>
+        <li>les <b>petits mots</b> : ceux qui précisent ou limitent</li>
       </ul>
     </div>
     <div class="example rev" style="margin-top:1.6rem">
-      <p>Deux sujets proches ne demandent pas la même chose. « Peut-on tout dire ? » interroge ce qui est possible ou permis ; « Doit-on tout dire ? » interroge une obligation. Répondre à l’un en traitant l’autre, c’est faire un hors-sujet.</p>
+      <p>Deux sujets proches ne demandent pas la même chose. « Peut-on tout dire ? » interroge ce qui est possible ou permis ; « Doit-on tout dire ? » interroge une obligation. Répondre à l’un en traitant l’autre, c’est faire un hors-sujet.</p>
     </div>
   </div>
 </section>
@@ -298,11 +298,11 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
       <caption>Ce que demande chaque formulation</caption>
       <thead><tr><th scope="col">Formulation</th><th scope="col">Ce qu’elle demande</th><th scope="col">Piège</th></tr></thead>
       <tbody>
-        <tr><th scope="row">« … est-il / est-ce que… ? »</th><td>Trancher entre « oui » et « non » après avoir examiné les raisons de chacun.</td><td>Répondre d’emblée « oui » ou « non », sans examiner l’autre réponse possible.</td></tr>
-        <tr><th scope="row">« Peut-on… ? »</th><td>Est-ce <b>possible</b> (capacité) ? Est-ce <b>permis</b> (droit) ?</td><td>Ne traiter que l’un des deux sens du verbe « pouvoir ».</td></tr>
-        <tr><th scope="row">« Faut-il… ? » « Doit-on… ? »</th><td>Y a-t-il une <b>obligation</b> : morale, juridique, ou simple intérêt ?</td><td>Confondre ce qui est utile et ce qui est obligatoire.</td></tr>
-        <tr><th scope="row">« … consiste-t-il à… ? »</th><td>Est-ce la <b>définition</b> de la chose ? Est-ce <i>seulement</i> cela ?</td><td>Donner des exemples au lieu de définir.</td></tr>
-        <tr><th scope="row">« X, est-ce Y ? » « X, est-ce seulement Y ? »</th><td>X se <b>réduit</b>-il à Y ? Y est-il la totalité de X, ou seulement l’un de ses aspects ?</td><td>Montrer que Y fait partie de X, sans chercher ce que X contient d’autre.</td></tr>
+        <tr><th scope="row">« … est-il / est-ce que… ? »</th><td>Trancher entre « oui » et « non » après avoir examiné les raisons de chacun.</td><td>Répondre d’emblée « oui » ou « non », sans examiner l’autre réponse possible.</td></tr>
+        <tr><th scope="row">« Peut-on… ? »</th><td>Est-ce <b>possible</b> (capacité) ? Est-ce <b>permis</b> (droit) ?</td><td>Ne traiter que l’un des deux sens du verbe « pouvoir ».</td></tr>
+        <tr><th scope="row">« Faut-il… ? » « Doit-on… ? »</th><td>Y a-t-il une <b>obligation</b> : morale, juridique, ou simple intérêt ?</td><td>Confondre ce qui est utile et ce qui est obligatoire.</td></tr>
+        <tr><th scope="row">« … consiste-t-il à… ? »</th><td>Est-ce la <b>définition</b> de la chose ? Est-ce <i>seulement</i> cela ?</td><td>Donner des exemples au lieu de définir.</td></tr>
+        <tr><th scope="row">« X, est-ce Y ? » « X, est-ce seulement Y ? »</th><td>X se <b>réduit</b>-il à Y ? Y est-il la totalité de X, ou seulement l’un de ses aspects ?</td><td>Montrer que Y fait partie de X, sans chercher ce que X contient d’autre.</td></tr>
       </tbody></table></div>
   </div>
 </section>
@@ -313,12 +313,12 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
       <h2 id="h-words">Les mots qui changent le sujet</h2>
     </div>
     <div class="pairs rev">
-      <article><h3>Tous, toujours, jamais</h3><p>Ils portent sur <b>l’ensemble</b> : un seul contre-exemple suffit à répondre « non ».</p><p class="vs">« Le bonheur consiste-t-il à satisfaire <i>tous</i> ses désirs ? »</p></article>
-      <article><h3>Un, le, seul</h3><p>« Un moyen » en désigne un parmi d’autres ; « le seul moyen » est beaucoup plus exigeant.</p><p class="vs">« L’art est-il <i>un</i> moyen d’accéder à la vérité ? »</p></article>
-      <article><h3>Nécessaire, suffisant</h3><p>Ce qui est <b>nécessaire</b> manque quand il est absent ; ce qui est <b>suffisant</b> garantit le résultat à lui seul. Ni l’un ni l’autre ne signifie « utile ».</p><p class="vs">« La religion est-elle <i>nécessaire</i> à la morale ? »</p></article>
-      <article><h3>Pouvoir, devoir, être</h3><p>Le verbe indique la <b>modalité</b> : ce qui est possible, ce qui est obligatoire, ce qui est.</p><p class="vs">« Peut-on décider d’être heureux ? »</p></article>
-      <article><h3>Seulement, que, au moins</h3><p>Ils restreignent ou élargissent : ils déplacent la question.</p><p class="vs">« Le travail est-il <i>seulement</i> une contrainte ? »</p></article>
-      <article><h3>La négation</h3><p>Elle retourne la question : « Ne faut-il pas… ? » invite à l’approbation, mais la question reste ouverte.</p><p class="vs">« Ne faut-il pas obéir aux lois ? »</p></article>
+      <article><h3>Tous, toujours, jamais</h3><p>Ils portent sur <b>l’ensemble</b> : un seul contre-exemple suffit à répondre « non ».</p><p class="vs">« Le bonheur consiste-t-il à satisfaire <i>tous</i> ses désirs ? »</p></article>
+      <article><h3>Un, le, seul</h3><p>« Un moyen » en désigne un parmi d’autres ; « le seul moyen » est beaucoup plus exigeant.</p><p class="vs">« L’art est-il <i>un</i> moyen d’accéder à la vérité ? »</p></article>
+      <article><h3>Nécessaire, suffisant</h3><p>Ce qui est <b>nécessaire</b> manque quand il est absent ; ce qui est <b>suffisant</b> garantit le résultat à lui seul. Ni l’un ni l’autre ne signifie « utile ».</p><p class="vs">« La religion est-elle <i>nécessaire</i> à la morale ? »</p></article>
+      <article><h3>Pouvoir, devoir, être</h3><p>Le verbe indique la <b>modalité</b> : ce qui est possible, ce qui est obligatoire, ce qui est.</p><p class="vs">« Peut-on décider d’être heureux ? »</p></article>
+      <article><h3>Seulement, que, au moins</h3><p>Ils restreignent ou élargissent : ils déplacent la question.</p><p class="vs">« Le travail est-il <i>seulement</i> une contrainte ? »</p></article>
+      <article><h3>La négation</h3><p>Elle retourne la question : « Ne faut-il pas… ? » invite à l’approbation, mais la question reste ouverte.</p><p class="vs">« Ne faut-il pas obéir aux lois ? »</p></article>
     </div>
   </div>
 </section>
@@ -332,7 +332,7 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
       <caption>Ce que l’on vous demande de faire</caption>
       <thead><tr><th scope="col">Verbe</th><th scope="col">Faire</th><th scope="col">Éviter</th></tr></thead>
       <tbody>
-        <tr><th scope="row">Expliquer</th><td>Rendre une idée ou un texte clair : sa thèse et son raisonnement.</td><td>Répéter les mots du texte.</td></tr>
+        <tr><th scope="row">Expliquer</th><td>Rendre une idée ou un texte clair : sa thèse et son raisonnement.</td><td>Répéter les mots du texte.</td></tr>
         <tr><th scope="row">Définir</th><td>Préciser le sens d’un terme, en distinguant plusieurs sens possibles.</td><td>Se contenter d’un exemple.</td></tr>
         <tr><th scope="row">Analyser</th><td>Décomposer en éléments et montrer comment ils s’articulent.</td><td>Résumer.</td></tr>
         <tr><th scope="row">Justifier</th><td>Donner des raisons qui soutiennent une affirmation.</td><td>Répéter l’affirmation au lieu de donner une raison.</td></tr>
@@ -347,9 +347,9 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
       <h2 id="h-pit">Quatre façons de passer à côté</h2>
     </div>
     <ol class="pitfalls rev">
-      <li><h3>Traiter le thème, pas le sujet</h3><p>Le sujet « La religion est-elle nécessaire à la morale ? » n’est pas un exposé sur la religion.</p></li>
-      <li><h3>Oublier un mot</h3><p>Un mot ignoré, « tous », « seulement », « nécessaire », peut changer la réponse attendue.</p></li>
-      <li><h3>Remplacer le sujet par un sujet voisin</h3><p>« Peut-on… ? » devient « Doit-on… ? » sans que l’on s’en aperçoive.</p></li>
+      <li><h3>Traiter le thème, pas le sujet</h3><p>Le sujet « La religion est-elle nécessaire à la morale ? » n’est pas un exposé sur la religion.</p></li>
+      <li><h3>Oublier un mot</h3><p>Un mot ignoré, « tous », « seulement », « nécessaire », peut changer la réponse attendue.</p></li>
+      <li><h3>Remplacer le sujet par un sujet voisin</h3><p>« Peut-on… ? » devient « Doit-on… ? » sans que l’on s’en aperçoive.</p></li>
       <li><h3>Plaquer un cours</h3><p>Réciter ce que l’on sait de la notion, sans l’adapter à la question posée.</p></li>
     </ol>
   </div>
@@ -361,9 +361,9 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
       <h2 id="h-use">Trois questions avant de commencer</h2>
     </div>
     <ol class="flow rev">
-      <li><h3>Quels sont les mots-clés ?</h3><p>Les notions, et le sens que chacune peut avoir.</p></li>
-      <li><h3>Que demande la formulation ?</h3><p>Possibilité, obligation, définition…</p></li>
-      <li><h3>Quel petit mot change tout ?</h3><p>Quantificateur, « un » ou « le », « nécessaire », négation.</p></li>
+      <li><h3>Quels sont les mots-clés ?</h3><p>Les notions, et le sens que chacune peut avoir.</p></li>
+      <li><h3>Que demande la formulation ?</h3><p>Possibilité, obligation, définition…</p></li>
+      <li><h3>Quel petit mot change tout ?</h3><p>Quantificateur, « un » ou « le », « nécessaire », négation.</p></li>
     </ol>
     <div class="example rev">
       <h3 style="margin-bottom:.5rem">Pour s’entraîner</h3>
@@ -375,9 +375,9 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
   <div class="wrap">
     <h2 id="h-r" style="margin-bottom:1.8rem">À retenir</h2>
     <ul class="recap rev">
-      <li>Une consigne se lit mot à mot : notions, forme de la question, petits mots.</li>
-      <li>« Peut-on » (possible ou permis), « faut-il » (obligation), « consiste-t-il à » (définition), « X, est-ce Y ? » (réduction) n’appellent pas la même réponse.</li>
-      <li>Un petit mot (« tous », « un », « seul », « nécessaire », la négation) peut changer entièrement le sujet.</li>
+      <li>Une consigne se lit mot à mot : notions, forme de la question, petits mots.</li>
+      <li>« Peut-on » (possible ou permis), « faut-il » (obligation), « consiste-t-il à » (définition), « X, est-ce Y ? » (réduction) n’appellent pas la même réponse.</li>
+      <li>Un petit mot (« tous », « un », « seul », « nécessaire », la négation) peut changer entièrement le sujet.</li>
       <li>Les verbes de consigne (expliquer, analyser, discuter…) précisent le travail demandé.</li>
       <li>Ne jamais remplacer le sujet par un thème ou par un sujet voisin.</li>
     </ul>
@@ -385,7 +385,7 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
 </section>
 </main>
 
-<nav class="pn" aria-label="Parcours dissertation"><a class="nx" href="argumentation.html" rel="next"><small>Étape suivante →</small><b>Argumenter</b></a><a class="hm" href="parcours-dissertation.html">Parcours dissertation : étape 1 sur 8</a><a class="hm" href="accueil.html">Retour à l’accueil</a></nav>
+<nav class="pn" aria-label="Parcours dissertation"><a class="nx" href="argumentation.html" rel="next"><small>Étape suivante →</small><b>Argumenter</b></a><a class="hm" href="parcours-dissertation.html">Parcours dissertation : étape 1 sur 8</a><a class="hm" href="accueil.html">Retour à l’accueil</a></nav>
 
 <script>
 (function(){

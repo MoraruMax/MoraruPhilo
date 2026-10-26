@@ -80,3 +80,23 @@
     sync();
   });
 })();
+
+/* Suivi léger : mémorise (sur cet appareil) les pages ouvertes et la dernière page, pour « Reprendre » sur l'accueil. */
+(function(){try{
+  var f=location.pathname.split('/').pop();
+  if(!/\.html$/.test(f)||/^(index|accueil)\.html$/.test(f))return;
+  function go(){try{
+    var V=JSON.parse(localStorage.getItem('pages-vues')||'{}');if(!V||typeof V!=='object')V={};
+    V[f]=Date.now();localStorage.setItem('pages-vues',JSON.stringify(V));
+    localStorage.setItem('derniere-page',JSON.stringify({f:f,t:(document.title||f).trim(),d:Date.now()}));
+  }catch(e){}}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go();
+}catch(e){}})();
+
+/* Surlignage personnel : charge surligneur.js sur les pages de contenu (pas sur l'accueil, le carnet, les ateliers, les quiz). */
+(function(){try{
+  var f=location.pathname.split('/').pop();
+  if(!/\.html$/.test(f)||/^(index|accueil|carnet|atelier-|auto-evaluation|parcours-|reperes-conceptuels|dissertation-a-completer)/.test(f))return;
+  function go(){if(!document.querySelector('main'))return;var s=document.createElement('script');s.src='surligneur.js';document.head.appendChild(s)}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go();
+}catch(e){}})();

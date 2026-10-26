@@ -191,7 +191,7 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
 .txt span.on{background:color-mix(in srgb,var(--k) 24%,transparent);box-shadow:inset 0 -3px 0 var(--k)}
 .txt .t{--k:var(--g1)}.txt .a{--k:var(--g2)}.txt .e{--k:var(--g3)}.txt .c{--k:var(--ink)}
 .role{margin:1.2rem 0 0;padding:.9rem 1.1rem;border-left:5px solid var(--stamp);background:var(--stamp-soft);border-radius:0 8px 8px 0;max-width:none;min-height:3.2em}
-.defs{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:1rem}
+.defs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr));gap:1rem}
 .defs article{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--k,var(--ink));border-radius:0 0 8px 8px;padding:1.1rem 1.2rem 1.3rem}
 .defs article:nth-child(1){--k:var(--g1)}.defs article:nth-child(2){--k:var(--g2)}.defs article:nth-child(3){--k:var(--g3)}.defs article:nth-child(4){--k:var(--ink)}
 .defs h3{font:700 1.6rem/1.1 var(--display);margin-bottom:.2rem}
@@ -220,7 +220,7 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
 .card dl{margin:0;display:grid;grid-template-columns:minmax(0,11rem) minmax(0,1fr);gap:.55rem 1.2rem}
 .card dt{font:700 .88rem/1.4 var(--text);color:var(--stamp)}
 .card dd{margin:0}
-.pairs{display:grid;grid-template-columns:repeat(auto-fit,minmax(18rem,1fr));gap:1rem}
+.pairs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,18rem),1fr));gap:1rem}
 .pairs article{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--stamp);border-radius:0 0 8px 8px;padding:1.1rem 1.2rem}
 .pairs h3{font:700 1.3rem/1.2 var(--display);margin-bottom:.5rem}
 .pairs p{margin:0 0 .6rem;font-size:1rem}
@@ -291,11 +291,11 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
       <span class="kicker">Étapes</span>
       <h2 id="h-intro">Faire naître le problème</h2>
     </div>
-    <p class="rev">L’introduction ne présente pas le sujet « en général » : elle conduit le lecteur, étape par étape, jusqu’à la question que le devoir va traiter.</p>
+    <p class="rev">L’introduction ne présente pas le sujet « en général » : elle conduit le lecteur, étape par étape, jusqu’à la question que le devoir va traiter.</p>
     <ol class="flow rev" style="margin-top:1.4rem">
       <li><h3>Poser le sujet</h3><p>Une accroche (un fait précis, un exemple historique, une référence culturelle comme une œuvre d’art) ou une définition des termes importants, courte et précise.</p></li>
-      <li><h3>Première réponse</h3><p>Celle qui vient d’abord : « à première vue », « il semblerait que… ».</p></li>
-      <li><h3>Difficulté</h3><p>Un « cependant » qui la met en question, souvent à l’aide d’un exemple.</p></li>
+      <li><h3>Première réponse</h3><p>Celle qui vient d’abord : « à première vue », « il semblerait que… ».</p></li>
+      <li><h3>Difficulté</h3><p>Un « cependant » qui la met en question, souvent à l’aide d’un exemple.</p></li>
       <li><h3>Problème</h3><p>Les deux réponses face à face, chacune avec sa justification.</p></li>
       <li><h3>Annonce du plan</h3><p>Une phrase par partie, dans l’ordre où elles viendront.</p></li>
     </ol>
@@ -307,12 +307,12 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
       <span class="kicker">Problématique</span>
       <h2 id="h-prob">Construction de la problématique</h2>
     </div>
-    <p class="rev">Elle suit presque toujours la même forme, qui oblige à donner une justification à chaque réponse :</p>
-    <p class="rev" style="font:700 clamp(1.2rem,2.4vw,1.5rem)/1.5 var(--display);max-width:none">Est-ce que…, puisque…, ou bien…, puisque… ?</p>
-    <p class="note rev">Elle reste une vraie question, à laquelle on peut répondre « oui » ou « non » : le plan répondra ensuite en défendant tour à tour chaque réponse.</p>
+    <p class="rev">Elle suit presque toujours la même forme, qui oblige à donner une justification à chaque réponse :</p>
+    <p class="rev" style="font:700 clamp(1.2rem,2.4vw,1.5rem)/1.5 var(--display);max-width:none">Est-ce que…, puisque…, ou bien…, puisque… ?</p>
+    <p class="note rev">Elle reste une vraie question, à laquelle on peut répondre « oui » ou « non » : le plan répondra ensuite en défendant tour à tour chaque réponse.</p>
     <div class="example rev">
       <h3>Au brouillon d’abord</h3>
-      <p>On écrit l’introduction au brouillon, puis on la recopie une fois le plan arrêté : elle doit annoncer ce que le devoir fait réellement.</p>
+      <p>On écrit l’introduction au brouillon, puis on la recopie une fois le plan arrêté : elle doit annoncer ce que le devoir fait réellement.</p>
     </div>
   </div>
 </section>
@@ -323,7 +323,7 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
       <h2 id="h-pit">Quatre façons de rater son introduction</h2>
     </div>
     <ol class="pitfalls rev">
-      <li><h3>Une accroche vague</h3><p>« De tout temps, les hommes se sont demandé… » n’amène rien. Mieux vaut un fait précis, un exemple ou une définition.</p></li>
+      <li><h3>Une accroche vague</h3><p>« De tout temps, les hommes se sont demandé… » n’amène rien. Mieux vaut un fait précis, un exemple ou une définition.</p></li>
       <li><h3>Un problème qui n’en est pas un</h3><p>Si une seule réponse paraît possible, il n’y a rien à démontrer. Les deux réponses doivent avoir une justification.</p></li>
       <li><h3>Une annonce de plan fausse</h3><p>Le devoir doit faire ce que l’introduction promet, dans le même ordre.</p></li>
       <li><h3>Des termes importants non définis</h3><p>Si le sujet repose sur un mot, il faut dire dans quel sens on le prend.</p></li>
@@ -336,15 +336,15 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
       <span class="kicker">Suite</span>
       <h2 id="h-use">Pour continuer</h2>
     </div>
-    <ul class="chips big rev"><li><a href="atelier-introduction.html">Atelier : l’introduction de la dissertation</a></li><li><a href="construire-une-problematique.html">Construire une problématique</a></li><li><a href="construire-le-plan.html">Construire le plan</a></li><li><a href="rediger-transitions.html">Relier les parties : les transitions</a></li><li><a href="rediger-conclusion.html">Rédiger la conclusion</a></li><li><a href="atelier-dissertation.html">L’atelier dissertation</a></li></ul>
+    <ul class="chips big rev"><li><a href="atelier-introduction.html">Atelier : l’introduction de la dissertation</a></li><li><a href="construire-une-problematique.html">Construire une problématique</a></li><li><a href="construire-le-plan.html">Construire le plan</a></li><li><a href="rediger-transitions.html">Relier les parties : les transitions</a></li><li><a href="rediger-conclusion.html">Rédiger la conclusion</a></li><li><a href="atelier-dissertation.html">L’atelier dissertation</a></li></ul>
   </div>
 </section>
 <section class="block" aria-labelledby="h-r">
   <div class="wrap">
     <h2 id="h-r" style="margin-bottom:1.8rem">À retenir</h2>
     <ul class="recap rev">
-      <li>L’introduction mène du sujet au problème : première réponse, difficulté, question, puis annonce du plan.</li>
-      <li>Le problème prend la forme « Est-ce que…, puisque…, ou bien…, puisque… ? ».</li>
+      <li>L’introduction mène du sujet au problème : première réponse, difficulté, question, puis annonce du plan.</li>
+      <li>Le problème prend la forme « Est-ce que…, puisque…, ou bien…, puisque… ? ».</li>
       <li>L’annonce du plan donne une phrase par partie, dans l’ordre, avec l’idée défendue.</li>
       <li>On écrit l’introduction au brouillon, puis on la recopie une fois le plan arrêté.</li>
     </ul>
@@ -352,7 +352,7 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
 </section>
 </main>
 
-<nav class="pn" aria-label="Parcours dissertation"><a href="utiliser-un-exemple.html" rel="prev"><small>← Étape précédente</small><b>Utiliser une référence ou un exemple</b></a><a class="nx" href="rediger-transitions.html" rel="next"><small>Étape suivante →</small><b>Relier les parties : les transitions</b></a><a class="hm" href="parcours-dissertation.html">Parcours dissertation : étape 6 sur 8</a><a class="hm" href="accueil.html">Retour à l’accueil</a></nav>
+<nav class="pn" aria-label="Parcours dissertation"><a href="utiliser-un-exemple.html" rel="prev"><small>← Étape précédente</small><b>Utiliser une référence ou un exemple</b></a><a class="nx" href="rediger-transitions.html" rel="next"><small>Étape suivante →</small><b>Relier les parties : les transitions</b></a><a class="hm" href="parcours-dissertation.html">Parcours dissertation : étape 6 sur 8</a><a class="hm" href="accueil.html">Retour à l’accueil</a></nav>
 
 <script>
 (function(){

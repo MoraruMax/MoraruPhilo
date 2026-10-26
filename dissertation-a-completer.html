@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Repérer le rôle des passages d’une dissertation</title>
+<script>document.documentElement.classList.add('js')</script>
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+  --bg:#F1F5F4; --surface:#FFFFFF; --ink:#10262B; --muted:#4A6064; --line:#D0DCDA;
+  --stamp:#B3124F; --free:#0B6E6D; --stamp-soft:#FBE3EC;
+  --g1:#0B6E6D; --g2:#B3124F; --g3:#5B3FC4; --focus:#0B6E6D;
+  --display:Georgia,"Times New Roman",serif;
+  --text:system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0C1719; --surface:#142427; --ink:#E6F0EF; --muted:#9DB5B4; --line:#24393C;
+    --stamp:#FF7FAA; --free:#4FD1C5; --stamp-soft:#3A1625;
+    --g1:#4FD1C5; --g2:#FF7FAA; --g3:#A592FF; --focus:#4FD1C5;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0C1719; --surface:#142427; --ink:#E6F0EF; --muted:#9DB5B4; --line:#24393C;
+  --stamp:#FF7FAA; --free:#4FD1C5; --stamp-soft:#3A1625;
+  --g1:#4FD1C5; --g2:#FF7FAA; --g3:#A592FF; --focus:#4FD1C5;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.65 var(--text)}
+.wrap{width:min(980px,100% - 2.5rem);margin-inline:auto}
+h1,h2,h3{margin:0}
+h1{font:700 clamp(2.8rem,9vw,6rem)/1 var(--display);letter-spacing:-.03em}
+h2{font:700 clamp(1.7rem,3.6vw,2.5rem)/1.1 var(--display);letter-spacing:-.02em}
+h3{font:700 1.15rem/1.3 var(--text)}
+p{margin:0 0 1em;max-width:62ch}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
+.muted{color:var(--muted)}
+.note{font-size:.9rem;color:var(--muted)}
+.btn{font:500 .98rem/1.2 var(--text);color:var(--ink);background:transparent;border:1.5px solid var(--ink);border-radius:6px;padding:.7rem 1.1rem;cursor:pointer}
+.btn.primary{background:var(--ink);color:var(--bg)}
+.btn[aria-pressed="true"]{background:var(--stamp);border-color:var(--stamp);color:var(--bg)}
+
+/* Hero */
+.hero{padding:clamp(2.2rem,6vw,4.5rem) 0 clamp(2.5rem,6vw,4rem)}
+.lead{font:400 clamp(1.25rem,2.4vw,1.6rem)/1.4 var(--display);max-width:38ch;margin:1.6rem 0 2.2rem}
+.stage{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:clamp(1rem,3vw,1.8rem)}
+.groups{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(.6rem,2.5vw,1.8rem)}
+.grp{min-width:0}
+.inds{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(.25rem,1.2vw,.7rem)}
+.ind{aspect-ratio:1;transition:background-color .8s ease,border-radius .8s ease,transform .8s ease}
+.gname{font:700 .95rem/1.2 var(--text);margin:.9rem 0 .15rem}
+.gcap{font-size:.88rem;line-height:1.35;color:var(--muted);margin:0;min-height:2.7em}
+.stage-foot{display:flex;flex-wrap:wrap;gap:.8rem 1.2rem;align-items:center;margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid var(--line)}
+.state{margin:0;font:500 1.05rem/1.4 var(--text);flex:1 1 18rem;max-width:none;min-height:2.8em}
+
+/* Sections */
+section.block{border-top:0;padding:clamp(3rem,7vw,5rem) 0}
+.sec-head{max-width:44rem;margin-bottom:2rem}
+.sec-head .kicker{display:block;font:700 .9rem/1 var(--text);color:var(--stamp);margin-bottom:.8rem}
+.sec-head h2{margin-bottom:1rem}
+
+/* Etymologie */
+.etym{display:flex;flex-wrap:wrap;align-items:stretch;gap:.8rem 1rem;margin:0 0 2rem}
+.word{padding:.9rem 1.2rem;border:1.5px solid var(--ink);border-radius:8px;background:var(--surface)}
+.word b{display:block;font:700 clamp(1.5rem,3.4vw,2.2rem)/1.1 var(--display)}
+.word span{display:block;font-size:.95rem;color:var(--muted)}
+.word.out{border-color:var(--stamp);background:var(--stamp-soft)}
+.word.out b{color:var(--stamp)}
+.op{align-self:center;font:700 1.8rem/1 var(--display);color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;margin:.4rem 0 0;padding:0}
+.chips li{border:1.5px solid var(--line);background:var(--surface);border-radius:6px;padding:.4rem .75rem;font-weight:500;font-size:.98rem}
+
+/* Flux en trois temps */
+.flow{display:flex;flex-wrap:wrap;gap:1rem;list-style:none;margin:0;padding:0;counter-reset:f}
+.flow li{counter-increment:f;flex:1 1 15rem;min-width:0;border-top:4px solid var(--stamp);background:var(--surface);padding:1rem 1.1rem 1.2rem;border-radius:0 0 8px 8px}
+.flow li::before{content:counter(f);display:block;font:700 2rem/1 var(--display);color:var(--stamp);margin-bottom:.5rem}
+.flow p{margin:0}
+
+/* Experience */
+.exp{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:2rem clamp(2rem,5vw,4rem);align-items:start}
+.steps{list-style:none;margin:0;padding:0 0 0 1.4rem;border-left:2px solid var(--line)}
+.steps li{position:relative;padding:0 0 1.5rem}
+.steps li:last-child{padding-bottom:0}
+.steps li::before{content:"";position:absolute;left:calc(-1.4rem - 7px);top:.4rem;width:12px;height:12px;border-radius:50%;background:var(--bg);border:3px solid var(--stamp)}
+.steps h3{margin-bottom:.25rem}
+.steps p{margin:0}
+.chart{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:1.2rem}
+.chart h3{margin-bottom:1rem}
+.bar-row{margin-bottom:1.1rem}
+.bl{display:block;font-size:.92rem;font-weight:500;margin-bottom:.35rem}
+.track{height:2.4rem;background:var(--bg);border-radius:6px;overflow:hidden}
+.fill{height:100%;width:0;display:flex;align-items:center;padding:0 .8rem;font:700 .88rem/1 var(--text);color:var(--bg);white-space:nowrap;transition:width 1.1s cubic-bezier(.2,.7,.2,1)}
+.fill.a{background:var(--free)}
+.fill.b{background:var(--stamp)}
+.chart-foot{display:flex;flex-wrap:wrap;gap:.7rem 1rem;align-items:center;margin-top:1.2rem}
+.chart-foot .note{margin:0;flex:1 1 12rem}
+
+/* Explication */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.two > div{padding:0 2rem 0 0}
+.two > div + div{padding:0 0 0 2rem;border-left:1px solid var(--line)}
+.two h3{margin-bottom:.6rem}
+.two p{margin:0}
+
+/* Consequence */
+.big{font:700 clamp(1.6rem,3.8vw,2.6rem)/1.15 var(--display);letter-spacing:-.02em;max-width:24ch;margin:0 0 1.4rem;padding-left:1.1rem;border-left:5px solid var(--stamp)}
+.example{margin-top:2rem;padding-top:1.6rem;border-top:1px solid var(--line);max-width:46rem}
+
+.recap{margin:0;padding:0;list-style:none;max-width:46rem}
+.recap li{padding:.95rem 0;border-top:1px solid var(--line)}
+.recap li:last-child{border-bottom:1px solid var(--line)}
+footer{border-top:1px solid var(--line);padding:2rem 0 3rem}
+footer p{font-size:.92rem;color:var(--muted);margin:0}
+
+/* Apparition */
+.js .rev{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+.js .rev.in{opacity:1;transform:none}
+
+@media (max-width:820px){
+  .exp{grid-template-columns:1fr}
+  .two{grid-template-columns:1fr}
+  .two > div,.two > div + div{padding:0;border-left:0}
+  .two > div + div{margin-top:1.8rem;padding-top:1.8rem;border-top:1px solid var(--line)}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition:none!important;animation:none!important}
+  .js .rev{opacity:1;transform:none}
+}
+
+.pn{display:flex;gap:1rem;flex-wrap:wrap;margin:2.5rem auto 0;max-width:980px;padding:0 1.25rem;box-sizing:content-box}
+.pn a{flex:1 1 16rem;display:flex;flex-direction:column;gap:.25rem;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--k,var(--ink));padding:.9rem 1.1rem;border-radius:0 0 8px 8px}
+.pn a:hover{border-color:var(--k,var(--ink))}.pn a:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.pn small{font:600 .78rem/1 system-ui,-apple-system,sans-serif;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.pn b{font:700 1.1rem/1.25 system-ui,-apple-system,sans-serif}
+.pn .nx{text-align:right}
+.pn .nx:first-child{margin-left:auto;max-width:calc(50% - .5rem)}
+.pn .hm{flex:0 0 100%;text-align:center;font:500 .92rem/1 system-ui,-apple-system,sans-serif;background:none;border:0;padding:.4rem;color:var(--ink);text-decoration:underline}
+
+.pdfbtn{display:inline-flex;align-items:center;gap:.5rem;font:600 .88rem/1 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--surface);border:1.5px solid var(--ink);border-radius:999px;padding:.55rem .95rem;cursor:pointer}
+.pdfbtn:hover{background:var(--ink);color:var(--bg)}.pdfbtn:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:2px}
+
+/* Mode lecture (pages à structure libre) */
+html.lect body::before,html.lect body::after{display:none!important}
+html.lect body{background:var(--bg)!important}
+html.lect .pn,html.lect #quiz,html.lect section[aria-labelledby="h-video"],html.lect video,html.lect .score,html.lect .lc-skip,html.lect [role="tablist"],html.lect main button,html.lect main input,html.lect main select,html.lect main textarea,html.lect .sec-head p.lc-x{display:none!important}
+html.lect .hero h1,html.lect .hero p,html.lect section.block h2,html.lect footer p{text-shadow:none!important}
+html.lect .hero,html.lect section.block{padding-block:1.2rem!important;border:0!important}
+html.lect .wrap,html.lect .sec-head{max-width:40rem!important;margin-inline:auto}
+html.lect .hgrid,html.lect .two,html.lect .cols{display:block!important}
+html.lect main,html.lect .hero{font-family:var(--serif)}
+html.lect .hero h1{font-size:clamp(1.9rem,5vw,2.6rem)!important}
+html.lect main p,html.lect main li,html.lect .lead{font-size:1.12rem!important;line-height:1.75!important}
+html.lect :is(main,.hero) :is(div,li,blockquote,article,aside,p,ul,ol,section,details,summary,figure,span):not(table *){background:none!important;border:0!important;box-shadow:none!important;border-radius:0!important}
+html.lect main [hidden]{display:revert!important}
+html.lect :is(main,.hero) div:not(.wrap):not(.sec-head):not(table *){display:block!important;grid-template-columns:none!important;float:none!important;max-width:none!important;width:auto!important;margin-inline:0}
+html.lect main li{display:list-item!important}
+html.lect .must{margin:1rem 0}
+html.lect .lead{max-width:none!important}
+html.lect .wrap{padding-inline:0}
+html.lect main details>summary{cursor:default;pointer-events:none;list-style:none}
+html.lect main details>summary::-webkit-details-marker,html.lect main details>summary::before{display:none!important}
+html.lect main blockquote{margin:.8rem 0;padding:0 0 0 1rem!important;border-left:3px solid var(--line)!important}
+html.lect main .panel{display:block!important;margin-bottom:1rem}
+html.lect main h3,html.lect main h4{margin-top:1.4rem}
+
+/* Accessibilité */
+.a11y{position:relative;display:inline-block}
+.a11y-menu{position:absolute;right:0;top:calc(100% + .4rem);z-index:60;min-width:14rem;background:var(--bg);color:var(--ink);border:1.5px solid var(--ink);border-radius:14px;padding:.35rem;box-shadow:0 8px 24px rgba(0,0,0,.18);text-shadow:none}
+.a11y-menu[hidden]{display:none}
+.a11y-menu p{margin:0;padding:.45rem .7rem .3rem;font:700 .72rem/1 system-ui,-apple-system,sans-serif;letter-spacing:.06em;text-transform:uppercase;opacity:.65}
+.a11y-opt{display:flex;align-items:center;gap:.6rem;width:100%;text-align:left;font:600 .92rem/1.2 system-ui,-apple-system,sans-serif;color:inherit;background:none;border:0;border-radius:9px;padding:.6rem .7rem;cursor:pointer}
+.a11y-opt:hover{background:var(--surface)}
+.a11y-opt:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:-2px}
+.a11y-opt .dot{flex:none;width:1rem;height:1rem;border:2px solid currentColor;border-radius:50%;position:relative}
+.a11y-opt[aria-checked="true"] .dot::after{content:"";position:absolute;inset:2px;background:currentColor;border-radius:50%}
+.a11y-opt small{display:block;font-weight:500;opacity:.7;font-size:.78rem;margin-top:.15rem}
+/* Fiche consigne */
+.demo{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:clamp(1rem,3vw,1.8rem)}
+.demo .tools{display:flex;flex-wrap:wrap;gap:.5rem;margin:0 0 1.2rem}
+.demo .btn{font-size:.95rem;padding:.55rem .9rem}
+.demo .btn[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.txt{font:400 clamp(1.15rem,2.2vw,1.4rem)/1.75 var(--display);max-width:none;margin:0}
+.txt span{border-radius:4px;padding:.1em .15em;-webkit-box-decoration-break:clone;box-decoration-break:clone;transition:background-color .3s,box-shadow .3s}
+.txt span.on{background:color-mix(in srgb,var(--k) 24%,transparent);box-shadow:inset 0 -3px 0 var(--k)}
+.txt .t{--k:var(--g1)}.txt .a{--k:var(--g2)}.txt .e{--k:var(--g3)}.txt .c{--k:var(--ink)}
+.role{margin:1.2rem 0 0;padding:.9rem 1.1rem;border-left:5px solid var(--stamp);background:var(--stamp-soft);border-radius:0 8px 8px 0;max-width:none;min-height:3.2em}
+.defs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr));gap:1rem}
+.defs article{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--k,var(--ink));border-radius:0 0 8px 8px;padding:1.1rem 1.2rem 1.3rem}
+.defs article:nth-child(1){--k:var(--g1)}.defs article:nth-child(2){--k:var(--g2)}.defs article:nth-child(3){--k:var(--g3)}.defs article:nth-child(4){--k:var(--ink)}
+.defs h3{font:700 1.6rem/1.1 var(--display);margin-bottom:.2rem}
+.defs .ety{font-size:.9rem;color:var(--muted);margin:0 0 .8rem}
+.defs p{margin:0 0 .7rem;font-size:1rem}
+.defs .ex{border-top:1px solid var(--line);padding-top:.7rem;margin:.9rem 0 0;color:var(--muted)}
+.cmp{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--line);font-size:.98rem}
+.cmp caption{text-align:left;font:700 .9rem/1.3 var(--text);color:var(--muted);padding:0 0 .6rem}
+.cmp th,.cmp td{text-align:left;vertical-align:top;padding:.7rem .9rem;border-top:1px solid var(--line)}
+.cmp th+th,.cmp td{border-left:1px solid var(--line)}
+.cmp thead th{border-top:0;border-bottom:2px solid var(--ink);font-family:var(--display);font-size:1.1rem}
+.cmp tbody th{font:700 .95rem/1.3 var(--text);width:20%}
+.tw{overflow-x:auto}
+.pitfalls{margin:0;padding:0;list-style:none;max-width:48rem;counter-reset:p}
+.pitfalls li{counter-increment:p;position:relative;padding:1rem 0 1rem 3rem;border-top:1px solid var(--line)}
+.pitfalls li:last-child{border-bottom:1px solid var(--line)}
+.pitfalls li::before{content:counter(p);position:absolute;left:0;top:.9rem;font:700 1.8rem/1 var(--display);color:var(--stamp)}
+.pitfalls h3{margin-bottom:.25rem}.pitfalls h3 small{font:500 .9rem/1.3 var(--text);color:var(--muted)}.pitfalls p{margin:0 0 .35rem}.pitfalls .ex{color:var(--muted);font-size:.98rem}
+.flow li{flex:1 1 11rem}
+.tips{margin:0;padding:0;list-style:none;max-width:48rem}
+.tips li{padding:.9rem 0;border-top:1px solid var(--line)}.tips li:last-child{border-bottom:1px solid var(--line)}
+.subj{display:grid;gap:.5rem;margin:0 0 1.2rem}
+.subj .btn{text-align:left;font-size:1rem;padding:.7rem 1rem;line-height:1.35}
+.subj .btn[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.card{border-left:5px solid var(--stamp);background:var(--stamp-soft);border-radius:0 8px 8px 0;padding:1rem 1.2rem}
+.card dl{margin:0;display:grid;grid-template-columns:minmax(0,11rem) minmax(0,1fr);gap:.55rem 1.2rem}
+.card dt{font:700 .88rem/1.4 var(--text);color:var(--stamp)}
+.card dd{margin:0}
+.pairs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,18rem),1fr));gap:1rem}
+.pairs article{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--stamp);border-radius:0 0 8px 8px;padding:1.1rem 1.2rem}
+.pairs h3{font:700 1.3rem/1.2 var(--display);margin-bottom:.5rem}
+.pairs p{margin:0 0 .6rem;font-size:1rem}
+.pairs .vs{border-top:1px solid var(--line);padding-top:.6rem;color:var(--muted)}
+.card dd ol{margin:.4rem 0 .2rem;padding-left:1.2rem}
+.card dd li{margin:0 0 .55rem}
+.card dd p{margin:0 0 .4rem;max-width:none}
+.card .bil{color:var(--muted);font-size:.95rem}
+.card dl{row-gap:1rem}
+@media (max-width:620px){.card dl{grid-template-columns:1fr;gap:.1rem}.card dt{margin-top:.5rem}}
+@media (max-width:820px){.q2{grid-template-columns:1fr}}
+
+@media print{
+  :root{--bg:#fff!important;--surface:#fff!important;--ink:#111!important;--muted:#444!important;--line:#bbb!important;color-scheme:light!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:#fff!important;color:#111!important}
+  body::before,body::after{display:none!important}
+  nav,.pdfbtn,.pn,video,section[aria-labelledby="h-video"]{display:none!important}
+  .rev,.js .rev{opacity:1!important;transform:none!important}
+  .stp li[hidden]{display:list-item!important}
+  details>*{display:block!important}
+  article,li,.card,figure,.stage{break-inside:avoid}
+  h1,h2,h3{break-after:avoid;text-shadow:none!important}
+  *{text-shadow:none!important}
+  a{color:inherit;text-decoration:none}
+  section.block,.part{padding-top:1.2rem!important;padding-bottom:1.2rem!important}
+  footer{break-before:avoid;border-top:1px solid #999;margin-top:1rem}
+}
+@page{size:A4;margin:16mm 14mm}
+
+.gp{margin:0 0 1rem;padding:.8rem 1.1rem 1rem;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+.gp h3{font:700 .95rem/1.3 var(--text);color:var(--muted);margin:0 0 .4rem}
+.gp.tr{border:2px dashed var(--g2);background:color-mix(in srgb,var(--g2) 8%,transparent)}
+.gp.tr h3{color:var(--g2)}
+.gp .txt{font-size:clamp(1.05rem,2vw,1.25rem)}
+
+/* Dissertation commentée */
+.demo p.note{max-width:none;font-size:.98rem;line-height:1.5}
+.sujet{margin:0;max-width:none;font:700 clamp(1.5rem,3.4vw,2.2rem)/1.2 var(--display)}
+.seg{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:.8rem 2rem;align-items:start;margin:0 0 1.6rem}
+.copie{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:1rem 1.3rem}
+.copie p{margin:0 0 .8em;max-width:none;font:400 1.08rem/1.75 var(--display)}
+.copie p:last-child{margin-bottom:0}
+.com{border-left:4px solid var(--stamp);background:var(--stamp-soft);border-radius:0 8px 8px 0;padding:.8rem 1rem;font-size:.95rem;line-height:1.5}
+.com .k{display:block;margin:0 0 .3rem;font:700 .85rem/1.3 var(--text);color:var(--stamp)}
+.sans-com .seg{grid-template-columns:minmax(0,1fr)}
+.sans-com .com{display:none}
+@media (max-width:820px){.seg{grid-template-columns:minmax(0,1fr);gap:.5rem}.com{margin:0 0 0 .6rem}}
+html.lect .com{display:block!important}
+html.lect .copie{padding:0!important}
+html.lect .copie p{font-family:var(--serif)}
+html.lect .com{margin:.3rem 0 1.2rem;padding:0 0 0 1rem!important;border-left:3px solid var(--line)!important;font-size:1rem;color:var(--muted)}
+@media print{.seg{grid-template-columns:1fr 1fr;break-inside:avoid}.tools{display:none}}
+
+/* À compléter */
+[hidden]{display:none!important}
+.right{min-width:0}
+.q{background:var(--surface);border:1.5px solid var(--ink);border-radius:8px;padding:.8rem 1rem}
+.qa{margin:0 0 .6rem;max-width:none;font:700 .95rem/1.3 var(--text)}
+.opts{display:grid;grid-template-columns:1fr;gap:.45rem}
+.opt{font:600 .92rem/1.25 var(--text);text-align:left;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:8px;padding:.6rem .8rem;cursor:pointer}
+.opt:hover:not([disabled]){border-color:var(--ink)}
+.opt[disabled]{cursor:default}
+.opt.ok{border:2.5px solid var(--free);background:color-mix(in srgb,var(--free) 14%,var(--bg))}
+.opt.bad{border:2.5px dashed var(--stamp);background:var(--stamp-soft)}
+.fb{margin:.6rem 0 0;max-width:none;font:600 .92rem/1.4 var(--text)}
+.q+.com{margin-top:.8rem}
+.place{display:inline-block;margin:0 0 .6rem;padding:.15rem .6rem;border:1.5px solid var(--ink);border-radius:999px;font:700 .8rem/1.3 var(--text)}
+.prog{margin:.4rem 0 0;max-width:none;font:700 1rem/1.3 var(--text)}
+.bigscore{font:700 clamp(1.6rem,4vw,2.4rem)/1.2 var(--display);max-width:none;margin:0 0 1rem}
+.miss{margin:.3rem 0;padding:.4rem 0;border-top:1px solid var(--line);max-width:none}
+.only-lect{display:none}
+html.lect #ex,html.lect #res,html.lect .prog{display:none!important}
+html.lect .only-lect{display:block}
+@media print{#ex,#res,.prog{display:none}}
+</style>
+
+<script>try{history.scrollRestoration="manual"}catch(e){}(function(){function t(){if(!location.hash)window.scrollTo(0,0)}t();document.addEventListener("DOMContentLoaded",t);window.addEventListener("load",function(){t();setTimeout(t,60)});window.addEventListener("pageshow",t)})();</script>
+<script src="sommaire.js" defer></script>
+<script src="confort.js"></script><script src="voix.js" defer></script>
+</head>
+<body>
+<nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><span style="display:inline-flex;gap:.6rem;flex-wrap:wrap;align-items:center"><span class="a11y"><button type="button" class="pdfbtn" id="a11y-btn" aria-haspopup="true" aria-expanded="false" aria-controls="a11y-menu"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="1.6"/><path d="M5 8.5l7 1.5 7-1.5M12 10v4.5M8.5 21l3.5-6.5 3.5 6.5"/></svg><span>Accessibilité</span></button><div class="a11y-menu" id="a11y-menu" role="radiogroup" aria-label="Affichage de la page" hidden><p>Affichage</p><button type="button" role="radio" class="a11y-opt" data-mode="orig" aria-checked="true"><span class="dot"></span><span>Page d’origine<small>Image de fond et mise en page habituelle</small></span></button><button type="button" role="radio" class="a11y-opt" data-mode="lect" aria-checked="false"><span class="dot"></span><span>Mode lecture<small>Texte continu, sans cadres ni exercices</small></span></button></div></span><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></span></nav>
+
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Repérer le rôle des passages d’une dissertation</h1>
+    <p class="lead">Des passages de la copie, dans le désordre : à vous de reconnaître le rôle de chacun.</p>
+    <div class="demo">
+      <p class="note" style="margin:0 0 .4rem">Le sujet de la copie</p>
+      <p class="sujet" id="sujet"></p>
+      <div class="tools" id="sj" role="group" aria-label="Choisir le sujet de la copie" style="margin:.6rem 0 0"></div>
+      <p class="note" style="margin:1rem 0 0">Un passage de la dissertation est tiré au hasard, sans son contexte : introduction, problématique, bilan de partie, conclusion ou sous-partie. Choisissez son rôle ; le commentaire s’affiche ensuite, avec la place du passage dans la copie. Les passages et les choix changent à chaque partie.</p>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="block" aria-labelledby="h-ex">
+  <div class="wrap">
+    <div class="sec-head"><span class="kicker">Exercice</span><h2 id="h-ex">Reconnaître le rôle du passage</h2><p class="prog" id="prog" aria-live="polite"></p></div>
+    <div class="seg" id="ex" tabindex="-1">
+      <div class="copie" id="copie"></div>
+      <div class="right">
+        <div class="q"><p class="qa">Quel est le rôle de ce passage ?</p><div class="opts" id="opts" role="group" aria-label="Choisir le rôle du passage"></div><p class="fb" id="fb" aria-live="polite"></p><div class="tools" style="margin:.8rem 0 0"><button class="btn primary" type="button" id="nx" hidden>Passage suivant</button></div></div>
+        <aside class="com" id="com" hidden></aside>
+      </div>
+    </div>
+    <p class="note only-lect">Le mode lecture n’affiche pas l’exercice : la copie complète, avec ses commentaires, se lit dans <a href="dissertation-commentee.html">Une dissertation commentée</a>.</p>
+  </div>
+</section>
+
+<section class="block" id="res" aria-labelledby="h-res" hidden>
+  <div class="wrap">
+    <div class="sec-head"><span class="kicker">Résultat</span><h2 id="h-res">Votre bilan</h2></div>
+    <p class="bigscore" id="score"></p>
+    <div id="missed"></div>
+    <div class="tools" style="margin-top:1.2rem"><button class="btn primary" type="button" id="redo">Recommencer</button> <a class="btn" id="lnkc" href="dissertation-commentee.html" style="text-decoration:none;display:inline-block">Relire la copie commentée</a></div>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="h-use">
+  <div class="wrap">
+    <div class="sec-head rev"><span class="kicker">Suite</span><h2 id="h-use">Pour aller plus loin</h2></div>
+    <ul class="chips big rev"><li><a href="dissertation-commentee.html">Une dissertation commentée</a></li><li><a href="methode-dissertation.html">La méthode de la dissertation</a></li><li><a href="rediger-introduction.html">Rédiger l’introduction</a></li><li><a href="rediger-transitions.html">Relier les parties : les transitions</a></li><li><a href="rediger-conclusion.html">Rédiger la conclusion</a></li><li><a href="auto-evaluation-dissertation.html">Auto-évaluer sa dissertation</a></li></ul>
+  </div>
+</section>
+</main>
+
+<nav class="pn" aria-label="Retour"><a class="hm" href="accueil.html">Retour à l’accueil</a></nav>
+
+<script>
+(function(){
+  var ALL=[{"sujet": "Le devoir est-il une contrainte ?", "items": [{"id": 0, "role": "Accroche", "struct": true, "place": "Introduction", "label": "Accroche", "text": ["Dès l’école, le mot « devoir » désigne ce qu’on nous demande de faire sans que nous l’ayons choisi : on « fait ses devoirs », on remplit ses « devoirs de citoyen », et l’on dit d’une action pénible mais nécessaire qu’elle est « un devoir ». Le devoir moral paraît porter ce poids à son comble : il exige de dire la vérité quand le mensonge nous arrangerait, de rendre le portefeuille trouvé dans la rue alors que nous voudrions le garder."], "com": "Une accroche part d’une expérience commune, ici le vocabulaire de l’école, et conduit au sujet sans le citer encore. Elle reste courte : deux ou trois phrases suffisent."}, {"id": 1, "role": "Analyse du sujet", "struct": true, "place": "Introduction", "label": "Analyse du sujet", "text": ["Le devoir est une obligation morale, une action que nous estimons devoir accomplir quelles que soient nos envies. La contrainte désigne de son côté ce qui s’impose à nous malgré nous, par la force ou par la menace d’une sanction, et limite ainsi notre liberté. L’obligation, elle, est une contrainte que nous avons reconnue et à laquelle nous consentons. Demander si le devoir est une contrainte, c’est donc se demander si l’obligation morale est une force qui nous vient du dehors et s’oppose à nos désirs, ou si elle peut devenir autre chose : une contrainte consentie, que nous reconnaissons comme nôtre."], "com": "On définit chacun des deux termes, puis on les oppose : la contrainte subie, l’obligation consentie. Cette distinction sera l’idée directrice de la copie. On reformule ensuite la question avec ces définitions. C’est ce qui montre que le sujet a été compris, et ce qui rend la suite de l’introduction précise."}, {"id": 2, "role": "Problématique", "struct": true, "place": "Introduction", "label": "Problématique", "text": ["La question est difficile, car l’expérience semble donner raison à la contrainte : nous éprouvons le devoir comme un poids, et nous savons que le transgresser expose à des sanctions. Mais si le devoir n’était que contrainte, agirions-nous encore par devoir, ou seulement par peur de la sanction ? Le devoir est-il alors une pure contrainte, ou peut-il devenir une obligation, c’est-à-dire une contrainte à laquelle nous consentons ?"], "com": "La problématique naît d’une tension : une réponse qui semble évidente (oui, c’est une contrainte), puis la difficulté qu’elle soulève (alors ce ne serait plus un devoir). La question finale est celle à laquelle la copie répondra."}, {"id": 3, "role": "Annonce du plan", "struct": true, "place": "Introduction", "label": "Annonce du plan", "text": ["Nous verrons d’abord que le devoir apparaît comme une contrainte, qu’elle soit celle du désir qu’il contrarie ou celle de la société qui le dicte. Nous montrerons ensuite qu’une pure contrainte ne fait pas un devoir, puisqu’agir par peur n’est pas agir par devoir, et que le devoir doit donc trouver une origine en nous. Nous montrerons enfin que, lorsque nous consentons à une contrainte, en particulier à celle que la raison s’impose à elle-même, elle devient une obligation."], "com": "Les trois parties sont annoncées dans l’ordre, avec le lien logique entre elles. Le lecteur sait où il va, et le correcteur voit que la copie a un plan."}, {"id": 4, "role": "Énoncé de la thèse de la partie", "struct": true, "place": "Partie I : Le devoir se présente comme une contrainte", "label": "Énoncé de la thèse", "text": ["Le devoir est d’abord une contrainte : il s’impose à nous contre nos désirs, nous est dicté par la société, et finit par devenir une contrainte que nous nous infligeons à nous-mêmes."], "com": "La partie s’ouvre sur sa thèse, énoncée clairement : le lecteur sait ce qui va être démontré. Les trois sous-parties qui suivent la développent dans l’ordre annoncé par la phrase (le désir, la société, l’intériorisation)."}, {"id": 5, "role": "Développement d’une sous-partie", "struct": false, "place": "Partie I : Le devoir se présente comme une contrainte", "label": "Sous-partie I.a", "text": ["D’abord, le devoir s’oppose au désir. Lorsque nous parlons de « notre devoir », nous supposons bien souvent que nous ne voulons pas l’accomplir : on ne parle guère de devoir pour ce qui nous plaît. Dire la vérité alors que nous voudrions mentir, rendre un portefeuille trouvé dans la rue alors que nous voudrions le garder : dans ces cas, l’action morale n’est pas celle qui nous arrange, et nous sentons un poids, une résistance à vaincre. Wittgenstein remarque ainsi qu’un « doit » n’a de force que par ce qui se tient derrière lui : dire qu’« un enfant doit faire telle chose », c’est dire que, s’il ne le fait pas, quelque chose de désagréable va se produire. Récompense et punition donnent au « doit » sa force. Le devoir semble donc contraindre notre désir."], "com": "Chaque sous-partie suit le même fil : une affirmation, sa justification, un exemple précis, une référence philosophique, puis une phrase qui boucle sur le sujet (« Le devoir semble donc… »). L’exemple est celui de l’introduction, ce qui donne de l’unité à la copie."}, {"id": 6, "role": "Développement d’une sous-partie", "struct": false, "place": "Partie I : Le devoir se présente comme une contrainte", "label": "Sous-partie I.b", "text": ["Cette contrainte semble ensuite venir de la société. C’est la thèse de Durkheim, qui étudie la morale comme un fait social : « quand notre conscience parle, c’est la société qui parle en nous » (<em>L’Éducation morale</em>). La conscience morale est l’œuvre de la société, qui nous a formés moralement, et le ton impératif dont elle nous parle prouve l’autorité dont elle est investie. Est moral, explique-t-il, « tout ce qui est source de solidarité, tout ce qui force l’homme à compter avec autrui » : la moralité ne consiste donc pas dans la liberté, mais, écrit-il, « dans un état de dépendance » (<em>De la division du travail social</em>). Être moral, c’est se rendre solidaire d’un groupe et lui sacrifier une part de la liberté de ses mouvements. Le devoir est alors la voix d’une contrainte collective."], "com": "Pour introduire une référence : situer l’auteur et sa thèse, citer avec l’œuvre, expliquer avec ses propres mots, puis relier à la question. La citation ne se substitue pas à l’explication, et le dernier mot du paragraphe revient à la contrainte, qui est le terme du sujet."}, {"id": 7, "role": "Développement d’une sous-partie", "struct": false, "place": "Partie I : Le devoir se présente comme une contrainte", "label": "Sous-partie I.c", "text": ["Nietzsche va plus loin en montrant que cette contrainte s’est intériorisée. Dans <em>Aurore</em>, le <em>Gai Savoir</em> et la <em>Généalogie de la morale</em>, il soutient que les valeurs morales ne sont pas des évidences naturelles, mais le produit d’une histoire et d’une société : « la moralité est l’instinct du troupeau dans l’individu » et n’est « rien d’autre que l’obéissance aux mœurs, quelles qu’elles soient ». La norme a d’abord été inculquée par la punition : « seul ce qui ne cesse de faire souffrir reste dans la mémoire ». Puis les instincts, ne pouvant plus s’exprimer au-dehors, se retournent contre l’individu sous forme de remords et de « mauvaise conscience ». L’homme devient son propre bourreau : il se contraint lui-même, sans que personne ait besoin de l’y obliger."], "com": "Cette sous-partie prolonge la précédente (« va plus loin ») au lieu de la répéter : la contrainte sociale devient une contrainte intérieure. Une gradation de ce genre rend la partie cohérente."}, {"id": 8, "role": "Bilan de partie (et transition)", "struct": true, "place": "Partie I : Le devoir se présente comme une contrainte", "label": "Bilan et transition", "text": ["Le devoir est donc une contrainte, qu’elle naisse de l’opposition entre la loi morale et nos désirs, de la pression sociale ou de sa version intériorisée. Mais cette conclusion est gênante. Si nous n’obéissons au devoir que parce que nous y sommes contraints, par la crainte de la punition ou celle du groupe, peut-on encore dire que nous agissons par devoir ?"], "com": "Le bilan résume la partie en une phrase qui répond au sujet. La transition formule ensuite le problème qui fait basculer vers la partie II : c’est la limite de la thèse précédente qui annonce la suivante, et pas un simple « d’autre part »."}, {"id": 9, "role": "Énoncé de la thèse de la partie", "struct": true, "place": "Partie II : Une pure contrainte ne ferait pas un devoir", "label": "Énoncé de la thèse", "text": ["Or une pure contrainte ne ferait pas un devoir : agir par peur ou par intérêt, ce n’est pas agir par devoir, et le devoir doit donc trouver son origine en nous, sans pouvoir se réduire à un simple penchant."], "com": "La thèse de la partie II répond directement au problème posé par la transition précédente. Elle contient déjà les deux étapes de la partie : écarter la pure contrainte, puis chercher l’origine du devoir en nous."}, {"id": 10, "role": "Développement d’une sous-partie", "struct": false, "place": "Partie II : Une pure contrainte ne ferait pas un devoir", "label": "Sous-partie II.a", "text": ["Kant le montre dans les <em>Fondements de la métaphysique des mœurs</em> en distinguant l’action conforme au devoir de l’action faite par devoir. Le commerçant qui traite honnêtement tous ses clients, même les moins expérimentés, agit conformément au devoir ; mais s’il le fait pour conserver sa clientèle, il agit par intérêt. De même, celui qui respecte la loi par crainte de la punition se conforme à la contrainte sans agir moralement. Pour Kant, « il n’y a qu’une seule chose qu’on puisse tenir pour bonne sans restriction, c’est une bonne volonté » : ni l’intelligence, ni le courage, ni la fortune ne valent moralement, car ils peuvent servir le mal. La bonne volonté, elle, vaut en soi, « ainsi qu’un joyau », indépendamment de ses succès. La valeur morale d’une action tient donc à l’intention, non à ce qui nous y pousse du dehors. Une action simplement contrainte peut être conforme au devoir, mais elle n’a pas de valeur morale."], "com": "La partie II reprend la difficulté posée par la transition. La distinction « conforme au devoir / par devoir » est le pivot de toute la copie : elle est définie, illustrée, puis appliquée à la contrainte."}, {"id": 11, "role": "Développement d’une sous-partie", "struct": false, "place": "Partie II : Une pure contrainte ne ferait pas un devoir", "label": "Sous-partie II.b", "text": ["Le devoir doit donc plutôt trouver son origine en nous. D’Holbach propose de fonder la morale sur la nature de l’homme, être qui sent, pense et s’aime lui-même ; Rousseau, dans le <em>Discours sur l’origine et les fondements de l’inégalité parmi les hommes</em>, en donne une première forme avec la pitié, « sentiment naturel qui, modérant dans chaque individu l’activité de l’amour de soi-même, concourt à la conservation mutuelle de toute l’espèce ». Elle nous porte « sans réflexion » au secours de ceux qui souffrent, avant toute loi ; à l’état de nature, elle « tient lieu de lois, de mœurs et de vertu », et nul n’est tenté de désobéir à sa « douce voix ». Elle inspire cette maxime de bonté naturelle : « Fais ton bien avec le moindre mal d’autrui qu’il est possible ». Ici, le devoir n’est plus une force qui s’exerce sur nous : il est une répugnance naturelle à faire du mal, qui n’a besoin d’aucune sanction pour être suivie."], "com": "La première phrase fait le lien avec le paragraphe précédent (« doit donc plutôt trouver son origine en nous »). Le raisonnement avance sans rupture : chaque sous-partie s’appuie sur la précédente."}, {"id": 12, "role": "Développement d’une sous-partie", "struct": false, "place": "Partie II : Une pure contrainte ne ferait pas un devoir", "label": "Sous-partie II.c", "text": ["Cette solution rencontre cependant deux limites. D’une part, la pitié est un mouvement spontané et aveugle : elle nous porte vers ceux que nous voyons souffrir, et ne dit rien de ce que nous devons à ceux que nous ne voyons pas, ni de ce que nous nous devons à nous-mêmes. Rousseau lui-même la distingue de la « justice raisonnée », celle de la maxime « Fais à autrui comme tu veux qu’on te fasse » : plus parfaite, mais œuvre de la raison. D’autre part, si le devoir se confondait avec un penchant, nous ne ferions que suivre notre inclination, et nous retomberions sur la difficulté de Kant : une action conforme au devoir peut venir d’une inclination, et agir parce que cela nous plaît, même pour le bien, ce n’est pas encore agir par devoir."], "com": "Une bonne partie examine aussi les limites de la thèse qu’elle vient d’exposer. Ici, deux critiques distinctes, annoncées par « d’une part… d’autre part », conduisent à la partie III : il faut un principe qui ne soit ni extérieur ni simple penchant."}, {"id": 13, "role": "Bilan de partie (et transition)", "struct": true, "place": "Partie II : Une pure contrainte ne ferait pas un devoir", "label": "Bilan et transition", "text": ["Le devoir ne peut donc être ni une contrainte purement extérieure, qui ne produirait que des actions conformes, ni un simple penchant, qui ne serait pas un devoir. Il faut alors chercher une contrainte qui ne soit pas extérieure à nous sans être pour autant un penchant : celle que nous nous donnons nous-mêmes, c’est-à-dire celle à laquelle nous consentons."], "com": "Le bilan écarte les deux solutions rencontrées. La transition ne pose pas seulement une question : elle esquisse déjà la piste de la partie III."}, {"id": 14, "role": "Énoncé de la thèse de la partie", "struct": true, "place": "Partie III : Consentie, la contrainte devient une obligation", "label": "Énoncé de la thèse", "text": ["Le devoir est pourtant bien une contrainte, mais lorsque nous y consentons, elle devient une obligation : la raison se donne à elle-même la loi qu’elle suit, et obéir au devoir est alors une autonomie, non une servitude."], "com": "La thèse de la partie III dépasse l’opposition entre les deux premières parties : elle conserve le mot « contrainte » (partie I) en le précisant par le consentement (partie II). C’est la réponse que la conclusion reprendra."}, {"id": 15, "role": "Développement d’une sous-partie", "struct": false, "place": "Partie III : Consentie, la contrainte devient une obligation", "label": "Sous-partie III.a", "text": ["Pour un être à la fois raisonnable et sensible, comme l’homme, la loi morale prend la forme d’un commandement. Kant l’explique dans les Fondements : une volonté parfaitement bonne ferait le bien sans effort et n’aurait pas de devoir ; la nôtre, partagée entre la raison et les inclinations, doit se contraindre pour obéir à la raison, et la loi lui apparaît donc sous la forme d’un impératif. Le devoir reste donc une contrainte, et c’est ce qui explique le poids que nous ressentons ; mais cette contrainte s’exerce contre nos penchants, non contre notre liberté."], "com": "La partie III ne rejette pas la thèse de la partie I : elle la conserve en la déplaçant. C’est ce qu’on appelle un dépassement : le devoir reste une contrainte, mais d’une autre nature."}, {"id": 16, "role": "Développement d’une sous-partie", "struct": false, "place": "Partie III : Consentie, la contrainte devient une obligation", "label": "Sous-partie III.b", "text": ["Or une contrainte à laquelle on consent n’est plus tout à fait une contrainte : elle devient une obligation. La force seule n’oblige pas. Rousseau le montre dans le <em>Contrat social</em>, au chapitre « Du droit du plus fort », avec l’exemple du brigand : celui qui, au coin d’un bois, donne sa bourse sous la menace cède à la nécessité, non à un devoir ; il ne se sent pas obligé en conscience. « Le plus fort n’est jamais assez fort pour être toujours le maître, s’il ne transforme sa force en droit, et l’obéissance en devoir. » En revanche, celui qui a promis est lié par sa parole : personne ne l’y force, mais, ayant consenti, il se doit de la tenir, même si cela lui coûte. La contrainte n’a pas disparu, mais elle a changé de nature : ce qui s’imposait comme une force devient un lien que nous reconnaissons, et que nous nous devons à nous-mêmes. C’est pourquoi Rousseau peut écrire que « l’obéissance à la loi qu’on s’est prescrite est liberté »."], "com": "C’est l’idée directrice de la copie : c’est le consentement qui fait passer de la contrainte à l’obligation. Elle est posée, illustrée par un contraste (le brigand, la promesse), puis citée avec une référence précise, avant d’être appliquée à la loi morale."}, {"id": 17, "role": "Développement d’une sous-partie", "struct": false, "place": "Partie III : Consentie, la contrainte devient une obligation", "label": "Sous-partie III.c", "text": ["Le devoir moral est la forme la plus achevée de cette contrainte consentie : la loi n’y est pas imposée du dehors. Kant la formule comme un impératif catégorique, qui commande sans condition, à la différence de l’impératif hypothétique (« si tu veux telle fin, fais telle chose ») : « Agis uniquement d’après la maxime grâce à laquelle tu peux vouloir en même temps qu’elle devienne une loi universelle. » Je n’ai besoin ni d’une autorité ni d’une sanction pour savoir si mon action est un devoir : il me suffit de me demander si je pourrais vouloir que tous agissent ainsi. Le critère est dans ma raison, et la loi est celle que je me donne : c’est l’autonomie, mot que Kant forme à partir du grec autos, « soi-même », et nomos, « loi ». Obéir au devoir, c’est alors obéir à soi-même, et non plus à un maître : la contrainte morale est une obligation que nous avons reconnue comme nôtre."], "com": "Le consentement est ici celui de la raison. La formule de l’impératif est citée, puis traduite en une question que chacun peut se poser. Le mot « autonomie » est introduit au moment où il devient nécessaire, avec sa définition."}, {"id": 18, "role": "Développement d’une sous-partie", "struct": false, "place": "Partie III : Consentie, la contrainte devient une obligation", "label": "Sous-partie III.d", "text": ["Reprenons notre exemple : celui qui rend le portefeuille parce qu’il ne pourrait pas vouloir que chacun garde ce qu’il trouve agit par devoir. Il a surmonté son désir, mais ce n’est ni le groupe ni la peur qui l’y a poussé : c’est une loi que sa raison reconnaît pour sienne. La contrainte demeure, mais, parce qu’il y consent, elle est devenue pour lui une obligation : celle d’une liberté qui se gouverne. Cela ne revient pas à dire que nous puissions être sûrs d’agir ainsi : Kant admet qu’il n’y a jamais d’exemple certain d’une intention d’agir par devoir, car l’amour-propre peut toujours se cacher derrière la moralité apparente. Mais cette difficulté touche la connaissance de nos intentions, et non la définition du devoir."], "com": "On revient à l’exemple de l’introduction : cela donne une boucle qui rassure le lecteur. La dernière objection, qui est une limite reconnue honnêtement, évite de présenter la solution comme parfaite."}, {"id": 19, "role": "Bilan de partie (et transition)", "struct": true, "place": "Partie III : Consentie, la contrainte devient une obligation", "label": "Bilan de la partie III", "text": ["Le devoir est donc bien une contrainte, mais une contrainte consentie, que la raison s’impose à elle-même : en y consentant, nous la transformons en obligation, et elle fait de nous des êtres autonomes."], "com": "Le bilan de la dernière partie contient déjà la réponse que reprendra la conclusion, avec le mot qui la résume : consentie."}, {"id": 20, "role": "Conclusion", "struct": true, "place": "Conclusion", "label": "Conclusion", "text": ["Le devoir est-il une contrainte ? Nous avons vu d’abord qu’il en a bien l’apparence : il s’oppose à nos désirs, et la société, par ses mœurs et ses sanctions, l’inculque jusqu’à nous le faire intérioriser. Mais nous avons montré ensuite qu’une pure contrainte ne ferait pas un devoir, puisqu’agir par peur du châtiment n’est pas agir par devoir, et que le seul penchant naturel ne suffit pas non plus à le fonder. Nous avons enfin établi que, lorsque nous consentons à une contrainte, celle-ci devient une obligation : le devoir est bien une contrainte, mais celle que la raison s’impose à elle-même, et qui ne nous soumet pas à un maître, puisque la loi que nous suivons est celle que nous nous donnons. On peut donc répondre que le devoir se ressent comme une contrainte, mais qu’il n’est pleinement un devoir, c’est-à-dire une obligation, que lorsque cette contrainte est consentie par notre propre raison."], "com": "La conclusion reprend la question, puis les bilans de chaque partie dans l’ordre, et aboutit à une réponse nette et nuancée. Aucune idée, aucun auteur nouveau : tout ce qui est dit a déjà été démontré."}], "pool": ["Accroche", "Analyse du sujet", "Problématique", "Annonce du plan", "Énoncé de la thèse de la partie", "Développement d’une sous-partie", "Bilan de partie (et transition)", "Conclusion"]}],DATA=[],SID=-1,PL=[],POOL=["Accroche", "Analyse du sujet", "Problématique", "Annonce du plan", "Énoncé de la thèse de la partie", "Développement d’une sous-partie", "Bilan de partie (et transition)", "Conclusion"],SUB="Développement d’une sous-partie",NSUB=4;
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var ex=document.getElementById('ex'),copie=document.getElementById('copie'),box=document.getElementById('opts'),fb=document.getElementById('fb'),com=document.getElementById('com'),nx=document.getElementById('nx'),prog=document.getElementById('prog'),res=document.getElementById('res');
+  var sj=document.getElementById('sj');
+  ALL.forEach(function(a,k){var b=document.createElement('button');b.type='button';b.className='btn';b.textContent=a.sujet;b.addEventListener('click',function(){start(k);window.scrollTo({top:0,behavior:reduce?'auto':'smooth'})});sj.appendChild(b)});
+  sj.hidden=ALL.length<2;
+  var Q=[],i=0,good=0,missed=[];
+  function shuffle(a){a=a.slice();for(var k=a.length-1;k>0;k--){var j=Math.floor(Math.random()*(k+1)),t=a[k];a[k]=a[j];a[j]=t}return a}
+  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;')}
+  function start(n){
+    if(typeof n!=='number'){do{n=Math.floor(Math.random()*ALL.length)}while(ALL.length>1&&n===SID)}
+    SID=n;DATA=ALL[n].items;PL=ALL[n].pool;document.getElementById('sujet').textContent=ALL[n].sujet;document.getElementById('lnkc').hidden=(n!==0);
+    [].slice.call(sj.children).forEach(function(b,k){b.setAttribute('aria-pressed',k===n?'true':'false')});
+    var st=DATA.filter(function(d){return d.struct}),sb=shuffle(DATA.filter(function(d){return !d.struct})).slice(0,NSUB);
+    Q=shuffle(st.concat(sb));i=0;good=0;missed=[];res.hidden=true;ex.hidden=false;show();
+  }
+  function show(){
+    var d=Q[i];
+    prog.textContent='Passage '+(i+1)+' sur '+Q.length;
+    copie.innerHTML=d.text.map(function(p){return '<p>'+p+'</p>'}).join('');
+    box.innerHTML='';fb.textContent='';com.hidden=true;com.innerHTML='';nx.hidden=true;
+    var others=shuffle(PL.filter(function(p){return p!==d.role})).slice(0,3);
+    shuffle(others.concat([d.role])).forEach(function(o){
+      var b=document.createElement('button');b.type='button';b.className='opt';b.textContent=o;
+      b.addEventListener('click',function(){answer(b,o,d)});box.appendChild(b);
+    });
+  }
+  function answer(b,o,d){
+    [].slice.call(box.children).forEach(function(x){x.disabled=true;if(x.textContent===d.role){x.classList.add('ok');if(x!==b)x.textContent=x.textContent+' (bonne réponse)'}});
+    if(o===d.role){good++;b.textContent='✓ '+o;fb.textContent='Bonne réponse.'}
+    else{b.classList.add('bad');b.textContent='✗ '+o;fb.textContent='Ce n’est pas cela : il s’agit de « '+d.role+' ».';missed.push(d.role)}
+    com.innerHTML='<span class="place">Place dans la copie : '+esc(d.place)+'</span><b class="k">'+esc(d.label)+'</b>'+d.com;
+    com.hidden=false;
+    nx.textContent=(i+1<Q.length)?'Passage suivant':'Voir mon bilan';nx.hidden=false;nx.focus();
+  }
+  nx.addEventListener('click',function(){
+    if(i+1<Q.length){i++;show();ex.focus({preventScroll:true});if(!reduce)ex.scrollIntoView({block:'start',behavior:'smooth'});else ex.scrollIntoView({block:'start'})}
+    else finish();
+  });
+  function finish(){
+    ex.hidden=true;prog.textContent='Exercice terminé';res.hidden=false;
+    document.getElementById('score').textContent='Vous avez reconnu '+good+' rôles sur '+Q.length+'.';
+    var m=document.getElementById('missed');m.innerHTML='';var h=document.createElement('p');h.className='miss';
+    if(missed.length){var uniq=missed.filter(function(x,k){return missed.indexOf(x)===k});h.textContent='À revoir : '+uniq.join(' ; ')+'.'}
+    else h.textContent='Aucune erreur : vous repérez bien la structure d’une dissertation.';
+    m.appendChild(h);res.scrollIntoView({block:'start',behavior:reduce?'auto':'smooth'});
+  }
+  document.getElementById('redo').addEventListener('click',function(){start(SID);window.scrollTo({top:0,behavior:reduce?'auto':'smooth'})});
+  start();
+})();
+</script>
+<script>
+(function(){var r=document.documentElement,K='texte-seul',KL='mode-lecture';
+var btn=document.getElementById('a11y-btn'),menu=document.getElementById('a11y-menu'),opts=menu.querySelectorAll('.a11y-opt'),closed=[],shown=[],skipped=[];
+function apply(m){
+  var ts=m==='ts',lc=m==='lect',was=r.classList.contains('lect');
+  r.classList.toggle('ts',ts);r.classList.toggle('lect',lc);
+  if(lc&&!was){closed=[];shown=[];skipped=[];
+    document.querySelectorAll('main details').forEach(function(d){if(!d.open){closed.push(d);d.open=true}});
+    document.querySelectorAll('main [hidden]').forEach(function(x){if(!x.closest('[aria-labelledby="h-video"]')&&!x.matches('video,[role="tablist"]')){shown.push(x);x.hidden=false}});
+    document.querySelectorAll('main section').forEach(function(sc){var h=sc.querySelector('h2');
+      if(sc.querySelector('input,select,textarea')||(h&&/^(Exercice|Faites le tri|En vid)/i.test(h.textContent.trim()))){sc.classList.add('lc-skip');skipped.push(sc)}});}
+  if(!lc&&was){closed.forEach(function(d){d.open=false});shown.forEach(function(x){x.hidden=true});skipped.forEach(function(s){s.classList.remove('lc-skip')});closed=[];shown=[];skipped=[]}
+  opts.forEach(function(o){o.setAttribute('aria-checked',o.getAttribute('data-mode')===m?'true':'false')});
+  try{localStorage.setItem(K,ts?'1':'0');localStorage.setItem(KL,lc?'1':'0')}catch(e){}
+}
+function open(on){menu.hidden=!on;btn.setAttribute('aria-expanded',on?'true':'false')}
+btn.addEventListener('click',function(e){e.stopPropagation();open(menu.hidden)});
+opts.forEach(function(o){o.addEventListener('click',function(){apply(o.getAttribute('data-mode'));open(false);btn.focus()})});
+document.addEventListener('click',function(e){if(!menu.hidden&&!menu.contains(e.target)&&e.target!==btn)open(false)});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!menu.hidden){open(false);btn.focus()}});
+var v='orig';try{if(localStorage.getItem(KL)==='1')v='lect';else if(localStorage.getItem(K)==='1'&&menu.querySelector('[data-mode="ts"]'))v='ts'}catch(e){}
+if(v==='ts')apply('ts');
+if(v==='lect')window.addEventListener('load',function(){apply('lect')});
+})();
+</script>
+</body>
+</html>

@@ -191,7 +191,7 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
 .txt span.on{background:color-mix(in srgb,var(--k) 24%,transparent);box-shadow:inset 0 -3px 0 var(--k)}
 .txt .t{--k:var(--g1)}.txt .a{--k:var(--g2)}.txt .e{--k:var(--g3)}.txt .c{--k:var(--ink)}
 .role{margin:1.2rem 0 0;padding:.9rem 1.1rem;border-left:5px solid var(--stamp);background:var(--stamp-soft);border-radius:0 8px 8px 0;max-width:none;min-height:3.2em}
-.defs{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:1rem}
+.defs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr));gap:1rem}
 .defs article{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--k,var(--ink));border-radius:0 0 8px 8px;padding:1.1rem 1.2rem 1.3rem}
 .defs article:nth-child(1){--k:var(--g1)}.defs article:nth-child(2){--k:var(--g2)}.defs article:nth-child(3){--k:var(--g3)}.defs article:nth-child(4){--k:var(--ink)}
 .defs h3{font:700 1.6rem/1.1 var(--display);margin-bottom:.2rem}
@@ -220,7 +220,7 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
 .card dl{margin:0;display:grid;grid-template-columns:minmax(0,11rem) minmax(0,1fr);gap:.55rem 1.2rem}
 .card dt{font:700 .88rem/1.4 var(--text);color:var(--stamp)}
 .card dd{margin:0}
-.pairs{display:grid;grid-template-columns:repeat(auto-fit,minmax(18rem,1fr));gap:1rem}
+.pairs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,18rem),1fr));gap:1rem}
 .pairs article{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--stamp);border-radius:0 0 8px 8px;padding:1.1rem 1.2rem}
 .pairs h3{font:700 1.3rem/1.2 var(--display);margin-bottom:.5rem}
 .pairs p{margin:0 0 .6rem;font-size:1rem}
@@ -294,8 +294,8 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
 
 <header class="hero">
   <div class="wrap">
-    <h1>Atelier : l’introduction de la dissertation</h1>
-    <p class="lead">Construisez une introduction étape par étape : une consigne, des amorces de phrases et un exemple pour chaque étape. Vous assemblez ensuite votre texte et vous le comparez à un corrigé.</p>
+    <h1>Atelier : l’introduction de la dissertation</h1>
+    <p class="lead">Construisez une introduction étape par étape : une consigne, des amorces de phrases et un exemple pour chaque étape. Vous assemblez ensuite votre texte et vous le comparez à un corrigé.</p>
 
     <div class="demo">
       <p class="note" style="margin:0 0 .8rem">Choisissez un sujet.</p>
@@ -312,9 +312,9 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
         <textarea class="ed" id="full" style="min-height:14rem" aria-label="Mon introduction assemblée"></textarea>
         <p class="cnt" id="cnt"></p>
         <div class="tools" style="margin:.8rem 0 0"><button class="btn" type="button" id="cp">Copier mon texte</button><button class="btn" type="button" id="pdf">Enregistrer en PDF</button><a class="btn primary depot" id="depot" href="#" target="_blank" rel="noopener noreferrer">Déposer mon travail ↗</a></div>
-        <p class="depot-note">Pour rendre votre travail, et ce uniquement si vous souhaitez que je vous corrige : enregistrez-le en PDF, puis cliquez sur « Déposer mon travail ». N’oubliez pas d’indiquer votre prénom et nom sur le Framaform.</p>
+        <p class="depot-note">Pour rendre votre travail, et ce uniquement si vous souhaitez que je vous corrige : enregistrez-le en PDF, puis cliquez sur « Déposer mon travail ». N’oubliez pas d’indiquer votre prénom et nom sur le Framaform.</p>
         <h3 style="margin:1.6rem 0 0">Grille d’auto-évaluation</h3>
-        <p class="note" style="margin:.2rem 0 1rem">Relisez votre texte, puis choisissez pour chaque critère la description qui lui correspond le mieux. Soyez exigeant : cette grille n’est vue que de vous.</p>
+        <p class="note" style="margin:.2rem 0 1rem">Relisez votre texte, puis choisissez pour chaque critère la description qui lui correspond le mieux. Soyez exigeant : cette grille n’est vue que de vous.</p>
         <div id="ev"></div>
         <div class="tools" style="margin:1rem 0 0"><button class="btn primary" type="button" id="bil-b">Voir mon bilan</button></div>
         <div id="bil" aria-live="polite"></div>

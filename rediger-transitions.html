@@ -191,7 +191,7 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
 .txt span.on{background:color-mix(in srgb,var(--k) 24%,transparent);box-shadow:inset 0 -3px 0 var(--k)}
 .txt .t{--k:var(--g1)}.txt .a{--k:var(--g2)}.txt .e{--k:var(--g3)}.txt .c{--k:var(--ink)}
 .role{margin:1.2rem 0 0;padding:.9rem 1.1rem;border-left:5px solid var(--stamp);background:var(--stamp-soft);border-radius:0 8px 8px 0;max-width:none;min-height:3.2em}
-.defs{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:1rem}
+.defs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr));gap:1rem}
 .defs article{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--k,var(--ink));border-radius:0 0 8px 8px;padding:1.1rem 1.2rem 1.3rem}
 .defs article:nth-child(1){--k:var(--g1)}.defs article:nth-child(2){--k:var(--g2)}.defs article:nth-child(3){--k:var(--g3)}.defs article:nth-child(4){--k:var(--ink)}
 .defs h3{font:700 1.6rem/1.1 var(--display);margin-bottom:.2rem}
@@ -220,7 +220,7 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
 .card dl{margin:0;display:grid;grid-template-columns:minmax(0,11rem) minmax(0,1fr);gap:.55rem 1.2rem}
 .card dt{font:700 .88rem/1.4 var(--text);color:var(--stamp)}
 .card dd{margin:0}
-.pairs{display:grid;grid-template-columns:repeat(auto-fit,minmax(18rem,1fr));gap:1rem}
+.pairs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,18rem),1fr));gap:1rem}
 .pairs article{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--stamp);border-radius:0 0 8px 8px;padding:1.1rem 1.2rem}
 .pairs h3{font:700 1.3rem/1.2 var(--display);margin-bottom:.5rem}
 .pairs p{margin:0 0 .6rem;font-size:1rem}
@@ -268,7 +268,7 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
 
 <header class="hero">
   <div class="wrap">
-    <h1>Relier les parties : les transitions</h1>
+    <h1>Relier les parties : les transitions</h1>
     <p class="lead">Une transition dit ce qu’une partie a établi, puis pourquoi il faut aller plus loin. Voici comment elles s’enchaînent, sur trois corrigés.</p>
 
     <div class="demo">
@@ -291,10 +291,10 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
       <span class="kicker">Principe</span>
       <h2 id="h-trans">Pourquoi on change de partie</h2>
     </div>
-    <p class="rev">Entre deux parties, le lecteur doit comprendre <b>pourquoi on change de partie</b>. Pour cela, la fin de chaque partie contient deux éléments. <b>La transition appartient donc à la fin de la partie qui s’achève</b> : le bilan la clôt, le problème ouvre la suivante. Le bilan peut rappeler, en une mention, la référence qui a appuyé la partie.</p>
+    <p class="rev">Entre deux parties, le lecteur doit comprendre <b>pourquoi on change de partie</b>. Pour cela, la fin de chaque partie contient deux éléments. <b>La transition appartient donc à la fin de la partie qui s’achève</b> : le bilan la clôt, le problème ouvre la suivante. Le bilan peut rappeler, en une mention, la référence qui a appuyé la partie.</p>
     <div class="pairs rev">
       <article><h3>Un bilan</h3><p>Ce que la partie vient d’établir, en une ou deux phrases.</p><p class="vs">Le choix semble suffisant, puisque la liberté se comprend comme notre capacité à choisir.</p></article>
-      <article><h3>Un problème</h3><p>Ce que ce bilan ne règle pas : la question qui oblige à passer à la partie suivante.</p><p class="vs">Ne pouvons-nous pas simplement nous sentir libres, sans l’être véritablement ?</p></article>
+      <article><h3>Un problème</h3><p>Ce que ce bilan ne règle pas : la question qui oblige à passer à la partie suivante.</p><p class="vs">Ne pouvons-nous pas simplement nous sentir libres, sans l’être véritablement ?</p></article>
     </div>
   </div>
 </section>
@@ -304,7 +304,7 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
       <span class="kicker">Sous-parties</span>
       <h2 id="h-sub">À l’intérieur d’une partie</h2>
     </div>
-    <p class="rev">C’est la même logique à plus petite échelle : <b>chaque sous-partie se termine par une synthèse</b>, qui dit ce qu’elle a établi et la relie au sujet. Les sous-parties s’enchaînent alors sans que le lecteur se perde.</p>
+    <p class="rev">C’est la même logique à plus petite échelle : <b>chaque sous-partie se termine par une synthèse</b>, qui dit ce qu’elle a établi et la relie au sujet. Les sous-parties s’enchaînent alors sans que le lecteur se perde.</p>
   </div>
 </section>
 <section class="block" aria-labelledby="h-mots">
@@ -335,7 +335,7 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
     <ol class="pitfalls rev">
       <li><h3>Des parties qui se succèdent sans lien</h3><p>Sans bilan ni problème, le lecteur ne voit pas pourquoi on change de partie.</p></li>
       <li><h3>Un bilan qui répète tout</h3><p>Le bilan dit l’essentiel de ce qui a été établi, pas le détail des arguments.</p></li>
-      <li><h3>Un problème artificiel</h3><p>La question doit naître du bilan : c’est ce qu’il laisse sans réponse qui conduit à la partie suivante.</p></li>
+      <li><h3>Un problème artificiel</h3><p>La question doit naître du bilan : c’est ce qu’il laisse sans réponse qui conduit à la partie suivante.</p></li>
     </ol>
   </div>
 </section>
@@ -352,16 +352,16 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
   <div class="wrap">
     <h2 id="h-r" style="margin-bottom:1.8rem">À retenir</h2>
     <ul class="recap rev">
-      <li>Chaque partie se termine par un bilan : ce qu’elle a établi.</li>
-      <li>Le bilan est suivi d’un problème : ce qu’il ne règle pas, et qui oblige à passer à la partie suivante.</li>
+      <li>Chaque partie se termine par un bilan : ce qu’elle a établi.</li>
+      <li>Le bilan est suivi d’un problème : ce qu’il ne règle pas, et qui oblige à passer à la partie suivante.</li>
       <li>Chaque sous-partie se termine par une synthèse.</li>
-      <li>Des mots de liaison guident le lecteur : donc, cependant, peut-être…</li>
+      <li>Des mots de liaison guident le lecteur : donc, cependant, peut-être…</li>
     </ul>
   </div>
 </section>
 </main>
 
-<nav class="pn" aria-label="Parcours dissertation"><a href="rediger-introduction.html" rel="prev"><small>← Étape précédente</small><b>Rédiger l’introduction</b></a><a class="nx" href="rediger-conclusion.html" rel="next"><small>Étape suivante →</small><b>Rédiger la conclusion</b></a><a class="hm" href="parcours-dissertation.html">Parcours dissertation : étape 7 sur 8</a><a class="hm" href="accueil.html">Retour à l’accueil</a></nav>
+<nav class="pn" aria-label="Parcours dissertation"><a href="rediger-introduction.html" rel="prev"><small>← Étape précédente</small><b>Rédiger l’introduction</b></a><a class="nx" href="rediger-conclusion.html" rel="next"><small>Étape suivante →</small><b>Rédiger la conclusion</b></a><a class="hm" href="parcours-dissertation.html">Parcours dissertation : étape 7 sur 8</a><a class="hm" href="accueil.html">Retour à l’accueil</a></nav>
 
 <script>
 (function(){

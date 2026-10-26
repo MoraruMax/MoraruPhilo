@@ -190,7 +190,7 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
 .verdict{margin-top:1.4rem;padding:1.1rem 1.3rem;border-left:5px solid var(--stamp);background:var(--stamp-soft);border-radius:0 8px 8px 0}
 .verdict h3{font:700 clamp(1.3rem,3vw,1.8rem)/1.2 var(--display);margin-bottom:.4rem}
 .verdict p{margin:0 0 .5rem;max-width:none}.verdict p:last-child{margin:0}
-.defs{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:1rem}
+.defs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr));gap:1rem}
 .defs article{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--k);border-radius:0 0 8px 8px;padding:1.1rem 1.2rem 1.3rem}
 .defs article:nth-child(1){--k:var(--g1)}.defs article:nth-child(2){--k:var(--g2)}.defs article:nth-child(3){--k:var(--ink)}.defs article:nth-child(4){--k:var(--g3)}
 .defs h3{font:700 1.6rem/1.1 var(--display);margin-bottom:.2rem}
@@ -248,19 +248,19 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
 
     <div class="stage">
       <div class="q2">
-        <fieldset><legend>1. Suis-je absolument sûr(e) ?</legend>
+        <fieldset><legend>1. Suis-je absolument sûr(e) ?</legend>
           <div class="seg2" role="group">
             <button class="btn" type="button" data-q="sure" data-v="1" aria-pressed="false">Oui, sans aucun doute</button>
             <button class="btn" type="button" data-q="sure" data-v="0" aria-pressed="false">Non, il me reste un doute</button>
           </div></fieldset>
-        <fieldset><legend>2. Ai-je des raisons que d’autres peuvent examiner ?</legend>
+        <fieldset><legend>2. Ai-je des raisons que d’autres peuvent examiner ?</legend>
           <div class="seg2" role="group">
             <button class="btn" type="button" data-q="reasons" data-v="1" aria-pressed="false">Oui, je peux les exposer</button>
             <button class="btn" type="button" data-q="reasons" data-v="0" aria-pressed="false">Non, c’est intime</button>
           </div></fieldset>
       </div>
       <div class="verdict" id="verdict" aria-live="polite"></div>
-      <p class="note" style="margin:1rem 0 0">Schéma simplifié, pour s’orienter : dans une copie, précisez toujours le sens que vous donnez à chaque mot.</p>
+      <p class="note" style="margin:1rem 0 0">Schéma simplifié, pour s’orienter : dans une copie, précisez toujours le sens que vous donnez à chaque mot.</p>
     </div>
   </div>
 </header>
@@ -275,27 +275,27 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
     <div class="defs rev">
       <article>
         <h3>Croyance</h3>
-        <p class="ety">du latin <i>credere</i> : confier, se fier à</p>
-        <p>Fait de tenir une idée pour vraie <b>sans disposer de preuves suffisantes</b>, ou sans pouvoir la vérifier. Elle peut être faible (« je crois qu’il pleuvra ») ou très forte (la foi), vraie ou fausse.</p>
-        <p class="ex">Ex. : croire à l’existence de Dieu, ou que demain sera meilleur qu’aujourd’hui.</p>
+        <p class="ety">du latin <i>credere</i> : confier, se fier à</p>
+        <p>Fait de tenir une idée pour vraie <b>sans disposer de preuves suffisantes</b>, ou sans pouvoir la vérifier. Elle peut être faible (« je crois qu’il pleuvra ») ou très forte (la foi), vraie ou fausse.</p>
+        <p class="ex">Ex. : croire à l’existence de Dieu, ou que demain sera meilleur qu’aujourd’hui.</p>
       </article>
       <article>
         <h3>Certitude</h3>
-        <p class="ety">du latin <i>certus</i> : décidé, sûr</p>
-        <p>État de celui qui est <b>sûr</b> et ne doute plus. C’est d’abord un sentiment : on peut être certain et se tromper. Elle est <b>fondée</b> lorsqu’elle s’appuie sur une preuve ou une évidence, comme en mathématiques.</p>
-        <p class="ex">Ex. : je suis certain que 2 + 2 = 4 ; je suis certain d’avoir fermé la porte (et pourtant…).</p>
+        <p class="ety">du latin <i>certus</i> : décidé, sûr</p>
+        <p>État de celui qui est <b>sûr</b> et ne doute plus. C’est d’abord un sentiment : on peut être certain et se tromper. Elle est <b>fondée</b> lorsqu’elle s’appuie sur une preuve ou une évidence, comme en mathématiques.</p>
+        <p class="ex">Ex. : je suis certain que 2 + 2 = 4 ; je suis certain d’avoir fermé la porte (et pourtant…).</p>
       </article>
       <article>
         <h3>Connaissance</h3>
-        <p class="ety">du latin <i>cognoscere</i> : apprendre à connaître</p>
-        <p>Adhésion à une idée <b>vraie</b> et <b>justifiée</b> : on la définit souvent comme une croyance vraie, appuyée sur des preuves ou des raisons que l’on peut exposer. Une « connaissance fausse » n’est pas une connaissance : c’est une erreur.</p>
-        <p class="ex">Ex. : savoir que l’eau bout à 100 °C au niveau de la mer, parce que l’on peut le vérifier.</p>
+        <p class="ety">du latin <i>cognoscere</i> : apprendre à connaître</p>
+        <p>Adhésion à une idée <b>vraie</b> et <b>justifiée</b> : on la définit souvent comme une croyance vraie, appuyée sur des preuves ou des raisons que l’on peut exposer. Une « connaissance fausse » n’est pas une connaissance : c’est une erreur.</p>
+        <p class="ex">Ex. : savoir que l’eau bout à 100 °C au niveau de la mer, parce que l’on peut le vérifier.</p>
       </article>
       <article>
         <h3>Conviction</h3>
-        <p class="ety">du latin <i>convincere</i> : vaincre complètement</p>
-        <p>Adhésion <b>forte et engagée</b>, que l’on a faite sienne, souvent à partir de raisons ou de valeurs. Elle oriente l’action : on a des convictions morales, politiques, religieuses.</p>
-        <p class="ex">Ex. : être convaincu que la torture est injustifiable, quoi qu’il arrive.</p>
+        <p class="ety">du latin <i>convincere</i> : vaincre complètement</p>
+        <p>Adhésion <b>forte et engagée</b>, que l’on a faite sienne, souvent à partir de raisons ou de valeurs. Elle oriente l’action : on a des convictions morales, politiques, religieuses.</p>
+        <p class="ex">Ex. : être convaincu que la torture est injustifiable, quoi qu’il arrive.</p>
       </article>
     </div>
   </div>
@@ -310,10 +310,10 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
       <caption>Quatre notions, quatre critères</caption>
       <thead><tr><th scope="col"><span class="sr-only" style="position:absolute;left:-9999px">Critère</span></th><th scope="col">Croyance</th><th scope="col">Certitude</th><th scope="col">Connaissance</th><th scope="col">Conviction</th></tr></thead>
       <tbody>
-        <tr><th scope="row">Degré d’adhésion</th><td>Variable, de la simple impression à la foi.</td><td>Total : plus aucun doute.</td><td>Total, et proportionné aux raisons dont on dispose.</td><td>Fort et durable, souvent engagé.</td></tr>
+        <tr><th scope="row">Degré d’adhésion</th><td>Variable, de la simple impression à la foi.</td><td>Total : plus aucun doute.</td><td>Total, et proportionné aux raisons dont on dispose.</td><td>Fort et durable, souvent engagé.</td></tr>
         <tr><th scope="row">Fondement</th><td>Insuffisant, ou impossible à vérifier.</td><td>Peut être solide (preuve, évidence) ou purement subjectif.</td><td>Une preuve, une démonstration ou une vérification que l’on peut exposer.</td><td>Des raisons, des valeurs, une expérience que l’on s’est appropriées.</td></tr>
-        <tr><th scope="row">Rapport à la vérité</th><td>Peut être vraie ou fausse.</td><td>Être certain ne garantit pas d’avoir raison.</td><td>Toujours vraie : sinon, c’est une erreur.</td><td>Peut être vraie ou fausse ; elle ne dispense pas de justifier.</td></tr>
-        <tr><th scope="row">Question qu’elle pose</th><td>Qu’est-ce qui me permet de croire ?</td><td>Qu’est-ce qui me garantit que je ne me trompe pas ?</td><td>Puis-je le démontrer ou le vérifier ?</td><td>Suis-je prêt à agir en conséquence ?</td></tr>
+        <tr><th scope="row">Rapport à la vérité</th><td>Peut être vraie ou fausse.</td><td>Être certain ne garantit pas d’avoir raison.</td><td>Toujours vraie : sinon, c’est une erreur.</td><td>Peut être vraie ou fausse ; elle ne dispense pas de justifier.</td></tr>
+        <tr><th scope="row">Question qu’elle pose</th><td>Qu’est-ce qui me permet de croire ?</td><td>Qu’est-ce qui me garantit que je ne me trompe pas ?</td><td>Puis-je le démontrer ou le vérifier ?</td><td>Suis-je prêt à agir en conséquence ?</td></tr>
       </tbody></table></div>
   </div>
 </section>
@@ -325,8 +325,8 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
     </div>
     <ol class="pitfalls rev">
       <li><h3>Être certain, ce n’est pas avoir raison</h3><p>La certitude est un état d’esprit, la vérité est une propriété de l’idée. Pendant des siècles, presque tous étaient certains que le Soleil tournait autour de la Terre.</p></li>
-      <li><h3>Croire n’est pas forcément déraisonnable</h3><p>Nous tenons pour vrai beaucoup de choses que nous ne vérifions pas nous-mêmes : ce que nous disent un médecin, un historien, un scientifique. Cette croyance repose sur la confiance accordée à une source. Elle est raisonnable si la source est fiable, mais elle reste moins sûre qu’une vérification personnelle.</p></li>
-      <li><h3>Une conviction ne dispense pas de justifier</h3><p>Plus on est convaincu, moins on est tenté de s’expliquer.  Avoir des convictions n’empêche pas d’en rendre compte, ni d’en examiner les conséquences.</p></li>
+      <li><h3>Croire n’est pas forcément déraisonnable</h3><p>Nous tenons pour vrai beaucoup de choses que nous ne vérifions pas nous-mêmes : ce que nous disent un médecin, un historien, un scientifique. Cette croyance repose sur la confiance accordée à une source. Elle est raisonnable si la source est fiable, mais elle reste moins sûre qu’une vérification personnelle.</p></li>
+      <li><h3>Une conviction ne dispense pas de justifier</h3><p>Plus on est convaincu, moins on est tenté de s’expliquer. Avoir des convictions n’empêche pas d’en rendre compte, ni d’en examiner les conséquences.</p></li>
     </ol>
   </div>
 </section>
@@ -334,19 +334,19 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
   <div class="wrap">
     <div class="sec-head rev">
       <span class="kicker">Réemploi</span>
-      <h2 id="h-app">Où cette distinction sert-elle ?</h2>
+      <h2 id="h-app">Où cette distinction sert-elle ?</h2>
     </div>
-    <p class="rev">Elle intervient dans presque tous les thèmes. Quelques entrées possibles :</p>
+    <p class="rev">Elle intervient dans presque tous les thèmes. Quelques entrées possibles :</p>
     <ul class="chips big rev">
-      <li><a href="plan-verite.html"><b>Vérité</b></a> : peut-on être certain sans que ce soit vrai ?</li>
-      <li><a href="plan-religion.html"><b>Religion</b></a> : la foi est-elle une croyance ou une certitude ?</li>
-      <li><a href="plan-justice.html"><b>Justice</b></a> : l’« intime conviction » du juré suffit-elle pour condamner ?</li>
-      <li><a href="plan-conscience.html"><b>Conscience</b></a> : suis-je certain de ce que je pense et de ce que je suis ?</li>
-      <li><a href="plan-devoir.html"><b>Devoir</b></a> : agir par conviction ou par responsabilité ?</li>
+      <li><a href="plan-verite.html"><b>Vérité</b></a> : peut-on être certain sans que ce soit vrai ?</li>
+      <li><a href="plan-religion.html"><b>Religion</b></a> : la foi est-elle une croyance ou une certitude ?</li>
+      <li><a href="plan-justice.html"><b>Justice</b></a> : l’« intime conviction » du juré suffit-elle pour condamner ?</li>
+      <li><a href="plan-conscience.html"><b>Conscience</b></a> : suis-je certain de ce que je pense et de ce que je suis ?</li>
+      <li><a href="plan-devoir.html"><b>Devoir</b></a> : agir par conviction ou par responsabilité ?</li>
     </ul>
     <div class="example rev">
       <h3 style="margin-bottom:.5rem">Sujets où elle est utile</h3>
-      <ul class="chips"><li>Suffit-il d’être convaincu pour avoir raison ?</li><li>Croire, est-ce renoncer à savoir ?</li><li>Peut-on douter de tout ?</li><li>Peut-on être certain de ne pas se tromper ?</li></ul>
+      <ul class="chips"><li>Suffit-il d’être convaincu pour avoir raison ?</li><li>Croire, est-ce renoncer à savoir ?</li><li>Peut-on douter de tout ?</li><li>Peut-on être certain de ne pas se tromper ?</li></ul>
     </div>
   </div>
 </section>
@@ -354,11 +354,11 @@ html.lect main h3,html.lect main h4{margin-top:1.4rem}
   <div class="wrap">
     <h2 id="h-r" style="margin-bottom:1.8rem">À retenir</h2>
     <ul class="recap rev">
-      <li>Croire, c’est tenir pour vrai sans preuve suffisante ; la croyance peut être faible ou très forte, vraie ou fausse.</li>
-      <li>La certitude est l’état de celui qui ne doute plus : elle peut être fondée (preuve, évidence) ou seulement subjective.</li>
-      <li>La connaissance est une croyance vraie et justifiée : on peut en rendre raison, et elle ne peut pas être fausse.</li>
+      <li>Croire, c’est tenir pour vrai sans preuve suffisante ; la croyance peut être faible ou très forte, vraie ou fausse.</li>
+      <li>La certitude est l’état de celui qui ne doute plus : elle peut être fondée (preuve, évidence) ou seulement subjective.</li>
+      <li>La connaissance est une croyance vraie et justifiée : on peut en rendre raison, et elle ne peut pas être fausse.</li>
       <li>La conviction est une adhésion forte et engagée, souvent fondée sur des raisons ou des valeurs, qui oriente l’action.</li>
-      <li>Être certain ou convaincu ne garantit pas d’avoir raison : une idée vraie se justifie.</li>
+      <li>Être certain ou convaincu ne garantit pas d’avoir raison : une idée vraie se justifie.</li>
     </ul>
   </div>
 </section>
