@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Badie, L’Art de la paix : fiche de lecture</title>
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+  --bg:#F1F4F6; --surface:#FFFFFF; --ink:#1B2733; --muted:#53626F; --line:#D5DDE3; --focus:#0E6E73;
+  --pour:#0E6E73; --contre:#A8321F; --nuance:#2F4FA8; --garde:#8A5A00; --neutre:#4F5D69;
+  --serif:Georgia,"Times New Roman",serif;
+  --sans:system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#10171D; --surface:#18222A; --ink:#E7EDF2; --muted:#A1B0BC; --line:#2A3641; --focus:#5FD0D6;
+    --pour:#5FD0D6; --contre:#FF8A75; --nuance:#97ADFF; --garde:#F0BC52; --neutre:#A9B7C2;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#10171D; --surface:#18222A; --ink:#E7EDF2; --muted:#A1B0BC; --line:#2A3641; --focus:#5FD0D6;
+  --pour:#5FD0D6; --contre:#FF8A75; --nuance:#97ADFF; --garde:#F0BC52; --neutre:#A9B7C2;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:calc(4.2rem + env(safe-area-inset-top,0px));-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.1rem/1.65 var(--serif)}
+.wrap{width:min(980px,100% - 2.5rem);margin-inline:auto}
+h1,h2,h3{margin:0;font-family:var(--serif)}
+h1{font-weight:800;font-size:clamp(2.5rem,8vw,5rem);line-height:1.02;letter-spacing:-.02em}
+h2{font-weight:800;font-size:clamp(1.6rem,3.4vw,2.2rem);line-height:1.12}
+p{margin:0 0 1em}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
+.hero{padding:clamp(2.2rem,6vw,4.5rem) 0 2rem}
+.lead{font-size:clamp(1.15rem,2.4vw,1.45rem);line-height:1.5;max-width:40ch;margin:1.4rem 0 1rem}
+.note{font:500 .92rem/1.5 var(--sans);color:var(--muted);max-width:62ch;margin:0}
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--bg);border-bottom:1px solid var(--line)}
+.nav ol{display:flex;gap:.3rem;list-style:none;margin:0;padding:.5rem 0;overflow-x:auto}
+.nav a{display:block;white-space:nowrap;text-decoration:none;color:var(--muted);font:700 .88rem/1.2 var(--sans);padding:.45rem .7rem .35rem;border-radius:6px;border-bottom:4px solid var(--c)}
+.nav a:hover{color:var(--ink)}
+.nav a[aria-current="true"]{background:var(--ink);color:var(--bg)}
+.nav small{display:block;font-weight:500;font-size:.75rem;opacity:1}
+.txt{border-bottom:1px solid var(--line);padding:clamp(2.4rem,6vw,3.6rem) 0}
+.meta{display:flex;flex-wrap:wrap;gap:.5rem .9rem;align-items:center;margin-bottom:.8rem;font:500 .92rem/1.3 var(--sans);color:var(--muted)}
+.tag{font:700 .8rem/1 var(--sans);color:var(--c);border:1.5px solid var(--c);border-radius:5px;padding:.3rem .5rem}
+.thesis{font-size:clamp(1.2rem,2.4vw,1.5rem);line-height:1.4;font-weight:600;margin:1rem 0 1.4rem;max-width:44ch;padding-left:1rem;border-left:5px solid var(--c)}
+.cols{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:1.6rem clamp(1.6rem,4vw,3rem)}
+h3{font:700 .9rem/1.2 var(--sans);color:var(--c);margin-bottom:.7rem}
+.args{margin:0;padding:0;list-style:none;counter-reset:a}
+.args li{counter-increment:a;padding:.6rem 0 .6rem 2.4rem;border-top:1px solid var(--line);position:relative}
+.args li:last-child{border-bottom:1px solid var(--line)}
+.args li::before{content:counter(a);position:absolute;left:0;top:.5rem;font:800 1.5rem/1 var(--serif);color:var(--c)}
+.quotes{margin:0;padding:0}
+.quotes blockquote{margin:0 0 1rem;padding:.2rem 0 .2rem .9rem;border-left:3px solid var(--line)}
+.quotes p{margin:0 0 .2rem;font-style:italic}
+.quotes cite{font:500 .82rem/1.3 var(--sans);font-style:normal;color:var(--muted)}
+footer{padding:1.6rem 0 2.5rem;font:500 .92rem/1.5 var(--sans);color:var(--muted)}
+footer p{margin:0}
+@media (max-width:760px){.cols{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+.pdfbtn{display:inline-flex;align-items:center;gap:.5rem;font:600 .88rem/1 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--surface);border:1.5px solid var(--ink);border-radius:999px;padding:.55rem .95rem;cursor:pointer}
+.pdfbtn:hover{background:var(--ink);color:var(--bg)}.pdfbtn:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:2px}
+
+/* Mode lecture (pages à structure libre) */
+html.lect body::before,html.lect body::after{display:none!important}
+html.lect body{background:var(--bg)!important}
+html.lect .pn,html.lect #quiz,html.lect section[aria-labelledby="h-video"],html.lect video,html.lect .score,html.lect .lc-skip,html.lect [role="tablist"],html.lect main button,html.lect main input,html.lect main select,html.lect main textarea,html.lect .sec-head p.lc-x{display:none!important}
+html.lect .hero h1,html.lect .hero p,html.lect section.block h2,html.lect footer p{text-shadow:none!important}
+html.lect .hero,html.lect section.block{padding-block:1.2rem!important;border:0!important}
+html.lect .wrap,html.lect .sec-head{max-width:40rem!important;margin-inline:auto}
+html.lect .hgrid,html.lect .two,html.lect .cols{display:block!important}
+html.lect main,html.lect .hero{font-family:var(--serif)}
+html.lect .hero h1{font-size:clamp(1.9rem,5vw,2.6rem)!important}
+html.lect main p,html.lect main li,html.lect .lead{font-size:1.12rem!important;line-height:1.75!important}
+html.lect :is(main,.hero) :is(div,li,blockquote,article,aside,p,ul,ol,section,details,summary,figure,span):not(table *){background:none!important;border:0!important;box-shadow:none!important;border-radius:0!important}
+html.lect main [hidden]{display:revert!important}
+html.lect :is(main,.hero) div:not(.wrap):not(.sec-head):not(table *){display:block!important;grid-template-columns:none!important;float:none!important;max-width:none!important;width:auto!important;margin-inline:0}
+html.lect main li{display:list-item!important}
+html.lect .must{margin:1rem 0}
+html.lect .lead{max-width:none!important}
+html.lect .wrap{padding-inline:0}
+html.lect main details>summary{cursor:default;pointer-events:none;list-style:none}
+html.lect main details>summary::-webkit-details-marker,html.lect main details>summary::before{display:none!important}
+html.lect main blockquote{margin:.8rem 0;padding:0 0 0 1rem!important;border-left:3px solid var(--line)!important}
+html.lect main .panel{display:block!important;margin-bottom:1rem}
+html.lect main h3,html.lect main h4{margin-top:1.4rem}
+html.lect .nav,html.lect .hero .note{display:none!important}
+html.lect .thesis{border:0!important;padding-left:0!important;max-width:none!important}
+html.lect .args li{padding-left:0!important}
+html.lect .args li::before{display:none!important}
+html.lect .args{list-style:decimal;padding-left:1.4rem!important}
+html.lect .txt{padding-block:1.2rem!important}
+
+/* Accessibilité */
+.a11y{position:relative;display:inline-block}
+.a11y-menu{position:absolute;right:0;top:calc(100% + .4rem);z-index:60;min-width:14rem;background:var(--bg);color:var(--ink);border:1.5px solid var(--ink);border-radius:14px;padding:.35rem;box-shadow:0 8px 24px rgba(0,0,0,.18);text-shadow:none}
+.a11y-menu[hidden]{display:none}
+.a11y-menu p{margin:0;padding:.45rem .7rem .3rem;font:700 .72rem/1 system-ui,-apple-system,sans-serif;letter-spacing:.06em;text-transform:uppercase;opacity:.65}
+.a11y-opt{display:flex;align-items:center;gap:.6rem;width:100%;text-align:left;font:600 .92rem/1.2 system-ui,-apple-system,sans-serif;color:inherit;background:none;border:0;border-radius:9px;padding:.6rem .7rem;cursor:pointer}
+.a11y-opt:hover{background:var(--surface)}
+.a11y-opt:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:-2px}
+.a11y-opt .dot{flex:none;width:1rem;height:1rem;border:2px solid currentColor;border-radius:50%;position:relative}
+.a11y-opt[aria-checked="true"] .dot::after{content:"";position:absolute;inset:2px;background:currentColor;border-radius:50%}
+.a11y-opt small{display:block;font-weight:500;opacity:.7;font-size:.78rem;margin-top:.15rem}
+@media print{
+  :root{--bg:#fff!important;--surface:#fff!important;--ink:#111!important;--muted:#444!important;--line:#bbb!important;color-scheme:light!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:#fff!important;color:#111!important}
+  body::before,body::after{display:none!important}
+  nav,.pdfbtn,.pn,video,section[aria-labelledby="h-video"]{display:none!important}
+  .rev,.js .rev{opacity:1!important;transform:none!important}
+  .stp li[hidden]{display:list-item!important}
+  details>*{display:block!important}
+  article,li,.card,figure,.stage{break-inside:avoid}
+  h1,h2,h3{break-after:avoid;text-shadow:none!important}
+  *{text-shadow:none!important}
+  a{color:inherit;text-decoration:none}
+  section.block,.part{padding-top:1.2rem!important;padding-bottom:1.2rem!important}
+  footer{break-before:avoid;border-top:1px solid #999;margin-top:1rem}
+}
+@page{size:A4;margin:16mm 14mm}
+/* Texte */
+.tx summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:.7rem;font:800 clamp(1.4rem,3vw,1.9rem)/1.2 var(--sans);padding:.3rem 0}
+.tx summary::-webkit-details-marker{display:none}
+.tx summary::before{content:"";width:.6em;height:.6em;border-right:.2em solid currentColor;border-bottom:.2em solid currentColor;transform:rotate(-45deg);transition:transform .15s;flex:none;margin-right:.2rem}
+.tx[open] summary::before{transform:rotate(45deg)}
+@media (prefers-reduced-motion:reduce){.tx summary::before{transition:none}}
+.txb{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--c,var(--ink));padding:1.2rem clamp(1rem,3vw,1.8rem);margin-top:.9rem;max-width:46rem;font:400 1.1rem/1.75 var(--serif)}
+.txb p{margin:0 0 1em}
+.txb h3{font:700 1rem/1.3 var(--sans);margin:1.2em 0 .5em}
+.txb .vs{font:700 .72rem/1 var(--sans);color:var(--muted);margin-right:.15em}
+.txb .tsrc{font:600 .88rem/1.4 var(--sans);color:var(--muted);text-align:right;margin:1.1em 0 0}
+.txb .tsrc:not(:last-child){margin-bottom:1.4em;padding-bottom:1.2em;border-bottom:1px solid var(--line)}
+
+/* Sujets de dissertation */
+.sjd ul{list-style:none;margin:.6rem 0 0;padding:0;max-width:46rem}
+.sjd li{margin:0;padding:.55rem 0;border-top:1px solid var(--line)}
+.sjd li:last-child{border-bottom:1px solid var(--line)}
+.sjd a{color:inherit;font:600 1.05rem/1.4 var(--sans,system-ui);text-underline-offset:3px}
+.sjd p{margin:.4rem 0 0}
+html.lect .sjd li{border:0!important;padding:.25rem 0!important}
+html.lect .sjd a{font:600 1.12rem/1.6 var(--serif,Georgia,serif)}
+@media print{.sjd a{font-weight:600}.sjd li{border-color:#999}}
+.ln{font:700 .66rem/1 var(--sans);color:var(--muted);margin:0 .2em 0 .1em;vertical-align:super}
+.txb .tsrcline{font:600 .9rem/1.4 var(--sans);color:var(--muted)}
+.txn{font:500 .85rem/1.4 var(--sans);color:var(--muted);margin:.2rem 0 1rem}
+html.lect .txb{padding:0!important}
+</style>
+<script>try{history.scrollRestoration="manual"}catch(e){}(function(){function t(){if(!location.hash)window.scrollTo(0,0)}t();document.addEventListener("DOMContentLoaded",t);window.addEventListener("load",function(){t();setTimeout(t,60)});window.addEventListener("pageshow",t)})();</script>
+<script src="confort.js"></script><script src="voix.js" defer></script>
+
+<style>
+.fs h2{margin-bottom:1rem}
+.fs h3{font:700 1rem/1.3 var(--sans);color:var(--c);margin:1.4rem 0 .5rem}
+.fs .wrap>p,.fs li{max-width:46rem}
+.pg{font:600 .78rem/1 var(--sans);color:var(--muted);white-space:nowrap;margin-left:.3em}
+.fs ul.pts{margin:.4rem 0 1rem;padding-left:1.2rem}
+.fs ul.pts li{margin:.35rem 0}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr));gap:1rem;margin:1rem 0}
+.card{background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--c);padding:1rem 1.1rem 1.1rem;border-radius:0 0 8px 8px}
+.card h3{margin:0 0 .5rem;font:800 1.05rem/1.25 var(--sans);color:var(--ink)}
+.card p{font-size:1rem;line-height:1.55;margin:0 0 .6em}
+.card ul{margin:.3rem 0 .4rem;padding-left:1.1rem;font-size:1rem;line-height:1.5}
+.card .k{font:700 .74rem/1 var(--sans);letter-spacing:.05em;text-transform:uppercase;color:var(--c);margin:.9rem 0 .25rem}
+.card .f{font-weight:600}
+.tbl{width:100%;border-collapse:collapse;margin:.8rem 0 1rem;font:400 1rem/1.5 var(--serif);background:var(--surface)}
+.tbl caption{text-align:left;font:600 .88rem/1.4 var(--sans);color:var(--muted);padding:.3rem 0}
+.tbl th,.tbl td{border:1px solid var(--line);padding:.55rem .7rem;vertical-align:top;text-align:left}
+.tbl th{font:700 .86rem/1.3 var(--sans);background:var(--bg);color:var(--ink)}
+.tblw{overflow-x:auto}
+.axes{display:grid;grid-template-columns:auto 1fr 1fr;gap:.4rem;margin:1rem 0;font:600 .92rem/1.35 var(--sans);max-width:46rem}
+.axes div{padding:.7rem .8rem;border:1px solid var(--line);background:var(--surface)}
+.axes .h{background:none;border:0;color:var(--muted);font-size:.82rem;align-self:center}
+.axes .a{border-left:6px solid var(--nuance)}.axes .b{border-left:6px solid var(--garde)}.axes .c2{border-left:6px solid var(--contre)}.axes .d{border-left:6px solid var(--neutre)}
+.axes small{display:block;font-weight:500;color:var(--muted);margin-top:.2rem}
+.fs blockquote{margin:0 0 1.1rem;padding:.2rem 0 .2rem .9rem;border-left:3px solid var(--c);max-width:46rem}
+.fs blockquote p{margin:0 0 .25rem;font-style:italic}
+.fs blockquote cite{font:500 .84rem/1.3 var(--sans);font-style:normal;color:var(--muted)}
+.fs dl{margin:.6rem 0 0;max-width:46rem}
+.fs dt{font:700 1rem/1.3 var(--sans);margin-top:.9rem}
+.fs dd{margin:.2rem 0 0}
+.fs .src{font:500 .9rem/1.5 var(--sans);color:var(--muted);max-width:46rem}
+@media (max-width:640px){.axes{grid-template-columns:1fr}.axes .h{display:none}}
+html.lect .cards{display:block!important}html.lect .card{margin-bottom:1rem}
+html.lect .tbl{display:block}
+@media print{.card,.tbl tr{break-inside:avoid}}
+</style>
+</head>
+<body>
+<nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><span style="display:inline-flex;gap:.6rem;flex-wrap:wrap;align-items:center"><span class="a11y"><button type="button" class="pdfbtn" id="a11y-btn" aria-haspopup="true" aria-expanded="false" aria-controls="a11y-menu"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="1.6"/><path d="M5 8.5l7 1.5 7-1.5M12 10v4.5M8.5 21l3.5-6.5 3.5 6.5"/></svg><span>Accessibilité</span></button><div class="a11y-menu" id="a11y-menu" role="radiogroup" aria-label="Affichage de la page" hidden><p>Affichage</p><button type="button" role="radio" class="a11y-opt" data-mode="orig" aria-checked="true"><span class="dot"></span><span>Page d’origine<small>Image de fond et mise en page habituelle</small></span></button><button type="button" role="radio" class="a11y-opt" data-mode="lect" aria-checked="false"><span class="dot"></span><span>Mode lecture<small>Texte continu, sans cadres ni exercices</small></span></button></div></span><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></span></nav>
+
+<header class="hero">
+  <div class="wrap">
+    <h1><em>L’Art de la paix</em>, fiche de lecture</h1>
+    <p class="lead">Et si l’on étudiait la paix comme Sun Tzu a étudié la guerre ? Bertrand Badie propose d’en faire un art positif, social et global, en neuf vertus.</p>
+    <p class="note">Bertrand Badie, <em>L’Art de la paix. Neuf vertus à honorer et autant de conditions à établir</em> (2024). Les références renvoient aux chapitres et aux sections de l’ouvrage.</p>
+  </div>
+</header>
+<nav class="nav" aria-label="Sections de la fiche"><div class="wrap"><ol id="nav">
+<li><a href="#essentiel" style="--c:var(--pour)">Essentiel</a></li>
+<li><a href="#plan" style="--c:var(--pour)">Plan</a></li>
+<li><a href="#ch1" style="--c:var(--pour)">Chap. 1</a></li>
+<li><a href="#ch2" style="--c:var(--pour)">Chap. 2-3</a></li>
+<li><a href="#ch4" style="--c:var(--pour)">Chap. 4-5</a></li>
+<li><a href="#ch6" style="--c:var(--pour)">Chap. 6-7</a></li>
+<li><a href="#ch8" style="--c:var(--pour)">Chap. 8-9</a></li>
+<li><a href="#conclusion" style="--c:var(--pour)">Conclusion</a></li>
+<li><a href="#citations" style="--c:var(--pour)">Citations</a></li>
+<li><a href="#notions" style="--c:var(--pour)">Notions</a></li>
+<li><a href="#limites" style="--c:var(--pour)">Limites</a></li>
+</ol></div></nav>
+<main id="main">
+<section class="txt fs" id="essentiel" aria-labelledby="h-essentiel" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-essentiel">L’essentiel en cinq points</h2>
+<p class="thesis">Bertrand Badie soutient que la paix a été pensée en Europe comme une simple « non-guerre » : une transaction qui met fin à un conflit. Dans un monde mondialisé, cette conception ne fonctionne plus. Il propose de penser la paix comme un art positif, social, subjectif, global et éduqué, en neuf « vertus ».</p>
+<ol class="args">
+<li><strong>Remettre la paix à l’endroit.</strong> Depuis Westphalie, la paix est seconde par rapport à la guerre et aux jeux de puissance (hégémonie, équilibre, transaction). Ces trois voies ont échoué.<span class="pg">chap. 1</span></li>
+<li><strong>Une paix humaine, sociale et subjective.</strong> La paix répond à des besoins sociaux (la « sufficientia vitae ») et dépend de la façon dont chacun perçoit l’Autre : inclusion, reconnaissance, altérité, et lutte contre l’humiliation.<span class="pg">chap. 2-3</span></li>
+<li><strong>Une paix systémique et globale.</strong> Les guerres actuelles viennent surtout de la faiblesse des États et de risques globaux (climat, alimentation, santé) : la paix doit traiter ces causes ensemble.<span class="pg">chap. 4-5</span></li>
+<li><strong>Des institutions et une diplomatie renouvelées.</strong> Réformer la notion de sécurité, passer du maintien à la construction de la paix, prévenir les conflits, gérer les « séparations » par des partenariats, y compris avec des acteurs non étatiques.<span class="pg">chap. 6-7</span></li>
+<li><strong>Hospitalité et éducation.</strong> La paix passe par l’accueil des migrants et par une école qui forme à l’altérité et à un savoir mondialisé.<span class="pg">chap. 8-9</span></li>
+</ol>
+<p class="src">Bertrand Badie, <em>L’Art de la paix. Neuf vertus à honorer et autant de conditions à établir</em> (2024). Les références renvoient aux chapitres et aux sections de l’ouvrage.</p></div></section>
+<section class="txt fs" id="plan" aria-labelledby="h-plan" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-plan">Le plan de l’ouvrage</h2>
+<p>Le livre s’ouvre sur un prologue : en 2017 à Conakry, un étudiant peul rappelle qu’en pulaar la paix (<em>njamu</em>) désigne la santé morale et physique du groupe, ce qui amène Badie à s’interroger sur le sens des mots. Il prend pour modèle Sun Tzu, auteur de <em>L’Art de la guerre</em> : pourquoi ne pas tenter de saisir la paix « de la même manière et avec la même hauteur » ?</p>
+<div class="cards">
+<article class="card" style="--c:var(--contre)"><h3>Chapitres 1 à 3 : fonder la paix</h3>
+<p class="k">Chapitres</p>
+<ul><li>1. Remettre la paix à l’endroit</li><li>2. Penser une paix humaine</li><li>3. Approcher une paix subjective</li></ul>
+</article>
+<article class="card" style="--c:var(--nuance)"><h3>Chapitres 4 à 6 : l’échelle du problème</h3>
+<p class="k">Chapitres</p>
+<ul><li>4. Construire une paix systémique</li><li>5. Inventer une paix globale</li><li>6. Stabiliser une paix institutionnelle</li></ul>
+</article>
+<article class="card" style="--c:var(--pour)"><h3>Chapitres 7 à 9 : les pratiques</h3>
+<p class="k">Chapitres</p>
+<ul><li>7. Élaborer une paix diplomatique</li><li>8. Admettre une paix hospitalière</li><li>9. Instiller une paix éduquée</li></ul>
+</article>
+</div>
+<p>La conclusion résume l’ensemble en une « triple inversion ».</p></div></section>
+<section class="txt fs" id="ch1" aria-labelledby="h-ch1" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-ch1">Chapitre 1 : remettre la paix à l’endroit</h2>
+<h3>Une paix longtemps seconde</h3>
+<p>Le mot latin <em>pax</em> vient de <em>pactum</em> : il désigne une convention passée entre deux partenaires en conflit, non un état. Chez les Grecs et les Romains, la guerre précède la paix (Héraclite, Homère, Aristophane ; Rome née de Mars). Le modèle « westphalien » et la souveraineté de Bodin installent la guerre comme mécanisme de l’État moderne (Hobbes, Tilly : <em>war-making/state-making</em>).</p>
+<div class="cards">
+<article class="card" style="--c:var(--contre)"><h3>La paix hégémonique</h3>
+<p class="k">Principe</p>
+La plus grande puissance garantit l’ordre (<em>pax romana</em>, <em>britannica</em>, <em>americana</em>).
+<p class="k">Limites</p>
+Inefficacité des interventions « de stabilisation » ; la paix est l’otage de la domination.
+</article>
+<article class="card" style="--c:var(--garde)"><h3>La paix par l’équilibre</h3>
+<p class="k">Principe</p>
+Équilibre des puissances, alliances, dissuasion.
+<p class="k">Limites</p>
+Précaire, déplace les conflits sur des tiers (<em>proxies</em>). L’abbé de Saint-Pierre le disqualifiait déjà.
+</article>
+<article class="card" style="--c:var(--nuance)"><h3>La paix par transaction</h3>
+<p class="k">Principe</p>
+Arbitrage, médiation, traités (territoriaux, dynastiques).
+<p class="k">Limites</p>
+Promesse de revanche, rapports de force changeants ; les accords récents n’ont pas mis fin aux guerres (Arusha, Minsk, Doha…).
+</article>
+</div>
+<p>Badie conclut : la paix se trouve piégée par la vision de « non-guerre » et par la relation ami/ennemi de Carl Schmitt. Elle doit « réinventer son propre fondement ».</p></div></section>
+<section class="txt fs" id="ch2" aria-labelledby="h-ch2" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-ch2">Chapitres 2 et 3 : une paix humaine et subjective</h2>
+<h3>Chapitre 2 : placer le social avant la force</h3>
+<ul class="pts">
+<li><strong>Une lignée de pensée positive.</strong> Aristote (la paix est liée au bonheur et au « bien suprême »), saint Augustin, Marsile de Padoue (<em>Defensor pacis</em>, la <em>sufficientia vitae</em>), l’abbé de Saint-Pierre, Rousseau (qui le juge « rêveur »), puis Kant.</li>
+<li><strong>Trois paix sociales :</strong> d’utilité sociale (le « doux commerce », Norman Angell), de développement social et de besoins (Mitrany, le « multilatéralisme social » de Kofi Annan), correctrice des souffrances sociales (la sécurité humaine du PNUD de 1994, qui énumère sept insécurités).</li>
+<li>Badie note que l’idée positive de paix gagne du terrain quand le pouvoir politique est contesté, et recule quand il s’affirme.</li>
+</ul>
+<h3>Chapitre 3 : chercher à comprendre l’Autre</h3>
+<ul class="pts">
+<li><strong>Trois attributs :</strong> inclusion (géographique et de genre : résolution 1325 de l’ONU), reconnaissance (Mattias Iser : égalité, estime, amitié) et altérité.</li>
+<li><strong>L’humiliation</strong> comme source de violence (siècle d’humiliation chinois, Versailles, Russie après 1991) ; Badie distingue le ressenti de l’humiliation de son instrumentalisation par des « entrepreneurs politiques ».</li>
+<li><strong>Trois postures belligènes à désamorcer :</strong> la séparation absolue (Huntington), la différence perçue comme menace (« grand remplacement »), la hiérarchie des sociétés.</li>
+<li><strong>Trois questions</strong> à se poser sur l’Autre, et la « fusion des horizons » de Gadamer ; l’exemple de quatre systèmes de sens dans la guerre en Ukraine.</li>
+</ul></div></section>
+<section class="txt fs" id="ch4" aria-labelledby="h-ch4" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-ch4">Chapitres 4 et 5 : une paix systémique et globale</h2>
+<h3>Chapitre 4 : nouveaux conflits, nouvelle paix</h3>
+<p>La plupart des guerres sont désormais intra-étatiques et naissent de l’effondrement du contrat social (Libéria, Somalie, Congo, Syrie…). Les acteurs y sont multiples (milices, <em>warlords</em>, entrepreneurs de violence) et beaucoup ont intérêt à la poursuite du conflit. La « compétition de faiblesse » a remplacé celle de puissance : il faut traiter ensemble les causes (climat, alimentation, institutions, pauvreté). Badie insiste sur le lien social à la base, le local et les programmes de « démobilisation, désarmement et réintégration » (DDR), avec des succès (Mozambique, 1992) et de nombreux échecs.</p>
+<h3>Chapitre 5 : un terrain planétaire</h3>
+<ul class="pts">
+<li><strong>De la sécurité collective à la sécurité commune</strong> (rapports Brandt 1980 et Palme 1982) : « il n’y a pas de sécurité possible sans que l’Autre ne se sente en sécurité ».</li>
+<li><strong>Trois axes</strong> : la guerre n’est plus la peur dominante ; les insécurités globales produisent des guerres et inversement (« Les ventres vides nourrissent les troubles », Guterres) ; la paix devient un bien commun.</li>
+<li><strong>Trois obstacles</strong> : les postures étatiques (désigner un ennemi), le temps politique court, la logique de transaction (les COP).</li>
+</ul></div></section>
+<section class="txt fs" id="ch6" aria-labelledby="h-ch6" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-ch6">Chapitres 6 et 7 : institutions et diplomatie</h2>
+<h3>Chapitre 6 : stabiliser une paix institutionnelle</h3>
+<ul class="pts">
+<li><strong>La souveraineté contre la paix.</strong> Rousseau jugeait impossible un droit international sans communauté souveraine ; Wilson a cantonné la SDN au politique, et le droit de veto fait du Conseil de sécurité un « sanctuaire de la puissance ».</li>
+<li><strong>Réformer la notion de sécurité</strong> : passer du « maintien » à la construction de la paix, renforcer le PNUD et la sécurité humaine, associer des acteurs non étatiques.</li>
+<li><strong>Prévenir plutôt que guérir</strong> : article 99 de la Charte, <em>Agenda pour la paix</em> de Boutros-Ghali (alerte, enquête sur le terrain, restauration de la confiance), Déclaration du Millénaire, objectifs de développement durable. Badie juge la réforme d’ensemble du Conseil de sécurité « improbable ».</li>
+</ul>
+<h3>Chapitre 7 : combler ce qui nous sépare</h3>
+<ul class="pts">
+<li><strong>La diplomatie comme « art de gérer les séparations »</strong> (Paul Sharp) par le partenariat, plus souple que l’alliance.</li>
+<li><strong>Une triple discipline :</strong> ne pas exclure, éviter une gestion imprudente des sanctions (efficaces dans une minorité de cas, un peu plus de 20 %, selon Badie), savoir créer des « aubaines coopératives ».</li>
+<li>Associer l’Autre lointain, composer avec les acteurs non étatiques (y compris dans les négociations avec des groupes armés, sans les légitimer), développer les diplomaties parallèles (<em>track two</em>).</li>
+</ul></div></section>
+<section class="txt fs" id="ch8" aria-labelledby="h-ch8" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-ch8">Chapitres 8 et 9 : hospitalité et éducation</h2>
+<h3>Chapitre 8 : l’étranger n’est pas l’ennemi</h3>
+<ul class="pts">
+<li>Badie reprend l’hospitalité universelle de Kant et la lie aux imaginaires mondialisés (la « cité subjective » de Guattari) et à la mobilité.</li>
+<li>Il relativise les migrations (3,5 % de la population mondiale, contre 2,3 % en 1980) et souligne leur utilité (700 milliards de dollars de transferts en 2023, contre 180 milliards d’aide publique au développement).</li>
+<li>Il plaide pour une gouvernance globale des flux (Pacte mondial de 2018) et pour la « créolisation » (Glissant, Chamoiseau).</li>
+</ul>
+<h3>Chapitre 9 : instiller une paix éduquée</h3>
+<ul class="pts">
+<li>Piaget : l’enseignement des relations internationales libère de « l’illusion égocentrique ».</li>
+<li>Enseigner une histoire de la paix et un savoir mondialisé (histoire, art et littérature des autres), développer la mobilité (Erasmus, écoles doctorales mondialisées), scolariser les 100 millions d’enfants non scolarisés.</li>
+<li>Un « dialogue » imaginé entre Tolstoï et Durkheim : l’individu ne peut rien sans une « société organisée » ; l’école doit préparer cette nouvelle subjectivité par un triangle de vertus : inclusivité, complémentarité, pluralité.</li>
+</ul></div></section>
+<section class="txt fs" id="conclusion" aria-labelledby="h-conclusion" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-conclusion">La conclusion : une triple inversion</h2>
+<ol class="args">
+<li><strong>Penser la guerre comme attentatoire à la paix</strong>, et non la paix comme trêve dans un jeu d’affrontements.</li>
+<li><strong>Substituer la solidarité à la compétition.</strong></li>
+<li><strong>Substituer le global au particulier</strong> : l’intérêt national n’est servi que si les intérêts globaux le sont d’abord.</li>
+</ol>
+<p>Badie reconnaît que ces inversions ont un coût pour le pouvoir politique et pour les individus qui se réfugient dans les repères du « vieux monde ».</p></div></section>
+<section class="txt fs" id="citations" aria-labelledby="h-citations" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-citations">Citations à retenir</h2>
+<blockquote><p>la paix ne progresse plus en investissant la puissance mais en intégrant la faiblesse.</p><cite>Chap. 1, « La paix hégémonique est un leurre »</cite></blockquote>
+<blockquote><p>il n’y a pas de sécurité possible sans que l’Autre ne se sente en sécurité.</p><cite>Chap. 5, à propos du rapport Palme</cite></blockquote>
+<blockquote><p>Les ventres vides nourrissent les troubles.</p><cite>Chap. 5, citation d’António Guterres</cite></blockquote>
+</div></section>
+<section class="txt fs" id="notions" aria-labelledby="h-notions" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-notions">Notions clés</h2>
+<dl>
+<dt>Paix transactionnelle</dt><dd>Paix comprise comme compromis conclu à la fin d’une guerre, souvent perçue comme simple trêve.</dd>
+<dt>Paix systémique</dt><dd>Paix qui traite ensemble les causes sociales, économiques, climatiques et institutionnelles des conflits.</dd>
+<dt>Sécurité commune</dt><dd>Idée selon laquelle la sécurité de chacun dépend de celle des autres.</dd>
+<dt>Humiliation</dt><dd>Ressenti de mépris ou de négation, source de ressentiment et de violence, que des acteurs politiques peuvent instrumentaliser.</dd>
+<dt>Gérer les séparations</dt><dd>Définition de la diplomatie : rendre vivables les écarts entre acteurs par le partenariat plutôt que par l’isolement ou les sanctions.</dd>
+<dt>Piéton de la mondialisation</dt><dd>Figure de l’individu comme acteur élémentaire de l’ordre mondial et de la paix.</dd>
+</dl></div></section>
+<section class="txt fs" id="limites" aria-labelledby="h-limites" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-limites">Limites et débats</h2>
+<ul class="pts">
+<li><strong>Un essai normatif.</strong> Badie décrit une paix à construire plus qu’un état observé ; il reconnaît lui-même que certaines réformes (celle du Conseil de sécurité) sont « improbables ».</li>
+<li><strong>Un discours d’ensemble.</strong> L’ouvrage mobilise de très nombreux exemples en peu de pages ; les analyses détaillées renvoient à ses autres livres (cités en bibliographie).</li>
+<li><strong>Débat (hors de l’ouvrage).</strong> La tradition réaliste que Badie critique (Hobbes, Schmitt, équilibre des puissances) reste défendue en relations internationales : sa thèse est une position dans ce débat, non un consensus.</li>
+<li><strong>Date.</strong> Le livre date de 2024 et utilise des événements récents (Ukraine, Gaza) qui ont pu évoluer depuis.</li>
+</ul></div></section>
+</main>
+<footer><div class="wrap"><p>Fiche de lecture : Bertrand Badie, <em>L’Art de la paix</em> (2024).</p></div></footer>
+<script>
+(function(){
+  var links=[].slice.call(document.querySelectorAll('#nav a'));
+  var secs=[].slice.call(document.querySelectorAll('.txt')),lock=null,ticking=false;
+  function setCur(i){
+    links.forEach(function(a,k){if(k===i)a.setAttribute('aria-current','true');else a.removeAttribute('aria-current')});
+    var a=links[i],box=a.parentNode.parentNode;
+    if(box.scrollWidth>box.clientWidth&&box.scrollTo)box.scrollTo({left:i?a.offsetLeft-20:0});
+  }
+  function upd(){
+    ticking=false;
+    if(lock!==null){setCur(lock);return}
+    var nb=document.querySelector('.nav'),y=(nb?nb.getBoundingClientRect().bottom:0)+24,cur=0;
+    secs.forEach(function(s,k){if(s.getBoundingClientRect().top<=y)cur=k});
+    setCur(cur);
+  }
+  function req(){if(!ticking){ticking=true;requestAnimationFrame(upd)}}
+  links.forEach(function(a,k){a.addEventListener('click',function(){lock=k;setCur(k)})});
+  ['wheel','touchstart','mousedown','keydown'].forEach(function(ev){window.addEventListener(ev,function(){lock=null},{passive:true})});
+  window.addEventListener('scroll',req,{passive:true});window.addEventListener('resize',req);
+  upd();
+})();
+</script>
+<script>
+(function(){var r=document.documentElement,K='texte-seul',KL='mode-lecture';
+var btn=document.getElementById('a11y-btn'),menu=document.getElementById('a11y-menu'),opts=menu.querySelectorAll('.a11y-opt'),closed=[],shown=[],skipped=[];
+function apply(m){
+  var ts=m==='ts',lc=m==='lect',was=r.classList.contains('lect');
+  r.classList.toggle('ts',ts);r.classList.toggle('lect',lc);
+  if(lc&&!was){closed=[];shown=[];skipped=[];
+    document.querySelectorAll('main details').forEach(function(d){if(!d.open){closed.push(d);d.open=true}});
+    document.querySelectorAll('main [hidden]').forEach(function(x){if(!x.closest('[aria-labelledby="h-video"]')&&!x.matches('video,[role="tablist"]')){shown.push(x);x.hidden=false}});
+    document.querySelectorAll('main section').forEach(function(sc){var h=sc.querySelector('h2');
+      if(sc.querySelector('input,select,textarea')||(h&&/^(Exercice|Faites le tri|En vid)/i.test(h.textContent.trim()))){sc.classList.add('lc-skip');skipped.push(sc)}});}
+  if(!lc&&was){closed.forEach(function(d){d.open=false});shown.forEach(function(x){x.hidden=true});skipped.forEach(function(s){s.classList.remove('lc-skip')});closed=[];shown=[];skipped=[]}
+  opts.forEach(function(o){o.setAttribute('aria-checked',o.getAttribute('data-mode')===m?'true':'false')});
+  try{localStorage.setItem(K,ts?'1':'0');localStorage.setItem(KL,lc?'1':'0')}catch(e){}
+}
+function open(on){menu.hidden=!on;btn.setAttribute('aria-expanded',on?'true':'false')}
+btn.addEventListener('click',function(e){e.stopPropagation();open(menu.hidden)});
+opts.forEach(function(o){o.addEventListener('click',function(){apply(o.getAttribute('data-mode'));open(false);btn.focus()})});
+document.addEventListener('click',function(e){if(!menu.hidden&&!menu.contains(e.target)&&e.target!==btn)open(false)});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!menu.hidden){open(false);btn.focus()}});
+var v='orig';try{if(localStorage.getItem(KL)==='1')v='lect';else if(localStorage.getItem(K)==='1'&&menu.querySelector('[data-mode="ts"]'))v='ts'}catch(e){}
+if(v==='ts')apply('ts');
+if(v==='lect')window.addEventListener('load',function(){apply('lect')});
+})();
+</script>
+</body>
+</html>

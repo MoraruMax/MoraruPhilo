@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lefranc, Comment sortir de la violence ? : fiche de lecture</title>
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+  --bg:#F1F4F6; --surface:#FFFFFF; --ink:#1B2733; --muted:#53626F; --line:#D5DDE3; --focus:#0E6E73;
+  --pour:#0E6E73; --contre:#A8321F; --nuance:#2F4FA8; --garde:#8A5A00; --neutre:#4F5D69;
+  --serif:Georgia,"Times New Roman",serif;
+  --sans:system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#10171D; --surface:#18222A; --ink:#E7EDF2; --muted:#A1B0BC; --line:#2A3641; --focus:#5FD0D6;
+    --pour:#5FD0D6; --contre:#FF8A75; --nuance:#97ADFF; --garde:#F0BC52; --neutre:#A9B7C2;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#10171D; --surface:#18222A; --ink:#E7EDF2; --muted:#A1B0BC; --line:#2A3641; --focus:#5FD0D6;
+  --pour:#5FD0D6; --contre:#FF8A75; --nuance:#97ADFF; --garde:#F0BC52; --neutre:#A9B7C2;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:calc(4.2rem + env(safe-area-inset-top,0px));-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.1rem/1.65 var(--serif)}
+.wrap{width:min(980px,100% - 2.5rem);margin-inline:auto}
+h1,h2,h3{margin:0;font-family:var(--serif)}
+h1{font-weight:800;font-size:clamp(2.5rem,8vw,5rem);line-height:1.02;letter-spacing:-.02em}
+h2{font-weight:800;font-size:clamp(1.6rem,3.4vw,2.2rem);line-height:1.12}
+p{margin:0 0 1em}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
+.hero{padding:clamp(2.2rem,6vw,4.5rem) 0 2rem}
+.lead{font-size:clamp(1.15rem,2.4vw,1.45rem);line-height:1.5;max-width:40ch;margin:1.4rem 0 1rem}
+.note{font:500 .92rem/1.5 var(--sans);color:var(--muted);max-width:62ch;margin:0}
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--bg);border-bottom:1px solid var(--line)}
+.nav ol{display:flex;gap:.3rem;list-style:none;margin:0;padding:.5rem 0;overflow-x:auto}
+.nav a{display:block;white-space:nowrap;text-decoration:none;color:var(--muted);font:700 .88rem/1.2 var(--sans);padding:.45rem .7rem .35rem;border-radius:6px;border-bottom:4px solid var(--c)}
+.nav a:hover{color:var(--ink)}
+.nav a[aria-current="true"]{background:var(--ink);color:var(--bg)}
+.nav small{display:block;font-weight:500;font-size:.75rem;opacity:1}
+.txt{border-bottom:1px solid var(--line);padding:clamp(2.4rem,6vw,3.6rem) 0}
+.meta{display:flex;flex-wrap:wrap;gap:.5rem .9rem;align-items:center;margin-bottom:.8rem;font:500 .92rem/1.3 var(--sans);color:var(--muted)}
+.tag{font:700 .8rem/1 var(--sans);color:var(--c);border:1.5px solid var(--c);border-radius:5px;padding:.3rem .5rem}
+.thesis{font-size:clamp(1.2rem,2.4vw,1.5rem);line-height:1.4;font-weight:600;margin:1rem 0 1.4rem;max-width:44ch;padding-left:1rem;border-left:5px solid var(--c)}
+.cols{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:1.6rem clamp(1.6rem,4vw,3rem)}
+h3{font:700 .9rem/1.2 var(--sans);color:var(--c);margin-bottom:.7rem}
+.args{margin:0;padding:0;list-style:none;counter-reset:a}
+.args li{counter-increment:a;padding:.6rem 0 .6rem 2.4rem;border-top:1px solid var(--line);position:relative}
+.args li:last-child{border-bottom:1px solid var(--line)}
+.args li::before{content:counter(a);position:absolute;left:0;top:.5rem;font:800 1.5rem/1 var(--serif);color:var(--c)}
+.quotes{margin:0;padding:0}
+.quotes blockquote{margin:0 0 1rem;padding:.2rem 0 .2rem .9rem;border-left:3px solid var(--line)}
+.quotes p{margin:0 0 .2rem;font-style:italic}
+.quotes cite{font:500 .82rem/1.3 var(--sans);font-style:normal;color:var(--muted)}
+footer{padding:1.6rem 0 2.5rem;font:500 .92rem/1.5 var(--sans);color:var(--muted)}
+footer p{margin:0}
+@media (max-width:760px){.cols{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+.pdfbtn{display:inline-flex;align-items:center;gap:.5rem;font:600 .88rem/1 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--surface);border:1.5px solid var(--ink);border-radius:999px;padding:.55rem .95rem;cursor:pointer}
+.pdfbtn:hover{background:var(--ink);color:var(--bg)}.pdfbtn:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:2px}
+
+/* Mode lecture (pages à structure libre) */
+html.lect body::before,html.lect body::after{display:none!important}
+html.lect body{background:var(--bg)!important}
+html.lect .pn,html.lect #quiz,html.lect section[aria-labelledby="h-video"],html.lect video,html.lect .score,html.lect .lc-skip,html.lect [role="tablist"],html.lect main button,html.lect main input,html.lect main select,html.lect main textarea,html.lect .sec-head p.lc-x{display:none!important}
+html.lect .hero h1,html.lect .hero p,html.lect section.block h2,html.lect footer p{text-shadow:none!important}
+html.lect .hero,html.lect section.block{padding-block:1.2rem!important;border:0!important}
+html.lect .wrap,html.lect .sec-head{max-width:40rem!important;margin-inline:auto}
+html.lect .hgrid,html.lect .two,html.lect .cols{display:block!important}
+html.lect main,html.lect .hero{font-family:var(--serif)}
+html.lect .hero h1{font-size:clamp(1.9rem,5vw,2.6rem)!important}
+html.lect main p,html.lect main li,html.lect .lead{font-size:1.12rem!important;line-height:1.75!important}
+html.lect :is(main,.hero) :is(div,li,blockquote,article,aside,p,ul,ol,section,details,summary,figure,span):not(table *){background:none!important;border:0!important;box-shadow:none!important;border-radius:0!important}
+html.lect main [hidden]{display:revert!important}
+html.lect :is(main,.hero) div:not(.wrap):not(.sec-head):not(table *){display:block!important;grid-template-columns:none!important;float:none!important;max-width:none!important;width:auto!important;margin-inline:0}
+html.lect main li{display:list-item!important}
+html.lect .must{margin:1rem 0}
+html.lect .lead{max-width:none!important}
+html.lect .wrap{padding-inline:0}
+html.lect main details>summary{cursor:default;pointer-events:none;list-style:none}
+html.lect main details>summary::-webkit-details-marker,html.lect main details>summary::before{display:none!important}
+html.lect main blockquote{margin:.8rem 0;padding:0 0 0 1rem!important;border-left:3px solid var(--line)!important}
+html.lect main .panel{display:block!important;margin-bottom:1rem}
+html.lect main h3,html.lect main h4{margin-top:1.4rem}
+html.lect .nav,html.lect .hero .note{display:none!important}
+html.lect .thesis{border:0!important;padding-left:0!important;max-width:none!important}
+html.lect .args li{padding-left:0!important}
+html.lect .args li::before{display:none!important}
+html.lect .args{list-style:decimal;padding-left:1.4rem!important}
+html.lect .txt{padding-block:1.2rem!important}
+
+/* Accessibilité */
+.a11y{position:relative;display:inline-block}
+.a11y-menu{position:absolute;right:0;top:calc(100% + .4rem);z-index:60;min-width:14rem;background:var(--bg);color:var(--ink);border:1.5px solid var(--ink);border-radius:14px;padding:.35rem;box-shadow:0 8px 24px rgba(0,0,0,.18);text-shadow:none}
+.a11y-menu[hidden]{display:none}
+.a11y-menu p{margin:0;padding:.45rem .7rem .3rem;font:700 .72rem/1 system-ui,-apple-system,sans-serif;letter-spacing:.06em;text-transform:uppercase;opacity:.65}
+.a11y-opt{display:flex;align-items:center;gap:.6rem;width:100%;text-align:left;font:600 .92rem/1.2 system-ui,-apple-system,sans-serif;color:inherit;background:none;border:0;border-radius:9px;padding:.6rem .7rem;cursor:pointer}
+.a11y-opt:hover{background:var(--surface)}
+.a11y-opt:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:-2px}
+.a11y-opt .dot{flex:none;width:1rem;height:1rem;border:2px solid currentColor;border-radius:50%;position:relative}
+.a11y-opt[aria-checked="true"] .dot::after{content:"";position:absolute;inset:2px;background:currentColor;border-radius:50%}
+.a11y-opt small{display:block;font-weight:500;opacity:.7;font-size:.78rem;margin-top:.15rem}
+@media print{
+  :root{--bg:#fff!important;--surface:#fff!important;--ink:#111!important;--muted:#444!important;--line:#bbb!important;color-scheme:light!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:#fff!important;color:#111!important}
+  body::before,body::after{display:none!important}
+  nav,.pdfbtn,.pn,video,section[aria-labelledby="h-video"]{display:none!important}
+  .rev,.js .rev{opacity:1!important;transform:none!important}
+  .stp li[hidden]{display:list-item!important}
+  details>*{display:block!important}
+  article,li,.card,figure,.stage{break-inside:avoid}
+  h1,h2,h3{break-after:avoid;text-shadow:none!important}
+  *{text-shadow:none!important}
+  a{color:inherit;text-decoration:none}
+  section.block,.part{padding-top:1.2rem!important;padding-bottom:1.2rem!important}
+  footer{break-before:avoid;border-top:1px solid #999;margin-top:1rem}
+}
+@page{size:A4;margin:16mm 14mm}
+/* Texte */
+.tx summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:.7rem;font:800 clamp(1.4rem,3vw,1.9rem)/1.2 var(--sans);padding:.3rem 0}
+.tx summary::-webkit-details-marker{display:none}
+.tx summary::before{content:"";width:.6em;height:.6em;border-right:.2em solid currentColor;border-bottom:.2em solid currentColor;transform:rotate(-45deg);transition:transform .15s;flex:none;margin-right:.2rem}
+.tx[open] summary::before{transform:rotate(45deg)}
+@media (prefers-reduced-motion:reduce){.tx summary::before{transition:none}}
+.txb{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--c,var(--ink));padding:1.2rem clamp(1rem,3vw,1.8rem);margin-top:.9rem;max-width:46rem;font:400 1.1rem/1.75 var(--serif)}
+.txb p{margin:0 0 1em}
+.txb h3{font:700 1rem/1.3 var(--sans);margin:1.2em 0 .5em}
+.txb .vs{font:700 .72rem/1 var(--sans);color:var(--muted);margin-right:.15em}
+.txb .tsrc{font:600 .88rem/1.4 var(--sans);color:var(--muted);text-align:right;margin:1.1em 0 0}
+.txb .tsrc:not(:last-child){margin-bottom:1.4em;padding-bottom:1.2em;border-bottom:1px solid var(--line)}
+
+/* Sujets de dissertation */
+.sjd ul{list-style:none;margin:.6rem 0 0;padding:0;max-width:46rem}
+.sjd li{margin:0;padding:.55rem 0;border-top:1px solid var(--line)}
+.sjd li:last-child{border-bottom:1px solid var(--line)}
+.sjd a{color:inherit;font:600 1.05rem/1.4 var(--sans,system-ui);text-underline-offset:3px}
+.sjd p{margin:.4rem 0 0}
+html.lect .sjd li{border:0!important;padding:.25rem 0!important}
+html.lect .sjd a{font:600 1.12rem/1.6 var(--serif,Georgia,serif)}
+@media print{.sjd a{font-weight:600}.sjd li{border-color:#999}}
+.ln{font:700 .66rem/1 var(--sans);color:var(--muted);margin:0 .2em 0 .1em;vertical-align:super}
+.txb .tsrcline{font:600 .9rem/1.4 var(--sans);color:var(--muted)}
+.txn{font:500 .85rem/1.4 var(--sans);color:var(--muted);margin:.2rem 0 1rem}
+html.lect .txb{padding:0!important}
+</style>
+<script>try{history.scrollRestoration="manual"}catch(e){}(function(){function t(){if(!location.hash)window.scrollTo(0,0)}t();document.addEventListener("DOMContentLoaded",t);window.addEventListener("load",function(){t();setTimeout(t,60)});window.addEventListener("pageshow",t)})();</script>
+<script src="confort.js"></script><script src="voix.js" defer></script>
+
+<style>
+.fs h2{margin-bottom:1rem}
+.fs h3{font:700 1rem/1.3 var(--sans);color:var(--c);margin:1.4rem 0 .5rem}
+.fs .wrap>p,.fs li{max-width:46rem}
+.pg{font:600 .78rem/1 var(--sans);color:var(--muted);white-space:nowrap;margin-left:.3em}
+.fs ul.pts{margin:.4rem 0 1rem;padding-left:1.2rem}
+.fs ul.pts li{margin:.35rem 0}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr));gap:1rem;margin:1rem 0}
+.card{background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--c);padding:1rem 1.1rem 1.1rem;border-radius:0 0 8px 8px}
+.card h3{margin:0 0 .5rem;font:800 1.05rem/1.25 var(--sans);color:var(--ink)}
+.card p{font-size:1rem;line-height:1.55;margin:0 0 .6em}
+.card ul{margin:.3rem 0 .4rem;padding-left:1.1rem;font-size:1rem;line-height:1.5}
+.card .k{font:700 .74rem/1 var(--sans);letter-spacing:.05em;text-transform:uppercase;color:var(--c);margin:.9rem 0 .25rem}
+.card .f{font-weight:600}
+.tbl{width:100%;border-collapse:collapse;margin:.8rem 0 1rem;font:400 1rem/1.5 var(--serif);background:var(--surface)}
+.tbl caption{text-align:left;font:600 .88rem/1.4 var(--sans);color:var(--muted);padding:.3rem 0}
+.tbl th,.tbl td{border:1px solid var(--line);padding:.55rem .7rem;vertical-align:top;text-align:left}
+.tbl th{font:700 .86rem/1.3 var(--sans);background:var(--bg);color:var(--ink)}
+.tblw{overflow-x:auto}
+.axes{display:grid;grid-template-columns:auto 1fr 1fr;gap:.4rem;margin:1rem 0;font:600 .92rem/1.35 var(--sans);max-width:46rem}
+.axes div{padding:.7rem .8rem;border:1px solid var(--line);background:var(--surface)}
+.axes .h{background:none;border:0;color:var(--muted);font-size:.82rem;align-self:center}
+.axes .a{border-left:6px solid var(--nuance)}.axes .b{border-left:6px solid var(--garde)}.axes .c2{border-left:6px solid var(--contre)}.axes .d{border-left:6px solid var(--neutre)}
+.axes small{display:block;font-weight:500;color:var(--muted);margin-top:.2rem}
+.fs blockquote{margin:0 0 1.1rem;padding:.2rem 0 .2rem .9rem;border-left:3px solid var(--c);max-width:46rem}
+.fs blockquote p{margin:0 0 .25rem;font-style:italic}
+.fs blockquote cite{font:500 .84rem/1.3 var(--sans);font-style:normal;color:var(--muted)}
+.fs dl{margin:.6rem 0 0;max-width:46rem}
+.fs dt{font:700 1rem/1.3 var(--sans);margin-top:.9rem}
+.fs dd{margin:.2rem 0 0}
+.fs .src{font:500 .9rem/1.5 var(--sans);color:var(--muted);max-width:46rem}
+@media (max-width:640px){.axes{grid-template-columns:1fr}.axes .h{display:none}}
+html.lect .cards{display:block!important}html.lect .card{margin-bottom:1rem}
+html.lect .tbl{display:block}
+@media print{.card,.tbl tr{break-inside:avoid}}
+</style>
+</head>
+<body>
+<nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><span style="display:inline-flex;gap:.6rem;flex-wrap:wrap;align-items:center"><span class="a11y"><button type="button" class="pdfbtn" id="a11y-btn" aria-haspopup="true" aria-expanded="false" aria-controls="a11y-menu"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="1.6"/><path d="M5 8.5l7 1.5 7-1.5M12 10v4.5M8.5 21l3.5-6.5 3.5 6.5"/></svg><span>Accessibilité</span></button><div class="a11y-menu" id="a11y-menu" role="radiogroup" aria-label="Affichage de la page" hidden><p>Affichage</p><button type="button" role="radio" class="a11y-opt" data-mode="orig" aria-checked="true"><span class="dot"></span><span>Page d’origine<small>Image de fond et mise en page habituelle</small></span></button><button type="button" role="radio" class="a11y-opt" data-mode="lect" aria-checked="false"><span class="dot"></span><span>Mode lecture<small>Texte continu, sans cadres ni exercices</small></span></button></div></span><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></span></nav>
+
+<header class="hero">
+  <div class="wrap">
+    <h1><em>Comment sortir de la violence ?</em>, fiche de lecture</h1>
+    <p class="lead">Les politiques de justice transitionnelle pacifient-elles vraiment les sociétés ? Sandrine Lefranc y voit moins une morale qu’une politique habile.</p>
+    <p class="note">Sandrine Lefranc, <em>Comment sortir de la violence ? Enjeux et limites de la justice transitionnelle</em> (2022). Les références renvoient aux chapitres et sections de l’ouvrage.</p>
+  </div>
+</header>
+<nav class="nav" aria-label="Sections de la fiche"><div class="wrap"><ol id="nav">
+<li><a href="#essentiel" style="--c:var(--pour)">Essentiel</a></li>
+<li><a href="#definitions" style="--c:var(--pour)">Définition</a></li>
+<li><a href="#commandements" style="--c:var(--pour)">Commandements</a></li>
+<li><a href="#paix" style="--c:var(--pour)">Quelle paix ?</a></li>
+<li><a href="#ch2" style="--c:var(--pour)">Chap. 1-2</a></li>
+<li><a href="#ch3" style="--c:var(--pour)">Chap. 3-5</a></li>
+<li><a href="#ch8" style="--c:var(--pour)">Chap. 8-10</a></li>
+<li><a href="#ch11" style="--c:var(--pour)">Chap. 11-13</a></li>
+<li><a href="#ch14" style="--c:var(--pour)">Chap. 14-15</a></li>
+<li><a href="#conclusion" style="--c:var(--pour)">Conclusion</a></li>
+<li><a href="#citations" style="--c:var(--pour)">Citations</a></li>
+<li><a href="#notions" style="--c:var(--pour)">Notions</a></li>
+<li><a href="#limites" style="--c:var(--pour)">Limites</a></li>
+</ol></div></nav>
+<main id="main">
+<section class="txt fs" id="essentiel" aria-labelledby="h-essentiel" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-essentiel">L’essentiel en cinq points</h2>
+<p class="thesis">Sandrine Lefranc, sociologue du politique, examine la « justice transitionnelle » : l’ensemble des mesures (procès, commissions de vérité, réparations, réformes des institutions) censées traiter les violences de masse après une dictature ou une guerre civile. Sa thèse : ces politiques échouent comme entreprise morale (elles ne transforment ni les bourreaux ni les sociétés), mais réussissent comme politique, parce qu’elles permettent des compromis.</p>
+<ol class="args">
+<li><strong>Une catégorie d’action récente et ambitieuse.</strong> Elle promet à la fois la justice, la démocratie et la paix durable, voire la « guérison » de sociétés présentées comme malades.<span class="pg">introduction ; chap. 1</span></li>
+<li><strong>Une « légende » à interroger.</strong> Le récit d’un progrès moral vers toujours moins d’impunité est trompeur : la justice transitionnelle est née du renoncement à punir (par prudence politique) et reste ambivalente sur l’amnistie.<span class="pg">introduction ; chap. 3-5</span></li>
+<li><strong>Une conception contestable de la paix.</strong> Les experts supposent que la paix exige des individus apaisés, des liens denses et un récit commun. Lefranc propose une paix « ordinaire » : une coexistence entre inconnus, faite de confiance qui s’ignore et d’ajustements quotidiens.<span class="pg">introduction</span></li>
+<li><strong>Des experts, un marché, des circulations.</strong> Le milieu de la justice transitionnelle est une profession internationale, issue de croisements avec la psychologie, le religieux et la réforme du droit pénal.<span class="pg">chap. 11-13</span></li>
+<li><strong>Une politique « insincère » mais efficace.</strong> L’ambiguïté, la dépolitisation et les doubles langages permettent de rallier des acteurs opposés : c’est un échec moral et un succès politique.<span class="pg">chap. 14-15 ; conclusion</span></li>
+</ol>
+<p class="src">Sandrine Lefranc, <em>Comment sortir de la violence ? Enjeux et limites de la justice transitionnelle</em> (2022). Les références renvoient aux chapitres et sections de l’ouvrage.</p></div></section>
+<section class="txt fs" id="definitions" aria-labelledby="h-definitions" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-definitions">Qu’est-ce que la justice transitionnelle ?</h2>
+<p>L’auteure part de la définition courante : l’ensemble des processus visant à remédier aux violations des droits de l’homme commises dans le passé. Elle recense plus de 800 initiatives dans plus de 120 pays entre 1970 et 2007. La « malle à outils » comprend quatre mécanismes principaux, auxquels s’ajoutent des politiques de mémoire et de réconciliation.</p>
+<div class="cards">
+<article class="card" style="--c:var(--contre)"><h3>Poursuites pénales</h3>
+<p class="k">Principe</p>
+Juger les responsables (tribunaux nationaux, ad hoc, hybrides, Cour pénale internationale).
+</article>
+<article class="card" style="--c:var(--nuance)"><h3>Recherche de la vérité</h3>
+<p class="k">Principe</p>
+Commissions de vérité, rapports, témoignages publics, ouverture des archives.
+</article>
+<article class="card" style="--c:var(--pour)"><h3>Réparations</h3>
+<p class="k">Principe</p>
+Indemnités, restitutions, gestes symboliques (excuses, plaques, lieux de mémoire).
+</article>
+<article class="card" style="--c:var(--garde)"><h3>Réformes institutionnelles</h3>
+<p class="k">Principe</p>
+Réforme des forces de sécurité et de la justice, formation aux droits humains, sanctions administratives.
+</article>
+</div></div></section>
+<section class="txt fs" id="commandements" aria-labelledby="h-commandements" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-commandements">Les quatre « commandements »</h2>
+<p>Lefranc résume ce que prescrivent couramment les experts en quatre injonctions. Elle montre qu’elles ne peuvent pas toutes être suivies ensemble : la justice transitionnelle est cohérente, non « holistique », et des choix sont faits qui contredisent la légende du progrès.</p>
+<dl>
+<dt>1. Responsabiliser les coupables</dt><dd>Lutter contre l’impunité, par le procès mais aussi par des sanctions disciplinaires ou une amnistie conditionnelle. Il s’agit aussi de « responsabiliser » l’État par la réforme de ses institutions, sans rompre avec sa continuité.</dd>
+<dt>2. Reconnaître les victimes</dt><dd>Réparations, reconnaissance publique, droit à l’expression. Mais la « victime pure, traumatisée » est un personnage construit, qui ignore la pluralité des identités (militant, pauvre, femme…).</dd>
+<dt>3. Établir la vérité</dt><dd>Une vérité fabriquée par l’échange et l’émotion (témoignage public, aveu), plus qu’une histoire officielle. Elle est encadrée par le contexte politique : par exemple la thèse des « deux démons » met sur un pied d’égalité l’État répressif et ses opposants armés.</dd>
+<dt>4. Prévenir la violence politique</dt><dd>Désarmer, réformer, démocratiser « en douceur », et mener une ingénierie sociale pour forger une culture de paix et des relations de confiance.</dd>
+</dl></div></section>
+<section class="txt fs" id="paix" aria-labelledby="h-paix" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-paix">Quelle paix ? La critique des experts</h2>
+<h3>La conception des experts</h3>
+<p>Selon Lefranc, la justice transitionnelle traite l’après-guerre comme une période « extraordinaire », en rupture avec la paix. La guerre y est vue comme pure négativité et comme pathologie. Elle en déduit trois objectifs : des récits communs, des individus pacifiques et bienveillants, la réconciliation.</p>
+<h3>Une contre-proposition : la paix ordinaire</h3>
+<p>L’auteure observe la paix telle qu’on la vit, par exemple dans un train de banlieue : une coexistence sans interactions, fondée sur une confiance qui s’ignore, sur des routines institutionnelles, une langue commune et des comportements réguliers. Elle distingue trois modèles de la paix :</p>
+<ul class="pts">
+<li><strong>le respect de règles communes</strong>, favorisé par la similitude des cultures et par les institutions ;</li>
+<li><strong>la vertu des individus</strong>, produite par l’éducation et les habitudes, avec des liens interpersonnels denses ;</li>
+<li><strong>l’ajustement relationnel</strong>, qu’elle privilégie : interactions civiles, côtoiement entre non-familiers, évitement des conflits ou expérience démocratique du quotidien.</li>
+</ul>
+<p>Elle ajoute que même après les guerres civiles, les haines coexistent avec des compromis et des interactions ordinaires (sur le lieu de travail, au marché), y compris entre anciens ennemis.</p></div></section>
+<section class="txt fs" id="ch2" aria-labelledby="h-ch2" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-ch2">Chapitres 1 et 2 : guérir, relier, réconcilier</h2>
+<p>Le chapitre 1 critique l’idée que la violence serait une maladie des sociétés, cyclique, devenue « fait de culture », que l’on pourrait guérir. Le chapitre 2 examine la « paix par le bas » et la réconciliation, mot dont les sens oscillent entre la restauration d’une harmonie antérieure et une simple coexistence pacifique, c’est-à-dire une trêve.</p>
+<ul class="pts">
+<li>La violence ne change pas mécaniquement les identités : rien n’autorise à faire de la victime un être porté à la vengeance ou du bourreau un homme travaillé par la culpabilité.</li>
+<li>Agir sur les « fors intérieurs » suppose que l’on puisse installer des dispositions dans les consciences, alors que nos actes dépendent souvent de la situation.</li>
+</ul></div></section>
+<section class="txt fs" id="ch3" aria-labelledby="h-ch3" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-ch3">Chapitres 3 à 5 : l’État, les élites, la punition</h2>
+<h3>Chap. 3 : une très prudente démocratie des élites</h3>
+<p>La justice transitionnelle veut la démocratie, parce qu’elle est née de l’étude des transitions des années 1980 (Europe du Sud, Amérique latine : une trentaine de pays entre 1974 et 1990). Il s’agit d’une démocratisation de compromis, fondée sur des pactes entre élites, dont le mot d’ordre uruguayen « il ne faut pas avoir d’yeux derrière la tête » donne le ton.</p>
+<h3>Chap. 4 : faire justice en conservant l’État et ses agents</h3>
+<p>Les régimes changent, mais les États changent rarement. Juger des violences d’État sans défaire l’État est le dilemme central : on préfère former les anciens agents aux droits humains plutôt que les licencier massivement.</p>
+<h3>Chap. 5 : on châtie mal les criminels politiques</h3>
+<p>Malgré la « fin de l’impunité » (tribunaux ad hoc, Cour pénale internationale, compétence universelle), les sanctions restent partielles. Les normes internationales encadrent les amnisties sans les proscrire, et l’amnistie conditionnelle est parfois reconnue comme une forme de sanction.</p></div></section>
+<section class="txt fs" id="ch8" aria-labelledby="h-ch8" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-ch8">Chapitres 8 à 10 : réparer, les victimes, la vérité</h2>
+<h3>Chap. 8 : réparer les victimes</h3>
+<p>Les réparations sont une politique pragmatique, peu coûteuse en l’absence de procès. Elles sont matérielles ou symboliques. Les indemnités ne sont pas toujours versées, et la réparation symbolique est privilégiée.</p>
+<h3>Chap. 9 : quels sont les besoins des victimes ?</h3>
+<p>Les guides internationaux reconnaissent la diversité des victimes mais les homogénéisent par des besoins supposés. L’auteure interroge qui est reconnu comme victime (proches, descendants, organisations de défense) et qui est écarté.</p>
+<h3>Chap. 10 : refonder une nation en écoutant une victime raisonnable</h3>
+<p>La vérité des commissions est « politique » : ni vérité de l’historien, ni verdict du juge. Elle vise à fonder un récit national et ne retient que la victime « raisonnable », dont la parole reste compatible avec la réconciliation.</p></div></section>
+<section class="txt fs" id="ch11" aria-labelledby="h-ch11" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-ch11">Chapitres 11 à 13 : intérêt d’État, profession, thérapeutes</h2>
+<h3>Chap. 11 : cause globale ou intérêt d’État ?</h3>
+<p>La justice transitionnelle est aussi une intervention étrangère, dénoncée comme néo-impérialiste (« tyrannie de la paix », « hégémonie libérale »). Lefranc discute cette critique sans la réduire à un projet impérialiste unique : les États et organisations y poursuivent des intérêts variés.</p>
+<h3>Chap. 12 : élites internationales mais précaires</h3>
+<p>En s’appuyant sur la sociologie des professions d’Andrew Abbott, elle montre comment un groupe d’experts s’est constitué en « profession » : un marché de l’emploi, des carrières, des revenus, un prestige.</p>
+<h3>Chap. 13 : guérisseurs et réformateurs du droit pénal</h3>
+<p>Elle retrace la circulation de techniques venues de la psychologie, des groupes thérapeutiques et des réseaux religieux (notamment protestants, mennonites), ainsi que de la critique de la justice pénale. La justice transitionnelle est un « patchwork » plutôt qu’un projet cohérent.</p></div></section>
+<section class="txt fs" id="ch14" aria-labelledby="h-ch14" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-ch14">Chapitres 14 et 15 : une politique insincère, dépolitisée</h2>
+<p>Le chapitre sur l’impact (évaluer l’efficacité de politiques complexes) montre qu’une « logique du pari » a longtemps dominé : « il faut faire quelque chose, ça doit bien avoir des effets puisque c’est vertueux ». L’efficacité réelle est difficile à établir.</p>
+<ul class="pts">
+<li><strong>Insincérité efficace (chap. 14).</strong> Le traitement judiciaire des crimes du passé répond d’abord à l’opportunité politique, qui laisse au droit une « cohérence de façade ». Les doubles langages ne sont pas des mensonges, mais ils permettent de rallier des camps opposés.</li>
+<li><strong>Dépolitisation (chap. 15).</strong> Les commissions doivent éviter les responsables politiques et bannir la politique de leurs audiences, tout en ayant des effets politiques.</li>
+</ul></div></section>
+<section class="txt fs" id="conclusion" aria-labelledby="h-conclusion" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-conclusion">Conclusion : un échec moral, un succès politique</h2>
+<p>La conclusion distingue deux plans.</p>
+<div class="cards">
+<article class="card" style="--c:var(--contre)"><h3>Échec moral</h3>
+<p class="k">Constats</p>
+<ul><li>Pas de conversion sincère des coupables, mais des incitations et des contraintes (menace judiciaire, amnistie).</li><li>Pas de culture de paix installée dans les populations.</li><li>Les besoins des victimes sont définis d’en haut.</li></ul>
+</article>
+<article class="card" style="--c:var(--pour)"><h3>Succès politique</h3>
+<p class="k">Constats</p>
+<ul><li>Ouverture de l’espace politique dans la continuité du droit et des administrations.</li><li>Compromis entre ennemis, ralliement de victimes et d’opposants.</li><li>Diffusion de normes, et pérennité d’une forme d’intervention internationale.</li></ul>
+</article>
+</div>
+<p>Elle ajoute qu’on ne peut pas faire de la prévention de la violence une science exacte : que la violence éclate ou non est « une affaire politique ». La notion de paix reste, elle, empiriquement indéfinie. Le livre se clôt sur le film <em>La Llorona</em> (Jayro Bustamante), où ce sont les esprits des morts qui font justice par un « regard froid qui responsabilise ».</p></div></section>
+<section class="txt fs" id="citations" aria-labelledby="h-citations" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-citations">Citations</h2>
+<blockquote><p>La justice transitionnelle est un échec moral, mais elle est un succès politique.</p><cite>conclusion</cite></blockquote>
+<blockquote><p>on ne sort de l’ambiguïté qu’à ses dépens</p><cite>introduction (citation reprise)</cite></blockquote>
+<blockquote><p>il faut faire quelque chose, ça doit bien avoir des effets puisque c’est vertueux</p><cite>chap. 13, propos d’acteurs cités</cite></blockquote>
+</div></section>
+<section class="txt fs" id="notions" aria-labelledby="h-notions" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-notions">Notions</h2>
+<dl>
+<dt>Justice transitionnelle</dt><dd>Ensemble de mesures judiciaires et non judiciaires traitant les violences de masse passées lors d’un changement de régime ou d’une sortie de guerre.</dd>
+<dt>Commission de vérité</dt><dd>Organe temporaire, souvent non judiciaire, qui enquête sur les violations passées, entend victimes et auteurs et rédige un rapport.</dd>
+<dt>Accountability</dt><dd>Terme anglais plus large que « sanction pénale » : rendre des comptes, par le procès, l’amnistie conditionnelle ou la sanction disciplinaire.</dd>
+<dt>Paix « par le bas »</dt><dd>Politique visant les relations sociales et les individus plutôt que les accords au sommet.</dd>
+<dt>Malentendu opératoire</dt><dd>Ambiguïté qui permet à des acteurs aux buts opposés de soutenir une même mesure.</dd>
+<dt>Amnistie conditionnelle</dt><dd>Amnistie accordée en échange d’aveux ou d’un renoncement à la violence, présentée comme une forme de sanction.</dd>
+</dl></div></section>
+<section class="txt fs" id="limites" aria-labelledby="h-limites" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-limites">Limites et débats</h2>
+<ul class="pts">
+<li><strong>Portée de cette fiche.</strong> Elle s’appuie sur l’introduction, la conclusion et les ouvertures de chapitres. Les chapitres 6 et 7 ne sont pas traités ici : on se reportera à l’ouvrage.</li>
+<li><strong>Une thèse critique.</strong> Lefranc propose une lecture sociologique qui s’oppose à celle des défenseurs de la justice transitionnelle ; elle ne nie pas l’existence d’« authentiques croyants » ni les effets réels des dispositifs.</li>
+<li><strong>Débat (hors de l’ouvrage).</strong> Les juristes et ONG qui défendent la lutte contre l’impunité contestent qu’elle soit « insincère » : la discussion porte sur l’équilibre entre justice et paix.</li>
+</ul></div></section>
+</main>
+<footer><div class="wrap"><p>Fiche de lecture : Sandrine Lefranc, <em>Comment sortir de la violence ?</em> (2022).</p></div></footer>
+<script>
+(function(){
+  var links=[].slice.call(document.querySelectorAll('#nav a'));
+  var secs=[].slice.call(document.querySelectorAll('.txt')),lock=null,ticking=false;
+  function setCur(i){
+    links.forEach(function(a,k){if(k===i)a.setAttribute('aria-current','true');else a.removeAttribute('aria-current')});
+    var a=links[i],box=a.parentNode.parentNode;
+    if(box.scrollWidth>box.clientWidth&&box.scrollTo)box.scrollTo({left:i?a.offsetLeft-20:0});
+  }
+  function upd(){
+    ticking=false;
+    if(lock!==null){setCur(lock);return}
+    var nb=document.querySelector('.nav'),y=(nb?nb.getBoundingClientRect().bottom:0)+24,cur=0;
+    secs.forEach(function(s,k){if(s.getBoundingClientRect().top<=y)cur=k});
+    setCur(cur);
+  }
+  function req(){if(!ticking){ticking=true;requestAnimationFrame(upd)}}
+  links.forEach(function(a,k){a.addEventListener('click',function(){lock=k;setCur(k)})});
+  ['wheel','touchstart','mousedown','keydown'].forEach(function(ev){window.addEventListener(ev,function(){lock=null},{passive:true})});
+  window.addEventListener('scroll',req,{passive:true});window.addEventListener('resize',req);
+  upd();
+})();
+</script>
+<script>
+(function(){var r=document.documentElement,K='texte-seul',KL='mode-lecture';
+var btn=document.getElementById('a11y-btn'),menu=document.getElementById('a11y-menu'),opts=menu.querySelectorAll('.a11y-opt'),closed=[],shown=[],skipped=[];
+function apply(m){
+  var ts=m==='ts',lc=m==='lect',was=r.classList.contains('lect');
+  r.classList.toggle('ts',ts);r.classList.toggle('lect',lc);
+  if(lc&&!was){closed=[];shown=[];skipped=[];
+    document.querySelectorAll('main details').forEach(function(d){if(!d.open){closed.push(d);d.open=true}});
+    document.querySelectorAll('main [hidden]').forEach(function(x){if(!x.closest('[aria-labelledby="h-video"]')&&!x.matches('video,[role="tablist"]')){shown.push(x);x.hidden=false}});
+    document.querySelectorAll('main section').forEach(function(sc){var h=sc.querySelector('h2');
+      if(sc.querySelector('input,select,textarea')||(h&&/^(Exercice|Faites le tri|En vid)/i.test(h.textContent.trim()))){sc.classList.add('lc-skip');skipped.push(sc)}});}
+  if(!lc&&was){closed.forEach(function(d){d.open=false});shown.forEach(function(x){x.hidden=true});skipped.forEach(function(s){s.classList.remove('lc-skip')});closed=[];shown=[];skipped=[]}
+  opts.forEach(function(o){o.setAttribute('aria-checked',o.getAttribute('data-mode')===m?'true':'false')});
+  try{localStorage.setItem(K,ts?'1':'0');localStorage.setItem(KL,lc?'1':'0')}catch(e){}
+}
+function open(on){menu.hidden=!on;btn.setAttribute('aria-expanded',on?'true':'false')}
+btn.addEventListener('click',function(e){e.stopPropagation();open(menu.hidden)});
+opts.forEach(function(o){o.addEventListener('click',function(){apply(o.getAttribute('data-mode'));open(false);btn.focus()})});
+document.addEventListener('click',function(e){if(!menu.hidden&&!menu.contains(e.target)&&e.target!==btn)open(false)});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!menu.hidden){open(false);btn.focus()}});
+var v='orig';try{if(localStorage.getItem(KL)==='1')v='lect';else if(localStorage.getItem(K)==='1'&&menu.querySelector('[data-mode="ts"]'))v='ts'}catch(e){}
+if(v==='ts')apply('ts');
+if(v==='lect')window.addEventListener('load',function(){apply('lect')});
+})();
+</script>
+</body>
+</html>

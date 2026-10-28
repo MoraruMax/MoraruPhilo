@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mauss en trois textes</title>
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+  --bg:#F1F4F6; --surface:#FFFFFF; --ink:#1B2733; --muted:#53626F; --line:#D5DDE3; --focus:#0E6E73;
+  --pour:#0E6E73; --contre:#A8321F; --nuance:#2F4FA8; --garde:#8A5A00; --neutre:#4F5D69;
+  --serif:Georgia,"Times New Roman",serif;
+  --sans:system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#10171D; --surface:#18222A; --ink:#E7EDF2; --muted:#A1B0BC; --line:#2A3641; --focus:#5FD0D6;
+    --pour:#5FD0D6; --contre:#FF8A75; --nuance:#97ADFF; --garde:#F0BC52; --neutre:#A9B7C2;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#10171D; --surface:#18222A; --ink:#E7EDF2; --muted:#A1B0BC; --line:#2A3641; --focus:#5FD0D6;
+  --pour:#5FD0D6; --contre:#FF8A75; --nuance:#97ADFF; --garde:#F0BC52; --neutre:#A9B7C2;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:calc(4.2rem + env(safe-area-inset-top,0px));-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.1rem/1.65 var(--serif)}
+.wrap{width:min(980px,100% - 2.5rem);margin-inline:auto}
+h1,h2,h3{margin:0;font-family:var(--serif)}
+h1{font-weight:800;font-size:clamp(2.5rem,8vw,5rem);line-height:1.02;letter-spacing:-.02em}
+h2{font-weight:800;font-size:clamp(1.6rem,3.4vw,2.2rem);line-height:1.12}
+p{margin:0 0 1em}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
+.hero{padding:clamp(2.2rem,6vw,4.5rem) 0 2rem}
+.lead{font-size:clamp(1.15rem,2.4vw,1.45rem);line-height:1.5;max-width:40ch;margin:1.4rem 0 1rem}
+.note{font:500 .92rem/1.5 var(--sans);color:var(--muted);max-width:62ch;margin:0}
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--bg);border-bottom:1px solid var(--line)}
+.nav ol{display:flex;gap:.3rem;list-style:none;margin:0;padding:.5rem 0;overflow-x:auto}
+.nav a{display:block;white-space:nowrap;text-decoration:none;color:var(--muted);font:700 .88rem/1.2 var(--sans);padding:.45rem .7rem .35rem;border-radius:6px;border-bottom:4px solid var(--c)}
+.nav a:hover{color:var(--ink)}
+.nav a[aria-current="true"]{background:var(--ink);color:var(--bg)}
+.nav small{display:block;font-weight:500;font-size:.75rem;opacity:1}
+.txt{border-bottom:1px solid var(--line);padding:clamp(2.4rem,6vw,3.6rem) 0}
+.meta{display:flex;flex-wrap:wrap;gap:.5rem .9rem;align-items:center;margin-bottom:.8rem;font:500 .92rem/1.3 var(--sans);color:var(--muted)}
+.tag{font:700 .8rem/1 var(--sans);color:var(--c);border:1.5px solid var(--c);border-radius:5px;padding:.3rem .5rem}
+.thesis{font-size:clamp(1.2rem,2.4vw,1.5rem);line-height:1.4;font-weight:600;margin:1rem 0 1.4rem;max-width:44ch;padding-left:1rem;border-left:5px solid var(--c)}
+.cols{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:1.6rem clamp(1.6rem,4vw,3rem)}
+h3{font:700 .9rem/1.2 var(--sans);color:var(--c);margin-bottom:.7rem}
+.args{margin:0;padding:0;list-style:none;counter-reset:a}
+.args li{counter-increment:a;padding:.6rem 0 .6rem 2.4rem;border-top:1px solid var(--line);position:relative}
+.args li:last-child{border-bottom:1px solid var(--line)}
+.args li::before{content:counter(a);position:absolute;left:0;top:.5rem;font:800 1.5rem/1 var(--serif);color:var(--c)}
+.quotes{margin:0;padding:0}
+.quotes blockquote{margin:0 0 1rem;padding:.2rem 0 .2rem .9rem;border-left:3px solid var(--line)}
+.quotes p{margin:0 0 .2rem;font-style:italic}
+.quotes cite{font:500 .82rem/1.3 var(--sans);font-style:normal;color:var(--muted)}
+footer{padding:1.6rem 0 2.5rem;font:500 .92rem/1.5 var(--sans);color:var(--muted)}
+footer p{margin:0}
+@media (max-width:760px){.cols{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+.pdfbtn{display:inline-flex;align-items:center;gap:.5rem;font:600 .88rem/1 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--surface);border:1.5px solid var(--ink);border-radius:999px;padding:.55rem .95rem;cursor:pointer}
+.pdfbtn:hover{background:var(--ink);color:var(--bg)}.pdfbtn:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:2px}
+
+/* Mode lecture (pages à structure libre) */
+html.lect body::before,html.lect body::after{display:none!important}
+html.lect body{background:var(--bg)!important}
+html.lect .pn,html.lect #quiz,html.lect section[aria-labelledby="h-video"],html.lect video,html.lect .score,html.lect .lc-skip,html.lect [role="tablist"],html.lect main button,html.lect main input,html.lect main select,html.lect main textarea,html.lect .sec-head p.lc-x{display:none!important}
+html.lect .hero h1,html.lect .hero p,html.lect section.block h2,html.lect footer p{text-shadow:none!important}
+html.lect .hero,html.lect section.block{padding-block:1.2rem!important;border:0!important}
+html.lect .wrap,html.lect .sec-head{max-width:40rem!important;margin-inline:auto}
+html.lect .hgrid,html.lect .two,html.lect .cols{display:block!important}
+html.lect main,html.lect .hero{font-family:var(--serif)}
+html.lect .hero h1{font-size:clamp(1.9rem,5vw,2.6rem)!important}
+html.lect main p,html.lect main li,html.lect .lead{font-size:1.12rem!important;line-height:1.75!important}
+html.lect :is(main,.hero) :is(div,li,blockquote,article,aside,p,ul,ol,section,details,summary,figure,span):not(table *){background:none!important;border:0!important;box-shadow:none!important;border-radius:0!important}
+html.lect main [hidden]{display:revert!important}
+html.lect :is(main,.hero) div:not(.wrap):not(.sec-head):not(table *){display:block!important;grid-template-columns:none!important;float:none!important;max-width:none!important;width:auto!important;margin-inline:0}
+html.lect main li{display:list-item!important}
+html.lect .must{margin:1rem 0}
+html.lect .lead{max-width:none!important}
+html.lect .wrap{padding-inline:0}
+html.lect main details>summary{cursor:default;pointer-events:none;list-style:none}
+html.lect main details>summary::-webkit-details-marker,html.lect main details>summary::before{display:none!important}
+html.lect main blockquote{margin:.8rem 0;padding:0 0 0 1rem!important;border-left:3px solid var(--line)!important}
+html.lect main .panel{display:block!important;margin-bottom:1rem}
+html.lect main h3,html.lect main h4{margin-top:1.4rem}
+html.lect .nav,html.lect .hero .note{display:none!important}
+html.lect .thesis{border:0!important;padding-left:0!important;max-width:none!important}
+html.lect .args li{padding-left:0!important}
+html.lect .args li::before{display:none!important}
+html.lect .args{list-style:decimal;padding-left:1.4rem!important}
+html.lect .txt{padding-block:1.2rem!important}
+
+/* Accessibilité */
+.a11y{position:relative;display:inline-block}
+.a11y-menu{position:absolute;right:0;top:calc(100% + .4rem);z-index:60;min-width:14rem;background:var(--bg);color:var(--ink);border:1.5px solid var(--ink);border-radius:14px;padding:.35rem;box-shadow:0 8px 24px rgba(0,0,0,.18);text-shadow:none}
+.a11y-menu[hidden]{display:none}
+.a11y-menu p{margin:0;padding:.45rem .7rem .3rem;font:700 .72rem/1 system-ui,-apple-system,sans-serif;letter-spacing:.06em;text-transform:uppercase;opacity:.65}
+.a11y-opt{display:flex;align-items:center;gap:.6rem;width:100%;text-align:left;font:600 .92rem/1.2 system-ui,-apple-system,sans-serif;color:inherit;background:none;border:0;border-radius:9px;padding:.6rem .7rem;cursor:pointer}
+.a11y-opt:hover{background:var(--surface)}
+.a11y-opt:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:-2px}
+.a11y-opt .dot{flex:none;width:1rem;height:1rem;border:2px solid currentColor;border-radius:50%;position:relative}
+.a11y-opt[aria-checked="true"] .dot::after{content:"";position:absolute;inset:2px;background:currentColor;border-radius:50%}
+.a11y-opt small{display:block;font-weight:500;opacity:.7;font-size:.78rem;margin-top:.15rem}
+@media print{
+  :root{--bg:#fff!important;--surface:#fff!important;--ink:#111!important;--muted:#444!important;--line:#bbb!important;color-scheme:light!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:#fff!important;color:#111!important}
+  body::before,body::after{display:none!important}
+  nav,.pdfbtn,.pn,video,section[aria-labelledby="h-video"]{display:none!important}
+  .rev,.js .rev{opacity:1!important;transform:none!important}
+  .stp li[hidden]{display:list-item!important}
+  details>*{display:block!important}
+  article,li,.card,figure,.stage{break-inside:avoid}
+  h1,h2,h3{break-after:avoid;text-shadow:none!important}
+  *{text-shadow:none!important}
+  a{color:inherit;text-decoration:none}
+  section.block,.part{padding-top:1.2rem!important;padding-bottom:1.2rem!important}
+  footer{break-before:avoid;border-top:1px solid #999;margin-top:1rem}
+}
+@page{size:A4;margin:16mm 14mm}
+/* Texte */
+.tx summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:.7rem;font:800 clamp(1.4rem,3vw,1.9rem)/1.2 var(--sans);padding:.3rem 0}
+.tx summary::-webkit-details-marker{display:none}
+.tx summary::before{content:"";width:.6em;height:.6em;border-right:.2em solid currentColor;border-bottom:.2em solid currentColor;transform:rotate(-45deg);transition:transform .15s;flex:none;margin-right:.2rem}
+.tx[open] summary::before{transform:rotate(45deg)}
+@media (prefers-reduced-motion:reduce){.tx summary::before{transition:none}}
+.txb{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--c,var(--ink));padding:1.2rem clamp(1rem,3vw,1.8rem);margin-top:.9rem;max-width:46rem;font:400 1.1rem/1.75 var(--serif)}
+.txb p{margin:0 0 1em}
+.txb h3{font:700 1rem/1.3 var(--sans);margin:1.2em 0 .5em}
+.txb .vs{font:700 .72rem/1 var(--sans);color:var(--muted);margin-right:.15em}
+.txb .tsrc{font:600 .88rem/1.4 var(--sans);color:var(--muted);text-align:right;margin:1.1em 0 0}
+.txb .tsrc:not(:last-child){margin-bottom:1.4em;padding-bottom:1.2em;border-bottom:1px solid var(--line)}
+
+/* Sujets de dissertation */
+.sjd ul{list-style:none;margin:.6rem 0 0;padding:0;max-width:46rem}
+.sjd li{margin:0;padding:.55rem 0;border-top:1px solid var(--line)}
+.sjd li:last-child{border-bottom:1px solid var(--line)}
+.sjd a{color:inherit;font:600 1.05rem/1.4 var(--sans,system-ui);text-underline-offset:3px}
+.sjd p{margin:.4rem 0 0}
+html.lect .sjd li{border:0!important;padding:.25rem 0!important}
+html.lect .sjd a{font:600 1.12rem/1.6 var(--serif,Georgia,serif)}
+@media print{.sjd a{font-weight:600}.sjd li{border-color:#999}}
+.ln{font:700 .66rem/1 var(--sans);color:var(--muted);margin:0 .2em 0 .1em;vertical-align:super}
+.txb .tsrcline{font:600 .9rem/1.4 var(--sans);color:var(--muted)}
+.txn{font:500 .85rem/1.4 var(--sans);color:var(--muted);margin:.2rem 0 1rem}
+html.lect .txb{padding:0!important}
+</style>
+<script>try{history.scrollRestoration="manual"}catch(e){}(function(){function t(){if(!location.hash)window.scrollTo(0,0)}t();document.addEventListener("DOMContentLoaded",t);window.addEventListener("load",function(){t();setTimeout(t,60)});window.addEventListener("pageshow",t)})();</script>
+<script src="confort.js"></script><script src="voix.js" defer></script>
+</head>
+<body>
+<nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><span style="display:inline-flex;gap:.6rem;flex-wrap:wrap;align-items:center"><span class="a11y"><button type="button" class="pdfbtn" id="a11y-btn" aria-haspopup="true" aria-expanded="false" aria-controls="a11y-menu"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="1.6"/><path d="M5 8.5l7 1.5 7-1.5M12 10v4.5M8.5 21l3.5-6.5 3.5 6.5"/></svg><span>Accessibilité</span></button><div class="a11y-menu" id="a11y-menu" role="radiogroup" aria-label="Affichage de la page" hidden><p>Affichage</p><button type="button" role="radio" class="a11y-opt" data-mode="orig" aria-checked="true"><span class="dot"></span><span>Page d’origine<small>Image de fond et mise en page habituelle</small></span></button><button type="button" role="radio" class="a11y-opt" data-mode="lect" aria-checked="false"><span class="dot"></span><span>Mode lecture<small>Texte continu, sans cadres ni exercices</small></span></button></div></span><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></span></nav>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Marcel Mauss en trois textes</h1>
+    <p class="lead">Ce qui distingue un phénomène social, le don comme « fait social total » et la part du social dans les techniques du corps.</p>
+    <p class="note">Mauss (1872-1950). Les passages en gras sont ceux qui sont mis en valeur dans les textes.</p>
+  </div>
+</header>
+<nav class="nav" aria-label="Les textes"><div class="wrap"><ol id="nav">
+<li><a href="#t1" style="--c:var(--garde)">Texte 1<small>L’obligation propre aux…</small></a></li>
+<li><a href="#t2" style="--c:var(--garde)">Texte 2<small>Le potlatch, « fait social…</small></a></li>
+<li><a href="#t3" style="--c:var(--garde)">Texte 3<small>La prise en compte de « …</small></a></li>
+</ol></div></nav>
+<main id="main">
+<section class="txt" id="t1" aria-labelledby="h1" style="--c:var(--garde)"><div class="wrap">
+<div class="meta"><span class="tag">Texte 1</span></div>
+<h2 id="h1">L’obligation propre aux phénomènes sociaux</h2>
+<details class="tx" open><summary>Le texte</summary><div class="txb">
+<p>« Il y a donc <strong>des phénomènes proprement sociaux</strong>, distincts de ceux qu’étudient les autres sciences qui traitent de l’homme, comme la psychologie : ce sont eux qui constituent la matière de la <strong>sociologie</strong>. Mais il ne suffit pas d’avoir établi leur existence par un certain nombre d’exemples et par des considérations générales. On voudrait encore connaître <strong>le signe auquel on peut les distinguer</strong>, de manière à ne pas risquer ni de les laisser échapper, ni de les confondre avec les phénomènes qui ressortissent à d’autres sciences. D’après ce qui vient d’être dit, la nature sociale a précisément pour caractéristique d’être comme <strong>surajoutée à la nature individuelle</strong> ; elle s’exprime par des idées ou des actes qui, alors même que nous contribuons à les produire, nous sont tout entiers <strong>imposés du dehors</strong>. C’est ce <strong>signe d’extériorité</strong> qu’il s’agit de découvrir.</p>
+<p>Dans un grand nombre de cas, le caractère obligatoire dont sont marquées les manières sociales d’agir et de penser est le meilleur des critères que l’on puisse souhaiter. Gravées au fond du cœur ou exprimées dans des formules légales, spontanément obéies ou inspirées par voie de contrainte, une multitude de règles juridiques, religieuses et morales sont rigoureusement <strong>obligatoires</strong>. La plupart des individus y obéissent ; même ceux qui les violent savent qu’ils manquent à une obligation ; et, en tout cas, la société leur rappelle le caractère obligatoire de son ordre en leur infligeant une <strong>sanction</strong>. Quelles que soient la nature et l’intensité de la sanction, excommunication ou mort, dommages-intérêts ou prison, mépris public, blâme, simple notation d’excentricité, à des degrés divers et sous des formes diverses, le phénomène est toujours le même : <strong>le groupe proteste contre la violation des règles collectives de la pensée et de l’action</strong>. Or cette protestation ne peut avoir qu’un sens : c’est que <strong>les manières de penser et d’agir qu’impose le groupe sont des manières propres de penser et d’agir</strong>. S’il ne tolère pas qu’on y déroge, c’est qu’il voit en elles <strong>les manifestations de sa personnalité</strong>, et qu’en y dérogeant on la diminue, on la détruit. Et d’ailleurs si les règles de la pensée et de l’action n’avaient pas une <strong>origine sociale</strong>, d’où pourraient-elles venir ? Une règle à laquelle l’individu se considère comme soumis ne peut être l’œuvre de cet individu : car toute obligation implique <strong>une autorité supérieure au sujet obligé</strong>, et qui lui inspire le <strong>respect</strong>, élément essentiel du sentiment d’obligation. Si donc on exclut l’intervention d’êtres surnaturels, on ne saurait trouver, en dehors et au-dessus de l’individu, qu’une seule source d’obligation, c’est <strong>la société</strong> ou plutôt l’ensemble des sociétés dont il est membre. »</p>
+<p class="tsrc">Marcel Mauss, « La sociologie : objet et méthode », 1901, dans <em>Essais de sociologie</em>, Le Seuil, p. 14-15.</p>
+</div></details>
+</div></section>
+<section class="txt" id="t2" aria-labelledby="h2" style="--c:var(--garde)"><div class="wrap">
+<div class="meta"><span class="tag">Texte 2</span></div>
+<h2 id="h2">Le potlatch, « fait social total »</h2>
+<details class="tx" open><summary>Le texte</summary><div class="txb">
+<p>« Quelle est <strong>la règle de droit et d’intérêt</strong> qui, dans les sociétés de type arriéré ou archaïque, fait que <strong>le présent reçu est obligatoirement rendu</strong> ? Quelle force y a-t-il dans la chose qu’on donne qui fait que le donataire la rend ? Voilà le problème auquel nous nous attachons plus spécialement tout en indiquant les autres. Nous espérons donner, par un assez grand nombre de faits, une réponse à cette question précise et montrer dans quelle direction on peut engager tout une étude des questions connexes. On verra aussi à quels problèmes nouveaux nous sommes amenés : les uns concernant une forme permanente de la morale contractuelle, à savoir la façon dont le droit réel reste encore de nos jours attaché au droit personnel ; les autres concernant les formes et les idées qui ont toujours présidé, au moins en partie, à l’échange et qui, encore maintenant, suppléent en partie la notion d’intérêt individuel. Ainsi, nous atteindrons un double but. D’une part, nous arriverons à des conclusions en quelque sorte archéologiques sur la nature des transactions humaines sur les sociétés qui nous entourent ou nous ont immédiatement précédés. Nous décrirons les <strong>phénomènes d’échange et de contrat</strong> dans ces sociétés qui sont non pas privées de marchés économiques comme on l’a prétendu — car le marché est un phénomène humain qui selon nous n’est étranger à aucune société connue — mais <strong>dont le régime d’échange est différent du nôtre</strong>. On y verra le marché avant l’institution des marchands et avant leur principale invention, la monnaie proprement dite ; comment il fonctionnait avant qu’eussent été trouvées les formes, on peut dire modernes (sémitique, hellénique, hellénistique et romaine) du contrat et de la vente d’une part, la monnaie titrée d’autre part. Nous verrons la morale et l’économie qui agissent dans ces transactions.</p>
+<p>Et comme nous constaterons que cette morale et cette économie fonctionnent encore dans nos sociétés de façon constante et pour ainsi dire sous-jacente, comme nous croyons avoir ici trouvé un des rocs humains sur lesquels sont bâties nos sociétés, nous pourrons en déduire quelques conclusions morales sur quelques problèmes que posent la crise de notre droit et la crise de notre économie et nous nous arrêterons là. Cette page d’histoire sociale, de sociologie théorique, de conclusions de morale, de pratique politique et économique, ne nous mène, au fond, qu’à poser une fois de plus, sous de nouvelles formes, de vieilles mais toujours nouvelles questions […]. Il ne semble pas qu’il ait jamais existé, ni jusqu’à une époque assez rapprochée de nous, ni dans les sociétés qu’on confond fort mal sous le nom de primitives ou inférieures, rien qui ressemblât à ce qu’on appelle l’Économie naturelle. Par une étrange mais classique aberration, on choisissait même pour donner le type de cette économie les textes de Cook concernant l’échange et le troc chez les Polynésiens. Or ce sont ces mêmes <strong>Polynésiens</strong> que nous allons étudier ici et dont on verra combien ils sont éloignés, en matière de droit et d’économie, de l’état de nature. Dans les économies et dans les droits qui ont précédé les nôtres, on ne constate pour ainsi dire jamais de simples échanges de biens, de richesses et de produits au cours d’un marché passé entre les individus. D’abord, ce ne sont pas des individus, <strong>ce sont des collectivités qui s’obligent mutuellement, échangent et contractent</strong> ; les personnes présentes au contrat sont des <strong>personnes morales</strong> : clans, tribus, familles, qui s’affrontent et s’opposent soit en groupes se faisant face sur le terrain même, soit par l’intermédiaire de leurs chefs, soit de ces deux façons à la fois. De plus, ce qu’ils échangent, ce n’est pas exclusivement des biens et des richesses, des meubles et des immeubles, des choses utiles économiquement. Ce sont avant tout <strong>des politesses, des festins, des rites, des services militaires, des femmes, des enfants, des danses, des fêtes, des foires</strong> dont le marché n’est qu’un des moments et où la circulation des richesses n’est qu’un des termes d’un contrat beaucoup plus général et beaucoup plus permanent. Enfin, ces prestations et contre-prestations s’engagent sous une forme plutôt volontaire, par <strong>des présents, des cadeaux</strong>, bien qu’elles soient au fond <strong>rigoureusement obligatoires</strong>, à peine de guerre privée ou publique. Nous avons proposé d’appeler tout ceci <strong>le système des prestations totales</strong>. Le type le plus pur de ces institutions nous paraît être représenté par l’alliance des deux phratries dans les tribus australiennes ou nord-américaines en général, où les rites, les mariages, la succession aux biens, les liens de droit et d’intérêt, rangs militaires et sacerdotaux, tout est complémentaire et suppose la collaboration des deux moitiés de la tribu. Par exemple, les jeux sont tout particulièrement régis par elles. Les Tlinkit et les Haïda, deux tribus du Nord-Ouest américain, expriment fortement la nature de ces pratiques en disant que les deux fratries se montrent respect.</p>
+<p>Mais, dans ces deux dernières tribus du Nord-Ouest américain et dans toute cette région apparaît une forme typique certes, mais évoluée et relativement rare, de ces prestations totales. Nous avons proposé de l’appeler <strong>potlatch</strong>, comme font d’ailleurs les auteurs américains se servant du nom chinook devenu partie du langage courant des Blancs et des Indiens de Vancouver à l’Alaska. « Potlateh » veut dire essentiellement « nourrit », « consommer ». Ces tribus, fort riches, qui vivent dans les îles ou sur la côte ou entre les Rocheuses et la côte, passent leur hiver dans une perpétuelle fête : banquets, foires et marchés, qui sont en même temps l’assemblée solennelle de la tribu. Celle-ci y est rangée suivant ses confréries hiérarchiques, ses sociétés secrètes, souvent confondues avec les premières et avec les clans ; et tout, clans, mariages, initiations, séances de chamanisme et du culte des grands dieux, des totems ou des ancêtres collectifs ou individuels du clan, tout se mêle en <strong>un inextricable lacis de rites, de prestations juridiques et économiques, de fixations de rangs politiques dans la société des hommes, dans la tribu et dans les confédérations de tribus et même internationalemen</strong>t. Mais ce qui est remarquable dans ces tribus, c’est <strong>le principe de la rivalité et de l’antagonisme</strong> qui domine toutes ces pratiques. On y va jusqu’à la bataille, jusqu’à la mise à mort des chefs et nobles qui s’affrontent ainsi. On y va d’autre part jusqu’à la destruction purement somptuaire des richesses accumulées pour éclipser le chef rival en même temps qu’associé (d’ordinaire grand-père, beau-père ou gendre). Il y a <strong>prestation totale</strong> en ce sens que <strong>c’est bien tout le clan qui contracte pour tous, pour tout ce qu’il possède et pour tout ce qu’il fait, par l’intermédiaire de son chef</strong>. Mais cette prestation revêt de la part du chef une allure <strong>agonistique</strong> très marquée. Elle est essentiellement usuraire et somptuaire et l’on assiste avant tout à une lutte des nobles pour assurer entre eux une hiérarchie dont ultérieurement profite leur clan. »</p>
+<p class="tsrc">Marcel Mauss, <em>Essai sur le don</em>, dans <em>Sociologie et anthropologie</em>, PUF, p. 148-153.</p>
+</div></details>
+</div></section>
+<section class="txt" id="t3" aria-labelledby="h3" style="--c:var(--garde)"><div class="wrap">
+<div class="meta"><span class="tag">Texte 3</span></div>
+<h2 id="h3">La prise en compte de « l’homme total » dans l’acquisition des techniques du corps</h2>
+<details class="tx" open><summary>Le texte</summary><div class="txb">
+<p>« J’ai donc eu pendant de nombreuses années cette notion de <strong>la nature sociale de l’« habitus »</strong>. Je vous prie de remarquer que je dis en bon latin, compris en France, « habitus ». Le mot traduit, infiniment mieux qu’« habitude », l’« exis », <strong>l’« acquis »</strong> et la « faculté » d’Aristote (qui était un psychologue). Il ne désigne pas ces habitudes métaphysiques, cette « mémoire » mystérieuse, sujets de volumes ou de courtes et fameuses thèses. Ces « habitudes » varient non pas simplement avec les individus et leurs imitations, <strong>elles varient surtout avec les sociétés, les éducations, les convenances et les modes, les prestiges</strong>. Il faut y voir des techniques et l’ouvrage de la raison pratique collective et individuelle, là où on ne voit d’ordinaire que l’âme et ses facultés de répétition.</p>
+<p>(…) Et je conclus que l’on ne pouvait avoir une vue claire de tous ces faits, de la course, de la nage, etc., si on ne faisait pas intervenir <strong>une triple considération au lieu d’une unique considération</strong>, qu’elle soit mécanique et physique, comme une théorie anatomique et physiologique de la marche, ou qu’elle soit au contraire psychologique ou sociologique. <strong>C’est le triple point de vue, celui de « l’homme total », qui est nécessaire. </strong></p>
+<p>Enfin une autre série de faits s’imposait. Dans tous ces éléments de <strong>l’art d’utiliser le corps humain</strong> les <strong>faits <em>d’éducation</em></strong> dominaient. La notion d’éducation pouvait se superposer à la notion d’imitation. Car il y a des enfants en particulier qui ont des facultés très grandes d’imitation, d’autres de très faibles, mais tous passent par la même éducation, de sorte que nous pouvons comprendre la suite des enchaînements. Ce qui se passe, c’est <strong>une imitation prestigieuse</strong>. L’enfant, l’adulte, imite des actes qui ont réussi et qu’il a vu réussir par des personnes en qui il a confiance et qui ont autorité sur lui. <strong>L’acte s’impose du dehors, d’en haut, fût-il un acte exclusivement biologique, concernant son corps. L’individu emprunte la série des mouvements dont il est composé à l’acte exécuté devant lui ou avec lui par les autres. </strong></p>
+<p>C’est précisément dans cette notion de <strong>prestige de la personne</strong> qui fait l’acte ordonné, autorisé, prouvé, par rapport à l’individu imitateur, que se trouve tout <strong>l’élément social</strong>. Dans l’acte imitateur qui suit se trouvent tout l’élément psychologique et l’élément biologique.</p>
+<p>Mais le tout, l’ensemble est <strong>conditionné par les trois éléments indissolublement mêlés</strong>.</p>
+<p>[…] J’ai assisté au <strong>changement des techniques de la nage</strong>, du vivant de notre génération. Un exemple va nous mettre immédiatement au milieu des choses : nous, les psychologues, comme les biologistes et comme les sociologues. Autrefois on nous apprenait à plonger après avoir nagé. Et quand on nous apprenait à plonger, on nous apprenait à fermer les yeux, puis à les ouvrir dans l’eau. Aujourd’hui la technique est inverse. On commence tout l’apprentissage en habituant l’enfant à se tenir dans l’eau les yeux ouverts. Ainsi, avant même qu’ils nagent, on exerce les enfants surtout à dompter des réflexes dangereux mais instinctifs des yeux, on les familiarise avant tout avec l’eau, on inhibe des peurs, on crée une certaine assurance, on sélectionne des arrêts et des mouvements. Il y a donc <strong>une technique de la plongée</strong> et une technique de l’éducation de la plongée qui ont été trouvées de mon temps. Et vous voyez qu’il s’agit bien d’un enseignement technique et qu’il y a, comme pour toute technique, <strong>un apprentissage de la nage</strong>. D’autre part, notre génération, ici, a assisté à un changement complet de technique : nous avons vu remplacer par les différentes sortes de crawl la nage à brasse et à tête hors de l’eau. De plus, on a perdu l’usage d’avaler de l’eau et de la cracher. Car les nageurs se considéraient, de mon temps, comme des espèces de bateaux à vapeur. C’était stupide, mais enfin je fais encore ce geste : je ne peux pas me débarrasser de ma technique. Voilà donc <strong>une technique du corps spécifique</strong>, un art gymnique perfectionné de notre temps.</p>
+<p>Mais cette spécificité est le caractère de toutes les techniques.</p>
+<p>[…] La notion que <strong>le coucher</strong> est quelque chose de naturel est complètement inexacte. Je peux vous dire que la guerre m’a appris à dormir partout, sur des tas de cailloux par exemple, mais que je n’ai jamais pu changer de lit sans avoir un moment d’insomnie : ce n’est qu’au deuxième jour que je peux m’endormir vite.</p>
+<p>Ce qui est très simple, c’est que l’on peut distinguer les sociétés qui n’ont rien pour dormir, sauf « la dure », et les autres qui s’aident d’instrument. La « civilisation par 15° de latitude » dont parle Graebner se caractérise entre autres par l’usage pour dormir d’un banc pour la nuque. L’accoudoir est souvent un totem, quelquefois sculpté de figures accroupies d’hommes, d’animaux totémiques. - Il y a les gens à natte et les gens sans natte (Asie, Océanie, une partie de l’Amérique). - Il y a les gens à oreillers et les gens sans oreillers. - Il y a les populations qui se mettent très serrées en rond pour dormir, autour d’un feu, ou même sans feu. Il y a des façons primitives de se réchauffer et de chauffer les pieds. Les Fuégiens, qui vivent dans un endroit très froid, ne savent que se chauffer les pieds au moment où ils dorment, n’ayant qu’une seule couverture de peau (guanaco). - Il y a enfin le sommeil debout. Les Masaï peuvent dormir debout. J’ai dormi debout en montagne. J’ai dormi souvent à cheval, même en marche quelquefois : le cheval était plus intelligent que moi. Les vieux historiens des invasions nous représentent Huns et Mongols dormant, à cheval. C’est encore vrai, et leurs cavaliers dormant n’arrêtent pas la marche des chevaux.</p>
+<p>Il y a l’usage de la couverture. Gens qui dorment couverts et non couverts. Il y a le hamac et la façon de dormir suspendu.</p>
+<p>Voilà<strong> une grande quantité de pratiques qui sont à la fois des techniques du corps et qui sont profondes en retentissements et effets biologiques</strong>. »</p>
+<p class="tsrc">Marcel Mauss, « Les techniques du corps », 1934, dans <em>Sociologie et anthropologie</em>, PUF, p. 368-369, 366-367, 378-379.</p>
+</div></details>
+</div></section>
+</main>
+<footer><div class="wrap"><p>Marcel Mauss en trois textes — 1872-1950.</p></div></footer>
+<script>
+(function(){
+  var links=[].slice.call(document.querySelectorAll('#nav a'));
+  var secs=[].slice.call(document.querySelectorAll('.txt')),lock=null,ticking=false;
+  function setCur(i){
+    links.forEach(function(a,k){if(k===i)a.setAttribute('aria-current','true');else a.removeAttribute('aria-current')});
+    var a=links[i],box=a.parentNode.parentNode;
+    if(box.scrollWidth>box.clientWidth&&box.scrollTo)box.scrollTo({left:i?a.offsetLeft-20:0});
+  }
+  function upd(){
+    ticking=false;
+    if(lock!==null){setCur(lock);return}
+    var nb=document.querySelector('.nav'),y=(nb?nb.getBoundingClientRect().bottom:0)+24,cur=0;
+    secs.forEach(function(s,k){if(s.getBoundingClientRect().top<=y)cur=k});
+    setCur(cur);
+  }
+  function req(){if(!ticking){ticking=true;requestAnimationFrame(upd)}}
+  links.forEach(function(a,k){a.addEventListener('click',function(){lock=k;setCur(k)})});
+  ['wheel','touchstart','mousedown','keydown'].forEach(function(ev){window.addEventListener(ev,function(){lock=null},{passive:true})});
+  window.addEventListener('scroll',req,{passive:true});window.addEventListener('resize',req);
+  upd();
+})();
+</script>
+<script>
+(function(){var r=document.documentElement,K='texte-seul',KL='mode-lecture';
+var btn=document.getElementById('a11y-btn'),menu=document.getElementById('a11y-menu'),opts=menu.querySelectorAll('.a11y-opt'),closed=[],shown=[],skipped=[];
+function apply(m){
+  var ts=m==='ts',lc=m==='lect',was=r.classList.contains('lect');
+  r.classList.toggle('ts',ts);r.classList.toggle('lect',lc);
+  if(lc&&!was){closed=[];shown=[];skipped=[];
+    document.querySelectorAll('main details').forEach(function(d){if(!d.open){closed.push(d);d.open=true}});
+    document.querySelectorAll('main [hidden]').forEach(function(x){if(!x.closest('[aria-labelledby="h-video"]')&&!x.matches('video,[role="tablist"]')){shown.push(x);x.hidden=false}});
+    document.querySelectorAll('main section').forEach(function(sc){var h=sc.querySelector('h2');
+      if(sc.querySelector('input,select,textarea')||(h&&/^(Exercice|Faites le tri|En vid)/i.test(h.textContent.trim()))){sc.classList.add('lc-skip');skipped.push(sc)}});}
+  if(!lc&&was){closed.forEach(function(d){d.open=false});shown.forEach(function(x){x.hidden=true});skipped.forEach(function(s){s.classList.remove('lc-skip')});closed=[];shown=[];skipped=[]}
+  opts.forEach(function(o){o.setAttribute('aria-checked',o.getAttribute('data-mode')===m?'true':'false')});
+  try{localStorage.setItem(K,ts?'1':'0');localStorage.setItem(KL,lc?'1':'0')}catch(e){}
+}
+function open(on){menu.hidden=!on;btn.setAttribute('aria-expanded',on?'true':'false')}
+btn.addEventListener('click',function(e){e.stopPropagation();open(menu.hidden)});
+opts.forEach(function(o){o.addEventListener('click',function(){apply(o.getAttribute('data-mode'));open(false);btn.focus()})});
+document.addEventListener('click',function(e){if(!menu.hidden&&!menu.contains(e.target)&&e.target!==btn)open(false)});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!menu.hidden){open(false);btn.focus()}});
+var v='orig';try{if(localStorage.getItem(KL)==='1')v='lect';else if(localStorage.getItem(K)==='1'&&menu.querySelector('[data-mode="ts"]'))v='ts'}catch(e){}
+if(v==='ts')apply('ts');
+if(v==='lect')window.addEventListener('load',function(){apply('lect')});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Durkheim, Le Suicide : fiche de lecture</title>
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+  --bg:#F1F4F6; --surface:#FFFFFF; --ink:#1B2733; --muted:#53626F; --line:#D5DDE3; --focus:#0E6E73;
+  --pour:#0E6E73; --contre:#A8321F; --nuance:#2F4FA8; --garde:#8A5A00; --neutre:#4F5D69;
+  --serif:Georgia,"Times New Roman",serif;
+  --sans:system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#10171D; --surface:#18222A; --ink:#E7EDF2; --muted:#A1B0BC; --line:#2A3641; --focus:#5FD0D6;
+    --pour:#5FD0D6; --contre:#FF8A75; --nuance:#97ADFF; --garde:#F0BC52; --neutre:#A9B7C2;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#10171D; --surface:#18222A; --ink:#E7EDF2; --muted:#A1B0BC; --line:#2A3641; --focus:#5FD0D6;
+  --pour:#5FD0D6; --contre:#FF8A75; --nuance:#97ADFF; --garde:#F0BC52; --neutre:#A9B7C2;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:calc(4.2rem + env(safe-area-inset-top,0px));-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.1rem/1.65 var(--serif)}
+.wrap{width:min(980px,100% - 2.5rem);margin-inline:auto}
+h1,h2,h3{margin:0;font-family:var(--serif)}
+h1{font-weight:800;font-size:clamp(2.5rem,8vw,5rem);line-height:1.02;letter-spacing:-.02em}
+h2{font-weight:800;font-size:clamp(1.6rem,3.4vw,2.2rem);line-height:1.12}
+p{margin:0 0 1em}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
+.hero{padding:clamp(2.2rem,6vw,4.5rem) 0 2rem}
+.lead{font-size:clamp(1.15rem,2.4vw,1.45rem);line-height:1.5;max-width:40ch;margin:1.4rem 0 1rem}
+.note{font:500 .92rem/1.5 var(--sans);color:var(--muted);max-width:62ch;margin:0}
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--bg);border-bottom:1px solid var(--line)}
+.nav ol{display:flex;gap:.3rem;list-style:none;margin:0;padding:.5rem 0;overflow-x:auto}
+.nav a{display:block;white-space:nowrap;text-decoration:none;color:var(--muted);font:700 .88rem/1.2 var(--sans);padding:.45rem .7rem .35rem;border-radius:6px;border-bottom:4px solid var(--c)}
+.nav a:hover{color:var(--ink)}
+.nav a[aria-current="true"]{background:var(--ink);color:var(--bg)}
+.nav small{display:block;font-weight:500;font-size:.75rem;opacity:1}
+.txt{border-bottom:1px solid var(--line);padding:clamp(2.4rem,6vw,3.6rem) 0}
+.meta{display:flex;flex-wrap:wrap;gap:.5rem .9rem;align-items:center;margin-bottom:.8rem;font:500 .92rem/1.3 var(--sans);color:var(--muted)}
+.tag{font:700 .8rem/1 var(--sans);color:var(--c);border:1.5px solid var(--c);border-radius:5px;padding:.3rem .5rem}
+.thesis{font-size:clamp(1.2rem,2.4vw,1.5rem);line-height:1.4;font-weight:600;margin:1rem 0 1.4rem;max-width:44ch;padding-left:1rem;border-left:5px solid var(--c)}
+.cols{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:1.6rem clamp(1.6rem,4vw,3rem)}
+h3{font:700 .9rem/1.2 var(--sans);color:var(--c);margin-bottom:.7rem}
+.args{margin:0;padding:0;list-style:none;counter-reset:a}
+.args li{counter-increment:a;padding:.6rem 0 .6rem 2.4rem;border-top:1px solid var(--line);position:relative}
+.args li:last-child{border-bottom:1px solid var(--line)}
+.args li::before{content:counter(a);position:absolute;left:0;top:.5rem;font:800 1.5rem/1 var(--serif);color:var(--c)}
+.quotes{margin:0;padding:0}
+.quotes blockquote{margin:0 0 1rem;padding:.2rem 0 .2rem .9rem;border-left:3px solid var(--line)}
+.quotes p{margin:0 0 .2rem;font-style:italic}
+.quotes cite{font:500 .82rem/1.3 var(--sans);font-style:normal;color:var(--muted)}
+footer{padding:1.6rem 0 2.5rem;font:500 .92rem/1.5 var(--sans);color:var(--muted)}
+footer p{margin:0}
+@media (max-width:760px){.cols{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+.pdfbtn{display:inline-flex;align-items:center;gap:.5rem;font:600 .88rem/1 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--surface);border:1.5px solid var(--ink);border-radius:999px;padding:.55rem .95rem;cursor:pointer}
+.pdfbtn:hover{background:var(--ink);color:var(--bg)}.pdfbtn:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:2px}
+
+/* Mode lecture (pages à structure libre) */
+html.lect body::before,html.lect body::after{display:none!important}
+html.lect body{background:var(--bg)!important}
+html.lect .pn,html.lect #quiz,html.lect section[aria-labelledby="h-video"],html.lect video,html.lect .score,html.lect .lc-skip,html.lect [role="tablist"],html.lect main button,html.lect main input,html.lect main select,html.lect main textarea,html.lect .sec-head p.lc-x{display:none!important}
+html.lect .hero h1,html.lect .hero p,html.lect section.block h2,html.lect footer p{text-shadow:none!important}
+html.lect .hero,html.lect section.block{padding-block:1.2rem!important;border:0!important}
+html.lect .wrap,html.lect .sec-head{max-width:40rem!important;margin-inline:auto}
+html.lect .hgrid,html.lect .two,html.lect .cols{display:block!important}
+html.lect main,html.lect .hero{font-family:var(--serif)}
+html.lect .hero h1{font-size:clamp(1.9rem,5vw,2.6rem)!important}
+html.lect main p,html.lect main li,html.lect .lead{font-size:1.12rem!important;line-height:1.75!important}
+html.lect :is(main,.hero) :is(div,li,blockquote,article,aside,p,ul,ol,section,details,summary,figure,span):not(table *){background:none!important;border:0!important;box-shadow:none!important;border-radius:0!important}
+html.lect main [hidden]{display:revert!important}
+html.lect :is(main,.hero) div:not(.wrap):not(.sec-head):not(table *){display:block!important;grid-template-columns:none!important;float:none!important;max-width:none!important;width:auto!important;margin-inline:0}
+html.lect main li{display:list-item!important}
+html.lect .must{margin:1rem 0}
+html.lect .lead{max-width:none!important}
+html.lect .wrap{padding-inline:0}
+html.lect main details>summary{cursor:default;pointer-events:none;list-style:none}
+html.lect main details>summary::-webkit-details-marker,html.lect main details>summary::before{display:none!important}
+html.lect main blockquote{margin:.8rem 0;padding:0 0 0 1rem!important;border-left:3px solid var(--line)!important}
+html.lect main .panel{display:block!important;margin-bottom:1rem}
+html.lect main h3,html.lect main h4{margin-top:1.4rem}
+html.lect .nav,html.lect .hero .note{display:none!important}
+html.lect .thesis{border:0!important;padding-left:0!important;max-width:none!important}
+html.lect .args li{padding-left:0!important}
+html.lect .args li::before{display:none!important}
+html.lect .args{list-style:decimal;padding-left:1.4rem!important}
+html.lect .txt{padding-block:1.2rem!important}
+
+/* Accessibilité */
+.a11y{position:relative;display:inline-block}
+.a11y-menu{position:absolute;right:0;top:calc(100% + .4rem);z-index:60;min-width:14rem;background:var(--bg);color:var(--ink);border:1.5px solid var(--ink);border-radius:14px;padding:.35rem;box-shadow:0 8px 24px rgba(0,0,0,.18);text-shadow:none}
+.a11y-menu[hidden]{display:none}
+.a11y-menu p{margin:0;padding:.45rem .7rem .3rem;font:700 .72rem/1 system-ui,-apple-system,sans-serif;letter-spacing:.06em;text-transform:uppercase;opacity:.65}
+.a11y-opt{display:flex;align-items:center;gap:.6rem;width:100%;text-align:left;font:600 .92rem/1.2 system-ui,-apple-system,sans-serif;color:inherit;background:none;border:0;border-radius:9px;padding:.6rem .7rem;cursor:pointer}
+.a11y-opt:hover{background:var(--surface)}
+.a11y-opt:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:-2px}
+.a11y-opt .dot{flex:none;width:1rem;height:1rem;border:2px solid currentColor;border-radius:50%;position:relative}
+.a11y-opt[aria-checked="true"] .dot::after{content:"";position:absolute;inset:2px;background:currentColor;border-radius:50%}
+.a11y-opt small{display:block;font-weight:500;opacity:.7;font-size:.78rem;margin-top:.15rem}
+@media print{
+  :root{--bg:#fff!important;--surface:#fff!important;--ink:#111!important;--muted:#444!important;--line:#bbb!important;color-scheme:light!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:#fff!important;color:#111!important}
+  body::before,body::after{display:none!important}
+  nav,.pdfbtn,.pn,video,section[aria-labelledby="h-video"]{display:none!important}
+  .rev,.js .rev{opacity:1!important;transform:none!important}
+  .stp li[hidden]{display:list-item!important}
+  details>*{display:block!important}
+  article,li,.card,figure,.stage{break-inside:avoid}
+  h1,h2,h3{break-after:avoid;text-shadow:none!important}
+  *{text-shadow:none!important}
+  a{color:inherit;text-decoration:none}
+  section.block,.part{padding-top:1.2rem!important;padding-bottom:1.2rem!important}
+  footer{break-before:avoid;border-top:1px solid #999;margin-top:1rem}
+}
+@page{size:A4;margin:16mm 14mm}
+/* Texte */
+.tx summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:.7rem;font:800 clamp(1.4rem,3vw,1.9rem)/1.2 var(--sans);padding:.3rem 0}
+.tx summary::-webkit-details-marker{display:none}
+.tx summary::before{content:"";width:.6em;height:.6em;border-right:.2em solid currentColor;border-bottom:.2em solid currentColor;transform:rotate(-45deg);transition:transform .15s;flex:none;margin-right:.2rem}
+.tx[open] summary::before{transform:rotate(45deg)}
+@media (prefers-reduced-motion:reduce){.tx summary::before{transition:none}}
+.txb{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--c,var(--ink));padding:1.2rem clamp(1rem,3vw,1.8rem);margin-top:.9rem;max-width:46rem;font:400 1.1rem/1.75 var(--serif)}
+.txb p{margin:0 0 1em}
+.txb h3{font:700 1rem/1.3 var(--sans);margin:1.2em 0 .5em}
+.txb .vs{font:700 .72rem/1 var(--sans);color:var(--muted);margin-right:.15em}
+.txb .tsrc{font:600 .88rem/1.4 var(--sans);color:var(--muted);text-align:right;margin:1.1em 0 0}
+.txb .tsrc:not(:last-child){margin-bottom:1.4em;padding-bottom:1.2em;border-bottom:1px solid var(--line)}
+
+/* Sujets de dissertation */
+.sjd ul{list-style:none;margin:.6rem 0 0;padding:0;max-width:46rem}
+.sjd li{margin:0;padding:.55rem 0;border-top:1px solid var(--line)}
+.sjd li:last-child{border-bottom:1px solid var(--line)}
+.sjd a{color:inherit;font:600 1.05rem/1.4 var(--sans,system-ui);text-underline-offset:3px}
+.sjd p{margin:.4rem 0 0}
+html.lect .sjd li{border:0!important;padding:.25rem 0!important}
+html.lect .sjd a{font:600 1.12rem/1.6 var(--serif,Georgia,serif)}
+@media print{.sjd a{font-weight:600}.sjd li{border-color:#999}}
+.ln{font:700 .66rem/1 var(--sans);color:var(--muted);margin:0 .2em 0 .1em;vertical-align:super}
+.txb .tsrcline{font:600 .9rem/1.4 var(--sans);color:var(--muted)}
+.txn{font:500 .85rem/1.4 var(--sans);color:var(--muted);margin:.2rem 0 1rem}
+html.lect .txb{padding:0!important}
+</style>
+<script>try{history.scrollRestoration="manual"}catch(e){}(function(){function t(){if(!location.hash)window.scrollTo(0,0)}t();document.addEventListener("DOMContentLoaded",t);window.addEventListener("load",function(){t();setTimeout(t,60)});window.addEventListener("pageshow",t)})();</script>
+<script src="confort.js"></script><script src="voix.js" defer></script>
+
+<style>
+.fs h2{margin-bottom:1rem}
+.fs h3{font:700 1rem/1.3 var(--sans);color:var(--c);margin:1.4rem 0 .5rem}
+.fs .wrap>p,.fs li{max-width:46rem}
+.pg{font:600 .78rem/1 var(--sans);color:var(--muted);white-space:nowrap;margin-left:.3em}
+.fs ul.pts{margin:.4rem 0 1rem;padding-left:1.2rem}
+.fs ul.pts li{margin:.35rem 0}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr));gap:1rem;margin:1rem 0}
+.card{background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--c);padding:1rem 1.1rem 1.1rem;border-radius:0 0 8px 8px}
+.card h3{margin:0 0 .5rem;font:800 1.05rem/1.25 var(--sans);color:var(--ink)}
+.card p{font-size:1rem;line-height:1.55;margin:0 0 .6em}
+.card ul{margin:.3rem 0 .4rem;padding-left:1.1rem;font-size:1rem;line-height:1.5}
+.card .k{font:700 .74rem/1 var(--sans);letter-spacing:.05em;text-transform:uppercase;color:var(--c);margin:.9rem 0 .25rem}
+.card .f{font-weight:600}
+.tbl{width:100%;border-collapse:collapse;margin:.8rem 0 1rem;font:400 1rem/1.5 var(--serif);background:var(--surface)}
+.tbl caption{text-align:left;font:600 .88rem/1.4 var(--sans);color:var(--muted);padding:.3rem 0}
+.tbl th,.tbl td{border:1px solid var(--line);padding:.55rem .7rem;vertical-align:top;text-align:left}
+.tbl th{font:700 .86rem/1.3 var(--sans);background:var(--bg);color:var(--ink)}
+.tblw{overflow-x:auto}
+.axes{display:grid;grid-template-columns:auto 1fr 1fr;gap:.4rem;margin:1rem 0;font:600 .92rem/1.35 var(--sans);max-width:46rem}
+.axes div{padding:.7rem .8rem;border:1px solid var(--line);background:var(--surface)}
+.axes .h{background:none;border:0;color:var(--muted);font-size:.82rem;align-self:center}
+.axes .a{border-left:6px solid var(--nuance)}.axes .b{border-left:6px solid var(--garde)}.axes .c2{border-left:6px solid var(--contre)}.axes .d{border-left:6px solid var(--neutre)}
+.axes small{display:block;font-weight:500;color:var(--muted);margin-top:.2rem}
+.fs blockquote{margin:0 0 1.1rem;padding:.2rem 0 .2rem .9rem;border-left:3px solid var(--c);max-width:46rem}
+.fs blockquote p{margin:0 0 .25rem;font-style:italic}
+.fs blockquote cite{font:500 .84rem/1.3 var(--sans);font-style:normal;color:var(--muted)}
+.fs dl{margin:.6rem 0 0;max-width:46rem}
+.fs dt{font:700 1rem/1.3 var(--sans);margin-top:.9rem}
+.fs dd{margin:.2rem 0 0}
+.fs .src{font:500 .9rem/1.5 var(--sans);color:var(--muted);max-width:46rem}
+@media (max-width:640px){.axes{grid-template-columns:1fr}.axes .h{display:none}}
+html.lect .cards{display:block!important}html.lect .card{margin-bottom:1rem}
+html.lect .tbl{display:block}
+@media print{.card,.tbl tr{break-inside:avoid}}
+</style>
+</head>
+<body>
+<nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><span style="display:inline-flex;gap:.6rem;flex-wrap:wrap;align-items:center"><span class="a11y"><button type="button" class="pdfbtn" id="a11y-btn" aria-haspopup="true" aria-expanded="false" aria-controls="a11y-menu"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="1.6"/><path d="M5 8.5l7 1.5 7-1.5M12 10v4.5M8.5 21l3.5-6.5 3.5 6.5"/></svg><span>Accessibilité</span></button><div class="a11y-menu" id="a11y-menu" role="radiogroup" aria-label="Affichage de la page" hidden><p>Affichage</p><button type="button" role="radio" class="a11y-opt" data-mode="orig" aria-checked="true"><span class="dot"></span><span>Page d’origine<small>Image de fond et mise en page habituelle</small></span></button><button type="button" role="radio" class="a11y-opt" data-mode="lect" aria-checked="false"><span class="dot"></span><span>Mode lecture<small>Texte continu, sans cadres ni exercices</small></span></button></div></span><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></span></nav>
+
+<header class="hero">
+  <div class="wrap">
+    <h1><em>Le Suicide</em>, fiche de lecture</h1>
+    <p class="lead">Peut-on expliquer scientifiquement un acte aussi individuel que le suicide ? Durkheim répond par le taux social des suicides et par les liens qui unissent l’individu à la société.</p>
+    <p class="note">Émile Durkheim, <em>Le Suicide. Étude de sociologie</em>, 1897. Les pages indiquées renvoient à l’édition originale (Félix Alcan).</p>
+  </div>
+</header>
+<nav class="nav" aria-label="Sections de la fiche"><div class="wrap"><ol id="nav">
+<li><a href="#essentiel" style="--c:var(--pour)">Essentiel</a></li>
+<li><a href="#methode" style="--c:var(--pour)">Méthode</a></li>
+<li><a href="#plan" style="--c:var(--pour)">Plan</a></li>
+<li><a href="#livre1" style="--c:var(--pour)">Livre I</a></li>
+<li><a href="#types" style="--c:var(--pour)">Les types</a></li>
+<li><a href="#livre3" style="--c:var(--pour)">Livre III</a></li>
+<li><a href="#citations" style="--c:var(--pour)">Citations</a></li>
+<li><a href="#notions" style="--c:var(--pour)">Notions</a></li>
+<li><a href="#limites" style="--c:var(--pour)">Limites</a></li>
+</ol></div></nav>
+<main id="main">
+<section class="txt fs" id="essentiel" aria-labelledby="h-essentiel" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-essentiel">L’essentiel en cinq points</h2>
+<p class="thesis">Le suicide, acte en apparence purement individuel, a un taux propre à chaque société, qui varie selon la force des liens sociaux : trop faibles, trop forts ou mal réglés, ils conduisent à trois types de suicide.</p>
+<ol class="args">
+<li><strong>Un objet défini objectivement.</strong> Est un suicide toute mort qui résulte d’un acte accompli par la victime « et qu’elle savait devoir produire ce résultat » (on ne cherche pas l’intention, trop difficile à saisir).<span class="pg">p. 3-6</span></li>
+<li><strong>Un fait social.</strong> Les suicides d’une société, pris ensemble, forment un « fait nouveau et <em>sui generis</em> » : le taux de suicide, stable dans le temps et différent d’une société à l’autre.<span class="pg">p. 8-11</span></li>
+<li><strong>Des explications écartées.</strong> Ni la folie, ni la race et l’hérédité, ni le climat, ni l’imitation ne rendent compte de ce taux.<span class="pg">p. 19-138</span></li>
+<li><strong>Des causes sociales.</strong> Le taux varie en raison inverse de l’intégration des groupes (suicide égoïste), avec l’excès d’intégration (suicide altruiste) et avec le dérèglement des désirs quand la société ne les limite plus (suicide anomique).<span class="pg">p. 149-311</span></li>
+<li><strong>Un remède social.</strong> Le suicide est le symptôme d’un « malaise général » des sociétés modernes ; Durkheim attend le remède de groupes intermédiaires, surtout des corporations professionnelles.<span class="pg">p. 413-451</span></li>
+</ol>
+<p class="src">Les pages indiquées renvoient à l’édition originale de 1897 (Félix Alcan).</p></div></section>
+<section class="txt fs" id="methode" aria-labelledby="h-methode" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-methode">La question et la méthode</h2>
+<h3>Définir avant d’expliquer<span class="pg">p. 3-7</span></h3>
+<blockquote><p>« On appelle suicide tout cas de mort qui résulte directement ou indirectement d’un acte positif ou négatif, accompli par la victime elle-même et qu’elle savait devoir produire ce résultat. »</p><cite>Introduction, p. 5</cite></blockquote>
+<ul class="pts">
+<li>L’intention est écartée comme critère : « chose trop intime pour pouvoir être atteinte du dehors autrement que par de grossières approximations » (p. 4). Le critère est la connaissance de cause, qui s’observe.</li>
+<li>La définition regroupe des actes que l’on sépare d’ordinaire (le désespéré, le martyr, le soldat qui court à une mort certaine) et exclut les prétendus suicides d’animaux (p. 3-6).</li>
+<li>Elle montre que le suicide n’est pas un phénomène monstrueux : « Ils ne sont que la forme exagérée de pratiques usuelles » (p. 7).</li>
+</ul>
+<h3>Du suicide individuel au taux social<span class="pg">p. 8-12</span></h3>
+<ul class="pts">
+<li>Chaque suicide a ses causes individuelles, qui relèvent du psychologue. Mais l’ensemble des suicides d’une société, pendant une période donnée, forme un fait nouveau, avec son unité et son individualité (p. 8).</li>
+<li>« Chaque société a donc, à chaque moment de son histoire, une aptitude définie pour le suicide » (p. 10). On la mesure par le <strong>taux de la mortalité-suicide</strong> : le nombre de morts volontaires rapporté à la population.</li>
+<li>Ce taux est constant sur de longues périodes et propre à chaque société : c’est lui, et non le cas particulier, que le sociologue étudie.</li>
+</ul>
+<h3>Chercher les causes par les variations<span class="pg">p. 139-148</span></h3>
+<ul class="pts">
+<li>Durkheim renonce à classer d’abord les suicides par leurs formes : il les classe par leurs causes.</li>
+<li>Les raisons présumées que donnent les statistiques officielles sont suspectes et ne font pas connaître les vraies causes.</li>
+<li>La méthode : chercher comment le taux de suicide varie en fonction de différents faits sociaux (religion, état civil, famille, crises, professions, etc.).</li>
+</ul></div></section>
+<section class="txt fs" id="plan" aria-labelledby="h-plan" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-plan">Le plan de l’ouvrage</h2>
+<div class="cards">
+<article class="card" style="--c:var(--neutre)"><h3>Livre I : les facteurs extra-sociaux</h3>
+<p class="k">Question</p>
+Le taux de suicide s’explique-t-il par des facteurs individuels, biologiques ou physiques ?
+<p class="k">Chapitres</p>
+<ul><li>I. Les états psychopathiques<span class="pg">p. 19-53</span></li><li>II. La race, l’hérédité<span class="pg">p. 54-81</span></li><li>III. Les facteurs cosmiques<span class="pg">p. 82-106</span></li><li>IV. L’imitation<span class="pg">p. 107-138</span></li></ul>
+</article>
+<article class="card" style="--c:var(--contre)"><h3>Livre II : causes sociales et types</h3>
+<p class="k">Question</p>
+Comment le taux varie-t-il avec les faits sociaux ?
+<p class="k">Chapitres</p>
+<ul><li>I. La méthode<span class="pg">p. 139-148</span></li><li>II-III. Le suicide égoïste<span class="pg">p. 149-232</span></li><li>IV. Le suicide altruiste<span class="pg">p. 233-263</span></li><li>V. Le suicide anomique<span class="pg">p. 264-311</span></li><li>VI. Les formes individuelles<span class="pg">p. 312-332</span></li></ul>
+</article>
+<article class="card" style="--c:var(--pour)"><h3>Livre III : le suicide comme phénomène social</h3>
+<p class="k">Question</p>
+Que dit le suicide de la société, et que faire ?
+<p class="k">Chapitres</p>
+<ul><li>I. L’élément social du suicide<span class="pg">p. 333-368</span></li><li>II. Rapports avec les autres phénomènes sociaux<span class="pg">p. 369-411</span></li><li>III. Conséquences pratiques<span class="pg">p. 413-451</span></li></ul>
+</article>
+</div></div></section>
+<section class="txt fs" id="livre1" aria-labelledby="h-livre1" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-livre1">Livre I : ce que Durkheim écarte</h2>
+<div class="tblw"><table class="tbl"><caption>Les quatre explications examinées puis rejetées</caption>
+<thead><tr><th scope="col">Facteur</th><th scope="col">Thèse examinée</th><th scope="col">Verdict de Durkheim</th><th scope="col">Pages</th></tr></thead><tbody>
+<tr><th scope="row">États psychopathiques</th><td>Le suicide serait une forme de folie (monomanie), ou dépendrait de la neurasthénie ou de l’alcoolisme.</td><td>Il existe des suicides « raisonnables ». Le taux de suicide ne varie pas comme celui de la folie (selon le sexe, les cultes, l’âge, les pays) ni comme l’alcoolisme.</td><td>19-53</td></tr>
+<tr><th scope="row">Race et hérédité</th><td>Certaines races, ou la transmission héréditaire, expliqueraient les écarts entre peuples.</td><td>La « race » est un concept trop indéterminé ; l’aptitude au suicide varie beaucoup au sein d’un même ensemble ; l’hérédité n’est pas prouvée.</td><td>54-81</td></tr>
+<tr><th scope="row">Facteurs cosmiques</th><td>Le climat et la température agiraient sur les suicides (variations saisonnières).</td><td>Le climat est sans influence. Les variations mensuelles suivent la longueur des jours, donc l’intensité de la vie sociale : elles ont une cause sociale.</td><td>82-106</td></tr>
+<tr><th scope="row">Imitation</th><td>Le suicide se propagerait par contagion.</td><td>La contagion existe entre individus, mais l’imitation n’a pas d’effet appréciable sur le taux : elle renforce d’autres facteurs sans en être un par elle-même.</td><td>107-138</td></tr>
+</tbody></table></div>
+<p>Conclusion du livre : le taux de suicide n’a pas de rapport avec les phénomènes cosmiques ou biologiques, mais des rapports définis avec les faits sociaux (p. 333).</p></div></section>
+<section class="txt fs" id="types" aria-labelledby="h-types" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-types">Les types de suicide</h2>
+<p>Durkheim ne veut pas étudier « le » suicide, mais des suicides : « il n’y a pas un suicide, mais des suicides » (p. 312). Chacun correspond à un état du lien social. Il en établit <strong>trois</strong> par son étude (égoïste, altruiste, anomique) et n’évoque un quatrième, le suicide fataliste, que dans une note de bas de page.</p>
+<div class="cards">
+<article class="card" style="--c:var(--nuance)"><h3>Le suicide égoïste</h3>
+<p class="k">Cause</p>
+Une intégration trop faible : l’individu, détaché des groupes, ne voit plus de raison d’être à la vie.
+<p class="k">Formule</p>
+<p class="f">« Le suicide varie en raison inverse du degré d’intégration des groupes sociaux dont fait partie l’individu. »<span class="pg">p. 223</span></p>
+<p class="k">Faits</p>
+<ul><li>Les protestants se tuent plus que les catholiques et les juifs : en Prusse (1849-1855), 159,9 contre 49,6 et 46,4 pour un million d’habitants (tableau XVIII).<span class="pg">p. 152-153</span></li><li>L’explication n’est pas la doctrine, mais l’intégration : la religion protège « parce qu’elle est une société ».<span class="pg">p. 173</span></li><li>Les célibataires et les veufs sont plus exposés que les gens mariés ; la protection tient surtout à la famille.<span class="pg">p. 174-222</span></li><li>Les crises politiques et les guerres font baisser le taux, car elles intègrent plus fortement le groupe.<span class="pg">p. 222</span></li></ul>
+<p class="k">Forme individuelle</p>
+Langueur mélancolique, repli de la conscience sur elle-même.<span class="pg">p. 314</span>
+</article>
+<article class="card" style="--c:var(--garde)"><h3>Le suicide altruiste</h3>
+<p class="k">Cause</p>
+Une intégration trop forte : l’individu, trop peu individualisé, trouve la raison de sa vie hors de la vie elle-même.
+<p class="k">Formule</p>
+<p class="f">« Quand l’homme est détaché de la société, il se tue facilement, il se tue aussi quand il y est trop fortement intégré. »<span class="pg">p. 233</span></p>
+<p class="k">Faits</p>
+<ul><li>Il est répandu dans les sociétés inférieures, sous trois variétés : obligatoire, facultatif, aigu.<span class="pg">p. 233-246</span></li><li>Il survit dans l’armée : le taux y est plus élevé qu’en milieu civil et augmente avec l’esprit militaire (troupes d’élite, engagés, officiers).<span class="pg">p. 250-263</span></li><li>Il recule avec le déclin du vieil esprit militaire : en France, 630 suicides par million en 1862, 280 en 1890.<span class="pg">p. 259</span></li></ul>
+</article>
+<article class="card" style="--c:var(--contre)"><h3>Le suicide anomique</h3>
+<p class="k">Cause</p>
+Un dérèglement : la société ne limite plus les désirs de l’individu, qui ne trouve plus de borne à ses aspirations.
+<p class="k">Formule</p>
+<p class="f">« La troisième sorte de suicide […] de ce que leur activité est déréglée et de ce qu’ils en souffrent. »<span class="pg">p. 288</span></p>
+<p class="k">Faits</p>
+<ul><li>Le suicide augmente avec les crises économiques, et aussi avec les crises de prospérité.<span class="pg">p. 264-281</span></li><li>Les pays pauvres sont plus protégés : la pauvreté est un frein. La richesse donne « l’illusion que nous ne relevons que de nous-mêmes ».<span class="pg">p. 282</span></li><li>Dans le commerce et l’industrie, l’anomie est devenue chronique.<span class="pg">p. 283-287</span></li><li>L’anomie conjugale : le divorce aggrave la tendance au suicide des hommes et diminue celle des femmes.<span class="pg">p. 289-311</span></li></ul>
+<p class="k">Idée clé</p>
+« Notre sensibilité est un abîme sans fond que rien ne peut combler » si aucun pouvoir extérieur ne la règle.<span class="pg">p. 273</span>
+</article>
+<article class="card" style="--c:var(--neutre)"><h3>Un quatrième type, seulement évoqué : le suicide fataliste</h3>
+<p class="k">Cause</p>
+Un excès de réglementation : un avenir muré, des passions comprimées par une discipline oppressive.
+<p class="k">Statut</p>
+Durkheim ne l’évoque que dans une note, comme l’opposé du suicide anomique. Il le juge de peu d’importance aujourd’hui (jeunes époux, femme mariée sans enfant, esclaves).<span class="pg">p. 311</span>
+</article>
+</div>
+<h3>Lecture d’ensemble : deux axes, quatre cas</h3>
+<div class="axes" role="group" aria-label="Quatre types de suicide selon l’intégration et la régulation">
+<div class="h"></div><div class="h">Trop peu</div><div class="h">Trop</div>
+<div class="h">Intégration</div><div class="a">Suicide égoïste<small>individuation excessive</small></div><div class="b">Suicide altruiste<small>individuation insuffisante</small></div>
+<div class="h">Régulation</div><div class="c2">Suicide anomique<small>désirs sans limite</small></div><div class="d">Suicide fataliste<small>discipline oppressive</small></div>
+</div>
+<p class="src">Le tableau est une présentation d’ensemble : Durkheim oppose le suicide égoïste au suicide altruiste (p. 233) et le suicide anomique au suicide fataliste (p. 311) ; ce dernier reste hors de sa classification principale.</p>
+<p>Le suicide égoïste et le suicide anomique ont un point commun : « la société n’est pas suffisamment présente aux individus ». Mais elle fait défaut à des endroits différents : à l’activité collective dans le premier cas, aux passions individuelles dans le second (p. 288).</p></div></section>
+<section class="txt fs" id="livre3" aria-labelledby="h-livre3" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-livre3">Livre III : portée et remèdes</h2>
+<h3>Le taux de suicide est un fait social<span class="pg">p. 333-368</span></h3>
+<ul class="pts">
+<li>Les facteurs individuels n’expliquent pas la constance ni l’individualité du taux. Durkheim écarte l’explication par l’« homme moyen » de Quételet.</li>
+<li>Il faut admettre l’existence de forces collectives, des « courants suicidogènes », extérieures et supérieures aux individus (p. 365).</li>
+<li>Le rôle des facteurs individuels est limité : ils expliquent qui succombe, non l’intensité du courant. « Comme la société fait en grande partie l’individu, elle le fait, dans la même mesure, à son image » (p. 366).</li>
+</ul>
+<h3>Le suicide et la morale<span class="pg">p. 369-411</span></h3>
+<ul class="pts">
+<li>Dans l’histoire, la réprobation du suicide s’accroît ; elle est plus que jamais fondée dans la constitution normale des sociétés modernes.</li>
+<li>Le suicide n’a pas de rapport avec les atteintes à la propriété. Son rapport avec l’homicide dépend du type de suicide.</li>
+</ul>
+<h3>Que faire ? Les conséquences pratiques<span class="pg">p. 413-451</span></h3>
+<ul class="pts">
+<li>Le taux actuel des peuples européens est, selon Durkheim, l’indice d’un état pathologique, même si un taux modéré n’a rien de morbide.</li>
+<li>Les mesures répressives n’ont qu’une efficacité limitée, et l’éducation ne peut réformer l’état moral de la société, dont elle n’est que le reflet.</li>
+<li>Pour le suicide égoïste, il faut renforcer les groupes qui encadrent l’individu. Ni l’État (trop loin de lui), ni la religion (elle ne socialise qu’en retirant la liberté de penser), ni la famille ne suffisent.</li>
+<li>Le groupe professionnel, la <strong>corporation</strong>, est seul en état de jouer ce rôle, à condition d’être reconstitué comme « une institution définie, une personnalité collective, ayant ses mœurs et ses traditions, ses droits et ses devoirs » (p. 450). Il peut aussi contenir l’anomie économique.<span class="pg">p. 434-441</span></li>
+<li>Il faut une « décentralisation professionnelle » plutôt que territoriale (p. 449).</li>
+<li>Pour l’anomie conjugale, le problème est celui de l’antagonisme des sexes dans le mariage.<span class="pg">p. 441-444</span></li>
+</ul>
+<blockquote><p>« Le malaise dont nous souffrons ne vient donc pas de ce que les causes objectives de souffrances ont augmenté en nombre ou en intensité ; il atteste, non pas une plus grande misère économique, mais une alarmante misère morale. »</p><cite>Livre III, chap. III, p. 445</cite></blockquote></div></section>
+<section class="txt fs" id="citations" aria-labelledby="h-citations" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-citations">Citations à retenir</h2>
+<blockquote><p>« Quand l’homme est détaché de la société, il se tue facilement, il se tue aussi quand il y est trop fortement intégré. »</p><cite>Livre II, chap. IV, p. 233</cite></blockquote>
+<blockquote><p>« Le suicide égoïste vient de ce que les hommes n’aperçoivent plus de raison d’être à la vie ; le suicide altruiste de ce que cette raison leur paraît être en dehors de la vie elle-même ; la troisième sorte de suicide […] de ce que leur activité est déréglée et de ce qu’ils en souffrent. »</p><cite>Livre II, chap. V, p. 288</cite></blockquote>
+<blockquote><p>« Si elle protège l’homme contre le désir de se détruire, ce n’est pas parce qu’elle lui prêche, avec des arguments <em>sui generis</em>, le respect de sa personne ; c’est parce qu’elle est une société. »</p><cite>Livre II, chap. II, p. 173 (sur la religion)</cite></blockquote>
+<blockquote><p>« Bien loin que la science soit la source du mal, elle est le remède et le seul dont nous disposions. »</p><cite>Livre II, chap. II, p. 171</cite></blockquote>
+<blockquote><p>« On communie dans la tristesse, quand on n’a plus rien d’autre à mettre en commun. »</p><cite>Livre II, chap. III, p. 230</cite></blockquote>
+<blockquote><p>« Des désirs illimités sont insatiables par définition. »</p><cite>Livre II, chap. V, p. 273</cite></blockquote>
+<blockquote><p>« Les progrès anormaux du suicide et le malaise général dont sont atteintes les sociétés contemporaines dérivent des mêmes causes. »</p><cite>Livre III, chap. III, p. 450</cite></blockquote>
+</div></section>
+<section class="txt fs" id="notions" aria-labelledby="h-notions" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-notions">Notions à retenir</h2>
+<dl>
+<dt>Taux social des suicides</dt><dd>Rapport entre le nombre de morts volontaires et la population d’une société à un moment donné ; Durkheim le tient pour un fait <em>sui generis</em> (p. 10).</dd>
+<dt>Intégration</dt><dd>Force des liens qui rattachent l’individu aux groupes (religion, famille, nation, profession). Trop faible, elle produit le suicide égoïste ; trop forte, le suicide altruiste.</dd>
+<dt>Régulation (réglementation)</dt><dd>Capacité de la société à limiter les désirs et les aspirations des individus (p. 288). Quand elle manque, c’est l’anomie.</dd>
+<dt>Anomie</dt><dd>État de dérèglement où les désirs ne trouvent plus de limite fixée par la société ; Durkheim la décrit dans les crises économiques et dans le monde industriel et commercial (p. 281-288).</dd>
+<dt>Courant suicidogène</dt><dd>Force collective (égoïste, altruiste ou anomique) qui pousse un certain nombre d’individus au suicide, indépendamment de leur histoire propre (p. 312, 365).</dd>
+<dt>Individuation</dt><dd>Degré auquel l’individu s’affirme comme personnalité distincte du groupe. Excessive, elle conduit au suicide égoïste (p. 223) ; insuffisante, au suicide altruiste (p. 233).</dd>
+<dt>Corporation</dt><dd>Groupe professionnel reconstitué, proposé comme remède : à la fois milieu moral, organe de régulation et base de l’organisation sociale (p. 434-450).</dd>
+</dl></div></section>
+<section class="txt fs" id="limites" aria-labelledby="h-limites" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-limites">Limites et débats</h2>
+<ul class="pts">
+<li><strong>Les statistiques.</strong> Durkheim s’appuie sur les statistiques officielles du XIXᵉ siècle, dont il juge lui-même les « raisons présumées » des suicides suspectes (p. 139-148) : sa démonstration repose sur des comparaisons de taux, non sur les motifs invoqués.</li>
+<li><strong>Du groupe à l’individu.</strong> L’ouvrage explique des taux, non des cas : il admet que les dispositions individuelles décident <em>qui</em> succombe à un courant, sans en déterminer l’intensité (p. 366). Il ne prétend donc pas expliquer chaque suicide.</li>
+<li><strong>Des passages datés.</strong> Les développements sur les femmes, le mariage et le divorce (par exemple p. 231 et 443-444) reflètent les représentations de l’époque et se lisent avec distance critique.</li>
+<li><strong>Prolongements (hors de l’ouvrage).</strong> Maurice Halbwachs reprend et discute l’analyse dans <em>Les Causes du suicide</em> (1930) ; la question du passage des taux de groupe aux comportements individuels reste un débat de la sociologie.</li>
+</ul></div></section>
+</main>
+<footer><div class="wrap"><p>Fiche de lecture : Durkheim, <em>Le Suicide</em> (1897).</p></div></footer>
+<script>
+(function(){
+  var links=[].slice.call(document.querySelectorAll('#nav a'));
+  var secs=[].slice.call(document.querySelectorAll('.txt')),lock=null,ticking=false;
+  function setCur(i){
+    links.forEach(function(a,k){if(k===i)a.setAttribute('aria-current','true');else a.removeAttribute('aria-current')});
+    var a=links[i],box=a.parentNode.parentNode;
+    if(box.scrollWidth>box.clientWidth&&box.scrollTo)box.scrollTo({left:i?a.offsetLeft-20:0});
+  }
+  function upd(){
+    ticking=false;
+    if(lock!==null){setCur(lock);return}
+    var nb=document.querySelector('.nav'),y=(nb?nb.getBoundingClientRect().bottom:0)+24,cur=0;
+    secs.forEach(function(s,k){if(s.getBoundingClientRect().top<=y)cur=k});
+    setCur(cur);
+  }
+  function req(){if(!ticking){ticking=true;requestAnimationFrame(upd)}}
+  links.forEach(function(a,k){a.addEventListener('click',function(){lock=k;setCur(k)})});
+  ['wheel','touchstart','mousedown','keydown'].forEach(function(ev){window.addEventListener(ev,function(){lock=null},{passive:true})});
+  window.addEventListener('scroll',req,{passive:true});window.addEventListener('resize',req);
+  upd();
+})();
+</script>
+<script>
+(function(){var r=document.documentElement,K='texte-seul',KL='mode-lecture';
+var btn=document.getElementById('a11y-btn'),menu=document.getElementById('a11y-menu'),opts=menu.querySelectorAll('.a11y-opt'),closed=[],shown=[],skipped=[];
+function apply(m){
+  var ts=m==='ts',lc=m==='lect',was=r.classList.contains('lect');
+  r.classList.toggle('ts',ts);r.classList.toggle('lect',lc);
+  if(lc&&!was){closed=[];shown=[];skipped=[];
+    document.querySelectorAll('main details').forEach(function(d){if(!d.open){closed.push(d);d.open=true}});
+    document.querySelectorAll('main [hidden]').forEach(function(x){if(!x.closest('[aria-labelledby="h-video"]')&&!x.matches('video,[role="tablist"]')){shown.push(x);x.hidden=false}});
+    document.querySelectorAll('main section').forEach(function(sc){var h=sc.querySelector('h2');
+      if(sc.querySelector('input,select,textarea')||(h&&/^(Exercice|Faites le tri|En vid)/i.test(h.textContent.trim()))){sc.classList.add('lc-skip');skipped.push(sc)}});}
+  if(!lc&&was){closed.forEach(function(d){d.open=false});shown.forEach(function(x){x.hidden=true});skipped.forEach(function(s){s.classList.remove('lc-skip')});closed=[];shown=[];skipped=[]}
+  opts.forEach(function(o){o.setAttribute('aria-checked',o.getAttribute('data-mode')===m?'true':'false')});
+  try{localStorage.setItem(K,ts?'1':'0');localStorage.setItem(KL,lc?'1':'0')}catch(e){}
+}
+function open(on){menu.hidden=!on;btn.setAttribute('aria-expanded',on?'true':'false')}
+btn.addEventListener('click',function(e){e.stopPropagation();open(menu.hidden)});
+opts.forEach(function(o){o.addEventListener('click',function(){apply(o.getAttribute('data-mode'));open(false);btn.focus()})});
+document.addEventListener('click',function(e){if(!menu.hidden&&!menu.contains(e.target)&&e.target!==btn)open(false)});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!menu.hidden){open(false);btn.focus()}});
+var v='orig';try{if(localStorage.getItem(KL)==='1')v='lect';else if(localStorage.getItem(K)==='1'&&menu.querySelector('[data-mode="ts"]'))v='ts'}catch(e){}
+if(v==='ts')apply('ts');
+if(v==='lect')window.addEventListener('load',function(){apply('lect')});
+})();
+</script>
+</body>
+</html>

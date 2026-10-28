@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Michaud, La Violence : fiche de lecture</title>
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+  --bg:#F1F4F6; --surface:#FFFFFF; --ink:#1B2733; --muted:#53626F; --line:#D5DDE3; --focus:#0E6E73;
+  --pour:#0E6E73; --contre:#A8321F; --nuance:#2F4FA8; --garde:#8A5A00; --neutre:#4F5D69;
+  --serif:Georgia,"Times New Roman",serif;
+  --sans:system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#10171D; --surface:#18222A; --ink:#E7EDF2; --muted:#A1B0BC; --line:#2A3641; --focus:#5FD0D6;
+    --pour:#5FD0D6; --contre:#FF8A75; --nuance:#97ADFF; --garde:#F0BC52; --neutre:#A9B7C2;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#10171D; --surface:#18222A; --ink:#E7EDF2; --muted:#A1B0BC; --line:#2A3641; --focus:#5FD0D6;
+  --pour:#5FD0D6; --contre:#FF8A75; --nuance:#97ADFF; --garde:#F0BC52; --neutre:#A9B7C2;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:calc(4.2rem + env(safe-area-inset-top,0px));-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.1rem/1.65 var(--serif)}
+.wrap{width:min(980px,100% - 2.5rem);margin-inline:auto}
+h1,h2,h3{margin:0;font-family:var(--serif)}
+h1{font-weight:800;font-size:clamp(2.5rem,8vw,5rem);line-height:1.02;letter-spacing:-.02em}
+h2{font-weight:800;font-size:clamp(1.6rem,3.4vw,2.2rem);line-height:1.12}
+p{margin:0 0 1em}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
+.hero{padding:clamp(2.2rem,6vw,4.5rem) 0 2rem}
+.lead{font-size:clamp(1.15rem,2.4vw,1.45rem);line-height:1.5;max-width:40ch;margin:1.4rem 0 1rem}
+.note{font:500 .92rem/1.5 var(--sans);color:var(--muted);max-width:62ch;margin:0}
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--bg);border-bottom:1px solid var(--line)}
+.nav ol{display:flex;gap:.3rem;list-style:none;margin:0;padding:.5rem 0;overflow-x:auto}
+.nav a{display:block;white-space:nowrap;text-decoration:none;color:var(--muted);font:700 .88rem/1.2 var(--sans);padding:.45rem .7rem .35rem;border-radius:6px;border-bottom:4px solid var(--c)}
+.nav a:hover{color:var(--ink)}
+.nav a[aria-current="true"]{background:var(--ink);color:var(--bg)}
+.nav small{display:block;font-weight:500;font-size:.75rem;opacity:1}
+.txt{border-bottom:1px solid var(--line);padding:clamp(2.4rem,6vw,3.6rem) 0}
+.meta{display:flex;flex-wrap:wrap;gap:.5rem .9rem;align-items:center;margin-bottom:.8rem;font:500 .92rem/1.3 var(--sans);color:var(--muted)}
+.tag{font:700 .8rem/1 var(--sans);color:var(--c);border:1.5px solid var(--c);border-radius:5px;padding:.3rem .5rem}
+.thesis{font-size:clamp(1.2rem,2.4vw,1.5rem);line-height:1.4;font-weight:600;margin:1rem 0 1.4rem;max-width:44ch;padding-left:1rem;border-left:5px solid var(--c)}
+.cols{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:1.6rem clamp(1.6rem,4vw,3rem)}
+h3{font:700 .9rem/1.2 var(--sans);color:var(--c);margin-bottom:.7rem}
+.args{margin:0;padding:0;list-style:none;counter-reset:a}
+.args li{counter-increment:a;padding:.6rem 0 .6rem 2.4rem;border-top:1px solid var(--line);position:relative}
+.args li:last-child{border-bottom:1px solid var(--line)}
+.args li::before{content:counter(a);position:absolute;left:0;top:.5rem;font:800 1.5rem/1 var(--serif);color:var(--c)}
+.quotes{margin:0;padding:0}
+.quotes blockquote{margin:0 0 1rem;padding:.2rem 0 .2rem .9rem;border-left:3px solid var(--line)}
+.quotes p{margin:0 0 .2rem;font-style:italic}
+.quotes cite{font:500 .82rem/1.3 var(--sans);font-style:normal;color:var(--muted)}
+footer{padding:1.6rem 0 2.5rem;font:500 .92rem/1.5 var(--sans);color:var(--muted)}
+footer p{margin:0}
+@media (max-width:760px){.cols{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+.pdfbtn{display:inline-flex;align-items:center;gap:.5rem;font:600 .88rem/1 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--surface);border:1.5px solid var(--ink);border-radius:999px;padding:.55rem .95rem;cursor:pointer}
+.pdfbtn:hover{background:var(--ink);color:var(--bg)}.pdfbtn:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:2px}
+
+/* Mode lecture (pages à structure libre) */
+html.lect body::before,html.lect body::after{display:none!important}
+html.lect body{background:var(--bg)!important}
+html.lect .pn,html.lect #quiz,html.lect section[aria-labelledby="h-video"],html.lect video,html.lect .score,html.lect .lc-skip,html.lect [role="tablist"],html.lect main button,html.lect main input,html.lect main select,html.lect main textarea,html.lect .sec-head p.lc-x{display:none!important}
+html.lect .hero h1,html.lect .hero p,html.lect section.block h2,html.lect footer p{text-shadow:none!important}
+html.lect .hero,html.lect section.block{padding-block:1.2rem!important;border:0!important}
+html.lect .wrap,html.lect .sec-head{max-width:40rem!important;margin-inline:auto}
+html.lect .hgrid,html.lect .two,html.lect .cols{display:block!important}
+html.lect main,html.lect .hero{font-family:var(--serif)}
+html.lect .hero h1{font-size:clamp(1.9rem,5vw,2.6rem)!important}
+html.lect main p,html.lect main li,html.lect .lead{font-size:1.12rem!important;line-height:1.75!important}
+html.lect :is(main,.hero) :is(div,li,blockquote,article,aside,p,ul,ol,section,details,summary,figure,span):not(table *){background:none!important;border:0!important;box-shadow:none!important;border-radius:0!important}
+html.lect main [hidden]{display:revert!important}
+html.lect :is(main,.hero) div:not(.wrap):not(.sec-head):not(table *){display:block!important;grid-template-columns:none!important;float:none!important;max-width:none!important;width:auto!important;margin-inline:0}
+html.lect main li{display:list-item!important}
+html.lect .must{margin:1rem 0}
+html.lect .lead{max-width:none!important}
+html.lect .wrap{padding-inline:0}
+html.lect main details>summary{cursor:default;pointer-events:none;list-style:none}
+html.lect main details>summary::-webkit-details-marker,html.lect main details>summary::before{display:none!important}
+html.lect main blockquote{margin:.8rem 0;padding:0 0 0 1rem!important;border-left:3px solid var(--line)!important}
+html.lect main .panel{display:block!important;margin-bottom:1rem}
+html.lect main h3,html.lect main h4{margin-top:1.4rem}
+html.lect .nav,html.lect .hero .note{display:none!important}
+html.lect .thesis{border:0!important;padding-left:0!important;max-width:none!important}
+html.lect .args li{padding-left:0!important}
+html.lect .args li::before{display:none!important}
+html.lect .args{list-style:decimal;padding-left:1.4rem!important}
+html.lect .txt{padding-block:1.2rem!important}
+
+/* Accessibilité */
+.a11y{position:relative;display:inline-block}
+.a11y-menu{position:absolute;right:0;top:calc(100% + .4rem);z-index:60;min-width:14rem;background:var(--bg);color:var(--ink);border:1.5px solid var(--ink);border-radius:14px;padding:.35rem;box-shadow:0 8px 24px rgba(0,0,0,.18);text-shadow:none}
+.a11y-menu[hidden]{display:none}
+.a11y-menu p{margin:0;padding:.45rem .7rem .3rem;font:700 .72rem/1 system-ui,-apple-system,sans-serif;letter-spacing:.06em;text-transform:uppercase;opacity:.65}
+.a11y-opt{display:flex;align-items:center;gap:.6rem;width:100%;text-align:left;font:600 .92rem/1.2 system-ui,-apple-system,sans-serif;color:inherit;background:none;border:0;border-radius:9px;padding:.6rem .7rem;cursor:pointer}
+.a11y-opt:hover{background:var(--surface)}
+.a11y-opt:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:-2px}
+.a11y-opt .dot{flex:none;width:1rem;height:1rem;border:2px solid currentColor;border-radius:50%;position:relative}
+.a11y-opt[aria-checked="true"] .dot::after{content:"";position:absolute;inset:2px;background:currentColor;border-radius:50%}
+.a11y-opt small{display:block;font-weight:500;opacity:.7;font-size:.78rem;margin-top:.15rem}
+@media print{
+  :root{--bg:#fff!important;--surface:#fff!important;--ink:#111!important;--muted:#444!important;--line:#bbb!important;color-scheme:light!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:#fff!important;color:#111!important}
+  body::before,body::after{display:none!important}
+  nav,.pdfbtn,.pn,video,section[aria-labelledby="h-video"]{display:none!important}
+  .rev,.js .rev{opacity:1!important;transform:none!important}
+  .stp li[hidden]{display:list-item!important}
+  details>*{display:block!important}
+  article,li,.card,figure,.stage{break-inside:avoid}
+  h1,h2,h3{break-after:avoid;text-shadow:none!important}
+  *{text-shadow:none!important}
+  a{color:inherit;text-decoration:none}
+  section.block,.part{padding-top:1.2rem!important;padding-bottom:1.2rem!important}
+  footer{break-before:avoid;border-top:1px solid #999;margin-top:1rem}
+}
+@page{size:A4;margin:16mm 14mm}
+/* Texte */
+.tx summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:.7rem;font:800 clamp(1.4rem,3vw,1.9rem)/1.2 var(--sans);padding:.3rem 0}
+.tx summary::-webkit-details-marker{display:none}
+.tx summary::before{content:"";width:.6em;height:.6em;border-right:.2em solid currentColor;border-bottom:.2em solid currentColor;transform:rotate(-45deg);transition:transform .15s;flex:none;margin-right:.2rem}
+.tx[open] summary::before{transform:rotate(45deg)}
+@media (prefers-reduced-motion:reduce){.tx summary::before{transition:none}}
+.txb{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--c,var(--ink));padding:1.2rem clamp(1rem,3vw,1.8rem);margin-top:.9rem;max-width:46rem;font:400 1.1rem/1.75 var(--serif)}
+.txb p{margin:0 0 1em}
+.txb h3{font:700 1rem/1.3 var(--sans);margin:1.2em 0 .5em}
+.txb .vs{font:700 .72rem/1 var(--sans);color:var(--muted);margin-right:.15em}
+.txb .tsrc{font:600 .88rem/1.4 var(--sans);color:var(--muted);text-align:right;margin:1.1em 0 0}
+.txb .tsrc:not(:last-child){margin-bottom:1.4em;padding-bottom:1.2em;border-bottom:1px solid var(--line)}
+
+/* Sujets de dissertation */
+.sjd ul{list-style:none;margin:.6rem 0 0;padding:0;max-width:46rem}
+.sjd li{margin:0;padding:.55rem 0;border-top:1px solid var(--line)}
+.sjd li:last-child{border-bottom:1px solid var(--line)}
+.sjd a{color:inherit;font:600 1.05rem/1.4 var(--sans,system-ui);text-underline-offset:3px}
+.sjd p{margin:.4rem 0 0}
+html.lect .sjd li{border:0!important;padding:.25rem 0!important}
+html.lect .sjd a{font:600 1.12rem/1.6 var(--serif,Georgia,serif)}
+@media print{.sjd a{font-weight:600}.sjd li{border-color:#999}}
+.ln{font:700 .66rem/1 var(--sans);color:var(--muted);margin:0 .2em 0 .1em;vertical-align:super}
+.txb .tsrcline{font:600 .9rem/1.4 var(--sans);color:var(--muted)}
+.txn{font:500 .85rem/1.4 var(--sans);color:var(--muted);margin:.2rem 0 1rem}
+html.lect .txb{padding:0!important}
+</style>
+<script>try{history.scrollRestoration="manual"}catch(e){}(function(){function t(){if(!location.hash)window.scrollTo(0,0)}t();document.addEventListener("DOMContentLoaded",t);window.addEventListener("load",function(){t();setTimeout(t,60)});window.addEventListener("pageshow",t)})();</script>
+<script src="confort.js"></script><script src="voix.js" defer></script>
+
+<style>
+.fs h2{margin-bottom:1rem}
+.fs h3{font:700 1rem/1.3 var(--sans);color:var(--c);margin:1.4rem 0 .5rem}
+.fs .wrap>p,.fs li{max-width:46rem}
+.pg{font:600 .78rem/1 var(--sans);color:var(--muted);white-space:nowrap;margin-left:.3em}
+.fs ul.pts{margin:.4rem 0 1rem;padding-left:1.2rem}
+.fs ul.pts li{margin:.35rem 0}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr));gap:1rem;margin:1rem 0}
+.card{background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--c);padding:1rem 1.1rem 1.1rem;border-radius:0 0 8px 8px}
+.card h3{margin:0 0 .5rem;font:800 1.05rem/1.25 var(--sans);color:var(--ink)}
+.card p{font-size:1rem;line-height:1.55;margin:0 0 .6em}
+.card ul{margin:.3rem 0 .4rem;padding-left:1.1rem;font-size:1rem;line-height:1.5}
+.card .k{font:700 .74rem/1 var(--sans);letter-spacing:.05em;text-transform:uppercase;color:var(--c);margin:.9rem 0 .25rem}
+.card .f{font-weight:600}
+.tbl{width:100%;border-collapse:collapse;margin:.8rem 0 1rem;font:400 1rem/1.5 var(--serif);background:var(--surface)}
+.tbl caption{text-align:left;font:600 .88rem/1.4 var(--sans);color:var(--muted);padding:.3rem 0}
+.tbl th,.tbl td{border:1px solid var(--line);padding:.55rem .7rem;vertical-align:top;text-align:left}
+.tbl th{font:700 .86rem/1.3 var(--sans);background:var(--bg);color:var(--ink)}
+.tblw{overflow-x:auto}
+.axes{display:grid;grid-template-columns:auto 1fr 1fr;gap:.4rem;margin:1rem 0;font:600 .92rem/1.35 var(--sans);max-width:46rem}
+.axes div{padding:.7rem .8rem;border:1px solid var(--line);background:var(--surface)}
+.axes .h{background:none;border:0;color:var(--muted);font-size:.82rem;align-self:center}
+.axes .a{border-left:6px solid var(--nuance)}.axes .b{border-left:6px solid var(--garde)}.axes .c2{border-left:6px solid var(--contre)}.axes .d{border-left:6px solid var(--neutre)}
+.axes small{display:block;font-weight:500;color:var(--muted);margin-top:.2rem}
+.fs blockquote{margin:0 0 1.1rem;padding:.2rem 0 .2rem .9rem;border-left:3px solid var(--c);max-width:46rem}
+.fs blockquote p{margin:0 0 .25rem;font-style:italic}
+.fs blockquote cite{font:500 .84rem/1.3 var(--sans);font-style:normal;color:var(--muted)}
+.fs dl{margin:.6rem 0 0;max-width:46rem}
+.fs dt{font:700 1rem/1.3 var(--sans);margin-top:.9rem}
+.fs dd{margin:.2rem 0 0}
+.fs .src{font:500 .9rem/1.5 var(--sans);color:var(--muted);max-width:46rem}
+@media (max-width:640px){.axes{grid-template-columns:1fr}.axes .h{display:none}}
+html.lect .cards{display:block!important}html.lect .card{margin-bottom:1rem}
+html.lect .tbl{display:block}
+@media print{.card,.tbl tr{break-inside:avoid}}
+</style>
+</head>
+<body>
+<nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><span style="display:inline-flex;gap:.6rem;flex-wrap:wrap;align-items:center"><span class="a11y"><button type="button" class="pdfbtn" id="a11y-btn" aria-haspopup="true" aria-expanded="false" aria-controls="a11y-menu"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="1.6"/><path d="M5 8.5l7 1.5 7-1.5M12 10v4.5M8.5 21l3.5-6.5 3.5 6.5"/></svg><span>Accessibilité</span></button><div class="a11y-menu" id="a11y-menu" role="radiogroup" aria-label="Affichage de la page" hidden><p>Affichage</p><button type="button" role="radio" class="a11y-opt" data-mode="orig" aria-checked="true"><span class="dot"></span><span>Page d’origine<small>Image de fond et mise en page habituelle</small></span></button><button type="button" role="radio" class="a11y-opt" data-mode="lect" aria-checked="false"><span class="dot"></span><span>Mode lecture<small>Texte continu, sans cadres ni exercices</small></span></button></div></span><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></span></nav>
+
+<header class="hero">
+  <div class="wrap">
+    <h1><em>La Violence</em>, fiche de lecture</h1>
+    <p class="lead">Que peut-on dire de la violence ? Yves Michaud en fait un concept relatif aux normes, que l’histoire, les sciences humaines et la philosophie éclairent chacune à leur manière.</p>
+    <p class="note">Yves Michaud, <em>La Violence</em>. Les références renvoient aux chapitres de l’ouvrage.</p>
+  </div>
+</header>
+<nav class="nav" aria-label="Sections de la fiche"><div class="wrap"><ol id="nav">
+<li><a href="#essentiel" style="--c:var(--pour)">Essentiel</a></li>
+<li><a href="#plan" style="--c:var(--pour)">Plan</a></li>
+<li><a href="#ch1" style="--c:var(--pour)">Chap. I</a></li>
+<li><a href="#ch2" style="--c:var(--pour)">Chap. II</a></li>
+<li><a href="#ch3" style="--c:var(--pour)">Chap. III-V</a></li>
+<li><a href="#ch6" style="--c:var(--pour)">Chap. VI-VIII</a></li>
+<li><a href="#conclusion" style="--c:var(--pour)">Conclusion</a></li>
+<li><a href="#citations" style="--c:var(--pour)">Citations</a></li>
+<li><a href="#notions" style="--c:var(--pour)">Notions</a></li>
+<li><a href="#limites" style="--c:var(--pour)">Limites</a></li>
+</ol></div></nav>
+<main id="main">
+<section class="txt fs" id="essentiel" aria-labelledby="h-essentiel" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-essentiel">L’essentiel en cinq points</h2>
+<p class="thesis">Yves Michaud, philosophe, propose dans ce « Que sais-je ? » un panorama de la violence : ce que l’on en sait (histoire, techniques, guerres, criminalité), ce qu’en disent les sciences de l’homme et la philosophie. Son fil conducteur : la violence est à la fois un ensemble de faits et un concept relatif aux normes, qui sert de révélateur des tensions d’une société.</p>
+<ol class="args">
+<li><strong>La violence est difficile à définir.</strong> Elle se mesure à des normes qui varient selon les époques et les cultures ; élargir la notion (violence psychologique, structurelle) fait perdre l’objectivité, la réduire à l’atteinte physique en laisse échapper une partie.<span class="pg">chap. I</span></li>
+<li><strong>L’histoire ne montre pas une montée de la violence.</strong> Les homicides reculent depuis le XIXe siècle ; les sociétés modernes sont plus sûres, mais plus sensibles à la violence.<span class="pg">chap. II</span></li>
+<li><strong>La violence est souvent rationnelle.</strong> Elle peut être un instrument stratégique ; les États eux-mêmes pratiquent la terreur en s’affranchissant de la légalité.<span class="pg">chap. IV</span></li>
+<li><strong>La technique la facilite.</strong> Les armes modernes (informatique, précision, drones) rendent la violence plus « propre » et plus aisée à décider ; de nouveaux concepts de guerre apparaissent.<span class="pg">chap. III et V</span></li>
+<li><strong>Aucune théorie n’épuise la violence.</strong> Neurosciences, éthologie, psychologie, sociologie et philosophie en donnent des éclairages partiels ; ces théories sont elles-mêmes des représentations qui orientent l’action.<span class="pg">chap. VI à VIII ; conclusion</span></li>
+</ol>
+<p class="src">Yves Michaud, <em>La Violence</em>. Les références renvoient aux chapitres de l’ouvrage.</p></div></section>
+<section class="txt fs" id="plan" aria-labelledby="h-plan" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-plan">Le plan de l’ouvrage</h2>
+<div class="cards">
+<article class="card" style="--c:var(--contre)"><h3>Chapitres I à III : définir et situer</h3>
+<p class="k">Chapitres</p>
+<ul><li>I. Définir la violence ?</li><li>II. La violence vue historiquement</li><li>III. Violence, technologie et communication</li></ul>
+</article>
+<article class="card" style="--c:var(--nuance)"><h3>Chapitres IV et V : violence et politique</h3>
+<p class="k">Chapitres</p>
+<ul><li>IV. La violence « moderne » : stratégie, terreur, déportation</li><li>V. Nouvelle violence internationale, nouveaux concepts</li></ul>
+</article>
+<article class="card" style="--c:var(--pour)"><h3>Chapitres VI à VIII : expliquer</h3>
+<p class="k">Chapitres</p>
+<ul><li>VI. Anthropologie de la violence</li><li>VII. Approches sociologiques</li><li>VIII. Violence et philosophie</li></ul>
+</article>
+</div></div></section>
+<section class="txt fs" id="ch1" aria-labelledby="h-ch1" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-ch1">Chapitre I : définir la violence ?</h2>
+<h3>Le sens des mots</h3>
+<p>Le mot vient du latin <em>vis</em> (la force, la force vitale). Il désigne des actes qui s’opposent à la paix ou à l’ordre, mais aussi une manière d’être de la force ou d’une passion, qui s’oppose à la mesure.</p>
+<h3>Le point de vue juridique</h3>
+<p>Le droit a besoin de catégories précises (homicide, coups et blessures, viol, maltraitance) et autorise certaines violences (sport, chirurgie consentie, force publique). Il élargit progressivement l’incrimination à mesure que la sensibilité évolue.</p>
+<h3>Une définition qui se dérobe</h3>
+<ul class="pts">
+<li>Une définition « objective » limitée aux atteintes physiques laisse de côté la violence insidieuse (harcèlement, violence psychologique) et les violences organisées et indirectes.</li>
+<li>En élargissant, on aboutit à faire de la violence un synonyme de domination, et à dire que « tout est violence ».</li>
+<li>Sorel et Arendt ont écrit sur la violence sans la définir : elle évoque l’imprévisible, la suspension de l’ordre, l’état de nature de Hobbes. Le sentiment d’insécurité en est la forme actuelle.</li>
+<li>Le mot a une valeur <strong>performative</strong> : qualifier un acte de violent, c’est le condamner, dénoncer un péril ou en faire l’éloge. Son contenu a varié selon les décennies (violence révolutionnaire, insécurité, terrorisme, violences domestiques).</li>
+</ul></div></section>
+<section class="txt fs" id="ch2" aria-labelledby="h-ch2" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-ch2">Chapitre II : la violence vue historiquement</h2>
+<ul class="pts">
+<li><strong>Ce que l’on sait dépend des archives.</strong> Les statistiques de la justice ne datent en France que de 1825 ; les chiffres de guerre ne sont fiables que depuis le XIXe siècle. Les chiffres sont aussi un enjeu : on minore ou on majore les violences selon son intérêt (exemple : la révision des victimes de Dresde de 200 000 à 28 000).</li>
+<li><strong>Les guerres.</strong> Le XXe siècle change l’échelle : conscription de masse, industrialisation, logistique, chars et avions, puis électronique et informatique. Michaud distingue la guerre industrielle de la guerre postindustrielle, ciblée, à distance et plus sensible aux pertes humaines.</li>
+<li><strong>Les variétés de violence politique</strong> : diffuse (rixes, émeutes), d’« en bas » (révolutions), d’« en haut » (tyrannie, répression, Terreur), terrorisme, guerres civiles (ultraviolence liée à l’effondrement de la communauté).</li>
+<li><strong>Criminalité.</strong> Le taux d’homicide en France est environ trois fois plus faible dans les années 1970 qu’en 1825-1830. Michaud y voit le processus de civilisation des mœurs décrit par Norbert Elias, avec pour contrepartie des contrôles sociaux accrus et une plus grande sensibilité à la violence.</li>
+<li><strong>Violences privées</strong> : incivilités, violence carcérale, scolaire, conjugale, harcèlement, maltraitance, désormais perçues et incriminées.</li>
+</ul></div></section>
+<section class="txt fs" id="ch3" aria-labelledby="h-ch3" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-ch3">Chapitres III à V : technique, stratégie, nouveaux concepts</h2>
+<h3>Chap. III : violence, technologie et communication</h3>
+<p>Il existe une tension entre des capacités de destruction énormes et un idéal de gestion rationnelle et pacifiée, d’où notre hypersensibilité à la violence. Les armes sont variées, graduées et accessibles (le bas de gamme est presque en vente libre), ce qui remet en cause le monopole de l’État. La diffusion de l’information fait de la violence un spectacle et un enjeu de communication.</p>
+<h3>Chap. IV : stratégie, terreur, déportation</h3>
+<p>Contre l’idée que la violence serait toujours irrationnelle, Michaud montre qu’elle peut être un moyen efficace si l’on en calcule coûts et bénéfices : elle est prise dans des marchandages et des menaces, avec des risques d’escalade, qui incitent les adversaires à la ritualiser (la manifestation de masse). Le terrorisme d’État se débarrasse des limites légales : lois d’exception, services parallèles, escadrons de la mort, torture, disparitions. Le XXe siècle est aussi celui des transferts forcés de populations et du nettoyage ethnique.</p>
+<h3>Chap. V : nouvelle violence internationale</h3>
+<p>Depuis 1989, les conflits sont moins clairement interétatiques et se déroulent au milieu des civils. Michaud passe en revue sept concepts : génocide, hyperterrorisme, guerre asymétrique, guerre préventive, guerre humanitaire, guerre juste, société civile internationale. Il y voit un double mouvement : plus de diversité et d’éclatement d’un côté, plus de solidarité et d’interdépendance (droits de l’homme, justice internationale) de l’autre. La conception « clausewitzienne », de Hobbes à Aron, ne vaut plus que partiellement.</p></div></section>
+<section class="txt fs" id="ch6" aria-labelledby="h-ch6" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-ch6">Chapitres VI à VIII : expliquer la violence</h2>
+<div class="cards">
+<article class="card" style="--c:var(--contre)"><h3>Anthropologie (chap. VI)</h3>
+<p class="k">Approches</p>
+<ul><li>Neurophysiologie : stress, cerveau reptilien, limbique, néocortex, avec trois types d’agressivité.</li><li>Éthologie : comparaison avec l’animal, aux limites fortes.</li><li>Préhistoire, psychologie (expériences de psychologie sociale, Milgram) et psychanalyse.</li></ul>
+</article>
+<article class="card" style="--c:var(--nuance)"><h3>Sociologie (chap. VII)</h3>
+<p class="k">Approches</p>
+<ul><li>Théories empiriques : frustration, privation relative (Gurr), courbe en J (Davies).</li><li>Fonctionnalisme (Coser, Merton, Parsons), approche systémique (Galtung), marxisme.</li><li>Études de terrain sectorielles, souvent liées à l’expertise et à l’action publique.</li></ul>
+</article>
+<article class="card" style="--c:var(--pour)"><h3>Philosophie (chap. VIII)</h3>
+<p class="k">Courants</p>
+<ul><li>Ontologies de la négativité et philosophies de la vie (Héraclite, Hegel, Marx).</li><li>Philosophies de l’expression (Nietzsche, Sorel, Benjamin, Fanon).</li><li>Approches intersubjectives (Hegel, Sartre, Girard, Levinas, Bauman).</li><li>Philosophies de la société (Enzensberger, Sofsky, Gellner).</li></ul>
+</article>
+</div>
+<h3>Quelques points de la partie philosophique</h3>
+<ul class="pts">
+<li><strong>Hegel et la reconnaissance.</strong> Chez Hegel, les consciences se réifient en se désirant ; la lutte pour la reconnaissance fait de la violence la condition de la reconnaissance mutuelle. Sartre reprend ce schéma en le liant à la rareté.</li>
+<li><strong>Girard.</strong> Le désir est mimétique ; la rivalité engendre la violence, que le sacrifice (puis la justice) canalise.</li>
+<li><strong>Benjamin.</strong> Il distingue la violence fondatrice de droit et la violence conservatrice de droit, et évoque une violence « pure » qui ne serait pas un moyen.</li>
+<li><strong>Gellner.</strong> Avec l’essor de la production et du commerce, la violence perd son rôle dans la répartition de la richesse, d’où une perspective de paix.</li>
+<li>Michaud critique le pessimisme d’Enzensberger et de Sofsky, et fait remarquer que la civilisation des mœurs d’Elias consiste à contrôler et ritualiser une violence toujours possible.</li>
+</ul></div></section>
+<section class="txt fs" id="conclusion" aria-labelledby="h-conclusion" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-conclusion">Conclusion : la violence et les représentations</h2>
+<ul class="pts">
+<li>Les philosophies de la violence ne sont pas inoffensives : Hobbes a servi à légitimer la répression, les philosophies de la vie l’impérialisme, Nietzsche la propagande pangermaniste, Sorel le fascisme mussolinien.</li>
+<li>« La violence, ce sont non seulement des faits, mais aussi nos manières de les appréhender, de les juger, de les voir – et de ne pas les voir. »</li>
+<li>Le concept fonctionne comme anathème : il signale les clivages sociaux et naît dans les sociétés où le consensus sur les normes est fragile. La question de la violence se pose surtout dans les démocraties ; ailleurs, elle est occultée derrière d’autres catégories (désordre, purge, maintien de l’ordre).</li>
+<li>Les progrès techniques entraînent une « facilitation de la violence » : nous nous indignons, nous contrôlons, et, s’il le faut, nous utilisons la violence « de préférence proprement ».</li>
+<li>Paradoxe final : les choses marchent à la fois mieux et beaucoup plus mal que nous ne le pensons.</li>
+</ul></div></section>
+<section class="txt fs" id="citations" aria-labelledby="h-citations" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-citations">Citations</h2>
+<blockquote><p>Les hommes sont ainsi faits qu’ils ont toujours besoin de règles, même pour se tuer.</p><cite>chap. II, d’après Hume</cite></blockquote>
+<blockquote><p>La violence, ce sont non seulement des faits, mais aussi nos manières de les appréhender, de les juger, de les voir – et de ne pas les voir.</p><cite>conclusion</cite></blockquote>
+</div></section>
+<section class="txt fs" id="notions" aria-labelledby="h-notions" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-notions">Notions</h2>
+<dl>
+<dt>Violence performative</dt><dd>Le mot ne décrit pas seulement : il condamne, dénonce ou valorise.</dd>
+<dt>Monopole de la violence légitime</dt><dd>L’État exerce la contrainte selon des lois publiques, non rétroactives et générales ; le terrorisme d’État s’en affranchit.</dd>
+<dt>Facilitation sociale</dt><dd>Degré de tolérance d’une société envers la violence comme moyen d’action politique.</dd>
+<dt>Guerre asymétrique</dt><dd>Affrontement où les adversaires n’ont ni les mêmes armes, ni le même terrain, ni la même rationalité.</dd>
+<dt>Privation relative</dt><dd>Écart perçu entre ce que l’on attend et ce que l’on obtient, qui nourrit la violence politique.</dd>
+<dt>Civilisation des mœurs</dt><dd>Concept de Norbert Elias : refoulement progressif de l’agressivité et extension des contrôles.</dd>
+</dl></div></section>
+<section class="txt fs" id="limites" aria-labelledby="h-limites" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-limites">Limites et débats</h2>
+<ul class="pts">
+<li><strong>Un manuel de synthèse.</strong> Format « Que sais-je ? » : les théories sont résumées, parfois en quelques lignes.</li>
+<li><strong>Données datées.</strong> Une partie des exemples et des chiffres (criminalité, conflits) s’arrête aux années 1990-2000 ; l’ouvrage mentionne les attentats de 2001, mais pas les événements ultérieurs.</li>
+<li><strong>Débat (hors de l’ouvrage).</strong> La thèse du recul historique de la violence (Elias, et plus tard Pinker) est discutée par des historiens ; Michaud en retient surtout la sensibilité accrue.</li>
+</ul></div></section>
+</main>
+<footer><div class="wrap"><p>Fiche de lecture : Yves Michaud, <em>La Violence</em> (« Que sais-je ? »).</p></div></footer>
+<script>
+(function(){
+  var links=[].slice.call(document.querySelectorAll('#nav a'));
+  var secs=[].slice.call(document.querySelectorAll('.txt')),lock=null,ticking=false;
+  function setCur(i){
+    links.forEach(function(a,k){if(k===i)a.setAttribute('aria-current','true');else a.removeAttribute('aria-current')});
+    var a=links[i],box=a.parentNode.parentNode;
+    if(box.scrollWidth>box.clientWidth&&box.scrollTo)box.scrollTo({left:i?a.offsetLeft-20:0});
+  }
+  function upd(){
+    ticking=false;
+    if(lock!==null){setCur(lock);return}
+    var nb=document.querySelector('.nav'),y=(nb?nb.getBoundingClientRect().bottom:0)+24,cur=0;
+    secs.forEach(function(s,k){if(s.getBoundingClientRect().top<=y)cur=k});
+    setCur(cur);
+  }
+  function req(){if(!ticking){ticking=true;requestAnimationFrame(upd)}}
+  links.forEach(function(a,k){a.addEventListener('click',function(){lock=k;setCur(k)})});
+  ['wheel','touchstart','mousedown','keydown'].forEach(function(ev){window.addEventListener(ev,function(){lock=null},{passive:true})});
+  window.addEventListener('scroll',req,{passive:true});window.addEventListener('resize',req);
+  upd();
+})();
+</script>
+<script>
+(function(){var r=document.documentElement,K='texte-seul',KL='mode-lecture';
+var btn=document.getElementById('a11y-btn'),menu=document.getElementById('a11y-menu'),opts=menu.querySelectorAll('.a11y-opt'),closed=[],shown=[],skipped=[];
+function apply(m){
+  var ts=m==='ts',lc=m==='lect',was=r.classList.contains('lect');
+  r.classList.toggle('ts',ts);r.classList.toggle('lect',lc);
+  if(lc&&!was){closed=[];shown=[];skipped=[];
+    document.querySelectorAll('main details').forEach(function(d){if(!d.open){closed.push(d);d.open=true}});
+    document.querySelectorAll('main [hidden]').forEach(function(x){if(!x.closest('[aria-labelledby="h-video"]')&&!x.matches('video,[role="tablist"]')){shown.push(x);x.hidden=false}});
+    document.querySelectorAll('main section').forEach(function(sc){var h=sc.querySelector('h2');
+      if(sc.querySelector('input,select,textarea')||(h&&/^(Exercice|Faites le tri|En vid)/i.test(h.textContent.trim()))){sc.classList.add('lc-skip');skipped.push(sc)}});}
+  if(!lc&&was){closed.forEach(function(d){d.open=false});shown.forEach(function(x){x.hidden=true});skipped.forEach(function(s){s.classList.remove('lc-skip')});closed=[];shown=[];skipped=[]}
+  opts.forEach(function(o){o.setAttribute('aria-checked',o.getAttribute('data-mode')===m?'true':'false')});
+  try{localStorage.setItem(K,ts?'1':'0');localStorage.setItem(KL,lc?'1':'0')}catch(e){}
+}
+function open(on){menu.hidden=!on;btn.setAttribute('aria-expanded',on?'true':'false')}
+btn.addEventListener('click',function(e){e.stopPropagation();open(menu.hidden)});
+opts.forEach(function(o){o.addEventListener('click',function(){apply(o.getAttribute('data-mode'));open(false);btn.focus()})});
+document.addEventListener('click',function(e){if(!menu.hidden&&!menu.contains(e.target)&&e.target!==btn)open(false)});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!menu.hidden){open(false);btn.focus()}});
+var v='orig';try{if(localStorage.getItem(KL)==='1')v='lect';else if(localStorage.getItem(K)==='1'&&menu.querySelector('[data-mode="ts"]'))v='ts'}catch(e){}
+if(v==='ts')apply('ts');
+if(v==='lect')window.addEventListener('load',function(){apply('lect')});
+})();
+</script>
+</body>
+</html>

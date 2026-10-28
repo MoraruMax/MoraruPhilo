@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rosa, Aliénation et accélération : fiche de lecture</title>
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+  --bg:#F1F4F6; --surface:#FFFFFF; --ink:#1B2733; --muted:#53626F; --line:#D5DDE3; --focus:#0E6E73;
+  --pour:#0E6E73; --contre:#A8321F; --nuance:#2F4FA8; --garde:#8A5A00; --neutre:#4F5D69;
+  --serif:Georgia,"Times New Roman",serif;
+  --sans:system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#10171D; --surface:#18222A; --ink:#E7EDF2; --muted:#A1B0BC; --line:#2A3641; --focus:#5FD0D6;
+    --pour:#5FD0D6; --contre:#FF8A75; --nuance:#97ADFF; --garde:#F0BC52; --neutre:#A9B7C2;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#10171D; --surface:#18222A; --ink:#E7EDF2; --muted:#A1B0BC; --line:#2A3641; --focus:#5FD0D6;
+  --pour:#5FD0D6; --contre:#FF8A75; --nuance:#97ADFF; --garde:#F0BC52; --neutre:#A9B7C2;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:calc(4.2rem + env(safe-area-inset-top,0px));-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.1rem/1.65 var(--serif)}
+.wrap{width:min(980px,100% - 2.5rem);margin-inline:auto}
+h1,h2,h3{margin:0;font-family:var(--serif)}
+h1{font-weight:800;font-size:clamp(2.5rem,8vw,5rem);line-height:1.02;letter-spacing:-.02em}
+h2{font-weight:800;font-size:clamp(1.6rem,3.4vw,2.2rem);line-height:1.12}
+p{margin:0 0 1em}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
+.hero{padding:clamp(2.2rem,6vw,4.5rem) 0 2rem}
+.lead{font-size:clamp(1.15rem,2.4vw,1.45rem);line-height:1.5;max-width:40ch;margin:1.4rem 0 1rem}
+.note{font:500 .92rem/1.5 var(--sans);color:var(--muted);max-width:62ch;margin:0}
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--bg);border-bottom:1px solid var(--line)}
+.nav ol{display:flex;gap:.3rem;list-style:none;margin:0;padding:.5rem 0;overflow-x:auto}
+.nav a{display:block;white-space:nowrap;text-decoration:none;color:var(--muted);font:700 .88rem/1.2 var(--sans);padding:.45rem .7rem .35rem;border-radius:6px;border-bottom:4px solid var(--c)}
+.nav a:hover{color:var(--ink)}
+.nav a[aria-current="true"]{background:var(--ink);color:var(--bg)}
+.nav small{display:block;font-weight:500;font-size:.75rem;opacity:1}
+.txt{border-bottom:1px solid var(--line);padding:clamp(2.4rem,6vw,3.6rem) 0}
+.meta{display:flex;flex-wrap:wrap;gap:.5rem .9rem;align-items:center;margin-bottom:.8rem;font:500 .92rem/1.3 var(--sans);color:var(--muted)}
+.tag{font:700 .8rem/1 var(--sans);color:var(--c);border:1.5px solid var(--c);border-radius:5px;padding:.3rem .5rem}
+.thesis{font-size:clamp(1.2rem,2.4vw,1.5rem);line-height:1.4;font-weight:600;margin:1rem 0 1.4rem;max-width:44ch;padding-left:1rem;border-left:5px solid var(--c)}
+.cols{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:1.6rem clamp(1.6rem,4vw,3rem)}
+h3{font:700 .9rem/1.2 var(--sans);color:var(--c);margin-bottom:.7rem}
+.args{margin:0;padding:0;list-style:none;counter-reset:a}
+.args li{counter-increment:a;padding:.6rem 0 .6rem 2.4rem;border-top:1px solid var(--line);position:relative}
+.args li:last-child{border-bottom:1px solid var(--line)}
+.args li::before{content:counter(a);position:absolute;left:0;top:.5rem;font:800 1.5rem/1 var(--serif);color:var(--c)}
+.quotes{margin:0;padding:0}
+.quotes blockquote{margin:0 0 1rem;padding:.2rem 0 .2rem .9rem;border-left:3px solid var(--line)}
+.quotes p{margin:0 0 .2rem;font-style:italic}
+.quotes cite{font:500 .82rem/1.3 var(--sans);font-style:normal;color:var(--muted)}
+footer{padding:1.6rem 0 2.5rem;font:500 .92rem/1.5 var(--sans);color:var(--muted)}
+footer p{margin:0}
+@media (max-width:760px){.cols{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+.pdfbtn{display:inline-flex;align-items:center;gap:.5rem;font:600 .88rem/1 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--surface);border:1.5px solid var(--ink);border-radius:999px;padding:.55rem .95rem;cursor:pointer}
+.pdfbtn:hover{background:var(--ink);color:var(--bg)}.pdfbtn:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:2px}
+
+/* Mode lecture (pages à structure libre) */
+html.lect body::before,html.lect body::after{display:none!important}
+html.lect body{background:var(--bg)!important}
+html.lect .pn,html.lect #quiz,html.lect section[aria-labelledby="h-video"],html.lect video,html.lect .score,html.lect .lc-skip,html.lect [role="tablist"],html.lect main button,html.lect main input,html.lect main select,html.lect main textarea,html.lect .sec-head p.lc-x{display:none!important}
+html.lect .hero h1,html.lect .hero p,html.lect section.block h2,html.lect footer p{text-shadow:none!important}
+html.lect .hero,html.lect section.block{padding-block:1.2rem!important;border:0!important}
+html.lect .wrap,html.lect .sec-head{max-width:40rem!important;margin-inline:auto}
+html.lect .hgrid,html.lect .two,html.lect .cols{display:block!important}
+html.lect main,html.lect .hero{font-family:var(--serif)}
+html.lect .hero h1{font-size:clamp(1.9rem,5vw,2.6rem)!important}
+html.lect main p,html.lect main li,html.lect .lead{font-size:1.12rem!important;line-height:1.75!important}
+html.lect :is(main,.hero) :is(div,li,blockquote,article,aside,p,ul,ol,section,details,summary,figure,span):not(table *){background:none!important;border:0!important;box-shadow:none!important;border-radius:0!important}
+html.lect main [hidden]{display:revert!important}
+html.lect :is(main,.hero) div:not(.wrap):not(.sec-head):not(table *){display:block!important;grid-template-columns:none!important;float:none!important;max-width:none!important;width:auto!important;margin-inline:0}
+html.lect main li{display:list-item!important}
+html.lect .must{margin:1rem 0}
+html.lect .lead{max-width:none!important}
+html.lect .wrap{padding-inline:0}
+html.lect main details>summary{cursor:default;pointer-events:none;list-style:none}
+html.lect main details>summary::-webkit-details-marker,html.lect main details>summary::before{display:none!important}
+html.lect main blockquote{margin:.8rem 0;padding:0 0 0 1rem!important;border-left:3px solid var(--line)!important}
+html.lect main .panel{display:block!important;margin-bottom:1rem}
+html.lect main h3,html.lect main h4{margin-top:1.4rem}
+html.lect .nav,html.lect .hero .note{display:none!important}
+html.lect .thesis{border:0!important;padding-left:0!important;max-width:none!important}
+html.lect .args li{padding-left:0!important}
+html.lect .args li::before{display:none!important}
+html.lect .args{list-style:decimal;padding-left:1.4rem!important}
+html.lect .txt{padding-block:1.2rem!important}
+
+/* Accessibilité */
+.a11y{position:relative;display:inline-block}
+.a11y-menu{position:absolute;right:0;top:calc(100% + .4rem);z-index:60;min-width:14rem;background:var(--bg);color:var(--ink);border:1.5px solid var(--ink);border-radius:14px;padding:.35rem;box-shadow:0 8px 24px rgba(0,0,0,.18);text-shadow:none}
+.a11y-menu[hidden]{display:none}
+.a11y-menu p{margin:0;padding:.45rem .7rem .3rem;font:700 .72rem/1 system-ui,-apple-system,sans-serif;letter-spacing:.06em;text-transform:uppercase;opacity:.65}
+.a11y-opt{display:flex;align-items:center;gap:.6rem;width:100%;text-align:left;font:600 .92rem/1.2 system-ui,-apple-system,sans-serif;color:inherit;background:none;border:0;border-radius:9px;padding:.6rem .7rem;cursor:pointer}
+.a11y-opt:hover{background:var(--surface)}
+.a11y-opt:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:-2px}
+.a11y-opt .dot{flex:none;width:1rem;height:1rem;border:2px solid currentColor;border-radius:50%;position:relative}
+.a11y-opt[aria-checked="true"] .dot::after{content:"";position:absolute;inset:2px;background:currentColor;border-radius:50%}
+.a11y-opt small{display:block;font-weight:500;opacity:.7;font-size:.78rem;margin-top:.15rem}
+@media print{
+  :root{--bg:#fff!important;--surface:#fff!important;--ink:#111!important;--muted:#444!important;--line:#bbb!important;color-scheme:light!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:#fff!important;color:#111!important}
+  body::before,body::after{display:none!important}
+  nav,.pdfbtn,.pn,video,section[aria-labelledby="h-video"]{display:none!important}
+  .rev,.js .rev{opacity:1!important;transform:none!important}
+  .stp li[hidden]{display:list-item!important}
+  details>*{display:block!important}
+  article,li,.card,figure,.stage{break-inside:avoid}
+  h1,h2,h3{break-after:avoid;text-shadow:none!important}
+  *{text-shadow:none!important}
+  a{color:inherit;text-decoration:none}
+  section.block,.part{padding-top:1.2rem!important;padding-bottom:1.2rem!important}
+  footer{break-before:avoid;border-top:1px solid #999;margin-top:1rem}
+}
+@page{size:A4;margin:16mm 14mm}
+/* Texte */
+.tx summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:.7rem;font:800 clamp(1.4rem,3vw,1.9rem)/1.2 var(--sans);padding:.3rem 0}
+.tx summary::-webkit-details-marker{display:none}
+.tx summary::before{content:"";width:.6em;height:.6em;border-right:.2em solid currentColor;border-bottom:.2em solid currentColor;transform:rotate(-45deg);transition:transform .15s;flex:none;margin-right:.2rem}
+.tx[open] summary::before{transform:rotate(45deg)}
+@media (prefers-reduced-motion:reduce){.tx summary::before{transition:none}}
+.txb{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--c,var(--ink));padding:1.2rem clamp(1rem,3vw,1.8rem);margin-top:.9rem;max-width:46rem;font:400 1.1rem/1.75 var(--serif)}
+.txb p{margin:0 0 1em}
+.txb h3{font:700 1rem/1.3 var(--sans);margin:1.2em 0 .5em}
+.txb .vs{font:700 .72rem/1 var(--sans);color:var(--muted);margin-right:.15em}
+.txb .tsrc{font:600 .88rem/1.4 var(--sans);color:var(--muted);text-align:right;margin:1.1em 0 0}
+.txb .tsrc:not(:last-child){margin-bottom:1.4em;padding-bottom:1.2em;border-bottom:1px solid var(--line)}
+
+/* Sujets de dissertation */
+.sjd ul{list-style:none;margin:.6rem 0 0;padding:0;max-width:46rem}
+.sjd li{margin:0;padding:.55rem 0;border-top:1px solid var(--line)}
+.sjd li:last-child{border-bottom:1px solid var(--line)}
+.sjd a{color:inherit;font:600 1.05rem/1.4 var(--sans,system-ui);text-underline-offset:3px}
+.sjd p{margin:.4rem 0 0}
+html.lect .sjd li{border:0!important;padding:.25rem 0!important}
+html.lect .sjd a{font:600 1.12rem/1.6 var(--serif,Georgia,serif)}
+@media print{.sjd a{font-weight:600}.sjd li{border-color:#999}}
+.ln{font:700 .66rem/1 var(--sans);color:var(--muted);margin:0 .2em 0 .1em;vertical-align:super}
+.txb .tsrcline{font:600 .9rem/1.4 var(--sans);color:var(--muted)}
+.txn{font:500 .85rem/1.4 var(--sans);color:var(--muted);margin:.2rem 0 1rem}
+html.lect .txb{padding:0!important}
+</style>
+<script>try{history.scrollRestoration="manual"}catch(e){}(function(){function t(){if(!location.hash)window.scrollTo(0,0)}t();document.addEventListener("DOMContentLoaded",t);window.addEventListener("load",function(){t();setTimeout(t,60)});window.addEventListener("pageshow",t)})();</script>
+<script src="confort.js"></script><script src="voix.js" defer></script>
+
+<style>
+.fs h2{margin-bottom:1rem}
+.fs h3{font:700 1rem/1.3 var(--sans);color:var(--c);margin:1.4rem 0 .5rem}
+.fs .wrap>p,.fs li{max-width:46rem}
+.pg{font:600 .78rem/1 var(--sans);color:var(--muted);white-space:nowrap;margin-left:.3em}
+.fs ul.pts{margin:.4rem 0 1rem;padding-left:1.2rem}
+.fs ul.pts li{margin:.35rem 0}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr));gap:1rem;margin:1rem 0}
+.card{background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--c);padding:1rem 1.1rem 1.1rem;border-radius:0 0 8px 8px}
+.card h3{margin:0 0 .5rem;font:800 1.05rem/1.25 var(--sans);color:var(--ink)}
+.card p{font-size:1rem;line-height:1.55;margin:0 0 .6em}
+.card ul{margin:.3rem 0 .4rem;padding-left:1.1rem;font-size:1rem;line-height:1.5}
+.card .k{font:700 .74rem/1 var(--sans);letter-spacing:.05em;text-transform:uppercase;color:var(--c);margin:.9rem 0 .25rem}
+.card .f{font-weight:600}
+.tbl{width:100%;border-collapse:collapse;margin:.8rem 0 1rem;font:400 1rem/1.5 var(--serif);background:var(--surface)}
+.tbl caption{text-align:left;font:600 .88rem/1.4 var(--sans);color:var(--muted);padding:.3rem 0}
+.tbl th,.tbl td{border:1px solid var(--line);padding:.55rem .7rem;vertical-align:top;text-align:left}
+.tbl th{font:700 .86rem/1.3 var(--sans);background:var(--bg);color:var(--ink)}
+.tblw{overflow-x:auto}
+.axes{display:grid;grid-template-columns:auto 1fr 1fr;gap:.4rem;margin:1rem 0;font:600 .92rem/1.35 var(--sans);max-width:46rem}
+.axes div{padding:.7rem .8rem;border:1px solid var(--line);background:var(--surface)}
+.axes .h{background:none;border:0;color:var(--muted);font-size:.82rem;align-self:center}
+.axes .a{border-left:6px solid var(--nuance)}.axes .b{border-left:6px solid var(--garde)}.axes .c2{border-left:6px solid var(--contre)}.axes .d{border-left:6px solid var(--neutre)}
+.axes small{display:block;font-weight:500;color:var(--muted);margin-top:.2rem}
+.fs blockquote{margin:0 0 1.1rem;padding:.2rem 0 .2rem .9rem;border-left:3px solid var(--c);max-width:46rem}
+.fs blockquote p{margin:0 0 .25rem;font-style:italic}
+.fs blockquote cite{font:500 .84rem/1.3 var(--sans);font-style:normal;color:var(--muted)}
+.fs dl{margin:.6rem 0 0;max-width:46rem}
+.fs dt{font:700 1rem/1.3 var(--sans);margin-top:.9rem}
+.fs dd{margin:.2rem 0 0}
+.fs .src{font:500 .9rem/1.5 var(--sans);color:var(--muted);max-width:46rem}
+@media (max-width:640px){.axes{grid-template-columns:1fr}.axes .h{display:none}}
+html.lect .cards{display:block!important}html.lect .card{margin-bottom:1rem}
+html.lect .tbl{display:block}
+@media print{.card,.tbl tr{break-inside:avoid}}
+</style>
+</head>
+<body>
+<nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><span style="display:inline-flex;gap:.6rem;flex-wrap:wrap;align-items:center"><span class="a11y"><button type="button" class="pdfbtn" id="a11y-btn" aria-haspopup="true" aria-expanded="false" aria-controls="a11y-menu"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="1.6"/><path d="M5 8.5l7 1.5 7-1.5M12 10v4.5M8.5 21l3.5-6.5 3.5 6.5"/></svg><span>Accessibilité</span></button><div class="a11y-menu" id="a11y-menu" role="radiogroup" aria-label="Affichage de la page" hidden><p>Affichage</p><button type="button" role="radio" class="a11y-opt" data-mode="orig" aria-checked="true"><span class="dot"></span><span>Page d’origine<small>Image de fond et mise en page habituelle</small></span></button><button type="button" role="radio" class="a11y-opt" data-mode="lect" aria-checked="false"><span class="dot"></span><span>Mode lecture<small>Texte continu, sans cadres ni exercices</small></span></button></div></span><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></span></nav>
+
+<header class="hero">
+  <div class="wrap">
+    <h1><em>Aliénation et accélération</em>, fiche de lecture</h1>
+    <p class="lead">Pourquoi la vie moderne donne-t-elle l’impression d’aller toujours plus vite et de manquer de temps ? Hartmut Rosa y voit une accélération sociale qui finit par produire une aliénation : nous ne sommes plus en relation avec le monde.</p>
+    <p class="note">Hartmut Rosa, <em>Aliénation et accélération. Vers une théorie critique de la modernité tardive</em>, La Découverte, coll. « Théorie critique », 2012 (trad. Thomas Chaumont). Les pages indiquées renvoient à cette édition.</p>
+  </div>
+</header>
+<nav class="nav" aria-label="Sections de la fiche"><div class="wrap"><ol id="nav">
+<li><a href="#essentiel" style="--c:var(--pour)">Essentiel</a></li>
+<li><a href="#plan" style="--c:var(--pour)">Plan</a></li>
+<li><a href="#accel" style="--c:var(--pour)">Accélération</a></li>
+<li><a href="#moteurs" style="--c:var(--pour)">Moteurs</a></li>
+<li><a href="#decel" style="--c:var(--pour)">Décélération</a></li>
+<li><a href="#monde" style="--c:var(--pour)">Être au monde</a></li>
+<li><a href="#critique" style="--c:var(--pour)">Théorie critique</a></li>
+<li><a href="#variantes" style="--c:var(--pour)">Trois critiques</a></li>
+<li><a href="#promesse" style="--c:var(--pour)">Promesse brisée</a></li>
+<li><a href="#alienation" style="--c:var(--pour)">Aliénation</a></li>
+<li><a href="#conclusion" style="--c:var(--pour)">Conclusion</a></li>
+<li><a href="#citations" style="--c:var(--pour)">Citations</a></li>
+<li><a href="#notions" style="--c:var(--pour)">Notions</a></li>
+<li><a href="#limites" style="--c:var(--pour)">Limites</a></li>
+</ol></div></nav>
+<main id="main">
+<section class="txt fs" id="essentiel" aria-labelledby="h-essentiel" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-essentiel">L’essentiel en cinq points</h2>
+<p class="thesis">Pour Hartmut Rosa, la modernité tardive est une « société de l’accélération » : tout y va plus vite, mais le temps manque de plus en plus. Cette accélération, que personne ne décide, finit par aliéner les sujets : ils font ce qu’ils ne veulent pas « vraiment » faire, et le monde cesse de leur répondre.</p>
+<ol class="args">
+<li><strong>Trois formes d’accélération.</strong> L’accélération technique (transports, communication, production), celle du changement social et celle du rythme de vie, qui se manifeste par l’impression de manquer de temps.<span class="pg">p. 17-31</span></li>
+<li><strong>Un paradoxe.</strong> La technique fait gagner du temps, et pourtant le temps devient plus rare : les taux de croissance dépassent les taux d’accélération.<span class="pg">p. 29-32</span></li>
+<li><strong>Un cercle qui s’entretient.</strong> La compétition et la promesse culturelle d’une vie pleine lancent l’accélération ; les trois formes s’alimentent ensuite l’une l’autre. Les freins existants sont secondaires.<span class="pg">p. 33-56</span></li>
+<li><strong>Un régime temporel quasi totalitaire.</strong> Délais et rythmes s’imposent à tous, partout, sans débat, comme des données naturelles : ils troublent la communication, la reconnaissance et la démocratie, et brisent la promesse d’autonomie de la modernité.<span class="pg">p. 57-113</span></li>
+<li><strong>Cinq formes d’aliénation.</strong> Par rapport à l’espace, aux choses, aux actions, au temps, à soi et aux autres. L’opposé de l’aliénation serait une relation « réactive » au monde, que Rosa nomme provisoirement la résonance.<span class="pg">p. 114-141</span></li>
+</ol>
+<p class="src">Les pages indiquées renvoient à l’édition française (La Découverte, coll. « Théorie critique », 2012).</p></div></section>
+<section class="txt fs" id="plan" aria-labelledby="h-plan" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-plan">Le plan de l’ouvrage</h2>
+<p>Le livre est un essai court. Rosa y résume sa théorie de l’accélération sociale, puis s’en sert pour renouveler la Théorie critique, la tradition de pensée qui va de Marx à l’École de Francfort, puis à Habermas et Honneth.<span class="pg">p. 7-10</span></p>
+<div class="cards">
+<article class="card" style="--c:var(--neutre)"><h3>Première partie : une théorie de l’accélération sociale</h3>
+<p class="k">Question</p>
+Qu’est-ce qui accélère dans la modernité, pourquoi, et qu’est-ce qui ralentit ?
+<p class="k">Chapitres</p>
+<ul><li>1. Qu’est-ce que l’accélération sociale ?<span class="pg">p. 13-32</span></li><li>2. Les forces motrices<span class="pg">p. 33-43</span></li><li>3. Qu’est-ce que la décélération sociale ?<span class="pg">p. 44-52</span></li><li>4. Pourquoi l’accélération plutôt que la décélération ?<span class="pg">p. 53-56</span></li><li>5. Pourquoi est-ce important ? L’être au monde<span class="pg">p. 57-65</span></li></ul>
+</article>
+<article class="card" style="--c:var(--contre)"><h3>Deuxième partie : accélération et Théorie critique</h3>
+<p class="k">Question</p>
+Que manque-t-il aux théories critiques de Habermas et de Honneth ?
+<p class="k">Chapitres</p>
+<ul><li>6. Conditions préalables à une théorie critique<span class="pg">p. 67-72</span></li><li>7. La critique des conditions de communication<span class="pg">p. 73-77</span></li><li>8. La critique des conditions de reconnaissance<span class="pg">p. 78-83</span></li><li>9. L’accélération comme nouvelle forme de totalitarisme<span class="pg">p. 84-86</span></li></ul>
+</article>
+<article class="card" style="--c:var(--pour)"><h3>Troisième partie : contours d’une théorie critique</h3>
+<p class="k">Question</p>
+Comment critiquer l’accélération et ré-introduire l’aliénation ?
+<p class="k">Chapitres</p>
+<ul><li>10. Trois variantes d’une critique des conditions temporelles<span class="pg">p. 89-92</span></li><li>11. La critique fonctionnaliste : la désynchronisation<span class="pg">p. 93-99</span></li><li>12. La critique normative : l’idéologie revisitée<span class="pg">p. 100-105</span></li><li>13. La critique éthique 1 : la promesse brisée de la modernité<span class="pg">p. 106-113</span></li><li>14. La critique éthique 2 : l’aliénation revisitée<span class="pg">p. 114-135</span></li><li>Conclusion<span class="pg">p. 137-142</span></li></ul>
+</article>
+</div></div></section>
+<section class="txt fs" id="accel" aria-labelledby="h-accel" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-accel">Chapitre 1 : trois formes d’accélération</h2>
+<h3>Un thème des classiques<span class="pg">p. 13-16</span></h3>
+<p>La sociologie et la philosophie sociale naissent comme réactions à l’expérience de la modernisation, que l’on a lue comme rationalisation, différenciation, individualisation ou marchandisation (p. 13). Rosa remarque que les classiques ont tous été frappés par l’accélération : Marx et Engels (« tout ce qui avait solidité et permanence s’en va en fumée »), Simmel (la vie nerveuse des métropoles), Durkheim (l’anomie, née de changements trop rapides), Weber (la perte de temps comme « le plus mortel de tous les péchés », d’après Franklin) (p. 14-15). La sociologie ultérieure, elle, est devenue « largement atemporelle » (p. 15).</p>
+<p>Difficulté : « accélérer » ne signifie pas la même chose partout, et beaucoup de choses ralentissent (p. 16-17). Rosa propose donc de distinguer trois catégories, analytiquement distinctes (p. 17).</p>
+<div class="cards">
+<article class="card" style="--c:var(--nuance)"><h3>1. L’accélération technique</h3>
+<p class="k">Définition</p>
+Accélération intentionnelle de processus orientés vers un but : transports, communication, production.<span class="pg">p. 18</span>
+<p class="k">Exemples</p>
+<ul><li>Vitesse de la communication : + 107 %, des transports personnels : + 102 %, du traitement des données : + 1 010 %.<span class="pg">p. 18</span></li><li>Espace « rétréci » : Londres-New York, de trois semaines à environ huit heures.<span class="pg">p. 19</span></li><li>Perte d’importance de l’espace, « non-lieux » (Augé).<span class="pg">p. 19-20</span></li></ul>
+<p class="k">Effet</p>
+Elle transforme le « régime spatio-temporel » de la société (p. 19).
+</article>
+<article class="card" style="--c:var(--garde)"><h3>2. L’accélération du changement social</h3>
+<p class="k">Définition</p>
+Accélération <em>de</em> la société elle-même : les attitudes, les valeurs, les modes de vie, les groupes, les pratiques, les savoirs changent à un rythme croissant.<span class="pg">p. 20-21</span>
+<p class="k">Mesure</p>
+« Compression du présent » (Lübbe) : le présent est la durée pendant laquelle expériences et attentes coïncident.<span class="pg">p. 21-22</span>
+<p class="k">Formule</p>
+<p class="f">L’accélération sociale est définie par « une augmentation de la vitesse de déclin de la fiabilité des expériences et des attentes et par la compression des durées définies comme le “présent” ».<span class="pg">p. 22</span></p>
+<p class="k">Exemples</p>
+<ul><li>La famille passe d’un rythme intergénérationnel à un rythme générationnel, puis intragénérationnel.<span class="pg">p. 22-23</span></li><li>Selon Sennett, les employés américains diplômés changent de travail environ onze fois dans leur vie.<span class="pg">p. 24</span></li></ul>
+</article>
+<article class="card" style="--c:var(--contre)"><h3>3. L’accélération du rythme de vie</h3>
+<p class="k">Définition</p>
+Augmentation du nombre d’épisodes d’action ou d’expérience par unité de temps : on veut « faire plus de choses en moins de temps ».<span class="pg">p. 25</span>
+<p class="k">Sentiment</p>
+« Famine temporelle » : on manque de temps, comme d’une matière première qui deviendrait rare.<span class="pg">p. 25</span>
+<p class="k">Mesure</p>
+Deux approches : « subjective » (le stress, les plaintes sur la rareté du temps) et « objective » (manger plus vite, dormir moins, faire plusieurs choses à la fois, le « multitâche »). Rosa souligne la prudence qu’exigent ces données.<span class="pg">p. 26-28</span>
+</article>
+</div>
+<h3>Le paradoxe central<span class="pg">p. 28-32</span></h3>
+<ul class="pts">
+<li>L’accélération technique devrait faire gagner du temps libre, donc ralentir le rythme de vie. Or c’est l’inverse qui se produit (p. 29).</li>
+<li>Explication : la quantité de tâches ne reste pas la même. Avec le courrier électronique, on écrit bien plus de messages et le temps gagné est absorbé (p. 30).</li>
+<li>Règle générale : tant que les taux de croissance (des messages, des kilomètres, des vêtements portés…) dépassent les taux d’accélération, le temps devient plus rare (p. 31-32).</li>
+</ul>
+<blockquote><p>« […] les taux de croissance dépassent les taux d’accélération et, par conséquent, le temps devient de plus en plus rare malgré l’accélération technique. »</p><cite>Chap. 1, p. 32</cite></blockquote>
+</div></section>
+<section class="txt fs" id="moteurs" aria-labelledby="h-moteurs" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-moteurs">Chapitre 2 : ce qui fait accélérer</h2>
+<p>La technique n’est pas la cause de l’accélération sociale, seulement sa « condition de possibilité ». Les révolutions techniques ont été des <em>réponses</em> à la « famine temporelle » : bien avant la machine à vapeur, on cherchait déjà à accélérer le transport et la communication (p. 33).</p>
+<div class="cards">
+<article class="card" style="--c:var(--nuance)"><h3>Le moteur social : la compétition</h3>
+<p class="k">Thèse</p>
+La compétition est le mode dominant de distribution des positions, des biens et de la reconnaissance, bien au-delà de l’économie : politique, science, arts, religion, vie privée.<span class="pg">p. 34-36</span>
+<p class="k">Mécanisme</p>
+La réussite se définit comme « le labeur ou le travail effectué en un temps donné » : gagner du temps, c’est gagner un avantage.<span class="pg">p. 36</span>
+<p class="k">Effet</p>
+Il faut « danser de plus en plus vite simplement pour rester en place » (formule recueillie dans des entretiens).<span class="pg">p. 37</span>
+</article>
+<article class="card" style="--c:var(--garde)"><h3>Le moteur culturel : la promesse de l’éternité</h3>
+<p class="k">Thèse</p>
+Société séculière, la modernité met l’accent sur la vie avant la mort. La « vie bonne » devient une vie accomplie, riche d’expériences.<span class="pg">p. 38-39</span>
+<p class="k">Mécanisme</p>
+Le temps du monde dépasse le temps d’une vie. Si l’on vit plus vite, on réalise plus d’options en une vie.<span class="pg">p. 39-40</span>
+<p class="k">Formule</p>
+<p class="f">L’accélération du rythme de vie serait « notre réponse (c’est-à-dire celle de la modernité) au problème de la finitude et de la mort ».<span class="pg">p. 40</span></p>
+<p class="k">Échec</p>
+Les options augmentent plus vite que notre capacité à les réaliser : notre part du monde « chute sans arrêt ». Rosa compare l’homme moderne à un hamster dans sa roue.<span class="pg">p. 40</span>
+</article>
+<article class="card" style="--c:var(--contre)"><h3>Le cycle de l’accélération</h3>
+<p class="k">Thèse</p>
+Aux deux forces « externes » s’ajoute la différenciation fonctionnelle (division du travail), qui permet puis impose des vitesses croissantes.<span class="pg">p. 40</span>
+<p class="k">Boucle</p>
+Les trois formes d’accélération s’alimentent mutuellement : une nouvelle technique change les pratiques sociales, donc le changement social, donc le rythme de vie, qui appelle de nouvelles techniques.<span class="pg">p. 41-43</span>
+<p class="k">Image</p>
+La « pente glissante » : s’arrêter, c’est retomber en arrière. Chacun se sent comme Sisyphe devant sa messagerie.<span class="pg">p. 42-43</span>
+<p class="k">Résultat</p>
+Le cycle est devenu « un système fermé et autopropulsé » (fig. 4).<span class="pg">p. 43</span>
+</article>
+</div></div></section>
+<section class="txt fs" id="decel" aria-labelledby="h-decel" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-decel">Chapitres 3 et 4 : la décélération, et pourquoi elle ne l’emporte pas</h2>
+<p>Rosa se demande si l’accélération n’est pas compensée par des phénomènes de ralentissement. Il en recense cinq formes (p. 44).</p>
+<div class="tblw"><table class="tbl"><caption>Les cinq formes de décélération et d’inertie</caption>
+<thead><tr><th scope="col">Forme</th><th scope="col">Idée</th><th scope="col">Exemples</th><th scope="col">Pages</th></tr></thead><tbody>
+<tr><th scope="row">a) Limites de vitesse naturelles</th><td>Certains processus ne peuvent pas être accélérés sans être détruits.</td><td>Rythmes circadiens, grossesse, jour et année ; mais la modernité a repoussé beaucoup de limites.</td><td>45</td></tr>
+<tr><th scope="row">b) Oasis de décélération</th><td>Territoires, groupes ou pratiques que l’accélération n’a pas touchés.</td><td>Îles perdues, sectes retirées comme les Amish, « produits à l’ancienne ».</td><td>45-46</td></tr>
+<tr><th scope="row">c) Décélération dysfonctionnelle</th><td>Ralentissement subi, conséquence de l’accélération.</td><td>Embouteillages, dépression, chômage de longue durée, récessions.</td><td>46-47</td></tr>
+<tr><th scope="row">d) Décélération intentionnelle</th><td>Ralentissement voulu : « fonctionnel » (ralentir pour mieux accélérer ensuite) ou « idéologique » (mouvements opposés à la modernité).</td><td>Retraites en monastère, cours de yoga, moratoires ; mouvements religieux radicaux, écologistes profonds.</td><td>47-51</td></tr>
+<tr><th scope="row">e) Inertie structurelle et culturelle</th><td>Derrière l’agitation, l’impression que rien ne change vraiment : « inertie polaire ».</td><td>Diagnostics de Virilio, Baudrillard, Jameson, Fukuyama ; « triangle structurel » compétition-croissance-accélération.</td><td>51-52</td></tr>
+</tbody></table></div>
+<h3>Pourquoi l’accélération l’emporte<span class="pg">p. 53-56</span></h3>
+<ul class="pts">
+<li>Deux hypothèses sont possibles : un équilibre entre accélération et décélération, ou une asymétrie en faveur de l’accélération. Rosa défend la seconde (p. 53).</li>
+<li>Les formes a) et b) marquent seulement des limites, c) est un effet de l’accélération, d) en est soit une condition (forme fonctionnelle), soit une réaction (forme idéologique) ; seule e) semble inhérente à la modernité : c’est « le revers paradoxal » de ses forces (p. 54).</li>
+<li>Cette inertie se vit comme un « changement frénétique » sans direction, avec la peur de l’immobilité et la dépression (p. 54-55).</li>
+</ul>
+<blockquote><p>« Il existe une indéniable asymétrie structurelle entre l’accélération et la décélération dans la société moderne et, par conséquent, la modernisation peut légitimement être interprétée comme un processus continu d’accélération sociale. »</p><cite>Chap. 4, p. 56</cite></blockquote>
+</div></section>
+<section class="txt fs" id="monde" aria-labelledby="h-monde" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-monde">Chapitre 5 : pourquoi cela importe : notre « être au monde »</h2>
+<p>Pour Rosa, une théorie sociologique de la modernité doit étudier l’accélération pour deux raisons.</p>
+<ul class="pts">
+<li><strong>Une régulation silencieuse.</strong> La société moderne n’est pas coordonnée par des règles explicites, mais par la « force normative silencieuse » de normes temporelles (délais, calendriers, limites), dépolitisées au point de sembler des données naturelles (p. 57). Cela revient, dit-il, en quelque sorte à un totalitarisme de l’accélération (p. 57-58).</li>
+<li><strong>Une transformation de notre rapport au monde.</strong> L’accélération transforme, dans le dos des acteurs, notre relation au monde social, au monde objectif et au monde subjectif (p. 58).</li>
+</ul>
+<div class="cards">
+<article class="card" style="--c:var(--nuance)"><h3>Espace et relations sociales</h3>
+<p class="k">Ce qui change</p>
+L’espace se « rétrécit », la proximité physique ne fait plus la proximité sociale : le voisin peut être un étranger, le partenaire intime vivre à l’autre bout du monde.<span class="pg">p. 58-60</span>
+<p class="k">Conséquence</p>
+Avec la multiplication des contacts, on devient « saturé » (Gergen).<span class="pg">p. 60</span>
+</article>
+<article class="card" style="--c:var(--garde)"><h3>Identité et monde subjectif</h3>
+<p class="k">Ce qui change</p>
+Au « plan de vie » de la modernité classique succède une identité « situationnelle » : on ne suit plus un plan, on « surfe sur les vagues ».<span class="pg">p. 60-61</span>
+<p class="k">Conséquence</p>
+L’histoire ne se lit plus comme un progrès : la modernité tardive est celle du changement « frénétique ».<span class="pg">p. 62-63</span>
+</article>
+<article class="card" style="--c:var(--contre)"><h3>Monde matériel</h3>
+<p class="k">Ce qui change</p>
+Les objets sont renouvelés à un rythme tel qu’on pourrait parler de « structures jetables » : on remplace les choses bien avant qu’elles ne s’usent (consommation « morale »).<span class="pg">p. 61-62</span>
+</article>
+</div>
+<blockquote><p>« […] nous avons <em>perdu toute certitude</em> sur la direction de l’histoire. »</p><cite>Chap. 5, p. 63 (Rosa y voit une « fin de l’histoire » au sens d’histoire dirigée)</cite></blockquote>
+<p>Rosa conclut le chapitre : cette évolution, restée largement inaperçue, n’est « ni bon ni mauvais en soi » ; elle porte cependant le potentiel de pathologies sociales, c’est-à-dire d’évolutions perturbantes qui causent de la souffrance (p. 64). C’est ce qui justifie une approche de théorie critique.</p></div></section>
+<section class="txt fs" id="critique" aria-labelledby="h-critique" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-critique">Chapitres 6 à 9 : l’accélération face à la Théorie critique</h2>
+<h3>Les conditions d’une théorie critique<span class="pg">p. 67-72</span></h3>
+<ul class="pts">
+<li>La Théorie critique cherche des « pathologies sociales » et part de la <strong>souffrance réelle</strong>, pas d’une « nature humaine ». Comme on peut souffrir sans le savoir, elle recourt aux idées de fausse conscience et d’idéologie ; la notion d’aliénation en relève (p. 68).</li>
+<li>Sa voie la plus prometteuse (Charles Taylor) : comparer les conceptions de la vie bonne que se font les acteurs avec les pratiques et institutions réelles. Les conditions qui empêchent d’atteindre cette vie bonne sont la cible de la critique (p. 69).</li>
+<li>Les idées de liberté et d’autonomie sont au « cœur de la modernité » : la critique doit viser les conditions sociales qui sapent l’autodétermination (p. 69-70).</li>
+<li>La société doit être pensée comme une totalité. Habermas la fonde sur la communication, Honneth sur la reconnaissance ; Rosa y ajoute la dynamique de l’accélération (p. 71-72).</li>
+</ul>
+<div class="cards">
+<article class="card" style="--c:var(--nuance)"><h3>Ch. 7 : la communication (Habermas)</h3>
+<p class="k">Idée de départ</p>
+Un discours légitime est exempt de relations de pouvoir et ne retient que « la force du meilleur argument ».<span class="pg">p. 73</span>
+<p class="k">Objection de Rosa</p>
+Délibérer prend du temps : la démocratie est un processus « chronophage ».<span class="pg">p. 74-75</span>
+<p class="k">Faits</p>
+Les images, les slogans et les sondages instantanés vont plus vite que les arguments : en politique, ce n’est plus (si ce le fut jamais) la force du meilleur argument qui décide.<span class="pg">p. 75-76</span>
+<p class="k">Conclusion</p>
+Les arguments sont devenus « trop lents » pour la vitesse du monde ; il faut prêter attention aux structures temporelles de la communication.<span class="pg">p. 77</span>
+</article>
+<article class="card" style="--c:var(--garde)"><h3>Ch. 8 : la reconnaissance (Honneth)</h3>
+<p class="k">Idée de départ</p>
+La société juste repose sur des formes justifiables de reconnaissance mutuelle ; le déni de reconnaissance fait naître l’indignation.<span class="pg">p. 78-79</span>
+<p class="k">Objection de Rosa</p>
+La compétition étant liée à la vitesse, la lutte pour la reconnaissance est elle-même un jeu de vitesse : « Nous devons être rapides et flexibles pour gagner (et conserver) la reconnaissance sociale ».<span class="pg">p. 79</span>
+<p class="k">Changement de forme</p>
+On passe d’une compétition « positionnelle » à une compétition « performative » : la reconnaissance se gagne chaque jour par la performance et n’est jamais acquise.<span class="pg">p. 80-82</span>
+<p class="k">Effet</p>
+Insécurité constante, peur de « rester en retrait », épuisement et burn-out.<span class="pg">p. 82-83</span>
+</article>
+<article class="card" style="--c:var(--contre)"><h3>Ch. 9 : un nouveau totalitarisme</h3>
+<p class="k">Thèse</p>
+L’accélération est devenue une force totalitaire <em>interne</em> à la société moderne, qu’il faut donc critiquer comme toutes les formes de domination totalitaire.<span class="pg">p. 84</span>
+<p class="k">Quatre conditions</p>
+Un pouvoir est totalitaire quand il : a) exerce une pression sur les volontés et les actions ; b) est inéchappable ; c) est omniprésent ; d) est difficile à critiquer.<span class="pg">p. 84</span>
+<p class="k">Ce qui la distingue</p>
+Elle ne vient ni d’un dictateur, ni d’un parti : « principe abstrait » qui assujettit tous ses sujets. Les diktats ne sont pas formulés comme des règles et ne font pas partie du débat politique.<span class="pg">p. 84-86</span>
+</article>
+</div></div></section>
+<section class="txt fs" id="variantes" aria-labelledby="h-variantes" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-variantes">Chapitres 10 à 12 : une critique des conditions temporelles</h2>
+<h3>Trois formes de critique sociale<span class="pg">p. 90-92</span></h3>
+<div class="tblw"><table class="tbl"><caption>Les trois variantes de critique et leur application à l’accélération</caption>
+<thead><tr><th scope="col">Critique</th><th scope="col">Question posée</th><th scope="col">Application à l’accélération</th><th scope="col">Pages</th></tr></thead><tbody>
+<tr><th scope="row">Fonctionnaliste</th><td>Un système ou une pratique peut-il fonctionner à long terme ?</td><td>La désynchronisation menace la reproduction de la société (ch. 11).</td><td>90 ; 93-99</td></tr>
+<tr><th scope="row">Normative (morale)</th><td>La distribution des biens, droits et statuts est-elle juste ?</td><td>Les normes temporelles cachées sont une idéologie qui viole la promesse de réflexivité et d’autonomie (ch. 12).</td><td>90 ; 100-105</td></tr>
+<tr><th scope="row">Éthique</th><td>Les conditions sociales permettent-elles de réaliser une vie bonne ?</td><td>La promesse d’autonomie est brisée (ch. 13) et l’aliénation réapparaît (ch. 14).</td><td>90-91 ; 106-135</td></tr>
+</tbody></table></div>
+<h3>Chapitre 11 : la désynchronisation<span class="pg">p. 93-99</span></h3>
+<ul class="pts">
+<li><strong>Principe.</strong> Tout ne s’accélère pas, et pas au même degré. Entre processus rapides et lents naissent des frictions : ce qui est lent est vécu comme une nuisance (p. 93). Exemple du train Hambourg-Copenhague (p. 93-94).</li>
+<li><strong>Nature.</strong> Les ressources naturelles sont épuisées à des rythmes supérieurs à leur renouvellement ; le réchauffement est un processus d’accélération physique (p. 94).</li>
+<li><strong>Corps et psychisme.</strong> Dépression et burn-out, selon Ehrenberg et Baier, seraient des réactions à la surcharge temporelle (p. 95).</li>
+<li><strong>Politique.</strong> La décision démocratique est lente alors que l’économie, la science et la technique s’accélèrent. D’où une inversion : la politique « progressiste » veut ralentir, les libéraux « conservateurs » veulent accélérer en supprimant le contrôle politique (p. 96-97).</li>
+<li><strong>Économie.</strong> L’accélération de la finance s’est détachée du rythme de l’économie « réelle », ce que Rosa relie à la crise de 2008 (p. 98).</li>
+<li><strong>Culture.</strong> La transmission entre générations devient difficile quand les mondes vécus diffèrent ; l’innovation permanente pourrait même appauvrir la créativité (p. 98-99).</li>
+</ul>
+<h3>Chapitre 12 : les normes temporelles cachées<span class="pg">p. 100-105</span></h3>
+<ul class="pts">
+<li><strong>Paradoxe.</strong> Les sociétés modernes sont des sociétés « libres » avec très peu de normes morales explicites, et pourtant extrêmement coordonnées et synchronisées (p. 100-101).</li>
+<li><strong>Solution.</strong> La coordination passe par des normes temporelles (horaires, délais, urgence) qui ne se présentent pas comme des normes éthiques (p. 101-104).</li>
+<li><strong>Rhétorique du « devoir ».</strong> Nous justifions nos actions par une exigence extérieure (« je dois vraiment… ») et nous sentons constamment coupables de ne jamais venir à bout de la liste des tâches (p. 102-103).</li>
+<li><strong>Culpabilité sans rémission.</strong> Contrairement à l’Église, la société moderne produit des sujets coupables sans possibilité de pardon : tous les échecs sont imputés aux individus (p. 103-104).</li>
+<li><strong>Un « langage silencieux ».</strong> Ces normes, selon l’expression d’Edward Hall, sont efficaces parce qu’elles restent silencieuses, inaperçues et naturalisées ; elles remplissent les quatre conditions du totalitarisme (p. 104-105).</li>
+</ul></div></section>
+<section class="txt fs" id="promesse" aria-labelledby="h-promesse" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-promesse">Chapitre 13 : la promesse brisée de la modernité</h2>
+<h3>Le projet d’autonomie<span class="pg">p. 106-108</span></h3>
+<ul class="pts">
+<li>La modernité est liée à un « projet » : l’autonomie, au sens d’autodétermination éthique. Je dois pouvoir modeler ma vie sans qu’un roi, une Église ou un ordre social prédéfini en décide (p. 106).</li>
+<li>L’autonomie suppose aussi une autonomie politique et démocratique, et le désir de maîtriser la nature (p. 107-108).</li>
+<li>Ce projet n’est devenu plausible que dans une société qui s’accélère : l’énergie du changement social libérait de l’ordre fixe. Accélération et autonomie se soutenaient donc mutuellement (p. 108).</li>
+</ul>
+<h3>La rupture<span class="pg">p. 108-113</span></h3>
+<ul class="pts">
+<li>L’accélération a toujours été à la fois « une promesse et une nécessité » ; aujourd’hui, la pression devient « accablante » (p. 109-110).</li>
+<li>L’accélération n’assure plus les ressources nécessaires à la poursuite de projets de vie : les rêves et les désirs des individus sont plutôt utilisés pour « alimenter la machine de l’accélération » (p. 110).</li>
+<li>Il s’agit de « rester dans la course » : l’autonomie classique devient anachronique. Gergen décrit le passage de « nager avec détermination vers un point de l’océan » à « flotter harmonieusement au gré des imprévisibles mouvements des flots » (p. 111).</li>
+<li>Politiquement, les réformes sont justifiées comme « adaptations nécessaires » à la compétition : la promesse d’une société modelée démocratiquement devient un « vague spectre » (p. 112).</li>
+</ul>
+<blockquote><p>« […] l’aliénation peut être définie préliminairement comme un état dans lequel les sujets poursuivent des buts ou suivent des pratiques que, d’une part, aucun acteur ou facteur externe ne les oblige à suivre – il existe des options alternatives possibles – et que, d’autre part, ils ne désirent ou n’approuvent pas “vraiment”. »</p><cite>Chap. 13, p. 113</cite></blockquote>
+<p>Rosa donne des exemples : travailler tard sans que personne ne l’exige alors qu’on voudrait « vraiment » rentrer ; mettre en place des réformes que l’on n’approuve pas ; participer à une guerre que l’on ne juge pas justifiée (p. 113). Si cet état persiste, on finit par oublier ce que l’on voulait « vraiment » (p. 113).</p></div></section>
+<section class="txt fs" id="alienation" aria-labelledby="h-alienation" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-alienation">Chapitre 14 : cinq formes d’aliénation</h2>
+<p>Le jeune Marx décrivait une aliénation quintuple dans le capitalisme : par rapport à ses actions (le travail), à ses produits, à la nature, aux autres êtres humains et à soi (p. 114). Rosa reprend ce schéma, en le déplaçant vers le temps : l’accélération franchit des seuils au-delà desquels les êtres humains deviennent nécessairement aliénés, non seulement par rapport à leurs actions et aux choses, mais aussi par rapport au temps et à l’espace (p. 114-115). L’aliénation est ici une distorsion de la relation entre le moi et le monde (p. 115).</p>
+<div class="cards">
+<article class="card" style="--c:var(--nuance)"><h3>a) L’espace</h3>
+<p class="k">Thèse</p>
+La proximité sociale et la proximité physique se séparent ; les lieux sont de moins en moins pertinents. On ne se sent plus « chez soi » (<em>Heimat</em>) dans un espace, car cela exige du temps.<span class="pg">p. 115-116</span>
+<p class="k">Exemples</p>
+Directeurs d’hôtel qui rassurent leurs clients sur la ville où ils se trouvent ; les « non-lieux » (Augé), les espaces qui ne racontent aucune histoire.<span class="pg">p. 116</span>
+</article>
+<article class="card" style="--c:var(--garde)"><h3>b) Les choses</h3>
+<p class="k">Thèse</p>
+Nous entretenions avec les objets des relations constitutives : un objet réparé ou usé finit par faire partie de nous. Dans la société de l’accélération, on ne répare plus, on remplace, et les objets, de plus en plus complexes, restent « étrangers ».<span class="pg">p. 117-119</span>
+<p class="k">Exemples</p>
+Rosa raconte ses logiciels et appareils : « Word-pour-DOS » qu’il maîtrisait, puis l’interface Vista qui lui est « illisible » ; il se sent « coupable » et « stupide ».<span class="pg">p. 119-120</span>
+<p class="k">Compensation</p>
+On achète des objets exclusifs et onéreux, mais on n’a pas le temps de les approprier.<span class="pg">p. 120</span>
+</article>
+<article class="card" style="--c:var(--contre)"><h3>c) Nos actions</h3>
+<p class="k">Thèse</p>
+Se sentir aliéné, c’est ne pas se sentir « chez soi » dans ce que l’on fait. Deux causes : la surcharge d’information, qui empêche de décider en connaissance de cause ; et la logique de compétition qui nous fait faire ce que nous ne voulons pas « vraiment » faire.<span class="pg">p. 120-126</span>
+<p class="k">Exemples</p>
+Choisir ses études, une assurance ou un partenaire sans jamais avoir le temps de s’informer ; surfer sur le web au lieu d’écrire (Rosa raconte sa propre journée) ; passer des heures devant la télévision, qui procure peu de plaisir ; acheter plus de livres et d’outils qu’on n’en pourra jamais utiliser.<span class="pg">p. 121-127</span>
+<p class="k">Remarque</p>
+Cette « rhétorique de l’obligation » (« je dois vraiment… ») trahit un sentiment viscéral d’hétéronomie.<span class="pg">p. 124</span>
+</article>
+<article class="card" style="--c:var(--neutre)"><h3>d) Le temps</h3>
+<p class="k">Thèse</p>
+Le « paradoxe subjectif du temps » : le temps de l’expérience et le temps du souvenir ont des qualités inverses. Ce qui est vécu intensément passe vite mais paraît long dans le souvenir (temps « bref/long »), l’ennui est long à vivre mais bref au souvenir (« long/bref »).<span class="pg">p. 127-128</span>
+<p class="k">Nouveauté</p>
+Dans la modernité tardive apparaît un motif « bref/bref » : le temps vécu passe vite mais se rétrécit dans la mémoire (télévision, zapping, Internet, jeux vidéo).<span class="pg">p. 128-130</span>
+<p class="k">Explication</p>
+Ces activités sont des « épisodes isolés » qui ne laissent pas de traces mémorielles. Rosa reprend l’opposition de Benjamin entre <em>Erlebnisse</em> (épisodes vécus) et <em>Erfahrungen</em> (expériences qui transforment) : nous sommes riches en épisodes, mais pauvres en expériences.<span class="pg">p. 130-132</span>
+</article>
+<article class="card" style="--c:var(--pour)"><h3>e) Soi et les autres</h3>
+<p class="k">Thèse</p>
+L’accélération mène à la désintégration puis à l’érosion de l’attachement : on n’intègre plus actions, expériences et objets à une vie. Il en va de même des relations : nous sommes « saturés » de contacts (Gergen), et les relations profondes, qui demandent du temps, deviennent « structurellement improbables ».<span class="pg">p. 132-133</span>
+<p class="k">Autoaliénation</p>
+Notre identité naît de nos actions, expériences et relations. Si tout cela est aliéné, nous peinons à nous raconter : risque d’« épuisement de l’être », de burn-out, de dépression (Ehrenberg).<span class="pg">p. 134-135</span>
+<p class="k">Idée clé</p>
+L’aliénation par rapport au monde et à soi sont « les deux faces de la même pièce » : elle persiste quand les « axes de résonance » entre l’être et le monde deviennent silencieux.<span class="pg">p. 135</span>
+</article>
+</div></div></section>
+<section class="txt fs" id="conclusion" aria-labelledby="h-conclusion" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-conclusion">Conclusion : l’opposé de l’aliénation</h2>
+<ul class="pts">
+<li><strong>Un essai partiel.</strong> Rosa reconnaît avoir présenté « une analyse partielle et unilatérale » de la modernité tardive, qui néglige les profits de la vitesse, et un concept d’aliénation « flou et philosophiquement sous-développé » (p. 137).</li>
+<li><strong>Sans essentialisme.</strong> On peut ré-introduire l’aliénation sans supposer une nature humaine : ce dont nous sommes aliénés, ce n’est pas un être intérieur immuable, mais « notre capacité à nous approprier le monde » (p. 137).</li>
+<li><strong>Sans paternalisme.</strong> Il n’y a pas de vie sans tensions ni conflits (p. 138). Mais les diktats de la vitesse produisent deux dilemmes : des modèles de comportement « étrangers » aux sujets, et l’absence de toute institution de « réconciliation » : les échecs retombent sur les individus (p. 138).</li>
+<li><strong>Un monde silencieux.</strong> Le sujet d’inquiétude le plus persistant des diagnostics de pathologie moderne est l’idée que nous lançons un appel dans le monde sans obtenir de réponse (p. 139-140).</li>
+<li><strong>La résonance.</strong> L’opposé de l’aliénation serait une relation « réactive » entre le moi et le monde. La « vie bonne » pourrait être une vie riche d’expériences de « résonance », qui vibrerait avec des « axes de résonance » (monde social, objets, nature, travail…). Cette résonance est d’abord existentielle et émotionnelle, non cognitive (p. 140-141).</li>
+<li><strong>Un statut modeste.</strong> Rosa le dit lui-même : « ceci n’est que pure spéculation », destinée à stimuler des recherches (p. 142).</li>
+</ul>
+<blockquote><p>« Pour les sujets de la modernité tardive, le monde (qui inclut le moi) est devenu silencieux, froid, indifférent ou même repoussant. »</p><cite>Conclusion, p. 139</cite></blockquote>
+</div></section>
+<section class="txt fs" id="citations" aria-labelledby="h-citations" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-citations">Citations à retenir</h2>
+<blockquote><p>« […] les taux de croissance dépassent les taux d’accélération et, par conséquent, le temps devient de plus en plus rare malgré l’accélération technique. »</p><cite>Chap. 1, p. 32</cite></blockquote>
+<blockquote><p>« La promesse eudémoniste de l’accélération moderne réside par conséquent dans l’idée (tacite) que l’accélération du “rythme de vie” est notre réponse (c’est-à-dire celle de la modernité) au problème de la finitude et de la mort. »</p><cite>Chap. 2, p. 40</cite></blockquote>
+<blockquote><p>« […] la force normative silencieuse de normes temporelles qui se présentent sous la forme de délais, de calendriers et de limites temporelles. »</p><cite>Chap. 5, p. 57</cite></blockquote>
+<blockquote><p>« […] la modernisation peut légitimement être interprétée comme un processus continu d’accélération sociale. »</p><cite>Chap. 4, p. 56</cite></blockquote>
+<blockquote><p>« Le “langage silencieux” du temps […] est assez efficace pour satisfaire l’immense besoin de régulation des sociétés modernes précisément parce qu’il reste – silencieux, inaperçu, idéologiquement individualisé et naturalisé. »</p><cite>Chap. 12, p. 104 (Rosa cite l’expression de Hall)</cite></blockquote>
+<blockquote><p>« Ce par rapport à quoi nous sommes aliénés par les diktats de la vitesse, je l’ai dit, n’est pas notre être intérieur immuable ou inaltérable, mais notre capacité à nous approprier le monde. »</p><cite>Conclusion, p. 137</cite></blockquote>
+</div></section>
+<section class="txt fs" id="notions" aria-labelledby="h-notions" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-notions">Notions à retenir</h2>
+<dl>
+<dt>Accélération sociale</dt><dd>Augmentation de la vitesse de déclin de la fiabilité des expériences et des attentes, et compression des durées définies comme le « présent » (p. 22). Elle recouvre trois formes : technique, du changement social, du rythme de vie (p. 17).</dd>
+<dt>Rythme de vie</dt><dd>Nombre d’épisodes d’action ou d’expérience par unité de temps (p. 25).</dd>
+<dt>Compression du présent</dt><dd>Notion de Hermann Lübbe : le temps pendant lequel expériences et attentes coïncident se raccourcit (p. 21-22).</dd>
+<dt>Famine temporelle</dt><dd>Sentiment de manquer de temps, paradoxal face aux gains de temps de la technique (p. 25).</dd>
+<dt>Cycle de l’accélération</dt><dd>Boucle par laquelle les trois formes d’accélération s’entraînent (p. 41-43).</dd>
+<dt>Désynchronisation</dt><dd>Friction entre des processus qui s’accélèrent à des vitesses différentes (p. 93).</dd>
+<dt>Compétition positionnelle et performative</dt><dd>Dans la première, on lutte pour atteindre une position ; dans la seconde, on doit prouver chaque jour sa performance (p. 80-82).</dd>
+<dt>Totalitarisme de l’accélération</dt><dd>Pouvoir abstrait qui pèse sur les volontés, est inéchappable, omniprésent et difficile à critiquer (p. 84).</dd>
+<dt>Normes temporelles cachées</dt><dd>Délais et rythmes qui régulent la société sans se présenter comme des normes éthiques ou politiques (p. 57, 101-105).</dd>
+<dt>Aliénation</dt><dd>État dans lequel on fait ou poursuit ce que l’on ne désire ou n’approuve pas « vraiment », sans que rien ne nous y contraigne (p. 113). Elle prend cinq formes (p. 115-135).</dd>
+<dt>Résonance</dt><dd>Relation « réactive » entre le moi et le monde, évoquée en conclusion comme opposé de l’aliénation (p. 139-141).</dd>
+</dl></div></section>
+<section class="txt fs" id="limites" aria-labelledby="h-limites" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-limites">Limites et débats</h2>
+<ul class="pts">
+<li><strong>Un essai programmatique.</strong> Rosa déclare lui-même son analyse « partielle et unilatérale », son concept d’aliénation « flou » et sa vision de la résonance « pure spéculation » (p. 137, 142). Le livre ouvre un programme de recherche plus qu’il ne l’achève.</li>
+<li><strong>Des données limitées.</strong> Sur le rythme de vie, Rosa invite à la prudence : les données longitudinales sont rares, on trouve des contre-exemples, et les causes des tendances mesurées restent peu claires (p. 26-27).</li>
+<li><strong>Des illustrations personnelles.</strong> Plusieurs exemples du chapitre 14 sont tirés de l’expérience de l’auteur (logiciels, journée de travail) : ils illustrent la thèse plus qu’ils ne la démontrent.</li>
+<li><strong>Prolongement (hors de l’ouvrage).</strong> Rosa a développé son analyse dans <em>Accélération. Une critique sociale du temps</em> (indiqué en bibliographie du livre) et, plus tard, dans un ouvrage consacré à la résonance.</li>
+</ul></div></section>
+</main>
+<footer><div class="wrap"><p>Fiche de lecture : Hartmut Rosa, <em>Aliénation et accélération</em> (2012).</p></div></footer>
+<script>
+(function(){
+  var links=[].slice.call(document.querySelectorAll('#nav a'));
+  var secs=[].slice.call(document.querySelectorAll('.txt')),lock=null,ticking=false;
+  function setCur(i){
+    links.forEach(function(a,k){if(k===i)a.setAttribute('aria-current','true');else a.removeAttribute('aria-current')});
+    var a=links[i],box=a.parentNode.parentNode;
+    if(box.scrollWidth>box.clientWidth&&box.scrollTo)box.scrollTo({left:i?a.offsetLeft-20:0});
+  }
+  function upd(){
+    ticking=false;
+    if(lock!==null){setCur(lock);return}
+    var nb=document.querySelector('.nav'),y=(nb?nb.getBoundingClientRect().bottom:0)+24,cur=0;
+    secs.forEach(function(s,k){if(s.getBoundingClientRect().top<=y)cur=k});
+    setCur(cur);
+  }
+  function req(){if(!ticking){ticking=true;requestAnimationFrame(upd)}}
+  links.forEach(function(a,k){a.addEventListener('click',function(){lock=k;setCur(k)})});
+  ['wheel','touchstart','mousedown','keydown'].forEach(function(ev){window.addEventListener(ev,function(){lock=null},{passive:true})});
+  window.addEventListener('scroll',req,{passive:true});window.addEventListener('resize',req);
+  upd();
+})();
+</script>
+<script>
+(function(){var r=document.documentElement,K='texte-seul',KL='mode-lecture';
+var btn=document.getElementById('a11y-btn'),menu=document.getElementById('a11y-menu'),opts=menu.querySelectorAll('.a11y-opt'),closed=[],shown=[],skipped=[];
+function apply(m){
+  var ts=m==='ts',lc=m==='lect',was=r.classList.contains('lect');
+  r.classList.toggle('ts',ts);r.classList.toggle('lect',lc);
+  if(lc&&!was){closed=[];shown=[];skipped=[];
+    document.querySelectorAll('main details').forEach(function(d){if(!d.open){closed.push(d);d.open=true}});
+    document.querySelectorAll('main [hidden]').forEach(function(x){if(!x.closest('[aria-labelledby="h-video"]')&&!x.matches('video,[role="tablist"]')){shown.push(x);x.hidden=false}});
+    document.querySelectorAll('main section').forEach(function(sc){var h=sc.querySelector('h2');
+      if(sc.querySelector('input,select,textarea')||(h&&/^(Exercice|Faites le tri|En vid)/i.test(h.textContent.trim()))){sc.classList.add('lc-skip');skipped.push(sc)}});}
+  if(!lc&&was){closed.forEach(function(d){d.open=false});shown.forEach(function(x){x.hidden=true});skipped.forEach(function(s){s.classList.remove('lc-skip')});closed=[];shown=[];skipped=[]}
+  opts.forEach(function(o){o.setAttribute('aria-checked',o.getAttribute('data-mode')===m?'true':'false')});
+  try{localStorage.setItem(K,ts?'1':'0');localStorage.setItem(KL,lc?'1':'0')}catch(e){}
+}
+function open(on){menu.hidden=!on;btn.setAttribute('aria-expanded',on?'true':'false')}
+btn.addEventListener('click',function(e){e.stopPropagation();open(menu.hidden)});
+opts.forEach(function(o){o.addEventListener('click',function(){apply(o.getAttribute('data-mode'));open(false);btn.focus()})});
+document.addEventListener('click',function(e){if(!menu.hidden&&!menu.contains(e.target)&&e.target!==btn)open(false)});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!menu.hidden){open(false);btn.focus()}});
+var v='orig';try{if(localStorage.getItem(KL)==='1')v='lect';else if(localStorage.getItem(K)==='1'&&menu.querySelector('[data-mode="ts"]'))v='ts'}catch(e){}
+if(v==='ts')apply('ts');
+if(v==='lect')window.addEventListener('load',function(){apply('lect')});
+})();
+</script>
+</body>
+</html>

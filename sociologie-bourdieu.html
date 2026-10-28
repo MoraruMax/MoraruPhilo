@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bourdieu en six textes</title>
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+  --bg:#F1F4F6; --surface:#FFFFFF; --ink:#1B2733; --muted:#53626F; --line:#D5DDE3; --focus:#0E6E73;
+  --pour:#0E6E73; --contre:#A8321F; --nuance:#2F4FA8; --garde:#8A5A00; --neutre:#4F5D69;
+  --serif:Georgia,"Times New Roman",serif;
+  --sans:system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#10171D; --surface:#18222A; --ink:#E7EDF2; --muted:#A1B0BC; --line:#2A3641; --focus:#5FD0D6;
+    --pour:#5FD0D6; --contre:#FF8A75; --nuance:#97ADFF; --garde:#F0BC52; --neutre:#A9B7C2;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#10171D; --surface:#18222A; --ink:#E7EDF2; --muted:#A1B0BC; --line:#2A3641; --focus:#5FD0D6;
+  --pour:#5FD0D6; --contre:#FF8A75; --nuance:#97ADFF; --garde:#F0BC52; --neutre:#A9B7C2;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:calc(4.2rem + env(safe-area-inset-top,0px));-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.1rem/1.65 var(--serif)}
+.wrap{width:min(980px,100% - 2.5rem);margin-inline:auto}
+h1,h2,h3{margin:0;font-family:var(--serif)}
+h1{font-weight:800;font-size:clamp(2.5rem,8vw,5rem);line-height:1.02;letter-spacing:-.02em}
+h2{font-weight:800;font-size:clamp(1.6rem,3.4vw,2.2rem);line-height:1.12}
+p{margin:0 0 1em}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
+.hero{padding:clamp(2.2rem,6vw,4.5rem) 0 2rem}
+.lead{font-size:clamp(1.15rem,2.4vw,1.45rem);line-height:1.5;max-width:40ch;margin:1.4rem 0 1rem}
+.note{font:500 .92rem/1.5 var(--sans);color:var(--muted);max-width:62ch;margin:0}
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--bg);border-bottom:1px solid var(--line)}
+.nav ol{display:flex;gap:.3rem;list-style:none;margin:0;padding:.5rem 0;overflow-x:auto}
+.nav a{display:block;white-space:nowrap;text-decoration:none;color:var(--muted);font:700 .88rem/1.2 var(--sans);padding:.45rem .7rem .35rem;border-radius:6px;border-bottom:4px solid var(--c)}
+.nav a:hover{color:var(--ink)}
+.nav a[aria-current="true"]{background:var(--ink);color:var(--bg)}
+.nav small{display:block;font-weight:500;font-size:.75rem;opacity:1}
+.txt{border-bottom:1px solid var(--line);padding:clamp(2.4rem,6vw,3.6rem) 0}
+.meta{display:flex;flex-wrap:wrap;gap:.5rem .9rem;align-items:center;margin-bottom:.8rem;font:500 .92rem/1.3 var(--sans);color:var(--muted)}
+.tag{font:700 .8rem/1 var(--sans);color:var(--c);border:1.5px solid var(--c);border-radius:5px;padding:.3rem .5rem}
+.thesis{font-size:clamp(1.2rem,2.4vw,1.5rem);line-height:1.4;font-weight:600;margin:1rem 0 1.4rem;max-width:44ch;padding-left:1rem;border-left:5px solid var(--c)}
+.cols{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:1.6rem clamp(1.6rem,4vw,3rem)}
+h3{font:700 .9rem/1.2 var(--sans);color:var(--c);margin-bottom:.7rem}
+.args{margin:0;padding:0;list-style:none;counter-reset:a}
+.args li{counter-increment:a;padding:.6rem 0 .6rem 2.4rem;border-top:1px solid var(--line);position:relative}
+.args li:last-child{border-bottom:1px solid var(--line)}
+.args li::before{content:counter(a);position:absolute;left:0;top:.5rem;font:800 1.5rem/1 var(--serif);color:var(--c)}
+.quotes{margin:0;padding:0}
+.quotes blockquote{margin:0 0 1rem;padding:.2rem 0 .2rem .9rem;border-left:3px solid var(--line)}
+.quotes p{margin:0 0 .2rem;font-style:italic}
+.quotes cite{font:500 .82rem/1.3 var(--sans);font-style:normal;color:var(--muted)}
+footer{padding:1.6rem 0 2.5rem;font:500 .92rem/1.5 var(--sans);color:var(--muted)}
+footer p{margin:0}
+@media (max-width:760px){.cols{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+.pdfbtn{display:inline-flex;align-items:center;gap:.5rem;font:600 .88rem/1 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--surface);border:1.5px solid var(--ink);border-radius:999px;padding:.55rem .95rem;cursor:pointer}
+.pdfbtn:hover{background:var(--ink);color:var(--bg)}.pdfbtn:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:2px}
+
+/* Mode lecture (pages à structure libre) */
+html.lect body::before,html.lect body::after{display:none!important}
+html.lect body{background:var(--bg)!important}
+html.lect .pn,html.lect #quiz,html.lect section[aria-labelledby="h-video"],html.lect video,html.lect .score,html.lect .lc-skip,html.lect [role="tablist"],html.lect main button,html.lect main input,html.lect main select,html.lect main textarea,html.lect .sec-head p.lc-x{display:none!important}
+html.lect .hero h1,html.lect .hero p,html.lect section.block h2,html.lect footer p{text-shadow:none!important}
+html.lect .hero,html.lect section.block{padding-block:1.2rem!important;border:0!important}
+html.lect .wrap,html.lect .sec-head{max-width:40rem!important;margin-inline:auto}
+html.lect .hgrid,html.lect .two,html.lect .cols{display:block!important}
+html.lect main,html.lect .hero{font-family:var(--serif)}
+html.lect .hero h1{font-size:clamp(1.9rem,5vw,2.6rem)!important}
+html.lect main p,html.lect main li,html.lect .lead{font-size:1.12rem!important;line-height:1.75!important}
+html.lect :is(main,.hero) :is(div,li,blockquote,article,aside,p,ul,ol,section,details,summary,figure,span):not(table *){background:none!important;border:0!important;box-shadow:none!important;border-radius:0!important}
+html.lect main [hidden]{display:revert!important}
+html.lect :is(main,.hero) div:not(.wrap):not(.sec-head):not(table *){display:block!important;grid-template-columns:none!important;float:none!important;max-width:none!important;width:auto!important;margin-inline:0}
+html.lect main li{display:list-item!important}
+html.lect .must{margin:1rem 0}
+html.lect .lead{max-width:none!important}
+html.lect .wrap{padding-inline:0}
+html.lect main details>summary{cursor:default;pointer-events:none;list-style:none}
+html.lect main details>summary::-webkit-details-marker,html.lect main details>summary::before{display:none!important}
+html.lect main blockquote{margin:.8rem 0;padding:0 0 0 1rem!important;border-left:3px solid var(--line)!important}
+html.lect main .panel{display:block!important;margin-bottom:1rem}
+html.lect main h3,html.lect main h4{margin-top:1.4rem}
+html.lect .nav,html.lect .hero .note{display:none!important}
+html.lect .thesis{border:0!important;padding-left:0!important;max-width:none!important}
+html.lect .args li{padding-left:0!important}
+html.lect .args li::before{display:none!important}
+html.lect .args{list-style:decimal;padding-left:1.4rem!important}
+html.lect .txt{padding-block:1.2rem!important}
+
+/* Accessibilité */
+.a11y{position:relative;display:inline-block}
+.a11y-menu{position:absolute;right:0;top:calc(100% + .4rem);z-index:60;min-width:14rem;background:var(--bg);color:var(--ink);border:1.5px solid var(--ink);border-radius:14px;padding:.35rem;box-shadow:0 8px 24px rgba(0,0,0,.18);text-shadow:none}
+.a11y-menu[hidden]{display:none}
+.a11y-menu p{margin:0;padding:.45rem .7rem .3rem;font:700 .72rem/1 system-ui,-apple-system,sans-serif;letter-spacing:.06em;text-transform:uppercase;opacity:.65}
+.a11y-opt{display:flex;align-items:center;gap:.6rem;width:100%;text-align:left;font:600 .92rem/1.2 system-ui,-apple-system,sans-serif;color:inherit;background:none;border:0;border-radius:9px;padding:.6rem .7rem;cursor:pointer}
+.a11y-opt:hover{background:var(--surface)}
+.a11y-opt:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:-2px}
+.a11y-opt .dot{flex:none;width:1rem;height:1rem;border:2px solid currentColor;border-radius:50%;position:relative}
+.a11y-opt[aria-checked="true"] .dot::after{content:"";position:absolute;inset:2px;background:currentColor;border-radius:50%}
+.a11y-opt small{display:block;font-weight:500;opacity:.7;font-size:.78rem;margin-top:.15rem}
+@media print{
+  :root{--bg:#fff!important;--surface:#fff!important;--ink:#111!important;--muted:#444!important;--line:#bbb!important;color-scheme:light!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:#fff!important;color:#111!important}
+  body::before,body::after{display:none!important}
+  nav,.pdfbtn,.pn,video,section[aria-labelledby="h-video"]{display:none!important}
+  .rev,.js .rev{opacity:1!important;transform:none!important}
+  .stp li[hidden]{display:list-item!important}
+  details>*{display:block!important}
+  article,li,.card,figure,.stage{break-inside:avoid}
+  h1,h2,h3{break-after:avoid;text-shadow:none!important}
+  *{text-shadow:none!important}
+  a{color:inherit;text-decoration:none}
+  section.block,.part{padding-top:1.2rem!important;padding-bottom:1.2rem!important}
+  footer{break-before:avoid;border-top:1px solid #999;margin-top:1rem}
+}
+@page{size:A4;margin:16mm 14mm}
+/* Texte */
+.tx summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:.7rem;font:800 clamp(1.4rem,3vw,1.9rem)/1.2 var(--sans);padding:.3rem 0}
+.tx summary::-webkit-details-marker{display:none}
+.tx summary::before{content:"";width:.6em;height:.6em;border-right:.2em solid currentColor;border-bottom:.2em solid currentColor;transform:rotate(-45deg);transition:transform .15s;flex:none;margin-right:.2rem}
+.tx[open] summary::before{transform:rotate(45deg)}
+@media (prefers-reduced-motion:reduce){.tx summary::before{transition:none}}
+.txb{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--c,var(--ink));padding:1.2rem clamp(1rem,3vw,1.8rem);margin-top:.9rem;max-width:46rem;font:400 1.1rem/1.75 var(--serif)}
+.txb p{margin:0 0 1em}
+.txb h3{font:700 1rem/1.3 var(--sans);margin:1.2em 0 .5em}
+.txb .vs{font:700 .72rem/1 var(--sans);color:var(--muted);margin-right:.15em}
+.txb .tsrc{font:600 .88rem/1.4 var(--sans);color:var(--muted);text-align:right;margin:1.1em 0 0}
+.txb .tsrc:not(:last-child){margin-bottom:1.4em;padding-bottom:1.2em;border-bottom:1px solid var(--line)}
+
+/* Sujets de dissertation */
+.sjd ul{list-style:none;margin:.6rem 0 0;padding:0;max-width:46rem}
+.sjd li{margin:0;padding:.55rem 0;border-top:1px solid var(--line)}
+.sjd li:last-child{border-bottom:1px solid var(--line)}
+.sjd a{color:inherit;font:600 1.05rem/1.4 var(--sans,system-ui);text-underline-offset:3px}
+.sjd p{margin:.4rem 0 0}
+html.lect .sjd li{border:0!important;padding:.25rem 0!important}
+html.lect .sjd a{font:600 1.12rem/1.6 var(--serif,Georgia,serif)}
+@media print{.sjd a{font-weight:600}.sjd li{border-color:#999}}
+.ln{font:700 .66rem/1 var(--sans);color:var(--muted);margin:0 .2em 0 .1em;vertical-align:super}
+.txb .tsrcline{font:600 .9rem/1.4 var(--sans);color:var(--muted)}
+.txn{font:500 .85rem/1.4 var(--sans);color:var(--muted);margin:.2rem 0 1rem}
+html.lect .txb{padding:0!important}
+</style>
+<script>try{history.scrollRestoration="manual"}catch(e){}(function(){function t(){if(!location.hash)window.scrollTo(0,0)}t();document.addEventListener("DOMContentLoaded",t);window.addEventListener("load",function(){t();setTimeout(t,60)});window.addEventListener("pageshow",t)})();</script>
+<script src="confort.js"></script><script src="voix.js" defer></script>
+</head>
+<body>
+<nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><span style="display:inline-flex;gap:.6rem;flex-wrap:wrap;align-items:center"><span class="a11y"><button type="button" class="pdfbtn" id="a11y-btn" aria-haspopup="true" aria-expanded="false" aria-controls="a11y-menu"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="1.6"/><path d="M5 8.5l7 1.5 7-1.5M12 10v4.5M8.5 21l3.5-6.5 3.5 6.5"/></svg><span>Accessibilité</span></button><div class="a11y-menu" id="a11y-menu" role="radiogroup" aria-label="Affichage de la page" hidden><p>Affichage</p><button type="button" role="radio" class="a11y-opt" data-mode="orig" aria-checked="true"><span class="dot"></span><span>Page d’origine<small>Image de fond et mise en page habituelle</small></span></button><button type="button" role="radio" class="a11y-opt" data-mode="lect" aria-checked="false"><span class="dot"></span><span>Mode lecture<small>Texte continu, sans cadres ni exercices</small></span></button></div></span><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></span></nav>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Pierre Bourdieu en six textes</h1>
+    <p class="lead">Sociologie et liberté, champs, habitus, pouvoir des mots, goût et école : comment le monde social se reproduit, et comment le connaître.</p>
+    <p class="note">Bourdieu (1930-2002). Les passages en gras sont ceux qui sont mis en valeur dans les textes.</p>
+  </div>
+</header>
+<nav class="nav" aria-label="Les textes"><div class="wrap"><ol id="nav">
+<li><a href="#t1" style="--c:var(--contre)">Texte 1<small>Sociologie et liberté</small></a></li>
+<li><a href="#t2" style="--c:var(--contre)">Texte 2<small>Les propriétés des champs sociaux</small></a></li>
+<li><a href="#t3" style="--c:var(--contre)">Texte 3<small>Habitus et sens pratique</small></a></li>
+<li><a href="#t4" style="--c:var(--contre)">Texte 4<small>Le pouvoir social des mots</small></a></li>
+<li><a href="#t5" style="--c:var(--contre)">Texte 5<small>Le goût esthétique comme…</small></a></li>
+<li><a href="#t6" style="--c:var(--contre)">Texte 6<small>L’école comme lieu de la…</small></a></li>
+</ol></div></nav>
+<main id="main">
+<section class="txt" id="t1" aria-labelledby="h1" style="--c:var(--contre)"><div class="wrap">
+<div class="meta"><span class="tag">Texte 1</span></div>
+<h2 id="h1">Sociologie et liberté</h2>
+<details class="tx" open><summary>Le texte</summary><div class="txb">
+<p>« Contrairement aux apparences, <strong>c’est en élevant le degré de nécessité perçue et en donnant une meilleure connaissance des lois du monde social, que la science sociale donne le plus de liberté</strong>. <strong>Tout progrès dans la connaissance de la nécessité est un progrès dans la liberté possible</strong>. Alors que la méconnaissance de la nécessité enferme une forme de <strong>reconnaissance de la nécessité</strong>, et sans doute la plus absolue, la plus totale, puisqu’elle s’ignore comme telle, la connaissance de la nécessité n’implique pas du tout la nécessité de cette reconnaissance. Au contraire, elle fait apparaître <strong>la possibilité de choix</strong> qui est inscrite dans toute relation du type si on a ceci, alors on aura cela : la liberté qui consiste à choisir d’accepter le si ou de le refuser est dépourvue de sens aussi longtemps que l’on ignore la relation qui l’unit à un alors. <strong>La mise au jour des lois qui supposent le laisser-faire (c’est-à-dire l’acceptation inconsciente des conditions de réalisation des effets prévus) étend le domaine de la liberté. Une loi ignorée est une nature, un destin (…) ; une loi connue apparaît comme la possibilité d’une liberté.</strong> »</p>
+<p class="tsrc">Pierre Bourdieu, <em>Questions de sociologie</em>, Minuit, p. 45.</p>
+</div></details>
+</div></section>
+<section class="txt" id="t2" aria-labelledby="h2" style="--c:var(--contre)"><div class="wrap">
+<div class="meta"><span class="tag">Texte 2</span></div>
+<h2 id="h2">Les propriétés des champs sociaux</h2>
+<details class="tx" open><summary>Le texte</summary><div class="txb">
+<p>« Les <strong>champs</strong> se présentent à l’appréhension synchronique comme <strong>des espaces structurés de positions (ou de postes) dont les propriétés dépendent de leur position dans ces espaces et qui peuvent être analysées indépendamment des caractéristiques de leurs occupants</strong> (en partie déterminées par elles). Il y a <strong>des <em>lois générales des champs</em></strong> : des champs aussi différents que le champ de la politique, le champ de la philosophie, le champ de la religion ont des lois de fonctionnement invariantes (c’est ce qui fait que le projet d’une théorie générale n’est pas insensé et que l’on peut se servir de ce que l’on apprend du fonctionnement de chaque champ particulier pour interroger et interpréter d’autres champs) […]. Mais on sait que dans tout champ on trouvera une lutte, dont il faut chaque fois rechercher <strong>les formes spécifiques</strong>, entre le nouvel entrant qui essaie de faire sauter les verrous du droit d’entrée et le dominant qui essaie de défendre le monopole et d’exclure la concurrence.</p>
+<p>Un champ, s’agirait-il du champ scientifique, se définit entre autres choses en définissant <strong>des enjeux et des intérêts spécifiques</strong>, qui sont irréductibles aux enjeux et aux intérêts propres à d’autres champs (on ne pourra pas faire courir un philosophe avec des enjeux de géographes) et qui ne sont pas perçus de quelqu’un qui n’a pas été construit pour entrer dans ce champ (chaque catégorie d’intérêts implique l’indifférence à d’autres intérêts, d’autres investissements, ainsi voués à être perçus comme absurdes, insensés, ou sublimes, désintéressés). Pour qu’un champ marche il faut qu’il y ait des enjeux et des gens prêts à jouer le jeu, dotés de l’habitus impliquant la connaissance et la reconnaissance des lois immanentes du jeu, des enjeux, etc.</p>
+<p>[…] <strong>La structure du champ est un <em>état</em> du rapport de force entre les agents ou les institutions engagés dans la lutte</strong> ou, si l’on préfère, de la distribution du capital spécifique qui, accumulé au cours des luttes antérieures, oriente les stratégies ultérieures. Cette structure qui est au principe des stratégies destinées à la transformer, est elle-même toujours en jeu : les luttes dont le champ est le lieu ont pour enjeu <strong>le monopole de la violence légitime</strong> (autorité spécifique) qui est caractéristique du champ considéré, c’est à dire, en définitive, <strong>la conservation ou la subversion de la structure de la distribution du capital spécifique</strong>. (Parler de capital spécifique, c’est dire que le capital vaut <em>en relation avec</em> un certain champ, donc dans les limites de ce champ, et qu’il n’est convertible en une autre espèce de capital que sous certaines conditions.) […]</p>
+<p>Ceux qui, dans un état déterminé du rapport de force, monopolisent (plus ou moins complètement) le capital spécifique, fondement du pouvoir ou de l’autorité spécifique caractéristique d’un champ, sont inclinés à des <strong>stratégies de conservation</strong> – celles qui, dans les champs de production de biens culturels, tendent à la défense de <strong>l’orthodoxie</strong> –, tandis que les moins pourvus de capital (qui sont aussi souvent les nouveaux venus, donc, la plupart du temps, les plus jeunes) sont enclins aux <strong>stratégies de subversion</strong> – celles de <strong>l’<em>hérésie</em></strong>. C’est l’hérésie, l’hétérodoxie, comme rupture critique, souvent liée à la crise, avec la <em>doxa</em>, qui fait sortir les dominants du silence et qui leur impose de produire le discours défensif de l’orthodoxie, pensée droite et de droite visant à restaurer l’équivalent de l’adhésion silencieuse de la doxa.</p>
+<p>Autre propriété, déjà moins visible, d’un champ : <strong>tous les gens qui sont engagés dans un champ ont en commun un certain nombre d’intérêts fondamentaux, à savoir tout ce qui est lié à l’existence même du champ</strong> : de là une <strong>complicité objective</strong> qui est sous-jacente à tous les antagonismes. On oublie que la lutte présuppose un accord entre les antagonistes sur ce qui mérite qu’on lutte et qui est refoulé dans le cela-va-de-soi, laissé à l’état de <em>doxa</em>, c’est-à-dire tout ce qui fait le champ lui-même, <strong>le jeu, les enjeux, tous les présupposés qu’on accepte tacitement, sans même le savoir, par le fait de jouer, d’entrer dans le jeu</strong>. Ceux qui participent à la lutte <strong>contribuent à la reproduction du jeu</strong> en contribuant, plus ou moins complètement selon les champs, à <strong>produire la croyance dans la valeur des enjeux</strong>. Les nouveaux entrants doivent payer un droit d’entrée qui consiste dans la reconnaissance de la valeur du jeu (la sélection et la cooptation accordent toujours beaucoup d’attention aux indices de l’adhésion au jeu, de l’investissement) et dans la connaissance (pratique) des principes de fonctionnement du jeu. Ils sont voués aux stratégies de subversion, mais qui, sous peine d’exclusion, restent cantonnées dans certaines limites. Et de fait, les <strong><em>révolutions partielles</em></strong> dont les champs sont continûment le lieu ne mettent pas en question les fondements mêmes du jeu, son axiomatique fondamentale, le socle de croyances ultimes sur lesquelles repose tout le jeu.</p>
+<p>Au contraire, dans les champs de production de biens culturels, religion, littérature, art, la subversion hérétique se réclame du retour aux sources, à l’origine, à l’esprit, à la vérité du jeu, contre la banalisation et la dégradation dont il a fait l’objet. (Un des facteurs qui met les différents jeux à l’abri des révolutions totales, de nature à détruire non seulement les dominants et la domination, mais le jeu lui-même, c’est précisément l’importance même de l’investissement, en temps, en efforts, etc., que suppose l’entrée dans le jeu et qui, comme les <strong>épreuves des rites de passage</strong>, contribue à <strong>rendre <em>impensable </em>pratiquement la destruction pure et simple du jeu</strong>. C’est ainsi que des secteurs entiers de la culture (…) sont sauvés par le coût que suppose l’acquisition des connaissances nécessaires même pour les détruire dans les formes).</p>
+<p>A travers la connaissance pratique des principes du jeu qui est tacitement exigée des nouveaux entrants, c’est toute l’histoire du jeu, tout le passé du jeu, qui sont présents dans chaque acte de jeu. »</p>
+<p class="tsrc">Pierre Bourdieu, <em>Questions de sociologie</em>, Minuit, 1984, p. 113-116.</p>
+</div></details>
+</div></section>
+<section class="txt" id="t3" aria-labelledby="h3" style="--c:var(--contre)"><div class="wrap">
+<div class="meta"><span class="tag">Texte 3</span></div>
+<h2 id="h3">Habitus et sens pratique</h2>
+<details class="tx" open><summary>Le texte</summary><div class="txb">
+<p>« Les conditionnements associés à une classe particulière de conditions d’existence produisent des <strong>habitus</strong>, <strong>systèmes de <em>dispositions </em>durables et transposables</strong>, structures structurées prédisposées à fonctionner comme <strong>structures structurantes</strong>, c’est-à-dire en tant que principes générateurs et organisateurs de pratiques et de représentations qui peuvent être objectivement adaptées à leur but sans supposer la visée consciente de fins et la maîtrise expresse des opérations nécessaires pour les atteindre, objectivement « réglées <em>» </em>et « régulières » sans être en rien le produit de l’obéissance à des règles, et, étant tout cela, <strong>collectivement orchestrées sans être le produit de l’action organisatrice d’un chef d’orchestre</strong>.(…)</p>
+<p>Échappant à l’alternative des forces inscrites dans l’état antérieur du système, à <strong><em>l’extérieur</em></strong><em> des corps, et des forces </em><strong><em>intérieures</em></strong><em>, </em>motivations surgies, dans l’instant, de la décision libre, les dispositions intérieures, <em>intériorisation de l’extériorité, </em>permettent aux forces extérieures de s’exercer, mais selon la logique spécifique des organismes dans lesquels elles sont incorporées, c’est-à-dire de manière durable, systématique et non mécanique : <strong>système acquis de schèmes générateurs</strong>, l’habitus rend possible la production libre de toutes les pensées, toutes les perceptions et toutes les actions inscrites dans les limites inhérentes aux conditions particulières de sa production, et de celles-là seulement. <strong>À travers lui, la structure dont il est le produit gouverne la pratique</strong>, non selon les voies d’un déterminisme mécanique, mais au travers des contraintes et des limites originairement assignées à ses inventions. Capacité de génération infinie et pourtant strictement limitée, l’habitus n’est difficile à penser qu’aussi longtemps qu’on reste enfermé dans les alternatives ordinaires, qu’il vise à dépasser, du déterminisme et de la liberté, du conditionnement et de la créativité, de la conscience et de l’inconscient ou de l’individu et de la société. Parce que l’habitus est une capacité infinie d’engendrer en toute liberté (contrôlée) des produits – pensées, perceptions, expressions, actions – qui ont toujours pour limites les conditions historiquement et socialement situées de sa production, la <strong>liberté conditionnée et conditionnelle</strong> qu’il assure est aussi éloignée d’une création d’imprévisible nouveauté que d’une simple reproduction mécanique des conditionnements initiaux. »</p>
+<p class="tsrc">Pierre Bourdieu, <em>Le Sens pratique</em>, Minuit, p. 88-89 et 92.</p>
+<p>« Celui qui possède une maîtrise pratique, un art, quel qu’il soit, est capable de mettre en œuvre, dans le passage à l’acte, cette disposition qui ne lui apparaît qu’en acte, dans la relation avec une situation (il saura refaire, autant de fois que la situation le demandera, la feinte qui s’impose à lui comme la seule chose à faire (…). L’idée de <strong>logique pratique</strong>, logique en soi, sans réflexion consciente ni contrôle logique, est une <em>contradiction dans les termes, </em>qui défie la logique logique. Cette logique paradoxale est celle de toute pratique ou, mieux, de tout <strong><em>sens pratique</em></strong> : happée par <em>ce dont il s’agit, totalement présente au présent et aux fonctions pratiques qu’elle y découvre (…). </em></p>
+<p>Le fait que le sens pratique ne peut (sauf entraînement spécial) fonctionner <em>à vide, </em>en dehors de toute situation, <strong>condamne à l’irréalité toutes les enquêtes par questionnaire</strong> qui enregistrent comme des produits authentiques de l’habitus les réponses suscitées par les stimuli abstraits de la situation d’enquête, artefacts de laboratoire qui sont aux réactions en situation réelle ce que les rites folklorisés, accomplis à l’intention des touristes (ou des ethnologues), sont aux rites imposés par les impératifs d’une tradition vivante ou l’urgence d’une situation dramatique. »</p>
+<p class="tsrc">Pierre Bourdieu, <em>Le Sens pratique</em>, Minuit, p. 152-154.</p>
+</div></details>
+</div></section>
+<section class="txt" id="t4" aria-labelledby="h4" style="--c:var(--contre)"><div class="wrap">
+<div class="meta"><span class="tag">Texte 4</span></div>
+<h2 id="h4">Le pouvoir social des mots</h2>
+<details class="tx" open><summary>Le texte</summary><div class="txb">
+<p>« La question naïve du <strong>pouvoir des mots</strong> est logiquement impliquée dans la suppression initiale de la question des usages du langage, donc des conditions sociales d’utilisation des mots. Dès que l’on traite le langage comme un <strong>objet autonome</strong>, acceptant la séparation radicale que faisait Saussure entre la linguistique interne et la linguistique externe, entre la science de la langue et la science des usages sociaux de la langue, <strong>on se condamne à chercher le pouvoir des mots dans les mots, c’est-à-dire là où il n’est pas</strong>; en effet, la <strong>force d’illocution</strong> des expressions <em>(illocutionary force) </em>ne saurait être trouvée dans les mots mêmes, comme les « performatifs », dans lesquels elle est <em>indiquée </em>ou mieux <em>représentée</em>—au double sens. Ce n’est que par exception—c’est-à-dire dans les situations abstraites et artificielles de l’expérimentation— que les échanges symboliques se réduisent à des rapports de pure communication et que le contenu informatif du message épuise le contenu de la communication. Le pouvoir des paroles n’est autre chose que <strong>le <em>pouvoir délégué </em>du porte-parole</strong>, et ses paroles -c’est-à-dire, indissociablement, la matière de son discours et sa manière de parler — sont tout au plus un témoignage et un témoignage parmi d’autres de la <em>garantie de délégation </em>dont il est investi. (…)</p>
+<p>Essayer de comprendre linguistiquement le pouvoir des manifestations linguistiques, chercher dans le langage le principe de la logique et de l’efficacité du <em>langage d’institution, </em>c’est oublier que <strong>l’autorité advient au langage du dehors</strong>, comme le rappelle concrètement le <em>skeptron </em>que l’on tend, chez Homère, à l’orateur qui va prendre la parole. (…)</p>
+<p>La tentative d’Austin pour caractériser les énoncés performatifs doit ses limites, et aussi son intérêt, au fait qu’il ne fait pas exactement ce qu’il croit faire, ce qui l’empêche de le faire complètement : croyant contribuer à la philosophie du langage, il travaille à la théorie d’une classe particulière de manifestations symboliques dont le discours d’autorité n’est que la forme paradigmatique et qui doivent leur efficacité spécifique au fait qu’elles paraissent enfermer <em>en elles-mêmes </em>le principe d’un pouvoir résidant en réalité <strong>dans les conditions institutionnelles de leur production et de leur réception</strong>. La spécificité du discours d’autorité (cours professoral, sermon, etc.) réside dans le fait qu’il ne suffit pas qu’il soit <em>compris </em>(il peut même en certains cas ne pas l’être sans perdre son pouvoir), et qu’il n’exerce son effet propre <strong>qu’à condition d’être <em>reconnu comme tel.</em></strong><em> Cette reconnaissance </em>—accompagnée ou non de la compréhension— n’est accordée, sur le mode du cela va de soi, que <strong>sous certaines conditions, celles qui définissent l’usage légitime </strong>: il doit être <strong>prononcé par la personne légitimée à le prononcer</strong>, le détenteur du <em>skeptron, </em>connu et reconnu comme habilité et habile à produire cette classe particulière de discours, prêtre, professeur, poète, etc. ; il doit être <strong>prononcé dans une situation légitime</strong>, c’est-à-dire devant les récepteurs légitimes (on ne peut pas lire une poésie dadaïste à une réunion du Conseil des ministres) ; il doit enfin être <strong>énoncé dans les formes (syntaxiques, phonétiques, etc.) légitimes</strong>. (…)</p>
+<p><strong>L’efficacité symbolique des mots</strong> ne s’exerce jamais que dans la mesure où celui qui la subit reconnaît celui qui l’exerce comme fondé à l’exercer ou, ce qui revient au même, s’oublie et s’ignore, en s’y soumettant, comme ayant contribué, par la reconnaissance qu’il lui accorde, à la fonder. »</p>
+<p class="tsrc">Pierre Bourdieu, <em>Ce que parler veut dire</em>, Fayard, p. 103-118.</p>
+</div></details>
+</div></section>
+<section class="txt" id="t5" aria-labelledby="h5" style="--c:var(--contre)"><div class="wrap">
+<div class="meta"><span class="tag">Texte 5</span></div>
+<h2 id="h5">Le goût esthétique comme distinction sociale</h2>
+<details class="tx" open><summary>Le texte</summary><div class="txb">
+<p>« Reconnaître que toute œuvre légitime tend <em>en fait </em>à imposer les normes de sa propre perception et qu’elle définit tacitement comme seul légitime le mode de perception qui met en œuvre une certaine disposition et une certaine compétence, ce n’est pas constituer en essence un mode de perception particulier, succombant ainsi à l’illusion qui fonde la reconnaissance de la légitimité artistique, mais prendre acte du fait que <strong>tous les agents, qu’ils le veuillent ou non, qu’ils aient ou non les moyens de s’y conformer, se trouvent objectivement mesurés à ces normes</strong>. C’est se donner du même coup la possibilité de déterminer si, comme le veut l’idéologie charismatique du rapport à l’œuvre d’art, ces dispositions et ces compétences sont <strong>des dons de nature ou des produits de l’apprentissage</strong> et de <strong>mettre au jour les conditions cachées du miracle de la distribution inégale entre les classes de l’aptitude à la rencontre inspirée avec l’œuvre d’art et, plus généralement, avec les œuvres de culture savante</strong>. Toute les <strong>analyses d’essence de la disposition esthétique</strong>, seule manière socialement tenue pour « convenable » d’aborder les objets socialement désignés comme œuvres d’art, c’est-à-dire comme exigeant et méritant à la fois d’être abordés selon une intention proprement esthétique, capable de les reconnaître et de les constituer en tant qu’œuvres d’art, est nécessairement <strong>vouée à l’échec</strong> ; en effet, en refusant de prendre en compte la genèse collective et individuelle de ce produit de l’histoire qui doit être indéfiniment reproduit par l’éducation, elle s’interdit de lui restituer sa seule raison d’être, c’est-à-dire <strong>la raison historique qui fonde la nécessité arbitraire de l’institution</strong>. Si l’œuvre d’art est bien, comme l’observe Erwin Panofsky, ce qui demande à être perçu selon une intention esthétique et si d’autre part tout objet, naturel aussi bien qu’artificiel, peut être perçu selon une intention esthétique, comment échapper à la conclusion <strong>que c’est l’intention esthétique qui « fait » l’œuvre d’art</strong> ou, en transposant une formule de Saussure, que c’est le point de vue esthétique qui crée l’objet esthétique ?(…) Le pouvoir économique est d’abord un <strong>pouvoir de mettre la nécessité économique à distance </strong>: c’est pourquoi il s’affirme universellement par la destruction des richesses, la dépense ostentatoire, le gaspillage et <strong>toutes les formes du luxe <em>gratuit</em></strong><em>. </em>C’est ainsi que la <strong>bourgeoisie</strong>, cessant de faire de toute l’existence, à la façon de l’aristocratie de cour, une parade continue, a <strong>constitué l’opposition du payant et du gratuit, de l’intéressé et du désintéressé</strong> sous la forme de l’opposition, qui la caractérise en propre selon Weber, entre le lieu de travail et le lieu de résidence, les jours ouvrés et les jours fériés, l’extérieur (masculin) et l’intérieur (féminin), les affaires et le sentiment, l’industrie et l’art, le monde de la nécessité économique et le monde de la liberté artistique arraché, par le pouvoir économique, à cette nécessité…)</p>
+<p>Ainsi <strong>la disposition esthétique est une dimension d’un rapport distant et assuré au monde et aux autres qui suppose l’assurance et la distance objectives</strong> ; une manifestation du système de dispositions que produisent les conditionnements sociaux associés à une classe particulière de conditions d’existence lorsqu’ils prennent la forme paradoxale de la plus grande liberté concevable, à un moment donné du temps, à l’égard des contraintes de la nécessité économique. Mais elle est aussi <strong>une <em>expression distinctive </em>d’une position privilégiée dans l’espace social dont la valeur distinctive se détermine <em>objectivement </em>dans la relation à des expressions engendrées à partir de conditions différentes</strong>. Comme toute espèce de goût, <strong>elle unit et sépare</strong> : étant le produit des conditionnements associés à une classe particulière de conditions d’existence, elle unit ceux qui sont le produit de conditions semblables mais en les distinguant de tous les autres et sur ce qu’ils ont de plus essentiel, puisque le goût est le principe de tout ce que l’on a, personnes et choses, et de tout ce que l’on est pour les autres, de <strong>ce par quoi on se classe et par quoi on est classé</strong>.</p>
+<p><strong>Les goûts (c’est-à-dire les préférences manifestées) sont l’affirmation pratique d’une différence inévitable</strong>. Ce n’est pas par hasard que, lorsqu’ils ont à se justifier, ils s’affirment de manière toute <strong>négative</strong>, par le refus opposé à d’autres goûts : en matière de goût, plus que partout, toute détermination est négation ; et les goûts sont sans doute avant tout des <strong>dégoûts</strong>, faits d’horreur ou d’intolérance viscérale (« c’est à vomir ») pour les autres goûts, les goûts des autres. Des goûts et des couleurs on ne discute pas : non parce que tous les goûts sont dans la nature, mais parce que <strong>chaque goût se sent fondé en nature -et il l’est quasiment, étant habitus-, ce qui revient à rejeter les autres dans le scandale du contre-nature</strong>. L’intolérance esthétique a des violences terribles. L’aversion pour les styles de vie différents est sans doute une des plus fortes barrières entre les classes : l’homogamie est là pour en témoigner. Et le plus intolérable, pour ceux qui s’estiment détenteurs du goût légitime, c’est par-dessus tout la réunion sacrilège des goûts que le goût commande de séparer. C’est dire que les jeux d’artistes et d’esthètes et leurs luttes pour le monopole de la légitimité artistique sont moins innocents qu’il ne paraît : il n’est pas de lutte à propos de l’art qui n’ait aussi pour enjeu <strong>l’imposition d’un art de vivre, c’est-à-dire la transmutation d’une manière arbitraire de vivre en manière légitime d’exister qui jette dans l’arbitraire toute autre manière de vivre.</strong> (…) Les prises de position objectivement et subjectivement esthétiques que sont par exemple la cosmétique corporelle, le vêtement ou la décoration domestique constituent autant d’occasions d’éprouver ou d’affirmer la position occupée dans l’espace social comme rang à tenir ou distance à maintenir. »</p>
+<p class="tsrc">Pierre Bourdieu, <em>La Distinction</em>, Minuit, p. 29, 47-48.</p>
+</div></details>
+</div></section>
+<section class="txt" id="t6" aria-labelledby="h6" style="--c:var(--contre)"><div class="wrap">
+<div class="meta"><span class="tag">Texte 6</span></div>
+<h2 id="h6">L’école comme lieu de la reproduction sociale</h2>
+<details class="tx" open><summary>Le texte</summary><div class="txb">
+<p>« La <strong>cécité aux inégalités sociales</strong> condamne et autorise à expliquer toutes les inégalités, particulièrement en matière de réussite scolaire, comme <strong>inégalités naturelles, inégalités de dons</strong>. Pareille attitude est dans la logique d’un système qui, reposant sur le <strong>postulat de l’égalité formelle de tous les enseignés</strong>, condition de son fonctionnement, ne peut reconnaître d’autres inégalités que celles qui tiennent aux dons individuels. Qu’il s’agisse de l’enseignement proprement dit ou de la sélection, le professeur ne connaît que des enseignés égaux en droits et en devoirs ; si, au cours de l’année scolaire, il lui arrive d’adapter son enseignement à certains, c’est aux « moins doués » qu’il s’adresse et non aux plus défavorisés par leur origine sociale ; de même si, le jour de l’examen, il prend en compte la situation sociale de tel candidat, ce n’est pas qu’il le perçoive comme membre d’une catégorie sociale défavorisée, c’est au contraire qu’il lui accorde l’intérêt d’exception que mérite un cas social. »</p>
+<p class="tsrc">Pierre Bourdieu, <em>La Reproduction</em>, Minuit, p. 111.</p>
+<p>« Rien n’est mieux fait que <strong>l’examen</strong> pour inspirer à tous <strong>la reconnaissance de la légitimité des verdicts scolaires et des hiérarchies sociales qu’ils légitiment</strong>, puisqu’il conduit ceux qui s’éliminent à s’assimiler à ceux qui échouent, tout en permettant à ceux qui sont élus parmi un petit nombre d’éligibles de voir dans leur élection <strong>l’attestation d’un mérite ou d’un « don »</strong> qui les aurait fait préférer en toute hypothèse à tous les autres. C’est seulement à condition de déceler dans l’examen <strong>la fonction de dissimulation de l’élimination sans examen</strong> que l’on peut comprendre complètement pourquoi tant de traits de son fonctionnement comme procédure patente de sélection obéissent encore à la logique régissant l’élimination qu’il dissimule. Sachant tout ce que les jugements des examinateurs doivent à des <strong>normes implicites qui retraduisent et spécifient dans la logique proprement scolaire les valeurs des classes dominantes</strong>, on voit que les candidats ont à supporter un handicap d’autant plus lourd que ces valeurs sont plus éloignées de celles de leur classe d’origine. Le biais de classe n’est jamais aussi marqué que dans les épreuves qui vouent le correcteur aux <strong>critères implicites et diffus de l’art traditionnel de noter</strong>, comme l’épreuve de dissertation ou l’oral, occasion de porter des jugements totaux, armés des critères inconscients de la perception sociale, sur des personnes totales, dont les qualités morales et intellectuelles sont saisies à travers les infiniment petits du style ou des manières, de l’accent ou de l’élocution, de la posture ou de la mimique, ou même du vêtement et de la cosmétique ; sans parler de ces épreuves orales qui, comme le concours de l’E.N.A. ou de l’agrégation des lettres, revendiquent presque explicitement le droit aux critères implicites, qu’il s’agisse de l’aisance et de la distinction bourgeoise ou du bon ton et de la bonne tenue universitaires. De même que, comme le remarque Marcel Proust, « on découvre au téléphone les inflexions d’une voix qu’on ne distingue pas tant qu’elle n’est pas dissociée d’un visage où on objective son expression », de même la décomposition expérimentale du jugement syncrétique de l’examinateur pourrait seule révéler tout ce qu’un jugement formulé en situation d’examen doit au <strong>système des marques sociales</strong> qui constitue le fondement objectif du sentiment de « la présence » ou de « l’insignifiance » du candidat. »</p>
+<p class="tsrc">Pierre Bourdieu, <em>La Reproduction</em>, Minuit, p. 198-200.</p>
+<p>« Si les <strong>étudiantes</strong> manifestent plus rarement que les étudiants l’aptitude au maniement de la <strong>langue d’idées</strong> (qui est exigée à des degrés très inégaux dans les différentes disciplines), c’est avant tout que les mécanismes objectifs qui orientent préférentiellement les filles vers les facultés des lettres et, à l’intérieur de celles-ci, vers certaines spécialités (comme les langues vivantes, l’histoire de l’art ou les lettres) doivent une part de leur efficacité à une <strong>définition sociale des qualités « féminines »</strong> qu’ils contribuent à forger, autrement dit, à l’intériorisation de la nécessité externe qui impose cette définition des études féminines ; pour qu’un destin, qui est le produit objectif des rapports sociaux définissant la condition féminine à un moment donné du temps, se trouve transmué en <strong>vocation</strong>, il faut et il suffit que les filles (et tout leur entourage, à commencer par leurs familles) se guident inconsciemment sur le préjugé -particulièrement vif et vivace en France en raison de la continuité entre la culture de salon et la culture universitaire- qu’il existe <strong>une affinité élective entre les qualités dites féminines et des qualités « littéraires »</strong> telles que la sensibilité aux nuances impondérables du sentiment ou le goût pour les préciosités imprécises du style, Ainsi, les « choix » en apparence les plus délibérés ou les plus inspirés prennent encore en compte (bien qu’indirectement) le système des chances objectives qui <strong>condamne les femmes aux professions appelant une disposition « féminine »</strong> (par exemple les métiers « sociaux ») ou qui les prédispose à accepter, sinon à revendiquer inconsciemment, les fonctions ou les aspects de la fonction appelant <strong>un rapport « féminin » à la profession</strong>. »</p>
+<p class="tsrc">Pierre Bourdieu, <em>La Reproduction</em>, Minuit, p. 98-99.</p>
+<p>« Ainsi, le système scolaire, avec les idéologies et les effets qu’engendre son autonomie relative, est à la société bourgeoise en sa phase actuelle ce que d’autres formes de la légitimation de l’ordre social et de la transmission héréditaire des privilèges ont été à des formations sociales qui différaient tant par la forme spécifique des rapports et des antagonismes entre les classes que par la nature du privilège transmis : ne contribue-t-il pas à <strong>convaincre chaque sujet social de rester à la place qui lui incombe par nature, de s’y tenir et d’y tenir</strong> (…) ? Ne pouvant invoquer le droit du sang -que sa classe a historiquement refusé à l’aristocratie- ni les droits de la Nature -arme autrefois dirigée contre les distinctions nobiliaires qui risquerait de se retourner contre la « distinction » bourgeoise- ni les vertus ascétiques* qui permettaient aux entrepreneurs de première génération de justifier leur succès par leur mérite, <strong>l’héritier des privilèges bourgeois doit en appeler aujourd’hui à la certification scolaire qui atteste à la fois ses dons et ses mérites</strong>. L’idée contre nature d’une culture de naissance suppose et produit la <strong>cécité aux fonctions de l’institution scolaire qui assure la rentabilité du capital culturel et en légitime la transmission en dissimulant qu’elle remplit cette fonction</strong>. Ainsi, dans une société où l’obtention des privilèges sociaux dépend de plus en plus étroitement de la possession de titres scolaires, l’École n’a pas seulement pour fonction d’assurer la succession discrète à des droits de bourgeoisie qui ne sauraient plus se transmettre d’une manière directe et déclarée. <strong>Instrument privilégié de la sociodicée bourgeoise qui confère aux privilégiés le privilège suprême de ne pas s’apparaître comme privilégiés</strong>, elle parvient d’autant plus facilement à convaincre les déshérités qu’ils doivent leur destin scolaire et social à leur défaut de dons ou de mérites qu’en matière de culture la dépossession absolue exclut la conscience de la dépossession. »</p>
+<p class="tsrc">Pierre Bourdieu, <em>La Reproduction</em>, Minuit, p. 252-253.</p>
+</div></details>
+</div></section>
+</main>
+<footer><div class="wrap"><p>Pierre Bourdieu en six textes — 1930-2002.</p></div></footer>
+<script>
+(function(){
+  var links=[].slice.call(document.querySelectorAll('#nav a'));
+  var secs=[].slice.call(document.querySelectorAll('.txt')),lock=null,ticking=false;
+  function setCur(i){
+    links.forEach(function(a,k){if(k===i)a.setAttribute('aria-current','true');else a.removeAttribute('aria-current')});
+    var a=links[i],box=a.parentNode.parentNode;
+    if(box.scrollWidth>box.clientWidth&&box.scrollTo)box.scrollTo({left:i?a.offsetLeft-20:0});
+  }
+  function upd(){
+    ticking=false;
+    if(lock!==null){setCur(lock);return}
+    var nb=document.querySelector('.nav'),y=(nb?nb.getBoundingClientRect().bottom:0)+24,cur=0;
+    secs.forEach(function(s,k){if(s.getBoundingClientRect().top<=y)cur=k});
+    setCur(cur);
+  }
+  function req(){if(!ticking){ticking=true;requestAnimationFrame(upd)}}
+  links.forEach(function(a,k){a.addEventListener('click',function(){lock=k;setCur(k)})});
+  ['wheel','touchstart','mousedown','keydown'].forEach(function(ev){window.addEventListener(ev,function(){lock=null},{passive:true})});
+  window.addEventListener('scroll',req,{passive:true});window.addEventListener('resize',req);
+  upd();
+})();
+</script>
+<script>
+(function(){var r=document.documentElement,K='texte-seul',KL='mode-lecture';
+var btn=document.getElementById('a11y-btn'),menu=document.getElementById('a11y-menu'),opts=menu.querySelectorAll('.a11y-opt'),closed=[],shown=[],skipped=[];
+function apply(m){
+  var ts=m==='ts',lc=m==='lect',was=r.classList.contains('lect');
+  r.classList.toggle('ts',ts);r.classList.toggle('lect',lc);
+  if(lc&&!was){closed=[];shown=[];skipped=[];
+    document.querySelectorAll('main details').forEach(function(d){if(!d.open){closed.push(d);d.open=true}});
+    document.querySelectorAll('main [hidden]').forEach(function(x){if(!x.closest('[aria-labelledby="h-video"]')&&!x.matches('video,[role="tablist"]')){shown.push(x);x.hidden=false}});
+    document.querySelectorAll('main section').forEach(function(sc){var h=sc.querySelector('h2');
+      if(sc.querySelector('input,select,textarea')||(h&&/^(Exercice|Faites le tri|En vid)/i.test(h.textContent.trim()))){sc.classList.add('lc-skip');skipped.push(sc)}});}
+  if(!lc&&was){closed.forEach(function(d){d.open=false});shown.forEach(function(x){x.hidden=true});skipped.forEach(function(s){s.classList.remove('lc-skip')});closed=[];shown=[];skipped=[]}
+  opts.forEach(function(o){o.setAttribute('aria-checked',o.getAttribute('data-mode')===m?'true':'false')});
+  try{localStorage.setItem(K,ts?'1':'0');localStorage.setItem(KL,lc?'1':'0')}catch(e){}
+}
+function open(on){menu.hidden=!on;btn.setAttribute('aria-expanded',on?'true':'false')}
+btn.addEventListener('click',function(e){e.stopPropagation();open(menu.hidden)});
+opts.forEach(function(o){o.addEventListener('click',function(){apply(o.getAttribute('data-mode'));open(false);btn.focus()})});
+document.addEventListener('click',function(e){if(!menu.hidden&&!menu.contains(e.target)&&e.target!==btn)open(false)});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!menu.hidden){open(false);btn.focus()}});
+var v='orig';try{if(localStorage.getItem(KL)==='1')v='lect';else if(localStorage.getItem(K)==='1'&&menu.querySelector('[data-mode="ts"]'))v='ts'}catch(e){}
+if(v==='ts')apply('ts');
+if(v==='lect')window.addEventListener('load',function(){apply('lect')});
+})();
+</script>
+</body>
+</html>

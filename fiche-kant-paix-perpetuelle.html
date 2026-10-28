@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kant, Projet de paix perpétuelle : fiche de lecture</title>
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+  --bg:#F1F4F6; --surface:#FFFFFF; --ink:#1B2733; --muted:#53626F; --line:#D5DDE3; --focus:#0E6E73;
+  --pour:#0E6E73; --contre:#A8321F; --nuance:#2F4FA8; --garde:#8A5A00; --neutre:#4F5D69;
+  --serif:Georgia,"Times New Roman",serif;
+  --sans:system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#10171D; --surface:#18222A; --ink:#E7EDF2; --muted:#A1B0BC; --line:#2A3641; --focus:#5FD0D6;
+    --pour:#5FD0D6; --contre:#FF8A75; --nuance:#97ADFF; --garde:#F0BC52; --neutre:#A9B7C2;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#10171D; --surface:#18222A; --ink:#E7EDF2; --muted:#A1B0BC; --line:#2A3641; --focus:#5FD0D6;
+  --pour:#5FD0D6; --contre:#FF8A75; --nuance:#97ADFF; --garde:#F0BC52; --neutre:#A9B7C2;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:calc(4.2rem + env(safe-area-inset-top,0px));-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.1rem/1.65 var(--serif)}
+.wrap{width:min(980px,100% - 2.5rem);margin-inline:auto}
+h1,h2,h3{margin:0;font-family:var(--serif)}
+h1{font-weight:800;font-size:clamp(2.5rem,8vw,5rem);line-height:1.02;letter-spacing:-.02em}
+h2{font-weight:800;font-size:clamp(1.6rem,3.4vw,2.2rem);line-height:1.12}
+p{margin:0 0 1em}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
+.hero{padding:clamp(2.2rem,6vw,4.5rem) 0 2rem}
+.lead{font-size:clamp(1.15rem,2.4vw,1.45rem);line-height:1.5;max-width:40ch;margin:1.4rem 0 1rem}
+.note{font:500 .92rem/1.5 var(--sans);color:var(--muted);max-width:62ch;margin:0}
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--bg);border-bottom:1px solid var(--line)}
+.nav ol{display:flex;gap:.3rem;list-style:none;margin:0;padding:.5rem 0;overflow-x:auto}
+.nav a{display:block;white-space:nowrap;text-decoration:none;color:var(--muted);font:700 .88rem/1.2 var(--sans);padding:.45rem .7rem .35rem;border-radius:6px;border-bottom:4px solid var(--c)}
+.nav a:hover{color:var(--ink)}
+.nav a[aria-current="true"]{background:var(--ink);color:var(--bg)}
+.nav small{display:block;font-weight:500;font-size:.75rem;opacity:1}
+.txt{border-bottom:1px solid var(--line);padding:clamp(2.4rem,6vw,3.6rem) 0}
+.meta{display:flex;flex-wrap:wrap;gap:.5rem .9rem;align-items:center;margin-bottom:.8rem;font:500 .92rem/1.3 var(--sans);color:var(--muted)}
+.tag{font:700 .8rem/1 var(--sans);color:var(--c);border:1.5px solid var(--c);border-radius:5px;padding:.3rem .5rem}
+.thesis{font-size:clamp(1.2rem,2.4vw,1.5rem);line-height:1.4;font-weight:600;margin:1rem 0 1.4rem;max-width:44ch;padding-left:1rem;border-left:5px solid var(--c)}
+.cols{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:1.6rem clamp(1.6rem,4vw,3rem)}
+h3{font:700 .9rem/1.2 var(--sans);color:var(--c);margin-bottom:.7rem}
+.args{margin:0;padding:0;list-style:none;counter-reset:a}
+.args li{counter-increment:a;padding:.6rem 0 .6rem 2.4rem;border-top:1px solid var(--line);position:relative}
+.args li:last-child{border-bottom:1px solid var(--line)}
+.args li::before{content:counter(a);position:absolute;left:0;top:.5rem;font:800 1.5rem/1 var(--serif);color:var(--c)}
+.quotes{margin:0;padding:0}
+.quotes blockquote{margin:0 0 1rem;padding:.2rem 0 .2rem .9rem;border-left:3px solid var(--line)}
+.quotes p{margin:0 0 .2rem;font-style:italic}
+.quotes cite{font:500 .82rem/1.3 var(--sans);font-style:normal;color:var(--muted)}
+footer{padding:1.6rem 0 2.5rem;font:500 .92rem/1.5 var(--sans);color:var(--muted)}
+footer p{margin:0}
+@media (max-width:760px){.cols{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+.pdfbtn{display:inline-flex;align-items:center;gap:.5rem;font:600 .88rem/1 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--surface);border:1.5px solid var(--ink);border-radius:999px;padding:.55rem .95rem;cursor:pointer}
+.pdfbtn:hover{background:var(--ink);color:var(--bg)}.pdfbtn:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:2px}
+
+/* Mode lecture (pages à structure libre) */
+html.lect body::before,html.lect body::after{display:none!important}
+html.lect body{background:var(--bg)!important}
+html.lect .pn,html.lect #quiz,html.lect section[aria-labelledby="h-video"],html.lect video,html.lect .score,html.lect .lc-skip,html.lect [role="tablist"],html.lect main button,html.lect main input,html.lect main select,html.lect main textarea,html.lect .sec-head p.lc-x{display:none!important}
+html.lect .hero h1,html.lect .hero p,html.lect section.block h2,html.lect footer p{text-shadow:none!important}
+html.lect .hero,html.lect section.block{padding-block:1.2rem!important;border:0!important}
+html.lect .wrap,html.lect .sec-head{max-width:40rem!important;margin-inline:auto}
+html.lect .hgrid,html.lect .two,html.lect .cols{display:block!important}
+html.lect main,html.lect .hero{font-family:var(--serif)}
+html.lect .hero h1{font-size:clamp(1.9rem,5vw,2.6rem)!important}
+html.lect main p,html.lect main li,html.lect .lead{font-size:1.12rem!important;line-height:1.75!important}
+html.lect :is(main,.hero) :is(div,li,blockquote,article,aside,p,ul,ol,section,details,summary,figure,span):not(table *){background:none!important;border:0!important;box-shadow:none!important;border-radius:0!important}
+html.lect main [hidden]{display:revert!important}
+html.lect :is(main,.hero) div:not(.wrap):not(.sec-head):not(table *){display:block!important;grid-template-columns:none!important;float:none!important;max-width:none!important;width:auto!important;margin-inline:0}
+html.lect main li{display:list-item!important}
+html.lect .must{margin:1rem 0}
+html.lect .lead{max-width:none!important}
+html.lect .wrap{padding-inline:0}
+html.lect main details>summary{cursor:default;pointer-events:none;list-style:none}
+html.lect main details>summary::-webkit-details-marker,html.lect main details>summary::before{display:none!important}
+html.lect main blockquote{margin:.8rem 0;padding:0 0 0 1rem!important;border-left:3px solid var(--line)!important}
+html.lect main .panel{display:block!important;margin-bottom:1rem}
+html.lect main h3,html.lect main h4{margin-top:1.4rem}
+html.lect .nav,html.lect .hero .note{display:none!important}
+html.lect .thesis{border:0!important;padding-left:0!important;max-width:none!important}
+html.lect .args li{padding-left:0!important}
+html.lect .args li::before{display:none!important}
+html.lect .args{list-style:decimal;padding-left:1.4rem!important}
+html.lect .txt{padding-block:1.2rem!important}
+
+/* Accessibilité */
+.a11y{position:relative;display:inline-block}
+.a11y-menu{position:absolute;right:0;top:calc(100% + .4rem);z-index:60;min-width:14rem;background:var(--bg);color:var(--ink);border:1.5px solid var(--ink);border-radius:14px;padding:.35rem;box-shadow:0 8px 24px rgba(0,0,0,.18);text-shadow:none}
+.a11y-menu[hidden]{display:none}
+.a11y-menu p{margin:0;padding:.45rem .7rem .3rem;font:700 .72rem/1 system-ui,-apple-system,sans-serif;letter-spacing:.06em;text-transform:uppercase;opacity:.65}
+.a11y-opt{display:flex;align-items:center;gap:.6rem;width:100%;text-align:left;font:600 .92rem/1.2 system-ui,-apple-system,sans-serif;color:inherit;background:none;border:0;border-radius:9px;padding:.6rem .7rem;cursor:pointer}
+.a11y-opt:hover{background:var(--surface)}
+.a11y-opt:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:-2px}
+.a11y-opt .dot{flex:none;width:1rem;height:1rem;border:2px solid currentColor;border-radius:50%;position:relative}
+.a11y-opt[aria-checked="true"] .dot::after{content:"";position:absolute;inset:2px;background:currentColor;border-radius:50%}
+.a11y-opt small{display:block;font-weight:500;opacity:.7;font-size:.78rem;margin-top:.15rem}
+@media print{
+  :root{--bg:#fff!important;--surface:#fff!important;--ink:#111!important;--muted:#444!important;--line:#bbb!important;color-scheme:light!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:#fff!important;color:#111!important}
+  body::before,body::after{display:none!important}
+  nav,.pdfbtn,.pn,video,section[aria-labelledby="h-video"]{display:none!important}
+  .rev,.js .rev{opacity:1!important;transform:none!important}
+  .stp li[hidden]{display:list-item!important}
+  details>*{display:block!important}
+  article,li,.card,figure,.stage{break-inside:avoid}
+  h1,h2,h3{break-after:avoid;text-shadow:none!important}
+  *{text-shadow:none!important}
+  a{color:inherit;text-decoration:none}
+  section.block,.part{padding-top:1.2rem!important;padding-bottom:1.2rem!important}
+  footer{break-before:avoid;border-top:1px solid #999;margin-top:1rem}
+}
+@page{size:A4;margin:16mm 14mm}
+/* Texte */
+.tx summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:.7rem;font:800 clamp(1.4rem,3vw,1.9rem)/1.2 var(--sans);padding:.3rem 0}
+.tx summary::-webkit-details-marker{display:none}
+.tx summary::before{content:"";width:.6em;height:.6em;border-right:.2em solid currentColor;border-bottom:.2em solid currentColor;transform:rotate(-45deg);transition:transform .15s;flex:none;margin-right:.2rem}
+.tx[open] summary::before{transform:rotate(45deg)}
+@media (prefers-reduced-motion:reduce){.tx summary::before{transition:none}}
+.txb{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--c,var(--ink));padding:1.2rem clamp(1rem,3vw,1.8rem);margin-top:.9rem;max-width:46rem;font:400 1.1rem/1.75 var(--serif)}
+.txb p{margin:0 0 1em}
+.txb h3{font:700 1rem/1.3 var(--sans);margin:1.2em 0 .5em}
+.txb .vs{font:700 .72rem/1 var(--sans);color:var(--muted);margin-right:.15em}
+.txb .tsrc{font:600 .88rem/1.4 var(--sans);color:var(--muted);text-align:right;margin:1.1em 0 0}
+.txb .tsrc:not(:last-child){margin-bottom:1.4em;padding-bottom:1.2em;border-bottom:1px solid var(--line)}
+
+/* Sujets de dissertation */
+.sjd ul{list-style:none;margin:.6rem 0 0;padding:0;max-width:46rem}
+.sjd li{margin:0;padding:.55rem 0;border-top:1px solid var(--line)}
+.sjd li:last-child{border-bottom:1px solid var(--line)}
+.sjd a{color:inherit;font:600 1.05rem/1.4 var(--sans,system-ui);text-underline-offset:3px}
+.sjd p{margin:.4rem 0 0}
+html.lect .sjd li{border:0!important;padding:.25rem 0!important}
+html.lect .sjd a{font:600 1.12rem/1.6 var(--serif,Georgia,serif)}
+@media print{.sjd a{font-weight:600}.sjd li{border-color:#999}}
+.ln{font:700 .66rem/1 var(--sans);color:var(--muted);margin:0 .2em 0 .1em;vertical-align:super}
+.txb .tsrcline{font:600 .9rem/1.4 var(--sans);color:var(--muted)}
+.txn{font:500 .85rem/1.4 var(--sans);color:var(--muted);margin:.2rem 0 1rem}
+html.lect .txb{padding:0!important}
+</style>
+<script>try{history.scrollRestoration="manual"}catch(e){}(function(){function t(){if(!location.hash)window.scrollTo(0,0)}t();document.addEventListener("DOMContentLoaded",t);window.addEventListener("load",function(){t();setTimeout(t,60)});window.addEventListener("pageshow",t)})();</script>
+<script src="confort.js"></script><script src="voix.js" defer></script>
+
+<style>
+.fs h2{margin-bottom:1rem}
+.fs h3{font:700 1rem/1.3 var(--sans);color:var(--c);margin:1.4rem 0 .5rem}
+.fs .wrap>p,.fs li{max-width:46rem}
+.pg{font:600 .78rem/1 var(--sans);color:var(--muted);white-space:nowrap;margin-left:.3em}
+.fs ul.pts{margin:.4rem 0 1rem;padding-left:1.2rem}
+.fs ul.pts li{margin:.35rem 0}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr));gap:1rem;margin:1rem 0}
+.card{background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--c);padding:1rem 1.1rem 1.1rem;border-radius:0 0 8px 8px}
+.card h3{margin:0 0 .5rem;font:800 1.05rem/1.25 var(--sans);color:var(--ink)}
+.card p{font-size:1rem;line-height:1.55;margin:0 0 .6em}
+.card ul{margin:.3rem 0 .4rem;padding-left:1.1rem;font-size:1rem;line-height:1.5}
+.card .k{font:700 .74rem/1 var(--sans);letter-spacing:.05em;text-transform:uppercase;color:var(--c);margin:.9rem 0 .25rem}
+.card .f{font-weight:600}
+.tbl{width:100%;border-collapse:collapse;margin:.8rem 0 1rem;font:400 1rem/1.5 var(--serif);background:var(--surface)}
+.tbl caption{text-align:left;font:600 .88rem/1.4 var(--sans);color:var(--muted);padding:.3rem 0}
+.tbl th,.tbl td{border:1px solid var(--line);padding:.55rem .7rem;vertical-align:top;text-align:left}
+.tbl th{font:700 .86rem/1.3 var(--sans);background:var(--bg);color:var(--ink)}
+.tblw{overflow-x:auto}
+.axes{display:grid;grid-template-columns:auto 1fr 1fr;gap:.4rem;margin:1rem 0;font:600 .92rem/1.35 var(--sans);max-width:46rem}
+.axes div{padding:.7rem .8rem;border:1px solid var(--line);background:var(--surface)}
+.axes .h{background:none;border:0;color:var(--muted);font-size:.82rem;align-self:center}
+.axes .a{border-left:6px solid var(--nuance)}.axes .b{border-left:6px solid var(--garde)}.axes .c2{border-left:6px solid var(--contre)}.axes .d{border-left:6px solid var(--neutre)}
+.axes small{display:block;font-weight:500;color:var(--muted);margin-top:.2rem}
+.fs blockquote{margin:0 0 1.1rem;padding:.2rem 0 .2rem .9rem;border-left:3px solid var(--c);max-width:46rem}
+.fs blockquote p{margin:0 0 .25rem;font-style:italic}
+.fs blockquote cite{font:500 .84rem/1.3 var(--sans);font-style:normal;color:var(--muted)}
+.fs dl{margin:.6rem 0 0;max-width:46rem}
+.fs dt{font:700 1rem/1.3 var(--sans);margin-top:.9rem}
+.fs dd{margin:.2rem 0 0}
+.fs .src{font:500 .9rem/1.5 var(--sans);color:var(--muted);max-width:46rem}
+@media (max-width:640px){.axes{grid-template-columns:1fr}.axes .h{display:none}}
+html.lect .cards{display:block!important}html.lect .card{margin-bottom:1rem}
+html.lect .tbl{display:block}
+@media print{.card,.tbl tr{break-inside:avoid}}
+</style>
+</head>
+<body>
+<nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><span style="display:inline-flex;gap:.6rem;flex-wrap:wrap;align-items:center"><span class="a11y"><button type="button" class="pdfbtn" id="a11y-btn" aria-haspopup="true" aria-expanded="false" aria-controls="a11y-menu"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="1.6"/><path d="M5 8.5l7 1.5 7-1.5M12 10v4.5M8.5 21l3.5-6.5 3.5 6.5"/></svg><span>Accessibilité</span></button><div class="a11y-menu" id="a11y-menu" role="radiogroup" aria-label="Affichage de la page" hidden><p>Affichage</p><button type="button" role="radio" class="a11y-opt" data-mode="orig" aria-checked="true"><span class="dot"></span><span>Page d’origine<small>Image de fond et mise en page habituelle</small></span></button><button type="button" role="radio" class="a11y-opt" data-mode="lect" aria-checked="false"><span class="dot"></span><span>Mode lecture<small>Texte continu, sans cadres ni exercices</small></span></button></div></span><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></span></nav>
+
+<header class="hero">
+  <div class="wrap">
+    <h1><em>Projet de paix perpétuelle</em>, fiche de lecture</h1>
+    <p class="lead">Comment sortir de l’état de guerre entre les États ? Kant répond par un traité en articles : des républiques, une fédération d’États libres et un droit d’hospitalité.</p>
+    <p class="note">Emmanuel Kant, <em>Projet de paix perpétuelle</em> (1795). Les références renvoient aux sections, articles et appendices du texte.</p>
+  </div>
+</header>
+<nav class="nav" aria-label="Sections de la fiche"><div class="wrap"><ol id="nav">
+<li><a href="#essentiel" style="--c:var(--pour)">Essentiel</a></li>
+<li><a href="#plan" style="--c:var(--pour)">Plan</a></li>
+<li><a href="#preliminaires" style="--c:var(--pour)">Préliminaires</a></li>
+<li><a href="#definitifs" style="--c:var(--pour)">Articles définitifs</a></li>
+<li><a href="#garantie" style="--c:var(--pour)">Garantie</a></li>
+<li><a href="#appendices" style="--c:var(--pour)">Appendices</a></li>
+<li><a href="#postface" style="--c:var(--pour)">Postface</a></li>
+<li><a href="#citations" style="--c:var(--pour)">Citations</a></li>
+<li><a href="#notions" style="--c:var(--pour)">Notions</a></li>
+<li><a href="#limites" style="--c:var(--pour)">Limites</a></li>
+</ol></div></nav>
+<main id="main">
+<section class="txt fs" id="essentiel" aria-labelledby="h-essentiel" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-essentiel">L’essentiel en cinq points</h2>
+<p class="thesis">En 1795, Kant soutient que la paix ne va pas de soi entre les hommes ni entre les États : elle doit être « instituée » par le droit. Il en fixe les conditions sous la forme d’un traité en articles, et défend l’idée que cet objectif, loin d’être une chimère, est un devoir que la raison impose.</p>
+<ol class="args">
+<li><strong>La paix est à instituer.</strong> L’état de nature, entre individus comme entre États, est un état de guerre au moins latent ; s’abstenir de combattre ne suffit pas à garantir la paix.<span class="pg">2e section, introduction</span></li>
+<li><strong>Trois conditions « définitives ».</strong> Des constitutions républicaines, un fédéralisme d’États libres, un droit cosmopolitique limité à l’hospitalité universelle.<span class="pg">2e section</span></li>
+<li><strong>Six interdits préalables.</strong> Ils visent les pratiques qui rendent la confiance impossible : armées permanentes, dettes de guerre, ingérence, ruses indignes…<span class="pg">1re section</span></li>
+<li><strong>Une garantie par la nature.</strong> Même sans bonté morale, l’égoïsme, la guerre et le commerce poussent les hommes vers l’état de droit : un bon État est possible « même pour un peuple de démons ».<span class="pg">1er supplément</span></li>
+<li><strong>Morale et politique doivent s’accorder.</strong> Le critère est la publicité : une action dont la maxime ne supporte pas d’être rendue publique n’est pas juste.<span class="pg">2e appendice</span></li>
+</ol>
+<p class="src">Emmanuel Kant, <em>Projet de paix perpétuelle</em>. Les références renvoient aux sections, articles et appendices du texte.</p></div></section>
+<section class="txt fs" id="plan" aria-labelledby="h-plan" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-plan">Le plan du texte</h2>
+<p>Kant adopte la forme d’un traité de paix, dont le titre, comme il l’explique en ouverture, reprend l’enseigne satirique d’une auberge hollandaise où était peint un cimetière. Il commence par une réserve ironique : le « praticien » traite le « théoricien » de pédant inoffensif.</p>
+<div class="cards">
+<article class="card" style="--c:var(--contre)"><h3>1re section : articles préliminaires</h3>
+<p class="k">Idée</p>
+Six interdits pour ne pas ruiner la confiance entre États.
+<p class="k">Statut</p>
+Certains sont stricts (1, 5, 6), d’autres peuvent être appliqués avec un délai (2, 3, 4).
+</article>
+<article class="card" style="--c:var(--pour)"><h3>2e section : articles définitifs</h3>
+<p class="k">Idée</p>
+Trois articles qui instituent l’état de paix.
+<p class="k">Contenu</p>
+<ul><li>Constitution républicaine</li><li>Fédéralisme d’États libres</li><li>Hospitalité universelle</li></ul>
+</article>
+<article class="card" style="--c:var(--neutre)"><h3>Suppléments et appendices</h3>
+<p class="k">Contenu</p>
+<ul><li>1er supplément : la garantie de la paix perpétuelle</li><li>2e supplément : l’« article secret »</li><li>Appendice I : désaccord entre morale et politique</li><li>Appendice II : accord par la publicité</li></ul>
+</article>
+</div></div></section>
+<section class="txt fs" id="preliminaires" aria-labelledby="h-preliminaires" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-preliminaires">Les six articles préliminaires</h2>
+<ol class="args">
+<li><strong>Pas de traité de paix avec « restriction mentale ».</strong> Un traité qui garde en réserve un motif de guerre future n’est qu’un cessez-le-feu.</li>
+<li><strong>Aucun État ne peut être acquis par un autre</strong> (héritage, échange, achat, donation) : un État est une société d’hommes, non un patrimoine.</li>
+<li><strong>Les armées permanentes doivent disparaître à terme.</strong> Elles menacent les autres États, alimentent la course aux armements et font des hommes de simples instruments. Kant distingue l’exercice volontaire en armes des citoyens.</li>
+<li><strong>Pas de dettes publiques pour les querelles extérieures.</strong> Le crédit rend la guerre facile à financer et il entraîne la banqueroute.</li>
+<li><strong>Pas d’ingérence de force dans la constitution d’un autre État.</strong> Exception : une guerre civile où deux parties se disputent l’ensemble, c’est-à-dire une situation d’anarchie.</li>
+<li><strong>Pas d’actes d’hostilité qui ruinent la confiance future :</strong> assassins, empoisonneurs, trahison. Autrement, la guerre tourne à la « guerre d’extermination ».</li>
+</ol>
+<p>Kant précise que les articles 1, 5 et 6 exigent une abrogation immédiate, tandis que les articles 2, 3 et 4 peuvent connaître un délai d’application, à condition de ne pas repousser l’objectif « à l’infini ».</p></div></section>
+<section class="txt fs" id="definitifs" aria-labelledby="h-definitifs" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-definitifs">Les trois articles définitifs</h2>
+<p class="thesis">Kant part de ce constat : « L’état de paix entre des hommes vivant côte à côte n’est pas un état de nature (<em>status naturalis</em>). Celui-ci est bien plutôt un état de guerre. »</p>
+<div class="cards">
+<article class="card" style="--c:var(--pour)"><h3>1. La constitution civile de chaque État doit être républicaine</h3>
+<p class="k">Définition</p>
+Elle repose sur la liberté des membres de la société, leur dépendance à une législation commune et leur égalité de citoyens.
+<p class="k">Argument</p>
+Si les citoyens décident de la guerre, ils devront en supporter eux-mêmes le coût : ils y réfléchiront. Un chef propriétaire de l’État n’y perd rien.
+<p class="k">Précision</p>
+Le républicanisme est la séparation du pouvoir exécutif et du pouvoir législatif ; il s’oppose au despotisme. Kant distingue donc <em>forme de souveraineté</em> et <em>forme de gouvernement</em>, et juge la démocratie « au sens propre » despotique, faute de système représentatif.
+</article>
+<article class="card" style="--c:var(--contre)"><h3>2. Le droit des gens doit être fondé sur un fédéralisme d’États libres</h3>
+<p class="k">Idée</p>
+Les États sont entre eux dans l’état de nature ; ils devraient en sortir en s’unissant sous des lois communes.
+<p class="k">Difficulté</p>
+Un État mondial supprimerait les peuples. Kant retient une « alliance de paix » (<em>fœdus pacificum</em>), qui vise à abolir toutes les guerres, et non un simple « contrat de paix » qui n’en termine qu’une.
+<p class="k">Compromis</p>
+L’idée positive d’une république universelle est remplacée par un « équivalent négatif » : une alliance permanente et toujours plus étendue.
+</article>
+<article class="card" style="--c:var(--nuance)"><h3>3. Le droit cosmopolitique se limite à l’hospitalité universelle</h3>
+<p class="k">Idée</p>
+L’étranger ne doit pas être traité en ennemi à son arrivée.
+<p class="k">Limite</p>
+C’est un droit de visite, non de résidence, fondé sur la possession commune de la surface de la terre.
+<p class="k">Critique</p>
+Kant dénonce la conduite inhospitalière des États commerçants européens (Inde, colonies, esclavage).
+</article>
+</div></div></section>
+<section class="txt fs" id="garantie" aria-labelledby="h-garantie" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-garantie">La garantie de la paix perpétuelle</h2>
+<p>Kant s’appuie ici sur la « nature » (qu’il préfère au mot de « providence », jugé plus présomptueux), qui mène les hommes vers la paix par des mécanismes dont ils ne sont pas conscients. Il ne s’agit pas de prédire l’avenir, mais de fonder le devoir de travailler à la paix.</p>
+<ul class="pts">
+<li><strong>Le peuplement de la terre</strong> : la nature a fait en sorte que les hommes puissent vivre partout, et la guerre les a poussés jusque dans les régions inhospitalières.</li>
+<li><strong>Le mécanisme des penchants égoïstes</strong> : il suffit que l’État soit bien organisé pour que les forces s’annulent. Le problème de l’État est soluble « même pour un peuple de démons (pourvu qu’ils aient de l’entendement) ».</li>
+<li><strong>La séparation des peuples</strong> par les langues et les religions, préférable à une monarchie universelle.</li>
+<li><strong>Le commerce</strong> : « c’est l’esprit de commerce qui est incompatible avec la guerre ».</li>
+</ul>
+<p>Le <strong>second supplément</strong> contient l’« article secret » : les États armés doivent consulter les maximes des philosophes, c’est-à-dire les laisser parler librement en public. Kant ajoute qu’il ne souhaite pas que les rois philosophent ni que les philosophes soient rois, car la détention du pouvoir corrompt le jugement de la raison.</p></div></section>
+<section class="txt fs" id="appendices" aria-labelledby="h-appendices" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-appendices">Morale, politique et publicité</h2>
+<h3>Appendice I : le désaccord apparent</h3>
+<p>Kant distingue le « politique moral », qui conçoit les principes de la prudence politique de manière compatible avec la morale, du « moraliste politique », qui se forge une morale à l’usage de l’homme d’État. Il dénonce les maximes sophistiques de ce dernier : <em>fac et excusa</em> (agis d’abord, justifie ensuite), <em>si fecisti nega</em> (nie ce que tu as fait) et <em>divide et impera</em>.</p>
+<blockquote><p>Le droit de l’homme doit être tenu pour sacré, quels que soient les sacrifices qu’il en coûte au pouvoir dominant.</p><cite>Appendice I</cite></blockquote>
+
+<h3>Appendice II : le critère de publicité</h3>
+<blockquote><p>Toute action relative au droit d’autrui et dont la maxime ne souffre pas la publicité n’est pas de droit.</p><cite>Appendice II (formule transcendantale du droit public)</cite></blockquote>
+
+<p>Kant ajoute un principe « affirmatif » : les maximes qui ont besoin de publicité pour atteindre leur but s’accordent à la fois avec le droit et avec la politique.</p></div></section>
+<section class="txt fs" id="postface" aria-labelledby="h-postface" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-postface">La postface de Jérôme Vérain : « Une chimère ? »</h2>
+<ul class="pts">
+<li>Vérain replace le texte dans son contexte : il paraît en 1795, après le traité de Bâle entre la France et la Prusse, dont Kant est sujet.</li>
+<li>Pour lui, la paix perpétuelle est « tout, aux yeux de Kant, sauf une chimère » : Kant raisonne sur les principes, par une « métaphysique du droit », non sur les possibilités concrètes.</li>
+<li>Il oppose cette démarche à celle de Machiavel et rappelle la critique kantienne du « lieu commun » selon lequel ce qui est bon en théorie serait irréalisable en pratique.</li>
+<li>Il relève que la paix perpétuelle ne signifie pas un renoncement à la guerre, mais sa disparition comme pratique périmée, à la manière de l’esclavage.</li>
+</ul></div></section>
+<section class="txt fs" id="citations" aria-labelledby="h-citations" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-citations">Citations à retenir</h2>
+<blockquote><p>L’état de paix entre des hommes vivant côte à côte n’est pas un état de nature (<em>status naturalis</em>). Celui-ci est bien plutôt un état de guerre.</p><cite>2e section, introduction</cite></blockquote>
+<blockquote><p>C’est l’esprit de commerce qui est incompatible avec la guerre, et qui tôt ou tard s’empare de chaque peuple.</p><cite>1er supplément</cite></blockquote>
+<blockquote><p>Les maximes des philosophes concernant les conditions de possibilité de la paix publique doivent être consultées par les Etats armés pour la guerre.</p><cite>2e supplément (article secret)</cite></blockquote>
+<blockquote><p>Toute action relative au droit d’autrui et dont la maxime ne souffre pas la publicité n’est pas de droit.</p><cite>Appendice II</cite></blockquote>
+</div></section>
+<section class="txt fs" id="notions" aria-labelledby="h-notions" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-notions">Notions clés</h2>
+<dl>
+<dt>État de nature</dt><dd>Situation sans loi commune, qui est entre États comme entre individus un état de guerre au moins potentiel.</dd>
+<dt>Constitution républicaine</dt><dd>Constitution fondée sur la liberté, la dépendance à une législation commune et l’égalité, avec séparation des pouvoirs et système représentatif.</dd>
+<dt>Fédéralisme d’États libres</dt><dd>Alliance permanente de paix entre États, qui conservent leur souveraineté, à la différence d’un État mondial.</dd>
+<dt>Droit cosmopolitique</dt><dd>Droit des individus comme citoyens du monde, limité ici à l’hospitalité universelle (droit de visite).</dd>
+<dt>Publicité</dt><dd>Critère de justice des actions publiques : une maxime qui ne supporte pas d’être rendue publique est injuste.</dd>
+</dl></div></section>
+<section class="txt fs" id="limites" aria-labelledby="h-limites" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-limites">Limites et débats</h2>
+<ul class="pts">
+<li><strong>Un traité philosophique.</strong> Kant raisonne sur des principes et laisse peu de place aux conditions concrètes de leur mise en œuvre ; la postface de Vérain y insiste elle-même.</li>
+<li><strong>Un compromis assumé.</strong> Kant reconnaît que les peuples ne veulent pas de la république universelle : il se rabat sur une fédération plus limitée.</li>
+<li><strong>Une garantie spéculative.</strong> Kant précise que la garantie par la nature ne permet pas de prédire l’avenir « théoriquement » ; elle fonde seulement un devoir pratique.</li>
+<li><strong>Prolongement (hors du texte).</strong> Cette réflexion est souvent rapprochée de la Société des Nations et de l’ONU, ainsi que de la thèse de la « paix démocratique » en relations internationales. Ce rapprochement est un commentaire de la fiche, non une thèse du texte.</li>
+</ul></div></section>
+</main>
+<footer><div class="wrap"><p>Fiche de lecture : Emmanuel Kant, <em>Projet de paix perpétuelle</em> (1795).</p></div></footer>
+<script>
+(function(){
+  var links=[].slice.call(document.querySelectorAll('#nav a'));
+  var secs=[].slice.call(document.querySelectorAll('.txt')),lock=null,ticking=false;
+  function setCur(i){
+    links.forEach(function(a,k){if(k===i)a.setAttribute('aria-current','true');else a.removeAttribute('aria-current')});
+    var a=links[i],box=a.parentNode.parentNode;
+    if(box.scrollWidth>box.clientWidth&&box.scrollTo)box.scrollTo({left:i?a.offsetLeft-20:0});
+  }
+  function upd(){
+    ticking=false;
+    if(lock!==null){setCur(lock);return}
+    var nb=document.querySelector('.nav'),y=(nb?nb.getBoundingClientRect().bottom:0)+24,cur=0;
+    secs.forEach(function(s,k){if(s.getBoundingClientRect().top<=y)cur=k});
+    setCur(cur);
+  }
+  function req(){if(!ticking){ticking=true;requestAnimationFrame(upd)}}
+  links.forEach(function(a,k){a.addEventListener('click',function(){lock=k;setCur(k)})});
+  ['wheel','touchstart','mousedown','keydown'].forEach(function(ev){window.addEventListener(ev,function(){lock=null},{passive:true})});
+  window.addEventListener('scroll',req,{passive:true});window.addEventListener('resize',req);
+  upd();
+})();
+</script>
+<script>
+(function(){var r=document.documentElement,K='texte-seul',KL='mode-lecture';
+var btn=document.getElementById('a11y-btn'),menu=document.getElementById('a11y-menu'),opts=menu.querySelectorAll('.a11y-opt'),closed=[],shown=[],skipped=[];
+function apply(m){
+  var ts=m==='ts',lc=m==='lect',was=r.classList.contains('lect');
+  r.classList.toggle('ts',ts);r.classList.toggle('lect',lc);
+  if(lc&&!was){closed=[];shown=[];skipped=[];
+    document.querySelectorAll('main details').forEach(function(d){if(!d.open){closed.push(d);d.open=true}});
+    document.querySelectorAll('main [hidden]').forEach(function(x){if(!x.closest('[aria-labelledby="h-video"]')&&!x.matches('video,[role="tablist"]')){shown.push(x);x.hidden=false}});
+    document.querySelectorAll('main section').forEach(function(sc){var h=sc.querySelector('h2');
+      if(sc.querySelector('input,select,textarea')||(h&&/^(Exercice|Faites le tri|En vid)/i.test(h.textContent.trim()))){sc.classList.add('lc-skip');skipped.push(sc)}});}
+  if(!lc&&was){closed.forEach(function(d){d.open=false});shown.forEach(function(x){x.hidden=true});skipped.forEach(function(s){s.classList.remove('lc-skip')});closed=[];shown=[];skipped=[]}
+  opts.forEach(function(o){o.setAttribute('aria-checked',o.getAttribute('data-mode')===m?'true':'false')});
+  try{localStorage.setItem(K,ts?'1':'0');localStorage.setItem(KL,lc?'1':'0')}catch(e){}
+}
+function open(on){menu.hidden=!on;btn.setAttribute('aria-expanded',on?'true':'false')}
+btn.addEventListener('click',function(e){e.stopPropagation();open(menu.hidden)});
+opts.forEach(function(o){o.addEventListener('click',function(){apply(o.getAttribute('data-mode'));open(false);btn.focus()})});
+document.addEventListener('click',function(e){if(!menu.hidden&&!menu.contains(e.target)&&e.target!==btn)open(false)});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!menu.hidden){open(false);btn.focus()}});
+var v='orig';try{if(localStorage.getItem(KL)==='1')v='lect';else if(localStorage.getItem(K)==='1'&&menu.querySelector('[data-mode="ts"]'))v='ts'}catch(e){}
+if(v==='ts')apply('ts');
+if(v==='lect')window.addEventListener('load',function(){apply('lect')});
+})();
+</script>
+</body>
+</html>
