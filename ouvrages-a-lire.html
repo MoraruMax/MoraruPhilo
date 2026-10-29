@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ouvrages à lire</title>
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+  --bg:#F1F4F6; --surface:#FFFFFF; --ink:#1B2733; --muted:#53626F; --line:#D5DDE3; --focus:#0E6E73;
+  --pour:#0E6E73; --contre:#A8321F; --nuance:#2F4FA8; --garde:#8A5A00; --neutre:#4F5D69;
+  --serif:Georgia,"Times New Roman",serif;
+  --sans:system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#10171D; --surface:#18222A; --ink:#E7EDF2; --muted:#A1B0BC; --line:#2A3641; --focus:#5FD0D6;
+    --pour:#5FD0D6; --contre:#FF8A75; --nuance:#97ADFF; --garde:#F0BC52; --neutre:#A9B7C2;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#10171D; --surface:#18222A; --ink:#E7EDF2; --muted:#A1B0BC; --line:#2A3641; --focus:#5FD0D6;
+  --pour:#5FD0D6; --contre:#FF8A75; --nuance:#97ADFF; --garde:#F0BC52; --neutre:#A9B7C2;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:calc(4.2rem + env(safe-area-inset-top,0px));-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.1rem/1.65 var(--serif)}
+.wrap{width:min(980px,100% - 2.5rem);margin-inline:auto}
+h1,h2,h3{margin:0;font-family:var(--serif)}
+h1{font-weight:800;font-size:clamp(2.5rem,8vw,5rem);line-height:1.02;letter-spacing:-.02em}
+h2{font-weight:800;font-size:clamp(1.6rem,3.4vw,2.2rem);line-height:1.12}
+p{margin:0 0 1em}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
+.hero{padding:clamp(2.2rem,6vw,4.5rem) 0 2rem}
+.lead{font-size:clamp(1.15rem,2.4vw,1.45rem);line-height:1.5;max-width:40ch;margin:1.4rem 0 1rem}
+.note{font:500 .92rem/1.5 var(--sans);color:var(--muted);max-width:62ch;margin:0}
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--bg);border-bottom:1px solid var(--line)}
+.nav ol{display:flex;gap:.3rem;list-style:none;margin:0;padding:.5rem 0;overflow-x:auto}
+.nav a{display:block;white-space:nowrap;text-decoration:none;color:var(--muted);font:700 .88rem/1.2 var(--sans);padding:.45rem .7rem .35rem;border-radius:6px;border-bottom:4px solid var(--c)}
+.nav a:hover{color:var(--ink)}
+.nav a[aria-current="true"]{background:var(--ink);color:var(--bg)}
+.nav small{display:block;font-weight:500;font-size:.75rem;opacity:1}
+.txt{border-bottom:1px solid var(--line);padding:clamp(2.4rem,6vw,3.6rem) 0}
+.meta{display:flex;flex-wrap:wrap;gap:.5rem .9rem;align-items:center;margin-bottom:.8rem;font:500 .92rem/1.3 var(--sans);color:var(--muted)}
+.tag{font:700 .8rem/1 var(--sans);color:var(--c);border:1.5px solid var(--c);border-radius:5px;padding:.3rem .5rem}
+.thesis{font-size:clamp(1.2rem,2.4vw,1.5rem);line-height:1.4;font-weight:600;margin:1rem 0 1.4rem;max-width:44ch;padding-left:1rem;border-left:5px solid var(--c)}
+.cols{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:1.6rem clamp(1.6rem,4vw,3rem)}
+h3{font:700 .9rem/1.2 var(--sans);color:var(--c);margin-bottom:.7rem}
+.args{margin:0;padding:0;list-style:none;counter-reset:a}
+.args li{counter-increment:a;padding:.6rem 0 .6rem 2.4rem;border-top:1px solid var(--line);position:relative}
+.args li:last-child{border-bottom:1px solid var(--line)}
+.args li::before{content:counter(a);position:absolute;left:0;top:.5rem;font:800 1.5rem/1 var(--serif);color:var(--c)}
+.quotes{margin:0;padding:0}
+.quotes blockquote{margin:0 0 1rem;padding:.2rem 0 .2rem .9rem;border-left:3px solid var(--line)}
+.quotes p{margin:0 0 .2rem;font-style:italic}
+.quotes cite{font:500 .82rem/1.3 var(--sans);font-style:normal;color:var(--muted)}
+footer{padding:1.6rem 0 2.5rem;font:500 .92rem/1.5 var(--sans);color:var(--muted)}
+footer p{margin:0}
+@media (max-width:760px){.cols{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+.pdfbtn{display:inline-flex;align-items:center;gap:.5rem;font:600 .88rem/1 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--surface);border:1.5px solid var(--ink);border-radius:999px;padding:.55rem .95rem;cursor:pointer}
+.pdfbtn:hover{background:var(--ink);color:var(--bg)}.pdfbtn:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:2px}
+
+/* Mode lecture (pages à structure libre) */
+html.lect body::before,html.lect body::after{display:none!important}
+html.lect body{background:var(--bg)!important}
+html.lect .pn,html.lect #quiz,html.lect section[aria-labelledby="h-video"],html.lect video,html.lect .score,html.lect .lc-skip,html.lect [role="tablist"],html.lect main button,html.lect main input,html.lect main select,html.lect main textarea,html.lect .sec-head p.lc-x{display:none!important}
+html.lect .hero h1,html.lect .hero p,html.lect section.block h2,html.lect footer p{text-shadow:none!important}
+html.lect .hero,html.lect section.block{padding-block:1.2rem!important;border:0!important}
+html.lect .wrap,html.lect .sec-head{max-width:40rem!important;margin-inline:auto}
+html.lect .hgrid,html.lect .two,html.lect .cols{display:block!important}
+html.lect main,html.lect .hero{font-family:var(--serif)}
+html.lect .hero h1{font-size:clamp(1.9rem,5vw,2.6rem)!important}
+html.lect main p,html.lect main li,html.lect .lead{font-size:1.12rem!important;line-height:1.75!important}
+html.lect :is(main,.hero) :is(div,li,blockquote,article,aside,p,ul,ol,section,details,summary,figure,span):not(table *){background:none!important;border:0!important;box-shadow:none!important;border-radius:0!important}
+html.lect main [hidden]{display:revert!important}
+html.lect :is(main,.hero) div:not(.wrap):not(.sec-head):not(table *){display:block!important;grid-template-columns:none!important;float:none!important;max-width:none!important;width:auto!important;margin-inline:0}
+html.lect main li{display:list-item!important}
+html.lect .must{margin:1rem 0}
+html.lect .lead{max-width:none!important}
+html.lect .wrap{padding-inline:0}
+html.lect main details>summary{cursor:default;pointer-events:none;list-style:none}
+html.lect main details>summary::-webkit-details-marker,html.lect main details>summary::before{display:none!important}
+html.lect main blockquote{margin:.8rem 0;padding:0 0 0 1rem!important;border-left:3px solid var(--line)!important}
+html.lect main .panel{display:block!important;margin-bottom:1rem}
+html.lect main h3,html.lect main h4{margin-top:1.4rem}
+html.lect .nav,html.lect .hero .note{display:none!important}
+html.lect .thesis{border:0!important;padding-left:0!important;max-width:none!important}
+html.lect .args li{padding-left:0!important}
+html.lect .args li::before{display:none!important}
+html.lect .args{list-style:decimal;padding-left:1.4rem!important}
+html.lect .txt{padding-block:1.2rem!important}
+
+/* Accessibilité */
+.a11y{position:relative;display:inline-block}
+.a11y-menu{position:absolute;right:0;top:calc(100% + .4rem);z-index:60;min-width:14rem;background:var(--bg);color:var(--ink);border:1.5px solid var(--ink);border-radius:14px;padding:.35rem;box-shadow:0 8px 24px rgba(0,0,0,.18);text-shadow:none}
+.a11y-menu[hidden]{display:none}
+.a11y-menu p{margin:0;padding:.45rem .7rem .3rem;font:700 .72rem/1 system-ui,-apple-system,sans-serif;letter-spacing:.06em;text-transform:uppercase;opacity:.65}
+.a11y-opt{display:flex;align-items:center;gap:.6rem;width:100%;text-align:left;font:600 .92rem/1.2 system-ui,-apple-system,sans-serif;color:inherit;background:none;border:0;border-radius:9px;padding:.6rem .7rem;cursor:pointer}
+.a11y-opt:hover{background:var(--surface)}
+.a11y-opt:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:-2px}
+.a11y-opt .dot{flex:none;width:1rem;height:1rem;border:2px solid currentColor;border-radius:50%;position:relative}
+.a11y-opt[aria-checked="true"] .dot::after{content:"";position:absolute;inset:2px;background:currentColor;border-radius:50%}
+.a11y-opt small{display:block;font-weight:500;opacity:.7;font-size:.78rem;margin-top:.15rem}
+@media print{
+  :root{--bg:#fff!important;--surface:#fff!important;--ink:#111!important;--muted:#444!important;--line:#bbb!important;color-scheme:light!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:#fff!important;color:#111!important}
+  body::before,body::after{display:none!important}
+  nav,.pdfbtn,.pn,video,section[aria-labelledby="h-video"]{display:none!important}
+  .rev,.js .rev{opacity:1!important;transform:none!important}
+  .stp li[hidden]{display:list-item!important}
+  details>*{display:block!important}
+  article,li,.card,figure,.stage{break-inside:avoid}
+  h1,h2,h3{break-after:avoid;text-shadow:none!important}
+  *{text-shadow:none!important}
+  a{color:inherit;text-decoration:none}
+  section.block,.part{padding-top:1.2rem!important;padding-bottom:1.2rem!important}
+  footer{break-before:avoid;border-top:1px solid #999;margin-top:1rem}
+}
+@page{size:A4;margin:16mm 14mm}
+/* Texte */
+.tx summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:.7rem;font:800 clamp(1.4rem,3vw,1.9rem)/1.2 var(--sans);padding:.3rem 0}
+.tx summary::-webkit-details-marker{display:none}
+.tx summary::before{content:"";width:.6em;height:.6em;border-right:.2em solid currentColor;border-bottom:.2em solid currentColor;transform:rotate(-45deg);transition:transform .15s;flex:none;margin-right:.2rem}
+.tx[open] summary::before{transform:rotate(45deg)}
+@media (prefers-reduced-motion:reduce){.tx summary::before{transition:none}}
+.txb{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--c,var(--ink));padding:1.2rem clamp(1rem,3vw,1.8rem);margin-top:.9rem;max-width:46rem;font:400 1.1rem/1.75 var(--serif)}
+.txb p{margin:0 0 1em}
+.txb h3{font:700 1rem/1.3 var(--sans);margin:1.2em 0 .5em}
+.txb .vs{font:700 .72rem/1 var(--sans);color:var(--muted);margin-right:.15em}
+.txb .tsrc{font:600 .88rem/1.4 var(--sans);color:var(--muted);text-align:right;margin:1.1em 0 0}
+.txb .tsrc:not(:last-child){margin-bottom:1.4em;padding-bottom:1.2em;border-bottom:1px solid var(--line)}
+
+/* Sujets de dissertation */
+.sjd ul{list-style:none;margin:.6rem 0 0;padding:0;max-width:46rem}
+.sjd li{margin:0;padding:.55rem 0;border-top:1px solid var(--line)}
+.sjd li:last-child{border-bottom:1px solid var(--line)}
+.sjd a{color:inherit;font:600 1.05rem/1.4 var(--sans,system-ui);text-underline-offset:3px}
+.sjd p{margin:.4rem 0 0}
+html.lect .sjd li{border:0!important;padding:.25rem 0!important}
+html.lect .sjd a{font:600 1.12rem/1.6 var(--serif,Georgia,serif)}
+@media print{.sjd a{font-weight:600}.sjd li{border-color:#999}}
+.ln{font:700 .66rem/1 var(--sans);color:var(--muted);margin:0 .2em 0 .1em;vertical-align:super}
+.txb .tsrcline{font:600 .9rem/1.4 var(--sans);color:var(--muted)}
+.txn{font:500 .85rem/1.4 var(--sans);color:var(--muted);margin:.2rem 0 1rem}
+html.lect .txb{padding:0!important}
+</style>
+<script>try{history.scrollRestoration="manual"}catch(e){}(function(){function t(){if(!location.hash)window.scrollTo(0,0)}t();document.addEventListener("DOMContentLoaded",t);window.addEventListener("load",function(){t();setTimeout(t,60)});window.addEventListener("pageshow",t)})();</script>
+<script src="confort.js"></script><script src="voix.js" defer></script>
+
+<style>
+.fs h2{margin-bottom:1rem}
+.fs h3{font:700 1rem/1.3 var(--sans);color:var(--c);margin:1.4rem 0 .5rem}
+.fs .wrap>p,.fs li{max-width:46rem}
+.pg{font:600 .78rem/1 var(--sans);color:var(--muted);white-space:nowrap;margin-left:.3em}
+.fs ul.pts{margin:.4rem 0 1rem;padding-left:1.2rem}
+.fs ul.pts li{margin:.35rem 0}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr));gap:1rem;margin:1rem 0}
+.card{background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--c);padding:1rem 1.1rem 1.1rem;border-radius:0 0 8px 8px}
+.card h3{margin:0 0 .5rem;font:800 1.05rem/1.25 var(--sans);color:var(--ink)}
+.card p{font-size:1rem;line-height:1.55;margin:0 0 .6em}
+.card ul{margin:.3rem 0 .4rem;padding-left:1.1rem;font-size:1rem;line-height:1.5}
+.card .k{font:700 .74rem/1 var(--sans);letter-spacing:.05em;text-transform:uppercase;color:var(--c);margin:.9rem 0 .25rem}
+.card .f{font-weight:600}
+.tbl{width:100%;border-collapse:collapse;margin:.8rem 0 1rem;font:400 1rem/1.5 var(--serif);background:var(--surface)}
+.tbl caption{text-align:left;font:600 .88rem/1.4 var(--sans);color:var(--muted);padding:.3rem 0}
+.tbl th,.tbl td{border:1px solid var(--line);padding:.55rem .7rem;vertical-align:top;text-align:left}
+.tbl th{font:700 .86rem/1.3 var(--sans);background:var(--bg);color:var(--ink)}
+.tblw{overflow-x:auto}
+.axes{display:grid;grid-template-columns:auto 1fr 1fr;gap:.4rem;margin:1rem 0;font:600 .92rem/1.35 var(--sans);max-width:46rem}
+.axes div{padding:.7rem .8rem;border:1px solid var(--line);background:var(--surface)}
+.axes .h{background:none;border:0;color:var(--muted);font-size:.82rem;align-self:center}
+.axes .a{border-left:6px solid var(--nuance)}.axes .b{border-left:6px solid var(--garde)}.axes .c2{border-left:6px solid var(--contre)}.axes .d{border-left:6px solid var(--neutre)}
+.axes small{display:block;font-weight:500;color:var(--muted);margin-top:.2rem}
+.fs blockquote{margin:0 0 1.1rem;padding:.2rem 0 .2rem .9rem;border-left:3px solid var(--c);max-width:46rem}
+.fs blockquote p{margin:0 0 .25rem;font-style:italic}
+.fs blockquote cite{font:500 .84rem/1.3 var(--sans);font-style:normal;color:var(--muted)}
+.fs dl{margin:.6rem 0 0;max-width:46rem}
+.fs dt{font:700 1rem/1.3 var(--sans);margin-top:.9rem}
+.fs dd{margin:.2rem 0 0}
+.fs .src{font:500 .9rem/1.5 var(--sans);color:var(--muted);max-width:46rem}
+@media (max-width:640px){.axes{grid-template-columns:1fr}.axes .h{display:none}}
+html.lect .cards{display:block!important}html.lect .card{margin-bottom:1rem}
+html.lect .tbl{display:block}
+@media print{.card,.tbl tr{break-inside:avoid}}
+</style>
+<style>
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.gal-tools{display:flex;flex-wrap:wrap;gap:.8rem 1.2rem;align-items:center;margin:1.2rem 0 .4rem}
+.gal-tools label{font:700 .9rem/1 var(--sans)}
+.gal-tools input[type=search]{font:400 1rem/1.2 var(--sans);padding:.6rem .8rem;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink);min-width:min(100%,18rem)}
+.gal-count{font:600 .9rem/1.3 var(--sans);color:var(--muted)}
+.cards{grid-template-columns:repeat(auto-fill,minmax(min(100%,19rem),1fr));align-items:start}
+.card h3{font-size:1.1rem}
+ul.ob{list-style:none;margin:.4rem 0 0;padding:0}ul.ob li{margin:.55rem 0;line-height:1.4}ul.ob li[hidden]{display:none}
+.card[hidden]{display:none}
+.card a{color:var(--ink);font-weight:600;text-underline-offset:.15em}.card a:hover{color:var(--c)}
+.per.off{padding:0}.per.off .cards,.per.off h2{display:none}
+.vide{font:600 1rem/1.4 var(--sans);color:var(--muted)}
+</style>
+</head>
+<body>
+<nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><span style="display:inline-flex;gap:.6rem;flex-wrap:wrap;align-items:center"><span class="a11y"><button type="button" class="pdfbtn" id="a11y-btn" aria-haspopup="true" aria-expanded="false" aria-controls="a11y-menu"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="1.6"/><path d="M5 8.5l7 1.5 7-1.5M12 10v4.5M8.5 21l3.5-6.5 3.5 6.5"/></svg><span>Accessibilité</span></button><div class="a11y-menu" id="a11y-menu" role="radiogroup" aria-label="Affichage de la page" hidden><p>Affichage</p><button type="button" role="radio" class="a11y-opt" data-mode="orig" aria-checked="true"><span class="dot"></span><span>Page d’origine<small>Image de fond et mise en page habituelle</small></span></button><button type="button" role="radio" class="a11y-opt" data-mode="lect" aria-checked="false"><span class="dot"></span><span>Mode lecture<small>Texte continu, sans cadres ni exercices</small></span></button></div></span><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></span></nav>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Ouvrages à lire</h1>
+    <p class="lead">106 ouvrages à télécharger, conserver, et lire</p>
+  </div>
+</header>
+<nav class="nav" aria-label="Périodes"><div class="wrap"><ol id="nav">
+<li><a href="#antiquite" style="--c:var(--pour)">Antiquité</a></li>
+<li><a href="#renaissance" style="--c:var(--pour)">Renaissance</a></li>
+<li><a href="#classique" style="--c:var(--pour)">Période classique</a></li>
+<li><a href="#moderne" style="--c:var(--pour)">Période moderne</a></li>
+<li><a href="#lire" style="--c:var(--pour)">Lire un epub</a></li>
+</ol></div></nav>
+<main id="main">
+<section class="fs" id="outils" aria-label="Recherche"><div class="wrap"><div class="gal-tools"><label for="rech">Rechercher un auteur ou un titre</label><input type="search" id="rech" autocomplete="off"><span class="gal-count" id="cnt" aria-live="polite"></span></div></div></section>
+<section class="txt fs per" id="antiquite" aria-labelledby="h-antiquite" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-antiquite">Antiquité <span class="pg">· <span class="n">19</span> ouvrages</span></h2>
+<div class="cards">
+<article class="card auteur" data-a="aristophane"><h3>Aristophane</h3>
+<ul class="ob">
+<li data-k="les-guepes-aristophane"><a href="ouvrages/aristophane-les-guepes.epub" download>Les Guêpes<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,1 Mo</span></li>
+<li data-k="les-nuees-aristophane"><a href="ouvrages/aristophane-les-nuees.epub" download>Les Nuées<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,1 Mo</span></li>
+</ul></article>
+<article class="card auteur" data-a="aristote"><h3>Aristote</h3>
+<ul class="ob">
+<li data-k="ethique-a-nicomaque-aristote"><a href="ouvrages/aristote-ethique-a-nicomaque.epub" download>Éthique à Nicomaque<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,5 Mo</span></li>
+<li data-k="la-metaphysique-aristote"><a href="ouvrages/aristote-la-metaphysique.epub" download>La Métaphysique<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,6 Mo</span></li>
+</ul></article>
+<article class="card auteur" data-a="ciceron"><h3>Cicéron</h3>
+<ul class="ob">
+<li data-k="de-la-nature-des-dieux-ciceron"><a href="ouvrages/ciceron-de-la-nature-des-dieux.epub" download>De la nature des dieux<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,2 Mo</span></li>
+</ul></article>
+<article class="card auteur" data-a="epictete"><h3>Épictète</h3>
+<ul class="ob">
+<li data-k="manuel-epictete"><a href="ouvrages/epictete-manuel.epub" download>Manuel<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,3 Mo</span></li>
+</ul></article>
+<article class="card auteur" data-a="epicure"><h3>Épicure</h3>
+<ul class="ob">
+<li data-k="lettre-a-menecee-epicure"><a href="ouvrages/epicure-lettre-a-menecee.epub" download>Lettre à Ménécée<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,02 Mo</span></li>
+</ul></article>
+<article class="card auteur" data-a="lucrece"><h3>Lucrèce</h3>
+<ul class="ob">
+<li data-k="de-la-nature-des-choses-lucrece"><a href="ouvrages/lucrece-de-la-nature-des-choses.epub" download>De la nature des choses<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,3 Mo</span></li>
+</ul></article>
+<article class="card auteur" data-a="marc-aurele"><h3>Marc Aurèle</h3>
+<ul class="ob">
+<li data-k="pensees-pour-moi-meme-marc-aurele"><a href="ouvrages/marc-aurele-pensees-pour-moi-meme.epub" download>Pensées pour moi-même<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,5 Mo</span></li>
+</ul></article>
+<article class="card auteur" data-a="platon"><h3>Platon</h3>
+<ul class="ob">
+<li data-k="le-banquet-platon"><a href="ouvrages/platon-le-banquet.epub" download>Le Banquet<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,3 Mo</span></li>
+<li data-k="le-gorgias-platon"><a href="ouvrages/platon-le-gorgias.epub" download>Le Gorgias<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,2 Mo</span></li>
+<li data-k="lapologie-de-socrate-platon"><a href="ouvrages/platon-lapologie-de-socrate.epub" download>L’Apologie de Socrate<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,1 Mo</span></li>
+<li data-k="les-lois-platon"><a href="ouvrages/platon-les-lois.epub" download>Les Lois<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,4 Mo</span></li>
+<li data-k="le-protagoras-platon"><a href="ouvrages/platon-le-protagoras.epub" download>Le Protagoras<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,2 Mo</span></li>
+<li data-k="la-republique-platon"><a href="ouvrages/platon-la-republique.epub" download>La République<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,7 Mo</span></li>
+<li data-k="le-theetete-platon"><a href="ouvrages/platon-le-theetete.epub" download>Le Théétète<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,2 Mo</span></li>
+<li data-k="le-timee-platon"><a href="ouvrages/platon-le-timee.epub" download>Le Timée<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,2 Mo</span></li>
+</ul></article>
+<article class="card auteur" data-a="plotin"><h3>Plotin</h3>
+<ul class="ob">
+<li data-k="enneades-plotin"><a href="ouvrages/plotin-enneades.epub" download>Ennéades<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,08 Mo</span></li>
+</ul></article>
+<article class="card auteur" data-a="seneque"><h3>Sénèque</h3>
+<ul class="ob">
+<li data-k="de-la-vie-heureuse-seneque"><a href="ouvrages/seneque-de-la-vie-heureuse.epub" download>De la vie heureuse<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,1 Mo</span></li>
+</ul></article>
+</div></div></section>
+<section class="txt fs per" id="renaissance" aria-labelledby="h-renaissance" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-renaissance">Renaissance <span class="pg">· <span class="n">5</span> ouvrages</span></h2>
+<div class="cards">
+<article class="card auteur" data-a="erasme"><h3>Érasme</h3>
+<ul class="ob">
+<li data-k="eloge-de-la-folie-erasme"><a href="ouvrages/erasme-eloge-de-la-folie.epub" download>Éloge de la folie<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,3 Mo</span></li>
+</ul></article>
+<article class="card auteur" data-a="machiavel"><h3>Machiavel</h3>
+<ul class="ob">
+<li data-k="discours-sur-la-premiere-decade-de-tite-live-machiavel"><a href="ouvrages/machiavel-discours-sur-la-premiere-decade-de-tite-live.epub" download>Discours sur la première décade de Tite-Live<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,6 Mo</span></li>
+<li data-k="le-prince-machiavel"><a href="ouvrages/machiavel-le-prince.epub" download>Le Prince<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,2 Mo</span></li>
+</ul></article>
+<article class="card auteur" data-a="montaigne"><h3>Montaigne</h3>
+<ul class="ob">
+<li data-k="essais-montaigne"><a href="ouvrages/montaigne-essais.epub" download>Essais<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 2,8 Mo</span></li>
+</ul></article>
+<article class="card auteur" data-a="more"><h3>More</h3>
+<ul class="ob">
+<li data-k="lutopie-more"><a href="ouvrages/more-lutopie.epub" download>L’Utopie<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,2 Mo</span></li>
+</ul></article>
+</div></div></section>
+<section class="txt fs per" id="classique" aria-labelledby="h-classique" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-classique">Période classique <span class="pg">· <span class="n">37</span> ouvrages</span></h2>
+<div class="cards">
+<article class="card auteur" data-a="berkeley"><h3>Berkeley</h3>
+<ul class="ob">
+<li data-k="les-principes-de-la-connaissance-humaine-berkeley"><a href="ouvrages/berkeley-les-principes-de-la-connaissance-humaine.epub" download>Les Principes de la connaissance humaine<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,2 Mo</span></li>
+</ul></article>
+<article class="card auteur" data-a="descartes"><h3>Descartes</h3>
+<ul class="ob">
+<li data-k="discours-de-la-methode-descartes"><a href="ouvrages/descartes-discours-de-la-methode.epub" download>Discours de la méthode<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,1 Mo</span></li>
+<li data-k="meditations-metaphysiques-descartes"><a href="ouvrages/descartes-meditations-metaphysiques.epub" download>Méditations métaphysiques<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,1 Mo</span></li>
+<li data-k="les-passions-de-lame-descartes"><a href="ouvrages/descartes-les-passions-de-lame.epub" download>Les Passions de l’âme<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,05 Mo</span></li>
+</ul></article>
+<article class="card auteur" data-a="diderot"><h3>Diderot</h3>
+<ul class="ob">
+<li data-k="lettre-sur-les-aveugles-diderot"><a href="ouvrages/diderot-lettre-sur-les-aveugles.epub" download>Lettre sur les aveugles<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,1 Mo</span></li>
+<li data-k="pensees-philosophiques-diderot"><a href="ouvrages/diderot-pensees-philosophiques.epub" download>Pensées philosophiques<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,1 Mo</span></li>
+</ul></article>
+<article class="card auteur" data-a="gracian"><h3>Gracián</h3>
+<ul class="ob">
+<li data-k="le-heros-gracian"><a href="ouvrages/gracian-le-heros.epub" download>Le Héros<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,1 Mo</span></li>
+<li data-k="lhomme-de-cour-ou-de-la-prudence-gracian"><a href="ouvrages/gracian-lhomme-de-cour-ou-de-la-prudence.epub" download>L’Homme de cour (ou De la Prudence)<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,3 Mo</span></li>
+</ul></article>
+<article class="card auteur" data-a="hobbes"><h3>Hobbes</h3>
+<ul class="ob">
+<li data-k="du-citoyen-hobbes"><a href="ouvrages/hobbes-du-citoyen.epub" download>Du citoyen<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,3 Mo</span></li>
+<li data-k="de-la-nature-humaine-hobbes"><a href="ouvrages/hobbes-de-la-nature-humaine.epub" download>De la nature humaine<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,1 Mo</span></li>
+</ul></article>
+<article class="card auteur" data-a="hume"><h3>Hume</h3>
+<ul class="ob">
+<li data-k="essais-philosophiques-sur-lentendement-humain-hume"><a href="ouvrages/hume-essais-philosophiques-sur-lentendement-humain.epub" download>Essais philosophiques sur l’entendement humain<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,2 Mo</span></li>
+<li data-k="recherches-sur-les-principes-de-la-morale-hume"><a href="ouvrages/hume-recherches-sur-les-principes-de-la-morale.epub" download>Recherches sur les principes de la morale<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,3 Mo</span></li>
+</ul></article>
+<article class="card auteur" data-a="kant"><h3>Kant</h3>
+<ul class="ob">
+<li data-k="critique-de-la-raison-pure-kant"><a href="ouvrages/kant-critique-de-la-raison-pure.epub" download>Critique de la raison pure<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,7 Mo</span></li>
+<li data-k="dun-pretendu-droit-de-mentir-par-humanite-kant"><a href="ouvrages/kant-dun-pretendu-droit-de-mentir-par-humanite.epub" download>D’un prétendu droit de mentir par humanité<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,06 Mo</span></li>
+<li data-k="fondements-de-la-metaphysique-des-moeurs-kant"><a href="ouvrages/kant-fondements-de-la-metaphysique-des-moeurs.epub" download>Fondements de la métaphysique des moeurs<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,3 Mo</span></li>
+<li data-k="de-la-paix-perpetuelle-kant"><a href="ouvrages/kant-de-la-paix-perpetuelle.epub" download>De la paix perpétuelle<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,1 Mo</span></li>
+</ul></article>
+<article class="card auteur" data-a="leibniz"><h3>Leibniz</h3>
+<ul class="ob">
+<li data-k="monadologie-leibniz"><a href="ouvrages/leibniz-monadologie.epub" download>Monadologie<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,07 Mo</span></li>
+<li data-k="nouveaux-essais-sur-lentendement-humain-leibniz"><a href="ouvrages/leibniz-nouveaux-essais-sur-lentendement-humain.epub" download>Nouveaux essais sur l’entendement humain<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,6 Mo</span></li>
+</ul></article>
+<article class="card auteur" data-a="locke"><h3>Locke</h3>
+<ul class="ob">
+<li data-k="traite-du-gouvernement-civil-locke"><a href="ouvrages/locke-traite-du-gouvernement-civil.epub" download>Traité du gouvernement civil<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,3 Mo</span></li>
+</ul></article>
+<article class="card auteur" data-a="malebranche"><h3>Malebranche</h3>
+<ul class="ob">
+<li data-k="de-la-recherche-de-la-verite-malebranche"><a href="ouvrages/malebranche-de-la-recherche-de-la-verite.epub" download>De la recherche de la vérité<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,8 Mo</span></li>
+</ul></article>
+<article class="card auteur" data-a="pascal"><h3>Pascal</h3>
+<ul class="ob">
+<li data-k="fragments-du-traite-du-vide-pascal"><a href="ouvrages/pascal-fragments-du-traite-du-vide.epub" download>Fragments du traité du vide<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,08 Mo</span></li>
+<li data-k="de-lesprit-geometrique-pascal"><a href="ouvrages/pascal-de-lesprit-geometrique.epub" download>De l’esprit géométrique<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,09 Mo</span></li>
+<li data-k="pensees-pascal"><a href="ouvrages/pascal-pensees.epub" download>Pensées<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 1,5 Mo</span></li>
+</ul></article>
+<article class="card auteur" data-a="rousseau"><h3>Rousseau</h3>
+<ul class="ob">
+<li data-k="les-confessions-rousseau"><a href="ouvrages/rousseau-les-confessions.epub" download>Les Confessions<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 8,0 Mo</span></li>
+<li data-k="du-contrat-social-rousseau"><a href="ouvrages/rousseau-du-contrat-social.epub" download>Du Contrat social<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,3 Mo</span></li>
+<li data-k="discours-sur-lorigine-et-les-fondements-de-linegalite-parmi-les-hommes-rousseau"><a href="ouvrages/rousseau-discours-sur-lorigine-et-les-fondements-de-linegalite-parmi-.epub" download>Discours sur l’origine et les fondements de l’inégalité parmi les hommes<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,1 Mo</span></li>
+<li data-k="essai-sur-lorigine-des-langues-rousseau"><a href="ouvrages/rousseau-essai-sur-lorigine-des-langues.epub" download>Essai sur l’origine des langues<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,09 Mo</span></li>
+<li data-k="les-reveries-du-promeneur-solitaire-rousseau"><a href="ouvrages/rousseau-les-reveries-du-promeneur-solitaire.epub" download>Les Rêveries du promeneur solitaire<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,2 Mo</span></li>
+</ul></article>
+<article class="card auteur" data-a="smith"><h3>Smith</h3>
+<ul class="ob">
+<li data-k="recherches-sur-la-nature-et-les-causes-de-la-richesse-parmi-les-nations-smith"><a href="ouvrages/smith-recherches-sur-la-nature-et-les-causes-de-la-richesse-parmi-.epub" download>Recherches sur la nature et les causes de la richesse parmi les Nations<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 2,0 Mo</span></li>
+</ul></article>
+<article class="card auteur" data-a="spinoza"><h3>Spinoza</h3>
+<ul class="ob">
+<li data-k="ethique-spinoza"><a href="ouvrages/spinoza-ethique.epub" download>Éthique<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,3 Mo</span></li>
+</ul></article>
+<article class="card auteur" data-a="voltaire"><h3>Voltaire</h3>
+<ul class="ob">
+<li data-k="candide-voltaire"><a href="ouvrages/voltaire-candide.epub" download>Candide<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,2 Mo</span></li>
+<li data-k="lettres-philosophiques-voltaire"><a href="ouvrages/voltaire-lettres-philosophiques.epub" download>Lettres philosophiques<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,3 Mo</span></li>
+<li data-k="le-monde-comme-il-va-voltaire"><a href="ouvrages/voltaire-le-monde-comme-il-va.epub" download>Le Monde comme il va<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,09 Mo</span></li>
+<li data-k="le-philosophe-ignorant-voltaire"><a href="ouvrages/voltaire-le-philosophe-ignorant.epub" download>Le Philosophe ignorant<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,1 Mo</span></li>
+<li data-k="traite-de-metaphysique-voltaire"><a href="ouvrages/voltaire-traite-de-metaphysique.epub" download>Traité de métaphysique<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,1 Mo</span></li>
+<li data-k="traite-sur-la-tolerance-voltaire"><a href="ouvrages/voltaire-traite-sur-la-tolerance.epub" download>Traité sur la tolérance<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,3 Mo</span></li>
+<li data-k="zadig-voltaire"><a href="ouvrages/voltaire-zadig.epub" download>Zadig<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,2 Mo</span></li>
+</ul></article>
+</div></div></section>
+<section class="txt fs per" id="moderne" aria-labelledby="h-moderne" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-moderne">Période moderne <span class="pg">· <span class="n">45</span> ouvrages</span></h2>
+<div class="cards">
+<article class="card auteur" data-a="bakounine"><h3>Bakounine</h3>
+<ul class="ob">
+<li data-k="dieu-et-letat-bakounine"><a href="ouvrages/bakounine-dieu-et-letat.epub" download>Dieu et l’État<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,1 Mo</span></li>
+<li data-k="le-principe-de-letat-bakounine"><a href="ouvrages/bakounine-le-principe-de-letat.epub" download>Le Principe de l’État<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,08 Mo</span></li>
+</ul></article>
+<article class="card auteur" data-a="bergson"><h3>Bergson</h3>
+<ul class="ob">
+<li data-k="essai-sur-les-donnees-immediates-de-la-conscience-bergson"><a href="ouvrages/bergson-essai-sur-les-donnees-immediates-de-la-conscience.epub" download>Essai sur les données immédiates de la conscience<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,3 Mo</span></li>
+<li data-k="lenergie-spirituelle-bergson"><a href="ouvrages/bergson-lenergie-spirituelle.epub" download>L’Énergie spirituelle<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,2 Mo</span></li>
+<li data-k="levolution-creatrice-bergson"><a href="ouvrages/bergson-levolution-creatrice.epub" download>L’Évolution créatrice<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,4 Mo</span></li>
+<li data-k="matiere-et-memoire-bergson"><a href="ouvrages/bergson-matiere-et-memoire.epub" download>Matière et mémoire<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,3 Mo</span></li>
+<li data-k="la-pensee-et-le-mouvant-bergson"><a href="ouvrages/bergson-la-pensee-et-le-mouvant.epub" download>La pensée et le mouvant<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,3 Mo</span></li>
+<li data-k="la-perception-du-changement-bergson"><a href="ouvrages/bergson-la-perception-du-changement.epub" download>La Perception du changement<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,1 Mo</span></li>
+<li data-k="le-reve-bergson"><a href="ouvrages/bergson-le-reve.epub" download>Le Rêve<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,07 Mo</span></li>
+<li data-k="le-rire-bergson"><a href="ouvrages/bergson-le-rire.epub" download>Le Rire<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,1 Mo</span></li>
+</ul></article>
+<article class="card auteur" data-a="bertrand-russell"><h3>Bertrand Russell</h3>
+<ul class="ob">
+<li data-k="les-problemes-de-la-philosophie-bertrand-russell"><a href="ouvrages/bertrand-russell-les-problemes-de-la-philosophie.epub" download>Les Problèmes de la philosophie<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,3 Mo</span></li>
+</ul></article>
+<article class="card auteur" data-a="constant"><h3>Constant</h3>
+<ul class="ob">
+<li data-k="de-la-liberte-des-anciens-comparee-a-celle-des-modernes-constant"><a href="ouvrages/constant-de-la-liberte-des-anciens-comparee-a-celle-des-modernes.epub" download>De la liberté des Anciens comparée à celle des Modernes<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,08 Mo</span></li>
+</ul></article>
+<article class="card auteur" data-a="feuerbach"><h3>Feuerbach</h3>
+<ul class="ob">
+<li data-k="essence-du-christianisme-feuerbach"><a href="ouvrages/feuerbach-essence-du-christianisme.epub" download>Essence du christianisme<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,6 Mo</span></li>
+<li data-k="quest-ce-que-la-religion-feuerbach"><a href="ouvrages/feuerbach-quest-ce-que-la-religion.epub" download>Qu’est-ce que la religion<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,6 Mo</span></li>
+</ul></article>
+<article class="card auteur" data-a="john-stuart-mill"><h3>John Stuart Mill</h3>
+<ul class="ob">
+<li data-k="lutilitarisme-john-stuart-mill"><a href="ouvrages/john-stuart-mill-lutilitarisme.epub" download>L’Utilitarisme<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,1 Mo</span></li>
+</ul></article>
+<article class="card auteur" data-a="kropotkine"><h3>Kropotkine</h3>
+<ul class="ob">
+<li data-k="communisme-et-anarchie-kropotkine"><a href="ouvrages/kropotkine-communisme-et-anarchie.epub" download>Communisme et anarchie<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,3 Mo</span></li>
+<li data-k="lanarchie-sa-philosophie-son-ideal-kropotkine"><a href="ouvrages/kropotkine-lanarchie-sa-philosophie-son-ideal.epub" download>L’Anarchie, sa philosophie, son idéal<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,1 Mo</span></li>
+<li data-k="la-morale-anarchiste-kropotkine"><a href="ouvrages/kropotkine-la-morale-anarchiste.epub" download>La Morale anarchiste<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,2 Mo</span></li>
+<li data-k="paroles-dun-revolte-kropotkine"><a href="ouvrages/kropotkine-paroles-dun-revolte.epub" download>Paroles d’un révolté<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,3 Mo</span></li>
+<li data-k="le-principe-anarchiste-kropotkine"><a href="ouvrages/kropotkine-le-principe-anarchiste.epub" download>Le Principe anarchiste<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,1 Mo</span></li>
+</ul></article>
+<article class="card auteur" data-a="marx"><h3>Marx</h3>
+<ul class="ob">
+<li data-k="le-capital-marx"><a href="ouvrages/marx-le-capital.epub" download>Le Capital<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 1,1 Mo</span></li>
+<li data-k="manifeste-du-parti-communiste-marx"><a href="ouvrages/marx-manifeste-du-parti-communiste.epub" download>Manifeste du parti communiste<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,09 Mo</span></li>
+</ul></article>
+<article class="card auteur" data-a="nietzsche"><h3>Nietzsche</h3>
+<ul class="ob">
+<li data-k="ainsi-parlait-zarathoustra-nietzsche"><a href="ouvrages/nietzsche-ainsi-parlait-zarathoustra.epub" download>Ainsi parlait Zarathoustra<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,5 Mo</span></li>
+<li data-k="aurore-nietzsche"><a href="ouvrages/nietzsche-aurore.epub" download>Aurore<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,3 Mo</span></li>
+<li data-k="le-crepuscule-des-idoles-nietzsche"><a href="ouvrages/nietzsche-le-crepuscule-des-idoles.epub" download>Le Crépuscule des idoles<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,2 Mo</span></li>
+<li data-k="le-gai-savoir-nietzsche"><a href="ouvrages/nietzsche-le-gai-savoir.epub" download>Le Gai savoir<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,3 Mo</span></li>
+<li data-k="genealogie-de-la-morale-nietzsche"><a href="ouvrages/nietzsche-genealogie-de-la-morale.epub" download>Généalogie de la morale<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,2 Mo</span></li>
+<li data-k="humain-trop-humain-nietzsche"><a href="ouvrages/nietzsche-humain-trop-humain.epub" download>Humain, trop humain<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,3 Mo</span></li>
+<li data-k="lantechrist-nietzsche"><a href="ouvrages/nietzsche-lantechrist.epub" download>L’Antéchrist<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,2 Mo</span></li>
+<li data-k="lorigine-de-la-tragedie-nietzsche"><a href="ouvrages/nietzsche-lorigine-de-la-tragedie.epub" download>L’Origine de la tragédie<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,4 Mo</span></li>
+<li data-k="par-dela-le-bien-et-le-mal-nietzsche"><a href="ouvrages/nietzsche-par-dela-le-bien-et-le-mal.epub" download>Par-delà le bien et le mal<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,3 Mo</span></li>
+<li data-k="le-voyageur-et-son-ombre-nietzsche"><a href="ouvrages/nietzsche-le-voyageur-et-son-ombre.epub" download>Le Voyageur et son ombre<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,3 Mo</span></li>
+</ul></article>
+<article class="card auteur" data-a="peirce"><h3>Peirce</h3>
+<ul class="ob">
+<li data-k="la-logique-de-la-science-peirce"><a href="ouvrages/peirce-la-logique-de-la-science.epub" download>La Logique de la science<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,08 Mo</span></li>
+</ul></article>
+<article class="card auteur" data-a="poincare"><h3>Poincaré</h3>
+<ul class="ob">
+<li data-k="theorie-mathematique-de-la-lumiere-1-poincare"><a href="ouvrages/poincare-theorie-mathematique-de-la-lumiere-1.epub" download>Théorie mathématique de la lumière (1)<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 7,5 Mo</span></li>
+<li data-k="theorie-mathematique-de-la-lumiere-2-poincare"><a href="ouvrages/poincare-theorie-mathematique-de-la-lumiere-2.epub" download>Théorie mathématique de la lumière (2)<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 6,3 Mo</span></li>
+<li data-k="la-valeur-de-la-science-poincare"><a href="ouvrages/poincare-la-valeur-de-la-science.epub" download>La Valeur de la science<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,3 Mo</span></li>
+</ul></article>
+<article class="card auteur" data-a="proudhon"><h3>Proudhon</h3>
+<ul class="ob">
+<li data-k="quest-ce-que-la-propriete-proudhon"><a href="ouvrages/proudhon-quest-ce-que-la-propriete.epub" download>Qu’est-ce que la propriété<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,3 Mo</span></li>
+</ul></article>
+<article class="card auteur" data-a="schopenhauer"><h3>Schopenhauer</h3>
+<ul class="ob">
+<li data-k="lart-davoir-toujours-raison-schopenhauer"><a href="ouvrages/schopenhauer-lart-davoir-toujours-raison.epub" download>L’Art d’avoir toujours raison<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,1 Mo</span></li>
+<li data-k="le-monde-comme-volonte-et-representation-schopenhauer"><a href="ouvrages/schopenhauer-le-monde-comme-volonte-et-representation.epub" download>Le Monde comme volonté et représentation<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 2,1 Mo</span></li>
+</ul></article>
+<article class="card auteur" data-a="simone-weil"><h3>Simone Weil</h3>
+<ul class="ob">
+<li data-k="la-condition-ouvriere-simone-weil"><a href="ouvrages/simone-weil-la-condition-ouvriere.epub" download>La Condition ouvrière<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,8 Mo</span></li>
+<li data-k="lenracinement-simone-weil"><a href="ouvrages/simone-weil-lenracinement.epub" download>L’Enracinement<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,3 Mo</span></li>
+<li data-k="liliade-ou-le-poeme-de-la-force-simone-weil"><a href="ouvrages/simone-weil-liliade-ou-le-poeme-de-la-force.epub" download>L’Iliade ou le poème de la force<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,08 Mo</span></li>
+<li data-k="la-pesanteur-et-la-grace-simone-weil"><a href="ouvrages/simone-weil-la-pesanteur-et-la-grace.epub" download>La Pesanteur et la grâce<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,3 Mo</span></li>
+</ul></article>
+<article class="card auteur" data-a="stirner"><h3>Stirner</h3>
+<ul class="ob">
+<li data-k="lunique-et-sa-propriete-stirner"><a href="ouvrages/stirner-lunique-et-sa-propriete.epub" download>L’Unique et sa propriété<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 0,4 Mo</span></li>
+</ul></article>
+<article class="card auteur" data-a="tocqueville"><h3>Tocqueville</h3>
+<ul class="ob">
+<li data-k="de-la-democratie-en-amerique-tocqueville"><a href="ouvrages/tocqueville-de-la-democratie-en-amerique.epub" download>De la Démocratie en Amérique<span class="sr"> (télécharger, epub)</span></a> <span class="pg">epub · 1,1 Mo</span></li>
+</ul></article>
+</div></div></section>
+<section class="fs" id="vide" hidden><div class="wrap"><p class="vide">Aucun ouvrage ne correspond à cette recherche.</p></div></section>
+<section class="txt fs" id="lire" aria-labelledby="h-lire" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-lire">Lire un fichier epub</h2>
+<p>Un fichier epub s’ouvre sur une liseuse, sur un téléphone ou une tablette (application de lecture comme Livres sur Apple, ou n’importe quelle application de lecture d’epub sur Android) et sur ordinateur avec un logiciel gratuit comme Calibre ou Thorium Reader. Le texte s’adapte à l’écran, on peut agrandir la police et faire des recherches dans le livre.</p>
+<p class="src">Ces textes appartiennent au domaine public. Les fichiers sont issus de la bibliothèque numérique Wikisource, qui les met à disposition sous licence libre (Creative Commons BY-SA) ; les traductions et éditions utilisées sont indiquées au début de chaque fichier.</p>
+</div></section>
+</main>
+<footer><div class="wrap"><p>Ouvrages à lire : textes du domaine public au format epub.</p></div></footer>
+<script>
+(function(){var q=document.getElementById('rech'),cnt=document.getElementById('cnt'),vide=document.getElementById('vide');
+function norm(s){return s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-')}
+function filt(){var v=norm(q.value.trim()).replace(/^-|-$/g,''),n=0;
+ document.querySelectorAll('.auteur').forEach(function(c){var am=!v||c.dataset.a.indexOf(v)>-1,any=0;
+  c.querySelectorAll('li').forEach(function(l){var ok=am||l.dataset.k.indexOf(v)>-1;l.hidden=!ok;if(ok){any++;n++}});c.hidden=!any});
+ document.querySelectorAll('.per').forEach(function(s){var c=s.querySelectorAll('.auteur:not([hidden]) li:not([hidden])').length;s.classList.toggle('off',!c);var g=s.querySelector('h2 .n');if(g)g.textContent=c});
+ document.querySelectorAll('#nav a').forEach(function(a){var s=document.getElementById(a.getAttribute('href').slice(1));a.parentNode.hidden=!!s&&s.classList.contains('off')});
+ cnt.textContent=v?(n+' ouvrage'+(n>1?'s':'')+' trouvé'+(n>1?'s':'')):'';vide.hidden=n>0||!v}
+q.addEventListener('input',filt)})();
+</script>
+<script>
+(function(){
+  var links=[].slice.call(document.querySelectorAll('#nav a'));
+  var secs=[].slice.call(document.querySelectorAll('.txt')),lock=null,ticking=false;
+  function setCur(i){
+    links.forEach(function(a,k){if(k===i)a.setAttribute('aria-current','true');else a.removeAttribute('aria-current')});
+    var a=links[i],box=a.parentNode.parentNode;
+    if(box.scrollWidth>box.clientWidth&&box.scrollTo)box.scrollTo({left:i?a.offsetLeft-20:0});
+  }
+  function upd(){
+    ticking=false;
+    if(lock!==null){setCur(lock);return}
+    var nb=document.querySelector('.nav'),y=(nb?nb.getBoundingClientRect().bottom:0)+24,cur=0;
+    secs.forEach(function(s,k){if(s.getBoundingClientRect().top<=y)cur=k});
+    setCur(cur);
+  }
+  function req(){if(!ticking){ticking=true;requestAnimationFrame(upd)}}
+  links.forEach(function(a,k){a.addEventListener('click',function(){lock=k;setCur(k)})});
+  ['wheel','touchstart','mousedown','keydown'].forEach(function(ev){window.addEventListener(ev,function(){lock=null},{passive:true})});
+  window.addEventListener('scroll',req,{passive:true});window.addEventListener('resize',req);
+  upd();
+})();
+</script>
+<script>
+(function(){var r=document.documentElement,K='texte-seul',KL='mode-lecture';
+var btn=document.getElementById('a11y-btn'),menu=document.getElementById('a11y-menu'),opts=menu.querySelectorAll('.a11y-opt'),closed=[],shown=[],skipped=[];
+function apply(m){
+  var ts=m==='ts',lc=m==='lect',was=r.classList.contains('lect');
+  r.classList.toggle('ts',ts);r.classList.toggle('lect',lc);
+  if(lc&&!was){closed=[];shown=[];skipped=[];
+    document.querySelectorAll('main details').forEach(function(d){if(!d.open){closed.push(d);d.open=true}});
+    document.querySelectorAll('main [hidden]').forEach(function(x){if(!x.closest('[aria-labelledby="h-video"]')&&!x.matches('video,[role="tablist"]')){shown.push(x);x.hidden=false}});
+    document.querySelectorAll('main section').forEach(function(sc){var h=sc.querySelector('h2');
+      if(sc.querySelector('input,select,textarea')||(h&&/^(Exercice|Faites le tri|En vid)/i.test(h.textContent.trim()))){sc.classList.add('lc-skip');skipped.push(sc)}});}
+  if(!lc&&was){closed.forEach(function(d){d.open=false});shown.forEach(function(x){x.hidden=true});skipped.forEach(function(s){s.classList.remove('lc-skip')});closed=[];shown=[];skipped=[]}
+  opts.forEach(function(o){o.setAttribute('aria-checked',o.getAttribute('data-mode')===m?'true':'false')});
+  try{localStorage.setItem(K,ts?'1':'0');localStorage.setItem(KL,lc?'1':'0')}catch(e){}
+}
+function open(on){menu.hidden=!on;btn.setAttribute('aria-expanded',on?'true':'false')}
+btn.addEventListener('click',function(e){e.stopPropagation();open(menu.hidden)});
+opts.forEach(function(o){o.addEventListener('click',function(){apply(o.getAttribute('data-mode'));open(false);btn.focus()})});
+document.addEventListener('click',function(e){if(!menu.hidden&&!menu.contains(e.target)&&e.target!==btn)open(false)});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!menu.hidden){open(false);btn.focus()}});
+var v='orig';try{if(localStorage.getItem(KL)==='1')v='lect';else if(localStorage.getItem(K)==='1'&&menu.querySelector('[data-mode="ts"]'))v='ts'}catch(e){}
+if(v==='ts')apply('ts');
+if(v==='lect')window.addEventListener('load',function(){apply('lect')});
+})();
+</script>
+</body>
+</html>

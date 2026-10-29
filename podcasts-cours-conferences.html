@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Podcasts, cours et conférences</title>
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+  --bg:#F1F4F6; --surface:#FFFFFF; --ink:#1B2733; --muted:#53626F; --line:#D5DDE3; --focus:#0E6E73;
+  --pour:#0E6E73; --contre:#A8321F; --nuance:#2F4FA8; --garde:#8A5A00; --neutre:#4F5D69;
+  --serif:Georgia,"Times New Roman",serif;
+  --sans:system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#10171D; --surface:#18222A; --ink:#E7EDF2; --muted:#A1B0BC; --line:#2A3641; --focus:#5FD0D6;
+    --pour:#5FD0D6; --contre:#FF8A75; --nuance:#97ADFF; --garde:#F0BC52; --neutre:#A9B7C2;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#10171D; --surface:#18222A; --ink:#E7EDF2; --muted:#A1B0BC; --line:#2A3641; --focus:#5FD0D6;
+  --pour:#5FD0D6; --contre:#FF8A75; --nuance:#97ADFF; --garde:#F0BC52; --neutre:#A9B7C2;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:calc(4.2rem + env(safe-area-inset-top,0px));-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.1rem/1.65 var(--serif)}
+.wrap{width:min(980px,100% - 2.5rem);margin-inline:auto}
+h1,h2,h3{margin:0;font-family:var(--serif)}
+h1{font-weight:800;font-size:clamp(2.5rem,8vw,5rem);line-height:1.02;letter-spacing:-.02em}
+h2{font-weight:800;font-size:clamp(1.6rem,3.4vw,2.2rem);line-height:1.12}
+p{margin:0 0 1em}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
+.hero{padding:clamp(2.2rem,6vw,4.5rem) 0 2rem}
+.lead{font-size:clamp(1.15rem,2.4vw,1.45rem);line-height:1.5;max-width:40ch;margin:1.4rem 0 1rem}
+.note{font:500 .92rem/1.5 var(--sans);color:var(--muted);max-width:62ch;margin:0}
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--bg);border-bottom:1px solid var(--line)}
+.nav ol{display:flex;gap:.3rem;list-style:none;margin:0;padding:.5rem 0;overflow-x:auto}
+.nav a{display:block;white-space:nowrap;text-decoration:none;color:var(--muted);font:700 .88rem/1.2 var(--sans);padding:.45rem .7rem .35rem;border-radius:6px;border-bottom:4px solid var(--c)}
+.nav a:hover{color:var(--ink)}
+.nav a[aria-current="true"]{background:var(--ink);color:var(--bg)}
+.nav small{display:block;font-weight:500;font-size:.75rem;opacity:1}
+.txt{border-bottom:1px solid var(--line);padding:clamp(2.4rem,6vw,3.6rem) 0}
+.meta{display:flex;flex-wrap:wrap;gap:.5rem .9rem;align-items:center;margin-bottom:.8rem;font:500 .92rem/1.3 var(--sans);color:var(--muted)}
+.tag{font:700 .8rem/1 var(--sans);color:var(--c);border:1.5px solid var(--c);border-radius:5px;padding:.3rem .5rem}
+.thesis{font-size:clamp(1.2rem,2.4vw,1.5rem);line-height:1.4;font-weight:600;margin:1rem 0 1.4rem;max-width:44ch;padding-left:1rem;border-left:5px solid var(--c)}
+.cols{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:1.6rem clamp(1.6rem,4vw,3rem)}
+h3{font:700 .9rem/1.2 var(--sans);color:var(--c);margin-bottom:.7rem}
+.args{margin:0;padding:0;list-style:none;counter-reset:a}
+.args li{counter-increment:a;padding:.6rem 0 .6rem 2.4rem;border-top:1px solid var(--line);position:relative}
+.args li:last-child{border-bottom:1px solid var(--line)}
+.args li::before{content:counter(a);position:absolute;left:0;top:.5rem;font:800 1.5rem/1 var(--serif);color:var(--c)}
+.quotes{margin:0;padding:0}
+.quotes blockquote{margin:0 0 1rem;padding:.2rem 0 .2rem .9rem;border-left:3px solid var(--line)}
+.quotes p{margin:0 0 .2rem;font-style:italic}
+.quotes cite{font:500 .82rem/1.3 var(--sans);font-style:normal;color:var(--muted)}
+footer{padding:1.6rem 0 2.5rem;font:500 .92rem/1.5 var(--sans);color:var(--muted)}
+footer p{margin:0}
+@media (max-width:760px){.cols{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+.pdfbtn{display:inline-flex;align-items:center;gap:.5rem;font:600 .88rem/1 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--surface);border:1.5px solid var(--ink);border-radius:999px;padding:.55rem .95rem;cursor:pointer}
+.pdfbtn:hover{background:var(--ink);color:var(--bg)}.pdfbtn:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:2px}
+
+/* Mode lecture (pages à structure libre) */
+html.lect body::before,html.lect body::after{display:none!important}
+html.lect body{background:var(--bg)!important}
+html.lect .pn,html.lect #quiz,html.lect section[aria-labelledby="h-video"],html.lect video,html.lect .score,html.lect .lc-skip,html.lect [role="tablist"],html.lect main button,html.lect main input,html.lect main select,html.lect main textarea,html.lect .sec-head p.lc-x{display:none!important}
+html.lect .hero h1,html.lect .hero p,html.lect section.block h2,html.lect footer p{text-shadow:none!important}
+html.lect .hero,html.lect section.block{padding-block:1.2rem!important;border:0!important}
+html.lect .wrap,html.lect .sec-head{max-width:40rem!important;margin-inline:auto}
+html.lect .hgrid,html.lect .two,html.lect .cols{display:block!important}
+html.lect main,html.lect .hero{font-family:var(--serif)}
+html.lect .hero h1{font-size:clamp(1.9rem,5vw,2.6rem)!important}
+html.lect main p,html.lect main li,html.lect .lead{font-size:1.12rem!important;line-height:1.75!important}
+html.lect :is(main,.hero) :is(div,li,blockquote,article,aside,p,ul,ol,section,details,summary,figure,span):not(table *){background:none!important;border:0!important;box-shadow:none!important;border-radius:0!important}
+html.lect main [hidden]{display:revert!important}
+html.lect :is(main,.hero) div:not(.wrap):not(.sec-head):not(table *){display:block!important;grid-template-columns:none!important;float:none!important;max-width:none!important;width:auto!important;margin-inline:0}
+html.lect main li{display:list-item!important}
+html.lect .must{margin:1rem 0}
+html.lect .lead{max-width:none!important}
+html.lect .wrap{padding-inline:0}
+html.lect main details>summary{cursor:default;pointer-events:none;list-style:none}
+html.lect main details>summary::-webkit-details-marker,html.lect main details>summary::before{display:none!important}
+html.lect main blockquote{margin:.8rem 0;padding:0 0 0 1rem!important;border-left:3px solid var(--line)!important}
+html.lect main .panel{display:block!important;margin-bottom:1rem}
+html.lect main h3,html.lect main h4{margin-top:1.4rem}
+html.lect .nav,html.lect .hero .note{display:none!important}
+html.lect .thesis{border:0!important;padding-left:0!important;max-width:none!important}
+html.lect .args li{padding-left:0!important}
+html.lect .args li::before{display:none!important}
+html.lect .args{list-style:decimal;padding-left:1.4rem!important}
+html.lect .txt{padding-block:1.2rem!important}
+
+/* Accessibilité */
+.a11y{position:relative;display:inline-block}
+.a11y-menu{position:absolute;right:0;top:calc(100% + .4rem);z-index:60;min-width:14rem;background:var(--bg);color:var(--ink);border:1.5px solid var(--ink);border-radius:14px;padding:.35rem;box-shadow:0 8px 24px rgba(0,0,0,.18);text-shadow:none}
+.a11y-menu[hidden]{display:none}
+.a11y-menu p{margin:0;padding:.45rem .7rem .3rem;font:700 .72rem/1 system-ui,-apple-system,sans-serif;letter-spacing:.06em;text-transform:uppercase;opacity:.65}
+.a11y-opt{display:flex;align-items:center;gap:.6rem;width:100%;text-align:left;font:600 .92rem/1.2 system-ui,-apple-system,sans-serif;color:inherit;background:none;border:0;border-radius:9px;padding:.6rem .7rem;cursor:pointer}
+.a11y-opt:hover{background:var(--surface)}
+.a11y-opt:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:-2px}
+.a11y-opt .dot{flex:none;width:1rem;height:1rem;border:2px solid currentColor;border-radius:50%;position:relative}
+.a11y-opt[aria-checked="true"] .dot::after{content:"";position:absolute;inset:2px;background:currentColor;border-radius:50%}
+.a11y-opt small{display:block;font-weight:500;opacity:.7;font-size:.78rem;margin-top:.15rem}
+@media print{
+  :root{--bg:#fff!important;--surface:#fff!important;--ink:#111!important;--muted:#444!important;--line:#bbb!important;color-scheme:light!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:#fff!important;color:#111!important}
+  body::before,body::after{display:none!important}
+  nav,.pdfbtn,.pn,video,section[aria-labelledby="h-video"]{display:none!important}
+  .rev,.js .rev{opacity:1!important;transform:none!important}
+  .stp li[hidden]{display:list-item!important}
+  details>*{display:block!important}
+  article,li,.card,figure,.stage{break-inside:avoid}
+  h1,h2,h3{break-after:avoid;text-shadow:none!important}
+  *{text-shadow:none!important}
+  a{color:inherit;text-decoration:none}
+  section.block,.part{padding-top:1.2rem!important;padding-bottom:1.2rem!important}
+  footer{break-before:avoid;border-top:1px solid #999;margin-top:1rem}
+}
+@page{size:A4;margin:16mm 14mm}
+/* Texte */
+.tx summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:.7rem;font:800 clamp(1.4rem,3vw,1.9rem)/1.2 var(--sans);padding:.3rem 0}
+.tx summary::-webkit-details-marker{display:none}
+.tx summary::before{content:"";width:.6em;height:.6em;border-right:.2em solid currentColor;border-bottom:.2em solid currentColor;transform:rotate(-45deg);transition:transform .15s;flex:none;margin-right:.2rem}
+.tx[open] summary::before{transform:rotate(45deg)}
+@media (prefers-reduced-motion:reduce){.tx summary::before{transition:none}}
+.txb{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--c,var(--ink));padding:1.2rem clamp(1rem,3vw,1.8rem);margin-top:.9rem;max-width:46rem;font:400 1.1rem/1.75 var(--serif)}
+.txb p{margin:0 0 1em}
+.txb h3{font:700 1rem/1.3 var(--sans);margin:1.2em 0 .5em}
+.txb .vs{font:700 .72rem/1 var(--sans);color:var(--muted);margin-right:.15em}
+.txb .tsrc{font:600 .88rem/1.4 var(--sans);color:var(--muted);text-align:right;margin:1.1em 0 0}
+.txb .tsrc:not(:last-child){margin-bottom:1.4em;padding-bottom:1.2em;border-bottom:1px solid var(--line)}
+
+/* Sujets de dissertation */
+.sjd ul{list-style:none;margin:.6rem 0 0;padding:0;max-width:46rem}
+.sjd li{margin:0;padding:.55rem 0;border-top:1px solid var(--line)}
+.sjd li:last-child{border-bottom:1px solid var(--line)}
+.sjd a{color:inherit;font:600 1.05rem/1.4 var(--sans,system-ui);text-underline-offset:3px}
+.sjd p{margin:.4rem 0 0}
+html.lect .sjd li{border:0!important;padding:.25rem 0!important}
+html.lect .sjd a{font:600 1.12rem/1.6 var(--serif,Georgia,serif)}
+@media print{.sjd a{font-weight:600}.sjd li{border-color:#999}}
+.ln{font:700 .66rem/1 var(--sans);color:var(--muted);margin:0 .2em 0 .1em;vertical-align:super}
+.txb .tsrcline{font:600 .9rem/1.4 var(--sans);color:var(--muted)}
+.txn{font:500 .85rem/1.4 var(--sans);color:var(--muted);margin:.2rem 0 1rem}
+html.lect .txb{padding:0!important}
+</style>
+<script>try{history.scrollRestoration="manual"}catch(e){}(function(){function t(){if(!location.hash)window.scrollTo(0,0)}t();document.addEventListener("DOMContentLoaded",t);window.addEventListener("load",function(){t();setTimeout(t,60)});window.addEventListener("pageshow",t)})();</script>
+<script src="confort.js"></script><script src="voix.js" defer></script>
+
+<style>
+.fs h2{margin-bottom:1rem}
+.fs h3{font:700 1rem/1.3 var(--sans);color:var(--c);margin:1.4rem 0 .5rem}
+.fs .wrap>p,.fs li{max-width:46rem}
+.pg{font:600 .78rem/1 var(--sans);color:var(--muted);white-space:nowrap;margin-left:.3em}
+.fs ul.pts{margin:.4rem 0 1rem;padding-left:1.2rem}
+.fs ul.pts li{margin:.35rem 0}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr));gap:1rem;margin:1rem 0}
+.card{background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--c);padding:1rem 1.1rem 1.1rem;border-radius:0 0 8px 8px}
+.card h3{margin:0 0 .5rem;font:800 1.05rem/1.25 var(--sans);color:var(--ink)}
+.card p{font-size:1rem;line-height:1.55;margin:0 0 .6em}
+.card ul{margin:.3rem 0 .4rem;padding-left:1.1rem;font-size:1rem;line-height:1.5}
+.card .k{font:700 .74rem/1 var(--sans);letter-spacing:.05em;text-transform:uppercase;color:var(--c);margin:.9rem 0 .25rem}
+.card .f{font-weight:600}
+.tbl{width:100%;border-collapse:collapse;margin:.8rem 0 1rem;font:400 1rem/1.5 var(--serif);background:var(--surface)}
+.tbl caption{text-align:left;font:600 .88rem/1.4 var(--sans);color:var(--muted);padding:.3rem 0}
+.tbl th,.tbl td{border:1px solid var(--line);padding:.55rem .7rem;vertical-align:top;text-align:left}
+.tbl th{font:700 .86rem/1.3 var(--sans);background:var(--bg);color:var(--ink)}
+.tblw{overflow-x:auto}
+.axes{display:grid;grid-template-columns:auto 1fr 1fr;gap:.4rem;margin:1rem 0;font:600 .92rem/1.35 var(--sans);max-width:46rem}
+.axes div{padding:.7rem .8rem;border:1px solid var(--line);background:var(--surface)}
+.axes .h{background:none;border:0;color:var(--muted);font-size:.82rem;align-self:center}
+.axes .a{border-left:6px solid var(--nuance)}.axes .b{border-left:6px solid var(--garde)}.axes .c2{border-left:6px solid var(--contre)}.axes .d{border-left:6px solid var(--neutre)}
+.axes small{display:block;font-weight:500;color:var(--muted);margin-top:.2rem}
+.fs blockquote{margin:0 0 1.1rem;padding:.2rem 0 .2rem .9rem;border-left:3px solid var(--c);max-width:46rem}
+.fs blockquote p{margin:0 0 .25rem;font-style:italic}
+.fs blockquote cite{font:500 .84rem/1.3 var(--sans);font-style:normal;color:var(--muted)}
+.fs dl{margin:.6rem 0 0;max-width:46rem}
+.fs dt{font:700 1rem/1.3 var(--sans);margin-top:.9rem}
+.fs dd{margin:.2rem 0 0}
+.fs .src{font:500 .9rem/1.5 var(--sans);color:var(--muted);max-width:46rem}
+@media (max-width:640px){.axes{grid-template-columns:1fr}.axes .h{display:none}}
+html.lect .cards{display:block!important}html.lect .card{margin-bottom:1rem}
+html.lect .tbl{display:block}
+@media print{.card,.tbl tr{break-inside:avoid}}
+</style>
+<style>
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.cards{grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr));align-items:start}
+.card h3{font-size:1.15rem}
+ol.ep{margin:.4rem 0 .4rem;padding-left:1.4rem}ol.ep li{margin:.5rem 0;line-height:1.45}
+.card a,details.cyc a{color:var(--ink);font-weight:600;text-underline-offset:.15em}
+.card a:hover,details.cyc a:hover{color:var(--c)}
+.reco-t{display:inline-block;font:700 .72rem/1 var(--sans);letter-spacing:.04em;text-transform:uppercase;color:var(--c);border:1.5px solid var(--c);border-radius:999px;padding:.2rem .5rem;margin-left:.3rem;vertical-align:.1em}
+.reco{margin:.6rem 0 0;font-size:1.05rem}
+.aud{margin:.6rem 0 0}.aud audio{width:100%;display:block;margin-top:.25rem}.aud .k{margin:.4rem 0 .1rem}
+.bonus{margin:.8rem 0 0}
+details.cyc{border:1px solid var(--line);border-left:6px solid var(--c);background:var(--surface);border-radius:0 8px 8px 0;margin:.6rem 0;max-width:46rem}
+details.cyc>summary{cursor:pointer;padding:.75rem 1rem;font:600 1rem/1.35 var(--sans);color:var(--ink)}
+details.cyc>summary:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+details.cyc>:not(summary){margin-left:1rem;margin-right:1rem}
+details.cyc>:last-child{margin-bottom:1rem}
+ul.cn{list-style:none;margin:.5rem 0 0;padding:0;display:flex;flex-wrap:wrap;gap:.45rem}
+ul.cn li{margin:0}
+ul.cn a{color:var(--ink);display:inline-block;padding:.45rem .7rem;border:1.5px solid var(--line);border-radius:6px;background:var(--bg);text-decoration:none;font:600 .92rem/1.2 var(--sans)}
+ul.cn a:hover{border-color:var(--ink)}
+ul.cn a.rec{border-color:var(--c)}
+ul.cn li.na{padding:.45rem .7rem;border:1.5px dashed var(--line);border-radius:6px;font:500 .92rem/1.2 var(--sans);color:var(--muted)}
+.inc{font-weight:500;color:var(--muted);font-size:.82em}
+html.lect details.cyc{border:0;background:none}
+</style>
+</head>
+<body>
+<nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><span style="display:inline-flex;gap:.6rem;flex-wrap:wrap;align-items:center"><span class="a11y"><button type="button" class="pdfbtn" id="a11y-btn" aria-haspopup="true" aria-expanded="false" aria-controls="a11y-menu"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="1.6"/><path d="M5 8.5l7 1.5 7-1.5M12 10v4.5M8.5 21l3.5-6.5 3.5 6.5"/></svg><span>Accessibilité</span></button><div class="a11y-menu" id="a11y-menu" role="radiogroup" aria-label="Affichage de la page" hidden><p>Affichage</p><button type="button" role="radio" class="a11y-opt" data-mode="orig" aria-checked="true"><span class="dot"></span><span>Page d’origine<small>Image de fond et mise en page habituelle</small></span></button><button type="button" role="radio" class="a11y-opt" data-mode="lect" aria-checked="false"><span class="dot"></span><span>Mode lecture<small>Texte continu, sans cadres ni exercices</small></span></button></div></span><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></span></nav>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Podcasts, cours et conférences</h1>
+    <p class="lead">Séries de France Culture et de France Musique, cours de Michel Foucault, conférences de l’ENS.</p>
+    <p class="note">Les liens s’ouvrent sur le site d’origine, dans un nouvel onglet. Les extraits sur la politique se lisent directement sur cette page.</p>
+  </div>
+</header>
+<nav class="nav" aria-label="Rubriques"><div class="wrap"><ol id="nav">
+<li><a href="#politique" style="--c:var(--pour)">Politique</a></li>
+<li><a href="#morale" style="--c:var(--pour)">Morale et religion</a></li>
+<li><a href="#homere" style="--c:var(--pour)">Homère</a></li>
+<li><a href="#art" style="--c:var(--pour)">Art et musique</a></li>
+<li><a href="#foucault" style="--c:var(--pour)">Foucault</a></li>
+<li><a href="#ens" style="--c:var(--pour)">ENS</a></li>
+</ol></div></nav>
+<main id="main">
+<section class="txt fs" id="politique" aria-labelledby="h-politique" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-politique">La politique</h2>
+<div class="cards">
+<article class="card"><h3>La politique en dix minutes</h3>
+<p>Pour aborder la pensée de ces grands philosophes politiques.</p>
+<div class="aud"><p class="k">Hobbes <span class="pg">10 minutes environ</span></p><audio controls preload="none" src="audio/politique-hobbes.mp3">Votre navigateur ne lit pas l’audio : <a href="audio/politique-hobbes.mp3">télécharger l’extrait</a>.</audio></div>
+<div class="aud"><p class="k">Machiavel <span class="pg">10 minutes environ</span></p><audio controls preload="none" src="audio/politique-machiavel.mp3">Votre navigateur ne lit pas l’audio : <a href="audio/politique-machiavel.mp3">télécharger l’extrait</a>.</audio></div>
+<div class="aud"><p class="k">Marx <span class="pg">10 minutes environ</span></p><audio controls preload="none" src="audio/politique-marx.mp3">Votre navigateur ne lit pas l’audio : <a href="audio/politique-marx.mp3">télécharger l’extrait</a>.</audio></div>
+<div class="aud"><p class="k">Tocqueville <span class="pg">10 minutes environ</span></p><audio controls preload="none" src="audio/politique-tocqueville.mp3">Votre navigateur ne lit pas l’audio : <a href="audio/politique-tocqueville.mp3">télécharger l’extrait</a>.</audio></div>
+<div class="aud"><p class="k">Arendt <span class="pg">10 minutes environ</span></p><audio controls preload="none" src="audio/politique-arendt.mp3">Votre navigateur ne lit pas l’audio : <a href="audio/politique-arendt.mp3">télécharger l’extrait</a>.</audio></div>
+</article>
+<article class="card"><h3>Arendt et la politique</h3>
+<p>Quatre épisodes d’environ une heure chacun, de la série « Avec philosophie » (France Culture).</p>
+<ol class="ep">
+<li><a href="https://www.radiofrance.fr/franceculture/podcasts/avec-philosophie/arendt-et-montesquieu-la-notion-de-theorie-des-regimes-politiques-8172822" target="_blank" rel="noopener noreferrer">Épisode 1 : Arendt et Montesquieu, analyser les régimes politiques<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://www.radiofrance.fr/franceculture/podcasts/avec-philosophie/arendt-et-la-democratie-5498230" target="_blank" rel="noopener noreferrer">Épisode 2 : Arendt et la démocratie<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://www.radiofrance.fr/franceculture/podcasts/avec-philosophie/arendt-et-marx-travail-et-souffrance-sociale-6942965" target="_blank" rel="noopener noreferrer">Épisode 3 : Arendt et Marx, le travail, la souffrance sociale et la politique<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://www.radiofrance.fr/franceculture/podcasts/avec-philosophie/arendt-et-kant-la-question-du-jugement-politique-6700378" target="_blank" rel="noopener noreferrer">Épisode 4 : Arendt et Kant, la question du jugement politique<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+</ol>
+</article>
+</div></div></section>
+<section class="txt fs" id="morale" aria-labelledby="h-morale" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-morale">Morale et religion</h2>
+<div class="cards">
+<article class="card"><h3>Sur la morale kantienne</h3>
+<p>Quatre épisodes d’environ une heure chacun, de la série « Avec philosophie » (France Culture).</p>
+<ol class="ep">
+<li><a href="https://www.radiofrance.fr/franceculture/podcasts/avec-philosophie/nos-devoirs-sont-ils-toujours-dictes-par-la-raison-3833280" target="_blank" rel="noopener noreferrer">Épisode 1 : nos devoirs sont-ils toujours dictés par la raison ?<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://www.radiofrance.fr/franceculture/podcasts/avec-philosophie/faut-il-etre-moral-pour-etre-vraiment-libre-3501091" target="_blank" rel="noopener noreferrer">Épisode 2 : faut-il être moral pour être vraiment libre ?<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://www.radiofrance.fr/franceculture/podcasts/avec-philosophie/a-t-on-le-droit-de-mentir-5728104" target="_blank" rel="noopener noreferrer">Épisode 3 : a-t-on le droit de mentir ?<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://www.radiofrance.fr/franceculture/podcasts/avec-philosophie/en-quoi-l-humanite-est-elle-digne-de-respect-2033871" target="_blank" rel="noopener noreferrer">Épisode 4 : respect, comment écouter la voix morale en soi ?<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+</ol>
+</article>
+<article class="card"><h3>Le Dieu de Descartes</h3>
+<p>Un épisode intéressant, qui apporte des précisions à notre cours sur la religion : les preuves de l’existence de Dieu, les critiques de ces preuves, la foi, le <em>cogito</em>, <em>etc.</em> La première demi-heure est particulièrement utile.</p>
+<p class="reco"><a href="https://www.radiofrance.fr/franceculture/podcasts/avec-philosophie/le-dieu-de-descartes-nous-parle-t-il-encore-6259473" target="_blank" rel="noopener noreferrer">Le Dieu de Descartes nous parle-t-il encore ? <span class="pg">58 minutes</span><span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></p>
+</article>
+</div></div></section>
+<section class="txt fs" id="homere" aria-labelledby="h-homere" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-homere">Homère, philosophe ?</h2>
+<div class="cards">
+<article class="card"><h3>Homère, philosophe ?</h3>
+<p>Je vous conseille particulièrement l’épisode 2 de la série, et son interprétation de la rencontre entre Ulysse et les sirènes, à l’aune des travaux d’Adorno et Horkheimer.</p>
+<ol class="ep">
+<li><a href="https://www.radiofrance.fr/franceculture/podcasts/avec-philosophie/preambule-destin-et-malediction-familiale-selon-les-grecs-anciens-7751703" target="_blank" rel="noopener noreferrer">Épisode 1 : destin et malédiction familiale selon les Grecs anciens<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://www.radiofrance.fr/franceculture/podcasts/avec-philosophie/que-nous-apprend-le-voyage-d-ulysse-4636155" target="_blank" rel="noopener noreferrer">Épisode 2 : que nous apprend le voyage d’Ulysse ? <span class="reco-t">conseillé</span><span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://www.radiofrance.fr/franceculture/podcasts/avec-philosophie/des-dieux-imparfaits-que-veut-nous-dire-homere-3151677" target="_blank" rel="noopener noreferrer">Épisode 3 : des dieux imparfaits, que veut nous dire Homère ?<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://www.radiofrance.fr/franceculture/podcasts/avec-philosophie/courage-mais-colere-cruaute-vengeance-le-heros-homerique-est-il-vraiment-admirable-9905770" target="_blank" rel="noopener noreferrer">Épisode 4 : l’héroïsme selon Homère<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+</ol>
+<p class="bonus">Pour prolonger : <a href="https://www.youtube.com/watch?v=WRSbjpXZYEA&amp;list=RDWRSbjpXZYEA&amp;start_radio=1" target="_blank" rel="noopener noreferrer">Cream, <em>Tales of Brave Ulysses</em><span class="sr"> (s’ouvre dans un nouvel onglet)</span></a> (YouTube).</p>
+</article>
+</div></div></section>
+<section class="txt fs" id="art" aria-labelledby="h-art" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-art">Art et musique</h2>
+<div class="cards">
+<article class="card"><h3>Le nu dans l’art</h3>
+<p>Des épisodes de 30 minutes environ, traçant les grandes lignes de l’histoire du nu dans l’art, dans « LSD, la série documentaire » (France Culture).</p>
+<ol class="ep">
+<li><a href="https://www.radiofrance.fr/franceculture/podcasts/lsd-la-serie-documentaire/venus-est-dans-la-grotte-4208570" target="_blank" rel="noopener noreferrer">Épisode 1 : Vénus est dans la grotte<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://www.radiofrance.fr/franceculture/podcasts/lsd-la-serie-documentaire/a-poil-sur-un-piedestal-5367504" target="_blank" rel="noopener noreferrer">Épisode 2 : à poil sur un piédestal<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://www.radiofrance.fr/franceculture/podcasts/lsd-la-serie-documentaire/pudeur-et-impudeur-medievale-6819603" target="_blank" rel="noopener noreferrer">Épisode 3 : pudeur et impudeur médiévales<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://www.radiofrance.fr/franceculture/podcasts/lsd-la-serie-documentaire/quand-venus-s-est-couchee-9706842" target="_blank" rel="noopener noreferrer">Épisode 4 : quand Vénus s’est couchée<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://www.radiofrance.fr/franceculture/podcasts/lsd-la-serie-documentaire/les-nus-invisibles-2782394" target="_blank" rel="noopener noreferrer">Épisode 5 : les nus invisibles<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://www.radiofrance.fr/franceculture/podcasts/lsd-la-serie-documentaire/profession-modele-vivant-1812932" target="_blank" rel="noopener noreferrer">Épisode 6 : profession modèle vivant<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://www.radiofrance.fr/franceculture/podcasts/lsd-la-serie-documentaire/l-empire-du-nu-2853587" target="_blank" rel="noopener noreferrer">Épisode 7 : l’empire du nu<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://www.radiofrance.fr/franceculture/podcasts/lsd-la-serie-documentaire/quand-les-femmes-performent-le-nu-2612324" target="_blank" rel="noopener noreferrer">Épisode 8 : quand les femmes performent le nu<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+</ol>
+</article>
+<article class="card"><h3>Art et féminisme</h3>
+<p>Des épisodes du podcast <em>Vénus s’épilait-elle la chatte ?</em>, qui entend apporter un regard féministe sur l’art.</p>
+<ol class="ep">
+<li><a href="https://www.venuslepodcast.com/episodes/esth%C3%A9tiser-les-femmes-mortes" target="_blank" rel="noopener noreferrer">« Esthétiser les femmes mortes »<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://www.venuslepodcast.com/episodes/frida-kahlo%2C-au-del%C3%A0-du-mythe-1%2F2" target="_blank" rel="noopener noreferrer">« Frida Kahlo, au-delà du mythe (1 sur 2) »<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://www.venuslepodcast.com/episodes/frida-kahlo%2C-au-del%C3%A0-du-mythe-2%2F2" target="_blank" rel="noopener noreferrer">« Frida Kahlo, au-delà du mythe (2 sur 2) »<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://www.venuslepodcast.com/episodes/la-grossesse%2C-tabou-de-l&#x27;art" target="_blank" rel="noopener noreferrer">« La grossesse, tabou de l’art »<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://www.venuslepodcast.com/episodes/les-autoportraits-f%C3%A9minins" target="_blank" rel="noopener noreferrer">« Les autoportraits féminins »<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://www.venuslepodcast.com/episodes/les-sacrifi%C3%A9es-du-romantisme" target="_blank" rel="noopener noreferrer">« Les sacrifiées du romantisme »<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://www.venuslepodcast.com/episodes/picasso%2C-s%C3%A9parer-l&#x27;homme-de-l&#x27;artiste" target="_blank" rel="noopener noreferrer">« Picasso, séparer l’homme de l’artiste »<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://www.venuslepodcast.com/episodes/repr%C3%A9senter-les-noir%C2%B7es-%3A-le-regard-blanc" target="_blank" rel="noopener noreferrer">« Représenter les noir·es : le regard blanc »<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://www.venuslepodcast.com/episodes/la-v%C3%A9nus-lac%C3%A9r%C3%A9e" target="_blank" rel="noopener noreferrer">« La Vénus lacérée »<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+</ol>
+</article>
+<article class="card"><h3>Musique et philosophie</h3>
+<p>Cinq épisodes consacrés aux liens entre la musique et la philosophie (France Musique, « Arabesques »).</p>
+<ol class="ep">
+<li><a href="https://www.radiofrance.fr/francemusique/podcasts/arabesques/les-philosophes-et-la-musique-1-5-6295359" target="_blank" rel="noopener noreferrer">Épisode 1 : « Les Antiques, de Pythagore à Aristote »<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://www.radiofrance.fr/francemusique/podcasts/arabesques/les-philosophes-et-la-musique-2-5-3531446" target="_blank" rel="noopener noreferrer">Épisode 2 : « Les Médiévaux, Saint-Augustin et Boèce »<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://www.radiofrance.fr/francemusique/podcasts/arabesques/les-philosophes-et-la-musique-3-5-8170293" target="_blank" rel="noopener noreferrer">Épisode 3 : « XVe et XVIe siècles, exprimer les sentiments et les passions »<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://www.radiofrance.fr/francemusique/podcasts/arabesques/les-philosophes-et-la-musique-4-5-3224418" target="_blank" rel="noopener noreferrer">Épisode 4 : « Les Cartésiens : “Les passions sont le sel de la vie.” »<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://www.radiofrance.fr/francemusique/podcasts/arabesques/les-philosophes-et-la-musique-5-5-3007932" target="_blank" rel="noopener noreferrer">Épisode 5 : « XVIIIe, XIXe et XXe siècles : la musique et l’ineffable »<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+</ol>
+</article>
+</div></div></section>
+<section class="txt fs" id="foucault" aria-labelledby="h-foucault" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-foucault">Michel Foucault au Collège de France</h2>
+<p>Je vous recommande particulièrement l’écoute du premier cours, consacré aux anormaux, et du cours consacré à la naissance de la biopolitique. Tous les cours ont également été publiés aux éditions du Seuil, et sont un passage obligé pour toute bibliothèque de philosophie digne de ce nom.</p>
+<p class="src">Les enregistrements ont été réalisés par les auditeurs du cours, notamment M. Gilbert Burlet.</p>
+<details class="cyc"><summary><span><i>Le Pouvoir psychiatrique</i> <span class="pg">1973–1974</span></span></summary>
+<p><a href="https://www.college-de-france.fr/sites/default/files/media/document/2024-07/1973-1974_foucault.pdf" target="_blank" rel="noopener noreferrer">Résumé du cours (PDF)<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></p>
+<ul class="cn">
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19731107.m4a" target="_blank" rel="noopener noreferrer">Cours 1<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19731114.m4a" target="_blank" rel="noopener noreferrer">Cours 2<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19731121.m4a" target="_blank" rel="noopener noreferrer">Cours 3<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li class="na">Cours 4 <span class="inc">audio non disponible</span></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19731205.m4a" target="_blank" rel="noopener noreferrer">Cours 5<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19731212.m4a" target="_blank" rel="noopener noreferrer">Cours 6<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19731219.m4a" target="_blank" rel="noopener noreferrer">Cours 7<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19740109.m4a" target="_blank" rel="noopener noreferrer">Cours 8<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19740116.m4a" target="_blank" rel="noopener noreferrer">Cours 9<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19740123.m4a" target="_blank" rel="noopener noreferrer">Cours 10<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19740130.m4a" target="_blank" rel="noopener noreferrer">Cours 11<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19740206.m4a" target="_blank" rel="noopener noreferrer">Cours 12<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+</ul>
+</details>
+<details class="cyc"><summary><span><i>Les Anormaux</i> <span class="pg">1974–1975</span></span></summary>
+<p><a href="https://www.college-de-france.fr/sites/default/files/media/document/2024-06/1974-1975_foucault.pdf" target="_blank" rel="noopener noreferrer">Résumé du cours (PDF)<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></p>
+<ul class="cn">
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19750108.m4a" target="_blank" rel="noopener noreferrer">Cours 1<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li class="na">Cours 2 <span class="inc">audio non disponible</span></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19750122.m4a" target="_blank" rel="noopener noreferrer">Cours 3<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19750129.m4a" target="_blank" rel="noopener noreferrer">Cours 4<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19750205.m4a" target="_blank" rel="noopener noreferrer">Cours 5<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19750212.m4a" target="_blank" rel="noopener noreferrer">Cours 6<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19750219.m4a" target="_blank" rel="noopener noreferrer">Cours 7<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19750226.m4a" target="_blank" rel="noopener noreferrer">Cours 8<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19750305.m4a" target="_blank" rel="noopener noreferrer">Cours 9<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19750312.m4a" target="_blank" rel="noopener noreferrer">Cours 10<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li class="na">Cours 11 <span class="inc">audio non disponible</span></li>
+</ul>
+</details>
+<details class="cyc"><summary><span><i>Il faut défendre la société</i> <span class="pg">1975–1976</span></span></summary>
+<p><a href="https://www.college-de-france.fr/sites/default/files/documents/michel-foucault/UPL5723156012849290092_AN_76_foucault.pdf" target="_blank" rel="noopener noreferrer">Résumé du cours (PDF)<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></p>
+<ul class="cn">
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19760107.m4a" target="_blank" rel="noopener noreferrer">Cours 1<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19760114.m4a" target="_blank" rel="noopener noreferrer">Cours 2<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19760121.m4a" target="_blank" rel="noopener noreferrer">Cours 3<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19760128.m4a" target="_blank" rel="noopener noreferrer">Cours 4<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19760204.m4a" target="_blank" rel="noopener noreferrer">Cours 5<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19760211.m4a" target="_blank" rel="noopener noreferrer">Cours 6<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19760218.m4a" target="_blank" rel="noopener noreferrer">Cours 7<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19760225.m4a" target="_blank" rel="noopener noreferrer">Cours 8<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19760303.m4a" target="_blank" rel="noopener noreferrer">Cours 9<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19760310.m4a" target="_blank" rel="noopener noreferrer">Cours 10<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19760317.m4a" target="_blank" rel="noopener noreferrer">Cours 11<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+</ul>
+</details>
+<details class="cyc"><summary><span><i>Sécurité, territoire et population</i> <span class="pg">1977–1978</span></span></summary>
+<p><a href="https://www.college-de-france.fr/sites/default/files/documents/michel-foucault/UPL1342243831800762859_AN_78_foucault.pdf" target="_blank" rel="noopener noreferrer">Résumé du cours (PDF)<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></p>
+<ul class="cn">
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19780111.m4a" target="_blank" rel="noopener noreferrer">Cours 1<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19780118.m4a" target="_blank" rel="noopener noreferrer">Cours 2<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19780125.m4a" target="_blank" rel="noopener noreferrer">Cours 3<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19780201.m4a" target="_blank" rel="noopener noreferrer">Cours 4<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19780208-incomplet.m4a" target="_blank" rel="noopener noreferrer">Cours 5<span class="inc"> incomplet</span><span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19780215.m4a" target="_blank" rel="noopener noreferrer">Cours 6<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19780222.m4a" target="_blank" rel="noopener noreferrer">Cours 7<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19780301.m4a" target="_blank" rel="noopener noreferrer">Cours 8<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19780308.m4a" target="_blank" rel="noopener noreferrer">Cours 9<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19780315.m4a" target="_blank" rel="noopener noreferrer">Cours 10<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19780322.m4a" target="_blank" rel="noopener noreferrer">Cours 11<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19780329.m4a" target="_blank" rel="noopener noreferrer">Cours 12<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19780405.m4a" target="_blank" rel="noopener noreferrer">Cours 13<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+</ul>
+</details>
+<details class="cyc"><summary><span><i>Naissance de la biopolitique</i> <span class="pg">1978–1979</span> <span class="reco-t">conseillé</span></span></summary>
+<p><a href="https://www.college-de-france.fr/sites/default/files/documents/michel-foucault/UPL233260505729692736_AN_79_foucault.pdf" target="_blank" rel="noopener noreferrer">Résumé du cours (PDF)<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></p>
+<ul class="cn">
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19790110.m4a" target="_blank" rel="noopener noreferrer">Cours 1<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19790117.m4a" target="_blank" rel="noopener noreferrer">Cours 2<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19790124.m4a" target="_blank" rel="noopener noreferrer">Cours 3<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19790131.m4a" target="_blank" rel="noopener noreferrer">Cours 4<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19790207.m4a" target="_blank" rel="noopener noreferrer">Cours 5<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19790214.m4a" target="_blank" rel="noopener noreferrer">Cours 6<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19790221.m4a" target="_blank" rel="noopener noreferrer">Cours 7<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19790307.m4a" target="_blank" rel="noopener noreferrer">Cours 8<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19790314.m4a" target="_blank" rel="noopener noreferrer">Cours 9<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19790321.m4a" target="_blank" rel="noopener noreferrer">Cours 10<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19790328.m4a" target="_blank" rel="noopener noreferrer">Cours 11<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19790404.m4a" target="_blank" rel="noopener noreferrer">Cours 12<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+</ul>
+</details>
+<details class="cyc"><summary><span><i>Du gouvernement des vivants</i> <span class="pg">1979–1980</span></span></summary>
+<p><a href="https://www.college-de-france.fr/sites/default/files/documents/michel-foucault/UPL3697058240022921252_AN_80_foucault.pdf" target="_blank" rel="noopener noreferrer">Résumé du cours (PDF)<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></p>
+<ul class="cn">
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19800109.m4a" target="_blank" rel="noopener noreferrer">Cours 1<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19800116.m4a" target="_blank" rel="noopener noreferrer">Cours 2<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19800123.m4a" target="_blank" rel="noopener noreferrer">Cours 3<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19800130.m4a" target="_blank" rel="noopener noreferrer">Cours 4<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19800206.m4a" target="_blank" rel="noopener noreferrer">Cours 5<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19800213.m4a" target="_blank" rel="noopener noreferrer">Cours 6<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19800220.m4a" target="_blank" rel="noopener noreferrer">Cours 7<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19800227.m4a" target="_blank" rel="noopener noreferrer">Cours 8<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19800305.m4a" target="_blank" rel="noopener noreferrer">Cours 9<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19800312.m4a" target="_blank" rel="noopener noreferrer">Cours 10<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19800319.m4a" target="_blank" rel="noopener noreferrer">Cours 11<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19800326.m4a" target="_blank" rel="noopener noreferrer">Cours 12<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+</ul>
+</details>
+<details class="cyc"><summary><span><i>Subjectivité et vérité</i> <span class="pg">1980–1981</span></span></summary>
+<p><a href="https://www.college-de-france.fr/sites/default/files/documents/michel-foucault/UPL597777239195930051_AN_81_foucault.pdf" target="_blank" rel="noopener noreferrer">Résumé du cours (PDF)<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></p>
+<ul class="cn">
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19810107.m4a" target="_blank" rel="noopener noreferrer">Cours 1<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19810114.m4a" target="_blank" rel="noopener noreferrer">Cours 2<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19810121.m4a" target="_blank" rel="noopener noreferrer">Cours 3<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19810128.m4a" target="_blank" rel="noopener noreferrer">Cours 4<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19810204.m4a" target="_blank" rel="noopener noreferrer">Cours 5<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li class="na">Cours 6 <span class="inc">audio non disponible</span></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19810225.m4a" target="_blank" rel="noopener noreferrer">Cours 7<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19810304.m4a" target="_blank" rel="noopener noreferrer">Cours 8<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19810311.m4a" target="_blank" rel="noopener noreferrer">Cours 9<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19810318.m4a" target="_blank" rel="noopener noreferrer">Cours 10<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19810325.m4a" target="_blank" rel="noopener noreferrer">Cours 11<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19810401.m4a" target="_blank" rel="noopener noreferrer">Cours 12<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+</ul>
+</details>
+<details class="cyc"><summary><span><i>L’herméneutique du sujet</i> <span class="pg">1981–1982</span></span></summary>
+<p><a href="https://www.college-de-france.fr/sites/default/files/documents/michel-foucault/UPL3133346741340602032_AN_82_foucault.pdf" target="_blank" rel="noopener noreferrer">Résumé du cours (PDF)<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></p>
+<ul class="cn">
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19820106.m4a" target="_blank" rel="noopener noreferrer">Cours 1<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19820113.m4a" target="_blank" rel="noopener noreferrer">Cours 2<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19820120.m4a" target="_blank" rel="noopener noreferrer">Cours 3<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19820127.m4a" target="_blank" rel="noopener noreferrer">Cours 4<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19820203.m4a" target="_blank" rel="noopener noreferrer">Cours 5<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19820210.m4a" target="_blank" rel="noopener noreferrer">Cours 6<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19820217.m4a" target="_blank" rel="noopener noreferrer">Cours 7<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19820224.m4a" target="_blank" rel="noopener noreferrer">Cours 8<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19820303.m4a" target="_blank" rel="noopener noreferrer">Cours 9<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19820310.m4a" target="_blank" rel="noopener noreferrer">Cours 10<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19820317.m4a" target="_blank" rel="noopener noreferrer">Cours 11<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19820324.m4a" target="_blank" rel="noopener noreferrer">Cours 12<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+</ul>
+</details>
+<details class="cyc"><summary><span><i>Le Gouvernement de soi et des autres</i> <span class="pg">1982–1983</span></span></summary>
+<ul class="cn">
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19830105.m4a" target="_blank" rel="noopener noreferrer">Cours 1<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19830112.m4a" target="_blank" rel="noopener noreferrer">Cours 2<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19830119.m4a" target="_blank" rel="noopener noreferrer">Cours 3<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19830126.m4a" target="_blank" rel="noopener noreferrer">Cours 4<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19830202.m4a" target="_blank" rel="noopener noreferrer">Cours 5<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19830209.m4a" target="_blank" rel="noopener noreferrer">Cours 6<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19830216.m4a" target="_blank" rel="noopener noreferrer">Cours 7<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19830223.m4a" target="_blank" rel="noopener noreferrer">Cours 8<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19830302.m4a" target="_blank" rel="noopener noreferrer">Cours 9<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19830309.m4a" target="_blank" rel="noopener noreferrer">Cours 10<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+</ul>
+</details>
+<details class="cyc"><summary><span><i>Le Gouvernement de soi et des autres : le courage de la vérité</i> <span class="pg">1983–1984</span></span></summary>
+<ul class="cn">
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19840201.m4a" target="_blank" rel="noopener noreferrer">Cours 1<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19840208.m4a" target="_blank" rel="noopener noreferrer">Cours 2<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19840215.m4a" target="_blank" rel="noopener noreferrer">Cours 3<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19840222.m4a" target="_blank" rel="noopener noreferrer">Cours 4<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19840229.m4a" target="_blank" rel="noopener noreferrer">Cours 5<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19840307.m4a" target="_blank" rel="noopener noreferrer">Cours 6<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+<li class="na">Cours 7 <span class="inc">audio non disponible</span></li>
+<li class="na">Cours 8 <span class="inc">audio non disponible</span></li>
+<li><a href="https://podcastfichiers.college-de-france.fr/foucault-19840328.m4a" target="_blank" rel="noopener noreferrer">Cours 9<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></li>
+</ul>
+</details>
+<p class="src">Michel Foucault s’éteint le 25 juin 1984, des suites d’une maladie opportuniste liée au sida, quelques mois seulement après son dernier cours au Collège de France (le 28 mars 1984).</p>
+</div></section>
+<section class="txt fs" id="ens" aria-labelledby="h-ens" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-ens">Conférences et exposés de l’ENS</h2>
+<p><a href="https://savoirs.ens.fr/recherche.php?class=12&amp;rechercheOption=ThemeRacine&amp;rechercheTerme=Philosophie&amp;classe=Lettres" target="_blank" rel="noopener noreferrer">Les conférences et exposés de l’ENS en philosophie (savoirs.ens.fr)<span class="sr"> (s’ouvre dans un nouvel onglet)</span></a></p>
+</div></section>
+</main>
+<footer><div class="wrap"><p>Podcasts, cours et conférences : séries, cours et conférences à écouter.</p></div></footer>
+<script>
+(function(){
+  var links=[].slice.call(document.querySelectorAll('#nav a'));
+  var secs=[].slice.call(document.querySelectorAll('.txt')),lock=null,ticking=false;
+  function setCur(i){
+    links.forEach(function(a,k){if(k===i)a.setAttribute('aria-current','true');else a.removeAttribute('aria-current')});
+    var a=links[i],box=a.parentNode.parentNode;
+    if(box.scrollWidth>box.clientWidth&&box.scrollTo)box.scrollTo({left:i?a.offsetLeft-20:0});
+  }
+  function upd(){
+    ticking=false;
+    if(lock!==null){setCur(lock);return}
+    var nb=document.querySelector('.nav'),y=(nb?nb.getBoundingClientRect().bottom:0)+24,cur=0;
+    secs.forEach(function(s,k){if(s.getBoundingClientRect().top<=y)cur=k});
+    setCur(cur);
+  }
+  function req(){if(!ticking){ticking=true;requestAnimationFrame(upd)}}
+  links.forEach(function(a,k){a.addEventListener('click',function(){lock=k;setCur(k)})});
+  ['wheel','touchstart','mousedown','keydown'].forEach(function(ev){window.addEventListener(ev,function(){lock=null},{passive:true})});
+  window.addEventListener('scroll',req,{passive:true});window.addEventListener('resize',req);
+  upd();
+})();
+</script>
+<script>
+(function(){var r=document.documentElement,K='texte-seul',KL='mode-lecture';
+var btn=document.getElementById('a11y-btn'),menu=document.getElementById('a11y-menu'),opts=menu.querySelectorAll('.a11y-opt'),closed=[],shown=[],skipped=[];
+function apply(m){
+  var ts=m==='ts',lc=m==='lect',was=r.classList.contains('lect');
+  r.classList.toggle('ts',ts);r.classList.toggle('lect',lc);
+  if(lc&&!was){closed=[];shown=[];skipped=[];
+    document.querySelectorAll('main details').forEach(function(d){if(!d.open){closed.push(d);d.open=true}});
+    document.querySelectorAll('main [hidden]').forEach(function(x){if(!x.closest('[aria-labelledby="h-video"]')&&!x.matches('video,[role="tablist"]')){shown.push(x);x.hidden=false}});
+    document.querySelectorAll('main section').forEach(function(sc){var h=sc.querySelector('h2');
+      if(sc.querySelector('input,select,textarea')||(h&&/^(Exercice|Faites le tri|En vid)/i.test(h.textContent.trim()))){sc.classList.add('lc-skip');skipped.push(sc)}});}
+  if(!lc&&was){closed.forEach(function(d){d.open=false});shown.forEach(function(x){x.hidden=true});skipped.forEach(function(s){s.classList.remove('lc-skip')});closed=[];shown=[];skipped=[]}
+  opts.forEach(function(o){o.setAttribute('aria-checked',o.getAttribute('data-mode')===m?'true':'false')});
+  try{localStorage.setItem(K,ts?'1':'0');localStorage.setItem(KL,lc?'1':'0')}catch(e){}
+}
+function open(on){menu.hidden=!on;btn.setAttribute('aria-expanded',on?'true':'false')}
+btn.addEventListener('click',function(e){e.stopPropagation();open(menu.hidden)});
+opts.forEach(function(o){o.addEventListener('click',function(){apply(o.getAttribute('data-mode'));open(false);btn.focus()})});
+document.addEventListener('click',function(e){if(!menu.hidden&&!menu.contains(e.target)&&e.target!==btn)open(false)});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!menu.hidden){open(false);btn.focus()}});
+var v='orig';try{if(localStorage.getItem(KL)==='1')v='lect';else if(localStorage.getItem(K)==='1'&&menu.querySelector('[data-mode="ts"]'))v='ts'}catch(e){}
+if(v==='ts')apply('ts');
+if(v==='lect')window.addEventListener('load',function(){apply('lect')});
+})();
+</script>
+</body>
+</html>
