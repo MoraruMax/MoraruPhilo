@@ -186,4 +186,4 @@ document.addEventListener("change",e=>{const k=e.target.dataset.k;if(!k)return;i
 $("#reset").addEventListener("click",()=>{if(!confirm("Effacer toutes les cases cochées ?"))return;st={};save();document.querySelectorAll("input").forEach(i=>{i.checked=false});upd()});
 $("#print").addEventListener("click",()=>window.print());
 upd();
-</script></body></html>
+</script><script src="fil.js" defer></script></body></html>

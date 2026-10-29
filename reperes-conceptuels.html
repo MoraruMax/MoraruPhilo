@@ -533,8 +533,8 @@ var X={"Absolu – Relatif": [["Kant", "Fondements de la métaphysique des mœur
       return;
     }
     if(!queue.length){
-      deckArea.innerHTML='<div class="done"><h3>Paquet terminé</h3><p>Vous avez parcouru les '+stats.total+' termes. '+stats.first+' sur '+stats.total+' ont été sus du premier coup.</p><button class="btn primary" id="again" type="button">Recommencer le paquet</button></div>';
-      $('#again').addEventListener('click',buildDeck);
+      deckArea.innerHTML='<div class="done"><h3>Paquet terminé</h3><p>Vous avez parcouru les '+stats.total+' termes. '+stats.first+' sur '+stats.total+' ont été sus du premier coup.</p><button class="btn primary" id="fin-recommencer" type="button">Recommencer le paquet</button></div>';
+      $('#fin-recommencer').addEventListener('click',buildDeck);
       return;
     }
     var t=queue[0];
@@ -679,5 +679,5 @@ var X={"Absolu – Relatif": [["Kant", "Fondements de la métaphysique des mœur
   if(reduce){hl.classList.add('on')}else{requestAnimationFrame(function(){requestAnimationFrame(function(){hl.classList.add('on')})})}
 })();
 </script>
-</body>
+<script src="fil.js" defer></script></body>
 </html>

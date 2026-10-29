@@ -177,6 +177,24 @@ html.ts h2.sec,html.ts .orient h2{text-shadow:none}
 .reprise button:focus-visible,.reprise a:focus-visible{outline:3px solid currentColor;outline-offset:3px}
 </style>
 <script src="confort.js"></script><script src="voix.js" defer></script>
+<style>
+/* accueil allégé */
+header{padding:clamp(1.4rem,4vw,2.6rem) 0 clamp(1rem,2.5vw,1.6rem)}
+h1{font-size:clamp(2.2rem,6vw,3.6rem)}
+.sub{margin-top:.7rem;font-size:clamp(1.05rem,2vw,1.25rem);max-width:60ch}
+.orient{padding-bottom:1rem}
+.orient h2{font-size:clamp(1.15rem,2.6vw,1.4rem)}
+.oc{gap:.7rem}
+.oc a{padding:.8rem 1rem .9rem;gap:.2rem}
+.oc b{font-size:1.1rem}
+.oc span{display:none}
+.raccourcis{padding:.4rem 0 1.2rem}
+.raccourcis h2{margin:0 0 .6rem;font:800 clamp(1.15rem,2.6vw,1.4rem)/1.2 var(--head)}
+.raccourcis ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.55rem}
+.raccourcis a{display:inline-block;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:.55rem 1rem;font:700 1rem/1.2 var(--head)}
+.raccourcis a:hover,.raccourcis a.on{border-color:var(--ink)}
+.grp{scroll-margin-top:.8rem}
+</style>
 </head>
 <body>
 <header>
@@ -199,8 +217,9 @@ html.ts h2.sec,html.ts .orient h2{text-shadow:none}
   </ul>
 </section>
 
+<nav class="raccourcis wrap" aria-label="Rubriques du site"><h2 id="h-rac">Parcourir le site</h2><ul><li><a href="#g-themes" data-g="g-themes">Les thèmes</a></li><li><a href="#g-reperes" data-g="g-reperes">Repères et méthodes</a></li><li><a href="#g-plans" data-g="g-plans">Plans de cours</a></li><li><a href="#g-bac" data-g="g-bac">Préparer le bac</a></li><li><a href="#g-culture" data-g="g-culture">Culture générale</a></li><li><a href="#g-approfondir" data-g="g-approfondir">Aller plus loin</a></li><li><a href="#g-emc" data-g="g-emc">EMC</a></li></ul></nav>
 <main>
-  <details class="grp wrap"><summary><h2 class="sec">Les thèmes</h2></summary>
+  <details class="grp wrap" id="g-themes"><summary><h2 class="sec">Les thèmes</h2></summary>
   <details class="notion"><summary><span>Art <span class="ser">: série générale et technologiques</span></span></summary>
   <div class="list">
     <a class="item" href="art-hume-sentiment.html" style="--c:var(--a4)"><img class="pt" src="images/hume.jpg" alt="" loading="lazy" style="object-position:50% 25%">
@@ -827,7 +846,7 @@ html.ts h2.sec,html.ts .orient h2{text-shadow:none}
   </div>
   </details>
   </details>
-  <details class="grp wrap"><summary><h2 class="sec">Repères, méthodologies et frise chronologique</h2></summary>
+  <details class="grp wrap" id="g-reperes"><summary><h2 class="sec">Repères, méthodologies et frise chronologique</h2></summary>
   <details class="notion"><summary>Repères conceptuels</summary>
   <div class="list">
     <a class="item" href="reperes-conceptuels.html" style="--c:var(--a6)">
@@ -979,7 +998,7 @@ html.ts h2.sec,html.ts .orient h2{text-shadow:none}
   </div>
   </details>
   </details>
-  <details class="grp wrap"><summary><h2 class="sec">Plans de cours</h2></summary>
+  <details class="grp wrap" id="g-plans"><summary><h2 class="sec">Plans de cours</h2></summary>
   <div class="list">
     <a class="item" href="plan-bonheur.html" style="--c:var(--a1)">
       <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M36 36 A24 24 0 0 1 84 36" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5"/><path d="M46 36 A14 14 0 0 1 74 36" stroke="var(--c)" stroke-width="2.5" fill="none" stroke-linecap="round"/><line x1="24" y1="40" x2="96" y2="40" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5"/><line x1="40" y1="45" x2="80" y2="45" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="2.5" opacity=".4"/></svg>
@@ -1067,7 +1086,7 @@ html.ts h2.sec,html.ts .orient h2{text-shadow:none}
     </a>
   </div>
   </details>
-  <details class="grp wrap"><summary><h2 class="sec">Se préparer et s’entraîner aux épreuves du bac</h2></summary>
+  <details class="grp wrap" id="g-bac"><summary><h2 class="sec">Se préparer et s’entraîner aux épreuves du bac</h2></summary>
   <details class="sub-n"><summary><span>Pour se préparer <span class="ser">: série générale et technologiques</span></span></summary>
   <div class="list">
     <a class="item" href="parcours-dissertation.html" style="--c:var(--a1)">
@@ -1297,7 +1316,7 @@ html.ts h2.sec,html.ts .orient h2{text-shadow:none}
   </details>
     </details>
 </details>
-  <details class="grp wrap"><summary><h2 class="sec">Culture générale</h2></summary>
+  <details class="grp wrap" id="g-culture"><summary><h2 class="sec">Culture générale</h2></summary>
   <details class="notion"><summary>Œuvres d’art</summary>
   <div class="list">
     <a class="item" href="oeuvre-d-art.html" style="--c:var(--a2)"><img class="pt" src="images/oeuvres/th/la-nuit-etoilee-vincent-van-gogh.jpg" alt="" loading="lazy" style="object-position:50% 40%">
@@ -1339,7 +1358,7 @@ html.ts h2.sec,html.ts .orient h2{text-shadow:none}
   </div>
   </details>
   </details>
-  <details class="grp wrap"><summary><h2 class="sec">Pour approfondir et aller plus loin</h2></summary>
+  <details class="grp wrap" id="g-approfondir"><summary><h2 class="sec">Pour approfondir et aller plus loin</h2></summary>
   <details class="notion"><summary>Sociologie</summary>
   <div class="list">
     <a class="item" href="sociologie-durkheim.html" style="--c:var(--a9)">
@@ -1461,7 +1480,7 @@ html.ts h2.sec,html.ts .orient h2{text-shadow:none}
   </div>
   </details>
   </details>
-  <details class="grp wrap"><summary><h2 class="sec">EMC</h2></summary>
+  <details class="grp wrap" id="g-emc"><summary><h2 class="sec">EMC</h2></summary>
   <details class="notion"><summary>Démocratie</summary>
   <div class="list">
     <a class="item" href="textes-democratie.html" style="--c:var(--a9)">
@@ -1516,7 +1535,7 @@ b.addEventListener('click',function(){
   try{if(window.caches)caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k)})})}catch(e){}
   get('recherche-index.js').then(function(r){return r?r.text():''}).then(function(t){
     var pages=[];try{pages=Object.keys(JSON.parse(t.replace(/^window\.IDX=/,'').replace(/;\s*$/,'')))}catch(e){}
-    var all=['accueil.html','index.html','carnet.html','quiz.js','quiz.css','confort.js','sommaire.js','accessibilite.js','voix.js','surligneur.js'].concat(pages),n=all.length,i=0,done=0;
+    var all=['accueil.html','index.html','carnet.html','quiz.js','quiz.css','confort.js','sommaire.js','accessibilite.js','voix.js','surligneur.js','fil.js'].concat(pages),n=all.length,i=0,done=0;
     function worker(){if(i>=n)return Promise.resolve();var u=all[i++];return get(u).then(function(){done++;s.textContent='Mise à jour… '+done+' / '+n;return worker()})}
     return Promise.all([worker(),worker(),worker(),worker()]).then(function(){s.textContent='Terminé. Rechargement…';setTimeout(function(){location.reload()},400)})
   }).catch(function(){s.textContent='La mise à jour a échoué.';b.disabled=false});
@@ -1618,6 +1637,19 @@ var v='orig';try{if(localStorage.getItem(KL)==='1')v='lect';else if(localStorage
 if(v==='ts')apply('ts');
 if(v==='lect')window.addEventListener('load',function(){apply('lect')});
 })();
+</script>
+<script>
+(function(){var G=[].slice.call(document.querySelectorAll('details.grp'));
+function openOnly(g){G.forEach(function(x){if(x!==g)x.open=false});g.open=true;
+ [].forEach.call(document.querySelectorAll('.raccourcis a'),function(a){a.classList.toggle('on',a.dataset.g===g.id)});
+ var r=window.matchMedia('(prefers-reduced-motion:reduce)').matches;g.scrollIntoView({behavior:r?'auto':'smooth',block:'start'});}
+[].forEach.call(document.querySelectorAll('.raccourcis a'),function(a){a.addEventListener('click',function(e){e.preventDefault();var g=document.getElementById(a.dataset.g);if(g)openOnly(g)})});
+G.forEach(function(g){g.querySelector(':scope > summary').addEventListener('click',function(){if(!g.open)G.forEach(function(x){if(x!==g)x.open=false})})});
+})();
+</script>
+<script>
+(function(){function go(){var g=document.getElementById(location.hash.slice(1));if(!g||!g.matches('details.grp'))return;document.querySelectorAll('details.grp').forEach(function(x){x.open=(x===g)});g.scrollIntoView()}
+if(location.hash)go();window.addEventListener('hashchange',go)})();
 </script>
 </body>
 </html>
