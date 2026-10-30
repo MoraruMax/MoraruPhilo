@@ -2,7 +2,7 @@
 (function(){
   var main=document.querySelector('main'); if(!main) return;
   var hs=[].slice.call(main.querySelectorAll('h2[id]')).filter(function(h){return h.textContent.trim()&&!h.closest('dialog,[hidden]')});
-  if(hs.length<4) return;
+  if(hs.length<(+main.getAttribute('data-som-min')||4)) return;
   var st=document.createElement('style');
   st.textContent=
   '.som{position:fixed;left:max(.8rem,env(safe-area-inset-left));bottom:max(.8rem,env(safe-area-inset-bottom));z-index:40;font:600 .9rem/1.3 var(--sans,system-ui,sans-serif);color:var(--ink,#111)}'+

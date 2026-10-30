@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Textes en hébreu</title>
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+  --bg:#F1F4F6; --surface:#FFFFFF; --ink:#1B2733; --muted:#53626F; --line:#D5DDE3; --focus:#0E6E73;
+  --pour:#0E6E73; --contre:#A8321F; --nuance:#2F4FA8; --garde:#8A5A00; --neutre:#4F5D69;
+  --serif:Georgia,"Times New Roman",serif;
+  --sans:system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#10171D; --surface:#18222A; --ink:#E7EDF2; --muted:#A1B0BC; --line:#2A3641; --focus:#5FD0D6;
+    --pour:#5FD0D6; --contre:#FF8A75; --nuance:#97ADFF; --garde:#F0BC52; --neutre:#A9B7C2;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#10171D; --surface:#18222A; --ink:#E7EDF2; --muted:#A1B0BC; --line:#2A3641; --focus:#5FD0D6;
+  --pour:#5FD0D6; --contre:#FF8A75; --nuance:#97ADFF; --garde:#F0BC52; --neutre:#A9B7C2;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:calc(4.2rem + env(safe-area-inset-top,0px));-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.1rem/1.65 var(--serif)}
+.wrap{width:min(980px,100% - 2.5rem);margin-inline:auto}
+h1,h2,h3{margin:0;font-family:var(--serif)}
+h1{font-weight:800;font-size:clamp(2.5rem,8vw,5rem);line-height:1.02;letter-spacing:-.02em}
+h2{font-weight:800;font-size:clamp(1.6rem,3.4vw,2.2rem);line-height:1.12}
+p{margin:0 0 1em}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
+.hero{padding:clamp(2.2rem,6vw,4.5rem) 0 2rem}
+.lead{font-size:clamp(1.15rem,2.4vw,1.45rem);line-height:1.5;max-width:40ch;margin:1.4rem 0 1rem}
+.note{font:500 .92rem/1.5 var(--sans);color:var(--muted);max-width:62ch;margin:0}
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--bg);border-bottom:1px solid var(--line)}
+.nav ol{display:flex;gap:.3rem;list-style:none;margin:0;padding:.5rem 0;overflow-x:auto}
+.nav a{display:block;white-space:nowrap;text-decoration:none;color:var(--muted);font:700 .88rem/1.2 var(--sans);padding:.45rem .7rem .35rem;border-radius:6px;border-bottom:4px solid var(--c)}
+.nav a:hover{color:var(--ink)}
+.nav a[aria-current="true"]{background:var(--ink);color:var(--bg)}
+.nav small{display:block;font-weight:500;font-size:.75rem;opacity:1}
+.txt{border-bottom:1px solid var(--line);padding:clamp(2.4rem,6vw,3.6rem) 0}
+.meta{display:flex;flex-wrap:wrap;gap:.5rem .9rem;align-items:center;margin-bottom:.8rem;font:500 .92rem/1.3 var(--sans);color:var(--muted)}
+.tag{font:700 .8rem/1 var(--sans);color:var(--c);border:1.5px solid var(--c);border-radius:5px;padding:.3rem .5rem}
+.thesis{font-size:clamp(1.2rem,2.4vw,1.5rem);line-height:1.4;font-weight:600;margin:1rem 0 1.4rem;max-width:44ch;padding-left:1rem;border-left:5px solid var(--c)}
+.cols{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:1.6rem clamp(1.6rem,4vw,3rem)}
+h3{font:700 .9rem/1.2 var(--sans);color:var(--c);margin-bottom:.7rem}
+.args{margin:0;padding:0;list-style:none;counter-reset:a}
+.args li{counter-increment:a;padding:.6rem 0 .6rem 2.4rem;border-top:1px solid var(--line);position:relative}
+.args li:last-child{border-bottom:1px solid var(--line)}
+.args li::before{content:counter(a);position:absolute;left:0;top:.5rem;font:800 1.5rem/1 var(--serif);color:var(--c)}
+.quotes{margin:0;padding:0}
+.quotes blockquote{margin:0 0 1rem;padding:.2rem 0 .2rem .9rem;border-left:3px solid var(--line)}
+.quotes p{margin:0 0 .2rem;font-style:italic}
+.quotes cite{font:500 .82rem/1.3 var(--sans);font-style:normal;color:var(--muted)}
+footer{padding:1.6rem 0 2.5rem;font:500 .92rem/1.5 var(--sans);color:var(--muted)}
+footer p{margin:0}
+@media (max-width:760px){.cols{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+.pdfbtn{display:inline-flex;align-items:center;gap:.5rem;font:600 .88rem/1 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--surface);border:1.5px solid var(--ink);border-radius:999px;padding:.55rem .95rem;cursor:pointer}
+.pdfbtn:hover{background:var(--ink);color:var(--bg)}.pdfbtn:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:2px}
+
+/* Mode lecture (pages à structure libre) */
+html.lect body::before,html.lect body::after{display:none!important}
+html.lect body{background:var(--bg)!important}
+html.lect .pn,html.lect #quiz,html.lect section[aria-labelledby="h-video"],html.lect video,html.lect .score,html.lect .lc-skip,html.lect [role="tablist"],html.lect main button,html.lect main input,html.lect main select,html.lect main textarea,html.lect .sec-head p.lc-x{display:none!important}
+html.lect .hero h1,html.lect .hero p,html.lect section.block h2,html.lect footer p{text-shadow:none!important}
+html.lect .hero,html.lect section.block{padding-block:1.2rem!important;border:0!important}
+html.lect .wrap,html.lect .sec-head{max-width:40rem!important;margin-inline:auto}
+html.lect .hgrid,html.lect .two,html.lect .cols{display:block!important}
+html.lect main,html.lect .hero{font-family:var(--serif)}
+html.lect .hero h1{font-size:clamp(1.9rem,5vw,2.6rem)!important}
+html.lect main p,html.lect main li,html.lect .lead{font-size:1.12rem!important;line-height:1.75!important}
+html.lect :is(main,.hero) :is(div,li,blockquote,article,aside,p,ul,ol,section,details,summary,figure,span):not(table *){background:none!important;border:0!important;box-shadow:none!important;border-radius:0!important}
+html.lect main [hidden]{display:revert!important}
+html.lect :is(main,.hero) div:not(.wrap):not(.sec-head):not(table *){display:block!important;grid-template-columns:none!important;float:none!important;max-width:none!important;width:auto!important;margin-inline:0}
+html.lect main li{display:list-item!important}
+html.lect .must{margin:1rem 0}
+html.lect .lead{max-width:none!important}
+html.lect .wrap{padding-inline:0}
+html.lect main details>summary{cursor:default;pointer-events:none;list-style:none}
+html.lect main details>summary::-webkit-details-marker,html.lect main details>summary::before{display:none!important}
+html.lect main blockquote{margin:.8rem 0;padding:0 0 0 1rem!important;border-left:3px solid var(--line)!important}
+html.lect main .panel{display:block!important;margin-bottom:1rem}
+html.lect main h3,html.lect main h4{margin-top:1.4rem}
+html.lect .nav,html.lect .hero .note{display:none!important}
+html.lect .thesis{border:0!important;padding-left:0!important;max-width:none!important}
+html.lect .args li{padding-left:0!important}
+html.lect .args li::before{display:none!important}
+html.lect .args{list-style:decimal;padding-left:1.4rem!important}
+html.lect .txt{padding-block:1.2rem!important}
+
+/* Accessibilité */
+.a11y{position:relative;display:inline-block}
+.a11y-menu{position:absolute;right:0;top:calc(100% + .4rem);z-index:60;min-width:14rem;background:var(--bg);color:var(--ink);border:1.5px solid var(--ink);border-radius:14px;padding:.35rem;box-shadow:0 8px 24px rgba(0,0,0,.18);text-shadow:none}
+.a11y-menu[hidden]{display:none}
+.a11y-menu p{margin:0;padding:.45rem .7rem .3rem;font:700 .72rem/1 system-ui,-apple-system,sans-serif;letter-spacing:.06em;text-transform:uppercase;opacity:.65}
+.a11y-opt{display:flex;align-items:center;gap:.6rem;width:100%;text-align:left;font:600 .92rem/1.2 system-ui,-apple-system,sans-serif;color:inherit;background:none;border:0;border-radius:9px;padding:.6rem .7rem;cursor:pointer}
+.a11y-opt:hover{background:var(--surface)}
+.a11y-opt:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:-2px}
+.a11y-opt .dot{flex:none;width:1rem;height:1rem;border:2px solid currentColor;border-radius:50%;position:relative}
+.a11y-opt[aria-checked="true"] .dot::after{content:"";position:absolute;inset:2px;background:currentColor;border-radius:50%}
+.a11y-opt small{display:block;font-weight:500;opacity:.7;font-size:.78rem;margin-top:.15rem}
+@media print{
+  :root{--bg:#fff!important;--surface:#fff!important;--ink:#111!important;--muted:#444!important;--line:#bbb!important;color-scheme:light!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:#fff!important;color:#111!important}
+  body::before,body::after{display:none!important}
+  nav,.pdfbtn,.pn,video,section[aria-labelledby="h-video"]{display:none!important}
+  .rev,.js .rev{opacity:1!important;transform:none!important}
+  .stp li[hidden]{display:list-item!important}
+  details>*{display:block!important}
+  article,li,.card,figure,.stage{break-inside:avoid}
+  h1,h2,h3{break-after:avoid;text-shadow:none!important}
+  *{text-shadow:none!important}
+  a{color:inherit;text-decoration:none}
+  section.block,.part{padding-top:1.2rem!important;padding-bottom:1.2rem!important}
+  footer{break-before:avoid;border-top:1px solid #999;margin-top:1rem}
+}
+@page{size:A4;margin:16mm 14mm}
+/* Texte */
+.tx summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:.7rem;font:800 clamp(1.4rem,3vw,1.9rem)/1.2 var(--sans);padding:.3rem 0}
+.tx summary::-webkit-details-marker{display:none}
+.tx summary::before{content:"";width:.6em;height:.6em;border-right:.2em solid currentColor;border-bottom:.2em solid currentColor;transform:rotate(-45deg);transition:transform .15s;flex:none;margin-right:.2rem}
+.tx[open] summary::before{transform:rotate(45deg)}
+@media (prefers-reduced-motion:reduce){.tx summary::before{transition:none}}
+.txb{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--c,var(--ink));padding:1.2rem clamp(1rem,3vw,1.8rem);margin-top:.9rem;max-width:46rem;font:400 1.1rem/1.75 var(--serif)}
+.txb p{margin:0 0 1em}
+.txb h3{font:700 1rem/1.3 var(--sans);margin:1.2em 0 .5em}
+.txb .vs{font:700 .72rem/1 var(--sans);color:var(--muted);margin-right:.15em}
+.txb .tsrc{font:600 .88rem/1.4 var(--sans);color:var(--muted);text-align:right;margin:1.1em 0 0}
+.txb .tsrc:not(:last-child){margin-bottom:1.4em;padding-bottom:1.2em;border-bottom:1px solid var(--line)}
+
+/* Sujets de dissertation */
+.sjd ul{list-style:none;margin:.6rem 0 0;padding:0;max-width:46rem}
+.sjd li{margin:0;padding:.55rem 0;border-top:1px solid var(--line)}
+.sjd li:last-child{border-bottom:1px solid var(--line)}
+.sjd a{color:inherit;font:600 1.05rem/1.4 var(--sans,system-ui);text-underline-offset:3px}
+.sjd p{margin:.4rem 0 0}
+html.lect .sjd li{border:0!important;padding:.25rem 0!important}
+html.lect .sjd a{font:600 1.12rem/1.6 var(--serif,Georgia,serif)}
+@media print{.sjd a{font-weight:600}.sjd li{border-color:#999}}
+.ln{font:700 .66rem/1 var(--sans);color:var(--muted);margin:0 .2em 0 .1em;vertical-align:super}
+.txb .tsrcline{font:600 .9rem/1.4 var(--sans);color:var(--muted)}
+.txn{font:500 .85rem/1.4 var(--sans);color:var(--muted);margin:.2rem 0 1rem}
+html.lect .txb{padding:0!important}
+</style>
+<script>try{history.scrollRestoration="manual"}catch(e){}(function(){function t(){if(!location.hash)window.scrollTo(0,0)}t();document.addEventListener("DOMContentLoaded",t);window.addEventListener("load",function(){t();setTimeout(t,60)});window.addEventListener("pageshow",t)})();</script>
+<script src="confort.js"></script><script src="voix.js" defer></script>
+
+<style>
+.fs h2{margin-bottom:1rem}
+.fs h3{font:700 1rem/1.3 var(--sans);color:var(--c);margin:1.4rem 0 .5rem}
+.fs .wrap>p,.fs li{max-width:46rem}
+.pg{font:600 .78rem/1 var(--sans);color:var(--muted);white-space:nowrap;margin-left:.3em}
+.fs ul.pts{margin:.4rem 0 1rem;padding-left:1.2rem}
+.fs ul.pts li{margin:.35rem 0}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr));gap:1rem;margin:1rem 0}
+.card{background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--c);padding:1rem 1.1rem 1.1rem;border-radius:0 0 8px 8px}
+.card h3{margin:0 0 .5rem;font:800 1.05rem/1.25 var(--sans);color:var(--ink)}
+.card p{font-size:1rem;line-height:1.55;margin:0 0 .6em}
+.card ul{margin:.3rem 0 .4rem;padding-left:1.1rem;font-size:1rem;line-height:1.5}
+.card .k{font:700 .74rem/1 var(--sans);letter-spacing:.05em;text-transform:uppercase;color:var(--c);margin:.9rem 0 .25rem}
+.card .f{font-weight:600}
+.tbl{width:100%;border-collapse:collapse;margin:.8rem 0 1rem;font:400 1rem/1.5 var(--serif);background:var(--surface)}
+.tbl caption{text-align:left;font:600 .88rem/1.4 var(--sans);color:var(--muted);padding:.3rem 0}
+.tbl th,.tbl td{border:1px solid var(--line);padding:.55rem .7rem;vertical-align:top;text-align:left}
+.tbl th{font:700 .86rem/1.3 var(--sans);background:var(--bg);color:var(--ink)}
+.tblw{overflow-x:auto}
+.axes{display:grid;grid-template-columns:auto 1fr 1fr;gap:.4rem;margin:1rem 0;font:600 .92rem/1.35 var(--sans);max-width:46rem}
+.axes div{padding:.7rem .8rem;border:1px solid var(--line);background:var(--surface)}
+.axes .h{background:none;border:0;color:var(--muted);font-size:.82rem;align-self:center}
+.axes .a{border-left:6px solid var(--nuance)}.axes .b{border-left:6px solid var(--garde)}.axes .c2{border-left:6px solid var(--contre)}.axes .d{border-left:6px solid var(--neutre)}
+.axes small{display:block;font-weight:500;color:var(--muted);margin-top:.2rem}
+.fs blockquote{margin:0 0 1.1rem;padding:.2rem 0 .2rem .9rem;border-left:3px solid var(--c);max-width:46rem}
+.fs blockquote p{margin:0 0 .25rem;font-style:italic}
+.fs blockquote cite{font:500 .84rem/1.3 var(--sans);font-style:normal;color:var(--muted)}
+.fs dl{margin:.6rem 0 0;max-width:46rem}
+.fs dt{font:700 1rem/1.3 var(--sans);margin-top:.9rem}
+.fs dd{margin:.2rem 0 0}
+.fs .src{font:500 .9rem/1.5 var(--sans);color:var(--muted);max-width:46rem}
+@media (max-width:640px){.axes{grid-template-columns:1fr}.axes .h{display:none}}
+html.lect .cards{display:block!important}html.lect .card{margin-bottom:1rem}
+html.lect .tbl{display:block}
+@media print{.card,.tbl tr{break-inside:avoid}}
+</style>
+<style>
+.lead2{max-width:62ch;margin:0 0 1.2rem}
+.lk{margin:.2rem 0 1rem;font:700 1rem/1.4 var(--sans)}.lk a{color:var(--ink);text-underline-offset:.15em}.lk a:hover{color:var(--c)}
+.bi2{border-top:2px solid var(--c)}
+.up{margin:1.2rem 0 0;font:700 .95rem/1.3 var(--sans)}.up a{color:var(--ink);text-underline-offset:.15em}
+.hd,.rw{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 2rem}
+.hd{font:800 .8rem/1 var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:.7rem 0 .3rem}
+.rw{border-top:1px solid var(--line);padding:.15rem 0}
+.rw > div > *{margin:.6rem 0}
+.rw .tsrc{font-size:.92rem}
+[dir=rtl]{text-align:right}
+@media(max-width:760px){.hd,.rw{grid-template-columns:minmax(0,1fr)}.hd span+span{display:none}.rw > div+div{border-left:3px solid var(--line);padding-left:.8rem;margin-bottom:.8rem}}
+</style>
+</head>
+<body>
+<nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><span style="display:inline-flex;gap:.6rem;flex-wrap:wrap;align-items:center"><span class="a11y"><button type="button" class="pdfbtn" id="a11y-btn" aria-haspopup="true" aria-expanded="false" aria-controls="a11y-menu"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="1.6"/><path d="M5 8.5l7 1.5 7-1.5M12 10v4.5M8.5 21l3.5-6.5 3.5 6.5"/></svg><span>Accessibilité</span></button><div class="a11y-menu" id="a11y-menu" role="radiogroup" aria-label="Affichage de la page" hidden><p>Affichage</p><button type="button" role="radio" class="a11y-opt" data-mode="orig" aria-checked="true"><span class="dot"></span><span>Page d’origine<small>Image de fond et mise en page habituelle</small></span></button><button type="button" role="radio" class="a11y-opt" data-mode="lect" aria-checked="false"><span class="dot"></span><span>Mode lecture<small>Texte continu, sans cadres ni exercices</small></span></button></div></span><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></span></nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <h1>Textes en hébreu</h1>
+    <p class="lead">Les passages de la Genèse cités dans les fiches, avec la traduction française en regard.</p>
+  </div>
+</header>
+<nav class="nav" aria-label="Textes de la page"><div class="wrap"><ol id="nav">
+<li><a href="#t0" style="--c:var(--pour)">Genèse : la domination de l’homme sur la nature</a></li>
+<li><a href="#t1" style="--c:var(--pour)">Genèse 3 : le travail comme punition</a></li>
+</ol></div></nav>
+<main id="main" data-som-min="2">
+<section class="txt fs" id="t0" aria-labelledby="h-t0" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-t0">Genèse : la domination de l’homme sur la nature</h2>
+<p class="lk"><a href="nature-genese.html">Ouvrir la fiche complète</a></p>
+<div class="bi2"><div class="hd" aria-hidden="true"><span>Traduction</span><span>Hébreu</span></div><div class="rw"><div><p><sup class="vs">26</sup> Puis Dieu dit : Faisons l’homme à notre image, selon notre ressemblance, et qu’il domine sur les poissons de la mer, sur les oiseaux du ciel, sur le bétail, sur toute la terre, et sur tous les reptiles qui rampent sur la terre.</p></div><div lang="he" dir="rtl"><p>26 וַיֹּ֣אמֶר אֱלֹהִ֔ים נַֽעֲשֶׂ֥ה אָדָ֛ם בְּצַלְמֵ֖נוּ כִּדְמוּתֵ֑נוּ וְיִרְדּוּ֩ בִדְגַ֨ת הַיָּ֜ם וּבְע֣וֹף הַשָּׁמַ֗יִם וּבַבְּהֵמָה֙ וּבְכָל־הָאָ֔רֶץ וּבְכָל־הָרֶ֖מֶשׂ הָֽרֹמֵ֥שׂ עַל־הָאָֽרֶץ׃</p></div></div><div class="rw"><div><p><sup class="vs">27</sup> Dieu créa l’homme à son image, il le créa à l’image de Dieu, il créa l’homme et la femme.</p></div><div lang="he" dir="rtl"><p>27 וַיִּבְרָ֨א אֱלֹהִ֤ים ׀ אֶת־הָֽאָדָם֙ בְּצַלְמ֔וֹ בְּצֶ֥לֶם אֱלֹהִ֖ים בָּרָ֣א אֹת֑וֹ זָכָ֥ר וּנְקֵבָ֖ה בָּרָ֥א אֹתָֽם׃</p></div></div><div class="rw"><div><p><sup class="vs">28</sup> Dieu les bénit, et Dieu leur dit : Soyez féconds, multipliez, remplissez la terre, et l’assujettissez ; et dominez sur les poissons de la mer, sur les oiseaux du ciel, et sur tout animal qui se meut sur la terre.</p></div><div lang="he" dir="rtl"><p>28 וַיְבָ֣רֶךְ אֹתָם֮ אֱלֹהִים֒ וַיֹּ֨אמֶר לָהֶ֜ם אֱלֹהִ֗ים פְּר֥וּ וּרְב֛וּ וּמִלְא֥וּ אֶת־הָאָ֖רֶץ וְכִבְשֻׁ֑הָ וּרְד֞וּ בִּדְגַ֤ת הַיָּם֙ וּבְע֣וֹף הַשָּׁמַ֔יִם וּבְכָל־חַיָּ֖ה הָֽרֹמֶ֥שֶׂת עַל־הָאָֽרֶץ׃</p></div></div><div class="rw"><div><p class="tsrc">Genèse, chapitre I</p></div><div lang="he" dir="rtl"><p class="tsrc">בראשית, פרק א</p></div></div></div></div></section>
+<section class="txt fs" id="t1" aria-labelledby="h-t1" style="--c:var(--pour)"><div class="wrap">
+<h2 id="h-t1">Genèse 3 : le travail comme punition</h2>
+<p class="lk"><a href="travail-genese.html">Ouvrir la fiche complète</a></p>
+<div class="bi2"><div class="hd" aria-hidden="true"><span>Traduction</span><span>Hébreu</span></div><div class="rw"><div><p><sup class="vs">01</sup> Le serpent était le plus rusé de tous les animaux des champs que le Seigneur Dieu avait faits. Il dit à la femme : « Alors, Dieu vous a vraiment dit : “Vous ne mangerez d’aucun arbre du jardin” ? »</p></div><div lang="he" dir="rtl"><p>01 וְהַנָּחָשׁ֙ הָיָ֣ה עָר֔וּם מִכֹּל֙ חַיַּ֣ת הַשָּׂדֶ֔ה אֲשֶׁ֥ר עָשָׂ֖ה יְהוָ֣ה אֱלֹהִ֑ים וַיֹּ֨אמֶר֙ אֶל־הָ֣אִשָּׁ֔ה אַ֚ף כִּֽי־אָמַ֣ר אֱלֹהִ֔ים לֹ֣א תֹֽאכְל֔וּ מִכֹּ֖ל עֵ֥ץ הַגָּֽן׃</p></div></div><div class="rw"><div><p><sup class="vs">02</sup> La femme répondit au serpent : « Nous mangeons les fruits des arbres du jardin.</p></div><div lang="he" dir="rtl"><p>02 וַתֹּ֥אמֶר הָֽאִשָּׁ֖ה אֶל־הַנָּחָ֑שׁ מִפְּרִ֥י עֵֽץ־הַגָּ֖ן נֹאכֵֽל׃</p></div></div><div class="rw"><div><p><sup class="vs">03</sup> Mais, pour le fruit de l’arbre qui est au milieu du jardin, Dieu a dit : “Vous n’en mangerez pas, vous n’y toucherez pas, sinon vous mourrez.” »</p></div><div lang="he" dir="rtl"><p>03 וּמִפְּרִ֣י הָעֵץ֮ אֲשֶׁ֣ר בְּתוֹךְ־הַגָּן֒ אָמַ֣ר אֱלֹהִ֗ים לֹ֤א תֹֽאכְלוּ֙ מִמֶּ֔נּוּ וְלֹ֥א תִגְּע֖וּ בּ֑וֹ פֶּן־תְּמֻתֽוּן׃</p></div></div><div class="rw"><div><p><sup class="vs">04</sup> Le serpent dit à la femme : « Pas du tout ! Vous ne mourrez pas !</p></div><div lang="he" dir="rtl"><p>04 וַיֹּ֥אמֶר הַנָּחָ֖שׁ אֶל־הָֽאִשָּׁ֑ה לֹֽא־מ֖וֹת תְּמֻתֽוּן׃</p></div></div><div class="rw"><div><p><sup class="vs">05</sup> Mais Dieu sait que, le jour où vous en mangerez, vos yeux s’ouvriront, et vous serez comme des dieux, connaissant le bien et le mal. »</p></div><div lang="he" dir="rtl"><p>05 כִּ֚י יֹדֵ֣עַ אֱלֹהִ֔ים כִּ֗י בְּיוֹם֙ אֲכָלְכֶ֣ם מִמֶּ֔נּוּ וְנִפְקְח֖וּ עֵֽינֵיכֶ֑ם וִהְיִיתֶם֙ כֵּֽאלֹהִ֔ים יֹדְעֵ֖י ט֥וֹב וָרָֽע׃</p></div></div><div class="rw"><div><p><sup class="vs">06</sup> La femme s’aperçut que le fruit de l’arbre devait être savoureux, qu’il était agréable à regarder et qu’il était désirable, cet arbre, puisqu’il donnait l’intelligence. Elle prit de son fruit, et en mangea. Elle en donna aussi à son mari, et il en mangea.</p></div><div lang="he" dir="rtl"><p>06 וַתֵּ֣רֶא הָֽאִשָּׁ֡ה כִּ֣י טוֹב֩ הָעֵ֨ץ לְמַאֲכָ֜ל וְכִ֧י תַֽאֲוָה־ה֣וּא לָעֵינַ֗יִם וְנֶחְמָ֤ד הָעֵץ֙ לְהַשְׂכִּ֔יל וַתִּקַּ֥ח מִפִּרְי֖וֹ וַתֹּאכַ֑ל וַתִּתֵּ֧ן גַּם־לְאִישָׁ֛הּ עִמָּ֖הּ וַיֹּאכַֽל׃</p></div></div><div class="rw"><div><p><sup class="vs">07</sup> Alors leurs yeux à tous deux s’ouvrirent et ils se rendirent compte qu’ils étaient nus. Ils attachèrent les unes aux autres des feuilles de figuier, et ils s’en firent des pagnes.</p></div><div lang="he" dir="rtl"><p>07 וַתִּפָּקַ֨חְנָה֙ עֵינֵ֣י שְׁנֵיהֶ֔ם וַיֵּ֣דְע֔וּ כִּ֥י עֵֽירֻמִּ֖ם הֵ֑ם וַֽיִּתְפְּרוּ֙ עֲלֵ֣ה תְאֵנָ֔ה וַיַּעֲשׂ֥וּ לָהֶ֖ם חֲגֹרֹֽת׃</p></div></div><div class="rw"><div><p><sup class="vs">08</sup> Ils entendirent la voix du Seigneur Dieu qui se promenait dans le jardin à la brise du jour. L’homme et sa femme allèrent se cacher aux regards du Seigneur Dieu parmi les arbres du jardin.</p></div><div lang="he" dir="rtl"><p>08 וַֽיִּשְׁמְע֞וּ אֶת־ק֨וֹל יְהוָ֧ה אֱלֹהִ֛ים מִתְהַלֵּ֥ךְ בַּגָּ֖ן לְר֣וּחַ הַיּ֑וֹם וַיִּתְחַבֵּ֨א הָֽאָדָ֜ם וְאִשְׁתּ֗וֹ מִפְּנֵי֙ יְהוָ֣ה אֱלֹהִ֔ים בְּת֖וֹךְ עֵ֥ץ הַגָּֽן׃</p></div></div><div class="rw"><div><p><sup class="vs">09</sup> Le Seigneur Dieu appela l’homme et lui dit : « Où es-tu donc ? »</p></div><div lang="he" dir="rtl"><p>09 וַיִּקְרָ֛א יְהוָ֥ה אֱלֹהִ֖ים אֶל־הָֽאָדָ֑ם וַיֹּ֥אמֶר ל֖וֹ אַיֶּֽכָּה׃</p></div></div><div class="rw"><div><p><sup class="vs">10</sup> Il répondit : « J’ai entendu ta voix dans le jardin, j’ai pris peur parce que je suis nu, et je me suis caché. »</p></div><div lang="he" dir="rtl"><p>10 וַיֹּ֕אמֶר אֶת־קֹלְךָ֥ שָׁמַ֖עְתִּי בַּגָּ֑ן וָאִירָ֛א כִּֽי־עֵירֹ֥ם אָנֹ֖כִי וָאֵחָבֵֽא׃</p></div></div><div class="rw"><div><p><sup class="vs">11</sup> Le Seigneur reprit : « Qui donc t’a dit que tu étais nu ? Aurais-tu mangé de l’arbre dont je t’avais interdit de manger ? »</p></div><div lang="he" dir="rtl"><p>11 וַיֹּ֕אמֶר מִ֚י הִגִּ֣יד לְךָ֔ כִּ֥י עֵירֹ֖ם אָ֑תָּה הֲמִן־הָעֵ֗ץ אֲשֶׁ֧ר צִוִּיתִ֛יךָ לְבִלְתִּ֥י אֲכָל־מִמֶּ֖נּוּ אָכָֽלְתָּ׃</p></div></div><div class="rw"><div><p><sup class="vs">12</sup> L’homme répondit : « La femme que tu m’as donnée, c’est elle qui m’a donné du fruit de l’arbre, et j’en ai mangé. »</p></div><div lang="he" dir="rtl"><p>12 וַיֹּ֖אמֶר הָֽאָדָ֑ם הָֽאִשָּׁה֙ אֲשֶׁ֣ר נָתַ֣תָּה עִמָּדִ֔י הִ֛וא נָֽתְנָה־לִּ֥י מִן־הָעֵ֖ץ וָאֹכֵֽל׃</p></div></div><div class="rw"><div><p><sup class="vs">13</sup> Le Seigneur Dieu dit à la femme : « Qu’as-tu fait là ? » La femme répondit : « Le serpent m’a trompée, et j’ai mangé. »</p></div><div lang="he" dir="rtl"><p>13 וַיֹּ֨אמֶר יְהוָ֧ה אֱלֹהִ֛ים לָאִשָּׁ֖ה מַה־זֹּ֣את עָשִׂ֑ית וַתֹּ֨אמֶר֙ הָֽאִשָּׁ֔ה הַנָּחָ֥שׁ הִשִּׁיאַ֖נִי וָאֹכֵֽל׃</p></div></div><div class="rw"><div><p><sup class="vs">14</sup> Alors le Seigneur Dieu dit au serpent : « Parce que tu as fait cela, tu seras maudit parmi tous les animaux et toutes les bêtes des champs. Tu ramperas sur le ventre et tu mangeras de la poussière tous les jours de ta vie.</p></div><div lang="he" dir="rtl"><p>14 וַיֹּאמֶר֩ יְהֹוָ֨ה אֱלֹהִ֥ים ׀ אֶֽל־הַנָּחָשׁ֮ כִּ֣י עָשִׂ֣יתָ זֹּאת֒ אָר֤וּר אַתָּה֙ מִכָּל־הַבְּהֵמָ֔ה וּמִכֹּ֖ל חַיַּ֣ת הַשָּׂדֶ֑ה עַל־גְּחֹנְךָ֣ תֵלֵ֔ךְ וְעָפָ֥ר תֹּאכַ֖ל כָּל־יְמֵ֥י חַיֶּֽיךָ׃</p></div></div><div class="rw"><div><p><sup class="vs">15</sup> Je mettrai une hostilité entre toi et la femme, entre ta descendance et sa descendance : celle-ci te meurtrira la tête, et toi, tu lui meurtriras le talon. »</p></div><div lang="he" dir="rtl"><p>15 וְאֵיבָ֣ה ׀ אָשִׁ֗ית בֵּֽינְךָ֙ וּבֵ֣ין הָֽאִשָּׁ֔ה וּבֵ֥ין זַרְעֲךָ֖ וּבֵ֣ין זַרְעָ֑הּ ה֚וּא יְשׁוּפְךָ֣ רֹ֔אשׁ וְאַתָּ֖ה תְּשׁוּפֶ֥נּוּ עָקֵֽב׃ ס</p></div></div><div class="rw"><div><p><sup class="vs">16</sup> Le Seigneur Dieu dit ensuite à la femme : « Je multiplierai la peine de tes grossesses ; c’est dans la peine que tu enfanteras des fils. Ton désir te portera vers ton mari, et celui-ci dominera sur toi. »</p></div><div lang="he" dir="rtl"><p>16 אֶֽל־הָאִשָּׁ֣ה אָמַ֗ר הַרְבָּ֤ה אַרְבֶּה֙ עִצְּבוֹנֵ֣ךְ וְהֵֽרֹנֵ֔ךְ בְּעֶ֖צֶב תֵּֽלְדִ֣י בָנִ֑ים וְאֶל־אִישֵׁךְ֙ תְּשׁ֣וּקָתֵ֔ךְ וְה֖וּא יִמְשָׁל־בָּֽךְ׃ ס</p></div></div><div class="rw"><div><p><sup class="vs">17</sup> Il dit enfin à l’homme : « Parce que tu as écouté la voix de ta femme, et que tu as mangé le fruit de l’arbre que je t’avais interdit de manger : maudit soit le sol à cause de toi ! C’est dans la peine que tu en tireras ta nourriture, tous les jours de ta vie.</p></div><div lang="he" dir="rtl"><p>17 וּלְאָדָ֣ם אָמַ֗ר כִּֽי־שָׁמַעְתָּ֮ לְק֣וֹל אִשְׁתֶּךָ֒ וַתֹּ֨אכַל֙ מִן־הָעֵ֔ץ אֲשֶׁ֤ר צִוִּיתִ֨יךָ֙ לֵאמֹ֔ר לֹ֥א תֹאכַ֖ל מִמֶּ֑נּוּ אֲרוּרָ֤ה הָֽאֲדָמָה֙ בַּֽעֲבוּרֶ֔ךָ בְּעִצָּבוֹן֙ תֹּֽאכֲלֶ֔נָּה כֹּ֖ל יְמֵ֥י חַיֶּֽיךָ׃</p></div></div><div class="rw"><div><p><sup class="vs">18</sup> De lui-même, il te donnera épines et chardons, mais tu auras ta nourriture en cultivant les champs.</p></div><div lang="he" dir="rtl"><p>18 וְק֥וֹץ וְדַרְדַּ֖ר תַּצְמִ֣יחַֽ לָ֑ךְ וְאָכַלְתָּ֖ אֶת־עֵ֥שֶׂב הַשָּׂדֶֽה׃</p></div></div><div class="rw"><div><p><sup class="vs">19</sup> C’est à la sueur de ton visage que tu gagneras ton pain, jusqu’à ce que tu retournes à la terre dont tu proviens ; car tu es poussière, et à la poussière tu retourneras. »</p></div><div lang="he" dir="rtl"><p>19 בְּזֵעַ֤ת אַפֶּ֨יךָ֙ תֹּ֣אכַל לֶ֔חֶם עַ֤ד שֽׁוּבְךָ֙ אֶל־הָ֣אֲדָמָ֔ה כִּ֥י מִמֶּ֖נָּה לֻקָּ֑חְתָּ כִּֽי־עָפָ֣ר אַ֔תָּה וְאֶל־עָפָ֖ר תָּשֽׁוּב׃</p></div></div><div class="rw"><div><p class="tsrc">Genèse, chapitre III – passages soulignés par nous</p></div><div lang="he" dir="rtl"><p class="tsrc">בראשית, פרק ג</p></div></div></div></div></section>
+</main>
+<footer><div class="wrap"><p>Chaque texte renvoie à sa fiche complète.</p></div></footer>
+<script>
+(function(){
+  var links=[].slice.call(document.querySelectorAll('#nav a'));
+  var secs=[].slice.call(document.querySelectorAll('.txt')),lock=null,ticking=false;
+  function setCur(i){
+    links.forEach(function(a,k){if(k===i)a.setAttribute('aria-current','true');else a.removeAttribute('aria-current')});
+    var a=links[i],box=a.parentNode.parentNode;
+    if(box.scrollWidth>box.clientWidth&&box.scrollTo)box.scrollTo({left:i?a.offsetLeft-20:0});
+  }
+  function upd(){
+    ticking=false;
+    if(lock!==null){setCur(lock);return}
+    var nb=document.querySelector('.nav'),y=(nb?nb.getBoundingClientRect().bottom:0)+24,cur=0;
+    secs.forEach(function(s,k){if(s.getBoundingClientRect().top<=y)cur=k});
+    setCur(cur);
+  }
+  function req(){if(!ticking){ticking=true;requestAnimationFrame(upd)}}
+  links.forEach(function(a,k){a.addEventListener('click',function(){lock=k;setCur(k)})});
+  ['wheel','touchstart','mousedown','keydown'].forEach(function(ev){window.addEventListener(ev,function(){lock=null},{passive:true})});
+  window.addEventListener('scroll',req,{passive:true});window.addEventListener('resize',req);
+  upd();
+})();
+</script>
+<script src="sommaire.js" defer></script><script>
+(function(){var r=document.documentElement,K='texte-seul',KL='mode-lecture';
+var btn=document.getElementById('a11y-btn'),menu=document.getElementById('a11y-menu'),opts=menu.querySelectorAll('.a11y-opt'),closed=[],shown=[],skipped=[];
+function apply(m){
+  var ts=m==='ts',lc=m==='lect',was=r.classList.contains('lect');
+  r.classList.toggle('ts',ts);r.classList.toggle('lect',lc);
+  if(lc&&!was){closed=[];shown=[];skipped=[];
+    document.querySelectorAll('main details').forEach(function(d){if(!d.open){closed.push(d);d.open=true}});
+    document.querySelectorAll('main [hidden]').forEach(function(x){if(!x.closest('[aria-labelledby="h-video"]')&&!x.matches('video,[role="tablist"]')){shown.push(x);x.hidden=false}});
+    document.querySelectorAll('main section').forEach(function(sc){var h=sc.querySelector('h2');
+      if(sc.querySelector('input,select,textarea')||(h&&/^(Exercice|Faites le tri|En vid)/i.test(h.textContent.trim()))){sc.classList.add('lc-skip');skipped.push(sc)}});}
+  if(!lc&&was){closed.forEach(function(d){d.open=false});shown.forEach(function(x){x.hidden=true});skipped.forEach(function(s){s.classList.remove('lc-skip')});closed=[];shown=[];skipped=[]}
+  opts.forEach(function(o){o.setAttribute('aria-checked',o.getAttribute('data-mode')===m?'true':'false')});
+  try{localStorage.setItem(K,ts?'1':'0');localStorage.setItem(KL,lc?'1':'0')}catch(e){}
+}
+function open(on){menu.hidden=!on;btn.setAttribute('aria-expanded',on?'true':'false')}
+btn.addEventListener('click',function(e){e.stopPropagation();open(menu.hidden)});
+opts.forEach(function(o){o.addEventListener('click',function(){apply(o.getAttribute('data-mode'));open(false);btn.focus()})});
+document.addEventListener('click',function(e){if(!menu.hidden&&!menu.contains(e.target)&&e.target!==btn)open(false)});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!menu.hidden){open(false);btn.focus()}});
+var v='orig';try{if(localStorage.getItem(KL)==='1')v='lect';else if(localStorage.getItem(K)==='1'&&menu.querySelector('[data-mode="ts"]'))v='ts'}catch(e){}
+if(v==='ts')apply('ts');
+if(v==='lect')window.addEventListener('load',function(){apply('lect')});
+})();
+</script>
+<script src="fil.js" defer></script><script src="menu.js" defer></script></body>
+</html>
