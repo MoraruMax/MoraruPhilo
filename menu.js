@@ -1,3 +1,5 @@
+/* Ouverture en haut de page (sauf lien avec ancre) */
+(function(){if(location.hash)return;function top(){if(!location.hash&&window.scrollY>0)window.scrollTo(0,0)}top();document.addEventListener('DOMContentLoaded',top);window.addEventListener('load',function(){top();setTimeout(top,150)});window.addEventListener('pageshow',function(e){if(!e.persisted)top()})})();
 /* Menu hamburger : accès à toutes les rubriques depuis chaque page */
 (function(){
 var ITEMS=[
@@ -13,6 +15,7 @@ var ITEMS=[
  ['Plans de cours','accueil.html#g-plans'],
  ['Préparer le bac','accueil.html#g-bac'],
  ['Culture générale','accueil.html#g-culture'],
+ ['La philo en BD','accueil.html#g-bd'],
  ['Philosophie et spécialités','accueil.html#g-specialites'],
  ['Aller plus loin','accueil.html#g-approfondir'],
  ['EMC','accueil.html#g-emc'],
