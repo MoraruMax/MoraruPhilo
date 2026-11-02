@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Philosophie et mathématiques</title>
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+  --bg:#F1F4F6; --surface:#FFFFFF; --ink:#1B2733; --muted:#53626F; --line:#D5DDE3; --focus:#0E6E73;
+  --pour:#0E6E73; --contre:#A8321F; --nuance:#2F4FA8; --garde:#8A5A00; --neutre:#4F5D69;
+  --serif:Georgia,"Times New Roman",serif;
+  --sans:system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#10171D; --surface:#18222A; --ink:#E7EDF2; --muted:#A1B0BC; --line:#2A3641; --focus:#5FD0D6;
+    --pour:#5FD0D6; --contre:#FF8A75; --nuance:#97ADFF; --garde:#F0BC52; --neutre:#A9B7C2;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#10171D; --surface:#18222A; --ink:#E7EDF2; --muted:#A1B0BC; --line:#2A3641; --focus:#5FD0D6;
+  --pour:#5FD0D6; --contre:#FF8A75; --nuance:#97ADFF; --garde:#F0BC52; --neutre:#A9B7C2;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:calc(4.2rem + env(safe-area-inset-top,0px));-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.1rem/1.65 var(--serif)}
+.wrap{width:min(980px,100% - 2.5rem);margin-inline:auto}
+h1,h2,h3{margin:0;font-family:var(--serif)}
+h1{font-weight:800;font-size:clamp(2.5rem,8vw,5rem);line-height:1.02;letter-spacing:-.02em}
+h2{font-weight:800;font-size:clamp(1.6rem,3.4vw,2.2rem);line-height:1.12}
+p{margin:0 0 1em}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
+.hero{padding:clamp(2.2rem,6vw,4.5rem) 0 2rem}
+.lead{font-size:clamp(1.15rem,2.4vw,1.45rem);line-height:1.5;max-width:40ch;margin:1.4rem 0 1rem}
+.note{font:500 .92rem/1.5 var(--sans);color:var(--muted);max-width:62ch;margin:0}
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--bg);border-bottom:1px solid var(--line)}
+.nav ol{display:flex;gap:.3rem;list-style:none;margin:0;padding:.5rem 0;overflow-x:auto}
+.nav a{display:block;white-space:nowrap;text-decoration:none;color:var(--muted);font:700 .88rem/1.2 var(--sans);padding:.45rem .7rem .35rem;border-radius:6px;border-bottom:4px solid var(--c)}
+.nav a:hover{color:var(--ink)}
+.nav a[aria-current="true"]{background:var(--ink);color:var(--bg)}
+.nav small{display:block;font-weight:500;font-size:.75rem;opacity:1}
+.txt{border-bottom:1px solid var(--line);padding:clamp(2.4rem,6vw,3.6rem) 0}
+.meta{display:flex;flex-wrap:wrap;gap:.5rem .9rem;align-items:center;margin-bottom:.8rem;font:500 .92rem/1.3 var(--sans);color:var(--muted)}
+.tag{font:700 .8rem/1 var(--sans);color:var(--c);border:1.5px solid var(--c);border-radius:5px;padding:.3rem .5rem}
+.thesis{font-size:clamp(1.2rem,2.4vw,1.5rem);line-height:1.4;font-weight:600;margin:1rem 0 1.4rem;max-width:44ch;padding-left:1rem;border-left:5px solid var(--c)}
+.cols{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:1.6rem clamp(1.6rem,4vw,3rem)}
+h3{font:700 .9rem/1.2 var(--sans);color:var(--c);margin-bottom:.7rem}
+.args{margin:0;padding:0;list-style:none;counter-reset:a}
+.args li{counter-increment:a;padding:.6rem 0 .6rem 2.4rem;border-top:1px solid var(--line);position:relative}
+.args li:last-child{border-bottom:1px solid var(--line)}
+.args li::before{content:counter(a);position:absolute;left:0;top:.5rem;font:800 1.5rem/1 var(--serif);color:var(--c)}
+.quotes{margin:0;padding:0}
+.quotes blockquote{margin:0 0 1rem;padding:.2rem 0 .2rem .9rem;border-left:3px solid var(--line)}
+.quotes p{margin:0 0 .2rem;font-style:italic}
+.quotes cite{font:500 .82rem/1.3 var(--sans);font-style:normal;color:var(--muted)}
+footer{padding:1.6rem 0 2.5rem;font:500 .92rem/1.5 var(--sans);color:var(--muted)}
+footer p{margin:0}
+@media (max-width:760px){.cols{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+.pdfbtn{display:inline-flex;align-items:center;gap:.5rem;font:600 .88rem/1 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--surface);border:1.5px solid var(--ink);border-radius:999px;padding:.55rem .95rem;cursor:pointer}
+.pdfbtn:hover{background:var(--ink);color:var(--bg)}.pdfbtn:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:2px}
+
+/* Mode lecture (pages à structure libre) */
+html.lect body::before,html.lect body::after{display:none!important}
+html.lect body{background:var(--bg)!important}
+html.lect .pn,html.lect #quiz,html.lect section[aria-labelledby="h-video"],html.lect video,html.lect .score,html.lect .lc-skip,html.lect [role="tablist"],html.lect main button,html.lect main input,html.lect main select,html.lect main textarea,html.lect .sec-head p.lc-x{display:none!important}
+html.lect .hero h1,html.lect .hero p,html.lect section.block h2,html.lect footer p{text-shadow:none!important}
+html.lect .hero,html.lect section.block{padding-block:1.2rem!important;border:0!important}
+html.lect .wrap,html.lect .sec-head{max-width:40rem!important;margin-inline:auto}
+html.lect .hgrid,html.lect .two,html.lect .cols{display:block!important}
+html.lect main,html.lect .hero{font-family:var(--serif)}
+html.lect .hero h1{font-size:clamp(1.9rem,5vw,2.6rem)!important}
+html.lect main p,html.lect main li,html.lect .lead{font-size:1.12rem!important;line-height:1.75!important}
+html.lect :is(main,.hero) :is(div,li,blockquote,article,aside,p,ul,ol,section,details,summary,figure,span):not(table *){background:none!important;border:0!important;box-shadow:none!important;border-radius:0!important}
+html.lect main [hidden]{display:revert!important}
+html.lect :is(main,.hero) div:not(.wrap):not(.sec-head):not(table *){display:block!important;grid-template-columns:none!important;float:none!important;max-width:none!important;width:auto!important;margin-inline:0}
+html.lect main li{display:list-item!important}
+html.lect .must{margin:1rem 0}
+html.lect .lead{max-width:none!important}
+html.lect .wrap{padding-inline:0}
+html.lect main details>summary{cursor:default;pointer-events:none;list-style:none}
+html.lect main details>summary::-webkit-details-marker,html.lect main details>summary::before{display:none!important}
+html.lect main blockquote{margin:.8rem 0;padding:0 0 0 1rem!important;border-left:3px solid var(--line)!important}
+html.lect main .panel{display:block!important;margin-bottom:1rem}
+html.lect main h3,html.lect main h4{margin-top:1.4rem}
+html.lect .nav,html.lect .hero .note{display:none!important}
+html.lect .thesis{border:0!important;padding-left:0!important;max-width:none!important}
+html.lect .args li{padding-left:0!important}
+html.lect .args li::before{display:none!important}
+html.lect .args{list-style:decimal;padding-left:1.4rem!important}
+html.lect .txt{padding-block:1.2rem!important}
+
+/* Accessibilité */
+.a11y{position:relative;display:inline-block}
+.a11y-menu{position:absolute;right:0;top:calc(100% + .4rem);z-index:60;min-width:14rem;background:var(--bg);color:var(--ink);border:1.5px solid var(--ink);border-radius:14px;padding:.35rem;box-shadow:0 8px 24px rgba(0,0,0,.18);text-shadow:none}
+.a11y-menu[hidden]{display:none}
+.a11y-menu p{margin:0;padding:.45rem .7rem .3rem;font:700 .72rem/1 system-ui,-apple-system,sans-serif;letter-spacing:.06em;text-transform:uppercase;opacity:.65}
+.a11y-opt{display:flex;align-items:center;gap:.6rem;width:100%;text-align:left;font:600 .92rem/1.2 system-ui,-apple-system,sans-serif;color:inherit;background:none;border:0;border-radius:9px;padding:.6rem .7rem;cursor:pointer}
+.a11y-opt:hover{background:var(--surface)}
+.a11y-opt:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:-2px}
+.a11y-opt .dot{flex:none;width:1rem;height:1rem;border:2px solid currentColor;border-radius:50%;position:relative}
+.a11y-opt[aria-checked="true"] .dot::after{content:"";position:absolute;inset:2px;background:currentColor;border-radius:50%}
+.a11y-opt small{display:block;font-weight:500;opacity:.7;font-size:.78rem;margin-top:.15rem}
+@media print{
+  :root{--bg:#fff!important;--surface:#fff!important;--ink:#111!important;--muted:#444!important;--line:#bbb!important;color-scheme:light!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:#fff!important;color:#111!important}
+  body::before,body::after{display:none!important}
+  nav,.pdfbtn,.pn,video,section[aria-labelledby="h-video"]{display:none!important}
+  .rev,.js .rev{opacity:1!important;transform:none!important}
+  .stp li[hidden]{display:list-item!important}
+  details>*{display:block!important}
+  article,li,.card,figure,.stage{break-inside:avoid}
+  h1,h2,h3{break-after:avoid;text-shadow:none!important}
+  *{text-shadow:none!important}
+  a{color:inherit;text-decoration:none}
+  section.block,.part{padding-top:1.2rem!important;padding-bottom:1.2rem!important}
+  footer{break-before:avoid;border-top:1px solid #999;margin-top:1rem}
+}
+@page{size:A4;margin:16mm 14mm}
+/* Texte */
+.tx summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:.7rem;font:800 clamp(1.4rem,3vw,1.9rem)/1.2 var(--sans);padding:.3rem 0}
+.tx summary::-webkit-details-marker{display:none}
+.tx summary::before{content:"";width:.6em;height:.6em;border-right:.2em solid currentColor;border-bottom:.2em solid currentColor;transform:rotate(-45deg);transition:transform .15s;flex:none;margin-right:.2rem}
+.tx[open] summary::before{transform:rotate(45deg)}
+@media (prefers-reduced-motion:reduce){.tx summary::before{transition:none}}
+.txb{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--c,var(--ink));padding:1.2rem clamp(1rem,3vw,1.8rem);margin-top:.9rem;max-width:46rem;font:400 1.1rem/1.75 var(--serif)}
+.txb p{margin:0 0 1em}
+.txb h3{font:700 1rem/1.3 var(--sans);margin:1.2em 0 .5em}
+.txb .vs{font:700 .72rem/1 var(--sans);color:var(--muted);margin-right:.15em}
+.txb .tsrc{font:600 .88rem/1.4 var(--sans);color:var(--muted);text-align:right;margin:1.1em 0 0}
+.txb .tsrc:not(:last-child){margin-bottom:1.4em;padding-bottom:1.2em;border-bottom:1px solid var(--line)}
+
+/* Sujets de dissertation */
+.sjd ul{list-style:none;margin:.6rem 0 0;padding:0;max-width:46rem}
+.sjd li{margin:0;padding:.55rem 0;border-top:1px solid var(--line)}
+.sjd li:last-child{border-bottom:1px solid var(--line)}
+.sjd a{color:inherit;font:600 1.05rem/1.4 var(--sans,system-ui);text-underline-offset:3px}
+.sjd p{margin:.4rem 0 0}
+html.lect .sjd li{border:0!important;padding:.25rem 0!important}
+html.lect .sjd a{font:600 1.12rem/1.6 var(--serif,Georgia,serif)}
+@media print{.sjd a{font-weight:600}.sjd li{border-color:#999}}
+.ln{font:700 .66rem/1 var(--sans);color:var(--muted);margin:0 .2em 0 .1em;vertical-align:super}
+.txb .tsrcline{font:600 .9rem/1.4 var(--sans);color:var(--muted)}
+.txn{font:500 .85rem/1.4 var(--sans);color:var(--muted);margin:.2rem 0 1rem}
+html.lect .txb{padding:0!important}
+
+.sjd li{font:600 1.05rem/1.4 var(--sans)}
+.tbl{width:100%;border-collapse:collapse;font:400 1rem/1.45 var(--sans);margin-top:1rem}
+.tbl th,.tbl td{text-align:left;vertical-align:top;padding:.6rem .7rem;border-top:1px solid var(--line)}
+.tbl th{font-weight:700;color:var(--ink);white-space:nowrap}
+.tbl thead th{border-top:0;border-bottom:2px solid var(--ink);font-size:.82rem;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.tblw{overflow-x:auto}
+.vois{margin:.6rem 0 0;padding:0;list-style:none}
+.vois li{padding:.35rem 0;border-top:1px solid var(--line);font:500 1rem/1.4 var(--sans)}
+.vois a{color:inherit;text-underline-offset:3px}
+.cols p.sm{font:500 .95rem/1.5 var(--sans);color:var(--muted)}
+html.lect .tbl th,html.lect .tbl td{border:0!important;display:block}
+</style>
+<script>try{history.scrollRestoration="manual"}catch(e){}(function(){function t(){if(!location.hash)window.scrollTo(0,0)}t();document.addEventListener("DOMContentLoaded",t);window.addEventListener("load",function(){t();setTimeout(t,60)});window.addEventListener("pageshow",t)})();</script>
+<script src="confort.js"></script><script src="voix.js" defer></script>
+</head>
+<body>
+<nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><span style="display:inline-flex;gap:.6rem;flex-wrap:wrap;align-items:center"><span class="a11y"><button type="button" class="pdfbtn" id="a11y-btn" aria-haspopup="true" aria-expanded="false" aria-controls="a11y-menu"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="1.6"/><path d="M5 8.5l7 1.5 7-1.5M12 10v4.5M8.5 21l3.5-6.5 3.5 6.5"/></svg><span>Accessibilité</span></button><div class="a11y-menu" id="a11y-menu" role="radiogroup" aria-label="Affichage de la page" hidden><p>Affichage</p><button type="button" role="radio" class="a11y-opt" data-mode="orig" aria-checked="true"><span class="dot"></span><span>Page d’origine<small>Image de fond et mise en page habituelle</small></span></button><button type="button" role="radio" class="a11y-opt" data-mode="lect" aria-checked="false"><span class="dot"></span><span>Mode lecture<small>Texte continu, sans cadres ni exercices</small></span></button></div></span><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></span></nav>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Philosophie et mathématiques</h1>
+    <p class="lead">De Platon à Gödel : ce que les philosophes ont attendu des mathématiques, et ce qu’ils en ont tiré.</p>
+    <p class="note">Une page de repères pour la notion de vérité, de raison et de connaissance. Les citations sont courtes et les références sont à vérifier dans vos éditions.</p>
+  </div>
+</header>
+<nav class="nav" aria-label="Les parties"><div class="wrap"><ol id="nav">
+<li><a href="#t0" style="--c:var(--pour)">Introduction<small>Pourquoi les maths ?</small></a></li>
+<li><a href="#t1" style="--c:var(--pour)">Platon<small>Que nul n’entre…</small></a></li>
+<li><a href="#t2" style="--c:var(--nuance)">Aristote, Euclide<small>Abstraire, démontrer</small></a></li>
+<li><a href="#t3" style="--c:var(--garde)">Descartes<small>Chaînes de raisons</small></a></li>
+<li><a href="#t4" style="--c:var(--contre)">Pascal<small>Géométrie, finesse</small></a></li>
+<li><a href="#t5" style="--c:var(--nuance)">Spinoza<small>Ordre géométrique</small></a></li>
+<li><a href="#t6" style="--c:var(--pour)">Leibniz<small>Calculons !</small></a></li>
+<li><a href="#t7" style="--c:var(--garde)">Kant<small>Synthétique a priori</small></a></li>
+<li><a href="#t8" style="--c:var(--contre)">Crise des fondements<small>Non euclidiennes, Gödel</small></a></li>
+<li><a href="#t9" style="--c:var(--nuance)">Bilan<small>Découvert ou inventé</small></a></li>
+<li><a href="#t10" style="--c:var(--neutre)">À réviser<small>Tableau, sujets</small></a></li>
+</ol></div></nav>
+<main id="main">
+<section class="txt" id="t0" aria-labelledby="h0" style="--c:var(--pour)"><div class="wrap">
+<div class="meta"><span class="tag">Introduction</span></div>
+<h2 id="h0">Pourquoi les mathématiques intéressent la philosophie</h2>
+<p class="thesis">Les mathématiques sont le modèle de la connaissance certaine. De là l’attrait qu’elles exercent sur les philosophes, et leurs désaccords.</p>
+<div class="cols"><div><h3>Ce qu’il faut savoir</h3><ol class="args"><li><strong>Un modèle de certitude.</strong> Une démonstration s’impose à tout esprit, sans appel à l’autorité ni à l’expérience. Beaucoup de philosophes y ont cherché l’idée d’une méthode pour penser.</li><li><strong>Un mystère sur leurs objets.</strong> On ne voit ni ne touche un cercle parfait, ni le nombre sept. Où sont ces objets : dans les choses, dans l’esprit, ou dans un monde à part ?</li><li><strong>Une énigme sur leur efficacité.</strong> Des constructions très abstraites décrivent le monde physique avec une précision étonnante. Pourquoi ?</li></ol></div><div><h3>Trois questions à garder en tête</h3><ul class="vois"><li>Découvre-t-on ou invente-t-on les vérités mathématiques ?</li><li>Peut-on tout démontrer ?</li><li>Les mathématiques disent-elles le réel ?</li></ul><p class="sm" style="margin-top:1rem">Avant Platon, les pythagoriciens faisaient déjà du nombre le principe des choses : l’attrait des philosophes pour les mathématiques est aussi ancien que la philosophie.</p></div></div>
+</div></section>
+<section class="txt" id="t1" aria-labelledby="h1" style="--c:var(--pour)"><div class="wrap">
+<div class="meta"><span class="tag">Antiquité</span><span>vers 428-348 av. J.-C.</span></div>
+<h2 id="h1">Platon : « Que nul n’entre ici s’il n’est géomètre »</h2>
+<p class="thesis">Pour Platon, les mathématiques détachent l’esprit du monde sensible et le préparent à connaître le vrai.</p>
+<div class="cols"><div><h3>Ce qu’il faut savoir</h3><ol class="args"><li><strong>L’inscription.</strong> La formule est attribuée à l’entrée de l’Académie, l’école de Platon. Elle ne figure dans aucun dialogue : on ne la trouve que dans des sources tardives. Elle résume pourtant bien sa position.</li><li><strong>Le <em>Ménon</em>.</strong> Par de simples questions, Socrate amène un esclave à trouver comment doubler l’aire d’un carré. La vérité géométrique se retrouve en soi plus qu’elle ne s’apprend du dehors : c’est l’exemple de la réminiscence.</li><li><strong>La <em>République</em> (livres VI-VII).</strong> Arithmétique, géométrie, astronomie et harmonie forment l’éducation des futurs gouvernants, car elles tournent l’âme du sensible vers l’intelligible. Mais elles partent d’hypothèses et s’aident de figures visibles : seule la dialectique remonte à un principe qui n’est plus une hypothèse.</li><li><strong>Des objets idéaux.</strong> Le géomètre parle du carré lui-même, pas du carré tracé dans le sable. On appelle « platonisme mathématique » la thèse que les objets mathématiques existent, éternels, indépendamment de nous.</li><li><strong>Le <em>Timée</em>.</strong> Le monde est composé de triangles et de polyèdres réguliers, associés aux éléments (feu, air, eau, terre) : l’ordre du monde est mathématique.</li></ol></div><div><div class="quotes"><blockquote><p>« Que nul n’entre ici s’il n’est géomètre. »</p><cite>Inscription attribuée à l’Académie de Platon (tradition tardive)</cite></blockquote></div><p class="sm" style="margin-top:1rem"><strong>À retenir.</strong> Pour Platon, les mathématiques sont un passage, pas un aboutissement : elles préparent à la dialectique.</p></div></div>
+</div></section>
+<section class="txt" id="t2" aria-labelledby="h2" style="--c:var(--nuance)"><div class="wrap">
+<div class="meta"><span class="tag">Antiquité</span><span>384-322 av. J.-C. ; Euclide vers 300 av. J.-C.</span></div>
+<h2 id="h2">Aristote et Euclide : abstraire et démontrer</h2>
+<p class="thesis">Aristote refuse un monde des Idées : les objets mathématiques sont tirés des choses sensibles par abstraction.</p>
+<div class="cols"><div><h3>Ce qu’il faut savoir</h3><ol class="args"><li><strong>L’abstraction.</strong> Le mathématicien considère les choses en ne retenant que leur quantité ou leur forme : le cercle d’une roue, sans le bois. Les objets mathématiques n’existent donc pas à part, mais dans les choses, comme un aspect isolé par la pensée.</li><li><strong>Les <em>Éléments</em> d’Euclide.</strong> La géométrie y est organisée en définitions, postulats et axiomes, dont on déduit les théorèmes. Pendant plus de deux mille ans, c’est le modèle de la science rigoureuse.</li><li><strong>La science démonstrative.</strong> Dans les <em>Seconds Analytiques</em>, Aristote décrit la science comme une déduction à partir de principes premiers, qu’on ne démontre pas mais qu’on saisit.</li></ol></div><div><h3>Platon ou Aristote ?</h3><ul class="vois"><li><strong>Platon :</strong> les objets mathématiques sont idéaux et existent à part.</li><li><strong>Aristote :</strong> ils sont abstraits des choses et n’existent pas à part.</li></ul><p class="sm" style="margin-top:1rem">C’est la première forme du débat entre réalisme et conceptions plus modestes des mathématiques.</p></div></div>
+</div></section>
+<section class="txt" id="t3" aria-labelledby="h3" style="--c:var(--garde)"><div class="wrap">
+<div class="meta"><span class="tag">XVIIe siècle</span><span>1596-1650</span></div>
+<h2 id="h3">Descartes : des chaînes de raisons</h2>
+<p class="thesis">Descartes veut étendre à toute la connaissance la clarté et l’enchaînement des raisons des mathématiques, tout en faisant d’elles un problème.</p>
+<div class="cols"><div><h3>Ce qu’il faut savoir</h3><ol class="args"><li><strong>Une méthode.</strong> Les <em>Règles pour la direction de l’esprit</em> (écrites vers 1628) rêvent d’une « mathématique universelle », science de l’ordre et de la mesure. Le <em>Discours de la méthode</em> (1637) en tire quatre préceptes : évidence, division, ordre, dénombrements.</li><li><strong>La géométrie analytique.</strong> Dans <em>La Géométrie</em> (1637), Descartes applique l’algèbre à la géométrie : les courbes se représentent par des équations. Fermat y parvient de son côté, et les « coordonnées cartésiennes » portent le nom de Descartes.</li><li><strong>Le doute.</strong> Les vérités mathématiques paraissent certaines. Pourtant la première <em>Méditation</em> les met en doute, avec l’hypothèse d’un Dieu trompeur qui me ferait me tromper même en comptant les côtés d’un carré. Elles ne sont garanties qu’une fois Dieu prouvé : la certitude mathématique n’est pas première, le cogito l’est.</li><li><strong>Des vérités créées.</strong> Dans ses lettres à Mersenne (1630), Descartes affirme que Dieu a librement créé les vérités mathématiques. Elles ne s’imposent pas à lui comme des modèles extérieurs : thèse opposée à Platon, et plus tard à Leibniz.</li></ol></div><div><div class="quotes"><blockquote><p>« Ces longues chaînes de raisons, toutes simples et faciles, dont les géomètres ont coutume de se servir pour parvenir à leurs plus difficiles démonstrations… »</p><cite>Descartes, <em>Discours de la méthode</em>, seconde partie</cite></blockquote></div><p class="sm" style="margin-top:1rem">Sur le site : <a href="descartes-du-doute-au-cogito.html">Descartes : du doute au cogito</a>.</p></div></div>
+</div></section>
+<section class="txt" id="t4" aria-labelledby="h4" style="--c:var(--contre)"><div class="wrap">
+<div class="meta"><span class="tag">XVIIe siècle</span><span>1623-1662</span></div>
+<h2 id="h4">Pascal : l’esprit de géométrie et ses limites</h2>
+<p class="thesis">Pascal est un grand mathématicien qui en connaît aussi les limites : la géométrie ne dit pas tout du vrai ni de l’homme.</p>
+<div class="cols"><div><h3>Ce qu’il faut savoir</h3><ol class="args"><li><strong>Un mathématicien.</strong> Il écrit un essai sur les coniques à seize ans (1640), construit une machine à calculer (la « Pascaline », à partir de 1642) et étudie le triangle arithmétique. Sa correspondance avec Fermat (1654) fonde le calcul des probabilités.</li><li><strong>Esprit de géométrie et esprit de finesse.</strong> Le premier raisonne à partir de principes peu nombreux, éloignés de l’usage commun mais très clairs. Le second saisit d’un coup d’œil des principes très nombreux et très fins : c’est celui qu’il faut pour les choses humaines. Il faut les deux.</li><li><strong>Les limites de la méthode.</strong> Dans <em>De l’esprit géométrique</em>, Pascal montre qu’on ne peut tout définir ni tout démontrer : on part de termes primitifs (espace, temps, nombre) et de principes qu’on ne démontre pas. Dans les <em>Pensées</em>, ces premiers principes sont connus par le « cœur », c’est-à-dire par une intuition.</li><li><strong>Les deux infinis.</strong> L’homme est un milieu entre l’infiniment grand et l’infiniment petit : « un néant à l’égard de l’infini, un tout à l’égard du néant ». L’infini mathématique devient une expérience de la finitude humaine.</li><li><strong>Le pari.</strong> L’argument du pari emprunte au calcul des probabilités : miser le fini pour gagner l’infini.</li></ol></div><div><div class="quotes"><blockquote><p>« Le cœur a ses raisons que la raison ne connaît point. »</p><cite>Pascal, <em>Pensées</em></cite></blockquote></div><p class="sm" style="margin-top:1rem">Sur le site : <a href="pascal.html">Pascal : le cœur et le pari</a>.</p></div></div>
+</div></section>
+<section class="txt" id="t5" aria-labelledby="h5" style="--c:var(--nuance)"><div class="wrap">
+<div class="meta"><span class="tag">XVIIe siècle</span><span>1632-1677</span></div>
+<h2 id="h5">Spinoza : une philosophie « démontrée selon l’ordre géométrique »</h2>
+<p class="thesis">Spinoza fait de la géométrie la forme même de la philosophie.</p>
+<div class="cols"><div><h3>Ce qu’il faut savoir</h3><ol class="args"><li><strong>Une forme euclidienne.</strong> L’<em>Éthique</em> (publiée après sa mort, en 1677) est « démontrée suivant l’ordre géométrique » : définitions, axiomes, propositions, démonstrations et scolies, comme chez Euclide.</li><li><strong>Pourquoi ?</strong> Spinoza veut traiter les passions et les actions humaines comme des réalités naturelles, qui obéissent à des lois, et non comme des fautes ou des défauts de la nature.</li><li><strong>Une autre norme de vérité.</strong> Dans l’appendice du livre I, il observe que les mathématiques, qui s’occupent des essences et des propriétés des figures et non des fins, ont montré aux hommes une autre norme de vérité que le finalisme.</li><li><strong>Une limite possible.</strong> Pour certains lecteurs, la forme géométrique donne à des thèses discutables une apparence de nécessité : la rigueur de la forme ne garantit pas celle du fond.</li></ol></div><div><div class="quotes"><blockquote><p>« … comme s’il était question de lignes, de plans ou de corps. »</p><cite>Spinoza, <em>Éthique</em>, préface de la partie III</cite></blockquote></div><p class="sm" style="margin-top:1rem">Sur le site : <a href="spinoza-lettre-a-schuller.html">Spinoza : l’ignorance des causes déterminantes</a>.</p></div></div>
+</div></section>
+<section class="txt" id="t6" aria-labelledby="h6" style="--c:var(--pour)"><div class="wrap">
+<div class="meta"><span class="tag">XVIIe-XVIIIe siècles</span><span>1646-1716</span></div>
+<h2 id="h6">Leibniz : calculer pour raisonner</h2>
+<p class="thesis">Leibniz rêve de transformer le raisonnement en calcul, et invente des outils mathématiques qui y contribuent.</p>
+<div class="cols"><div><h3>Ce qu’il faut savoir</h3><ol class="args"><li><strong>Le calcul infinitésimal.</strong> Vers 1675-1676, il met au point sa version du calcul différentiel et intégral, avec les notations dx et ∫ encore utilisées. Newton y parvient de son côté, d’où une querelle de priorité. Leibniz tient les infiniment petits pour des fictions bien fondées.</li><li><strong>La caractéristique universelle.</strong> Il projette une langue de symboles où les idées se combineraient comme des nombres, de sorte qu’une dispute se règle en calculant. C’est une annonce de la logique formelle moderne.</li><li><strong>Vérités de raison et vérités de fait.</strong> Les premières, comme les vérités mathématiques, sont nécessaires : leur contraire est impossible, et le principe de contradiction suffit. Les secondes sont contingentes et relèvent du principe de raison suffisante.</li><li><strong>Machines et binaire.</strong> Il conçoit une machine à calculer et décrit l’arithmétique binaire (1703). Ses 0 et ses 1 préfigurent le codage des ordinateurs.</li></ol></div><div><div class="quotes"><blockquote><p>« Calculons ! »</p><cite>Leibniz, à propos de sa caractéristique universelle (<em>Calculemus</em>)</cite></blockquote></div><p class="sm" style="margin-top:1rem">Sur le site : <a href="inconscient-leibniz.html">Leibniz : les petites perceptions</a>.</p></div></div>
+</div></section>
+<section class="txt" id="t7" aria-labelledby="h7" style="--c:var(--garde)"><div class="wrap">
+<div class="meta"><span class="tag">XVIIIe siècle</span><span>1724-1804</span></div>
+<h2 id="h7">Kant : des jugements synthétiques a priori</h2>
+<p class="thesis">Pour Kant, les mathématiques sont une connaissance certaine qui ne vient pas de l’expérience, mais qui n’est pas non plus une simple analyse de concepts.</p>
+<div class="cols"><div><h3>Ce qu’il faut savoir</h3><ol class="args"><li><strong>La question.</strong> Comment des jugements synthétiques a priori (qui nous apprennent quelque chose, tout en étant nécessaires et universels) sont-ils possibles ? Les mathématiques en sont l’exemple principal.</li><li><strong>7 + 5 = 12.</strong> Le concept de 12 n’est pas contenu dans celui de « 7 + 5 » : pour trouver le résultat, il faut s’appuyer sur l’intuition (des doigts, des points). Le jugement est donc synthétique, et pourtant a priori.</li><li><strong>Construire les concepts.</strong> Le mathématicien ne s’en tient pas aux concepts : il les construit dans l’intuition pure. L’espace fonde la géométrie, le temps fonde le nombre, par la succession.</li><li><strong>Une portée limitée.</strong> Les mathématiques valent pour les objets de l’expérience, car l’espace et le temps sont les formes de notre sensibilité. Elles ne valent pas pour les choses en soi.</li><li><strong>Contre l’imitation.</strong> La métaphysique ne peut pas imiter la méthode mathématique : on ne peut pas construire Dieu ou l’âme dans l’intuition. C’est une critique de Descartes, de Spinoza et de Leibniz.</li></ol></div><div><h3>Un exemple à connaître</h3><p>« 7 + 5 = 12 » : l’exemple de Kant dans l’introduction de la <em>Critique de la raison pure</em> (1781). Il permet de défendre qu’une vérité peut être a priori sans être vide.</p></div></div>
+</div></section>
+<section class="txt" id="t8" aria-labelledby="h8" style="--c:var(--contre)"><div class="wrap">
+<div class="meta"><span class="tag">XIXe-XXe siècles</span></div>
+<h2 id="h8">Quand les mathématiques doutent d’elles-mêmes</h2>
+<p class="thesis">Aux XIXe et XXe siècles, les mathématiques ébranlent elles-mêmes les certitudes qu’on leur prêtait.</p>
+<div class="cols"><div><h3>Ce qu’il faut savoir</h3><ol class="args"><li><strong>Les géométries non euclidiennes.</strong> Lobatchevski (1829), Bolyai (1832) et Riemann (1854) montrent qu’en niant le postulat des parallèles, on obtient des géométries cohérentes. La géométrie d’Euclide n’est plus la seule possible, ce qui pose problème à la thèse de Kant. Poincaré y voit des conventions commodes. La relativité générale d’Einstein (1915) utilise la géométrie de Riemann.</li><li><strong>Le logicisme.</strong> Frege puis Russell veulent ramener les mathématiques à la logique. Le paradoxe de Russell (1901-1902) ruine le système de Frege.</li><li><strong>Formalisme et intuitionnisme.</strong> Pour Hilbert, les mathématiques sont un système de symboles réglé, dont il faut prouver la cohérence. Pour Brouwer, les objets mathématiques sont des constructions de l’esprit, et il refuse le tiers exclu pour les ensembles infinis.</li><li><strong>Gödel (1931).</strong> Dans tout système formel cohérent, assez riche pour contenir l’arithmétique, il existe des énoncés qu’on ne peut ni démontrer ni réfuter dans ce système. Le programme de Hilbert ne peut aboutir comme il l’espérait : démontrer n’est pas la même chose qu’être vrai.</li></ol></div><div><h3>Ce que cela change</h3><ul class="vois"><li>L’évidence n’est plus un critère assuré en mathématiques.</li><li>On distingue la <em>vérité</em> d’un énoncé de sa <em>démontrabilité</em>.</li><li>Le débat sur la nature des objets mathématiques est relancé.</li></ul></div></div>
+</div></section>
+<section class="txt" id="t9" aria-labelledby="h9" style="--c:var(--nuance)"><div class="wrap">
+<div class="meta"><span class="tag">Bilan</span></div>
+<h2 id="h9">Découvertes ou inventées ?</h2>
+<p class="thesis">Trois grandes réponses se partagent la question, et une énigme demeure : l’efficacité des mathématiques dans les sciences de la nature.</p>
+<div class="cols"><div><h3>Ce qu’il faut savoir</h3><ol class="args"><li><strong>Réalisme (ou platonisme).</strong> Les objets et les vérités mathématiques existent indépendamment de nous : on les découvre. C’est la position de Platon, reprise par Gödel.</li><li><strong>Constructivisme (ou intuitionnisme).</strong> Les mathématiques sont des constructions de l’esprit humain : on les invente, ou plutôt on les construit pas à pas.</li><li><strong>Formalisme.</strong> Les mathématiques sont des jeux de symboles réglés par des conventions : la vérité mathématique est la cohérence interne.</li><li><strong>L’énigme de l’efficacité.</strong> Galilée écrit que le livre de la nature est « écrit en langue mathématique ». En 1960, le physicien Eugene Wigner parle de « la déraisonnable efficacité des mathématiques » dans les sciences de la nature : si elles sont des inventions, pourquoi s’appliquent-elles si bien au réel ?</li></ol></div><div><h3>Sur le site</h3><ul class="vois"><li><a href="nature-galilee.html">Galilée : l’univers, un livre écrit en langue mathématique</a></li><li><a href="nature-descartes.html">Descartes : maîtres et possesseurs de la nature</a></li><li><a href="croyance-certitude-conviction.html">Croyance, certitude, connaissance, conviction</a></li><li><a href="reperes-conceptuels.html">Les repères conceptuels</a></li></ul></div></div>
+</div></section>
+<section class="txt" id="t10" aria-labelledby="h10" style="--c:var(--neutre)"><div class="wrap">
+<div class="meta"><span class="tag">Pour réviser</span></div>
+<h2 id="h10">Qui pense quoi ?</h2>
+<div class="tblw"><table class="tbl"><thead><tr><th scope="col">Auteur</th><th scope="col">Les mathématiques sont…</th><th scope="col">Idée-clé</th></tr></thead><tbody>
+<tr><th scope="row">Platon</th><td>idéales, éternelles, et une préparation à la dialectique</td><td>réminiscence, platonisme mathématique</td></tr>
+<tr><th scope="row">Aristote</th><td>abstraites des choses</td><td>abstraction</td></tr>
+<tr><th scope="row">Descartes</th><td>le modèle de la méthode, et des vérités créées</td><td>mathématique universelle, géométrie analytique</td></tr>
+<tr><th scope="row">Pascal</th><td>précieuses mais limitées</td><td>esprit de géométrie et esprit de finesse</td></tr>
+<tr><th scope="row">Spinoza</th><td>un modèle de vérité et de présentation</td><td>ordre géométrique</td></tr>
+<tr><th scope="row">Leibniz</th><td>le langage d’une raison calculable</td><td>caractéristique universelle, « Calculons ! »</td></tr>
+<tr><th scope="row">Kant</th><td>des jugements synthétiques a priori</td><td>construction dans l’intuition pure</td></tr>
+<tr><th scope="row">Gödel</th><td>limitées de l’intérieur</td><td>incomplétude</td></tr>
+</tbody></table></div>
+<h2 id="h10b" style="margin-top:2.4rem;font-size:clamp(1.3rem,2.6vw,1.7rem)">Sujets de dissertation possibles</h2>
+<div class="sjd"><ul>
+<li>Peut-on tout démontrer ?</li>
+<li>Les vérités mathématiques sont-elles découvertes ou inventées ?</li>
+<li>Les mathématiques sont-elles le modèle de toute connaissance rigoureuse ?</li>
+<li>La raison se réduit-elle au calcul ?</li>
+<li>Les mathématiques décrivent-elles le réel ?</li>
+</ul></div>
+</div></section>
+</main>
+<footer><div class="wrap"><p>Philosophie et mathématiques : de Platon à Gödel.</p></div></footer>
+<script>
+(function(){
+  var links=[].slice.call(document.querySelectorAll('#nav a'));
+  var secs=[].slice.call(document.querySelectorAll('.txt')),lock=null,ticking=false;
+  function setCur(i){
+    links.forEach(function(a,k){if(k===i)a.setAttribute('aria-current','true');else a.removeAttribute('aria-current')});
+    var a=links[i],box=a.parentNode.parentNode;
+    if(box.scrollWidth>box.clientWidth&&box.scrollTo)box.scrollTo({left:i?a.offsetLeft-20:0});
+  }
+  function upd(){
+    ticking=false;
+    if(lock!==null){setCur(lock);return}
+    var nb=document.querySelector('.nav'),y=(nb?nb.getBoundingClientRect().bottom:0)+24,cur=0;
+    secs.forEach(function(s,k){if(s.getBoundingClientRect().top<=y)cur=k});
+    setCur(cur);
+  }
+  function req(){if(!ticking){ticking=true;requestAnimationFrame(upd)}}
+  links.forEach(function(a,k){a.addEventListener('click',function(){lock=k;setCur(k)})});
+  ['wheel','touchstart','mousedown','keydown'].forEach(function(ev){window.addEventListener(ev,function(){lock=null},{passive:true})});
+  window.addEventListener('scroll',req,{passive:true});window.addEventListener('resize',req);
+  upd();
+})();
+</script>
+<script>
+(function(){var r=document.documentElement,K='texte-seul',KL='mode-lecture';
+var btn=document.getElementById('a11y-btn'),menu=document.getElementById('a11y-menu'),opts=menu.querySelectorAll('.a11y-opt'),closed=[],shown=[],skipped=[];
+function apply(m){
+  var ts=m==='ts',lc=m==='lect',was=r.classList.contains('lect');
+  r.classList.toggle('ts',ts);r.classList.toggle('lect',lc);
+  if(lc&&!was){closed=[];shown=[];skipped=[];
+    document.querySelectorAll('main details').forEach(function(d){if(!d.open){closed.push(d);d.open=true}});
+    document.querySelectorAll('main [hidden]').forEach(function(x){if(!x.closest('[aria-labelledby="h-video"]')&&!x.matches('video,[role="tablist"]')){shown.push(x);x.hidden=false}});
+    document.querySelectorAll('main section').forEach(function(sc){var h=sc.querySelector('h2');
+      if(sc.querySelector('input,select,textarea')||(h&&/^(Exercice|Faites le tri|En vid)/i.test(h.textContent.trim()))){sc.classList.add('lc-skip');skipped.push(sc)}});}
+  if(!lc&&was){closed.forEach(function(d){d.open=false});shown.forEach(function(x){x.hidden=true});skipped.forEach(function(s){s.classList.remove('lc-skip')});closed=[];shown=[];skipped=[]}
+  opts.forEach(function(o){o.setAttribute('aria-checked',o.getAttribute('data-mode')===m?'true':'false')});
+  try{localStorage.setItem(K,ts?'1':'0');localStorage.setItem(KL,lc?'1':'0')}catch(e){}
+}
+function open(on){menu.hidden=!on;btn.setAttribute('aria-expanded',on?'true':'false')}
+btn.addEventListener('click',function(e){e.stopPropagation();open(menu.hidden)});
+opts.forEach(function(o){o.addEventListener('click',function(){apply(o.getAttribute('data-mode'));open(false);btn.focus()})});
+document.addEventListener('click',function(e){if(!menu.hidden&&!menu.contains(e.target)&&e.target!==btn)open(false)});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!menu.hidden){open(false);btn.focus()}});
+var v='orig';try{if(localStorage.getItem(KL)==='1')v='lect';else if(localStorage.getItem(K)==='1'&&menu.querySelector('[data-mode="ts"]'))v='ts'}catch(e){}
+if(v==='ts')apply('ts');
+if(v==='lect')window.addEventListener('load',function(){apply('lect')});
+})();
+</script>
+<script src="fil.js" defer></script><script src="menu.js" defer></script></body>
+</html>
