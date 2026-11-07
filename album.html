@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Le Pokédex des philosophes</title>
+<title>Mon Pokédex philosophique</title>
 <style>
 :root{--bg:#F5F7F9;--surface:#fff;--ink:#17212B;--muted:#55636F;--line:#D8E0E6;--acc:#1F4FA3;--ok:#1B7F3B;--focus:#06c;--serif:Georgia,"Times New Roman",serif;--sans:system-ui,-apple-system,"Segoe UI",sans-serif;color-scheme:light}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#10171D;--surface:#18222A;--ink:#E7EDF2;--muted:#A1B0BC;--line:#2A3641;--acc:#8FB0FF;--ok:#6fd18b;--focus:#5FD0D6;color-scheme:dark}}
@@ -161,9 +161,9 @@ html[data-theme="dark"] .hlst mark{background:#6b5a00;color:#fff6cc}
 </style>
 </head>
 <body>
-<nav class="top"><a href="accueil.html">Retour à l’accueil</a><a href="carnet.html">Mon carnet de suivi</a></nav>
+<nav class="top"><a href="rubriques.html">Retour à l’accueil</a><a href="carnet.html">Mon carnet de suivi</a></nav>
 <header class="wrap">
-  <h1>Le Pokédex des philosophes</h1>
+  <h1>Mon Pokédex philosophique</h1>
   <p class="lead">Chaque QCM réussi à 80&nbsp;% ou plus vous donne la vignette du philosophe, lunettes de soleil comprises. Un sans-faute l’entoure d’une couronne de laurier, un défi réussi lui ajoute une boule à facettes. Vos vignettes gagnées vous donnent aussi des cartes à échanger avec vos camarades.</p>
   <p class="note">Votre Pokédex reste sur cet appareil : rien n’est envoyé, et votre professeur n’y a pas accès. Les échanges se font par des codes que vous vous transmettez vous-mêmes.</p>
   <p class="note">Vous changez d’appareil ? <a href="carnet.html#transfert">Transférez votre progression</a> avec un code.</p>
@@ -186,7 +186,7 @@ html[data-theme="dark"] .hlst mark{background:#6b5a00;color:#fff6cc}
   <ul class="album" id="album-sp"></ul>
   <h2 class="sec" style="margin:0 0 1rem">Les philosophes</h2>
   <ul class="album" id="album"></ul>
-  
+  <div hidden><p id="bx-n"></p><ul id="bx-l"></ul></div>
   <section class="al-given" id="al-given" hidden aria-labelledby="h-gv"><h2 id="h-gv">Les codes que j’ai donnés</h2><ul id="al-gl"></ul></section>
 </main>
 <script>
@@ -228,7 +228,7 @@ function render(){var st=state(),h='',n=0,nr=0,nx=0,ns=0;
   if(!o.won)h+='<ul>'+a.p.map(function(p){return '<li><a href="'+p[0]+'#quiz">'+esc(a.p.length===1?'Faire le QCM':p[1].replace(/^[^:]+:\s*/,''))+'</a></li>'}).join('')+'</ul>';
   h+='</li>'});
  document.getElementById('album').innerHTML=h;
- var hs='';stSp().forEach(function(o){var a=o.a;hs+='<li class="vg sp'+(o.won?'':' off')+(o.shiny?' shiny':'')+'">'+(o.won?'<span class="bd" aria-hidden="true">🎖️</span>':'')+'<span class="pw">'+(o.won?'<span class="wr" aria-hidden="true">'+LAUR+'</span>':'')+'<span class="pic em" role="img" aria-label="'+esc(a.n)+'" style="background:radial-gradient(circle at 35% 30%,'+a.c1+','+a.c2+' 75%)">'+(o.shiny?'<i class="holo"></i>':'')+'<span aria-hidden="true">'+a.ic+'</span></span>'+(o.shiny?'<span class="spk" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>':'')+'</span><span class="nm">'+esc(a.n)+'</span><span class="st">'+(o.won?(o.shiny?'✨ Shiny ✨ · ':'')+(a.jeu?'Gagnée dans la Joute philosophique':'Décernée par le professeur'):(a.jeu?'À gagner dans la <a href="joute.html">Joute philosophique</a>':'À gagner auprès de votre professeur'))+'</span>'+(o.won?'<div class="va"><button type="button" data-act="card" data-i="'+a.i+'">Télécharger la carte</button></div>':'')+'</li>'});
+ var hs='';stSp().forEach(function(o){var a=o.a;hs+='<li class="vg sp'+(o.won?'':' off')+(o.shiny?' shiny':'')+'">'+(o.won?'<span class="bd" aria-hidden="true">🎖️</span>':'')+'<span class="pw">'+(o.won?'<span class="wr" aria-hidden="true">'+LAUR+'</span>':'')+'<span class="pic em" role="img" aria-label="'+esc(a.n)+'" style="background:radial-gradient(circle at 35% 30%,'+a.c1+','+a.c2+' 75%)">'+(o.shiny?'<i class="holo"></i>':'')+'<span aria-hidden="true">'+a.ic+'</span></span>'+(o.shiny?'<span class="spk" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>':'')+'</span><span class="nm">'+esc(a.n)+'</span><span class="st">'+(o.won?(o.shiny?'✨ Shiny ✨ · ':'')+'Décernée par le professeur':'À gagner auprès de votre professeur')+'</span>'+(o.won?'<div class="va"><button type="button" data-act="card" data-i="'+a.i+'">Télécharger la carte</button></div>':'')+'</li>'});
  document.getElementById('album-sp').innerHTML=hs;
  document.getElementById('al-n').textContent=n+' / '+D.length;document.getElementById('al-r').textContent=nr;document.getElementById('al-x').textContent=nx;var se=document.getElementById('al-s');se.textContent=ns;se.parentNode.style.display=ns?'contents':'none';
  var GL=load('album-codes-donnes',[]),gs=document.getElementById('al-given');gs.hidden=!GL.length;
@@ -301,8 +301,8 @@ function drawCard(i,code){var o=state().concat(stSp()).filter(function(x){return
  c.textAlign='center';c.fillStyle=o.won?'#5a0000':'#1f2933';if(a.sp){c.font='italic 900 40px Impact,"Arial Black",sans-serif';wrap(c,a.n.toUpperCase(),W/2,540,W-100,44)}else{fit(c,a.n.toUpperCase(),W-110,64,'italic 900 #px Impact,"Arial Black",sans-serif');c.fillText(a.n.toUpperCase(),W/2,560)}
  c.font='600 23px system-ui,-apple-system,"Segoe UI",sans-serif';var m=a.sp?a.m:(a.m||'').replace(/^[^:]+:\s*/,'');wrap(c,m,W/2,a.sp?640:605,W-120,30);
  if(code){rr(c,70,690,W-140,120,18);c.fillStyle='rgba(255,255,255,.9)';c.fill();c.fillStyle='#1a1a1a';c.font='600 18px system-ui,-apple-system,"Segoe UI",sans-serif';c.fillText(o.shiny?'✨ SHINY · EXEMPLAIRE UNIQUE · code':'CARTE À ÉCHANGER · code',W/2,722);
-  c.font='800 48px ui-monospace,Menlo,Consolas,monospace';c.fillText(code,W/2,778);c.font='500 15px system-ui,-apple-system,"Segoe UI",sans-serif';c.fillText('À saisir dans « Le Pokédex des philosophes »',W/2,802)}
- else{c.font='600 20px system-ui,-apple-system,"Segoe UI",sans-serif';c.fillText((o.shiny?'✨ SHINY ✨ · ':'')+(a.sp?(a.jeu?'⚔️ Gagnée dans la Joute':'🎖️ Décernée par le professeur'):o.won?(o.full?'🏆 Sans-faute':'🕶️ Vignette gagnée')+(o.df?' · 🪩 défi réussi':''):'🥈 Reçue en échange'),W/2,760)}
+  c.font='800 48px ui-monospace,Menlo,Consolas,monospace';c.fillText(code,W/2,778);c.font='500 15px system-ui,-apple-system,"Segoe UI",sans-serif';c.fillText('À saisir dans « Mon Pokédex philosophique »',W/2,802)}
+ else{c.font='600 20px system-ui,-apple-system,"Segoe UI",sans-serif';c.fillText((o.shiny?'✨ SHINY ✨ · ':'')+(a.sp?'🎖️ Décernée par le professeur':o.won?(o.full?'🏆 Sans-faute':'🕶️ Vignette gagnée')+(o.df?' · 🪩 défi réussi':''):'🥈 Reçue en échange'),W/2,760)}
  return cv}
 function fname(s){return s.normalize?s.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-'):'carte'}
 function onAct(e){var b=e.target.closest&&e.target.closest('button[data-act]');if(!b)return;
@@ -316,6 +316,11 @@ document.getElementById('al-dl').addEventListener('click',function(){alertMsg('a
 render();
 })();
 </script>
-
+<script>
+(function(){var S={"Argument d’autorité": "Croire qu’une idée est vraie parce qu’une personne célèbre ou savante l’a dite. Le prestige ne remplace pas les raisons.", "Hors sujet": "Répondre à côté : l’argument parle d’autre chose que de la thèse.", "Mauvaise direction": "Soutenir la thèse quand il fallait la réfuter, ou l’inverse.", "Confusion de notions": "Prendre une notion pour une autre (le légal et le juste, le plaisir et le bonheur…).", "Contresens sur l’auteur": "Attribuer à un philosophe une idée qu’il ne soutient pas, ou même qu’il combat.", "Attaque contre la personne": "S’en prendre à la vie ou au caractère de l’auteur au lieu de discuter ce qu’il dit (argument ad hominem).", "Exemple qui ne prouve rien": "Un exemple qui ne montre pas ce qu’on veut montrer, ou qui montre le contraire.", "Confusion du fait et du droit": "Passer de ce qui est (un fait) à ce qui doit être (une norme) : « tout le monde le fait » ne prouve pas que ce soit juste.", "Glissement de sens": "Changer en cours de route le sens d’un mot (devoir scolaire et devoir moral, « libre » et « place libre »…).", "Changement de question": "Répondre à une autre question que celle posée.", "Argument trop vague": "Une phrase vraie mais si générale qu’elle ne prouve rien.", "Simple reformulation du sujet": "Répéter le sujet au lieu de montrer pourquoi il pose problème.", "Plan catalogue d’auteurs": "Faire défiler des auteurs au lieu de construire des idées qui s’enchaînent.", "Plan oui/non sans dépassement": "Juxtaposer le pour et le contre sans aboutir à une réponse.", "Plan descriptif hors sujet": "Décrire des situations au lieu de traiter le problème posé.", "Transition vide": "Annoncer qu’on change de partie sans dire pourquoi.", "Conclusion prématurée": "Conclure avant d’avoir examiné les objections.", "Transition par les auteurs, pas par les idées": "Passer d’un auteur à l’autre sans lien logique.", "Faux dépassement": "Prétendre dépasser l’opposition en revenant simplement à l’un des deux camps.", "Le problème disparaît": "Déclarer que les deux termes sont identiques pour éviter la difficulté.", "Résumé sans réponse": "Récapituler le développement sans répondre à la question.", "Pas de réponse": "Refuser de trancher : « à chacun de voir ».", "Affirmation sans justification": "Poser une thèse sans aucun argument pour la soutenir.", "Faux dilemme": "Ne présenter que deux possibilités alors qu’il en existe d’autres.", "Réponse donnée avant l’examen": "Trancher la question avant de l’avoir analysée.", "Question trop large": "Poser une question qui sort du sujet en l’élargissant.", "Homme de paille": "Caricaturer la position adverse pour l’attaquer plus facilement : on réfute une thèse que personne n’a défendue (« Donc selon toi… »).", "Fausse objection": "Présenter comme une objection ce qui, en réalité, va dans le sens de l’argument adverse : « c’est vrai, et en plus… ».", "Généralisation hâtive": "Tirer une règle générale d’un ou deux cas particuliers."},M;try{M=JSON.parse(localStorage.getItem('joute-sophismes')||'{}')||{}}catch(e){M={}}
+var k=Object.keys(S),n=k.filter(function(x){return M[x]}).length,h='';k.sort(function(a,b){return (M[b]?1:0)-(M[a]?1:0)});
+k.forEach(function(x){var c=M[x];h+='<li class="'+(c?'got':'')+'"><b>'+(c?x:'??? (pas encore rencontré)')+'</b>'+(c?'<span>Rencontré '+c+' fois</span><p>'+S[x]+'</p>':'')+'</li>'});
+document.getElementById('bx-l').innerHTML=h;document.getElementById('bx-n').textContent='Sophismes capturés : '+n+' / '+k.length;})();
+</script>
 </body>
 </html>

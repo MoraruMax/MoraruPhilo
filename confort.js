@@ -1,3 +1,5 @@
+/* Fonds d'écran atténués partout pour la lisibilité */
+(function(){try{var st=document.createElement('style');st.id='fond-att-global';st.textContent='html:not(.ts):not(.lect) body::after{opacity:.84!important}';(document.head||document.documentElement).appendChild(st)}catch(e){}})();
 /* Confort de lecture : taille du texte, interligne, police. Réglages mémorisés sur l'appareil. */
 (function(){
   var K='confort-lecture',r=document.documentElement;
@@ -84,7 +86,7 @@
 /* Suivi léger : mémorise (sur cet appareil) les pages ouvertes et la dernière page, pour « Reprendre » sur l'accueil. */
 (function(){try{
   var f=location.pathname.split('/').pop();
-  if(!/\.html$/.test(f)||/^(index|accueil)\.html$/.test(f))return;
+  if(!/\.html$/.test(f)||/^(index|accueil|accueil-proposition|rubriques)\.html$/.test(f)||/^rubrique-/.test(f))return;
   function go(){try{
     var V=JSON.parse(localStorage.getItem('pages-vues')||'{}');if(!V||typeof V!=='object')V={};
     V[f]=Date.now();localStorage.setItem('pages-vues',JSON.stringify(V));
