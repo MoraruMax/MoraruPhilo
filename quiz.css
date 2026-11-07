@@ -26,3 +26,107 @@
 #quiz .qz p{max-width:none}
 @media (prefers-reduced-motion:reduce){#quiz .qbar i{transition:none}}
 @media print{#quiz{display:none!important}}
+#quiz .qctx{margin:0 0 .9rem;padding:.8rem 1rem;border-left:4px solid var(--qa,var(--qfg,CanvasText));background:color-mix(in srgb,var(--qfg,CanvasText) 7%,transparent);border-radius:0 8px 8px 0;font:italic 400 1rem/1.55 Georgia,serif;max-width:none}
+#quiz .qact{display:flex;flex-wrap:wrap;gap:.6rem}
+
+/* Effet flamme (bonne réponse) */
+.qfire{position:fixed;inset:0;pointer-events:none;z-index:9999;overflow:hidden}
+.qfire .fl{position:absolute;font-size:var(--s);line-height:1;opacity:0;animation:qrise var(--d) cubic-bezier(.2,.7,.3,1) forwards;filter:drop-shadow(0 0 6px #ff7a00) drop-shadow(0 0 2px #ffd000)}
+@keyframes qrise{0%{transform:translate(-50%,0) scale(.3);opacity:0}15%{opacity:1}70%{opacity:1}100%{transform:translate(calc(-50% + var(--dx)),var(--dy)) scale(1.35) rotate(var(--r));opacity:0}}
+.qfire .qwrap{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:.4rem;width:max-content;max-width:94vw}
+.qfire .qm{position:relative;width:clamp(120px,30vw,170px);aspect-ratio:1;display:block;animation:qmin 2.3s cubic-bezier(.2,1.5,.4,1) forwards}
+.qfire .qm-sun{position:absolute;inset:-48%;border-radius:50%;background:repeating-conic-gradient(from 0deg,rgba(255,215,0,.95) 0 9deg,rgba(255,90,0,.0) 9deg 18deg);-webkit-mask:radial-gradient(circle,#000 30%,transparent 70%);mask:radial-gradient(circle,#000 30%,transparent 70%);animation:qspin 2.3s linear forwards}
+.qfire .qm-pic,.qfire .qm-bust{position:absolute;inset:0;border-radius:50%;background-color:#2a1600;background-repeat:no-repeat;border:6px solid #ffd23a;box-shadow:0 0 0 4px #b8001f,0 0 0 9px #ffd23a,0 0 26px 10px rgba(255,140,0,.85),inset 0 0 18px rgba(0,0,0,.45)}
+.qfire .qm-bust{display:flex;align-items:center;justify-content:center;font-size:clamp(3.2rem,9vw,4.8rem);background:radial-gradient(circle,#fff6c8,#ffb300)}
+.qfire .qm-thumb{position:absolute;right:-26%;bottom:-14%;font-size:clamp(3.6rem,11vw,5.6rem);line-height:1;filter:drop-shadow(0 0 3px #fff) drop-shadow(3px 4px 0 #b8001f) drop-shadow(0 0 14px rgba(255,200,0,.9));transform-origin:30% 90%;animation:qthumb 2.3s cubic-bezier(.3,1.8,.5,1) forwards}
+@keyframes qmin{0%{transform:scale(0) rotate(-200deg);opacity:1}22%{transform:scale(1.15) rotate(8deg)}34%{transform:scale(1) rotate(0)}80%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(.85) translateY(-20px)}}
+@keyframes qspin{0%{transform:rotate(0) scale(.4);opacity:0}20%{opacity:1;transform:rotate(40deg) scale(1)}80%{opacity:1}100%{transform:rotate(160deg) scale(1.1);opacity:0}}
+@keyframes qthumb{0%,15%{transform:scale(0) rotate(-60deg)}30%{transform:scale(1.35) rotate(12deg)}40%{transform:scale(1) rotate(-8deg)}50%{transform:rotate(10deg)}60%{transform:rotate(-6deg)}70%{transform:rotate(4deg)}80%{transform:rotate(0);opacity:1}100%{opacity:0}}
+.qfire .bang{position:relative;max-width:94vw;text-align:center;font:900 clamp(1.6rem,6vw,3.6rem)/1.1 Impact,"Arial Black","Comic Sans MS",sans-serif;letter-spacing:.02em;font-style:italic;
+ background:linear-gradient(180deg,#fffbe0 0%,#fff200 22%,#ffa200 50%,#ff3c00 75%,#a80000 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
+ -webkit-text-stroke:2px #5a0000;filter:drop-shadow(3px 3px 0 #ffde00) drop-shadow(0 0 14px rgba(255,120,0,.9));
+ transform:rotate(-7deg) scale(0);animation:qbang 2.3s cubic-bezier(.2,1.6,.4,1) .12s forwards}
+@keyframes qbang{0%{transform:rotate(-25deg) scale(0);opacity:1}18%{transform:rotate(-5deg) scale(1.25)}30%{transform:rotate(-8deg) scale(1)}78%{opacity:1}100%{transform:translateY(-30px) rotate(-8deg) scale(1.05);opacity:0}}
+.opt.ok.fire{animation:qglow 1.4s ease-out}
+@keyframes qglow{0%{box-shadow:0 0 0 0 rgba(255,120,0,.9)}30%{box-shadow:0 0 22px 6px rgba(255,90,0,.75),inset 0 0 14px rgba(255,200,0,.5)}100%{box-shadow:0 0 0 0 rgba(255,120,0,0)}}
+@media (prefers-reduced-motion:reduce){.qfire{display:none}.opt.ok.fire{animation:none}}
+@media print{.qfire{display:none}}
+
+/* Effet déception (mauvaise réponse) */
+.qsad .dr{position:absolute;top:-40px;font-size:var(--s);opacity:0;animation:qrain var(--d) linear forwards}
+@keyframes qrain{0%{transform:translateY(0);opacity:0}10%{opacity:.9}100%{transform:translateY(105vh);opacity:.6}}
+.qsad .qm{animation:qmsad 2.2s ease-out forwards}
+.qsad .qm-sun{display:none}
+.qsad .qm-pic{filter:grayscale(1) contrast(.9) brightness(.85);border-color:#9fb3c8;box-shadow:0 0 0 4px #3b4f66,0 0 0 9px #9fb3c8,0 0 22px 8px rgba(70,110,170,.6),inset 0 0 18px rgba(0,0,0,.5)}
+.qsad .qm-bust{filter:grayscale(1);border-color:#9fb3c8;box-shadow:0 0 0 4px #3b4f66,0 0 0 9px #9fb3c8}
+.qsad .qm-thumb{filter:drop-shadow(0 0 3px #fff) drop-shadow(3px 4px 0 #3b4f66);animation:qthumbd 2.2s ease-out forwards}
+.qsad .bang{background:linear-gradient(180deg,#ffffff 0%,#cfe0f2 35%,#7d9cc0 70%,#3b4f66 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-stroke:2px #1d2a3a;
+ filter:drop-shadow(3px 3px 0 #9fb3c8) drop-shadow(0 0 10px rgba(60,90,140,.7));animation:qbangsad 2.2s ease-out .1s forwards}
+@keyframes qmsad{0%{transform:scale(0);opacity:1}20%{transform:scale(1.05)}30%{transform:scale(1) rotate(0)}55%{transform:rotate(-6deg) translateY(6px)}80%{opacity:1;transform:rotate(-6deg) translateY(10px)}100%{opacity:0;transform:rotate(-8deg) translateY(30px)}}
+@keyframes qthumbd{0%,12%{transform:scale(0)}28%{transform:scale(1.2)}40%{transform:scale(1) translateY(0)}60%{transform:translateY(8px) rotate(-8deg)}80%{opacity:1}100%{opacity:0;transform:translateY(20px)}}
+@keyframes qbangsad{0%{transform:rotate(4deg) scale(0);opacity:1}20%{transform:rotate(4deg) scale(1.08)}30%{transform:rotate(4deg) scale(1)}80%{opacity:1}100%{transform:rotate(6deg) translateY(30px) scale(.95);opacity:0}}
+
+.qfire .bang.long{font-size:clamp(1.25rem,4.2vw,2.5rem);max-width:min(94vw,40rem)}
+
+/* Lunettes de soleil (score >= 80 %) */
+#quiz .qcool{display:flex;flex-direction:column;align-items:center;margin:1.4rem 0 .4rem;overflow:visible}
+#quiz .qcool .qm{position:relative;width:clamp(130px,34vw,180px);aspect-ratio:1;display:block;margin:1.2rem 0 .6rem}
+#quiz .qcool .qm-sun{position:absolute;inset:-40%;border-radius:50%;background:repeating-conic-gradient(from 0deg,rgba(255,215,0,.9) 0 9deg,rgba(255,90,0,0) 9deg 18deg);-webkit-mask:radial-gradient(circle,#000 30%,transparent 70%);mask:radial-gradient(circle,#000 30%,transparent 70%);animation:qspin2 14s linear infinite}
+#quiz .qcool .qm-pic,#quiz .qcool .qm-bust{position:absolute;inset:0;border-radius:50%;background-color:#2a1600;background-repeat:no-repeat;border:6px solid #ffd23a;box-shadow:0 0 0 4px #b8001f,0 0 0 9px #ffd23a,0 0 26px 10px rgba(255,140,0,.7)}
+#quiz .qcool .qsg{position:absolute;display:block;transform:translate(-50%,-31%) rotate(var(--r,0deg));transform-origin:50% 31%;aspect-ratio:4/1;filter:drop-shadow(0 2px 2px rgba(0,0,0,.5));animation:qdeal 1.6s cubic-bezier(.3,0,.6,1) .5s both}
+#quiz .qcool .qsg svg{display:block;width:100%;height:100%}
+#quiz .qcool-t{margin:.8rem 0 1rem;max-width:24rem;text-align:center;font:900 italic clamp(1.2rem,4.2vw,1.9rem)/1.15 Impact,"Arial Black",sans-serif;background:linear-gradient(180deg,#fffbe0,#fff200 25%,#ffa200 55%,#ff3c00 80%,#a80000);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-stroke:1.5px #5a0000;filter:drop-shadow(2px 2px 0 #ffde00);transform:rotate(-4deg);animation:qcoolt .5s cubic-bezier(.2,1.6,.4,1) 2.1s both}
+@keyframes qdeal{0%{transform:translate(-50%,-600%) rotate(var(--r,0deg))}85%{transform:translate(-50%,-31%) rotate(var(--r,0deg))}92%{transform:translate(-50%,-43%) rotate(var(--r,0deg))}100%{transform:translate(-50%,-31%) rotate(var(--r,0deg))}}
+@keyframes qcoolt{0%{transform:rotate(-4deg) scale(0)}100%{transform:rotate(-4deg) scale(1)}}
+@keyframes qspin2{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#quiz .qcool .qsg,#quiz .qcool-t,#quiz .qcool .qm-sun{animation:none}}
+
+/* Mode disco (défi réussi) */
+.qdisco{position:fixed;inset:0;pointer-events:none;z-index:9998;overflow:hidden;transition:opacity .8s}
+.qdisco.out{opacity:0}
+.qdisco .qd-bg{position:absolute;inset:0;background:linear-gradient(120deg,#ff0080,#ff8c00,#ffe600,#00e676,#00b0ff,#d500f9,#ff0080);background-size:400% 400%;opacity:.16;mix-blend-mode:multiply;animation:qdbg 1.2s linear infinite,qdflash .25s steps(2) infinite}
+.qdisco .qd-beams{position:absolute;left:50%;top:70px;width:240vmax;height:240vmax;transform:translate(-50%,-50%);background:repeating-conic-gradient(rgba(255,255,255,.16) 0 6deg,transparent 6deg 24deg);animation:qdspin 4s linear infinite;mix-blend-mode:screen}
+.qdisco .qd-ball{position:absolute;left:50%;top:0;width:110px;height:110px;margin-left:-55px;border-radius:50%;
+ background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.95) 0 8%,transparent 30%),repeating-linear-gradient(0deg,#555 0 2px,transparent 2px 13px),repeating-linear-gradient(90deg,#555 0 2px,transparent 2px 13px),radial-gradient(circle at 40% 35%,#f4f4f4,#9aa3ad 60%,#4a5058);
+ box-shadow:0 0 30px 8px rgba(255,255,255,.7),0 0 60px 20px rgba(255,0,200,.35);animation:qdball 6.5s cubic-bezier(.3,1.3,.5,1) forwards}
+.qdisco .qd-ball i{position:absolute;left:50%;bottom:100%;width:2px;height:60vh;background:#888}
+.qdisco .qd-sp{position:absolute;font-size:24px;opacity:0;animation:qdsp 1.4s ease-in-out infinite}
+@keyframes qdbg{to{background-position:400% 0}}
+@keyframes qdflash{50%{filter:hue-rotate(90deg) brightness(1.3)}}
+@keyframes qdspin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+@keyframes qdball{0%{transform:translateY(-180px) rotate(0)}18%{transform:translateY(30px) rotate(60deg)}100%{transform:translateY(30px) rotate(720deg)}}
+@keyframes qdsp{0%,100%{opacity:0;transform:scale(.3) rotate(0)}50%{opacity:1;transform:scale(1.3) rotate(180deg)}}
+#quiz .qcool .qm.qdance{animation:qdance .55s ease-in-out 12 alternate}
+@keyframes qdance{from{transform:rotate(-9deg) translateY(0)}to{transform:rotate(9deg) translateY(-8px)}}
+@media (prefers-reduced-motion:reduce){.qdisco{display:none}#quiz .qcool .qm.qdance{animation:none}}
+
+/* Couronne de laurier (sans-faute), derrière le médaillon */
+#quiz .qcool .qwr{position:absolute;left:50%;top:50%;width:142%;aspect-ratio:200/212;transform:translate(-50%,-47%);filter:drop-shadow(0 2px 3px rgba(0,0,0,.35)) drop-shadow(0 0 10px rgba(255,210,0,.6));animation:qwr 1.2s cubic-bezier(.3,1.5,.5,1) 2.3s both}
+#quiz .qcool .qwr svg{display:block;width:100%;height:100%}
+@keyframes qwr{0%{transform:translate(-50%,-47%) scale(.4) rotate(-120deg);opacity:0}40%{opacity:1}100%{transform:translate(-50%,-47%) scale(1) rotate(0)}}
+#quiz .qcool.full .qm{margin-top:2rem;margin-bottom:2.6rem}
+@media (prefers-reduced-motion:reduce){#quiz .qcool .qwr{animation:none}}
+
+#quiz .qalb{margin:1rem 0 0;font:600 .95rem/1.4 system-ui,-apple-system,"Segoe UI",sans-serif}#quiz .qalb a{color:inherit;text-underline-offset:3px}
+
+/* Vignette shiny (easter egg, 10 % des sans-faute) */
+#quiz .qshiny-t{margin:1rem 0 0;text-align:center;font:900 italic clamp(1.5rem,5.5vw,2.4rem)/1.1 Impact,"Arial Black",sans-serif;letter-spacing:.03em;
+ background:linear-gradient(90deg,#ff0080,#ff8c00,#ffe600,#00e676,#00b0ff,#d500f9,#ff0080);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;
+ -webkit-text-stroke:1.5px #2a0040;filter:drop-shadow(2px 2px 0 #fff) drop-shadow(0 0 10px rgba(255,255,255,.9));animation:qrbw 1.6s linear infinite,qcoolt .6s cubic-bezier(.2,1.6,.4,1) 3.2s both}
+#quiz .qcool.shiny .qm-pic{overflow:hidden;box-shadow:0 0 0 4px #b8001f,0 0 0 9px #ffd23a,0 0 26px 10px rgba(255,140,0,.7),0 0 40px 18px rgba(180,120,255,.55)}
+#quiz .qholo,.vg .holo{position:absolute;inset:0;border-radius:50%;pointer-events:none;
+ background:linear-gradient(115deg,transparent 20%,rgba(255,0,128,.55) 30%,rgba(255,230,0,.55) 40%,rgba(0,230,118,.55) 50%,rgba(0,176,255,.55) 60%,rgba(213,0,249,.55) 70%,transparent 80%);
+ background-size:300% 300%;mix-blend-mode:color-dodge;animation:qholo 2.4s linear infinite}
+#quiz .qcool.shiny .qspk,.vg .spk{position:absolute;inset:-12%;pointer-events:none}
+#quiz .qcool.shiny .qspk i,.vg .spk i{position:absolute;width:14px;height:14px;background:radial-gradient(circle,#fff 0 20%,transparent 21%),conic-gradient(from 45deg,transparent 0 40deg,#fff 40deg 50deg,transparent 50deg 130deg,#fff 130deg 140deg,transparent 140deg 220deg,#fff 220deg 230deg,transparent 230deg 310deg,#fff 310deg 320deg,transparent 320deg);
+ filter:drop-shadow(0 0 4px #fff) drop-shadow(0 0 6px #b388ff);animation:qtw 1.6s ease-in-out infinite}
+#quiz .qcool.shiny .qspk i:nth-child(1),.vg .spk i:nth-child(1){left:6%;top:12%}
+#quiz .qcool.shiny .qspk i:nth-child(2),.vg .spk i:nth-child(2){right:4%;top:22%;animation-delay:.4s}
+#quiz .qcool.shiny .qspk i:nth-child(3),.vg .spk i:nth-child(3){left:14%;bottom:8%;animation-delay:.8s}
+#quiz .qcool.shiny .qspk i:nth-child(4),.vg .spk i:nth-child(4){right:12%;bottom:4%;animation-delay:1.2s}
+#quiz .qcool.shiny .qspk i:nth-child(5),.vg .spk i:nth-child(5){left:48%;top:-4%;animation-delay:.6s}
+#quiz .qcool.shiny .qspk i:nth-child(6),.vg .spk i:nth-child(6){left:-4%;top:52%;animation-delay:1s}
+@keyframes qholo{0%{background-position:0% 50%}100%{background-position:300% 50%}}
+@keyframes qrbw{to{background-position:200% 0}}
+@keyframes qtw{0%,100%{transform:scale(.2) rotate(0);opacity:0}50%{transform:scale(1.3) rotate(90deg);opacity:1}}
+@media (prefers-reduced-motion:reduce){#quiz .qholo,.vg .holo,#quiz .qshiny-t{animation:none}#quiz .qcool.shiny .qspk i,.vg .spk i{animation:none;opacity:.9}}

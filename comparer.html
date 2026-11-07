@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Comparer deux auteurs</title>
+<meta name="description" content="Deux fiches côte à côte : questions, thèses, citations et points de confrontation.">
+<script src="confort.js"></script>
+<style>
+
+:root{
+  color-scheme:light;
+  --bg:#F7F4EF; --surface:#FFFFFF; --ink:#1E1A16; --muted:#5E564D; --line:#DED6CB; --focus:#0B5CAD; --on:#FFFFFF;
+  --soc:#9A3412; --soc-soft:#FBE7DC;
+  --nat:#1B6B4A; --nat-soft:#DDF1E7;
+  --rai:#2B4C9B; --rai-soft:#E1E8F8;
+  --gold:#8A5A00; --bad:#B3261E;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --serif:Charter,"Bitstream Charter","Sitka Text",Cambria,Georgia,serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#16130F; --surface:#211D18; --ink:#F2ECE4; --muted:#B5AA9C; --line:#3A332B; --focus:#8CC2FF; --on:#16130F;
+    --soc:#FF9E6B; --soc-soft:#45220F; --nat:#74DDA7; --nat-soft:#143826; --rai:#9DB8FF; --rai-soft:#1C2A52; --gold:#F2C36B; --bad:#FF8F86;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#16130F; --surface:#211D18; --ink:#F2ECE4; --muted:#B5AA9C; --line:#3A332B; --focus:#8CC2FF; --on:#16130F;
+  --soc:#FF9E6B; --soc-soft:#45220F; --nat:#74DDA7; --nat-soft:#143826; --rai:#9DB8FF; --rai-soft:#1C2A52; --gold:#F2C36B; --bad:#FF8F86;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.1rem/1.65 var(--serif)}
+.wrap{width:min(980px,100% - 2.5rem);margin-inline:auto}
+h1,h2,h3{margin:0}
+h1{font:800 clamp(2.6rem,8vw,5rem)/1.02 var(--sans);letter-spacing:-.025em}
+h2{font:800 clamp(1.5rem,3.2vw,2.1rem)/1.2 var(--sans);margin-bottom:.8rem}
+h3{font:700 1.08rem/1.35 var(--sans)}
+p{margin:0 0 1em}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
+.btn{font:600 .95rem/1.2 var(--sans);color:var(--ink);background:transparent;border:1.5px solid var(--ink);border-radius:8px;padding:.65rem 1rem;cursor:pointer}
+.btn:hover{background:var(--line)}
+.btn.primary{background:var(--ink);color:var(--bg)}
+.btn.primary:hover{background:var(--ink);filter:brightness(1.2)}
+.note{font:500 .92rem/1.5 var(--sans);color:var(--muted)}
+section.block{border-top:0;padding:clamp(2.2rem,6vw,3.8rem) 0}
+.sec-head{max-width:46rem;margin-bottom:1.6rem}
+.src{font:600 .85rem/1.35 var(--sans);color:var(--muted)}
+blockquote{margin:0}
+
+
+.pdfbtn{display:inline-flex;align-items:center;gap:.5rem;font:600 .88rem/1 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--surface);border:1.5px solid var(--ink);border-radius:999px;padding:.55rem .95rem;cursor:pointer}.pdfbtn:hover{background:var(--ink);color:var(--bg)}.pdfbtn:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:2px}
+.hero{padding:clamp(2rem,6vw,3.6rem) 0 1.5rem}
+.lead{font-size:clamp(1.15rem,2.4vw,1.4rem);line-height:1.5;margin:1.1rem 0 0;max-width:46ch}
+
+.pick{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:.8rem;align-items:end;margin:1.2rem 0 1.4rem}
+.pick label{font:700 .95rem/1.3 var(--sans);display:block;margin-bottom:.35rem}
+.pick select{width:100%;font:600 1rem var(--sans);padding:.6rem .7rem;border:2px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
+.pick .vs{font:900 1.3rem/1 var(--sans);padding-bottom:.7rem}
+.pick .sw{font:700 .9rem var(--sans);border:1.5px solid var(--ink);background:var(--surface);color:var(--ink);border-radius:8px;padding:.55rem .7rem;cursor:pointer}
+@media(max-width:700px){.pick{grid-template-columns:1fr}.pick .vs{display:none}}
+.cmp{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin-bottom:1.2rem}
+@media(max-width:760px){.cmp{grid-template-columns:1fr}}
+.col{background:var(--surface);border:1px solid var(--line);border-top:8px solid var(--c);border-radius:14px;padding:1.1rem 1.2rem;font:500 1rem/1.55 var(--sans)}
+.col .hd{display:flex;gap:.8rem;align-items:center;margin-bottom:.6rem}
+.col .pt{width:64px;height:64px;flex:none;border-radius:50%;background:url(images/approuve.jpg) no-repeat;border:3px solid var(--c)}
+.col h2{font-size:1.35rem;margin:0}.col .tg{display:inline-block;font:700 .75rem/1 var(--sans);color:#fff;background:var(--c);border-radius:99px;padding:.3rem .55rem;margin-top:.3rem}
+.col h3{font:800 .78rem/1 var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--c);margin:1rem 0 .35rem}
+.col p{margin:0 0 .4rem}.col .th{font:500 1.05rem/1.6 var(--serif)}
+.col blockquote{font:italic 500 1.05rem/1.5 var(--serif);border-left:4px solid var(--c);padding:.1rem 0 .1rem .8rem;margin:.2rem 0 .3rem}
+.col .src{font-size:.9rem;color:var(--muted)}
+.col ul{margin:.2rem 0;padding-left:1.1rem}.col li{margin:.2rem 0}
+.col a{color:var(--focus);font-weight:700}
+.row{display:grid;grid-template-columns:9rem minmax(0,1fr) minmax(0,1fr);gap:0 1rem;border-top:1px solid var(--line);padding:.8rem 0;font:500 1rem/1.55 var(--sans)}
+.row>b{font:800 .8rem/1.3 var(--sans);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);padding-top:.15rem}
+.vsbox{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--ink);border-radius:12px;padding:1rem 1.2rem;margin:0 0 1.2rem;font:500 1rem/1.55 var(--sans)}
+.vsbox h2{font-size:1.25rem;margin:0 0 .5rem}.vsbox .it{margin:.6rem 0}.vsbox .it b{display:block}
+.vsbox .who{font:800 .75rem/1 var(--sans);text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+.note2{font:500 .92rem/1.5 var(--sans);color:var(--muted)}
+
+</style>
+</head>
+<body>
+<nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
+<header class="hero"><div class="wrap">
+  <h1>Comparer deux auteurs</h1>
+  <p class="lead">Deux fiches côte à côte : leurs questions, leurs thèses, leurs citations, et ce que le cours invite à confronter entre eux.</p>
+</div></header>
+<main class="wrap">
+  <div class="pick"><div><label for="pa">Premier auteur</label><select id="pa"></select></div><button type="button" class="sw" id="sw" aria-label="Inverser les deux auteurs">⇄</button><div><label for="pb">Second auteur</label><select id="pb"></select></div></div>
+  <div id="out" aria-live="polite"></div>
+  <p class="note2">Les contenus viennent des fiches du cours. Pour aller plus loin, ouvrez chaque fiche et faites son QCM.</p>
+</main>
+<script src="savoirs.js"></script>
+<script>
+(function(){var D=window.SAV,C=D.AP.c,R=D.AP.r,F={},pa=document.getElementById('pa'),pb=document.getElementById('pb'),out=document.getElementById('out');
+function esc(t){return String(t||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;')}
+var opts='';D.N.forEach(function(n){opts+='<optgroup label="'+esc(n.nom)+'">';n.fiches.forEach(function(f){if(!(f.th||f.ret||f.cit))return;F[f.f]={n:n,f:f};opts+='<option value="'+f.f+'">'+esc(f.t||f.f)+'</option>'});opts+='</optgroup>'});
+pa.innerHTML=opts;pb.innerHTML=opts;
+function q(k){var m=location.search.match(new RegExp('[?&]'+k+'=([^&]+)'));return m?decodeURIComponent(m[1]):null}
+var a=q('a'),b=q('b');if(!F[a])a='devoir-kant.html';if(!F[b]){var na=F[a].n;b=(na.fiches.filter(function(f){return f.f!==a&&F[f.f]})[0]||{}).f||'verite-kant.html'}
+pa.value=a;pb.value=b;
+function pt(name,c){var v=D.A[name];if(!v||v.i<0)return '';return '<span class="pt" style="--c:'+c+';background-size:'+(C*100)+'% '+(R*100)+'%;background-position:'+((v.i%C)/(C-1)*100)+'% '+(Math.floor(v.i/C)/(R-1)*100)+'%" aria-hidden="true"></span>'}
+function col(x){var f=x.f,n=x.n,au=f.a[0]||'';var h='<article class="col" style="--c:'+n.c+'"><div class="hd">'+pt(au,n.c)+'<div><h2>'+esc(f.t)+'</h2><span class="tg">'+esc(n.nom)+'</span></div></div>';
+ if(f.q)h+='<h3>La question</h3><p>'+esc(f.q)+'</p>';
+ if(f.th)h+='<h3>La thèse</h3><p class="th">'+esc(f.th)+'</p>';else if(f.ret)h+='<h3>À retenir</h3><p class="th">'+esc(f.ret)+'</p>';
+ if(f.cit)h+='<h3>Citation</h3><blockquote>'+esc(f.cit)+'</blockquote><p class="src">'+esc(f.src)+'</p>';
+ if(f.rec&&f.rec.length)h+='<h3>L’essentiel</h3><ul>'+f.rec.map(function(r){return '<li>'+esc(r)+'</li>'}).join('')+'</ul>';
+ return h+'<p style="margin-top:.8rem"><a href="'+f.f+'">Lire la fiche</a></p></article>'}
+function render(){var A=F[pa.value],B=F[pb.value];if(!A||!B)return;
+ try{history.replaceState(null,'','?a='+encodeURIComponent(pa.value)+'&b='+encodeURIComponent(pb.value))}catch(e){}
+ if(pa.value===pb.value){out.innerHTML='<div class="vsbox"><p>Choisissez deux fiches différentes.</p></div>';return}
+ var vs=[];[[A,B],[B,A]].forEach(function(p){(p[0].f.disc||[]).forEach(function(d){if(d.c.some(function(x){return p[1].f.a.indexOf(x)>-1}))vs.push({w:p[0].f.a.join(' et ')||p[0].f.t,d:d})})});
+ var sb={};(B.f.suj||[]).forEach(function(s){sb[s[0]]=s}),common=(A.f.suj||[]).filter(function(s){return sb[s[0]]});
+ var h='<div class="cmp">'+col(A)+col(B)+'</div>';
+ h+='<section class="vsbox" aria-labelledby="h-vs"><h2 id="h-vs">Ce que le cours invite à confronter</h2>';
+ if(vs.length)h+=vs.map(function(v){return '<div class="it"><span class="who">Fiche '+esc(v.w)+'</span><b>'+esc(v.d.t)+'</b>'+esc(v.d.x)+'</div>'}).join('');
+ else h+='<p>Ces deux fiches ne se citent pas directement. Comparez leurs questions : répondent-elles au même problème, ou à deux problèmes différents ?</p>';
+ h+='</section>';
+ if(common.length)h+='<section class="vsbox" style="border-left-color:'+A.n.c+'"><h2>Sujets de dissertation où les mobiliser ensemble</h2><ul>'+common.map(function(s){return '<li><a href="'+s[0]+'">'+esc(s[1])+'</a></li>'}).join('')+'</ul></section>';
+ out.innerHTML=h}
+pa.addEventListener('change',render);pb.addEventListener('change',render);
+document.getElementById('sw').addEventListener('click',function(){var t=pa.value;pa.value=pb.value;pb.value=t;render()});
+render();
+})();
+</script>
+<script src="fil.js" defer></script>
+<script src="menu.js" defer></script>
+<script src="voix.js" defer></script>
+</body>
+</html>

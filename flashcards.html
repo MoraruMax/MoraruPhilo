@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Flashcards</title>
+<meta name="description" content="Flashcards par notion : thèses et citations des auteurs du cours.">
+<script src="confort.js"></script>
+<style>
+
+:root{
+  color-scheme:light;
+  --bg:#F7F4EF; --surface:#FFFFFF; --ink:#1E1A16; --muted:#5E564D; --line:#DED6CB; --focus:#0B5CAD; --on:#FFFFFF;
+  --soc:#9A3412; --soc-soft:#FBE7DC;
+  --nat:#1B6B4A; --nat-soft:#DDF1E7;
+  --rai:#2B4C9B; --rai-soft:#E1E8F8;
+  --gold:#8A5A00; --bad:#B3261E;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --serif:Charter,"Bitstream Charter","Sitka Text",Cambria,Georgia,serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#16130F; --surface:#211D18; --ink:#F2ECE4; --muted:#B5AA9C; --line:#3A332B; --focus:#8CC2FF; --on:#16130F;
+    --soc:#FF9E6B; --soc-soft:#45220F; --nat:#74DDA7; --nat-soft:#143826; --rai:#9DB8FF; --rai-soft:#1C2A52; --gold:#F2C36B; --bad:#FF8F86;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#16130F; --surface:#211D18; --ink:#F2ECE4; --muted:#B5AA9C; --line:#3A332B; --focus:#8CC2FF; --on:#16130F;
+  --soc:#FF9E6B; --soc-soft:#45220F; --nat:#74DDA7; --nat-soft:#143826; --rai:#9DB8FF; --rai-soft:#1C2A52; --gold:#F2C36B; --bad:#FF8F86;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.1rem/1.65 var(--serif)}
+.wrap{width:min(980px,100% - 2.5rem);margin-inline:auto}
+h1,h2,h3{margin:0}
+h1{font:800 clamp(2.6rem,8vw,5rem)/1.02 var(--sans);letter-spacing:-.025em}
+h2{font:800 clamp(1.5rem,3.2vw,2.1rem)/1.2 var(--sans);margin-bottom:.8rem}
+h3{font:700 1.08rem/1.35 var(--sans)}
+p{margin:0 0 1em}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
+.btn{font:600 .95rem/1.2 var(--sans);color:var(--ink);background:transparent;border:1.5px solid var(--ink);border-radius:8px;padding:.65rem 1rem;cursor:pointer}
+.btn:hover{background:var(--line)}
+.btn.primary{background:var(--ink);color:var(--bg)}
+.btn.primary:hover{background:var(--ink);filter:brightness(1.2)}
+.note{font:500 .92rem/1.5 var(--sans);color:var(--muted)}
+section.block{border-top:0;padding:clamp(2.2rem,6vw,3.8rem) 0}
+.sec-head{max-width:46rem;margin-bottom:1.6rem}
+.src{font:600 .85rem/1.35 var(--sans);color:var(--muted)}
+blockquote{margin:0}
+
+
+.pdfbtn{display:inline-flex;align-items:center;gap:.5rem;font:600 .88rem/1 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--surface);border:1.5px solid var(--ink);border-radius:999px;padding:.55rem .95rem;cursor:pointer}.pdfbtn:hover{background:var(--ink);color:var(--bg)}.pdfbtn:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:2px}
+.hero{padding:clamp(2rem,6vw,3.6rem) 0 1.5rem}
+.lead{font-size:clamp(1.15rem,2.4vw,1.4rem);line-height:1.5;margin:1.1rem 0 0;max-width:46ch}
+
+.nsel{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.2rem 0 1.4rem}
+.nsel button{font:700 .92rem/1 var(--sans);border:2px solid var(--c,var(--ink));color:var(--c,var(--ink));background:var(--surface);border-radius:99px;padding:.55rem .85rem;cursor:pointer}
+.nsel button[aria-pressed="true"]{background:var(--c,var(--ink));color:#fff}
+.nsel small{font-weight:600;opacity:.8;margin-left:.3rem}
+.opts{display:flex;flex-wrap:wrap;gap:.6rem 1.4rem;align-items:center;font:600 .95rem/1.3 var(--sans);margin:0 0 1rem}
+.opts label{display:flex;gap:.4rem;align-items:center;cursor:pointer}
+.prog{font:700 .95rem/1.3 var(--sans);color:var(--muted);margin:0 0 .6rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.bar{height:8px;background:var(--line);border-radius:99px;overflow:hidden;margin:0 0 1.1rem}.bar i{display:block;height:100%;background:var(--c,var(--ink));width:0;transition:width .3s}
+.fc{perspective:1400px;margin:0 0 1.1rem}
+.fc .in{position:relative;min-height:19rem;transition:transform .5s;transform-style:preserve-3d;cursor:pointer}
+.fc.flip .in{transform:rotateY(180deg)}
+.fc .face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--surface);border:1px solid var(--line);border-top:8px solid var(--c,var(--ink));border-radius:16px;padding:1.4rem 1.5rem;display:flex;flex-direction:column;justify-content:center;gap:.6rem;overflow:auto}
+.fc .back{transform:rotateY(180deg)}
+@media (prefers-reduced-motion:reduce){.fc .in{transition:none}.fc.flip .front{visibility:hidden}.fc:not(.flip) .back{visibility:hidden}}
+.fc .kind{font:800 .78rem/1 var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--c,var(--muted))}
+.fc .big{font:700 clamp(1.25rem,3vw,1.7rem)/1.3 var(--sans);margin:0}
+.fc .q{font:italic 500 clamp(1.15rem,2.6vw,1.45rem)/1.45 var(--serif);margin:0}
+.fc .sub{font:500 1rem/1.5 var(--sans);color:var(--muted);margin:0}
+.fc .ans{font:500 1.08rem/1.6 var(--serif);margin:0}
+.fc .hint{font:600 .85rem/1.3 var(--sans);color:var(--muted);margin-top:auto}
+.fc a{color:var(--focus);font:700 .95rem/1.3 var(--sans)}
+.acts{display:flex;flex-wrap:wrap;gap:.6rem}
+.acts .btn{flex:1 1 10rem}
+.btn.rev{border-color:#b42318;color:#b42318}.btn.ok{border-color:#1d7a2e;color:#1d7a2e}
+.end{background:var(--surface);border:1px solid var(--line);border-top:8px solid var(--c,var(--ink));border-radius:16px;padding:1.4rem 1.5rem;font:500 1.05rem/1.55 var(--sans)}
+.end h2{margin:0 0 .4rem}
+
+</style>
+</head>
+<body>
+<nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
+<header class="hero"><div class="wrap">
+  <h1>Flashcards</h1>
+  <p class="lead">Les thèses et les citations clés de chaque notion, tirées des fiches du cours. Lisez la carte, cherchez la réponse, puis retournez-la.</p>
+</div></header>
+<main class="wrap" style="max-width:52rem">
+  <div class="nsel" id="nsel" role="group" aria-label="Choisir une notion"></div>
+  <div class="opts"><label><input type="checkbox" id="o-th" checked> Thèses et points à retenir</label><label><input type="checkbox" id="o-ci" checked> Citations</label><label><input type="checkbox" id="o-rev"> Seulement les cartes à revoir</label></div>
+  <div id="deck" aria-live="polite"></div>
+  <p class="note">Raccourcis : Espace pour retourner la carte, 1 pour « À revoir », 2 pour « Je savais ». Vos réponses restent sur cet appareil.</p>
+</main>
+<script src="savoirs.js"></script>
+<script>
+(function(){var D=window.SAV,K='flashcards',st,deck=[],i=0,cur=null,res={ok:0,rev:0};
+function load(){try{return JSON.parse(localStorage.getItem(K)||'{}')||{}}catch(e){return {}}}function save(){try{localStorage.setItem(K,JSON.stringify(st))}catch(e){}}st=load();
+function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;')}
+function shuf(a){a=a.slice();for(var j=a.length-1;j>0;j--){var k=Math.floor(Math.random()*(j+1)),t=a[j];a[j]=a[k];a[k]=t}return a}
+function cards(n){var c=[];n.fiches.forEach(function(f){var a=f.a.join(' et ')||f.t;
+ if(f.th)c.push({id:'t:'+f.f,kind:'Thèse',n:n,f:f,front:'<p class="big">'+esc(a)+'</p><p class="sub">'+esc(f.t)+'</p>'+(f.q?'<p class="sub"><b>La question :</b> '+esc(f.q)+'</p>':'')+'<p class="sub">Quelle est sa thèse ?</p>',back:'<p class="ans">'+esc(f.th)+'</p><p><a href="'+f.f+'">Relire la fiche</a></p>'});
+ if(!f.th&&f.ret)c.push({id:'r:'+f.f,kind:'À retenir',n:n,f:f,front:'<p class="big">'+esc(f.t)+'</p>'+(f.l?'<p class="sub">'+esc(f.l.length>220?f.l.slice(0,217)+'…':f.l)+'</p>':'')+'<p class="sub">Que faut-il en retenir ?</p>',back:'<p class="ans">'+esc(f.ret)+'</p><p><a href="'+f.f+'">Relire la fiche</a></p>'});
+ if(f.cit)c.push({id:'c:'+f.f,kind:'Citation',n:n,f:f,front:'<p class="q">'+esc(f.cit)+'</p><p class="sub">Qui l’a écrit ? Que veut-il dire ?</p>',back:'<p class="big">'+esc(f.src||a)+'</p>'+(f.ex?'<p class="ans">'+esc(f.ex)+'</p>':'')+'<p><a href="'+f.f+'">Relire la fiche</a></p>'})});return c}
+var nsel=document.getElementById('nsel'),sel=null;
+nsel.innerHTML='<button type="button" data-k="*" style="--c:#1e1a16">Toutes les notions</button>'+D.N.map(function(n){return '<button type="button" data-k="'+n.k+'" style="--c:'+n.c+'">'+esc(n.nom)+'<small>'+cards(n).length+'</small></button>'}).join('');
+nsel.addEventListener('click',function(e){var b=e.target.closest('button');if(b)choose(b.getAttribute('data-k'))});
+['o-th','o-ci','o-rev'].forEach(function(id){document.getElementById(id).addEventListener('change',function(){choose(sel)})});
+function choose(k){sel=k;[].forEach.call(nsel.querySelectorAll('button'),function(b){b.setAttribute('aria-pressed',b.getAttribute('data-k')===k?'true':'false')});
+ var ns=k==='*'?D.N:D.N.filter(function(n){return n.k===k}),all=[];ns.forEach(function(n){all=all.concat(cards(n))});
+ var th=document.getElementById('o-th').checked,ci=document.getElementById('o-ci').checked,rv=document.getElementById('o-rev').checked;
+ all=all.filter(function(c){return (c.kind==='Citation'?ci:th)&&(!rv||st[c.id]==='rev')});
+ deck=shuf(all);i=0;res={ok:0,rev:0};document.documentElement.style.setProperty('--c',k==='*'?'#1e1a16':(ns[0]&&ns[0].c)||'#1e1a16');
+ try{history.replaceState(null,'','#'+k)}catch(e){}show()}
+function show(){var el=document.getElementById('deck');
+ if(!deck.length){el.innerHTML='<div class="end"><h2>Aucune carte</h2><p>'+(document.getElementById('o-rev').checked?'Vous n’avez marqué aucune carte « à revoir » ici. Bravo, ou décochez l’option.':'Cochez au moins un type de cartes.')+'</p></div>';return}
+ if(i>=deck.length){var rv=deck.filter(function(c){return st[c.id]==='rev'}).length;
+  el.innerHTML='<div class="end"><h2>Paquet terminé !</h2><p>'+res.ok+' carte'+(res.ok>1?'s':'')+' sue'+(res.ok>1?'s':'')+', '+res.rev+' à revoir.</p><div class="acts"><button class="btn primary" type="button" id="again">Recommencer</button>'+(rv?'<button class="btn" type="button" id="onlyrev">Revoir les '+rv+' cartes à revoir</button>':'')+'</div></div>';
+  document.getElementById('again').addEventListener('click',function(){choose(sel)});var o=document.getElementById('onlyrev');if(o)o.addEventListener('click',function(){document.getElementById('o-rev').checked=true;choose(sel)});document.getElementById('again').focus();return}
+ cur=deck[i];var c=cur.n.c;
+ el.innerHTML='<div class="prog"><span>Carte '+(i+1)+' sur '+deck.length+'</span><span>'+(st[cur.id]==='rev'?'Marquée « à revoir »':st[cur.id]==='ok'?'Déjà sue':'')+'</span></div><div class="bar"><i style="width:'+(i/deck.length*100)+'%;background:'+c+'"></i></div>'+
+ '<div class="fc" id="card" style="--c:'+c+'"><div class="in" role="button" tabindex="0" aria-label="Retourner la carte"><div class="face front"><span class="kind">'+cur.kind+' · '+esc(cur.n.nom)+'</span>'+cur.front+'<span class="hint">Cliquez ou appuyez sur Espace pour voir la réponse</span></div><div class="face back" aria-hidden="true"><span class="kind">Réponse · '+esc(cur.n.nom)+'</span>'+cur.back+'</div></div></div>'+
+ '<div class="acts"><button class="btn" type="button" id="flip">Retourner</button><button class="btn rev" type="button" id="b-rev">À revoir</button><button class="btn ok" type="button" id="b-ok">Je savais</button></div>';
+ var card=document.getElementById('card'),inn=card.querySelector('.in');
+ function flip(){card.classList.toggle('flip');var f=card.classList.contains('flip');card.querySelector('.front').setAttribute('aria-hidden',f?'true':'false');card.querySelector('.back').setAttribute('aria-hidden',f?'false':'true')}
+ inn.addEventListener('click',function(e){if(e.target.closest('a'))return;flip()});inn.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();flip()}});
+ document.getElementById('flip').addEventListener('click',flip);
+ document.getElementById('b-rev').addEventListener('click',function(){mark('rev')});document.getElementById('b-ok').addEventListener('click',function(){mark('ok')});inn.focus()}
+function mark(v){st[cur.id]=v;save();res[v]++;i++;show()}
+document.addEventListener('keydown',function(e){if(!cur||e.target.tagName==='INPUT'||e.altKey||e.ctrlKey||e.metaKey)return;var c=document.getElementById('card');if(!c)return;
+ if(e.key===' '){e.preventDefault();document.getElementById('flip').click()}else if(e.key==='1')mark('rev');else if(e.key==='2')mark('ok')});
+var h=(location.hash||'').slice(1);choose(h==='*'||D.N.some(function(n){return n.k===h})?h:'*');
+})();
+</script>
+<script src="fil.js" defer></script>
+<script src="menu.js" defer></script>
+<script src="voix.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Carte des notions</title>
+<meta name="description" content="Carte interactive des notions du programme et des auteurs étudiés.">
+<script src="confort.js"></script>
+<style>
+
+:root{
+  color-scheme:light;
+  --bg:#F7F4EF; --surface:#FFFFFF; --ink:#1E1A16; --muted:#5E564D; --line:#DED6CB; --focus:#0B5CAD; --on:#FFFFFF;
+  --soc:#9A3412; --soc-soft:#FBE7DC;
+  --nat:#1B6B4A; --nat-soft:#DDF1E7;
+  --rai:#2B4C9B; --rai-soft:#E1E8F8;
+  --gold:#8A5A00; --bad:#B3261E;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --serif:Charter,"Bitstream Charter","Sitka Text",Cambria,Georgia,serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#16130F; --surface:#211D18; --ink:#F2ECE4; --muted:#B5AA9C; --line:#3A332B; --focus:#8CC2FF; --on:#16130F;
+    --soc:#FF9E6B; --soc-soft:#45220F; --nat:#74DDA7; --nat-soft:#143826; --rai:#9DB8FF; --rai-soft:#1C2A52; --gold:#F2C36B; --bad:#FF8F86;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#16130F; --surface:#211D18; --ink:#F2ECE4; --muted:#B5AA9C; --line:#3A332B; --focus:#8CC2FF; --on:#16130F;
+  --soc:#FF9E6B; --soc-soft:#45220F; --nat:#74DDA7; --nat-soft:#143826; --rai:#9DB8FF; --rai-soft:#1C2A52; --gold:#F2C36B; --bad:#FF8F86;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.1rem/1.65 var(--serif)}
+.wrap{width:min(980px,100% - 2.5rem);margin-inline:auto}
+h1,h2,h3{margin:0}
+h1{font:800 clamp(2.6rem,8vw,5rem)/1.02 var(--sans);letter-spacing:-.025em}
+h2{font:800 clamp(1.5rem,3.2vw,2.1rem)/1.2 var(--sans);margin-bottom:.8rem}
+h3{font:700 1.08rem/1.35 var(--sans)}
+p{margin:0 0 1em}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
+.btn{font:600 .95rem/1.2 var(--sans);color:var(--ink);background:transparent;border:1.5px solid var(--ink);border-radius:8px;padding:.65rem 1rem;cursor:pointer}
+.btn:hover{background:var(--line)}
+.btn.primary{background:var(--ink);color:var(--bg)}
+.btn.primary:hover{background:var(--ink);filter:brightness(1.2)}
+.note{font:500 .92rem/1.5 var(--sans);color:var(--muted)}
+section.block{border-top:0;padding:clamp(2.2rem,6vw,3.8rem) 0}
+.sec-head{max-width:46rem;margin-bottom:1.6rem}
+.src{font:600 .85rem/1.35 var(--sans);color:var(--muted)}
+blockquote{margin:0}
+
+
+.pdfbtn{display:inline-flex;align-items:center;gap:.5rem;font:600 .88rem/1 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--surface);border:1.5px solid var(--ink);border-radius:999px;padding:.55rem .95rem;cursor:pointer}.pdfbtn:hover{background:var(--ink);color:var(--bg)}.pdfbtn:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:2px}
+.hero{padding:clamp(2rem,6vw,3.6rem) 0 1.5rem}
+.lead{font-size:clamp(1.15rem,2.4vw,1.4rem);line-height:1.5;margin:1.1rem 0 0;max-width:46ch}
+
+.carte .wrap{width:min(1280px,100% - 2rem)}
+.cm{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:1.4rem;align-items:start;margin:1rem 0 3rem}
+@media(max-width:900px){.cm{grid-template-columns:1fr}}
+.tools{display:flex;flex-wrap:wrap;gap:.8rem 1.2rem;align-items:end;margin:1.2rem 0 .4rem}
+.tools label{font:700 .95rem/1.3 var(--sans);display:block;margin-bottom:.35rem}
+.tools input{font:500 1rem var(--sans);padding:.6rem .8rem;border:2px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);width:min(22rem,100%)}
+.mapw{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+svg.map{display:block;width:100%;height:auto;touch-action:manipulation}
+.e{stroke-width:2;opacity:.28;transition:opacity .2s}
+.nd{cursor:pointer}.nd:focus{outline:none}.nd:focus-visible .ring{stroke:var(--focus);stroke-width:5}
+.nd .ring{fill:none;stroke:transparent;stroke-width:4}
+.nd text{font:700 17px/1 var(--sans);fill:var(--ink);pointer-events:none;paint-order:stroke;stroke:var(--surface);stroke-width:4px;stroke-linejoin:round}
+.nd.n text{font:800 17px/1 var(--sans);fill:#fff;stroke:none}
+.map.sel .nd{opacity:.18}.map.sel .e{opacity:.05}.map.sel .nd.on{opacity:1}.map.sel .e.on{opacity:.85;stroke-width:3}
+.nd.cur .ring{stroke:var(--ink);stroke-width:4}
+@media (prefers-reduced-motion:no-preference){.nd{transition:opacity .2s}}
+.side{background:var(--surface);border:1px solid var(--line);border-top:8px solid var(--pc,var(--ink));border-radius:14px;padding:1.1rem 1.2rem;font:500 1rem/1.55 var(--sans);position:sticky;top:1rem}
+.side h2{font-size:1.5rem;margin:.1rem 0 .5rem}
+.side .chips{display:flex;flex-wrap:wrap;gap:.4rem;margin:.2rem 0 .8rem}
+.side .chip{font:700 .82rem/1 var(--sans);color:#fff;background:var(--c);border:0;border-radius:99px;padding:.4rem .7rem;cursor:pointer}
+.side ul{margin:.2rem 0 .9rem;padding-left:1.1rem}.side li{margin:.35rem 0}
+.side a{color:var(--focus);font-weight:700}
+.side .th{display:block;font-weight:400;color:var(--muted);font-size:.93rem;margin-top:.15rem}
+.side blockquote{font:italic 500 1.05rem/1.5 var(--serif);border-left:4px solid var(--pc,var(--line));padding:.2rem 0 .2rem .8rem;margin:.4rem 0 .9rem}
+.side .pt{width:84px;height:84px;border-radius:50%;background-repeat:no-repeat;float:right;margin:0 0 .5rem .8rem;border:3px solid var(--pc,var(--line))}
+.side .st{font-size:.92rem;color:var(--muted)}
+.side .links{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.6rem}
+.side .links a{font:700 .9rem/1.2 var(--sans);text-decoration:none;color:var(--ink);border:1.5px solid var(--ink);border-radius:8px;padding:.5rem .7rem}
+.leg{font:500 .9rem/1.5 var(--sans);color:var(--muted)}
+
+</style>
+</head>
+<body>
+<nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="accueil.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
+<header class="hero"><div class="wrap">
+  <h1>Carte des notions</h1>
+  <p class="lead">Les quinze notions du programme et les auteurs étudiés en cours. Cliquez sur une notion ou sur un auteur pour voir ce qui les relie.</p>
+</div></header>
+<main class="wrap" style="width:min(1280px,100% - 2rem)">
+  <div class="tools"><div><label for="cq">Aller à un auteur ou une notion</label><input id="cq" type="search" list="cl" placeholder="Par exemple : Rousseau" autocomplete="off"><datalist id="cl"></datalist></div>
+  <button type="button" class="btn" id="cr">Tout afficher</button></div>
+  <p class="leg">Grands cercles : les notions. Petits cercles : les auteurs. Un trait relie un auteur aux notions où il est étudié.</p>
+  <div class="cm">
+    <div class="mapw"><svg class="map" id="map" viewBox="0 0 1000 820" role="group" aria-label="Carte des notions et des auteurs"></svg></div>
+    <aside class="side" id="side" aria-live="polite"><h2>Choisissez un point de départ</h2><p>Cliquez sur une notion pour voir ses auteurs, ses fiches, sa BD et son plan de cours. Cliquez sur un auteur pour voir les notions où il intervient, sa thèse et sa citation clé.</p><p class="st">Astuce : la touche Tab parcourt la carte, Entrée sélectionne.</p></aside>
+  </div>
+</main>
+<script src="savoirs.js"></script>
+<script>
+(function(){var D=window.SAV,P={"n:art": [500, 110], "n:bonheur": [646, 136], "n:conscience": [768, 209], "n:devoir": [842, 317], "n:etat": [858, 441], "n:inconscient": [812, 560], "n:justice": [712, 653], "n:langage": [575, 703], "n:liberte": [425, 703], "n:nature": [288, 653], "n:religion": [188, 560], "n:technique": [142, 441], "n:temps": [158, 317], "n:travail": [232, 209], "n:verite": [354, 136], "a:Hume": [566, 171], "a:Bourdieu": [393, 36], "a:Kant": [479, 269], "a:Arendt": [423, 311], "a:Socrate": [796, 102], "a:Épicure": [693, 36], "a:Rousseau": [614, 235], "a:Épictète": [575, 36], "a:Descartes": [560, 475], "a:Aristophane": [768, 36], "a:Bergson": [394, 214], "a:Hobbes": [741, 433], "a:Sartre": [559, 290], "a:Nietzsche": [537, 366], "a:Durkheim": [925, 216], "a:D’Holbach": [925, 145], "a:Kropotkine": [925, 288], "a:Chapoutot": [925, 373], "a:Leibniz": [925, 577], "a:Freud": [925, 667], "a:Platon": [505, 429], "a:Smith": [442, 462], "a:Rawls": [838, 753], "a:Saussure": [686, 736], "a:Wittgenstein": [534, 776], "a:Austin": [627, 776], "a:Klemperer": [745, 776], "a:Buridan": [464, 776], "a:Spinoza": [343, 776], "a:Aristote": [259, 447], "a:Pascal": [328, 396], "a:Galilée": [135, 776], "a:Mill": [201, 748], "a:Jacob": [137, 682], "a:Descola": [267, 776], "a:Marx": [211, 387], "a:Bacon": [75, 347], "a:Heidegger": [255, 294], "a:Hölderlin": [75, 588], "a:Lévinas": [75, 516], "a:Proust": [75, 170], "a:Einstein": [75, 242], "a:Russell": [127, 85], "a:Hegel": [213, 52]},svg=document.getElementById('map'),side=document.getElementById('side'),NS='http://www.w3.org/2000/svg';
+var NK={};D.N.forEach(function(n){NK[n.k]=n});var A=D.A,T=D.T,C=D.AP.c,R=D.AP.r;
+function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e}
+function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;')}
+function best(f){try{var b=JSON.parse(localStorage.getItem('carnet-quiz')||'{}')[f];return b&&b[1]?b[0]/b[1]:0}catch(e){return 0}}
+
+el('clipPath',{id:'c20'},el('defs',{},svg)).appendChild(el('circle',{cx:0,cy:0,r:20}));var gE=el('g',{},svg),gN=el('g',{},svg),nodes={},edges=[];
+Object.keys(A).forEach(function(a){if(!P['a:'+a])return;A[a].n.forEach(function(k){var p=P['a:'+a],q=P['n:'+k];var l=el('line',{x1:p[0],y1:p[1],x2:q[0],y2:q[1],class:'e',stroke:NK[k].c},gE);edges.push({a:a,k:k,el:l})})});
+function node(id,x,y,label,isN,col,ix){var g=el('g',{class:'nd '+(isN?'n':'a'),transform:'translate('+x+' '+y+')',tabindex:0,role:'button','aria-label':label+(isN?' (notion)':' (auteur)')},gN);
+ if(isN){el('circle',{r:50,fill:col},g);var t=el('text',{'text-anchor':'middle',y:5},g);var lb=label.replace(/^(Le |La |L’)/,'');t.textContent=lb.charAt(0).toUpperCase()+lb.slice(1)}
+ else{el('circle',{r:22,fill:'#fff',stroke:'#cfc6b8','stroke-width':2},g);
+  if(ix>-1){el('image',{href:'images/approuve.jpg',x:-20-(ix%C)*40,y:-20-Math.floor(ix/C)*40,width:C*40,height:R*40,'preserveAspectRatio':'none','clip-path':'url(#c20)'},g)}
+  else{var t2=el('text',{'text-anchor':'middle',y:5},g);t2.textContent=label.slice(0,2)}
+  var tl=el('text',{'text-anchor':'middle',y:42},g);tl.textContent=label}
+ el('circle',{class:'ring',r:isN?54:25},g);
+ g.addEventListener('click',function(){sel(id)});g.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();sel(id)}});
+ nodes[id]=g;return g}
+D.N.forEach(function(n){var p=P['n:'+n.k];node('n:'+n.k,p[0],p[1],n.nom,true,n.c)});
+Object.keys(A).forEach(function(a){var p=P['a:'+a];if(p)node('a:'+a,p[0],p[1],a,false,null,A[a].i)});
+var dl=document.getElementById('cl');D.N.forEach(function(n){dl.insertAdjacentHTML('beforeend','<option value="'+esc(n.nom)+'">')});Object.keys(A).forEach(function(a){dl.insertAdjacentHTML('beforeend','<option value="'+esc(a)+'">')});
+function frise(a){return 'frise-philosophes.html#'+encodeURIComponent(a)}
+function sel(id){svg.classList.add('sel');Object.keys(nodes).forEach(function(k){nodes[k].classList.remove('on','cur')});edges.forEach(function(e){e.el.classList.remove('on')});
+ nodes[id].classList.add('on','cur');var h='';
+ if(id[0]==='n'){var n=NK[id.slice(2)];side.style.setProperty('--pc',n.c);
+  edges.forEach(function(e){if(e.k===n.k){e.el.classList.add('on');nodes['a:'+e.a].classList.add('on')}});
+  var au=Object.keys(A).filter(function(a){return A[a].n.indexOf(n.k)>-1});
+  h='<h2 style="color:'+n.c+'">'+esc(n.nom)+'</h2><div class="chips">'+au.map(function(a){return '<button type="button" class="chip" style="--c:'+n.c+'" data-go="a:'+esc(a)+'">'+esc(a)+'</button>'}).join('')+'</div>';
+  h+='<b>Les fiches</b><ul>'+n.fiches.map(function(f){return '<li><a href="'+f.f+'">'+esc(f.t||T[f.f]||f.f)+'</a>'+(f.l?'<span class="th">'+esc(f.l)+'</span>':'')+'</li>'}).join('')+'</ul>';
+  h+='<div class="links">'+(n.plan?'<a href="'+n.plan+'">Plan de cours</a>':'')+n.bd.map(function(b){return '<a href="'+b+'">BD : '+esc(T[b]||b)+'</a>'}).join('')+'<a href="flashcards.html#'+n.k+'">Flashcards</a></div>'}
+ else{var a=id.slice(2),v=A[a];var c0=NK[v.n[0]].c;side.style.setProperty('--pc',c0);
+  edges.forEach(function(e){if(e.a===a){e.el.classList.add('on');nodes['n:'+e.k].classList.add('on')}});
+  var fs=[];D.N.forEach(function(n){n.fiches.forEach(function(f){if(f.a.indexOf(a)>-1)fs.push([n,f])})});
+  var cit=fs.filter(function(x){return x[1].cit})[0],won=v.f.some(function(f){return best(f)>=.8});
+  if(v.i>-1)h+='<div class="pt" role="img" aria-label="Portrait de '+esc(a)+'" style="background-image:url(images/approuve.jpg);background-size:'+(C*100)+'% '+(R*100)+'%;background-position:'+((v.i%C)/(C-1)*100)+'% '+(Math.floor(v.i/C)/(R-1)*100)+'%"></div>';
+  h+='<h2>'+esc(a)+'</h2><div class="chips">'+v.n.map(function(k){return '<button type="button" class="chip" style="--c:'+NK[k].c+'" data-go="n:'+k+'">'+esc(NK[k].nom)+'</button>'}).join('')+'</div>';
+  if(cit)h+='<blockquote>'+esc(cit[1].cit)+'</blockquote><p class="st">'+esc(cit[1].src)+'</p>';
+  h+='<b>Ce qu’il soutient</b><ul>'+fs.map(function(x){return '<li><a href="'+x[1].f+'">'+esc(x[1].t||T[x[1].f])+'</a>'+(x[1].th?'<span class="th">'+esc(x[1].th.length>190?x[1].th.slice(0,187)+'…':x[1].th)+'</span>':'')+'</li>'}).join('')+'</ul>';
+  h+='<p class="st">'+(v.i>-1?(won?'🕶️ Vignette gagnée dans votre Pokédex.':'Vignette du Pokédex à gagner : réussissez un de ses QCM à 80 %.'):'')+'</p><div class="links"><a href="'+frise(a)+'">Sur la frise</a><a href="album.html">Pokédex</a></div>'}
+ side.innerHTML=h;[].forEach.call(side.querySelectorAll('[data-go]'),function(b){b.addEventListener('click',function(){sel(b.getAttribute('data-go'));nodes[b.getAttribute('data-go')].focus()})});
+ try{history.replaceState(null,'','#'+encodeURIComponent(id))}catch(e){}}
+function reset(){svg.classList.remove('sel');Object.keys(nodes).forEach(function(k){nodes[k].classList.remove('on','cur')});edges.forEach(function(e){e.el.classList.remove('on')});side.style.removeProperty('--pc');try{history.replaceState(null,'',location.pathname)}catch(e){}}
+document.getElementById('cr').addEventListener('click',reset);
+var cq=document.getElementById('cq');function norm(s){return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/^(le |la |l’|l')/,'')}
+cq.addEventListener('change',function(){var v=norm(cq.value);if(!v)return;var hit=null;D.N.forEach(function(n){if(!hit&&norm(n.nom)===v)hit='n:'+n.k});Object.keys(A).forEach(function(a){if(!hit&&norm(a)===v)hit='a:'+a});
+ if(!hit){D.N.forEach(function(n){if(!hit&&norm(n.nom).indexOf(v)===0)hit='n:'+n.k});Object.keys(A).forEach(function(a){if(!hit&&norm(a).indexOf(v)===0)hit='a:'+a})}
+ if(hit){sel(hit);nodes[hit].focus()}});
+var h0=decodeURIComponent((location.hash||'').slice(1));if(nodes[h0])sel(h0);else{var nk=NK[h0];if(nk)sel('n:'+h0)}
+})();
+</script>
+<script src="fil.js" defer></script>
+<script src="menu.js" defer></script>
+<script src="voix.js" defer></script>
+</body>
+</html>

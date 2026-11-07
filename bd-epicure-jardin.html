@@ -4,9 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Le Jardin d'Épicure</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Gentium+Book+Plus:ital,wght@0,400;0,700;1,400&family=IM+Fell+English:ital@0;1&family=Patrick+Hand&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="fonts/bd-fonts.css">
 <style>
 /* Mise en page : une colonne de planches ; chaque planche est une grille de cases (2 colonnes dès 660px).
    Couleurs : encre bleu nuit, feu orangé, pierre froide ; les décors de la caverne gardent leur propre palette. */
@@ -345,5 +343,59 @@ details.decode .dc p{margin:0 0 8px}details.decode .dc p:last-child{margin:0}
 <script src="menu.js" defer></script>
 <script src="sommaire.js" defer></script>
 <script src="fil.js" defer></script>
+<!--lbfs--><style>
+.lb:not(.land) .lb-in{position:absolute !important;inset:0 !important;width:auto !important;padding:0 !important;display:flex !important;align-items:center;justify-content:center;overflow:auto;flex:none !important}
+.lb:not(.land):not(.z) .shot{width:min(100vw,calc(100dvh * var(--ar,1.6667))) !important;max-width:none !important;margin:0 !important;flex:none}
+.lb:not(.land):not(.z) .shot img{width:100% !important;height:auto !important;aspect-ratio:auto !important;border-radius:0 !important}
+.lb:not(.land) .lb-cap,.lb:not(.land) .lb-lex,.lb:not(.land) .lb-hint{display:none !important}
+.lb.cap-on:not(.land) .lb-cap{display:block !important;position:fixed;left:0;right:0;bottom:0;z-index:102;max-width:none !important;padding:14px 18px calc(14px + env(safe-area-inset-bottom,0px)) !important;background:rgba(10,7,4,.9)}
+.lb.cap-on:not(.land) .lb-lex{display:grid !important;position:fixed;left:0;right:0;top:0;z-index:102;max-width:none !important;max-height:40vh;overflow:auto;padding:12px 270px 12px 18px !important;background:rgba(10,7,4,.9);margin:0}
+.lb-bar{flex-wrap:wrap;justify-content:flex-end;max-width:calc(100vw - 20px)}
+.lb.nob .ov{display:none !important}
+@media (min-width:721px){.lb:not(.land) .shot .ov .bub{font-size:clamp(15px,1.55vw,24px) !important;padding:.4em .7em .5em !important}.lb:not(.land) .shot .ov .bub .who{font-size:.6em !important}}
+.lb:not(.land) .lb-in{padding:0 !important}@media (max-width:720px){.lb:not(.land):not(.z) .shot{margin:auto !important}.lb:not(.land) .lb-in{padding:96px 0 24px !important;box-sizing:border-box}}
+</style><script>
+(function(){
+  var lb=document.querySelector('.lb');if(!lb)return;
+  var bar=lb.querySelector('.lb-bar'),inn=lb.querySelector('.lb-in');
+  function mk(t,l,f){var b=document.createElement('button');b.type='button';b.textContent=t;b.setAttribute('aria-label',l);b.addEventListener('click',f);bar.insertBefore(b,bar.firstChild);return b;}
+  var fsb=mk('⛶ Plein écran','Plein écran',function(){
+    try{if(document.fullscreenElement){document.exitFullscreen();}else if(lb.requestFullscreen){lb.requestFullscreen();}}catch(e){}
+  });
+  mk('Légende','Afficher ou masquer la légende',function(){lb.classList.toggle('cap-on');});
+  if(!document.fullscreenEnabled)fsb.style.display='none';
+  new MutationObserver(function(){
+    var im=inn.querySelector('img');
+    if(im){var r=(im.naturalWidth&&im.naturalHeight)?im.naturalWidth/im.naturalHeight:1.6667;lb.style.setProperty('--ar',r);}
+  }).observe(inn,{childList:true});
+  new MutationObserver(function(){
+    try{
+      if(!lb.hidden){lb.classList.remove('cap-on');if(document.fullscreenEnabled&&!document.fullscreenElement&&lb.requestFullscreen)lb.requestFullscreen().catch(function(){});}
+      else if(document.fullscreenElement){document.exitFullscreen();}
+    }catch(e){}
+  }).observe(lb,{attributes:true,attributeFilter:['hidden']});
+})();
+</script>
+
+<!--lbfs2--><style>
+.lb-bar{transition:opacity .35s ease}
+.lb.bar-hide .lb-bar{opacity:0;pointer-events:none}
+</style><script>
+(function(){
+  var lb=document.querySelector('.lb');if(!lb)return;
+  var t=null;
+  function show(){lb.classList.remove('bar-hide');clearTimeout(t);if(!lb.hidden&&!lb.classList.contains('cap-on'))t=setTimeout(function(){lb.classList.add('bar-hide');},2500);}
+  ['mousemove','touchstart','pointerdown','keydown'].forEach(function(e){lb.addEventListener(e,show,{passive:true});});
+  document.addEventListener('keydown',function(){if(!lb.hidden)show();});
+  lb.querySelector('.lb-bar').addEventListener('mouseenter',function(){clearTimeout(t);lb.classList.remove('bar-hide');});
+  new MutationObserver(function(){if(!lb.hidden)show();else{clearTimeout(t);lb.classList.remove('bar-hide');}}).observe(lb,{attributes:true,attributeFilter:['hidden']});
+})();
+</script>
+
+<!--lbfs3--><style>
+.lb:not(.land) .shot .ov.top .bub.r{margin-left:0 !important;margin-right:auto !important}
+.lb:not(.land) .shot .ov.top .bub.r{border-right:0}
+</style>
+
 </body>
 </html>

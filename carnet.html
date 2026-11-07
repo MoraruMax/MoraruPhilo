@@ -76,6 +76,16 @@ html[data-theme="dark"] .hlst mark{background:#6b5a00;color:#fff6cc}
 .hlst button{flex:none;font:600 .85rem/1 var(--sans);color:var(--muted);background:none;border:0;padding:.45rem .3rem;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
 .hlst button:focus-visible{outline:3px solid currentColor;outline-offset:2px}
 @media (max-width:600px){.sum{grid-template-columns:1fr}.mini{display:none}}
+.sv{margin:2.5rem 0 1.5rem}
+.sv-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,20rem),1fr));gap:1rem}
+.sv-box{border:1.5px solid var(--line);border-radius:12px;padding:1rem 1.1rem}
+.sv-box h3{margin:0 0 .7rem;font:700 1.05rem/1.3 var(--sans)}
+.sv-box label{display:block;font:600 .9rem/1.3 var(--sans);margin:.8rem 0 .3rem}
+.sv-box textarea{width:100%;font:500 .85rem/1.35 ui-monospace,Menlo,Consolas,monospace;padding:.6rem;border:1.5px solid var(--line);border-radius:8px;background:transparent;color:inherit;word-break:break-all;resize:vertical;margin:0 0 .6rem}
+.sv-chk{display:flex!important;gap:.5rem;align-items:flex-start;font:500 .88rem/1.4 var(--sans)!important;margin:.8rem 0 .2rem!important;color:var(--muted)}
+#sv-out,#sv-in{font-size:1.05rem;letter-spacing:.06em}
+.sv-msg{margin:.6rem 0 0;font:600 .95rem/1.4 var(--sans);min-height:1.2em}.sv-msg.ok{color:#1b7f3b}.sv-msg.ko{color:#b3261e}
+@media (prefers-color-scheme:dark){.sv-msg.ok{color:#6fd18b}.sv-msg.ko{color:#ff8a80}}
 </style>
 <script src="confort.js"></script><script src="voix.js" defer></script>
 </head>
@@ -93,10 +103,28 @@ html[data-theme="dark"] .hlst mark{background:#6b5a00;color:#fff6cc}
     <div><b id="s-d">0 / 0</b><span>dissertations terminées</span></div>
     <div><b id="s-e">0 / 0</b><span>explications terminées</span></div>
   </div>
+  <p class="carnet-alb" style="margin:0 0 1.5rem;font:600 1.05rem/1.4 var(--sans)">🕶️ <a href="album.html">Le Pokédex des philosophes</a> : les vignettes gagnées aux QCM.</p>
   <h2 class="sec">Les fiches, thème par thème</h2>
   <div id="themes"></div>
   <div id="ateliers"></div>
   <div id="surlignages"></div>
+  <section class="sv" id="transfert" aria-labelledby="h-sv">
+    <h2 class="sec" id="h-sv">Transférer ma progression sur un autre appareil</h2>
+    <p class="note" style="margin-top:0">Votre progression reste sur chaque appareil. Pour la retrouver ailleurs, par exemple de votre téléphone à votre ordinateur, créez un code ici, puis collez-le sur l’autre appareil. Les deux progressions sont fusionnées : vous gardez le meilleur des deux, rien n’est perdu.</p>
+    <p class="note">Le code court transporte les fiches lues, vos meilleurs scores aux quiz et aux défis et votre Pokédex. Les lettres ne font pas de différence entre majuscules et minuscules.</p>
+    <div class="sv-grid">
+      <div class="sv-box"><h3>1. Sur l’appareil de départ</h3>
+        <button class="b" id="sv-make" type="button">Créer mon code de transfert</button>
+        <label class="sv-chk"><input type="checkbox" id="sv-full"> Transfert complet, avec mes surlignages et mes brouillons d’ateliers (code beaucoup plus long)</label>
+        <div id="sv-out-w" hidden><label for="sv-out">Votre code</label><textarea id="sv-out" rows="4" readonly spellcheck="false"></textarea><button class="b" id="sv-copy" type="button">Copier le code</button></div>
+        <p class="sv-msg" id="sv-out-msg" role="status"></p>
+        <p class="note">Envoyez-vous ce code, par exemple par la messagerie de l’ENT ou dans un document. Ne le donnez à personne : il contient toute votre progression.</p></div>
+      <div class="sv-box"><h3>2. Sur l’autre appareil</h3>
+        <label for="sv-in">Collez votre code</label><textarea id="sv-in" rows="4" spellcheck="false" placeholder="XXXX-XXXX-XXXX-…"></textarea>
+        <button class="b" id="sv-go" type="button">Récupérer ma progression</button>
+        <p class="sv-msg" id="sv-in-msg" role="status"></p></div>
+    </div>
+  </section>
   <div class="act">
     <button class="b warn" id="reset" type="button">Effacer mon carnet</button>
     <span class="note" id="rmsg" role="status" style="margin:0;align-self:center"></span>
@@ -224,5 +252,5 @@ box.addEventListener('click',function(e){var b=e.target.closest&&e.target.closes
 window.renderHL=render;render();
 })();
 </script>
-<script src="fil.js" defer></script><script src="menu.js" defer></script></body>
+<script src="sauvegarde.js" defer></script><script src="fil.js" defer></script><script src="menu.js" defer></script></body>
 </html>
