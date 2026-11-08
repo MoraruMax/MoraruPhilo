@@ -106,6 +106,6 @@
 (function(){try{
   var f=location.pathname.split('/').pop();
   if(!/\.html$/.test(f)||/^(index|accueil|carnet|atelier-|auto-evaluation|parcours-|reperes-conceptuels|dissertation-a-completer)/.test(f))return;
-  function go(){if(!document.querySelector('main'))return;var s=document.createElement('script');s.src='surligneur.js';document.head.appendChild(s)}
+  function go(){if(!document.querySelector('main'))return;var s=document.createElement('script');s.src='surligneur.js?v=20261108173911';document.head.appendChild(s)}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go();
 }catch(e){}})();

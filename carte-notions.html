@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head><meta name="robots" content="noindex, nofollow"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="favicon.ico" sizes="any"><link rel="apple-touch-icon" href="apple-touch-icon.png"><meta name="theme-color" content="#1E1A16">
+<head><script id="maj-auto">(function(){var V="20261108173911";try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!/^\d+$/.test(t)||t<=V)return;var k="maj-"+t;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,"1")}catch(e){}fetch(location.href,{cache:"reload"}).then(function(){location.reload()})}).catch(function(){})}catch(e){}})();</script><meta name="robots" content="noindex, nofollow"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="favicon.ico" sizes="any"><link rel="apple-touch-icon" href="apple-touch-icon.png"><meta name="theme-color" content="#1E1A16">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Carte des notions</title>
 <meta name="description" content="Carte interactive des notions du programme et des auteurs étudiés.">
-<script src="confort.js"></script>
+<script src="confort.js?v=20261108173911"></script>
 <style>
 
 :root{
@@ -103,7 +103,7 @@ svg.map{display:block;width:100%;height:auto;touch-action:manipulation}
     <aside class="side" id="side" aria-live="polite"><h2>Choisissez un point de départ</h2><p>Cliquez sur une notion pour voir ses auteurs, ses fiches, sa BD et son plan de cours. Cliquez sur un auteur pour voir les notions où il intervient, sa thèse et sa citation clé.</p><p class="st">Astuce : la touche Tab parcourt la carte, Entrée sélectionne.</p></aside>
   </div>
 </main>
-<script src="savoirs.js"></script>
+<script src="savoirs.js?v=20261108173911"></script>
 <script>
 (function(){var D=window.SAV,P={"n:art": [500, 110], "n:bonheur": [646, 136], "n:conscience": [768, 209], "n:devoir": [842, 317], "n:etat": [858, 441], "n:inconscient": [812, 560], "n:justice": [712, 653], "n:langage": [575, 703], "n:liberte": [425, 703], "n:nature": [288, 653], "n:religion": [188, 560], "n:technique": [142, 441], "n:temps": [158, 317], "n:travail": [232, 209], "n:verite": [354, 136], "a:Hume": [566, 171], "a:Bourdieu": [393, 36], "a:Kant": [479, 269], "a:Arendt": [423, 311], "a:Socrate": [796, 102], "a:Épicure": [693, 36], "a:Rousseau": [614, 235], "a:Épictète": [575, 36], "a:Descartes": [560, 475], "a:Aristophane": [768, 36], "a:Bergson": [394, 214], "a:Hobbes": [741, 433], "a:Sartre": [559, 290], "a:Nietzsche": [537, 366], "a:Durkheim": [925, 216], "a:D’Holbach": [925, 145], "a:Kropotkine": [925, 288], "a:Chapoutot": [925, 373], "a:Leibniz": [925, 577], "a:Freud": [925, 667], "a:Platon": [505, 429], "a:Smith": [442, 462], "a:Rawls": [838, 753], "a:Saussure": [686, 736], "a:Wittgenstein": [534, 776], "a:Austin": [627, 776], "a:Klemperer": [745, 776], "a:Buridan": [464, 776], "a:Spinoza": [343, 776], "a:Aristote": [259, 447], "a:Pascal": [328, 396], "a:Galilée": [135, 776], "a:Mill": [201, 748], "a:Jacob": [137, 682], "a:Descola": [267, 776], "a:Marx": [211, 387], "a:Bacon": [75, 347], "a:Heidegger": [255, 294], "a:Hölderlin": [75, 588], "a:Lévinas": [75, 516], "a:Proust": [75, 170], "a:Einstein": [75, 242], "a:Russell": [127, 85], "a:Hegel": [213, 52]},svg=document.getElementById('map'),side=document.getElementById('side'),NS='http://www.w3.org/2000/svg';
 var NK={};D.N.forEach(function(n){NK[n.k]=n});var A=D.A,T=D.T,C=D.AP.c,R=D.AP.r;
@@ -154,8 +154,8 @@ cq.addEventListener('change',function(){var v=norm(cq.value);if(!v)return;var hi
 var h0=decodeURIComponent((location.hash||'').slice(1));if(nodes[h0])sel(h0);else{var nk=NK[h0];if(nk)sel('n:'+h0)}
 })();
 </script>
-<script src="fil.js" defer></script>
-<script src="menu.js" defer></script>
-<script src="voix.js" defer></script>
+<script src="fil.js?v=20261108173911" defer></script>
+<script src="menu.js?v=20261108173911" defer></script>
+<script src="voix.js?v=20261108173911" defer></script>
 </body>
 </html>

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head><meta name="robots" content="noindex, nofollow"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="favicon.ico" sizes="any"><link rel="apple-touch-icon" href="apple-touch-icon.png"><meta name="theme-color" content="#1E1A16"><script id="theme-init">try{var t=localStorage.getItem('theme');document.documentElement.setAttribute('data-theme',t==='light'?'light':'dark')}catch(e){document.documentElement.setAttribute('data-theme','dark')}</script>
+<head><script id="maj-auto">(function(){var V="20261108173911";try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!/^\d+$/.test(t)||t<=V)return;var k="maj-"+t;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,"1")}catch(e){}fetch(location.href,{cache:"reload"}).then(function(){location.reload()})}).catch(function(){})}catch(e){}})();</script><meta name="robots" content="noindex, nofollow"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="favicon.ico" sizes="any"><link rel="apple-touch-icon" href="apple-touch-icon.png"><meta name="theme-color" content="#1E1A16"><script id="theme-init">try{var t=localStorage.getItem('theme');document.documentElement.setAttribute('data-theme',t==='light'?'light':'dark')}catch(e){document.documentElement.setAttribute('data-theme','dark')}</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Le mythe de Prométhée</title>
-<link rel="stylesheet" href="fonts/bd-fonts.css">
+<link rel="stylesheet" href="fonts/bd-fonts.css?v=20261108173911">
 <style>
 /* Mise en page : une colonne de planches ; chaque planche est une grille de cases (2 colonnes dès 660px).
    Couleurs : encre bleu nuit, feu orangé, pierre froide ; les décors de la caverne gardent leur propre palette. */
@@ -349,9 +349,9 @@ details.decode .dc p{margin:0 0 8px}details.decode .dc p:last-child{margin:0}
     var L=lb.classList.contains('land'),a=L?dy:dx,c=L?dx:dy;if(Math.abs(a)>50&&Math.abs(a)>1.5*Math.abs(c)){var b=lb.querySelectorAll('.lb-n');var k=a<0?b[1]:b[0];if(k)k.click();}},{passive:true});
 })();
 </script>
-<script src="menu.js" defer></script>
-<script src="sommaire.js" defer></script>
-<script src="fil.js" defer></script>
+<script src="menu.js?v=20261108173911" defer></script>
+<script src="sommaire.js?v=20261108173911" defer></script>
+<script src="fil.js?v=20261108173911" defer></script>
 <!--lbfs--><style>
 .lb:not(.land) .lb-in{position:absolute !important;inset:0 !important;width:auto !important;padding:0 !important;display:flex !important;align-items:center;justify-content:center;overflow:auto;flex:none !important}
 .lb:not(.land):not(.z) .shot{width:min(100vw,calc(100dvh * var(--ar,1.6667))) !important;max-width:none !important;margin:0 !important;flex:none}

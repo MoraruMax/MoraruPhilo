@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head><meta name="robots" content="noindex, nofollow"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="favicon.ico" sizes="any"><link rel="apple-touch-icon" href="apple-touch-icon.png"><meta name="theme-color" content="#1E1A16">
+<head><script id="maj-auto">(function(){var V="20261108173911";try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!/^\d+$/.test(t)||t<=V)return;var k="maj-"+t;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,"1")}catch(e){}fetch(location.href,{cache:"reload"}).then(function(){location.reload()})}).catch(function(){})}catch(e){}})();</script><meta name="robots" content="noindex, nofollow"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="favicon.ico" sizes="any"><link rel="apple-touch-icon" href="apple-touch-icon.png"><meta name="theme-color" content="#1E1A16">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Comparer deux auteurs</title>
 <meta name="description" content="Deux fiches côte à côte : questions, thèses, citations et points de confrontation.">
-<script src="confort.js"></script>
+<script src="confort.js?v=20261108173911"></script>
 <style>
 
 :root{
@@ -94,7 +94,7 @@ blockquote{margin:0}
   <div id="out" aria-live="polite"></div>
   <p class="note2">Les contenus viennent des fiches du cours. Pour aller plus loin, ouvrez chaque fiche et faites son QCM.</p>
 </main>
-<script src="savoirs.js"></script>
+<script src="savoirs.js?v=20261108173911"></script>
 <script>
 (function(){var D=window.SAV,C=D.AP.c,R=D.AP.r,F={},pa=document.getElementById('pa'),pb=document.getElementById('pb'),out=document.getElementById('out');
 function esc(t){return String(t||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;')}
@@ -127,8 +127,8 @@ document.getElementById('sw').addEventListener('click',function(){var t=pa.value
 render();
 })();
 </script>
-<script src="fil.js" defer></script>
-<script src="menu.js" defer></script>
-<script src="voix.js" defer></script>
+<script src="fil.js?v=20261108173911" defer></script>
+<script src="menu.js?v=20261108173911" defer></script>
+<script src="voix.js?v=20261108173911" defer></script>
 </body>
 </html>

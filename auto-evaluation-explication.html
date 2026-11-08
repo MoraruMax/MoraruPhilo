@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="fr"><head><meta name="robots" content="noindex, nofollow"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="favicon.ico" sizes="any"><link rel="apple-touch-icon" href="apple-touch-icon.png"><meta name="theme-color" content="#1E1A16"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Auto-évaluation explication de texte</title><style>
+<!DOCTYPE html><html lang="fr"><head><script id="maj-auto">(function(){var V="20261108173911";try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!/^\d+$/.test(t)||t<=V)return;var k="maj-"+t;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,"1")}catch(e){}fetch(location.href,{cache:"reload"}).then(function(){location.reload()})}).catch(function(){})}catch(e){}})();</script><meta name="robots" content="noindex, nofollow"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="favicon.ico" sizes="any"><link rel="apple-touch-icon" href="apple-touch-icon.png"><meta name="theme-color" content="#1E1A16"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Auto-évaluation explication de texte</title><style>
 /* Layout : un cahier de brouillon. Colonne d'étapes à gauche, feuille Seyes au centre, corrections au stylo rouge. */
 :root{
   --paper:#fbfcff; --paper-2:#eef2fa; --ink:#1b2340; --ink-soft:#56607d;
@@ -145,8 +145,8 @@ h1.t{font-family:var(--f-display);font-size:clamp(32px,5vw,48px);line-height:1.1
 @media (max-width:760px){.meth{grid-template-columns:minmax(0,1fr)}}
 @media print{.noprint{display:none!important}body{background:#fff}.card,.comp{break-inside:avoid}}
 .pdfbtn{display:inline-flex;align-items:center;gap:.5rem;font:600 .88rem/1 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--paper);border:1.5px solid var(--ink);border-radius:999px;padding:.55rem .95rem;cursor:pointer;margin-left:auto}.pdfbtn:hover{background:var(--ink);color:var(--paper)}.pdfbtn:focus-visible{outline:3px solid var(--blue,#06c);outline-offset:2px}.a11y+.pdfbtn{margin-left:.6rem}</style><script>try{history.scrollRestoration="manual"}catch(e){}(function(){function t(){if(!location.hash)window.scrollTo(0,0)}t();document.addEventListener("DOMContentLoaded",t);window.addEventListener("load",function(){t();setTimeout(t,60)});window.addEventListener("pageshow",t)})();</script>
-<script src="accessibilite.js" defer></script>
-<script src="confort.js"></script><script src="voix.js" defer></script>
+<script src="accessibilite.js?v=20261108173911" defer></script>
+<script src="confort.js?v=20261108173911"></script><script src="voix.js?v=20261108173911" defer></script>
 </head><body>
 <nav style="font:500 .92rem/1 system-ui,-apple-system,'Segoe UI',sans-serif;max-width:900px;margin:0 auto 14px;display:flex;align-items:center" class="noprint"><a href="rubriques.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn noprint" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
 <main class="wrap2" id="main">
@@ -186,4 +186,4 @@ document.addEventListener("change",e=>{const k=e.target.dataset.k;if(!k)return;i
 $("#reset").addEventListener("click",()=>{if(!confirm("Effacer toutes les cases cochées ?"))return;st={};save();document.querySelectorAll("input").forEach(i=>{i.checked=false});upd()});
 $("#print").addEventListener("click",()=>window.print());
 upd();
-</script><script src="fil.js" defer></script><script src="menu.js" defer></script></body></html>
+</script><script src="fil.js?v=20261108173911" defer></script><script src="menu.js?v=20261108173911" defer></script></body></html>
