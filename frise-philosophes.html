@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
+<head><meta name="robots" content="noindex, nofollow"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="favicon.ico" sizes="any"><link rel="apple-touch-icon" href="apple-touch-icon.png"><meta name="theme-color" content="#1E1A16">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Frise des philosophes</title>
@@ -300,11 +300,11 @@ window.FRX=function(name){var a=find(name);if(!a)return '';var v=D.A[a],fs=[];D.
  var cit=fs.filter(function(f){return f.cit})[0],w=won(v.f),h='<div class="fx">';
  if(v.i>-1)h+='<div class="pt'+(w?' won':'')+'" role="img" aria-label="Vignette de '+esc(a)+'" style="background-image:url(images/approuve.jpg);background-size:'+(C*100)+'% '+(R*100)+'%;background-position:'+((v.i%C)/(C-1)*100)+'% '+(Math.floor(v.i/C)/(R-1)*100)+'%'+(w?'':';filter:grayscale(1);opacity:.7')+'"></div>';
  else h+='<div></div>';
- h+='<p class="vg">'+(v.i>-1?(w?(shiny(v.s)?'✨ Vignette shiny dans votre Pokédex':'🕶️ Vignette gagnée dans votre Pokédex'):'Vignette à gagner : réussissez un de ses QCM à 80 %'):'')+'</p>';
+ h+='<p class="vg">'+(v.i>-1?(w?(shiny(v.s)?'✨ Vignette shiny dans votre Agora des vignettes':'🕶️ Vignette gagnée dans votre Agora des vignettes'):'Vignette à gagner : réussissez un de ses QCM à 80 %'):'')+'</p>';
  if(cit)h+='<blockquote>'+esc(cit.cit)+'</blockquote><p class="src">'+esc(cit.src)+'</p>';
  h+='</div><div class="chips">'+v.n.map(function(k){return '<a href="carte-notions.html#n%3A'+k+'" style="--c:'+NK[k].c+'">'+esc(NK[k].nom)+'</a>'}).join('')+'</div>';
  if(fs.length)h+='<p style="margin:.6rem 0 .2rem"><b>Ses fiches :</b></p><ul>'+fs.map(function(f){return '<li><a href="'+f.f+'">'+esc(f.t||f.f)+'</a></li>'}).join('')+'</ul>';
- h+='<div class="more"><a href="carte-notions.html#a%3A'+encodeURIComponent(a)+'">Voir sur la carte des notions</a><a href="album.html">Pokédex</a></div>';return h};
+ h+='<div class="more"><a href="carte-notions.html#a%3A'+encodeURIComponent(a)+'">Voir sur la carte des notions</a><a href="album.html">Agora des vignettes</a></div>';return h};
 function hash(){var h=decodeURIComponent((location.hash||'').slice(1));if(h&&window.FRISE_GO)window.FRISE_GO(h)}
 window.addEventListener('hashchange',hash);if(document.readyState==='complete')hash();else window.addEventListener('load',hash);
 })();

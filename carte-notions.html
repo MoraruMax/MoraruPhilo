@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
+<head><meta name="robots" content="noindex, nofollow"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="favicon.ico" sizes="any"><link rel="apple-touch-icon" href="apple-touch-icon.png"><meta name="theme-color" content="#1E1A16">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Carte des notions</title>
@@ -133,7 +133,7 @@ function sel(id){svg.classList.add('sel');Object.keys(nodes).forEach(function(k)
   var au=Object.keys(A).filter(function(a){return A[a].n.indexOf(n.k)>-1});
   h='<h2 style="color:'+n.c+'">'+esc(n.nom)+'</h2><div class="chips">'+au.map(function(a){return '<button type="button" class="chip" style="--c:'+n.c+'" data-go="a:'+esc(a)+'">'+esc(a)+'</button>'}).join('')+'</div>';
   h+='<b>Les fiches</b><ul>'+n.fiches.map(function(f){return '<li><a href="'+f.f+'">'+esc(f.t||T[f.f]||f.f)+'</a>'+(f.l?'<span class="th">'+esc(f.l)+'</span>':'')+'</li>'}).join('')+'</ul>';
-  h+='<div class="links">'+(n.plan?'<a href="'+n.plan+'">Plan de cours</a>':'')+n.bd.map(function(b){return '<a href="'+b+'">BD : '+esc(T[b]||b)+'</a>'}).join('')+'<a href="flashcards.html#'+n.k+'">Flashcards</a></div>'}
+  h+='<div class="links">'+(n.plan?'<a href="'+n.plan+'">Plan de cours</a>':'')+n.bd.map(function(b){return '<a href="'+b+'">BD : '+esc(T[b]||b)+'</a>'}).join('')+'<a href="flashcards.html#'+n.k+'">Flashcards</a><a href="joute.html">La Joute</a></div>'}
  else{var a=id.slice(2),v=A[a];var c0=NK[v.n[0]].c;side.style.setProperty('--pc',c0);
   edges.forEach(function(e){if(e.a===a){e.el.classList.add('on');nodes['n:'+e.k].classList.add('on')}});
   var fs=[];D.N.forEach(function(n){n.fiches.forEach(function(f){if(f.a.indexOf(a)>-1)fs.push([n,f])})});
@@ -142,7 +142,7 @@ function sel(id){svg.classList.add('sel');Object.keys(nodes).forEach(function(k)
   h+='<h2>'+esc(a)+'</h2><div class="chips">'+v.n.map(function(k){return '<button type="button" class="chip" style="--c:'+NK[k].c+'" data-go="n:'+k+'">'+esc(NK[k].nom)+'</button>'}).join('')+'</div>';
   if(cit)h+='<blockquote>'+esc(cit[1].cit)+'</blockquote><p class="st">'+esc(cit[1].src)+'</p>';
   h+='<b>Ce qu’il soutient</b><ul>'+fs.map(function(x){return '<li><a href="'+x[1].f+'">'+esc(x[1].t||T[x[1].f])+'</a>'+(x[1].th?'<span class="th">'+esc(x[1].th.length>190?x[1].th.slice(0,187)+'…':x[1].th)+'</span>':'')+'</li>'}).join('')+'</ul>';
-  h+='<p class="st">'+(v.i>-1?(won?'🕶️ Vignette gagnée dans votre Pokédex.':'Vignette du Pokédex à gagner : réussissez un de ses QCM à 80 %.'):'')+'</p><div class="links"><a href="'+frise(a)+'">Sur la frise</a><a href="album.html">Pokédex</a></div>'}
+  h+='<p class="st">'+(v.i>-1?(won?'🕶️ Vignette gagnée dans votre Agora des vignettes.':'Vignette à gagner dans l’Agora des vignettes : réussissez un de ses QCM à 80 %.'):'')+'</p><div class="links"><a href="'+frise(a)+'">Sur la frise</a><a href="album.html">Agora des vignettes</a></div>'}
  side.innerHTML=h;[].forEach.call(side.querySelectorAll('[data-go]'),function(b){b.addEventListener('click',function(){sel(b.getAttribute('data-go'));nodes[b.getAttribute('data-go')].focus()})});
  try{history.replaceState(null,'','#'+encodeURIComponent(id))}catch(e){}}
 function reset(){svg.classList.remove('sel');Object.keys(nodes).forEach(function(k){nodes[k].classList.remove('on','cur')});edges.forEach(function(e){e.el.classList.remove('on')});side.style.removeProperty('--pc');try{history.replaceState(null,'',location.pathname)}catch(e){}}
