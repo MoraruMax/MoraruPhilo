@@ -2,7 +2,7 @@
 (function(){try{var t=localStorage.getItem('theme');if(t!=='light'&&t!=='dark')t='dark';document.documentElement.setAttribute('data-theme',t)}catch(e){document.documentElement.setAttribute('data-theme','dark')}})();
 /*THEME-END*/
 /* Fonds d'écran atténués partout pour la lisibilité */
-(function(){try{var st=document.createElement('style');st.id='fond-att-global';st.textContent='html:not(.ts):not(.lect) body::after{opacity:.84!important}';(document.head||document.documentElement).appendChild(st)}catch(e){}})();
+(function(){try{var st=document.createElement('style');st.id='fond-att-global';st.textContent='html:not(.ts):not(.lect):not(.nc) body::after{opacity:.84!important}html.nc[data-theme="dark"]:not(.ts):not(.lect) body::after{opacity:.74!important}';(document.head||document.documentElement).appendChild(st)}catch(e){}})();
 /* Confort de lecture : taille du texte, interligne, police. Réglages mémorisés sur l'appareil. */
 (function(){
   var K='confort-lecture',r=document.documentElement;
