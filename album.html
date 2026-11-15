@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head><script id="maj-auto">(function(){var V="20261108173911";try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!/^\d+$/.test(t)||t<=V)return;var k="maj-"+t;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,"1")}catch(e){}fetch(location.href,{cache:"reload"}).then(function(){location.reload()})}).catch(function(){})}catch(e){}})();</script><meta name="robots" content="noindex, nofollow"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="favicon.ico" sizes="any"><link rel="apple-touch-icon" href="apple-touch-icon.png"><meta name="theme-color" content="#1E1A16">
+<head><script id="maj-auto">(function(){var V="20261115123310";try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!/^\d+$/.test(t)||t<=V)return;var k="maj-"+t;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,"1")}catch(e){}fetch(location.href,{cache:"reload"}).then(function(){location.reload()})}).catch(function(){})}catch(e){}})();</script><meta name="robots" content="noindex, nofollow"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="favicon.ico" sizes="any"><link rel="apple-touch-icon" href="apple-touch-icon.png"><meta name="theme-color" content="#1E1A16">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>L’Agora des vignettes</title>
@@ -87,7 +87,7 @@ html[data-theme="dark"] .hlst mark{background:#6b5a00;color:#fff6cc}
 .sv-msg{margin:.6rem 0 0;font:600 .95rem/1.4 var(--sans);min-height:1.2em}.sv-msg.ok{color:#1b7f3b}.sv-msg.ko{color:#b3261e}
 @media (prefers-color-scheme:dark){.sv-msg.ok{color:#6fd18b}.sv-msg.ko{color:#ff8a80}}
 </style>
-<script src="confort.js?v=20261108173911"></script><script src="voix.js?v=20261108173911" defer></script>
+<script src="confort.js?v=20261115123310"></script><script src="voix.js?v=20261115123310" defer></script>
 <style>
 .al-sum{display:flex;flex-wrap:wrap;gap:1rem 2rem;align-items:baseline;margin:1.2rem 0 1.4rem}
 .al-sum b{font:800 clamp(2rem,6vw,3rem)/1 var(--sans)}
@@ -170,7 +170,7 @@ html[data-theme="dark"] .hlst mark{background:#6b5a00;color:#fff6cc}
   <p class="note">Vous changez d’appareil ? <a href="carnet.html#transfert">Transférez votre progression</a> avec un code.</p>
 </header>
 <main class="wrap">
-  <div class="al-sum" aria-live="polite"><b id="al-n">0 / 0</b><span>vignettes gagnées</span><b id="al-r">0</b><span>reçues en échange</span><b id="al-x">0</b><span>cartes à échanger</span><span style="display:none"><b id="al-s">0</b><span>✨ shinies</span></span></div>
+  <div class="al-sum" aria-live="polite"><b id="al-n">0 / 0</b><span>vignettes gagnées</span><b id="al-r">0</b><span>reçues en échange</span><b id="al-x">0</b><span>cartes à échanger</span><span style="display:none"><b id="al-s">0</b><span>✨ chromatiques</span></span></div>
   <ul class="al-leg"><li>🕶️ Vignette gagnée : QCM réussi à 80&nbsp;% ou plus</li><li>🏆 Sans-faute : couronne de laurier et une carte de plus</li><li>🪩 Défi réussi</li><li>🥈 Vignette reçue en échange (ne compte pas dans le score)</li></ul>
   <div class="al-tools">
     <section class="al-box" aria-labelledby="h-dl"><h2 id="h-dl">Télécharger l’Agora des vignettes</h2><p>Une image de toute l’Agora des vignettes, à garder ou à montrer.</p>
@@ -221,21 +221,21 @@ function render(){var st=state(),h='',n=0,nr=0,nx=0,ns=0;
   var g=o.seen&&a.e?'<span class="sg" style="left:'+pos(a.e[0])+';top:'+pos(a.e[1])+';width:'+(a.e[2]*100)+'%;--r:'+a.e[3]+'deg">'+SUNG+'</span>':'';
   var w=o.full?'<span class="wr" aria-hidden="true">'+LAUR+'</span>':'';
   var bd=o.won?(o.df?'🪩':o.full?'🏆':''):(o.rc>0?'🥈':'');
-  var lab=(o.pf?'🎖️ Offerte par le professeur · ':'')+(o.shiny?'✨ Shiny ✨'+(o.ns>1?' ×'+o.ns:'')+' · ':'')+(o.won?(o.full?'Sans-faute':'Vignette gagnée')+(o.df?' · défi réussi':''):(o.rc>0?'Reçue en échange':'À débloquer'));
+  var lab=(o.pf?'🎖️ Offerte par le professeur · ':'')+(o.shiny?'✨ Chromatique ✨'+(o.ns>1?' ×'+o.ns:'')+' · ':'')+(o.won?(o.full?'Sans-faute':'Vignette gagnée')+(o.df?' · défi réussi':''):(o.rc>0?'Reçue en échange':'À débloquer'));
   h+='<li class="vg'+cls+'">'+(bd?'<span class="bd" aria-hidden="true">'+bd+'</span>':'')+(o.stock?'<span class="nb" title="Cartes à échanger">×'+o.stock+'</span>':'')
    +'<span class="pw">'+w+'<span class="pic" style="'+bg+'" role="img" aria-label="'+(o.seen?'Portrait de '+esc(a.n):'Vignette non obtenue')+'">'+(o.shiny?'<i class="holo"></i>':'')+g+'</span>'+(o.shiny?'<span class="spk" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>':'')+'</span>'
    +'<span class="nm">'+(o.seen?esc(a.n):'???')+'</span><span class="st">'+lab+(o.stock?' · '+o.stock+' carte'+(o.stock>1?'s':'')+' à échanger':'')+'</span>';
-  if(o.seen)h+='<div class="va"><button type="button" data-act="card" data-i="'+a.i+'">Télécharger la carte</button>'+(o.stock?'<button type="button" data-act="give" data-i="'+a.i+'">Donner une carte</button>':'')+(o.ns?'<button type="button" data-act="gives" data-i="'+a.i+'">✨ Donner la shiny</button>':'')+'</div>';
-  if(conf===a.i)h+='<div class="gv cf" role="alert"><b>⚠️ Attention</b> : si vous donnez cette vignette shiny, vous ne disposerez plus de sa version shiny. Il vous faudra la regagner : un sans-faute avec un peu de chance, ou une récompense de votre professeur.<div class="va" style="margin-top:.5rem"><button type="button" data-act="gives-ok" data-i="'+a.i+'">Oui, donner la shiny</button><button type="button" data-act="gives-no" data-i="'+a.i+'">Annuler</button></div></div>';
-  if(open&&open.i===a.i)h+='<div class="gv" role="status">'+(open.sh?'<b>✨ Code SHINY</b> (exemplaire unique). ':'')+'Code à donner :<code>'+open.k+'</code>Votre camarade le saisit dans son Agora des vignettes. <button type="button" class="al-b" style="margin-top:.4rem;padding:.4rem .7rem;font-size:.8rem" data-act="cardcode" data-i="'+a.i+'">Télécharger la carte avec le code</button></div>';
+  if(o.seen)h+='<div class="va"><button type="button" data-act="card" data-i="'+a.i+'">Télécharger la carte</button>'+(o.stock?'<button type="button" data-act="give" data-i="'+a.i+'">Donner une carte</button>':'')+(o.ns?'<button type="button" data-act="gives" data-i="'+a.i+'">✨ Donner la chromatique</button>':'')+'</div>';
+  if(conf===a.i)h+='<div class="gv cf" role="alert"><b>⚠️ Attention</b> : si vous donnez cette vignette chromatique, vous ne disposerez plus de sa version chromatique. Il vous faudra la regagner : un sans-faute avec un peu de chance, ou une récompense de votre professeur.<div class="va" style="margin-top:.5rem"><button type="button" data-act="gives-ok" data-i="'+a.i+'">Oui, donner la chromatique</button><button type="button" data-act="gives-no" data-i="'+a.i+'">Annuler</button></div></div>';
+  if(open&&open.i===a.i)h+='<div class="gv" role="status">'+(open.sh?'<b>✨ Code CHROMATIQUE</b> (exemplaire unique). ':'')+'Code à donner :<code>'+open.k+'</code>Votre camarade le saisit dans son Agora des vignettes. <button type="button" class="al-b" style="margin-top:.4rem;padding:.4rem .7rem;font-size:.8rem" data-act="cardcode" data-i="'+a.i+'">Télécharger la carte avec le code</button></div>';
   if(!o.won)h+='<ul>'+a.p.map(function(p){return '<li><a href="'+p[0]+'#quiz">'+esc(a.p.length===1?'Faire le QCM':p[1].replace(/^[^:]+:\s*/,''))+'</a></li>'}).join('')+'</ul>';
   h+='</li>'});
  document.getElementById('album').innerHTML=h;
- var hs='';stSp().forEach(function(o){var a=o.a;hs+='<li class="vg sp'+(o.won?'':' off')+(o.shiny?' shiny':'')+'">'+(o.won?'<span class="bd" aria-hidden="true">🎖️</span>':'')+'<span class="pw">'+(o.won?'<span class="wr" aria-hidden="true">'+LAUR+'</span>':'')+'<span class="pic em" role="img" aria-label="'+esc(a.n)+'" style="background:radial-gradient(circle at 35% 30%,'+a.c1+','+a.c2+' 75%)">'+(o.shiny?'<i class="holo"></i>':'')+'<span aria-hidden="true">'+a.ic+'</span></span>'+(o.shiny?'<span class="spk" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>':'')+'</span><span class="nm">'+esc(a.n)+'</span><span class="st">'+(o.won?(o.shiny?'✨ Shiny ✨ · ':'')+(a.jeu?'Gagnée dans la Joute Philosophique':'Décernée par le professeur'):(a.jeu?'À gagner dans la <a href="joute.html">Joute Philosophique</a>':'À gagner auprès de votre professeur'))+'</span>'+(o.won?'<div class="va"><button type="button" data-act="card" data-i="'+a.i+'">Télécharger la carte</button></div>':'')+'</li>'});
+ var hs='';stSp().forEach(function(o){var a=o.a;hs+='<li class="vg sp'+(o.won?'':' off')+(o.shiny?' shiny':'')+'">'+(o.won?'<span class="bd" aria-hidden="true">🎖️</span>':'')+'<span class="pw">'+(o.won?'<span class="wr" aria-hidden="true">'+LAUR+'</span>':'')+'<span class="pic em" role="img" aria-label="'+esc(a.n)+'" style="background:radial-gradient(circle at 35% 30%,'+a.c1+','+a.c2+' 75%)">'+(o.shiny?'<i class="holo"></i>':'')+'<span aria-hidden="true">'+a.ic+'</span></span>'+(o.shiny?'<span class="spk" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>':'')+'</span><span class="nm">'+esc(a.n)+'</span><span class="st">'+(o.won?(o.shiny?'✨ Chromatique ✨ · ':'')+(a.jeu?'Gagnée dans la Joute Philosophique':'Décernée par le professeur'):(a.jeu?'À gagner dans la <a href="joute.html">Joute Philosophique</a>':'À gagner auprès de votre professeur'))+'</span>'+(o.won?'<div class="va"><button type="button" data-act="card" data-i="'+a.i+'">Télécharger la carte</button></div>':'')+'</li>'});
  document.getElementById('album-sp').innerHTML=hs;
  document.getElementById('al-n').textContent=n+' / '+D.length;document.getElementById('al-r').textContent=nr;document.getElementById('al-x').textContent=nx;var se=document.getElementById('al-s');se.textContent=ns;se.parentNode.style.display=ns?'contents':'none';
  var GL=load('album-codes-donnes',[]),gs=document.getElementById('al-given');gs.hidden=!GL.length;
- document.getElementById('al-gl').innerHTML=GL.slice().reverse().map(function(x){var a=BYI[x.i];return '<li><code>'+esc(x.k)+'</code> : '+esc(a?a.n:'?')+(x.s?' ✨ shiny':'')+(x.d?' ('+esc(x.d)+')':'')+'</li>'}).join('')}
+ document.getElementById('al-gl').innerHTML=GL.slice().reverse().map(function(x){var a=BYI[x.i];return '<li><code>'+esc(x.k)+'</code> : '+esc(a?a.n:'?')+(x.s?' ✨ chromatique':'')+(x.d?' ('+esc(x.d)+')':'')+'</li>'}).join('')}
 function give(i,sh){var o=state().filter(function(x){return x.a.i===i})[0];if(!o||!(sh?o.ns:o.stock))return;
  var KG=sh?'album-shiny-donnees':'album-donnees',GV=load(KG,{});GV[o.a.s]=(GV[o.a.s]||0)+1;
  var code=mk(i,sh),GL=load('album-codes-donnes',[]);GL.push({k:code,i:i,s:sh?1:0,d:new Date().toLocaleDateString('fr-FR')});
@@ -249,10 +249,10 @@ function receive(){var inp=document.getElementById('al-code'),r=rd(inp.value);
  if(GL.some(function(x){return x.k===r.k})){alertMsg('al-rcmsg','C’est un code que vous avez donné : il est pour un camarade.','ko');return}
  if(BYI[r.i].sp){var A2=BYI[r.i],X=load('album-special',{}),v=X[A2.k]||{n:0,s:0};if(r.sh)v.s=(v.s||0)+1;else v.n=(v.n||0)+1;X[A2.k]=v;U.push(r.k);
   if(!save('album-special',X)||!save('album-codes-utilises',U)){alertMsg('al-rcmsg','Impossible d’enregistrer sur cet appareil.','ko');return}
-  inp.value='';alertMsg('al-rcmsg','🎖️ Bravo ! Vous gagnez la vignette '+(r.sh?'SHINY ':'')+'« '+A2.n+' » !','ok');render();return}
+  inp.value='';alertMsg('al-rcmsg','🎖️ Bravo ! Vous gagnez la vignette '+(r.sh?'CHROMATIQUE ':'')+'« '+A2.n+' » !','ok');render();return}
  var a=BYI[r.i],KR=r.sh?'album-shiny-recues':'album-recues',RC=load(KR,{});RC[a.s]=(RC[a.s]||0)+1;U.push(r.k);if(r.pf){var PF=load('album-prof',{});PF[a.s]=(PF[a.s]||0)+1;save('album-prof',PF)}
  if(!save(KR,RC)||!save('album-codes-utilises',U)){alertMsg('al-rcmsg','Impossible d’enregistrer sur cet appareil.','ko');return}
- inp.value='';alertMsg('al-rcmsg',(r.pf?'🎖️ Bravo ! Votre professeur vous offre la vignette SHINY : ':r.sh?'✨ Vignette SHINY ajoutée : ':'Vignette ajoutée : ')+a.n+' !','ok');render()}
+ inp.value='';alertMsg('al-rcmsg',(r.pf?'🎖️ Bravo ! Votre professeur vous offre la vignette CHROMATIQUE : ':r.sh?'✨ Vignette CHROMATIQUE ajoutée : ':'Vignette ajoutée : ')+a.n+' !','ok');render()}
 /* ---- Dessin (téléchargements) ---- */
 function svgImg(s){var i=new Image();i.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(s.replace('<svg ','<svg xmlns="http://www.w3.org/2000/svg" '));return i}
 var IMG={sp:new Image(),sg:svgImg(SUNG),wr:svgImg(LAUR)};IMG.sp.src='images/approuve.jpg';
@@ -289,11 +289,11 @@ function drawAlbum(){var st=state(),sp=stSp(),cols=6,cw=190,ch=250,pad=30,W=cols
  c.fillText((nm?nm+' · ':'')+won+' / '+st.length+' vignettes gagnées'+(rc?' · '+rc+' reçues':''),W/2,140);
  c.fillStyle='#d9c9e6';c.font='500 18px system-ui,-apple-system,"Segoe UI",sans-serif';c.fillText(new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'}),W/2,172);
  c.fillStyle='#ffcf1f';c.font='italic 900 30px Impact,"Arial Black",sans-serif';c.fillText('VIGNETTES À GAGNER',W/2,228);
- sp.forEach(function(o,k){var x=pad+(k+(cols-sp.length)/2)*cw+8,y=245,w=cw-16,h=ch-16;card(c,o,x,y,w,h);portrait(c,o.a,x+w/2,y+86,104,o);c.textAlign='center';c.fillStyle=o.won?'#5a0000':'#6d685f';fit(c,o.a.n.toUpperCase(),w-16,15,'italic 900 #px Impact,"Arial Black",sans-serif');var t=o.a.n.toUpperCase();if(c.measureText(t).width>w-16){var mid=t.lastIndexOf(' ',Math.ceil(t.length/2)+4);c.fillText(t.slice(0,mid),x+w/2,y+172);c.fillText(t.slice(mid+1),x+w/2,y+190)}else c.fillText(t,x+w/2,y+180);c.font='600 13px system-ui,-apple-system,"Segoe UI",sans-serif';c.fillText(o.won?(o.shiny?'✨ Shiny · ':'')+'Décernée':'À gagner',x+w/2,y+212)});
+ sp.forEach(function(o,k){var x=pad+(k+(cols-sp.length)/2)*cw+8,y=245,w=cw-16,h=ch-16;card(c,o,x,y,w,h);portrait(c,o.a,x+w/2,y+86,104,o);c.textAlign='center';c.fillStyle=o.won?'#5a0000':'#6d685f';fit(c,o.a.n.toUpperCase(),w-16,15,'italic 900 #px Impact,"Arial Black",sans-serif');var t=o.a.n.toUpperCase();if(c.measureText(t).width>w-16){var mid=t.lastIndexOf(' ',Math.ceil(t.length/2)+4);c.fillText(t.slice(0,mid),x+w/2,y+172);c.fillText(t.slice(mid+1),x+w/2,y+190)}else c.fillText(t,x+w/2,y+180);c.font='600 13px system-ui,-apple-system,"Segoe UI",sans-serif';c.fillText(o.won?(o.shiny?'✨ Chromatique · ':'')+'Décernée':'À gagner',x+w/2,y+212)});
  st.forEach(function(o,k){var x=pad+(k%cols)*cw+8,y=200+ch+40+Math.floor(k/cols)*ch,w=cw-16,h=ch-16;card(c,o,x,y,w,h);
   portrait(c,o.a,x+w/2,y+86,104,o);c.textAlign='center';c.fillStyle=o.won?'#5a0000':(o.seen?'#1f2933':'#6d685f');
   fit(c,o.seen?o.a.n.toUpperCase():'???',w-16,22,'italic 900 #px Impact,"Arial Black",sans-serif');c.fillText(o.seen?o.a.n.toUpperCase():'???',x+w/2,y+180);
-  c.font='600 14px system-ui,-apple-system,"Segoe UI",sans-serif';c.fillText((o.shiny?'✨ Shiny · ':'')+(o.won?(o.full?'Sans-faute':'Gagnée')+(o.df?' · défi':''):(o.seen?'Reçue en échange':'À débloquer')),x+w/2,y+205);
+  c.font='600 14px system-ui,-apple-system,"Segoe UI",sans-serif';c.fillText((o.shiny?'✨ Chromatique · ':'')+(o.won?(o.full?'Sans-faute':'Gagnée')+(o.df?' · défi':''):(o.seen?'Reçue en échange':'À débloquer')),x+w/2,y+205);
   if(o.won&&(o.full||o.df)){c.font='26px sans-serif';c.fillText(o.df?'🪩':'🏆',x+w-14,y+20)}});
  return cv}
 function drawCard(i,code){var o=state().concat(stSp()).filter(function(x){return x.a.i===i})[0];if(code){o=Object.assign({},o,{shiny:!!(open&&open.sh),seen:true})}var a=o.a,W=600,H=860,cv=document.createElement('canvas');cv.width=W;cv.height=H;var c=cv.getContext('2d');
@@ -303,9 +303,9 @@ function drawCard(i,code){var o=state().concat(stSp()).filter(function(x){return
  portrait(c,a,W/2,300,300,o);
  c.textAlign='center';c.fillStyle=o.won?'#5a0000':'#1f2933';if(a.sp){c.font='italic 900 40px Impact,"Arial Black",sans-serif';wrap(c,a.n.toUpperCase(),W/2,540,W-100,44)}else{fit(c,a.n.toUpperCase(),W-110,64,'italic 900 #px Impact,"Arial Black",sans-serif');c.fillText(a.n.toUpperCase(),W/2,560)}
  c.font='600 23px system-ui,-apple-system,"Segoe UI",sans-serif';var m=a.sp?a.m:(a.m||'').replace(/^[^:]+:\s*/,'');wrap(c,m,W/2,a.sp?640:605,W-120,30);
- if(code){rr(c,70,690,W-140,120,18);c.fillStyle='rgba(255,255,255,.9)';c.fill();c.fillStyle='#1a1a1a';c.font='600 18px system-ui,-apple-system,"Segoe UI",sans-serif';c.fillText(o.shiny?'✨ SHINY · EXEMPLAIRE UNIQUE · code':'CARTE À ÉCHANGER · code',W/2,722);
+ if(code){rr(c,70,690,W-140,120,18);c.fillStyle='rgba(255,255,255,.9)';c.fill();c.fillStyle='#1a1a1a';c.font='600 18px system-ui,-apple-system,"Segoe UI",sans-serif';c.fillText(o.shiny?'✨ CHROMATIQUE · EXEMPLAIRE UNIQUE · code':'CARTE À ÉCHANGER · code',W/2,722);
   c.font='800 48px ui-monospace,Menlo,Consolas,monospace';c.fillText(code,W/2,778);c.font='500 15px system-ui,-apple-system,"Segoe UI",sans-serif';c.fillText('À saisir dans « L’Agora des vignettes »',W/2,802)}
- else{c.font='600 20px system-ui,-apple-system,"Segoe UI",sans-serif';c.fillText((o.shiny?'✨ SHINY ✨ · ':'')+(a.sp?(a.jeu?'⚔️ Gagnée dans la Joute':'🎖️ Décernée par le professeur'):o.won?(o.full?'🏆 Sans-faute':'🕶️ Vignette gagnée')+(o.df?' · 🪩 défi réussi':''):'🥈 Reçue en échange'),W/2,760)}
+ else{c.font='600 20px system-ui,-apple-system,"Segoe UI",sans-serif';c.fillText((o.shiny?'✨ CHROMATIQUE ✨ · ':'')+(a.sp?(a.jeu?'⚔️ Gagnée dans la Joute':'🎖️ Décernée par le professeur'):o.won?(o.full?'🏆 Sans-faute':'🕶️ Vignette gagnée')+(o.df?' · 🪩 défi réussi':''):'🥈 Reçue en échange'),W/2,760)}
  return cv}
 function fname(s){return s.normalize?s.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-'):'carte'}
 function onAct(e){var b=e.target.closest&&e.target.closest('button[data-act]');if(!b)return;
