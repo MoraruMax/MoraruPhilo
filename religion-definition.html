@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head><script id="maj-auto">(function(){var V="20261116170435",busy=0;function chk(){if(busy)return;busy=1;try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){busy=0;t=(t||"").trim();if(!/^\d+$/.test(t)||t<=V)return;var k="maj-"+t,a=[0,0];try{a=(sessionStorage.getItem(k)||"0,0").split(",").map(Number)}catch(e){}if(a[0]>=4||Date.now()-a[1]<20000)return;try{sessionStorage.setItem(k,(a[0]+1)+","+Date.now())}catch(e){}fetch(location.pathname+"?v="+t,{cache:"reload"}).catch(function(){}).then(function(){return fetch(location.href,{cache:"reload"})}).then(function(){location.reload()},function(){location.reload()})}).catch(function(){busy=0})}catch(e){busy=0}}chk();document.addEventListener("visibilitychange",function(){if(!document.hidden)chk()});window.addEventListener("pageshow",function(e){if(e.persisted)chk()});setInterval(function(){if(!document.hidden)chk()},300000)})();</script><meta name="robots" content="noindex, nofollow"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="favicon.ico" sizes="any"><link rel="apple-touch-icon" href="apple-touch-icon.png"><meta name="theme-color" content="#1E1A16">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Les difficultés pour définir la religion · La philosophie en terminale</title>
+<script>document.documentElement.classList.add('js')</script>
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+  --bg:#F1F5F4; --surface:#FFFFFF; --ink:#10262B; --muted:#4A6064; --line:#D0DCDA;
+  --stamp:#B3124F; --free:#0B6E6D; --stamp-soft:#FBE3EC;
+  --g1:#0B6E6D; --g2:#B3124F; --g3:#5B3FC4; --focus:#0B6E6D;
+  --display:Georgia,"Times New Roman",serif;
+  --text:system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0C1719; --surface:#142427; --ink:#E6F0EF; --muted:#9DB5B4; --line:#24393C;
+    --stamp:#FF7FAA; --free:#4FD1C5; --stamp-soft:#3A1625;
+    --g1:#4FD1C5; --g2:#FF7FAA; --g3:#A592FF; --focus:#4FD1C5;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0C1719; --surface:#142427; --ink:#E6F0EF; --muted:#9DB5B4; --line:#24393C;
+  --stamp:#FF7FAA; --free:#4FD1C5; --stamp-soft:#3A1625;
+  --g1:#4FD1C5; --g2:#FF7FAA; --g3:#A592FF; --focus:#4FD1C5;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.65 var(--text)}
+.wrap{width:min(980px,100% - 2.5rem);margin-inline:auto}
+h1,h2,h3{margin:0}
+h1{font:700 clamp(2.8rem,9vw,6rem)/1 var(--display);letter-spacing:-.03em}
+h2{font:700 clamp(1.7rem,3.6vw,2.5rem)/1.1 var(--display);letter-spacing:-.02em}
+h3{font:700 1.15rem/1.3 var(--text)}
+p{margin:0 0 1em;max-width:62ch}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
+.muted{color:var(--muted)}
+.note{font-size:.9rem;color:var(--muted)}
+.btn{font:500 .98rem/1.2 var(--text);color:var(--ink);background:transparent;border:1.5px solid var(--ink);border-radius:6px;padding:.7rem 1.1rem;cursor:pointer}
+.btn.primary{background:var(--ink);color:var(--bg)}
+.btn[aria-pressed="true"]{background:var(--stamp);border-color:var(--stamp);color:var(--bg)}
+
+/* Hero */
+.hero{padding:clamp(2.2rem,6vw,4.5rem) 0 clamp(2.5rem,6vw,4rem)}
+.lead{font:400 clamp(1.25rem,2.4vw,1.6rem)/1.4 var(--display);max-width:38ch;margin:1.6rem 0 2.2rem}
+.stage{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:clamp(1rem,3vw,1.8rem)}
+.groups{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(.6rem,2.5vw,1.8rem)}
+.grp{min-width:0}
+.inds{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(.25rem,1.2vw,.7rem)}
+.ind{aspect-ratio:1;transition:background-color .8s ease,border-radius .8s ease,transform .8s ease}
+.gname{font:700 .95rem/1.2 var(--text);margin:.9rem 0 .15rem}
+.gcap{font-size:.88rem;line-height:1.35;color:var(--muted);margin:0;min-height:2.7em}
+.stage-foot{display:flex;flex-wrap:wrap;gap:.8rem 1.2rem;align-items:center;margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid var(--line)}
+.state{margin:0;font:500 1.05rem/1.4 var(--text);flex:1 1 18rem;max-width:none;min-height:2.8em}
+
+/* Sections */
+section.block{border-top:0;padding:clamp(3rem,7vw,5rem) 0}
+.sec-head{max-width:44rem;margin-bottom:2rem}
+.sec-head .kicker{display:block;font:700 .9rem/1 var(--text);color:var(--stamp);margin-bottom:.8rem}
+.sec-head h2{margin-bottom:1rem}
+
+/* Etymologie */
+.etym{display:flex;flex-wrap:wrap;align-items:stretch;gap:.8rem 1rem;margin:0 0 2rem}
+.word{padding:.9rem 1.2rem;border:1.5px solid var(--ink);border-radius:8px;background:var(--surface)}
+.word b{display:block;font:700 clamp(1.5rem,3.4vw,2.2rem)/1.1 var(--display)}
+.word span{display:block;font-size:.95rem;color:var(--muted)}
+.word.out{border-color:var(--stamp);background:var(--stamp-soft)}
+.word.out b{color:var(--stamp)}
+.op{align-self:center;font:700 1.8rem/1 var(--display);color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;margin:.4rem 0 0;padding:0}
+.chips li{border:1.5px solid var(--line);background:var(--surface);border-radius:6px;padding:.4rem .75rem;font-weight:500;font-size:.98rem}
+
+/* Flux en trois temps */
+.flow{display:flex;flex-wrap:wrap;gap:1rem;list-style:none;margin:0;padding:0;counter-reset:f}
+.flow li{counter-increment:f;flex:1 1 15rem;min-width:0;border-top:4px solid var(--stamp);background:var(--surface);padding:1rem 1.1rem 1.2rem;border-radius:0 0 8px 8px}
+.flow li::before{content:counter(f);display:block;font:700 2rem/1 var(--display);color:var(--stamp);margin-bottom:.5rem}
+.flow p{margin:0}
+
+/* Experience */
+.exp{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:2rem clamp(2rem,5vw,4rem);align-items:start}
+.steps{list-style:none;margin:0;padding:0 0 0 1.4rem;border-left:2px solid var(--line)}
+.steps li{position:relative;padding:0 0 1.5rem}
+.steps li:last-child{padding-bottom:0}
+.steps li::before{content:"";position:absolute;left:calc(-1.4rem - 7px);top:.4rem;width:12px;height:12px;border-radius:50%;background:var(--bg);border:3px solid var(--stamp)}
+.steps h3{margin-bottom:.25rem}
+.steps p{margin:0}
+.chart{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:1.2rem}
+.chart h3{margin-bottom:1rem}
+.bar-row{margin-bottom:1.1rem}
+.bl{display:block;font-size:.92rem;font-weight:500;margin-bottom:.35rem}
+.track{height:2.4rem;background:var(--bg);border-radius:6px;overflow:hidden}
+.fill{height:100%;width:0;display:flex;align-items:center;padding:0 .8rem;font:700 .88rem/1 var(--text);color:var(--bg);white-space:nowrap;transition:width 1.1s cubic-bezier(.2,.7,.2,1)}
+.fill.a{background:var(--free)}
+.fill.b{background:var(--stamp)}
+.chart-foot{display:flex;flex-wrap:wrap;gap:.7rem 1rem;align-items:center;margin-top:1.2rem}
+.chart-foot .note{margin:0;flex:1 1 12rem}
+
+/* Explication */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.two > div{padding:0 2rem 0 0}
+.two > div + div{padding:0 0 0 2rem;border-left:1px solid var(--line)}
+.two h3{margin-bottom:.6rem}
+.two p{margin:0}
+
+/* Consequence */
+.big{font:700 clamp(1.6rem,3.8vw,2.6rem)/1.15 var(--display);letter-spacing:-.02em;max-width:24ch;margin:0 0 1.4rem;padding-left:1.1rem;border-left:5px solid var(--stamp)}
+.example{margin-top:2rem;padding-top:1.6rem;border-top:1px solid var(--line);max-width:46rem}
+
+.recap{margin:0;padding:0;list-style:none;max-width:46rem}
+.recap li{padding:.95rem 0;border-top:1px solid var(--line)}
+.recap li:last-child{border-bottom:1px solid var(--line)}
+footer{border-top:1px solid var(--line);padding:2rem 0 3rem}
+footer p{font-size:.92rem;color:var(--muted);margin:0}
+
+/* Apparition */
+.js .rev{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+.js .rev.in{opacity:1;transform:none}
+
+@media (max-width:820px){
+  .exp{grid-template-columns:1fr}
+  .two{grid-template-columns:1fr}
+  .two > div,.two > div + div{padding:0;border-left:0}
+  .two > div + div{margin-top:1.8rem;padding-top:1.8rem;border-top:1px solid var(--line)}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition:none!important;animation:none!important}
+  .js .rev{opacity:1;transform:none}
+}
+
+.pn{display:flex;gap:1rem;flex-wrap:wrap;margin:2.5rem auto 0;max-width:980px;padding:0 1.25rem;box-sizing:content-box}
+.pn a{flex:1 1 16rem;display:flex;flex-direction:column;gap:.25rem;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--k,var(--ink));padding:.9rem 1.1rem;border-radius:0 0 8px 8px}
+.pn a:hover{border-color:var(--k,var(--ink))}.pn a:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.pn small{font:600 .78rem/1 system-ui,-apple-system,sans-serif;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.pn b{font:700 1.1rem/1.25 system-ui,-apple-system,sans-serif}
+.pn .nx{text-align:right}
+.pn .nx:first-child{margin-left:auto;max-width:calc(50% - .5rem)}
+.pn .hm{flex:0 0 100%;text-align:center;font:500 .92rem/1 system-ui,-apple-system,sans-serif;background:none;border:0;padding:.4rem;color:var(--ink);text-decoration:underline}
+
+.pdfbtn{display:inline-flex;align-items:center;gap:.5rem;font:600 .88rem/1 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--surface);border:1.5px solid var(--ink);border-radius:999px;padding:.55rem .95rem;cursor:pointer}
+.pdfbtn:hover{background:var(--ink);color:var(--bg)}.pdfbtn:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:2px}
+
+/* Mode lecture (pages à structure libre) */
+html.lect body::before,html.lect body::after{display:none!important}
+html.lect body{background:var(--bg)!important}
+html.lect .pn,html.lect #quiz,html.lect section[aria-labelledby="h-video"],html.lect video,html.lect .score,html.lect .lc-skip,html.lect [role="tablist"],html.lect main button,html.lect main input,html.lect main select,html.lect main textarea,html.lect .sec-head p.lc-x{display:none!important}
+html.lect .hero h1,html.lect .hero p,html.lect section.block h2,html.lect footer p{text-shadow:none!important}
+html.lect .hero,html.lect section.block{padding-block:1.2rem!important;border:0!important}
+html.lect .wrap,html.lect .sec-head{max-width:40rem!important;margin-inline:auto}
+html.lect .hgrid,html.lect .two,html.lect .cols{display:block!important}
+html.lect main,html.lect .hero{font-family:var(--serif)}
+html.lect .hero h1{font-size:clamp(1.9rem,5vw,2.6rem)!important}
+html.lect main p,html.lect main li,html.lect .lead{font-size:1.12rem!important;line-height:1.75!important}
+html.lect :is(main,.hero) :is(div,li,blockquote,article,aside,p,ul,ol,section,details,summary,figure,span):not(table *){background:none!important;border:0!important;box-shadow:none!important;border-radius:0!important}
+html.lect main [hidden]{display:revert!important}
+html.lect :is(main,.hero) div:not(.wrap):not(.sec-head):not(table *){display:block!important;grid-template-columns:none!important;float:none!important;max-width:none!important;width:auto!important;margin-inline:0}
+html.lect main li{display:list-item!important}
+html.lect .must{margin:1rem 0}
+html.lect .lead{max-width:none!important}
+html.lect .wrap{padding-inline:0}
+html.lect main details>summary{cursor:default;pointer-events:none;list-style:none}
+html.lect main details>summary::-webkit-details-marker,html.lect main details>summary::before{display:none!important}
+html.lect main blockquote{margin:.8rem 0;padding:0 0 0 1rem!important;border-left:3px solid var(--line)!important}
+html.lect main .panel{display:block!important;margin-bottom:1rem}
+html.lect main h3,html.lect main h4{margin-top:1.4rem}
+
+/* Accessibilité */
+.a11y{position:relative;display:inline-block}
+.a11y-menu{position:absolute;right:0;top:calc(100% + .4rem);z-index:60;min-width:14rem;background:var(--bg);color:var(--ink);border:1.5px solid var(--ink);border-radius:14px;padding:.35rem;box-shadow:0 8px 24px rgba(0,0,0,.18);text-shadow:none}
+.a11y-menu[hidden]{display:none}
+.a11y-menu p{margin:0;padding:.45rem .7rem .3rem;font:700 .72rem/1 system-ui,-apple-system,sans-serif;letter-spacing:.06em;text-transform:uppercase;opacity:.65}
+.a11y-opt{display:flex;align-items:center;gap:.6rem;width:100%;text-align:left;font:600 .92rem/1.2 system-ui,-apple-system,sans-serif;color:inherit;background:none;border:0;border-radius:9px;padding:.6rem .7rem;cursor:pointer}
+.a11y-opt:hover{background:var(--surface)}
+.a11y-opt:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:-2px}
+.a11y-opt .dot{flex:none;width:1rem;height:1rem;border:2px solid currentColor;border-radius:50%;position:relative}
+.a11y-opt[aria-checked="true"] .dot::after{content:"";position:absolute;inset:2px;background:currentColor;border-radius:50%}
+.a11y-opt small{display:block;font-weight:500;opacity:.7;font-size:.78rem;margin-top:.15rem}
+/* Fiche consigne */
+.demo{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:clamp(1rem,3vw,1.8rem)}
+.demo .tools{display:flex;flex-wrap:wrap;gap:.5rem;margin:0 0 1.2rem}
+.demo .btn{font-size:.95rem;padding:.55rem .9rem}
+.demo .btn[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.txt{font:400 clamp(1.15rem,2.2vw,1.4rem)/1.75 var(--display);max-width:none;margin:0}
+.txt span{border-radius:4px;padding:.1em .15em;-webkit-box-decoration-break:clone;box-decoration-break:clone;transition:background-color .3s,box-shadow .3s}
+.txt span.on{background:color-mix(in srgb,var(--k) 24%,transparent);box-shadow:inset 0 -3px 0 var(--k)}
+.txt .t{--k:var(--g1)}.txt .a{--k:var(--g2)}.txt .e{--k:var(--g3)}.txt .c{--k:var(--ink)}
+.role{margin:1.2rem 0 0;padding:.9rem 1.1rem;border-left:5px solid var(--stamp);background:var(--stamp-soft);border-radius:0 8px 8px 0;max-width:none;min-height:3.2em}
+.defs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr));gap:1rem}
+.defs article{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--k,var(--ink));border-radius:0 0 8px 8px;padding:1.1rem 1.2rem 1.3rem}
+.defs article:nth-child(1){--k:var(--g1)}.defs article:nth-child(2){--k:var(--g2)}.defs article:nth-child(3){--k:var(--g3)}.defs article:nth-child(4){--k:var(--ink)}
+.defs h3{font:700 1.6rem/1.1 var(--display);margin-bottom:.2rem}
+.defs .ety{font-size:.9rem;color:var(--muted);margin:0 0 .8rem}
+.defs p{margin:0 0 .7rem;font-size:1rem}
+.defs .ex{border-top:1px solid var(--line);padding-top:.7rem;margin:.9rem 0 0;color:var(--muted)}
+.cmp{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--line);font-size:.98rem}
+.cmp caption{text-align:left;font:700 .9rem/1.3 var(--text);color:var(--muted);padding:0 0 .6rem}
+.cmp th,.cmp td{text-align:left;vertical-align:top;padding:.7rem .9rem;border-top:1px solid var(--line)}
+.cmp th+th,.cmp td{border-left:1px solid var(--line)}
+.cmp thead th{border-top:0;border-bottom:2px solid var(--ink);font-family:var(--display);font-size:1.1rem}
+.cmp tbody th{font:700 .95rem/1.3 var(--text);width:20%}
+.tw{overflow-x:auto}
+.pitfalls{margin:0;padding:0;list-style:none;max-width:48rem;counter-reset:p}
+.pitfalls li{counter-increment:p;position:relative;padding:1rem 0 1rem 3rem;border-top:1px solid var(--line)}
+.pitfalls li:last-child{border-bottom:1px solid var(--line)}
+.pitfalls li::before{content:counter(p);position:absolute;left:0;top:.9rem;font:700 1.8rem/1 var(--display);color:var(--stamp)}
+.pitfalls h3{margin-bottom:.25rem}.pitfalls h3 small{font:500 .9rem/1.3 var(--text);color:var(--muted)}.pitfalls p{margin:0 0 .35rem}.pitfalls .ex{color:var(--muted);font-size:.98rem}
+.flow li{flex:1 1 11rem}
+.tips{margin:0;padding:0;list-style:none;max-width:48rem}
+.tips li{padding:.9rem 0;border-top:1px solid var(--line)}.tips li:last-child{border-bottom:1px solid var(--line)}
+.subj{display:grid;gap:.5rem;margin:0 0 1.2rem}
+.subj .btn{text-align:left;font-size:1rem;padding:.7rem 1rem;line-height:1.35}
+.subj .btn[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.card{border-left:5px solid var(--stamp);background:var(--stamp-soft);border-radius:0 8px 8px 0;padding:1rem 1.2rem}
+.card dl{margin:0;display:grid;grid-template-columns:minmax(0,11rem) minmax(0,1fr);gap:.55rem 1.2rem}
+.card dt{font:700 .88rem/1.4 var(--text);color:var(--stamp)}
+.card dd{margin:0}
+.pairs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,18rem),1fr));gap:1rem}
+.pairs article{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--stamp);border-radius:0 0 8px 8px;padding:1.1rem 1.2rem}
+.pairs h3{font:700 1.3rem/1.2 var(--display);margin-bottom:.5rem}
+.pairs p{margin:0 0 .6rem;font-size:1rem}
+.pairs .vs{border-top:1px solid var(--line);padding-top:.6rem;color:var(--muted)}
+.card dd ol{margin:.4rem 0 .2rem;padding-left:1.2rem}
+.card dd li{margin:0 0 .55rem}
+.card dd p{margin:0 0 .4rem;max-width:none}
+.card .bil{color:var(--muted);font-size:.95rem}
+.card dl{row-gap:1rem}
+@media (max-width:620px){.card dl{grid-template-columns:1fr;gap:.1rem}.card dt{margin-top:.5rem}}
+@media (max-width:820px){.q2{grid-template-columns:1fr}}
+
+@media print{
+  :root{--bg:#fff!important;--surface:#fff!important;--ink:#111!important;--muted:#444!important;--line:#bbb!important;color-scheme:light!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:#fff!important;color:#111!important}
+  body::before,body::after{display:none!important}
+  nav,.pdfbtn,.pn,video,section[aria-labelledby="h-video"]{display:none!important}
+  .rev,.js .rev{opacity:1!important;transform:none!important}
+  .stp li[hidden]{display:list-item!important}
+  details>*{display:block!important}
+  article,li,.card,figure,.stage{break-inside:avoid}
+  h1,h2,h3{break-after:avoid;text-shadow:none!important}
+  *{text-shadow:none!important}
+  a{color:inherit;text-decoration:none}
+  section.block,.part{padding-top:1.2rem!important;padding-bottom:1.2rem!important}
+  footer{break-before:avoid;border-top:1px solid #999;margin-top:1rem}
+}
+@page{size:A4;margin:16mm 14mm}
+
+.gp{margin:0 0 1rem;padding:.8rem 1.1rem 1rem;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+.gp h3{font:700 .95rem/1.3 var(--text);color:var(--muted);margin:0 0 .4rem}
+.gp.tr{border:2px dashed var(--g2);background:color-mix(in srgb,var(--g2) 8%,transparent)}
+.gp.tr h3{color:var(--g2)}
+.gp .txt{font-size:clamp(1.05rem,2vw,1.25rem)}
+</style>
+
+<script>try{history.scrollRestoration="manual"}catch(e){}(function(){function t(){if(!location.hash)window.scrollTo(0,0)}t();document.addEventListener("DOMContentLoaded",t);window.addEventListener("load",function(){t();setTimeout(t,60)});window.addEventListener("pageshow",t)})();</script>
+<script src="sommaire.js?v=20261116170435" defer></script><script src="fil.js?v=20261116170435" defer></script><script src="menu.js?v=20261116170435" defer></script>
+<script src="confort.js?v=20261116170435"></script><script src="voix.js?v=20261116170435" defer></script>
+<style>
+.rd .lead2{font-size:1.05rem}
+.rd .crit{list-style:none;padding:0;margin:.6rem 0 0;display:grid;gap:.6rem}
+.rd .crit details{background:var(--surface);border:1px solid var(--line);border-left:5px solid #5e6b00;border-radius:0 8px 8px 0;padding:.7rem 1rem}
+.rd .crit summary{cursor:pointer;font-weight:700;list-style:none;display:flex;justify-content:space-between;gap:1rem;align-items:baseline}
+.rd .crit summary::-webkit-details-marker{display:none}
+.rd .crit summary::after{content:"Ce critère suffit-il ?";font-weight:600;font-size:.85rem;color:var(--muted);white-space:nowrap}
+.rd .crit details[open] summary::after{content:"Non"}
+.rd .crit details[open]{border-left-color:#b42318}
+.rd .crit p{margin:.5rem 0 0}
+.rd .crit summary:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+.rd .bar{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.8rem}
+.rd .two{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:1rem;margin-top:.6rem}
+.rd .two>div{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:.9rem 1rem}
+.rd .two h3{margin:0 0 .4rem;font-size:1.05rem}
+.rd .two p{margin:.3rem 0}
+.rd .def{border:2px solid #5e6b00;border-radius:8px;padding:1rem 1.2rem;background:var(--surface);font-size:1.08rem;margin:.6rem 0 1rem}
+.rd table{width:100%;border-collapse:collapse;margin-top:.6rem;font-size:.95rem}
+.rd th,.rd td{border:1px solid var(--line);padding:.55rem .6rem;text-align:left;vertical-align:top}
+.rd th{background:var(--surface)}
+.rd .tw{overflow-x:auto}
+.rd .src{color:var(--muted);font-size:.9rem}
+@media print{.rd .crit details{break-inside:avoid}}
+html.lect .rd .crit summary::after{display:none}
+</style></head>
+<body>
+<nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="rubriques.html" style="color:inherit">Retour à l’accueil</a><span style="display:inline-flex;gap:.6rem;flex-wrap:wrap;align-items:center"><span class="a11y"><button type="button" class="pdfbtn" id="a11y-btn" aria-haspopup="true" aria-expanded="false" aria-controls="a11y-menu"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="1.6"/><path d="M5 8.5l7 1.5 7-1.5M12 10v4.5M8.5 21l3.5-6.5 3.5 6.5"/></svg><span>Accessibilité</span></button><div class="a11y-menu" id="a11y-menu" role="radiogroup" aria-label="Affichage de la page" hidden><p>Affichage</p><button type="button" role="radio" class="a11y-opt" data-mode="orig" aria-checked="true"><span class="dot"></span><span>Page d’origine<small>Image de fond et mise en page habituelle</small></span></button><button type="button" role="radio" class="a11y-opt" data-mode="lect" aria-checked="false"><span class="dot"></span><span>Mode lecture<small>Texte continu, sans cadres ni exercices</small></span></button></div></span><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></span></nav>
+<header class="hero">
+  <div class="wrap">
+    <h1>Les difficultés pour définir la religion</h1>
+    <p class="lead">Un Dieu, des dogmes, la prière, des rites ? Aucun critère ne convient à toutes les religions. Pourquoi est-il si difficile de dire ce qu’est la religion ?</p>
+  </div>
+</header>
+<main id="main">
+<section class="block rd" aria-labelledby="h-intro"><div class="wrap"><div class="sec-head"><span class="kicker">Le problème</span><h2 id="h-intro">Qu’y a-t-il de commun à toutes les religions ?</h2></div><p class="lead2">« Qu’est-ce que <i>la</i> religion ? » L’article singulier n’est pas anodin : il ne s’agit pas d’étudier une religion particulière, mais ce qui serait commun à tous les faits religieux. C’est là que commencent les difficultés : quel est le critère du fait religieux ?</p><p>Deux voies semblent possibles : définir la religion par ce que l’on croit, ou par la manière dont on se comporte. Pour chaque critère proposé, cherchez un contre-exemple avant d’ouvrir la réponse.</p></div></section>
+<section class="block rd" aria-labelledby="h-croy"><div class="wrap"><div class="sec-head"><span class="kicker">Première voie</span><h2 id="h-croy">Définir la religion par le contenu des croyances</h2></div><p>Trouver un élément commun à toutes les croyances se révèle vite impossible : chaque critère est trop étroit (il exclut de vraies religions) ou trop large (il inclut ce qui n’est pas une religion).</p><ul class="crit" id="c1"><li><details><summary>Un Dieu éternel et créateur</summary><p>Toutes les religions n’en conçoivent pas un. Le culte des ancêtres, par exemple en Mélanésie, ne reconnaît comme dieux que des morts, qui ont connu la condition humaine avant d’être divinisés.</p></details></li><li><details><summary>Une divinité, une puissance surnaturelle</summary><p>Le bouddhisme est une religion sans divinité ; à l’inverse, certaines philosophies non religieuses admettent une ou des divinités. Religion et divinité ne se recouvrent donc pas.</p></details></li><li><details><summary>Des dogmes</summary><p>La « religion naturelle » de Voltaire et de Rousseau n’admet pas de dogmes. Mais on peut discuter du droit d’appeler « religion » cette philosophie.</p></details></li><li><details><summary>La croyance en un au-delà</summary><p>La « religion philosophique » de Spinoza la refuse. Là encore, le mot « religion » ne va pas de soi.</p></details></li><li><details><summary>Le réel ne se réduit pas à ce que perçoivent les sens</summary><p>Critère trop large : la philosophie de Platon, qui n’est pas une religion, pense la même chose.</p></details></li><li><details><summary>Un système de représentations qui donne un sens à la vie</summary><p>Critère beaucoup trop large : il confond la religion avec toutes sortes de conceptions du monde, d’idéologies ou de systèmes symboliques.</p></details></li></ul><div class="bar"><button class="btn" type="button" data-all="c1">Tout afficher</button></div></div></section>
+<section class="block rd" aria-labelledby="h-att"><div class="wrap"><div class="sec-head"><span class="kicker">Deuxième voie</span><h2 id="h-att">Définir la religion par l’attitude religieuse</h2></div><p>Plutôt que ce que l’on croit, on peut chercher ce que font les croyants. Mais là encore, chaque critère rencontre des exceptions.</p><ul class="crit" id="c2"><li><details><summary>La prière</summary><p>Elle n’existe pas dans le bouddhisme, centré sur la méditation. Voltaire et Rousseau ne prient pas non plus, au sens habituel, bien qu’ils admettent l’existence d’un Dieu.</p></details></li><li><details><summary>Les rites</summary><p>Il existe des religions sans rites, fondées sur la seule foi (les quakers, le baha’isme), et des rites sans religion, comme le mariage civil.</p></details></li><li><details><summary>La séparation du sacré et du profane</summary><p>Elle semble universelle. Pourtant, dans certaines sociétés traditionnelles, le divin serait présent dans chaque geste et chaque parole, sans domaine profane. La Réforme protestante refuse aussi cette séparation : rien n’est sacré hors de Dieu. Enfin, définir le religieux par le sacré ne fait que déplacer la difficulté d’une notion à une autre.</p></details></li><li><details><summary>Une organisation collective, qui réunit les croyants dans un culte</summary><p>Ce critère distingue la religion de la magie. Mais certaines religions n’ont aucune institution (les quakers), ou pas de clergé (les mennonites).</p></details></li><li><details><summary>Une activité sociale régulière, en relation avec un pouvoir charismatique</summary><p>Définition du sociologue Jean-Paul Willaime. Elle insiste sur la dimension collective, mais réduit la religion à sa dimension sociale et politique.</p></details></li></ul><div class="bar"><button class="btn" type="button" data-all="c2">Tout afficher</button></div><p style="margin-top:1rem">L’anthropologue Marcel Mauss va plus loin : selon lui, il n’existe aucun point commun entre tous les phénomènes religieux, qui dépendent chacun d’une culture particulière. Il n’y aurait pas <i>la</i> religion, mais des phénomènes religieux.</p></div></section>
+<section class="block rd" aria-labelledby="h-ety"><div class="wrap"><div class="sec-head"><span class="kicker">Troisième voie</span><h2 id="h-ety">Le recours à l’étymologie</h2></div><p>Le mot « religion » vient du latin, mais de deux origines possibles, qui n’engagent pas la même réflexion.</p><div class="two"><div><h3><i>Religare</i> : relier, attacher</h3><p>La religion relie les hommes entre eux : c’est sa dimension horizontale, sociale et morale. Elle les relie aussi à une réalité supérieure : c’est sa dimension verticale, personnelle et mystique.</p><p>Réduire la religion à l’une de ces deux dimensions (le lien social, ou la foi personnelle) serait la mutiler.</p></div><div><h3><i>Religio</i> : scrupule, respect</h3><p>Le mot désigne alors une attitude de vénération, de respect mêlé de crainte. On s’intéresse au comportement du croyant, sans s’interroger sur l’objet de sa vénération.</p><p>Avec cette définition, on ne se demande plus si Dieu existe, mais pourquoi et comment les hommes croient.</p></div></div><p style="margin-top:1rem">On voit ici que le choix d’une définition oriente toute la réflexion.</p></div></section>
+<section class="block rd" aria-labelledby="h-def"><div class="wrap"><div class="sec-head"><span class="kicker">Une proposition</span><h2 id="h-def">Une définition possible</h2></div><p>Frédéric Rognon propose de tenir compte de toutes ces difficultés :</p><p class="def">La religion est un système de croyances et de pratiques qui, dans le respect et la vénération, relie des hommes entre eux et avec une instance non sensible, et donne sens à l’existence subjective.</p><p>Cette définition a plusieurs avantages :</p><ul><li>elle présente la religion comme un <b>système</b>, un ensemble cohérent ;</li><li>elle garde ses <b>deux dimensions</b>, personnelle et sociale ;</li><li>elle emploie des termes <b>larges</b> : « pratiques » plutôt que « rites », « instance non sensible » plutôt que « Dieu », pour ne pas exclure le bouddhisme ;</li><li>elle ajoute un dernier critère : la religion <b>donne un sens</b> à la vie du croyant.</li></ul></div></section>
+<section class="block rd" aria-labelledby="h-synth"><div class="wrap"><div class="sec-head"><span class="kicker">Synthèse</span><h2 id="h-synth">Tableau de synthèse</h2></div><div class="tw"><table><thead><tr><th>Voie</th><th>On définit la religion par…</th><th>La difficulté</th></tr></thead><tbody><tr><td><b>Le contenu des croyances</b></td><td>Ce que l’on croit : un Dieu, des dogmes, un au-delà…</td><td>Chaque critère exclut de vraies religions (le bouddhisme, le culte des ancêtres) ou inclut ce qui n’en est pas (la philosophie de Platon).</td></tr><tr><td><b>L’attitude religieuse</b></td><td>Ce que l’on fait : prier, accomplir des rites, se réunir…</td><td>Il existe des religions sans prière ni rites, et des rites sans religion.</td></tr><tr><td><b>L’étymologie</b></td><td>Ce que dit le mot : relier, ou respecter scrupuleusement</td><td>Deux origines possibles, qui ne conduisent pas à la même réflexion.</td></tr></tbody></table></div></div></section>
+<section class="block rd" aria-labelledby="h-ret"><div class="wrap"><div class="sec-head"><span class="kicker">À retenir</span><h2 id="h-ret">À retenir</h2></div><ul><li>Il est difficile de trouver un critère commun à toutes les religions : un Dieu créateur, une divinité, des dogmes, la prière ou des rites ne se retrouvent pas partout.</li><li>Le bouddhisme est le contre-exemple le plus fréquent : une religion sans divinité et sans prière.</li><li>Un bon critère ne doit être ni trop étroit, ni trop large : la philosophie de Platon ou le mariage civil ne sont pas des religions.</li><li>Deux étymologies : <i>religare</i> (relier) et <i>religio</i> (respect scrupuleux).</li><li>La religion a deux dimensions, personnelle et sociale, qu’il ne faut pas séparer.</li></ul><p class="src">D’après Frédéric Rognon, <i>La religion</i>, coll. « PhiloSophie », 1996, introduction.</p></div></section>
+</main>
+<script>
+document.querySelectorAll('.rd [data-all]').forEach(function(b){b.addEventListener('click',function(){var l=document.getElementById(b.getAttribute('data-all')).querySelectorAll('details'),o=[].every.call(l,function(d){return d.open});l.forEach(function(d){d.open=!o});b.textContent=o?'Tout afficher':'Tout masquer'})});
+</script>
+<nav class="pn" aria-label="Pages de la section Religion"><a class="pv" href="religion-preuves-dieu.html" rel="prev"><small>← Page précédente</small><b>Les principales preuves et réfutations de l’existence de Dieu</b></a><a class="hm" href="rubriques.html">Retour à l’accueil</a></nav>
+<script>
+(function(){var r=document.documentElement,K='texte-seul',KL='mode-lecture';
+var btn=document.getElementById('a11y-btn'),menu=document.getElementById('a11y-menu'),opts=menu.querySelectorAll('.a11y-opt'),closed=[],shown=[],skipped=[];
+function apply(m){
+  var ts=m==='ts',lc=m==='lect',was=r.classList.contains('lect');
+  r.classList.toggle('ts',ts);r.classList.toggle('lect',lc);
+  if(lc&&!was){closed=[];shown=[];skipped=[];
+    document.querySelectorAll('main details').forEach(function(d){if(!d.open){closed.push(d);d.open=true}});
+    document.querySelectorAll('main [hidden]').forEach(function(x){if(!x.closest('[aria-labelledby="h-video"]')&&!x.matches('video,[role="tablist"]')){shown.push(x);x.hidden=false}});
+    document.querySelectorAll('main section').forEach(function(sc){var h=sc.querySelector('h2');
+      if(sc.querySelector('input,select,textarea')||(h&&/^(Exercice|Faites le tri|En vid)/i.test(h.textContent.trim()))){sc.classList.add('lc-skip');skipped.push(sc)}});}
+  if(!lc&&was){closed.forEach(function(d){d.open=false});shown.forEach(function(x){x.hidden=true});skipped.forEach(function(s){s.classList.remove('lc-skip')});closed=[];shown=[];skipped=[]}
+  opts.forEach(function(o){o.setAttribute('aria-checked',o.getAttribute('data-mode')===m?'true':'false')});
+  try{localStorage.setItem(K,ts?'1':'0');localStorage.setItem(KL,lc?'1':'0')}catch(e){}
+}
+function open(on){menu.hidden=!on;btn.setAttribute('aria-expanded',on?'true':'false')}
+btn.addEventListener('click',function(e){e.stopPropagation();open(menu.hidden)});
+opts.forEach(function(o){o.addEventListener('click',function(){apply(o.getAttribute('data-mode'));open(false);btn.focus()})});
+document.addEventListener('click',function(e){if(!menu.hidden&&!menu.contains(e.target)&&e.target!==btn)open(false)});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!menu.hidden){open(false);btn.focus()}});
+var v='orig';try{if(localStorage.getItem(KL)==='1')v='lect';else if(localStorage.getItem(K)==='1'&&menu.querySelector('[data-mode="ts"]'))v='ts'}catch(e){}
+if(v==='ts')apply('ts');
+if(v==='lect')window.addEventListener('load',function(){apply('lect')});
+})();
+</script>
+</body>
+</html>

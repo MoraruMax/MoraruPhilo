@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head><script id="maj-auto">(function(){var V="20261116170435",busy=0;function chk(){if(busy)return;busy=1;try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){busy=0;t=(t||"").trim();if(!/^\d+$/.test(t)||t<=V)return;var k="maj-"+t,a=[0,0];try{a=(sessionStorage.getItem(k)||"0,0").split(",").map(Number)}catch(e){}if(a[0]>=4||Date.now()-a[1]<20000)return;try{sessionStorage.setItem(k,(a[0]+1)+","+Date.now())}catch(e){}fetch(location.pathname+"?v="+t,{cache:"reload"}).catch(function(){}).then(function(){return fetch(location.href,{cache:"reload"})}).then(function(){location.reload()},function(){location.reload()})}).catch(function(){busy=0})}catch(e){busy=0}}chk();document.addEventListener("visibilitychange",function(){if(!document.hidden)chk()});window.addEventListener("pageshow",function(e){if(e.persisted)chk()});setInterval(function(){if(!document.hidden)chk()},300000)})();</script><meta name="robots" content="noindex, nofollow"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="favicon.ico" sizes="any"><link rel="apple-touch-icon" href="apple-touch-icon.png"><meta name="theme-color" content="#1E1A16">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Russell : la poule inductiviste</title>
+<style>
+:root{
+  color-scheme:light;
+  --bg:#F7F4EF; --surface:#FFFFFF; --ink:#1E1A16; --muted:#5E564D; --line:#DED6CB; --focus:#0B5CAD; --on:#FFFFFF;
+  --soc:#9A3412; --soc-soft:#FBE7DC;
+  --nat:#1B6B4A; --nat-soft:#DDF1E7;
+  --rai:#2B4C9B; --rai-soft:#E1E8F8;
+  --gold:#8A5A00; --gold-soft:#F6E8C8; --bad:#B3261E;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --serif:Charter,"Bitstream Charter","Sitka Text",Cambria,Georgia,serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#16130F; --surface:#211D18; --ink:#F2ECE4; --muted:#B5AA9C; --line:#3A332B; --focus:#8CC2FF; --on:#16130F;
+    --soc:#FF9E6B; --soc-soft:#45220F; --nat:#74DDA7; --nat-soft:#143826; --rai:#9DB8FF; --rai-soft:#1C2A52; --gold:#F2C36B; --gold-soft:#3F3112; --bad:#FF8F86;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#16130F; --surface:#211D18; --ink:#F2ECE4; --muted:#B5AA9C; --line:#3A332B; --focus:#8CC2FF; --on:#16130F;
+  --soc:#FF9E6B; --soc-soft:#45220F; --nat:#74DDA7; --nat-soft:#143826; --rai:#9DB8FF; --rai-soft:#1C2A52; --gold:#F2C36B; --gold-soft:#3F3112; --bad:#FF8F86;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.1rem/1.65 var(--serif)}
+.wrap{width:min(980px,100% - 2.5rem);margin-inline:auto}
+h1,h2,h3{margin:0}
+h1{font:800 clamp(2.6rem,8vw,5rem)/1.02 var(--sans);letter-spacing:-.025em}
+h2{font:800 clamp(1.5rem,3.2vw,2.1rem)/1.2 var(--sans);margin-bottom:.8rem}
+h3{font:700 1.08rem/1.35 var(--sans)}
+p{margin:0 0 1em}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
+.btn{font:600 .95rem/1.2 var(--sans);color:var(--ink);background:transparent;border:1.5px solid var(--ink);border-radius:8px;padding:.65rem 1rem;cursor:pointer}
+.btn:hover{background:var(--line)}
+.btn.primary{background:var(--ink);color:var(--bg)}
+.btn.primary:hover{background:var(--ink);filter:brightness(1.2)}
+.note{font:500 .92rem/1.5 var(--sans);color:var(--muted)}
+section.block{border-top:0;padding:clamp(2.2rem,6vw,3.8rem) 0}
+.sec-head{max-width:46rem;margin-bottom:1.6rem}
+.src{font:600 .85rem/1.35 var(--sans);color:var(--muted)}
+blockquote{margin:0}
+
+/* Hero */
+.hero{padding:clamp(2rem,6vw,4rem) 0 clamp(2rem,5vw,3rem)}
+.hgrid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:2rem clamp(2rem,5vw,4rem);align-items:center}
+.lead{font-size:clamp(1.2rem,2.4vw,1.45rem);line-height:1.5;margin:1.3rem 0 0;max-width:34ch}
+.must{background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--ink);padding:1.2rem 1.3rem}
+.must p{margin:0 0 .7rem;font-size:1.05rem}
+.must .q{font:700 1.3rem/1.3 var(--serif)}
+.must .chain{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;margin:.8rem 0}
+.must .chain span{font:700 .85rem/1.2 var(--sans);padding:.35rem .55rem;background:var(--bg);border:1px solid var(--line)}
+.must .chain i{font-style:normal;color:var(--muted)}
+
+/* Questions */
+.qs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+.qc{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--k);padding:1rem 1.2rem}
+.qc h3{color:var(--k);margin-bottom:.4rem}
+.qc p{margin:0;font-size:1rem}
+
+/* Parcours */
+.path{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem;margin-bottom:1rem}
+.path button{font:700 .98rem/1.3 var(--sans);text-align:left;color:var(--ink);background:var(--surface);border:2px solid var(--line);border-radius:8px;padding:.8rem .9rem;cursor:pointer}
+.path button small{display:block;font:600 .8rem/1.3 var(--sans);color:var(--muted);margin-top:.15rem}
+.path button[aria-selected="true"]{border-color:var(--k);background:var(--ks)}
+.panel{background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--k);padding:clamp(1rem,3vw,1.7rem)}
+.panel[hidden]{display:none}
+.panel > h3{font-size:1.3rem;color:var(--k);margin-bottom:.3rem}
+.panel .thesis{font:700 1.2rem/1.35 var(--serif);margin:.2rem 0 1rem}
+.panel h4{font:800 .8rem/1 var(--sans);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin:1.3rem 0 .5rem}
+.panel ul{margin:0;padding-left:1.15rem}
+.panel li{margin-bottom:.5rem;font-size:1.02rem}
+.auth{background:var(--ks);border-left:5px solid var(--k);padding:.8rem 1rem;margin:0 0 .8rem}
+.auth b{font:700 .95rem/1.3 var(--sans);color:var(--k);display:block;margin-bottom:.25rem}
+.auth blockquote{font-size:1rem;font-style:italic;margin:.3rem 0}
+.auth p{margin:.3rem 0 0;font-size:1rem}
+.lim{background:var(--bg);border-left:5px solid var(--gold);padding:.8rem 1rem;font:500 .98rem/1.55 var(--sans)}
+.lim b{color:var(--gold)}
+
+/* Sorters */
+.sorter{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.5rem 1rem;align-items:center;padding:.8rem 0;border-bottom:1px solid var(--line)}
+.row .name{font:600 1rem/1.45 var(--sans)}
+.row .name i{font:italic 400 1rem/1.45 var(--serif)}
+.pick{display:flex;flex-wrap:wrap;gap:.4rem}
+.pick button{font:700 .9rem/1.15 var(--sans);color:var(--ink);background:var(--surface);border:2px solid var(--line);border-radius:8px;padding:.55rem .75rem;cursor:pointer}
+.pick button[disabled]{cursor:default}
+.pick button:hover:not([disabled]){border-color:var(--c)}
+.pick button[aria-pressed="true"]{background:var(--c);border-color:var(--c);color:var(--on)}
+.fb{grid-column:1/-1;margin:0;font:500 .95rem/1.45 var(--sans);padding:.5rem .8rem;border-left:5px solid var(--line);background:var(--surface)}
+.fb[hidden]{display:none}
+.row.good .fb{border-left-color:var(--nat)} .row.bad .fb{border-left-color:var(--bad)}
+.score{display:flex;flex-wrap:wrap;gap:.8rem 1.2rem;align-items:center;margin-top:1.1rem}
+.score p{margin:0;font:600 1rem/1.4 var(--sans);flex:1 1 16rem}
+
+/* Test d'universalisation */
+.lab{background:var(--surface);border:1px solid var(--line);padding:clamp(1rem,3vw,1.6rem)}
+.maxims{display:flex;flex-wrap:wrap;gap:.5rem;margin:.8rem 0 1.2rem}
+.maxims button{font:600 .98rem/1.3 var(--sans);color:var(--ink);background:var(--bg);border:2px solid var(--line);border-radius:8px;padding:.7rem .95rem;cursor:pointer;text-align:left}
+.maxims button[aria-pressed="true"]{border-color:var(--rai);background:var(--rai-soft)}
+.world{display:grid;grid-template-columns:repeat(8,1fr);gap:.4rem;max-width:30rem;margin:.6rem 0 1rem}
+.world span{aspect-ratio:1;border-radius:50%;background:var(--rai);opacity:.85;display:flex;align-items:center;justify-content:center;font:700 .8rem/1 var(--sans);color:var(--on)}
+.world.broken span{background:var(--bad);opacity:.7}
+@media (prefers-reduced-motion:no-preference){.world span{transition:background .4s,opacity .4s}}
+.steps{margin:0;padding:0;list-style:none;counter-reset:s}
+.steps li{counter-increment:s;display:grid;grid-template-columns:2rem 1fr;gap:.5rem;padding:.5rem 0;border-top:1px solid var(--line);font:500 1rem/1.5 var(--sans)}
+.steps li::before{content:counter(s);font:800 1.3rem/1 var(--sans);color:var(--rai)}
+.steps[hidden]{display:none}
+.verdict{margin:1rem 0 0;padding:.8rem 1rem;border-left:6px solid var(--bad);background:var(--bg);font:600 1rem/1.5 var(--sans)}
+.verdict[hidden]{display:none}
+
+/* Dilemme */
+.dil{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.opt{background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--k);padding:1rem 1.2rem;font:500 1rem/1.55 var(--sans)}
+.opt h3{color:var(--k);margin-bottom:.4rem}
+.opt ul{margin:.4rem 0 .8rem;padding-left:1.1rem}
+.opt li{margin-bottom:.35rem}
+.opt .m{font-weight:700}
+.pickd{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+.after{margin-top:1rem;padding:1rem 1.2rem;background:var(--surface);border-left:6px solid var(--gold);font:500 1rem/1.55 var(--sans)}
+.after[hidden]{display:none}
+
+/* Fil */
+.recap{margin:0;padding:0;list-style:none;max-width:48rem}
+.recap li{padding:.9rem 0;border-top:1px solid var(--line)}
+.recap li:last-child{border-bottom:1px solid var(--line)}
+.recap b{font-family:var(--sans)}
+footer{padding:1.6rem 0 2.5rem;font:500 .9rem/1.5 var(--sans);color:var(--muted)}
+footer p{margin:0}
+@media (max-width:820px){
+  .hgrid,.qs,.dil{grid-template-columns:1fr}
+  .path{grid-template-columns:1fr}
+  .row{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
+
+.stp{list-style:none;margin:0;padding:0;counter-reset:s}
+.stp li{counter-increment:s;display:grid;grid-template-columns:2.4rem 1fr;gap:.6rem;background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--k,var(--ink));padding:.9rem 1.1rem;margin-bottom:.7rem}
+.stp li::before{content:counter(s);font:800 1.6rem/1 var(--sans);color:var(--k)}
+.stp li[hidden]{display:none}
+.stp h3{font-size:1.02rem;margin-bottom:.2rem}
+.stp p{margin:0;font-size:1.02rem}
+@media (prefers-reduced-motion:no-preference){.stp li.new{animation:in .5s ease both}@keyframes in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}}
+.terms details{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--k);margin-bottom:.6rem;padding:.2rem 1rem}
+.terms summary{font:700 1.02rem/1.4 var(--sans);cursor:pointer;padding:.7rem 0}
+.terms details p{margin:0 0 .9rem;font-size:1.02rem}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media (max-width:820px){.two{grid-template-columns:1fr}}
+.links a{color:var(--k);font-weight:700}
+
+/* Fond : portrait (hume) */
+body::before{content:"";position:fixed;inset:0;z-index:-2;background:url("images/russell.jpg") center top/cover no-repeat}
+@media (min-aspect-ratio:1/1){body::before{background:#180804 url("images/russell.jpg") right center/auto 100% no-repeat}}
+body::after{content:"";position:fixed;inset:0;z-index:-1;background:var(--bg);opacity:.77;pointer-events:none}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) body::after{opacity:.87}}
+:root[data-theme="dark"] body::after{opacity:.87}
+.hero h1,.hero p,section.block h2,section.block > .wrap > p,.sec-head p,footer p{text-shadow:0 0 .4em var(--bg),0 0 .9em var(--bg)}
+
+.pn{display:flex;gap:1rem;flex-wrap:wrap;margin:2.5rem auto 0;max-width:980px;padding:0 1.25rem;box-sizing:content-box}
+.pn a{flex:1 1 16rem;display:flex;flex-direction:column;gap:.25rem;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--k,var(--ink));padding:.9rem 1.1rem;border-radius:0 0 8px 8px}
+.pn a:hover{border-color:var(--k,var(--ink))}.pn a:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.pn small{font:600 .78rem/1 system-ui,-apple-system,sans-serif;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.pn b{font:700 1.1rem/1.25 system-ui,-apple-system,sans-serif}
+.pn .nx{text-align:right}
+.pn .nx:first-child{margin-left:auto;max-width:calc(50% - .5rem)}
+.pn .hm{flex:0 0 100%;text-align:center;font:500 .92rem/1 system-ui,-apple-system,sans-serif;background:none;border:0;padding:.4rem;color:var(--ink);text-decoration:underline}
+
+.pdfbtn{display:inline-flex;align-items:center;gap:.5rem;font:600 .88rem/1 system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--surface);border:1.5px solid var(--ink);border-radius:999px;padding:.55rem .95rem;cursor:pointer}
+.pdfbtn:hover{background:var(--ink);color:var(--bg)}.pdfbtn:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:2px}
+
+/* Texte seul */
+html.ts body::before,html.ts body::after{display:none!important}
+html.ts body{background:var(--bg)!important}
+html.ts .hero h1,html.ts .hero p,html.ts section.block h2,html.ts section.block > .wrap > p,html.ts .sec-head p,html.ts footer p{text-shadow:none!important}
+
+/* Mode lecture */
+html.lect body::before,html.lect body::after{display:none!important}
+html.lect body{background:var(--bg)!important}
+html.lect .pn,html.lect #quiz,html.lect section[aria-labelledby="h-ex"],html.lect section[aria-labelledby="h-video"],html.lect .sec-head p,html.lect .score{display:none!important}
+html.lect .hero h1,html.lect .hero p,html.lect section.block h2,html.lect footer p{text-shadow:none!important}
+html.lect .hero,html.lect section.block{padding-block:1.2rem!important;border:0!important}
+html.lect .wrap,html.lect .sec-head{max-width:40rem!important;margin-inline:auto}
+html.lect .hgrid,html.lect .two{display:block!important}
+html.lect main,html.lect .hero{font-family:var(--serif)}
+html.lect .hero h1{font-size:clamp(1.9rem,5vw,2.6rem)!important}
+html.lect .lead,html.lect p,html.lect li{font-size:1.15rem!important;line-height:1.8!important}
+html.lect .lead{max-width:none!important}
+html.lect .must,html.lect .qc,html.lect .lim,html.lect .terms details,html.lect .txb,html.lect .stp li{background:none!important;border:0!important;box-shadow:none!important;padding:0!important;margin:0 0 1rem!important;display:block!important;border-radius:0!important}
+html.lect .must p{margin:.4rem 0!important}
+html.lect .must .q,html.lect .must .src{font-style:normal}
+html.lect .stp li[hidden]{display:block!important}
+html.lect .stp li::before{display:none!important}
+html.lect .stp h3{display:block!important;margin:0 0 .1rem!important}
+html.lect .qc h3,html.lect .terms summary,html.lect .lim b{display:inline;font:700 1.15rem/1.8 var(--sans);color:var(--ink)!important;margin:0}
+html.lect .stp h3{font:700 1.15rem/1.8 var(--sans);color:var(--ink)!important}
+html.lect .terms summary::after{content:" \2014  "}
+html.lect .qc h3::after{content:" : "}
+html.lect .stp div{display:block}
+html.lect .terms summary{cursor:default;list-style:none;padding:0}
+html.lect .terms summary::-webkit-details-marker,html.lect .terms summary::marker{display:none;content:""}
+html.lect .terms details p{display:inline;margin:0}
+html.lect .qc p{display:inline}
+html.lect .qc{margin-bottom:.6rem!important}
+html.lect .tx summary{cursor:default;pointer-events:none;padding:0}
+html.lect .tx summary::before{display:none!important}
+html.lect .txb{margin-top:.6rem!important}
+html.lect .txb .tsrc:not(:last-child){border:0!important}
+html.lect .recap li{border:0!important;padding:.2rem 0!important}
+html.lect .recap{max-width:none}
+
+/* Accessibilité */
+.a11y{position:relative;display:inline-block}
+.a11y-menu{position:absolute;right:0;top:calc(100% + .4rem);z-index:60;min-width:14rem;background:var(--bg);color:var(--ink);border:1.5px solid var(--ink);border-radius:14px;padding:.35rem;box-shadow:0 8px 24px rgba(0,0,0,.18);text-shadow:none}
+.a11y-menu[hidden]{display:none}
+.a11y-menu p{margin:0;padding:.45rem .7rem .3rem;font:700 .72rem/1 system-ui,-apple-system,sans-serif;letter-spacing:.06em;text-transform:uppercase;opacity:.65}
+.a11y-opt{display:flex;align-items:center;gap:.6rem;width:100%;text-align:left;font:600 .92rem/1.2 system-ui,-apple-system,sans-serif;color:inherit;background:none;border:0;border-radius:9px;padding:.6rem .7rem;cursor:pointer}
+.a11y-opt:hover{background:var(--surface)}
+.a11y-opt:focus-visible{outline:3px solid var(--focus,#06c);outline-offset:-2px}
+.a11y-opt .dot{flex:none;width:1rem;height:1rem;border:2px solid currentColor;border-radius:50%;position:relative}
+.a11y-opt[aria-checked="true"] .dot::after{content:"";position:absolute;inset:2px;background:currentColor;border-radius:50%}
+.a11y-opt small{display:block;font-weight:500;opacity:.7;font-size:.78rem;margin-top:.15rem}
+@media print{
+  :root{--bg:#fff!important;--surface:#fff!important;--ink:#111!important;--muted:#444!important;--line:#bbb!important;color-scheme:light!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:#fff!important;color:#111!important}
+  body::before,body::after{display:none!important}
+  nav,.pdfbtn,.pn,video,section[aria-labelledby="h-video"]{display:none!important}
+  .rev,.js .rev{opacity:1!important;transform:none!important}
+  .stp li[hidden]{display:list-item!important}
+  details>*{display:block!important}
+  article,li,.card,figure,.stage{break-inside:avoid}
+  h1,h2,h3{break-after:avoid;text-shadow:none!important}
+  *{text-shadow:none!important}
+  a{color:inherit;text-decoration:none}
+  section.block,.part{padding-top:1.2rem!important;padding-bottom:1.2rem!important}
+  footer{break-before:avoid;border-top:1px solid #999;margin-top:1rem}
+}
+@page{size:A4;margin:16mm 14mm}
+.tx summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:.7rem;font:800 clamp(1.4rem,3vw,1.9rem)/1.2 var(--sans);padding:.3rem 0}
+.tx summary::-webkit-details-marker{display:none}
+.tx summary::before{content:"";width:.6em;height:.6em;border-right:.2em solid currentColor;border-bottom:.2em solid currentColor;transform:rotate(-45deg);transition:transform .15s;flex:none;margin-right:.2rem}
+.tx[open] summary::before{transform:rotate(45deg)}
+@media (prefers-reduced-motion:reduce){.tx summary::before{transition:none}}
+.txb{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--k,var(--ink));padding:1.2rem clamp(1rem,3vw,1.8rem);margin-top:.9rem;max-width:46rem;font:400 1.1rem/1.75 var(--serif)}
+.txb p{margin:0 0 1em}
+.txb h3{font:700 1rem/1.3 var(--sans);margin:1.2em 0 .5em}
+.txb .vs{font:700 .72rem/1 var(--sans);color:var(--muted);margin-right:.15em}
+.txb .tsrc{font:600 .88rem/1.4 var(--sans);color:var(--muted);text-align:right;margin:1.1em 0 0}
+.txb .tsrc:not(:last-child){margin-bottom:1.4em;padding-bottom:1.2em;border-bottom:1px solid var(--line)}
+</style>
+<link rel="stylesheet" href="quiz.css?v=20261116170435">
+<script>try{history.scrollRestoration="manual"}catch(e){}(function(){function t(){if(!location.hash)window.scrollTo(0,0)}t();document.addEventListener("DOMContentLoaded",t);window.addEventListener("load",function(){t();setTimeout(t,60)});window.addEventListener("pageshow",t)})();</script>
+<script src="sommaire.js?v=20261116170435" defer></script><script src="fil.js?v=20261116170435" defer></script><script src="menu.js?v=20261116170435" defer></script><script src="vo.js?v=20261116170435" defer></script>
+<script src="confort.js?v=20261116170435"></script><script src="voix.js?v=20261116170435" defer></script>
+<style id="pc-css">#pour-continuer .pc{max-width:980px;margin:2.5rem auto 0;padding:0 1.25rem;box-sizing:content-box;font-family:var(--sans,system-ui,sans-serif)}
+#pour-continuer h2{font:700 1.15rem/1.3 var(--sans,system-ui,sans-serif);margin:0 0 .8rem;color:var(--ink)}
+#pour-continuer h3{font:700 .8rem/1.3 var(--sans,system-ui,sans-serif);text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:1rem 0 .45rem}
+#pour-continuer ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.5rem}
+#pour-continuer a{display:inline-block;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--k,var(--ink));padding:.45rem .75rem;border-radius:6px;font:500 .95rem/1.35 var(--sans,system-ui,sans-serif)}
+#pour-continuer a:hover{border-color:var(--k,var(--ink))}
+#pour-continuer a:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+#pour-continuer a.plan{font-weight:700}
+@media print{#pour-continuer{display:none}}</style></head>
+<body style="--k:var(--nat);--ks:var(--nat-soft)">
+<nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="rubriques.html" style="color:inherit">Retour à l’accueil</a><span style="display:inline-flex;gap:.6rem;flex-wrap:wrap;align-items:center"><span class="a11y"><button type="button" class="pdfbtn" id="a11y-btn" aria-haspopup="true" aria-expanded="false" aria-controls="a11y-menu"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="1.6"/><path d="M5 8.5l7 1.5 7-1.5M12 10v4.5M8.5 21l3.5-6.5 3.5 6.5"/></svg><span>Accessibilité</span></button><div class="a11y-menu" id="a11y-menu" role="radiogroup" aria-label="Affichage de la page" hidden><p>Affichage</p><button type="button" role="radio" class="a11y-opt" data-mode="orig" aria-checked="true"><span class="dot"></span><span>Page d’origine<small>Image de fond et mise en page habituelle</small></span></button><button type="button" role="radio" class="a11y-opt" data-mode="ts" aria-checked="false"><span class="dot"></span><span>Texte seul<small>Sans image de fond</small></span></button><button type="button" role="radio" class="a11y-opt" data-mode="lect" aria-checked="false"><span class="dot"></span><span>Mode lecture<small>Texte continu, sans cadres ni exercices</small></span></button></div></span><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></span></nav>
+<header class="hero">
+  <div class="wrap hgrid">
+    <div>
+      <h1>Russell</h1>
+      <p class="lead">Nous croyons que le soleil se lèvera demain parce qu’il s’est toujours levé. Mais la poule nourrie chaque matin le croyait aussi, jusqu’au jour où on lui a tordu le cou.</p>
+    </div>
+    <div class="must" style="border-top-color:var(--k)">
+      <p class="src">Russell, <i>Problèmes de philosophie</i></p>
+      <p class="q">« Peut-être ne sommes-nous pas plus avisés que le poulet. »</p>
+      <p>L’habitude explique nos attentes, mais elle ne prouve pas qu’elles sont fondées.</p>
+    </div>
+  </div>
+</header>
+<main>
+<section class="block" aria-labelledby="h-tx">
+  <div class="wrap">
+    <details class="tx"><summary id="h-tx">Le texte</summary><div class="txb"><p>Prenons comme illustration un cas au sujet duquel nul, en réalité, n’a le plus léger doute : nous sommes tous convaincus que le soleil se lèvera demain. Pourquoi ? Cette conviction est-elle issue d’une confiance aveugle en notre expérience passée, ou peut-elle se justifier comme étant raisonnable ? Il n’est pas facile de trouver un moyen d’élucider si une croyance de ce genre est raisonnable ou non, mais nous pouvons du moins déterminer de quelle sorte sont les principes généraux qui peuvent suffire, s’ils sont exacts, à justifier notre confiance dans le lever quotidien du soleil, ou de nombreux jugements du même ordre sur lesquels se fondent nos actes.</p><p>Si l’on nous demande pourquoi nous croyons que le soleil se lèvera demain, nous répondrons évidemment : « parce que le soleil s’est toujours levé chaque jour. » Notre croyance est fermement établie : le soleil se lèvera à l’avenir, parce qu’il s’est levé dans le passé. Mis au défi de donner la raison de notre confiance, nous en appellerons peut-être aux lois du mouvement ; la Terre, dirons-nous, est un corps à rotation libre et de tels corps ne cessent de tourner que si quelque chose vient de l’extérieur pour les en empêcher ; or il n’y a rien qui, entre aujourd’hui et demain, puisse venir de l’extérieur pour empêcher la Terre de tourner. Bien entendu, on pourrait douter de notre certitude absolue sur ce point, mais ce n’est pas là le doute qui nous intéresse. Le doute intéressant s’applique aux lois du mouvement : demeureront-elles ce qu’elles sont jusqu’à demain ? Si un tel doute surgit, nous nous trouvons dans la même position que lorsque le doute concernant le lever du soleil a été admis. […]</p><p>Ce genre d’associations n’est pas l’apanage de l’homme ; elle existe chez l’animal et est même très vive. Un cheval qui a été souvent mené dans une certaine direction résiste et refuse de prendre une autre route. Les animaux domestiques s’attendent à avoir leur nourriture lorsqu’ils voient les personnes qui s’occupent d’eux. Nous savons que toutes ces associations assez élémentaires peuvent être décevantes : le propriétaire des poulets qui les nourrit ponctuellement chaque jour, arrive un beau jour pour leur tordre le cou. Il aurait été utile pour les poulets d’avoir une conception moins simple de l’uniformité des actions humaines.</p><p>En dépit des déceptions possibles qu’entraînent parfois nos attentes, elles n’en existent pas moins. Lorsqu’un fait survient un certain nombre de fois, c’est une cause suffisante pour qu’humains et animaux s’attendent à le voir se reproduire. Ainsi, notre instinct nous fait supposer que le soleil se lèvera demain, mais peut-être ne sommes-nous pas plus avisés que le poulet qui a le cou tordu sans s’y attendre. Il nous faut donc distinguer deux sortes de questions : premièrement, le fait qu’une succession uniforme de faits passés entraîne l’attente de ces faits pour l’avenir ; deuxièmement, après avoir examiné la justification même de notre attente, cherchons à savoir s’il y a une raison assez solide pour qu’elle ait toutes les chances de n’être pas déçue.</p><p class="tsrc">Bertrand Russell, <em>Problèmes de philosophie</em>, chapitre VI : « De l’induction ». Traduction française.</p><div class="vo" lang="en" data-lang="anglais" hidden><p>Let us take as an illustration a matter about which none of us, in fact, feel the slightest doubt. We are all convinced that the sun will rise tomorrow. Why? Is this belief a mere blind outcome of past experience, or can it be justified as a reasonable belief? It is not easy to find a test by which to judge whether a belief of this kind is reasonable or not, but we can at least ascertain what sort of general beliefs would suffice, if true, to justify the judgement that the sun will rise tomorrow, and the many other similar judgements upon which our actions are based.</p><p>It is obvious that if we are asked why we believe that the sun will rise tomorrow, we shall naturally answer “Because it always has risen every day.” We have a firm belief that it will rise in the future, because it has risen in the past. If we are challenged as to why we believe that it will continue to rise as heretofore, we may appeal to the laws of motion: the earth, we shall say, is a freely rotating body, and such bodies do not cease to rotate unless something interferes from outside, and there is nothing outside to interfere with the earth between now and tomorrow. Of course it might be doubted whether we are quite certain that there is nothing outside to interfere, but this is not the interesting doubt. The interesting doubt is as to whether the laws of motion will remain in operation until tomorrow. If this doubt is raised, we find ourselves in the same position as when the doubt about the sunrise was first raised. […]</p><p>And this kind of association is not confined to men; in animals also it is very strong. A horse which has been often driven along a certain road resists the attempt to drive him in a different direction. Domestic animals expect food when they see the person who usually feeds them. We know that all these rather crude expectations of uniformity are liable to be misleading. The man who has fed the chicken every day throughout its life at last wrings its neck instead, showing that more refined views as to the uniformity of nature would have been useful to the chicken.</p><p>But in spite of the misleadingness of such expectations, they nevertheless exist. The mere fact that something has happened a certain number of times causes animals and men to expect that it will happen again. Thus our instincts certainly cause us to believe that the sun will rise tomorrow, but we may be in no better a position than the chicken which unexpectedly has its neck wrung. We have therefore to distinguish the fact that past uniformities cause expectations as to the future, from the question whether there is any reasonable ground for giving weight to such expectations after the question of their validity has been raised.</p><p class="tsrc">Bertrand Russell, <em>The Problems of Philosophy</em>, chapter VI, 1912</p></div></div></details>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-th">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="h-th">Le problème et la thèse</h2></div>
+    <div class="two"><div class="qc" style="--k:var(--gold)"><h3>La question</h3><p>Avons-nous une raison valable de croire que l’avenir ressemblera au passé, ou seulement l’habitude de le croire ?</p></div><div class="qc" style="--k:var(--k)"><h3>La thèse</h3><p>La répétition explique nos attentes, mais ne les justifie pas. Il faut distinguer la cause d’une croyance et sa justification : une attente fondée sur l’habitude peut toujours être démentie, comme celle de la poule.</p></div></div>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-ctx">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="h-ctx">Contexte et enjeu</h2></div>
+    <div class="two"><div class="qc" style="--k:var(--gold)"><h3>L’auteur</h3><p>Bertrand Russell (1872-1970), philosophe, logicien et mathématicien britannique, prix Nobel de littérature en 1950. Il est l’un des fondateurs de la philosophie analytique.</p></div><div class="qc" style="--k:var(--k)"><h3>L’enjeu</h3><p><i>Problèmes de philosophie</i> (1912) est un livre d’introduction. Le chapitre VI reprend le problème posé par Hume : sur quoi repose notre croyance que l’avenir ressemblera au passé ? Toute la science et toute notre conduite en dépendent.</p></div></div>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-fk">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="h-fk">Hume et Russell : expliquer ou justifier ?</h2><p>La fiche de Hume montre d’où vient notre croyance ; Russell demande ce qu’elle vaut.</p></div>
+    <div class="two"><div class="qc" style="--k:var(--gold)"><h3>Hume</h3><p>Notre croyance dans les faits futurs vient de l’expérience : nous avons vu des objets en « conjonction constante », et l’habitude nous fait attendre le même effet après la même cause. Cette croyance n’est pas démontrée, mais elle est raisonnable : elle guide la vie.</p></div><div class="qc" style="--k:var(--k)"><h3>Russell</h3><p>Russell accepte cette explication, mais il demande si elle suffit. L’habitude explique pourquoi nous croyons ; elle ne dit pas si nous avons raison de croire. La poule aussi avait une habitude, et elle s’est trompée.</p></div></div>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-arg">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="h-arg">Le fil de l’argumentation</h2><p>Faites avancer le raisonnement étape par étape.</p></div>
+    <ol class="stp" id="stp" aria-live="polite"><li hidden><div><h3>Une certitude que personne ne met en doute</h3><p>Nous sommes tous convaincus que le soleil se lèvera demain. Mais cette conviction vient-elle d’une confiance aveugle dans l’expérience passée, ou peut-elle se justifier comme raisonnable ?</p></div></li><li hidden><div><h3>Les lois du mouvement ne font que déplacer le doute</h3><p>On peut invoquer les lois du mouvement : la Terre tourne et rien ne l’en empêchera d’ici demain. Mais ces lois resteront-elles ce qu’elles sont jusqu’à demain ? On retrouve exactement la même question.</p></div></li><li hidden><div><h3>L’attente, un fait commun aux hommes et aux animaux</h3><p>Le cheval refuse de quitter la route habituelle, les animaux domestiques attendent leur repas en voyant celui qui les nourrit : la répétition crée une attente.</p></div></li><li hidden><div><h3>Ces attentes peuvent tromper</h3><p>La poule nourrie chaque jour s’attend à l’être encore ; un jour, on lui tord le cou. Une attente fondée sur la seule répétition peut être brutalement démentie.</p></div></li><li hidden><div><h3>Pourtant, elles existent</h3><p>Le simple fait qu’une chose soit arrivée plusieurs fois nous fait attendre qu’elle se reproduise. C’est ainsi que nous croyons que le soleil se lèvera demain.</p></div></li><li hidden><div><h3>Nous ressemblons à la poule</h3><p>Notre certitude sur le soleil n’est peut-être pas mieux fondée que la confiance de la poule.</p></div></li><li hidden><div><h3>La distinction décisive</h3><p>Il faut distinguer le fait (le passé cause nos attentes) et la question de droit (avons-nous une raison valable de leur faire confiance ?).</p></div></li></ol>
+    <div class="score"><button class="btn primary" id="nx" type="button">Première étape</button><button class="btn" id="all" type="button">Tout afficher</button><button class="btn" id="rs" type="button">Recommencer</button></div>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-ls">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="h-ls">Lecture suivie du texte</h2><p>Un parcours plus détaillé que le fil de l’argumentation, paragraphe par paragraphe.</p></div>
+    <div class="lim" style="margin-bottom:.8rem"><b>1er paragraphe : des exemples pris aux animaux.</b> Russell ne commence pas par les hommes mais par des animaux : le cheval, les animaux domestiques. Le choix est volontaire : il montre que l’attente née de la répétition est un mécanisme naturel, qui n’a rien d’un raisonnement.</div><div class="lim" style="margin-bottom:.8rem"><b>La poule : un contre-exemple brutal.</b> L’exemple est construit pour frapper : chaque jour confirme l’attente de la poule, et c’est justement celui qui la nourrit qui la tue. Plus les confirmations s’accumulent, plus la poule est confiante, sans être mieux protégée. La phrase finale est ironique : « il aurait été utile pour les poulets d’avoir une conception moins simple de l’uniformité des actions humaines ».</div><div class="lim" style="margin-bottom:.8rem"><b>2e paragraphe : un fait incontestable.</b> Russell ne nie pas que nous ayons ces attentes : elles « n’en existent pas moins ». Il retrouve ici Hume : la répétition produit l’attente. Puis il revient au soleil, l’exemple de Hume, et nous met à la place de la poule.</div><div class="lim" style="margin-bottom:.8rem"><b>La distinction finale.</b> Le texte s’achève sur une distinction capitale : d’un côté le fait (le passé cause nos attentes), de l’autre la question de leur validité (avons-nous raison d’y croire ?). C’est la distinction entre expliquer une croyance et la justifier.</div><div class="lim" style="margin-bottom:.8rem"><b>Le mouvement d’ensemble.</b> On part d’une certitude commune, le lever du soleil, dont la science ne fait que déplacer la justification ; puis des exemples concrets (le cheval, la poule) conduisent à une distinction philosophique. Le texte ne conclut pas que nous avons tort de croire, mais que la question reste ouverte.</div>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-no">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="h-no">Notions à maîtriser</h2><p>Cliquez sur une notion pour ouvrir sa définition.</p></div>
+    <div class="terms"><details><summary>Induction</summary><p>Raisonnement qui passe de cas observés à une règle générale ou à l’avenir : « le soleil s’est toujours levé, donc il se lèvera demain ».</p></details><details><summary>Uniformité de la nature</summary><p>Croyance que la nature obéit à des lois sans exception, et que l’avenir ressemblera donc au passé.</p></details><details><summary>Cause / justification</summary><p>La cause d’une croyance explique pourquoi on l’a ; sa justification dit si l’on a raison de l’avoir. L’habitude est une cause, pas une justification.</p></details><details><summary>Fait / droit</summary><p>Le fait : ce qui se passe (nous attendons que le soleil se lève). Le droit : ce qui est légitime (avons-nous raison de l’attendre ?).</p></details></div>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-nc">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="h-nc">Notions complémentaires</h2></div>
+    <div class="terms"><details><summary>Principe d’induction</summary><p>Dans la suite du chapitre, Russell nomme ainsi le principe selon lequel plus deux choses ont été trouvées ensemble, plus il est probable qu’elles le seront encore.</p></details><details><summary>Probabilité</summary><p>Russell conclut que l’induction ne donne jamais la certitude, seulement des probabilités, qui augmentent avec le nombre de cas observés.</p></details><details><summary>Pétition de principe</summary><p>Faute de raisonnement qui suppose ce qu’il faut prouver. Justifier l’induction par l’expérience passée en est une, selon Russell.</p></details></div>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-ex">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="h-ex">Exercice : est-ce la position de l’auteur ?</h2><p>Pour chaque phrase, dites si elle correspond à la pensée de l’auteur dans ce texte. <span class="note">Exercice et corrections rédigés pour cette page.</span></p></div>
+    <ul class="sorter" id="s1"></ul>
+    <div class="score"><p id="sc1" aria-live="polite"></p><button class="btn" id="r1" type="button">Recommencer</button></div>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-in">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="h-in">Au-delà de l’extrait : la suite du problème</h2><p>Le texte s’arrête avant les conclusions du chapitre, utiles pour la dissertation.</p></div>
+    <div class="lim" style="margin-bottom:.8rem"><b>Les « futurs passés ».</b> On pourrait dire : le futur a toujours fini par ressembler au passé, donc nous avons l’expérience du futur. Russell répond que nous n’avons l’expérience que des « futurs passés », pas des « futurs futurs ». Supposer qu’ils se ressemblent, c’est supposer ce qu’il fallait prouver.</div><div class="lim" style="margin-bottom:.8rem"><b>Un principe ni prouvable ni réfutable.</b> Le principe d’induction ne peut pas être prouvé par l’expérience, car tout argument tiré de l’expérience le suppose déjà. Mais sans lui, nous n’aurions aucune raison de croire que le pain nourrit mieux qu’une pierre, ou que nous tomberons si nous sautons d’un toit.</div><div class="lim" style="margin-bottom:.8rem"><b>Une probabilité, pas une certitude.</b> Russell ne conclut pas au scepticisme : plus les cas observés sont nombreux, plus l’induction est probable. Mais elle n’atteint jamais la certitude d’une démonstration.</div>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-ob">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="h-ob">Objections et prolongements</h2><p>Quelques auteurs à mobiliser pour discuter la thèse de Russell. Ces rapprochements sont des mises en perspective rédigées pour la page, non des passages de l’extrait.</p></div>
+    <div class="lim" style="margin-bottom:.8rem"><b>Hume : l’habitude, guide de la vie.</b> Hume (voir la fiche) répondrait que nous ne pouvons pas vivre sans nous fier à l’habitude : sans elle, nous ne saurions pas agir. La croyance n’est pas démontrée, mais elle est inévitable et, en pratique, raisonnable.</div><div class="lim" style="margin-bottom:.8rem"><b>Popper : se passer de l’induction.</b> Popper tire les conséquences de l’argument : la science ne prouve pas ses lois par accumulation de cas, elle propose des hypothèses et cherche à les réfuter. Un seul contre-exemple, comme la mort de la poule, suffit à faire tomber une loi.</div><div class="lim" style="margin-bottom:.8rem"><b>James : une croyance qui réussit.</b> James (voir la fiche) répondrait qu’une croyance vaut par sa réussite dans l’action. Mais l’exemple de la poule montre qu’une croyance peut réussir longtemps et finir par être démentie.</div>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-pg">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="h-pg">Erreurs à éviter</h2></div>
+    <div class="lim" style="margin-bottom:.8rem"><b>« Russell dit que le soleil ne se lèvera pas demain. »</b> Non : il ne prédit rien. Il demande seulement si nous avons une raison valable de croire qu’il se lèvera.</div><div class="lim" style="margin-bottom:.8rem"><b>« Russell contredit Hume. »</b> Pas exactement : il reprend son explication (la répétition crée l’attente) et pousse plus loin la question de sa valeur.</div><div class="lim" style="margin-bottom:.8rem"><b>« Les animaux sont bêtes, pas nous. »</b> Le texte dit l’inverse : sur ce point, nous fonctionnons comme les animaux, et nous ne sommes « peut-être […] pas plus avisés que le poulet ».</div>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-ci">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="h-ci">Citations à retenir</h2></div>
+    <div class="lim" style="margin-bottom:.8rem"><b>« Peut-être ne sommes-nous pas plus avisés que le poulet qui a le cou tordu sans s’y attendre. »</b> Notre confiance dans l’avenir n’est pas mieux fondée que celle d’un animal habitué.</div>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-di">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="h-di">Pour discuter</h2></div>
+    <div class="lim" style="margin-bottom:.8rem"><b>Face à Hume.</b> Hume montre d’où vient notre croyance dans l’avenir ; Russell demande ce qui la justifie. L’un explique, l’autre évalue.</div><div class="lim" style="margin-bottom:.8rem"><b>Face à la science.</b> Si l’induction n’est jamais certaine, que valent les lois scientifiques ? Le cours sur la vérité parle d’une « croyance raisonnable probabiliste ».</div>
+    <p class="links note">Voir aussi : <a href="verite-hume.html">Hume</a>, <a href="verite-james.html">James</a>, <a href="travail-russell.html">Russell : éloge de l’oisiveté</a>.</p>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-re">
+  <div class="wrap">
+    <h2 id="h-re" style="margin-bottom:1.2rem">À retenir</h2>
+    <ul class="recap"><li><b>Thèse :</b> la répétition explique nos attentes, mais ne les justifie pas.</li><li><b>Exemple :</b> la poule nourrie chaque jour, à qui l’on finit par tordre le cou.</li><li><b>Distinction :</b> la cause d’une croyance (le fait) et sa justification (le droit).</li><li><b>Face à Hume :</b> Hume explique l’origine de la croyance ; Russell interroge sa valeur.</li><li><b>Hors extrait :</b> le principe d’induction ne peut être ni prouvé ni réfuté par l’expérience ; il ne donne que des probabilités.</li></ul>
+  </div>
+</section>
+</main>
+
+
+<aside id="pour-continuer" aria-labelledby="pc-h"><div class="pc"><h2 id="pc-h">Pour continuer</h2><h3>Le cours</h3><ul><li><a class="plan" href="plan-verite.html">Plan de cours : La vérité</a></li></ul><h3>Autres textes : La vérité</h3><ul><li><a href="croyance-certitude-conviction.html">Croyance, certitude, connaissance, conviction</a></li><li><a href="verite-platon.html">Platon : le mythe de la caverne</a></li><li><a href="descartes-du-doute-au-cogito.html">Descartes : du doute au cogito</a></li><li><a href="pascal.html">Pascal : le cœur et le pari</a></li><li><a href="verite-kant.html">Kant : mensonge et devoir</a></li><li><a href="verite-rousseau.html">Rousseau : dire faux et mentir</a></li><li><a href="verite-hume.html">Hume : croyance raisonnable</a></li><li><a href="verite-james.html">James : le pragmatisme</a></li><li><a href="art-et-verite.html">L’art et la vérité</a></li></ul><h3>Russell dans d’autres notions</h3><ul><li><a href="travail-russell.html">Russell : éloge de l’oisiveté</a></li></ul></div></aside>
+<nav class="pn" aria-label="Pages de la section Vérité"><a class="pv" href="verite-hume.html" rel="prev"><small>← Page précédente</small><b>Hume : croyance raisonnable</b></a><a class="nx" href="verite-james.html" rel="next"><small>Page suivante →</small><b>James : le pragmatisme</b></a><a class="hm" href="rubriques.html">Retour à l’accueil</a></nav>
+<script>
+(function(){
+function $(s){return document.querySelector(s)}
+function sorter(listSel,scoreSel,resetSel,items,choices){
+    var list=$(listSel),sc=$(scoreSel),rows=[],done=0,right=0;
+    items.forEach(function(it){
+      var li=document.createElement('li');li.className='row';
+      li.innerHTML='<span class="name"></span><div class="pick" role="group"></div><p class="fb" hidden aria-live="polite"></p>';
+      li.querySelector('.name').innerHTML=it[0];
+      var pick=li.querySelector('.pick'),fb=li.querySelector('.fb'),bs=[];
+      pick.setAttribute('aria-label',li.querySelector('.name').textContent);
+      choices.forEach(function(c,k){
+        var b=document.createElement('button');b.type='button';b.textContent=c[0];b.style.setProperty('--c',c[1]);b.setAttribute('aria-pressed','false');
+        b.addEventListener('click',function(){
+          if(li.classList.contains('good')||li.classList.contains('bad'))return;
+          var ok=k===it[1];
+          b.setAttribute('aria-pressed','true');bs.forEach(function(x){x.disabled=true});
+          li.classList.add(ok?'good':'bad');fb.hidden=false;
+          fb.textContent=(ok?'Bien vu. ':'Pas tout à fait. ')+it[2];
+          done++;if(ok)right++;upd();
+        });
+        pick.appendChild(b);bs.push(b);
+      });
+      list.appendChild(li);rows.push(li);
+    });
+    function upd(){
+      var n=items.length,s=function(x){return x>1?'s':''};
+      sc.textContent=!done?n+' à classer.':done<n?done+' classé'+s(done)+' sur '+n+' : '+right+' bonne'+s(right)+' réponse'+s(right)+'.':'Terminé : '+right+' bonne'+s(right)+' réponse'+s(right)+' sur '+n+'.';
+    }
+    $(resetSel).addEventListener('click',function(){
+      rows.forEach(function(li){li.classList.remove('good','bad');li.querySelector('.fb').hidden=true;
+        [].forEach.call(li.querySelectorAll('button'),function(b){b.disabled=false;b.setAttribute('aria-pressed','false')})});
+      done=0;right=0;upd();
+    });
+    upd();
+  }
+
+var L=[].slice.call(document.querySelectorAll('#stp li')),n=0,nx=$('#nx');
+function show(i){L[i].hidden=false;L[i].classList.add('new')}
+function lab(){nx.textContent=n===0?'Première étape':n<L.length?'Étape suivante ('+(n+1)+'/'+L.length+')':'Terminé';nx.disabled=n>=L.length}
+nx.addEventListener('click',function(){if(n<L.length){show(n);n++;lab();}});
+$('#all').addEventListener('click',function(){while(n<L.length){show(n);n++}lab()});
+$('#rs').addEventListener('click',function(){L.forEach(function(l){l.hidden=true;l.classList.remove('new')});n=0;lab()});
+lab();
+sorter('#s1','#sc1','#r1',[["Les attentes nées de la répétition existent chez les animaux comme chez les hommes.", 0, "Oui : le cheval, les animaux domestiques, la poule."], ["Plus une chose s’est répétée, plus il est certain qu’elle se répétera.", 1, "Non : la poule a été nourrie chaque jour, et on lui a pourtant tordu le cou."], ["Il faut distinguer le fait qui cause nos attentes et la raison qui pourrait les justifier.", 0, "Oui : c’est la distinction sur laquelle s’achève le texte."], ["Nous sommes certains que le soleil se lèvera demain, contrairement à la poule.", 1, "Non : nous ne sommes « peut-être […] pas plus avisés que le poulet »."], ["Russell conclut qu’il ne faut plus rien attendre de l’avenir.", 1, "Non : il pose la question de la validité de nos attentes, sans demander d’y renoncer."]],[["Selon l’auteur", "var(--nat)"], ["Pas selon l’auteur", "var(--soc)"]]);
+})();
+</script>
+<script src="quiz.js?v=20261116170435" defer></script>
+<script>
+(function(){var r=document.documentElement,K='texte-seul',KL='mode-lecture';
+var btn=document.getElementById('a11y-btn'),menu=document.getElementById('a11y-menu'),opts=menu.querySelectorAll('.a11y-opt'),closed=[],mode='orig';
+function apply(m){
+  var ts=m==='ts',lc=m==='lect',was=r.classList.contains('lect');
+  r.classList.toggle('ts',ts);r.classList.toggle('lect',lc);
+  var ds=document.querySelectorAll('main details');
+  if(lc&&!was){closed=[];ds.forEach(function(d){if(!d.open){closed.push(d);d.open=true}});document.querySelectorAll('#stp li').forEach(function(x){x.hidden=false})}
+  if(!lc&&was){closed.forEach(function(d){d.open=false});closed=[]}
+  mode=m;opts.forEach(function(o){o.setAttribute('aria-checked',o.getAttribute('data-mode')===m?'true':'false')});
+  try{localStorage.setItem(K,ts?'1':'0');localStorage.setItem(KL,lc?'1':'0')}catch(e){}
+}
+function open(on){menu.hidden=!on;btn.setAttribute('aria-expanded',on?'true':'false')}
+btn.addEventListener('click',function(e){e.stopPropagation();open(menu.hidden)});
+opts.forEach(function(o){o.addEventListener('click',function(){apply(o.getAttribute('data-mode'));open(false);btn.focus()})});
+document.addEventListener('click',function(e){if(!menu.hidden&&!menu.contains(e.target)&&e.target!==btn)open(false)});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!menu.hidden){open(false);btn.focus()}});
+var v='orig';try{if(localStorage.getItem(KL)==='1')v='lect';else if(localStorage.getItem(K)==='1'&&menu.querySelector('[data-mode="ts"]'))v='ts'}catch(e){}
+if(v==='ts')apply('ts');
+if(v==='lect')window.addEventListener('load',function(){apply('lect')});
+})();
+</script>
+<script src="reperes-liens.js?v=20261116170435" defer></script></body>
+</html><div class="lim" style="margin-bottom:.8rem"><b>1er paragraphe : un exemple que personne ne conteste.</b> Russell choisit à dessein une croyance dont nul ne doute, le lever du soleil : si même celle-là est difficile à justifier, toutes nos croyances sur l’avenir sont concernées. La question est posée d’emblée : confiance aveugle en l’expérience passée, ou croyance raisonnable ?</div><div class="lim" style="margin-bottom:.8rem"><b>2e paragraphe : la science ne fait que déplacer le doute.</b> La réponse spontanée (« il s’est toujours levé ») et la réponse savante (la Terre est un corps en rotation libre) reposent sur la même supposition : que les lois resteront ce qu’elles sont. Le doute intéressant ne porte pas sur un obstacle extérieur, mais sur la permanence des lois elles-mêmes.</div>
