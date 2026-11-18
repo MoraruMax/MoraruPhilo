@@ -24,12 +24,14 @@ function merge(a,b){
  if(typeof a==='number'&&typeof b==='number')return Math.max(a,b);
  if(typeof a==='boolean'||typeof b==='boolean')return !!(a||b);
  if(a==null||a==='')return b;return a}
+function mergeFiches(a,b){var out={c:a.c||b.c,f:a.f.slice()},by={};out.f.forEach(function(x,i){by[x.id]=i});b.f.forEach(function(x){if(by[x.id]==null){by[x.id]=out.f.length;out.f.push(x);return}var y=out.f[by[x.id]],seen={};y.it.forEach(function(i){seen[i.id]=1});y=Object.assign({},y,{it:y.it.concat(x.it.filter(function(i){return !seen[i.id]}))});out.f[by[x.id]]=y});return out}
 function bestScore(a,b){var o={},k;for(k in a)o[k]=a[k];for(k in b){var x=a[k],y=b[k];if(!x){o[k]=y;continue}if(!y)continue;
  var rx=x[1]?x[0]/x[1]:0,ry=y[1]?y[0]/y[1]:0;o[k]=ry>rx?y:x}return o}
 function importData(data){var n=0;Object.keys(data).forEach(function(k){if(EXCL.test(k))return;var nv=data[k],ov=localStorage.getItem(k),res;
   if(ov==null)res=nv;else{var A,B,ok=true;try{A=JSON.parse(ov);B=JSON.parse(nv)}catch(e){ok=false}
    if(!ok)res=ov||nv;
    else if(/^carnet-quiz/.test(k)&&A&&B&&typeof A==='object')res=JSON.stringify(bestScore(A,B));
+   else if(k==='mes-fiches'&&A&&B&&A.f&&B.f)res=JSON.stringify(mergeFiches(A,B));
    else res=JSON.stringify(merge(A,B))}
   if(res!==ov){localStorage.setItem(k,res);n++}});return n}
 
