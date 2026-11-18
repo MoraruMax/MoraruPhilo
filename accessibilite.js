@@ -1,7 +1,8 @@
 /* Bouton « Accessibilité » pour les pages qui n'en ont pas : ouvre le menu de confort de lecture (confort.js). */
 (function(){
-  var nav=document.querySelector('body > nav');
-  if(!nav||document.getElementById('a11y-btn')||!nav.querySelector('a[href="accueil.html"]'))return;
+  var nav=document.querySelector('body > nav')||document.querySelector('nav.top');
+  if(!nav||document.getElementById('a11y-btn')||!nav.querySelector('a[href="accueil.html"],a[href="rubriques.html"]'))return;
+  if(getComputedStyle(nav).display.indexOf('flex')<0){nav.style.display='flex';nav.style.alignItems='center';nav.style.flexWrap='wrap';nav.style.gap='.6rem 1rem'}
   var st=document.createElement('style');
   st.textContent=
    '.a11y{position:relative;display:inline-block;margin-left:auto}'+
@@ -43,7 +44,7 @@
   var w=document.createElement('span');w.className='a11y';
   w.innerHTML='<button type="button" class="a11y-b" id="a11y-btn" aria-haspopup="true" aria-expanded="false" aria-controls="a11y-menu"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="1.6"/><path d="M5 8.5l7 1.5 7-1.5M12 10v4.5M8.5 21l3.5-6.5 3.5 6.5"/></svg><span>Accessibilité</span></button><div class="a11y-menu" id="a11y-menu" hidden>'+(plan?'<p class="a11y-t">Affichage</p><button type="button" role="radio" class="a11y-opt" data-mode="orig" aria-checked="true"><span class="dot"></span><span>Page d’origine<small>Branches repliables et couleurs</small></span></button><button type="button" role="radio" class="a11y-opt" data-mode="lect" aria-checked="false"><span class="dot"></span><span>Mode lecture<small>Texte continu, sans cadres ni boutons</small></span></button>':'')+'</div>';
   var pdf=nav.querySelector('.pdfbtn');
-  if(pdf)nav.insertBefore(w,pdf);else nav.appendChild(w);
+  if(pdf)pdf.parentNode.insertBefore(w,pdf);else{var sp=nav.querySelector(':scope > span');if(sp)sp.insertBefore(w,sp.firstChild);else nav.appendChild(w)}
   var btn=w.querySelector('#a11y-btn'),menu=w.querySelector('#a11y-menu');
   function open(on){menu.hidden=!on;btn.setAttribute('aria-expanded',on?'true':'false')}
   btn.addEventListener('click',function(e){e.stopPropagation();open(menu.hidden)});
