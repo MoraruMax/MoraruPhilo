@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head><script id="maj-auto">(function(){var V="20261120185526",busy=0;function chk(){if(busy)return;busy=1;try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){busy=0;t=(t||"").trim();if(!/^\d+$/.test(t)||t<=V)return;var k="maj-"+t,a=[0,0];try{a=(sessionStorage.getItem(k)||"0,0").split(",").map(Number)}catch(e){}if(a[0]>=4||Date.now()-a[1]<20000)return;try{sessionStorage.setItem(k,(a[0]+1)+","+Date.now())}catch(e){}fetch(location.pathname+"?v="+t,{cache:"reload"}).catch(function(){}).then(function(){return fetch(location.href,{cache:"reload"})}).then(function(){location.reload()},function(){location.reload()})}).catch(function(){busy=0})}catch(e){busy=0}}chk();document.addEventListener("visibilitychange",function(){if(!document.hidden)chk()});window.addEventListener("pageshow",function(e){if(e.persisted)chk()});setInterval(function(){if(!document.hidden)chk()},300000)})();</script><meta name="robots" content="noindex, nofollow"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="favicon.ico" sizes="any"><link rel="apple-touch-icon" href="apple-touch-icon.png"><meta name="theme-color" content="#1E1A16">
+<head><script id="maj-auto">(function(){var V="20261120223523",busy=0;function chk(){if(busy)return;busy=1;try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){busy=0;t=(t||"").trim();if(!/^\d+$/.test(t)||t<=V)return;var k="maj-"+t,a=[0,0];try{a=(sessionStorage.getItem(k)||"0,0").split(",").map(Number)}catch(e){}if(a[0]>=4||Date.now()-a[1]<20000)return;try{sessionStorage.setItem(k,(a[0]+1)+","+Date.now())}catch(e){}fetch(location.pathname+"?v="+t,{cache:"reload"}).catch(function(){}).then(function(){return fetch(location.href,{cache:"reload"})}).then(function(){location.reload()},function(){location.reload()})}).catch(function(){busy=0})}catch(e){busy=0}}chk();document.addEventListener("visibilitychange",function(){if(!document.hidden)chk()});window.addEventListener("pageshow",function(e){if(e.persisted)chk()});setInterval(function(){if(!document.hidden)chk()},300000)})();</script><meta name="robots" content="noindex, nofollow"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="favicon.ico" sizes="any"><link rel="apple-touch-icon" href="apple-touch-icon.png"><meta name="theme-color" content="#1E1A16">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Flashcards</title>
 <meta name="description" content="Flashcards par notion : thèses et citations des auteurs du cours.">
-<script src="confort.js?v=20261120185526"></script>
+<script src="confort.js?v=20261120223523"></script>
 <style>
 
 :root{
@@ -84,7 +84,7 @@ blockquote{margin:0}
 .end h2{margin:0 0 .4rem}
 
 </style>
-</head>
+<style id="a11y-fix">.fc .kind{color:color-mix(in srgb,var(--c,var(--muted)) 45%,var(--ink))}.btn.rev{color:color-mix(in srgb,#b42318 55%,var(--ink));border-color:color-mix(in srgb,#b42318 55%,var(--ink))}.btn.ok{color:color-mix(in srgb,#1d7a2e 55%,var(--ink));border-color:color-mix(in srgb,#1d7a2e 55%,var(--ink))}.nsel button:not([aria-pressed="true"]){color:color-mix(in srgb,var(--c,var(--ink)) 45%,var(--ink))}.nsel button:not([aria-pressed="true"]) small{opacity:1}</style></head>
 <body>
 <nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="rubriques.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
 <header class="hero"><div class="wrap">
@@ -97,7 +97,7 @@ blockquote{margin:0}
   <div id="deck" aria-live="polite"></div>
   <p class="note">Raccourcis : Espace pour retourner la carte, 1 pour « À revoir », 2 pour « Je savais ». Vos réponses restent sur cet appareil.</p>
 </main>
-<script src="savoirs.js?v=20261120185526"></script>
+<script src="savoirs.js?v=20261120223523"></script>
 <script>
 (function(){var D=window.SAV,K='flashcards',st,deck=[],i=0,cur=null,res={ok:0,rev:0};
 function load(){try{return JSON.parse(localStorage.getItem(K)||'{}')||{}}catch(e){return {}}}function save(){try{localStorage.setItem(K,JSON.stringify(st))}catch(e){}}st=load();
@@ -124,7 +124,7 @@ function show(){var el=document.getElementById('deck');
   document.getElementById('again').addEventListener('click',function(){choose(sel)});var o=document.getElementById('onlyrev');if(o)o.addEventListener('click',function(){document.getElementById('o-rev').checked=true;choose(sel)});document.getElementById('again').focus();return}
  cur=deck[i];var c=cur.n.c;
  el.innerHTML='<div class="prog"><span>Carte '+(i+1)+' sur '+deck.length+'</span><span>'+(st[cur.id]==='rev'?'Marquée « à revoir »':st[cur.id]==='ok'?'Déjà sue':'')+'</span></div><div class="bar"><i style="width:'+(i/deck.length*100)+'%;background:'+c+'"></i></div>'+
- '<div class="fc" id="card" style="--c:'+c+'"><div class="in" role="button" tabindex="0" aria-label="Retourner la carte"><div class="face front"><span class="kind">'+cur.kind+' · '+esc(cur.n.nom)+'</span>'+cur.front+'<span class="hint">Cliquez ou appuyez sur Espace pour voir la réponse</span></div><div class="face back" aria-hidden="true"><span class="kind">Réponse · '+esc(cur.n.nom)+'</span>'+cur.back+'</div></div></div>'+
+ '<div class="fc" id="card" style="--c:'+c+'"><div class="in"><div class="face front"><span class="kind">'+cur.kind+' · '+esc(cur.n.nom)+'</span>'+cur.front+'<span class="hint">Cliquez ou appuyez sur Espace pour voir la réponse</span></div><div class="face back"><span class="kind">Réponse · '+esc(cur.n.nom)+'</span>'+cur.back+'</div></div></div>'+
  '<div class="acts"><button class="btn" type="button" id="flip">Retourner</button><button class="btn rev" type="button" id="b-rev">À revoir</button><button class="btn ok" type="button" id="b-ok">Je savais</button></div>';
  var card=document.getElementById('card'),inn=card.querySelector('.in');
  function flip(){card.classList.toggle('flip');var f=card.classList.contains('flip');card.querySelector('.front').setAttribute('aria-hidden',f?'true':'false');card.querySelector('.back').setAttribute('aria-hidden',f?'false':'true')}
@@ -137,8 +137,8 @@ document.addEventListener('keydown',function(e){if(!cur||e.target.tagName==='INP
 var h=(location.hash||'').slice(1);choose(h==='*'||D.N.some(function(n){return n.k===h})?h:'*');
 })();
 </script>
-<script src="fil.js?v=20261120185526" defer></script>
-<script src="menu.js?v=20261120185526" defer></script>
-<script src="voix.js?v=20261120185526" defer></script>
-<script src="accessibilite.js?v=20261120185526" defer></script></body>
+<script src="fil.js?v=20261120223523" defer></script>
+<script src="menu.js?v=20261120223523" defer></script>
+<script src="voix.js?v=20261120223523" defer></script>
+<script src="accessibilite.js?v=20261120223523" defer></script></body>
 </html>

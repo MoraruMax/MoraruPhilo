@@ -6,7 +6,7 @@ var L='a-zA-ZÀ-ÿœŒ',K=Object.keys(M).sort(function(a,b){return b.length-a.le
 function rx(k){return new RegExp('(^|[^'+L+'])('+k.replace(/[.*+?^${}()|[\]\\]/g,'\\$&').replace(/’/g,"[’']").replace(/^[ÉE]/,'[ÉE]')+')(?=$|[^'+L+'])',k.charAt(0)===k.charAt(0).toUpperCase()?'':'i')}
 var RX=K.map(rx);
 function run(){var main=document.querySelector('main');if(!main||main.querySelector('.pl-t'))return;var done={};
- var w=document.createTreeWalker(main,NodeFilter.SHOW_TEXT,{acceptNode:function(t){var p=t.parentElement;return p&&!p.closest('a,button,h1,h2,script,style,nav,#pour-continuer,.pl-pop,svg')?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT}}),ns=[];
+ var w=document.createTreeWalker(main,NodeFilter.SHOW_TEXT,{acceptNode:function(t){var p=t.parentElement;return p&&!p.closest('summary,a,button,h1,h2,script,style,nav,#pour-continuer,.pl-pop,svg')?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT}}),ns=[];
  while(w.nextNode())ns.push(w.currentNode);
  ns.forEach(function(t){for(var i=0;i<K.length;i++){var k=K[i];if(done[k])continue;var m=RX[i].exec(t.nodeValue);if(!m)continue;
   var s=m.index+m[1].length,word=m[2],aft=t.splitText(s);aft.nodeValue=aft.nodeValue.slice(word.length);var L2=M[k];
