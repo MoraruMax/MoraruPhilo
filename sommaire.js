@@ -18,7 +18,7 @@
   '.som .som-go{flex:1;display:flex;align-items:center;justify-content:center;gap:.4rem;border-left:0;text-align:center}'+
   '.som a:hover{background:var(--surface,#f3f3f3)}'+
   '.som a[aria-current="true"]{background:var(--surface,#f3f3f3);border-left-color:var(--focus,#06c);font-weight:800}'+
-  '@media (min-width:1500px){.som{left:max(1rem,calc(50% - 490px - 17rem));top:7rem;bottom:auto}.som-b{display:none}.som-p{display:block;position:static;width:15rem;max-height:calc(100vh - 10rem);border:0;box-shadow:none;background:transparent;padding:0}}'+
+  '@media (min-width:1500px){.som{left:max(1rem,calc(50% - 490px - 17rem));top:7rem;bottom:auto}.som-p{top:calc(100% + .5rem);bottom:auto;width:17rem;max-height:calc(100vh - 11rem)}}'+
   '@media print{.som{display:none}}';
   document.head.appendChild(st);
   var box=document.createElement('nav'); box.className='som'; box.setAttribute('aria-label','Sur cette page');

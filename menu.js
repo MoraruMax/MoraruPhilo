@@ -95,3 +95,28 @@ function go(){setTimeout(init,0)}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go();
 })();
 /*FICHE-END*/
+
+/* « etc. », « a priori », « a posteriori » en italique, y compris dans les contenus affichés par script */
+(function(){
+var RE=/(^|[^0-9A-Za-zÀ-ɏ_])(etc\.|a priori|a posteriori)(?![0-9A-Za-zÀ-ɏ_])/i;
+var SK='script,style,textarea,option,em,i,code,pre,cite,title,svg,input,select,[contenteditable]';
+function fix(t){
+ var p=t.parentElement;if(!p||p.closest(SK))return;
+ var s=t.data;if(!RE.test(s))return;
+ var g=new RegExp(RE.source,'gi'),f=document.createDocumentFragment(),last=0,m;
+ while((m=g.exec(s))){var a=m.index+m[1].length;f.appendChild(document.createTextNode(s.slice(last,a)));var e=document.createElement('em');e.textContent=m[2];f.appendChild(e);last=a+m[2].length}
+ f.appendChild(document.createTextNode(s.slice(last)));p.replaceChild(f,t);
+}
+function walk(root){
+ if(root.nodeType===3){fix(root);return}
+ if(root.nodeType!==1||root.closest&&root.closest(SK))return;
+ var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT),l=[],n;
+ while((n=w.nextNode()))if(RE.test(n.data))l.push(n);
+ l.forEach(fix);
+}
+function init(){
+ walk(document.body);
+ new MutationObserver(function(ms){ms.forEach(function(m){[].forEach.call(m.addedNodes,walk)})}).observe(document.body,{childList:true,subtree:true});
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
