@@ -44,7 +44,7 @@ document.head.appendChild(st);
 function paras(tx){return [].slice.call(tx.children).filter(function(e){return e.tagName==='P'&&!e.classList.contains('tsrc')})}
 function index(tx){
  var s='',map=[];
- paras(tx).forEach(function(p,i){if(i)s+='\n';var w=document.createTreeWalker(p,NodeFilter.SHOW_TEXT);var n;while((n=w.nextNode())){map.push([s.length,n]);s+=n.data.replace(/[  ]/g,' ')}});
+ paras(tx).forEach(function(p,i){if(i)s+='\n';var w=document.createTreeWalker(p,NodeFilter.SHOW_TEXT);var n;while((n=w.nextNode())){if(n.parentNode.closest&&n.parentNode.closest('.rx-n,.rx-part'))continue;map.push([s.length,n]);s+=n.data.replace(/[  ]/g,' ')}});
  return {s:s,map:map};
 }
 function find(ix,an){
@@ -64,7 +64,8 @@ function insertAt(tx,pos,el){
  var n=m[lo][1],off=pos-m[lo][0];
  if(off>=n.data.length){n.parentNode.insertBefore(el,n.nextSibling);return}
  if(off>0)n=n.splitText(off);
- n.parentNode.insertBefore(el,n);
+ var ref=n;if(el.classList.contains('rx-part')){for(;;){while(ref.previousSibling&&ref.previousSibling.nodeType===1&&ref.previousSibling.classList.contains('rx-n'))ref=ref.previousSibling;if(!ref.previousSibling&&ref.parentNode.hasAttribute&&ref.parentNode.hasAttribute('data-rx'))ref=ref.parentNode;else break}}
+ ref.parentNode.insertBefore(el,ref);
 }
 function unwrap(tx){
  [].forEach.call(tx.querySelectorAll('.rx-n,.rx-part'),function(e){e.remove()});
