@@ -17,7 +17,7 @@ function init(){
  '.lx-sc{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:2rem max(16px,env(safe-area-inset-right,0px)) max(3rem,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}'+
  '.lx-tx{max-width:38em;margin:0 auto;font-family:Charter,"Bitstream Charter","Sitka Text",Cambria,Georgia,serif;line-height:1.7;text-align:left;hyphens:auto}'+
  '.lx-tx p{margin:0 0 1em}.lx-tx .tsrc{font-size:.8em;opacity:.8;margin-top:2em}'+
- '.lx-tx .vo-btn,.lx-tx .lx-btn{display:none}'+
+ '.lx-tx .vo-btn,.lx-tx .lx-btn{display:none}.lx-tx .rx-side,.lx-tx .rx-layers,.lx-tx .rx-skel{font-size:1rem}'+
  'html.lx-on{overflow:hidden}'+
  '@media(max-width:560px){.lx-bar .lx-t{flex-basis:100%}.lx-bar button[data-a="fermer"]{margin-left:auto}}'+
  '@media print{.lx,.lx-btn{display:none!important}}';
@@ -35,7 +35,7 @@ function init(){
  ov.querySelector('.lx-t').textContent=(h1?h1.textContent.trim():document.title)+' · Le texte';
  var box=ov.querySelector('.lx-tx'),sc=ov.querySelector('.lx-sc'),bvo=ov.querySelector('[data-a="vo"]');
 
- function kids(root){return [].slice.call(root.children).filter(function(e){return !e.classList.contains('vo')&&!e.classList.contains('vo-btn')&&!e.classList.contains('lx-btn')&&!e.classList.contains('vo-rows')})}
+ function kids(root){return [].slice.call(root.children).filter(function(e){return !e.classList.contains('vo')&&!e.classList.contains('vo-btn')&&!e.classList.contains('lx-btn')&&!e.classList.contains('vo-rows')&&!/\brx-(btn|layers|side|skel)\b/.test(e.className)})}
  var vo=tx.querySelector('.vo'),showVo=false;
  if(vo){bvo.hidden=false;bvo.textContent='Texte original ('+(vo.getAttribute('data-lang')||'original')+')'}
  function fill(){
@@ -44,6 +44,7 @@ function init(){
   if(showVo&&vo){var lc=vo.getAttribute('lang');if(lc){box.setAttribute('lang',lc);if(/^(he|ar|fa)/.test(lc))box.setAttribute('dir','rtl')}}
   src.forEach(function(n){var c=n.cloneNode(true);c.removeAttribute('hidden');c.removeAttribute('id');[].forEach.call(c.querySelectorAll('[id]'),function(x){x.removeAttribute('id')});box.appendChild(c)});
   bvo.setAttribute('aria-pressed',showVo?'true':'false');
+  if(!showVo&&window.RX)window.RX.attach(box,tx);
  }
  function apply(){box.style.fontSize=size+'rem'}
  var last=null;
