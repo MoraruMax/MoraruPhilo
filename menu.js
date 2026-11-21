@@ -96,10 +96,10 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 })();
 /*FICHE-END*/
 
-/* « etc. », « a priori », « a posteriori » en italique, y compris dans les contenus affichés par script */
+/* « etc. », locutions et mots latins en italique, y compris dans les contenus affichés par script */
 (function(){
-var RE=/(^|[^0-9A-Za-zÀ-ɏ_])(etc\.|a priori|a posteriori)(?![0-9A-Za-zÀ-ɏ_])/i;
-var SK='script,style,textarea,option,em,i,code,pre,cite,title,svg,input,select,[contenteditable]';
+var RE=/(^|[^0-9A-Za-zÀ-ɏ_])(etc\.|a priori|a posteriori|cf\.|ad hominem|ad hoc|conditio sine qua non|sine qua non|ex nihilo|cogito|homo faber|animal laborans|habitus|jus ad bellum|jus in bello|sufficientia vitae|otium|negotium|tripalium)(?![0-9A-Za-zÀ-ɏ_])/i;
+var SK='script,style,textarea,option,em,i,code,pre,cite,title,svg,input,select,[contenteditable],.vo,[lang]:not([lang="fr"])';
 function fix(t){
  var p=t.parentElement;if(!p||p.closest(SK))return;
  var s=t.data;if(!RE.test(s))return;
