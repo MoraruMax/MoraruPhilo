@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head><script id="maj-auto">(function(){var V="20261121130043",busy=0;function chk(){if(busy)return;busy=1;try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){busy=0;t=(t||"").trim();if(!/^\d+$/.test(t)||t<=V)return;var k="maj-"+t,a=[0,0];try{a=(sessionStorage.getItem(k)||"0,0").split(",").map(Number)}catch(e){}if(a[0]>=4||Date.now()-a[1]<20000)return;try{sessionStorage.setItem(k,(a[0]+1)+","+Date.now())}catch(e){}fetch(location.pathname+"?v="+t,{cache:"reload"}).catch(function(){}).then(function(){return fetch(location.href,{cache:"reload"})}).then(function(){location.reload()},function(){location.reload()})}).catch(function(){busy=0})}catch(e){busy=0}}chk();document.addEventListener("visibilitychange",function(){if(!document.hidden)chk()});window.addEventListener("pageshow",function(e){if(e.persisted)chk()});setInterval(function(){if(!document.hidden)chk()},300000)})();</script><meta name="robots" content="noindex, nofollow"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="favicon.ico" sizes="any"><link rel="apple-touch-icon" href="apple-touch-icon.png"><meta name="theme-color" content="#1E1A16">
+<head><script id="maj-auto">(function(){var V="20261121132032",busy=0;function chk(){if(busy)return;busy=1;try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){busy=0;t=(t||"").trim();if(!/^\d+$/.test(t)||t<=V)return;var k="maj-"+t,a=[0,0];try{a=(sessionStorage.getItem(k)||"0,0").split(",").map(Number)}catch(e){}if(a[0]>=4||Date.now()-a[1]<20000)return;try{sessionStorage.setItem(k,(a[0]+1)+","+Date.now())}catch(e){}fetch(location.pathname+"?v="+t,{cache:"reload"}).catch(function(){}).then(function(){return fetch(location.href,{cache:"reload"})}).then(function(){location.reload()},function(){location.reload()})}).catch(function(){busy=0})}catch(e){busy=0}}chk();document.addEventListener("visibilitychange",function(){if(!document.hidden)chk()});window.addEventListener("pageshow",function(e){if(e.persisted)chk()});setInterval(function(){if(!document.hidden)chk()},300000)})();</script><meta name="robots" content="noindex, nofollow"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="favicon.ico" sizes="any"><link rel="apple-touch-icon" href="apple-touch-icon.png"><meta name="theme-color" content="#1E1A16">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Mes fiches de révision</title>
@@ -81,7 +81,7 @@ html.pf #print-fiche .foot{font:9pt Arial,sans-serif;color:#555;margin-top:1.2em
 .mxb{font:700 .78rem/1 var(--sans);border:1.5px dashed var(--acc);color:var(--acc);background:transparent;border-radius:999px;padding:.4rem .7rem;cursor:pointer;margin:.1rem 0 .3rem}
 .mxb:hover{background:var(--acc-s)}
 </style>
-<script src="confort.js?v=20261121130043"></script>
+<script src="confort.js?v=20261121132032"></script>
 <style id="a11y-fix">.b.w{color:color-mix(in srgb,#b3261e 55%,var(--ink));border-color:color-mix(in srgb,#b3261e 55%,var(--ink))}</style></head>
 <body>
 <nav class="top"><a href="rubriques.html">Retour à l’accueil</a><span><a href="carnet.html">Mon carnet de suivi</a></span></nav>
@@ -189,6 +189,6 @@ window.addEventListener('storage',function(e){if(e.key===FK){load();hydrate();re
 load();hydrate();(function(){var h=(location.hash||'').slice(1);if(h&&st.f.some(function(f){return f.id===h})){st.c=h;save()}})();renderAll();
 })();
 </script>
-<script src="fil.js?v=20261121130043" defer></script><script src="accessibilite.js?v=20261121130043" defer></script><script src="menu.js?v=20261121130043" defer></script>
+<script src="fil.js?v=20261121132032" defer></script><script src="accessibilite.js?v=20261121132032" defer></script><script src="menu.js?v=20261121132032" defer></script>
 </body>
 </html>
