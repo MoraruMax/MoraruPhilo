@@ -35,7 +35,7 @@ st.textContent=
 '.rx-skel .rl{font:700 .72rem/1.3 '+F+';text-transform:uppercase;letter-spacing:.05em;color:var(--muted,inherit);display:block}'+
 '.rx-side{font:500 .88rem/1.45 '+F+'}'+
 '.rx-box{border:1px solid var(--line,rgba(128,128,128,.4));border-radius:10px;padding:12px;margin-bottom:12px}'+
-'.rx-box h3{font:700 .95rem/1.3 '+F+';margin:0 0 6px;color:var(--rx-acc)}'+
+'.rx-box .rx-bt{font:700 .95rem/1.3 '+F+';margin:0 0 6px;color:var(--rx-acc)}'+
 '.rx-box p{margin:0}.rx-box ul{margin:0;padding-left:18px}.rx-box li{margin:4px 0}'+
 '.rx-lg span{display:inline-block;padding:0 6px;border-radius:4px;margin:2px 0}'+
 '.rx-lg .l-co{color:var(--rx-co);font-weight:700;text-decoration:underline}.rx-lg .l-th{background:var(--rx-th)}.rx-lg .l-ex{background:var(--rx-ex)}.rx-lg .l-ar{background:var(--rx-ar)}.rx-lg .l-k{font-weight:700;font-variant:small-caps}'+
@@ -122,8 +122,8 @@ function skeleton(b){
 function side(b){
  var h='',q=null;
  if(b.n===0){[].forEach.call(document.querySelectorAll('h3'),function(e){if(!q&&e.textContent.trim()==='La question'&&e.nextElementSibling)q=e.nextElementSibling.textContent})}
- if(q)h+='<div class="rx-box"><h3>Question du texte</h3><p>'+esch(q)+'</p></div>';
- h+='<div class="rx-box rx-lg"><h3>Légende</h3>';
+ if(q)h+='<div class="rx-box"><p class="rx-bt">Question du texte</p><p>'+esch(q)+'</p></div>';
+ h+='<div class="rx-box rx-lg"><p class="rx-bt">Légende</p>';
  if(b.av.co)h+='<span class="l-co">connecteur</span><br>';
  if(b.av.th)h+='<span class="l-th">thèse</span><br>';
  if(b.av.ex)h+='<span class="l-ex">exemple</span><br>';
@@ -131,7 +131,7 @@ function side(b){
  if(b.av.k)h+='<span class="l-k">mot clé</span>';
  h+='</div>';
  var rc=b.n===0?document.querySelector('ul.recap'):null;
- if(rc)h+='<div class="rx-box rx-ret"><h3>À retenir</h3><ul>'+rc.innerHTML+'</ul></div>';
+ if(rc)h+='<div class="rx-box rx-ret"><p class="rx-bt">À retenir</p><ul>'+rc.innerHTML+'</ul></div>';
  return h;
 }
 var ALL=[];
@@ -149,8 +149,8 @@ function one(tx,d,n){
   if(R.st.some(Boolean))h+='<button type="button" data-sk aria-pressed="false">Squelette</button>';
   bar.innerHTML=h;
   sk=document.createElement('div');sk.className='rx-skel';sk.innerHTML=skeleton(b);
-  sd=document.createElement('aside');sd.className='rx-side';sd.setAttribute('aria-label','Aide à la lecture du texte');sd.innerHTML=side(b);
-  var rr=sd.querySelector('.rx-ret');if(rr){se=document.createElement('aside');se.className='rx-side rx-end';se.setAttribute('aria-label','À retenir');se.appendChild(rr.cloneNode(true))}
+  sd=document.createElement('div');sd.className='rx-side';sd.setAttribute('role','group');sd.setAttribute('aria-label','Aide à la lecture du texte');sd.innerHTML=side(b);
+  var rr=sd.querySelector('.rx-ret');if(rr){se=document.createElement('div');se.className='rx-side rx-end';se.setAttribute('role','group');se.setAttribute('aria-label','À retenir');se.appendChild(rr.cloneNode(true))}
   bar.addEventListener('click',function(e){
    var t=e.target.closest('button');if(!t)return;
    if(t.hasAttribute('data-all')){var all=t.getAttribute('aria-pressed')!=='true';t.setAttribute('aria-pressed',all);[].forEach.call(bar.querySelectorAll('[data-l]'),function(x){x.setAttribute('aria-pressed',all);tx.classList.toggle('on-'+x.getAttribute('data-l'),all)});return}

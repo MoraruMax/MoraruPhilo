@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head><script id="maj-auto">(function(){var V="20261121181514",busy=0;function chk(){if(busy)return;busy=1;try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){busy=0;t=(t||"").trim();if(!/^\d+$/.test(t)||t<=V)return;var k="maj-"+t,a=[0,0];try{a=(sessionStorage.getItem(k)||"0,0").split(",").map(Number)}catch(e){}if(a[0]>=4||Date.now()-a[1]<20000)return;try{sessionStorage.setItem(k,(a[0]+1)+","+Date.now())}catch(e){}fetch(location.pathname+"?v="+t,{cache:"reload"}).catch(function(){}).then(function(){return fetch(location.href,{cache:"reload"})}).then(function(){location.reload()},function(){location.reload()})}).catch(function(){busy=0})}catch(e){busy=0}}chk();document.addEventListener("visibilitychange",function(){if(!document.hidden)chk()});window.addEventListener("pageshow",function(e){if(e.persisted)chk()});setInterval(function(){if(!document.hidden)chk()},300000)})();</script><meta name="robots" content="noindex, nofollow"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="favicon.ico" sizes="any"><link rel="apple-touch-icon" href="apple-touch-icon.png"><meta name="theme-color" content="#1E1A16">
+<head><script id="maj-auto">(function(){var V="20261122120545",busy=0;function chk(){if(busy)return;busy=1;try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){busy=0;t=(t||"").trim();if(!/^\d+$/.test(t)||t<=V)return;var k="maj-"+t,a=[0,0];try{a=(sessionStorage.getItem(k)||"0,0").split(",").map(Number)}catch(e){}if(a[0]>=4||Date.now()-a[1]<20000)return;try{sessionStorage.setItem(k,(a[0]+1)+","+Date.now())}catch(e){}fetch(location.pathname+"?v="+t,{cache:"reload"}).catch(function(){}).then(function(){return fetch(location.href,{cache:"reload"})}).then(function(){location.reload()},function(){location.reload()})}).catch(function(){busy=0})}catch(e){busy=0}}chk();document.addEventListener("visibilitychange",function(){if(!document.hidden)chk()});window.addEventListener("pageshow",function(e){if(e.persisted)chk()});setInterval(function(){if(!document.hidden)chk()},300000)})();</script><meta name="robots" content="noindex, nofollow"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="favicon.ico" sizes="any"><link rel="apple-touch-icon" href="apple-touch-icon.png"><meta name="theme-color" content="#1E1A16">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Frise des philosophes</title>
@@ -128,7 +128,7 @@ footer{padding:1.6rem 0 2.5rem;font:500 .9rem/1.5 var(--sans);color:var(--muted)
 @page{size:A4;margin:16mm 14mm}
 </style>
 <script>try{history.scrollRestoration="manual"}catch(e){}(function(){function t(){if(!location.hash)window.scrollTo(0,0)}t();document.addEventListener("DOMContentLoaded",t);window.addEventListener("load",function(){t();setTimeout(t,60)});window.addEventListener("pageshow",t)})();</script>
-<script src="confort.js?v=20261121181514"></script>
+<script src="confort.js?v=20261122120545"></script>
 </head>
 <body>
 <nav style="font:500 .92rem/1 system-ui,-apple-system,sans-serif;padding:.9rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><a href="rubriques.html" style="color:inherit">Retour à l’accueil</a><button type="button" class="pdfbtn" onclick="window.print()" aria-label="Imprimer ou enregistrer cette fiche en PDF"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>Enregistrer en PDF</button></nav>
@@ -152,7 +152,7 @@ footer{padding:1.6rem 0 2.5rem;font:500 .9rem/1.5 var(--sans);color:var(--muted)
     <div class="axis" id="axis" aria-hidden="true"></div>
     <div class="rows" id="rows"><div class="mark" id="mark" aria-hidden="true"></div></div>
   </div>
-  <div class="card" id="card" aria-live="polite"><h3>Cliquez sur un nom</h3><p class="dt" style="margin:0">Vous verrez ses dates, ses contemporains (entourés sur la frise) et les pages du site où il apparaît.</p></div>
+  <div class="card" id="card" aria-live="polite"><h3 aria-level="2">Cliquez sur un nom</h3><p class="dt" style="margin:0">Vous verrez ses dates, ses contemporains (entourés sur la frise) et les pages du site où il apparaît.</p></div>
 </section>
 
 <section class="block" aria-labelledby="h-q" style="margin-top:2.5rem">
@@ -171,9 +171,9 @@ function norm(s){return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f
 var A=[
 ['Anaximandre',-610,-546,1],['Pythagore',-570,-495,1],['Xénophane',-570,-475,1],['Héraclite',-540,-480,1],['Parménide',-515,-450,1],['Anaxagore',-500,-428,1],['Empédocle',-494,-434,1],['Zénon d’Élée',-490,-430,1],['Protagoras',-490,-420,1],['Gorgias',-483,-375,1],['Platon',-428,-348],['Aristote',-384,-322],['Zhuangzi',-369,-286,1],['Épicure',-341,-270],['Cicéron',-106,-43],['Lucrèce',-98,-55,1],['Sénèque',-4,65],['Épictète',50,135,1],['Marc Aurèle',121,180],['Nāgārjuna',150,250,1],['Sextus Empiricus',160,210,1],['Plotin',204,270],['Augustin',354,430],['Avicenne',980,1037],['Anselme',1033,1109],['Averroès',1126,1198],['Maïmonide',1138,1204],['Thomas d’Aquin',1225,1274],['Guillaume d’Occam',1287,1347,1]];
 var M=[
-['Machiavel',1469,1527],['Montaigne',1533,1592],['Francis Bacon',1561,1626],['Hobbes',1588,1679],['Descartes',1596,1650],['Pascal',1623,1662],['Locke',1632,1704],['Spinoza',1632,1677],['Malebranche',1638,1715],['Leibniz',1646,1716],['Giambattista Vico',1668,1744],['Berkeley',1685,1753],['Montesquieu',1689,1755],['Hume',1711,1776],['Rousseau',1712,1778],['Diderot',1713,1784],['Condillac',1714,1780],['Adam Smith',1723,1790],['Kant',1724,1804],['Bentham',1748,1832],['Hegel',1770,1831],['Schopenhauer',1788,1860],['Auguste Comte',1798,1857],['Cournot',1801,1877],['Feuerbach',1804,1872],['Tocqueville',1805,1859],['John Stuart Mill',1806,1873],['Søren Kierkegaard',1813,1855],['Marx',1818,1883],['Engels',1820,1895],['William James',1842,1910],['Nietzsche',1844,1900],['Freud',1856,1939],['Durkheim',1858,1917],['Bergson',1859,1941],['Husserl',1859,1938],['Max Weber',1864,1920],['Alain',1868,1951],['Marcel Mauss',1872,1950],['Russell',1872,1970],['Karl Jaspers',1883,1969],['Bachelard',1884,1962],['Heidegger',1889,1976],['Wittgenstein',1889,1951],['Walter Benjamin',1892,1940],['Karl Popper',1902,1994],['Vladimir Jankélévitch',1903,1985],['Hans Jonas',1903,1993],['Raymond Aron',1905,1983],['Jean-Paul Sartre',1905,1980],['Hannah Arendt',1906,1975],['Emmanuel Levinas',1906,1995],['Simone de Beauvoir',1908,1986],['Claude Lévi-Strauss',1908,2009],['Maurice Merleau-Ponty',1908,1961],['Simone Weil',1909,1943],['Jeanne Hersch',1910,2000],['Paul Ricœur',1913,2005],['Elizabeth Anscombe',1919,2001],['Iris Murdoch',1919,1999],['John Rawls',1921,2002]];
+['Machiavel',1469,1527],['Montaigne',1533,1592],['Francis Bacon',1561,1626],['Hobbes',1588,1679],['Descartes',1596,1650],['Pascal',1623,1662],['Locke',1632,1704],['Spinoza',1632,1677],['Malebranche',1638,1715],['Leibniz',1646,1716],['Giambattista Vico',1668,1744],['Berkeley',1685,1753],['Montesquieu',1689,1755],['Hume',1711,1776],['Rousseau',1712,1778],['Diderot',1713,1784],['Condillac',1714,1780],['Adam Smith',1723,1790],['Kant',1724,1804],['Bentham',1748,1832],['Hegel',1770,1831],['Schopenhauer',1788,1860],['Auguste Comte',1798,1857],['Cournot',1801,1877],['Feuerbach',1804,1872],['Tocqueville',1805,1859],['John Stuart Mill',1806,1873],['Søren Kierkegaard',1813,1855],['Marx',1818,1883],['Engels',1820,1895],['William James',1842,1910],['Nietzsche',1844,1900],['Freud',1856,1939],['Durkheim',1858,1917],['Bergson',1859,1941],['Husserl',1859,1938],['Max Weber',1864,1920],['Alain',1868,1951],['Marcel Mauss',1872,1950],['Russell',1872,1970],['Karl Jaspers',1883,1969],['Bachelard',1884,1962],['Heidegger',1889,1976],['Wittgenstein',1889,1951],['Walter Benjamin',1892,1940],['Karl Popper',1902,1994],['Vladimir Jankélévitch',1903,1985],['Hans Jonas',1903,1993],['Raymond Aron',1905,1983],['Jean-Paul Sartre',1905,1980],['Hannah Arendt',1906,1975],['Emmanuel Lévinas',1906,1995],['Simone de Beauvoir',1908,1986],['Claude Lévi-Strauss',1908,2009],['Maurice Merleau-Ponty',1908,1961],['Simone Weil',1909,1943],['Jeanne Hersch',1910,2000],['Paul Ricœur',1913,2005],['Elizabeth Anscombe',1919,2001],['Iris Murdoch',1919,1999],['John Rawls',1921,2002]];
 /* pages du site */
-var L={'Platon':[['verite-platon.html','Le mythe de la caverne']],'Épictète':[['epictete.html','Épictète et la liberté']],'Descartes':[['descartes-du-doute-au-cogito.html','Du doute au cogito']],'Pascal':[['pascal.html','Pascal']],'Spinoza':[['spinoza-lettre-a-schuller.html','Lettre à Schuller']],'Hume':[['verite-hume.html','Croyance raisonnable']],'Kant':[['verite-kant.html','Mensonge et devoir'],['le-devoir.html','Le devoir']],'Rousseau':[['verite-rousseau.html','Dire faux et mentir'],['le-devoir.html','Le devoir']],'Francis Bacon':[['technique-bacon.html','Vaincre la nature']],'Heidegger':[['technique-heidegger.html','Le Rhin et la centrale']],'Emmanuel Levinas':[['technique-levinas.html','Défendre l’homme contre la technique ?']],'Hannah Arendt':[['technique-arendt.html','Animal laborans et homo faber']],'Russell':[['travail-alienation-emancipation.html','Travail : aliénation ou émancipation']],'Hegel':[['travail-alienation-emancipation.html','Travail : aliénation ou émancipation']],'Marx':[['travail-alienation-emancipation.html','Travail : aliénation ou émancipation']],'Nietzsche':[['le-devoir.html','Le devoir']],'Durkheim':[['le-devoir.html','Le devoir']],'Wittgenstein':[['le-devoir.html','Le devoir']]};
+var L={'Platon':[['verite-platon.html','Le mythe de la caverne']],'Épictète':[['epictete.html','Épictète et la liberté']],'Descartes':[['descartes-du-doute-au-cogito.html','Du doute au cogito']],'Pascal':[['pascal.html','Pascal']],'Spinoza':[['spinoza-lettre-a-schuller.html','Lettre à Schuller']],'Hume':[['verite-hume.html','Croyance raisonnable']],'Kant':[['verite-kant.html','Mensonge et devoir'],['le-devoir.html','Le devoir']],'Rousseau':[['verite-rousseau.html','Dire faux et mentir'],['le-devoir.html','Le devoir']],'Francis Bacon':[['technique-bacon.html','Vaincre la nature']],'Heidegger':[['technique-heidegger.html','Le Rhin et la centrale']],'Emmanuel Lévinas':[['technique-levinas.html','Défendre l’homme contre la technique ?']],'Hannah Arendt':[['technique-arendt.html','Animal laborans et homo faber']],'Russell':[['travail-alienation-emancipation.html','Travail : aliénation ou émancipation']],'Hegel':[['travail-alienation-emancipation.html','Travail : aliénation ou émancipation']],'Marx':[['travail-alienation-emancipation.html','Travail : aliénation ou émancipation']],'Nietzsche':[['le-devoir.html','Le devoir']],'Durkheim':[['le-devoir.html','Le devoir']],'Wittgenstein':[['le-devoir.html','Le devoir']]};
 var P=[['Avant J.-C.',-9999,0,'--p1'],['1ᵉʳ–XIVᵉ siècle',1,1399,'--p2'],['XVIᵉ–XVIIᵉ',1400,1699,'--p3'],['XVIIIᵉ',1700,1799,'--p4'],['XIXᵉ',1800,1899,'--p5'],['XXᵉ',1900,2100,'--p6']];
 function col(b){for(var i=0;i<P.length;i++)if(b>=P[i][1]&&b<=P[i][2])return P[i][3];return '--p1'}
 function fy(y){return y<0?(-y)+' av. J.-C.':String(y)}
@@ -198,7 +198,7 @@ function build(){
   });
   yr.min=S.min;yr.max=S.max;yr.step=S.step;yr.value=Math.round((S.min+S.max)/2/S.step)*S.step;
   sel=null;upd();filt();
-  card.innerHTML='<h3>Cliquez sur un nom</h3><p class="dt" style="margin:0">Vous verrez ses dates, ses contemporains (entourés sur la frise) et les pages du site où il apparaît.</p>';
+  card.innerHTML='<h3 aria-level="2">Cliquez sur un nom</h3><p class="dt" style="margin:0">Vous verrez ses dates, ses contemporains (entourés sur la frise) et les pages du site où il apparaît.</p>';
 }
 function upd(){
   var S=SETS[cur],y=+yr.value;yv.textContent=fy(y);
@@ -276,7 +276,7 @@ function end(){
 build();start();
 })();
 </script>
-<script src="fil.js?v=20261121181514" defer></script><script src="menu.js?v=20261121181514" defer></script><!--FRX-START--><style>
+<script src="fil.js?v=20261122120545" defer></script><script src="menu.js?v=20261122120545" defer></script><!--FRX-START--><style>
 .card .fx{display:grid;grid-template-columns:auto minmax(0,1fr);gap:.4rem 1rem;align-items:start;margin:.9rem 0 .2rem;padding-top:.9rem;border-top:1px solid var(--line)}
 .card .fx .pt{width:88px;height:88px;border-radius:50%;background-repeat:no-repeat;border:3px solid var(--line);grid-row:span 3}
 .card .fx .pt.won{border-color:#8a5a00;box-shadow:0 0 0 3px #f6d78b}
@@ -288,7 +288,7 @@ build();start();
 .card .more{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.7rem}
 .card .more a{font:700 .9rem/1.2 var(--sans);text-decoration:none;color:var(--ink);border:1.5px solid var(--ink);border-radius:8px;padding:.45rem .7rem}
 </style>
-<script src="savoirs.js?v=20261121181514"></script>
+<script src="savoirs.js?v=20261122120545"></script>
 <script>
 (function(){var D=window.SAV;if(!D)return;var C=D.AP.c,R=D.AP.r,NK={};D.N.forEach(function(n){NK[n.k]=n});
 function norm(s){return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/^d[’']/,'')}
@@ -309,5 +309,5 @@ function hash(){var h=decodeURIComponent((location.hash||'').slice(1));if(h&&win
 window.addEventListener('hashchange',hash);if(document.readyState==='complete')hash();else window.addEventListener('load',hash);
 })();
 </script><!--FRX-END-->
-<script src="accessibilite.js?v=20261121181514" defer></script></body>
+<script src="accessibilite.js?v=20261122120545" defer></script></body>
 </html>
