@@ -1,0 +1,16 @@
+{
+  "name": "La philosophie en terminale",
+  "short_name": "Philo Tle",
+  "description": "Textes, plans de cours, méthodes et exercices pour la philosophie en terminale.",
+  "lang": "fr",
+  "start_url": "rubriques.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#1E1A16",
+  "theme_color": "#1E1A16",
+  "icons": [
+    {"src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+    {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
+    {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  ]
+}

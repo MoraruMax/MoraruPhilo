@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head><script id="maj-auto">(function(){var V="20261122120545",busy=0;function chk(){if(busy)return;busy=1;try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){busy=0;t=(t||"").trim();if(!/^\d+$/.test(t)||t<=V)return;var k="maj-"+t,a=[0,0];try{a=(sessionStorage.getItem(k)||"0,0").split(",").map(Number)}catch(e){}if(a[0]>=4||Date.now()-a[1]<20000)return;try{sessionStorage.setItem(k,(a[0]+1)+","+Date.now())}catch(e){}fetch(location.pathname+"?v="+t,{cache:"reload"}).catch(function(){}).then(function(){return fetch(location.href,{cache:"reload"})}).then(function(){location.reload()},function(){location.reload()})}).catch(function(){busy=0})}catch(e){busy=0}}chk();document.addEventListener("visibilitychange",function(){if(!document.hidden)chk()});window.addEventListener("pageshow",function(e){if(e.persisted)chk()});setInterval(function(){if(!document.hidden)chk()},300000)})();</script><meta name="robots" content="noindex, nofollow"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="favicon.ico" sizes="any"><link rel="apple-touch-icon" href="apple-touch-icon.png"><meta name="theme-color" content="#1E1A16">
+<head><script id="maj-auto">(function(){var V="20261123115447",busy=0;function chk(){if(busy)return;busy=1;try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){busy=0;t=(t||"").trim();if(!/^\d+$/.test(t)||t<=V)return;var k="maj-"+t,a=[0,0];try{a=(sessionStorage.getItem(k)||"0,0").split(",").map(Number)}catch(e){}if(a[0]>=4||Date.now()-a[1]<20000)return;try{sessionStorage.setItem(k,(a[0]+1)+","+Date.now())}catch(e){}fetch(location.pathname+"?v="+t,{cache:"reload"}).catch(function(){}).then(function(){return fetch(location.href,{cache:"reload"})}).then(function(){location.reload()},function(){location.reload()})}).catch(function(){busy=0})}catch(e){busy=0}}chk();document.addEventListener("visibilitychange",function(){if(!document.hidden)chk()});window.addEventListener("pageshow",function(e){if(e.persisted)chk()});setInterval(function(){if(!document.hidden)chk()},300000)})();</script><meta name="robots" content="noindex, nofollow"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="favicon.ico" sizes="any"><link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#1E1A16">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Textes en hébreu</title>
@@ -154,7 +155,7 @@ html.lect .sjd a{font:600 1.12rem/1.6 var(--serif,Georgia,serif)}
 html.lect .txb{padding:0!important}
 </style>
 <script>try{history.scrollRestoration="manual"}catch(e){}(function(){function t(){if(!location.hash)window.scrollTo(0,0)}t();document.addEventListener("DOMContentLoaded",t);window.addEventListener("load",function(){t();setTimeout(t,60)});window.addEventListener("pageshow",t)})();</script>
-<script src="confort.js?v=20261122120545"></script><script src="voix.js?v=20261122120545" defer></script>
+<script src="confort.js?v=20261123115447"></script><script src="voix.js?v=20261123115447" defer></script>
 
 <style>
 .fs h2{margin-bottom:1rem}
@@ -253,7 +254,7 @@ html.lect .tbl{display:block}
   upd();
 })();
 </script>
-<script src="sommaire.js?v=20261122120545" defer></script><script>
+<script src="sommaire.js?v=20261123115447" defer></script><script>
 (function(){var r=document.documentElement,K='texte-seul',KL='mode-lecture';
 var btn=document.getElementById('a11y-btn'),menu=document.getElementById('a11y-menu'),opts=menu.querySelectorAll('.a11y-opt'),closed=[],shown=[],skipped=[];
 function apply(m){
@@ -278,5 +279,5 @@ if(v==='ts')apply('ts');
 if(v==='lect')window.addEventListener('load',function(){apply('lect')});
 })();
 </script>
-<script src="fil.js?v=20261122120545" defer></script><script src="menu.js?v=20261122120545" defer></script></body>
+<script src="fil.js?v=20261123115447" defer></script><script src="menu.js?v=20261123115447" defer></script></body>
 </html>

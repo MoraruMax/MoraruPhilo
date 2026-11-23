@@ -152,6 +152,22 @@ function setup(){
   var ab=document.getElementById('a11y-btn');
   if(ab){var box=ab.closest('.a11y');if(box&&!box.contains(wrap))put(box);else{put(ab);put(document.getElementById('a11y-menu'))}}
   var pdf=document.querySelector('button[onclick*="print"]');if(pdf&&pdf.closest('nav,header,.tsbar,.a11y,span'))put(pdf);
+  if(hl&&pn.lastElementChild!==hl)pn.appendChild(hl);
+ }
+ var hl=null;
+ if('serviceWorker' in navigator&&window.caches&&window.MessageChannel&&(location.protocol==='https:'||/^(localhost|127\.0\.0\.1)$/.test(location.hostname))){
+  hl=document.createElement('button');hl.type='button';hl.id='hl-menu';hl.className='mnu-btn';
+  hl.innerHTML='<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8.5a15 15 0 0 1 20 0M5 12a10 10 0 0 1 14 0M8.5 15.5a5 5 0 0 1 7 0"/><circle cx="12" cy="19" r="1.2" fill="currentColor"/><path d="M3 3l18 18"/></svg><span>Lire les fiches sans connexion</span>';
+  var hs=hl.querySelector('span'),busy=false;
+  hl.addEventListener('click',function(){if(busy)return;busy=true;hs.textContent='Préparation…';
+   fetch('pages-hors-ligne.json',{cache:'no-cache'}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(d){
+    return navigator.serviceWorker.register('sw.js').then(function(){return navigator.serviceWorker.ready}).then(function(reg){
+     var ch=new MessageChannel();ch.port1.onmessage=function(e){var x=e.data;hs.textContent='Enregistrement… '+x.done+' / '+x.total;
+      if(x.done>=x.total){busy=false;hs.textContent=x.fail?'Fiches enregistrées, sauf '+x.fail:'Fiches enregistrées ✓'}};
+     reg.active.postMessage({type:'fiches',urls:d.pages,assets:d.assets||[]},[ch.port2]);
+    });
+   }).catch(function(){busy=false;hs.textContent='Connexion nécessaire'});
+  });
  }
  collect();
  var mo=new MutationObserver(collect);mo.observe(document.body,{childList:true,subtree:true});
@@ -163,7 +179,7 @@ function setup(){
  window.addEventListener('resize',place);pn.addEventListener('click',function(){setTimeout(place,0)});
  gb.addEventListener('click',function(e){e.stopPropagation();set(pn.hidden)});
  pn.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
-  if(b.id==='a11y-btn'||b.closest('#a11y-menu'))return;setTimeout(function(){set(false)},0)});
+  if(b.id==='a11y-btn'||b.id==='hl-menu'||b.closest('#a11y-menu'))return;setTimeout(function(){set(false)},0)});
  document.addEventListener('click',function(e){if(!pn.hidden&&!wrap.contains(e.target))set(false)});
  wrap.addEventListener('focusout',function(e){if(!pn.hidden&&e.relatedTarget&&!wrap.contains(e.relatedTarget))set(false)});
  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!pn.hidden){var am=document.getElementById('a11y-menu');if(am&&!am.hidden)return;set(false);gb.focus()}});
@@ -198,3 +214,9 @@ function scrollers(){
 function init(){skip();scrollers();setTimeout(scrollers,1500);window.addEventListener('resize',function(){clearTimeout(init.t);init.t=setTimeout(scrollers,400)});document.addEventListener('toggle',function(){setTimeout(scrollers,50)},true)}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
+
+/* Impression : charger d’abord les images différées */
+window.addEventListener('beforeprint',function(){[].forEach.call(document.querySelectorAll('img[loading="lazy"]'),function(i){i.loading='eager'})});
+
+/* Site installable et lisible hors connexion */
+if('serviceWorker' in navigator&&(location.protocol==='https:'||/^(localhost|127\.0\.0\.1)$/.test(location.hostname)))window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){})});
