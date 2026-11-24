@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head><script id="maj-auto">(function(){var V="20261124152822",busy=0;function chk(){if(busy)return;busy=1;try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){busy=0;t=(t||"").trim();if(!/^\d+$/.test(t)||t<=V)return;var k="maj-"+t,a=[0,0];try{a=(sessionStorage.getItem(k)||"0,0").split(",").map(Number)}catch(e){}if(a[0]>=4||Date.now()-a[1]<20000)return;try{sessionStorage.setItem(k,(a[0]+1)+","+Date.now())}catch(e){}fetch(location.pathname+"?v="+t,{cache:"reload"}).catch(function(){}).then(function(){return fetch(location.href,{cache:"reload"})}).then(function(){location.reload()},function(){location.reload()})}).catch(function(){busy=0})}catch(e){busy=0}}chk();document.addEventListener("visibilitychange",function(){if(!document.hidden)chk()});window.addEventListener("pageshow",function(e){if(e.persisted)chk()});setInterval(function(){if(!document.hidden)chk()},300000)})();</script><meta name="robots" content="noindex, nofollow"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="favicon.ico" sizes="any"><link rel="apple-touch-icon" href="apple-touch-icon.png"><meta name="theme-color" content="#1E1A16"><script id="theme-init">try{var t=localStorage.getItem('theme');document.documentElement.setAttribute('data-theme',t==='light'?'light':'dark')}catch(e){document.documentElement.setAttribute('data-theme','dark')}</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Le tonneau percé</title>
+<meta name="robots" content="noindex, nofollow">
+<script>try{var P=JSON.parse(localStorage.getItem('joute')||'{}')||{};if(["devoir","bonheur","technique","art","conscience","etat","inconscient","justice","langage","nature","religion","temps","travail","verite","liberte"].some(function(k){return !(P[k]&&P[k].win)}))location.replace('joute.html')}catch(e){location.replace('joute.html')}</script>
+<style>
+@font-face{font-family:"Press Start 2P";src:url(fonts/press-start-2p.woff2) format("woff2");font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Press Start 2P";src:url(fonts/press-start-2p-ext.woff2) format("woff2");font-display:swap;unicode-range:U+0100-02AF,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF}
+:root{--bg:#14102b;--panel:#fdf6e3;--ink:#1b1430;--muted:#5c5470;--gold:#ffcf1f;--red:#e8334a;--green:#2bb673;--blue:#3d7be0;--wine:#7a1f3d;--px:"Press Start 2P",monospace}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--panel);font:16px/1.6 system-ui,sans-serif;min-height:100vh}
+.wrap{max-width:860px;margin:0 auto;padding:18px 16px 40px}
+.px{font-family:var(--px)}
+.topnav{padding:4px 0 6px;font:600 .9rem/1.3 system-ui,sans-serif}.topnav a{color:#d9d2ff;text-underline-offset:3px}
+#end a{color:var(--gold)}
+.tag{font-family:var(--px);font-size:.6rem;color:var(--gold);letter-spacing:.05em}
+button{font:inherit;cursor:pointer}
+button:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+/* écran d'accueil */
+#intro{text-align:center;padding:30px 10px}
+.lock{display:inline-block;font-family:var(--px);font-size:.75rem;background:#2a2150;border:3px solid var(--gold);padding:10px 16px;margin-bottom:22px;box-shadow:4px 4px 0 #000}
+#intro h1{font-family:var(--px);font-size:clamp(1.1rem,4.5vw,1.9rem);line-height:1.5;color:var(--gold);text-shadow:3px 3px 0 var(--wine);margin:0 0 18px}
+.teaser{font-family:var(--px);font-size:.72rem;line-height:2;max-width:34rem;margin:0 auto 22px}
+.quote{max-width:36rem;margin:0 auto 26px;background:var(--panel);color:var(--ink);border:3px solid #000;box-shadow:5px 5px 0 #000;padding:14px 18px;font-family:Georgia,serif;font-size:1.02rem;text-align:left}
+.quote small{display:block;margin-top:8px;font-family:var(--px);font-size:.55rem;color:var(--muted)}
+.go{font-family:var(--px);font-size:.85rem;background:var(--gold);color:var(--ink);border:3px solid #000;box-shadow:4px 4px 0 #000;padding:14px 22px}
+.go:active{transform:translate(2px,2px);box-shadow:2px 2px 0 #000}
+/* arène */
+#arena{display:none}
+.stage{position:relative;height:250px;border:3px solid #000;box-shadow:5px 5px 0 #000;background:#2b2248 url(images/joute/arene.webp) center/cover;overflow:hidden;image-rendering:pixelated}
+.stage::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 55%,rgba(10,6,30,.55))}
+.eleve{position:absolute;left:6%;bottom:6px;height:150px;z-index:2;image-rendering:pixelated}
+.cal{position:absolute;right:5%;bottom:6px;z-index:2;display:flex;align-items:flex-end}.cal img{display:block;height:200px;width:auto;filter:drop-shadow(3px 4px 0 rgba(0,0,0,.45));transition:opacity .2s}@media (max-width:520px){.cal img{transform:scale(.8);transform-origin:bottom right}}
+.endcal{display:block;margin:0 auto 10px;height:200px;width:auto}
+.cal .nm{position:absolute;top:-10px;right:-8px;font-family:var(--px);font-size:.55rem;background:var(--wine);color:#fff;padding:4px 6px;border:2px solid #000;white-space:nowrap}
+.cal.hit{animation:hit .45s}
+@keyframes hit{20%{transform:translateX(8px)}40%{transform:translateX(-6px)}60%{transform:translateX(4px)}}
+.barrel-box{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);z-index:3;text-align:center}
+.barrel-box img{display:block;height:130px;width:auto;margin:0 auto;filter:drop-shadow(3px 4px 0 rgba(0,0,0,.45))}@media (max-width:520px){.barrel-box img{height:100px}}
+.barrel-box .tag{display:block;margin-bottom:4px;text-shadow:2px 2px 0 #000}
+.hud{display:flex;justify-content:space-between;align-items:center;margin:14px 0 10px;font-family:var(--px);font-size:.62rem;gap:10px;flex-wrap:wrap}
+.hud .pct{color:var(--gold)}
+.box{background:var(--panel);color:var(--ink);border:3px solid #000;box-shadow:5px 5px 0 #000;padding:16px 18px}
+.box .who{font-family:var(--px);font-size:.62rem;color:var(--wine);margin-bottom:8px}
+.ctx{font-size:.92rem;color:var(--muted);margin:0 0 6px}
+.atk{font-family:Georgia,serif;font-size:1.18rem;margin:0 0 4px}
+.ask{font-family:var(--px);font-size:.62rem;margin:16px 0 10px;line-height:1.8}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.opts button{text-align:left;background:#fff;color:var(--ink);border:3px solid #000;box-shadow:3px 3px 0 #000;padding:11px 12px;font-size:.95rem;font-weight:600}
+.opts button:hover:not([disabled]){background:#fff3c4}
+.opts button[disabled]{cursor:default;opacity:.55}
+.opts button.ok{background:#c9f2dc;opacity:1}
+.opts button.ko{background:#ffd0d6;opacity:1}
+.fb{margin-top:14px;padding:12px 14px;border:3px solid #000;font-size:.95rem;display:none}
+.fb.on{display:block}
+.fb.ok{background:#e3f8ec}.fb.ko{background:#ffe6ea}
+.fb b{font-family:var(--px);font-size:.6rem;display:block;margin-bottom:6px}
+.next{margin-top:12px;display:none}
+.next.on{display:inline-block}
+/* fin */
+#end{display:none;text-align:center;padding:20px 6px}
+#end h2{font-family:var(--px);color:var(--gold);font-size:1.1rem;line-height:1.6;text-shadow:3px 3px 0 var(--wine)}
+.badge{display:inline-flex;flex-direction:column;align-items:center;gap:8px;margin:14px 0 18px;font-family:var(--px);font-size:.6rem}
+.note{font-family:var(--px);font-size:.55rem;color:#b9b0d6;line-height:2;margin-top:22px;border-top:2px dashed #3a3166;padding-top:14px}
+@media(max-width:560px){.opts{grid-template-columns:1fr}.stage{height:210px}.eleve{height:115px}.cal{width:80px;height:130px}.cal .nm{right:-4px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="topnav" aria-label="Navigation"><a href="joute.html">‹ Retour à la joute</a></nav>
+
+<section id="intro">
+ <div class="lock">🔓 ??? — NIVEAU SECRET DÉBLOQUÉ</div>
+ <h1>Le tonneau percé</h1>
+ <p class="teaser">Tu as vaincu les quinze gardiens.<br>Mais as-tu vaincu les sophistes&nbsp;?</p>
+ <div class="quote">« Pour bien vivre, il faut entretenir en soi-même les plus fortes passions au lieu de les réprimer. »<small>CALLICLÈS · Platon, Gorgias</small></div>
+ <p class="teaser" style="font-size:.62rem">Calliclès connaît tes faiblesses&nbsp;: il t’attaque avec les pièges dans lesquels tu es tombé. Ta vie est un tonneau percé&nbsp;: il fuit à chaque tour. Nomme le piège pour boucher une fuite.</p>
+ <button class="go" id="start">Entrer dans l’arène</button>
+</section>
+
+<section id="arena" aria-live="polite">
+ <div class="stage">
+  <img class="eleve" src="images/joute/eleve.webp" alt="">
+  <div class="barrel-box"><span class="tag">TON TONNEAU</span><img id="barrel" alt="" src=""></div>
+  <div class="cal" id="cal"><img id="calimg" alt="Calliclès" src=""><span class="nm">CALLICLÈS</span></div>
+ </div>
+ <div class="hud"><span id="turn">ATTAQUE 1/6</span><span>EAU : <span class="pct" id="pct">100&nbsp;%</span> · FUITES : <span id="leaks">2</span></span></div>
+ <div class="box">
+  <div class="who">CALLICLÈS ATTAQUE&nbsp;!</div>
+  <p class="ctx" id="ctx"></p>
+  <p class="atk" id="atk"></p>
+  <p class="ask">Quel piège Calliclès te tend-il&nbsp;?</p>
+  <div class="opts" id="opts"></div>
+  <div class="fb" id="fb"></div>
+  <button class="go next" id="next">Suite ›</button>
+ </div>
+</section>
+
+<section id="end" aria-live="polite">
+ <h2 id="endt"></h2>
+ <p id="endp" style="max-width:34rem;margin:0 auto"></p>
+ <div class="badge" id="badge"></div>
+ <div><button class="go" id="again">Rejouer</button></div>
+ <p id="endl" style="margin-top:18px"><a href="bestiaire-sophismes.html">Ton bestiaire des sophismes</a> · <a href="joute.html">Retour à la joute</a></p>
+</section>
+
+</div>
+<script>
+var ALL=[{"n": "Argument d’autorité", "d": "Croire qu’une idée est vraie parce qu’une personne célèbre ou savante l’a dite. Le prestige ne remplace pas les arguments.", "th": "« La religion est l’opium du peuple. » (Marx)", "c": "Soutenir la thèse", "atk": "« Marx est l’auteur du Capital. »", "why": "Citer le livre ne prouve pas la thèse."}, {"n": "Hors sujet", "d": "Répondre à côté : l’argument parle d’autre chose que de la thèse.", "th": "« Il faut suivre la nature. » (Les stoïciens)", "c": "Réfuter la thèse", "atk": "« La nature est belle au printemps. »", "why": "La beauté de la nature ne dit pas s’il faut la suivre."}, {"n": "Mauvaise direction", "d": "Soutenir la thèse quand il fallait la réfuter, ou l’inverse.", "th": "« Est vrai ce qui correspond au réel. » (Une thèse classique)", "c": "Soutenir la thèse", "atk": "« Chacun a sa vérité. »", "why": "Ce relativisme va contre la thèse."}, {"n": "Confusion de notions", "d": "Prendre une notion pour une autre (le légal et le juste, le plaisir et le bonheur…).", "th": "« À chacun sa vérité. » (Le relativisme)", "c": "Soutenir la thèse", "atk": "« On a le droit de penser ce qu’on veut. »", "why": "Le droit d’avoir une opinion n’implique pas que toutes les opinions soient vraies."}, {"n": "Contresens sur l’auteur", "d": "Attribuer à un philosophe une idée qu’il ne soutient pas, ou même qu’il combat.", "th": "« On peut vivre sans maître. » (Kropotkine)", "c": "Soutenir la thèse", "atk": "« L’anarchie, c’est le chaos et le désordre. »", "why": "C’est le contresens courant : les anarchistes défendent un ordre sans domination."}, {"n": "Attaque contre la personne", "d": "S’en prendre à la vie ou au caractère de l’auteur au lieu de discuter ce qu’il dit (argument ad hominem).", "th": "« Il faut parier que Dieu existe. » (Pascal)", "c": "Réfuter la thèse", "atk": "« Pascal était malade et angoissé. »", "why": "La santé de l’auteur ne réfute pas son argument."}, {"n": "Exemple qui ne prouve rien", "d": "Un exemple qui ne montre pas ce qu’on veut montrer, ou qui montre le contraire.", "th": "« À chacun sa vérité. » (Le relativisme)", "c": "Soutenir la thèse", "atk": "« Sur Internet, on trouve tout et son contraire. »", "why": "Que des avis s’opposent ne prouve pas qu’ils soient tous vrais."}, {"n": "Confusion du fait et du droit", "d": "Passer de ce qui est (un fait) à ce qui doit être (une norme) : « tout le monde le fait » ne prouve pas que ce soit juste.", "th": "« À chacun sa vérité. » (Une opinion courante)", "c": "Réfuter la thèse", "atk": "« Les gens ne sont jamais d’accord. »", "why": "Que les gens soient en désaccord ne prouve pas que tous aient raison."}, {"n": "Glissement de sens", "d": "Changer en cours de route le sens d’un mot (devoir scolaire et devoir moral, « libre » et « place libre »…).", "th": "« Dieu est mort. » (Nietzsche)", "c": "Illustrer la thèse par un exemple", "atk": "« Le héros meurt à la fin du roman. »", "why": "On prend le mot « mort » au sens propre."}, {"n": "Changement de question", "d": "Répondre à une autre question que celle posée.", "th": "« Pour être heureux, il suffit de satisfaire tous ses désirs. » (Une opinion courante)", "c": "Réfuter la thèse", "atk": "« Certains désirs sont immoraux. »", "why": "On passe de la question du bonheur à celle de la morale."}, {"n": "Argument trop vague", "d": "Une phrase vraie mais si générale qu’elle ne prouve rien.", "th": "« Est vrai ce qui correspond au réel. » (Une thèse classique)", "c": "Soutenir la thèse", "atk": "« La vérité est très importante. »", "why": "C’est trop vague pour définir la vérité."}, {"n": "Affirmation sans justification", "d": "Poser une thèse sans aucun argument pour la soutenir.", "th": "« Il ne faut jamais mentir. » (Kant)", "c": "Soutenir la thèse", "atk": "« Mentir, c’est mal, tout le monde le sait. »", "why": "C’est répéter la thèse sous une autre forme, sans dire pourquoi."}, {"n": "Homme de paille", "d": "Caricaturer la position adverse pour l’attaquer plus facilement : on réfute une thèse que personne n’a défendue (« Donc selon toi… »).", "th": "« À chacun sa vérité. » (Le relativisme) — Argument : « Certains énoncés dépendent de celui qui les prononce : « il fait chaud aujourd’hui » peut être vrai pour l’un et faux pour l’autre. »", "c": "Objecter à cet argument", "atk": "« Donc selon toi, on n’a pas le droit d’avoir son avis ? »", "why": "L’objection ne supprime pas les opinions, elle conteste qu’elles soient toutes vraies."}, {"n": "Fausse objection", "d": "Présenter comme une objection ce qui, en réalité, va dans le sens de l’argument adverse : « c’est vrai, et en plus… ».", "th": "« Le travail libère l’homme. » (Hegel) — Argument : « En travaillant, l’homme transforme la nature et se transforme lui-même : il développe ses capacités et se reconnaît dans ce qu’il produit. »", "c": "Objecter à cet argument", "atk": "« C’est vrai, on apprend beaucoup en travaillant. »", "why": "Cela confirme l’argument adverse."}, {"n": "Généralisation hâtive", "d": "Tirer une règle générale d’un ou deux cas particuliers.", "th": "« Il ne faut jamais mentir. » (Kant)", "c": "Soutenir la thèse", "atk": "« Un menteur finit toujours par se faire prendre. »", "why": "Ce n’est pas toujours vrai, et c’est un argument d’intérêt, pas un argument moral."}];
+var N=6,R=[];
+function lsj(k){try{return JSON.parse(localStorage.getItem(k)||'{}')||{}}catch(e){return {}}}
+function revele(){try{return localStorage.getItem('joute-sophismes-revele')==='1'}catch(e){return false}}
+function tirage(){if(revele())return shuffle(ALL).slice(0,N);
+ var M=lsj('joute-sophismes'),mine=shuffle(ALL.filter(function(r){return M[r.n]})).sort(function(a,b){return (M[b.n]||0)-(M[a.n]||0)}).slice(0,N);
+ return shuffle(mine.concat(shuffle(ALL.filter(function(r){return !M[r.n]})).slice(0,N-mine.length)))}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
+var DEF={};ALL.forEach(function(r){DEF[r.n]=r.d});
+var $=function(i){return document.getElementById(i)};
+var CAL={n:'images/joute/callicles.webp',s2:'images/joute/callicles-2.webp',s3:'images/joute/callicles-3.webp',ko:'images/joute/callicles-ko.webp'},CALH={"n": 200, "s2": 200, "s3": 138, "ko": 148},hits=0;
+function calState(k){var im=$('calimg');im.src=CAL[k];im.style.height=CALH[k]+'px'}
+function calNow(){calState(hits>=4?'s3':hits>=2?'s2':'n')}
+
+var TON={t0:'images/joute/tonneau-0.webp',t1:'images/joute/tonneau-1.webp',t2:'images/joute/tonneau-2.webp',t3:'images/joute/tonneau-3.webp',tv:'images/joute/tonneau-vide.webp'};
+var water,leaks,turn,drops;
+function barrel(){
+ var k=water<=0?'tv':leaks<=0?'t0':leaks==1?'t1':leaks==2?'t2':'t3';
+ $('barrel').src=TON[k];$('barrel').alt='Tonneau : '+(k=='tv'?'vide':leaks+' fuite'+(leaks>1?'s':''));
+ $('pct').textContent=Math.max(0,Math.round(water))+' %';$('leaks').textContent=leaks;
+}
+function show(){
+ var r=R[turn];$('turn').textContent='ATTAQUE '+(turn+1)+'/'+R.length;$('ctx').textContent='Thèse : '+r.th+' — Consigne : '+r.c.toLowerCase()+'.';$('atk').textContent='Calliclès répond : '+r.atk;
+ $('fb').className='fb';$('next').className='go next';
+ $('opts').innerHTML='';shuffle([r.n].concat(shuffle(ALL.filter(function(x){return x.n!==r.n}).map(function(x){return x.n})).slice(0,3))).forEach(function(o){var b=document.createElement('button');b.textContent=o;b.onclick=function(){pick(b,o)};$('opts').appendChild(b)});
+}
+function pick(b,o){
+ var r=R[turn],ok=o===r.n;
+ [].forEach.call($('opts').children,function(x){x.disabled=true;if(x.textContent===r.n)x.classList.add('ok')});
+ if(!ok)b.classList.add('ko');
+ if(ok){hits++;calNow();leaks=Math.max(0,leaks-1);$('cal').classList.remove('hit');void $('cal').offsetWidth;$('cal').classList.add('hit')}else leaks++;
+ water-=leaks*6;barrel();
+ $('fb').className='fb on '+(ok?'ok':'ko');
+ $('fb').innerHTML='<b>'+(ok?'FUITE BOUCHÉE !':'UNE FUITE DE PLUS…')+'</b>'+(ok?'':'C’était le piège « '+r.n+' » : '+DEF[r.n]+'<br>')+'Pourquoi c’est un piège : '+r.why;
+ if(water<=0){setTimeout(end,900);return}
+ $('next').className='go next on';$('next').focus();
+}
+$('next').onclick=function(){turn++;if(turn<R.length)show();else end()};
+function end(){
+ $('arena').style.display='none';$('end').style.display='block';
+ var win=water>0;try{var S=lsj('joute-secret');if(win){S.win=1;if(leaks===0){S.sealed=1;localStorage.setItem('joute-sophismes-revele','1')}}localStorage.setItem('joute-secret',JSON.stringify(S))}catch(e){}
+ $('endt').textContent=win?(leaks===0?'TONNEAU SCELLÉ !':'TONNEAU SAUVÉ'):'TONNEAU VIDE…';
+ $('endp').textContent=win?(leaks===0?'Plus aucune fuite : comme le sage du Gorgias, ton tonneau est en bon état, tu peux rester tranquille. Le bestiaire des sophismes se dévoile en entier.':'Il fuit encore un peu, mais tu tiens bon. Bouche toutes les fuites pour obtenir le badge.'):'Comme l’intempérant, tu remplis un tonneau percé. Relis les pièges de ton bestiaire et reviens.';
+ $('endp').insertAdjacentHTML('beforebegin','');var ec=document.getElementById('endcal');if(!ec){ec=document.createElement('img');ec.id='endcal';ec.className='endcal';ec.alt='Calliclès';$('endt').parentNode.insertBefore(ec,$('endt'))}ec.src=CAL[win?'ko':'n'];ec.style.height=(win?CALH.ko:CALH.n)+'px';
+ $('badge').innerHTML=win&&leaks===0?'<img src="images/joute/badge-tonneau.webp" alt="" style="display:block;width:110px;height:110px;margin:0 auto 8px;filter:drop-shadow(3px 4px 0 rgba(0,0,0,.45))">BADGE DU TONNEAU SCELLÉ':'';
+}
+function init(){hits=0;calNow();water=100;leaks=2;turn=0;R=tirage();$('end').style.display='none';barrel();show()}
+$('start').onclick=function(){$('intro').style.display='none';$('arena').style.display='block';init();$('opts').firstChild.focus()};
+$('again').onclick=function(){$('arena').style.display='block';init()};
+barrel();
+</script>
+</body>
+</html>
