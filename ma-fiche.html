@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head><script id="maj-auto">(function(){var V="20261124134547",busy=0;function chk(){if(busy)return;busy=1;try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){busy=0;t=(t||"").trim();if(!/^\d+$/.test(t)||t<=V)return;var k="maj-"+t,a=[0,0];try{a=(sessionStorage.getItem(k)||"0,0").split(",").map(Number)}catch(e){}if(a[0]>=4||Date.now()-a[1]<20000)return;try{sessionStorage.setItem(k,(a[0]+1)+","+Date.now())}catch(e){}fetch(location.pathname+"?v="+t,{cache:"reload"}).catch(function(){}).then(function(){return fetch(location.href,{cache:"reload"})}).then(function(){location.reload()},function(){location.reload()})}).catch(function(){busy=0})}catch(e){busy=0}}chk();document.addEventListener("visibilitychange",function(){if(!document.hidden)chk()});window.addEventListener("pageshow",function(e){if(e.persisted)chk()});setInterval(function(){if(!document.hidden)chk()},300000)})();</script><meta name="robots" content="noindex, nofollow"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="favicon.ico" sizes="any"><link rel="apple-touch-icon" href="apple-touch-icon.png"><meta name="theme-color" content="#1E1A16">
+<head><script id="maj-auto">(function(){var V="20261124135836",busy=0;function chk(){if(busy)return;busy=1;try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){busy=0;t=(t||"").trim();if(!/^\d+$/.test(t)||t<=V)return;var k="maj-"+t,a=[0,0];try{a=(sessionStorage.getItem(k)||"0,0").split(",").map(Number)}catch(e){}if(a[0]>=4||Date.now()-a[1]<20000)return;try{sessionStorage.setItem(k,(a[0]+1)+","+Date.now())}catch(e){}fetch(location.pathname+"?v="+t,{cache:"reload"}).catch(function(){}).then(function(){return fetch(location.href,{cache:"reload"})}).then(function(){location.reload()},function(){location.reload()})}).catch(function(){busy=0})}catch(e){busy=0}}chk();document.addEventListener("visibilitychange",function(){if(!document.hidden)chk()});window.addEventListener("pageshow",function(e){if(e.persisted)chk()});setInterval(function(){if(!document.hidden)chk()},300000)})();</script><meta name="robots" content="noindex, nofollow"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="favicon.ico" sizes="any"><link rel="apple-touch-icon" href="apple-touch-icon.png"><meta name="theme-color" content="#1E1A16">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Mes fiches de révision</title>
@@ -80,8 +80,15 @@ html.pf #print-fiche .foot{font:9pt Arial,sans-serif;color:#555;margin-top:1.2em
 #cols[data-v="cat"] .mine,#cols[data-v="mine"] .pane:not(.mine){display:none}}
 .mxb{font:700 .78rem/1 var(--sans);border:1.5px dashed var(--acc);color:var(--acc);background:transparent;border-radius:999px;padding:.4rem .7rem;cursor:pointer;margin:.1rem 0 .3rem}
 .mxb:hover{background:var(--acc-s)}
+
+mark.fhl{background:var(--hl,#ffe27a);color:inherit;border-radius:3px;padding:.02em .08em;box-decoration-break:clone;-webkit-box-decoration-break:clone;cursor:pointer}
+.fhl-bar{position:fixed;z-index:2147483000;display:none;background:#1a1a1a;color:#fff;border:1.5px solid #fff;border-radius:999px;padding:.3rem .35rem;box-shadow:0 4px 14px rgba(0,0,0,.35);font:600 .9rem/1 system-ui,-apple-system,"Segoe UI",sans-serif}
+.fhl-bar.on{display:flex}.fhl-bar button{font:inherit;color:#fff;background:none;border:0;border-radius:999px;padding:.5rem .8rem;cursor:pointer;min-height:2.4rem}
+.fhl-bar button:hover{background:rgba(255,255,255,.18)}.fhl-bar button:focus-visible{outline:3px solid #8cc4ff;outline-offset:1px}
+.fhl-dot{display:inline-block;width:.8em;height:.8em;border-radius:50%;background:#ffe27a;margin-right:.45em;vertical-align:-.05em}
+@media print{.fhl-bar{display:none!important}html.pf #print-fiche mark.fhl{background:#ffe27a!important;color:#000!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;padding:0 .05em}}
 </style>
-<script src="confort.js?v=20261124134547"></script>
+<script src="confort.js?v=20261124135836"></script>
 <style id="a11y-fix">.b.w{color:color-mix(in srgb,#b3261e 55%,var(--ink));border-color:color-mix(in srgb,#b3261e 55%,var(--ink))}</style></head>
 <body>
 <nav class="top"><a href="rubriques.html">Retour à l’accueil</a><span><a href="carnet.html">Mon carnet de suivi</a></span></nav>
@@ -137,6 +144,14 @@ function rCat(){
 }
 /* ---- la fiche ---- */
 var fs=document.getElementById('fs'),ttl=document.getElementById('ttl'),mine=document.getElementById('mine');
+/* ---- surlignage dans la fiche : mémorisé dans la fiche elle-même (it.hl), par champ ---- */
+function hlR(it,k){var t=String(it[k]||''),L=(it.hl&&it.hl[k])||[],out=[];
+  L.forEach(function(r){var s=r[0],e=r[1];if(t.slice(s,e)!==r[2]){s=t.indexOf(r[2]);e=s+r[2].length}if(s>=0&&r[2])out.push([s,e,r[2]])});
+  out.sort(function(a,b){return a[0]-b[0]});return out}
+function hd(it,k){var t=String(it[k]||''),R=hlR(it,k),h='',p=0;
+  R.forEach(function(r){if(r[0]<p)return;h+=esc(t.slice(p,r[0]))+'<mark class="fhl">'+esc(t.slice(r[0],r[1]))+'</mark>';p=r[1]});
+  return h+esc(t.slice(p))}
+function hdS(it,k){return '<span class="hd" data-k="'+k+'">'+hd(it,k)+'</span>'}
 function rFiche(){
   fs.innerHTML=st.f.map(function(f){return '<option value="'+f.id+'"'+(f.id===st.c?' selected':'')+'>'+esc(f.t||'Sans titre')+' ('+f.it.length+')</option>'}).join('');
   var F=cur();ttl.value=F.t||'';document.getElementById('cnt').textContent=F.it.length;
@@ -144,11 +159,11 @@ function rFiche(){
   F.it.forEach(function(it){if(!it.id)it.id='i'+Math.random().toString(36).slice(2,9)});
   var M=[],G=[],A={};F.it.forEach(function(it,i){if(it.s==='note'&&it.g)G.push(i);else if(it.s==='note'&&it.a)(A[it.a]=A[it.a]||[]).push(i);else M.push(i)});
   function ctl(i,mv,j,n){return '<div class="ctl">'+(mv?'<button class="ic" type="button" data-a="up" aria-label="Monter"'+(j?'':' disabled')+'>↑</button><button class="ic" type="button" data-a="dn" aria-label="Descendre"'+(j<n-1?'':' disabled')+'>↓</button>':'')+'<button class="ic" type="button" data-a="ed" aria-label="Reformuler">✎</button><button class="ic" type="button" data-a="rm" aria-label="Retirer">✕</button></div>'}
-  function note(i,lab,cls){var it=F.it[i];return '<div class="mi nt'+(cls||'')+'" data-i="'+i+'"><div class="tx"><b class="nl">'+lab+'</b> <span class="hd">'+esc(it.x)+'</span></div>'+ctl(i,false)+'</div>'}
+  function note(i,lab,cls){var it=F.it[i];return '<div class="mi nt'+(cls||'')+'" data-i="'+i+'"><div class="tx"><b class="nl">'+lab+'</b> '+hdS(it,'x')+'</div>'+ctl(i,false)+'</div>'}
   var h='';
   h+=M.map(function(i,j){var it=F.it[i],body;
-    if(it.s==='page')body='<p class="pt"><a href="'+esc(it.p)+'">'+esc(it.t)+'</a><span class="src">'+esc(it.n||'')+(it.e?' · reformulé':'')+'</span></p>'+PARTS.filter(function(k){return it[k[0]]}).map(function(k){return '<p class="pp"><b>'+k[1]+'</b> <span class="hd">'+esc(it[k[0]])+'</span></p>'}).join('')+(it.mx?'':'<button class="mxb" type="button" data-mx="'+i+'">＋ Mon exemple</button>');
-    else body=(it.l?'<b>'+esc(it.l)+'</b> : ':'')+'<span class="hd">'+esc(it.x)+'</span><span class="src">'+(it.s==='note'?'Ma note':esc(it.pt||''))+'</span>';
+    if(it.s==='page')body='<p class="pt"><a href="'+esc(it.p)+'">'+esc(it.t)+'</a><span class="src">'+esc(it.n||'')+(it.e?' · reformulé':'')+'</span></p>'+PARTS.filter(function(k){return it[k[0]]}).map(function(k){return '<p class="pp"><b>'+k[1]+'</b> '+hdS(it,k[0])+'</p>'}).join('')+(it.mx?'':'<button class="mxb" type="button" data-mx="'+i+'">＋ Mon exemple</button>');
+    else body=(it.l?'<b>'+esc(it.l)+'</b> : ':'')+hdS(it,'x')+'<span class="src">'+(it.s==='note'?'Ma note':esc(it.pt||''))+'</span>';
     return '<div class="mi'+(it.s==='page'?' pg':'')+'" data-i="'+i+'"><div class="tx">'+body+'</div>'+ctl(i,true,j,M.length)+'</div>'+((it.s==='page'&&A[it.id])?A[it.id].map(function(k){return note(k,'Ma note',' att')}).join(''):'')}).join('');
   if(G.length)h+='<div class="gen"><p class="sec">Pour toute la fiche</p>'+G.map(function(i){return note(i,'Ma note','')}).join('')+'</div>';
   mine.innerHTML=h;
@@ -177,18 +192,54 @@ document.getElementById('addn').onclick=function(){var t=document.getElementById
 /* ---- impression : uniquement la fiche ouverte ---- */
 document.getElementById('pdf').onclick=function(){var F=cur(),old=document.getElementById('print-fiche');if(old)old.remove();
   var d=document.createElement('div');d.id='print-fiche';
-  var gen=F.it.filter(function(it){return it.s==='note'&&it.g}),nt=function(it){return '<section class="nt"><p><b>Ma note</b> '+esc(it.x)+'</p></section>'};
+  var gen=F.it.filter(function(it){return it.s==='note'&&it.g}),nt=function(it){return '<section class="nt"><p><b>Ma note</b> '+hd(it,'x')+'</p></section>'};
   d.innerHTML='<h1>'+esc(F.t||'Ma fiche de révision')+'</h1>'+(F.it.length?F.it.filter(function(it){return !(it.s==='note'&&(it.g||it.a))}).map(function(it){
-    if(it.s==='page')return '<section><h2>'+esc(it.t)+'<small>'+esc(it.n||'')+'</small></h2>'+PARTS.filter(function(k){return it[k[0]]}).map(function(k){return '<p><b>'+k[1]+'</b> '+esc(it[k[0]])+'</p>'}).join('')+F.it.filter(function(y){return y.s==='note'&&y.a===it.id}).map(function(y){return '<p class="an"><b>Ma note</b> '+esc(y.x)+'</p>'}).join('')+'</section>';
+    if(it.s==='page')return '<section><h2>'+esc(it.t)+'<small>'+esc(it.n||'')+'</small></h2>'+PARTS.filter(function(k){return it[k[0]]}).map(function(k){return '<p><b>'+k[1]+'</b> '+hd(it,k[0])+'</p>'}).join('')+F.it.filter(function(y){return y.s==='note'&&y.a===it.id}).map(function(y){return '<p class="an"><b>Ma note</b> '+hd(y,'x')+'</p>'}).join('')+'</section>';
     return nt(it)}).join(''):'<p>Fiche vide.</p>')+(gen.length?'<div class="gen">'+gen.map(nt).join('')+'</div>':'')+'<p class="foot">La philosophie en terminale · Mes fiches de révision</p>';
   document.body.appendChild(d);document.documentElement.classList.add('pf');
   function done(){document.documentElement.classList.remove('pf');var x=document.getElementById('print-fiche');if(x)x.remove();window.removeEventListener('afterprint',done)}
   window.addEventListener('afterprint',done);window.print();setTimeout(function(){if(!window.matchMedia||!matchMedia('print').matches)done()},1500)};
+(function(){
+  var bar=document.createElement('div');bar.className='fhl-bar';bar.setAttribute('role','toolbar');bar.setAttribute('aria-label','Surlignage');
+  var btn=document.createElement('button');btn.type='button';bar.appendChild(btn);document.body.appendChild(bar);
+  var pend=null,rm=null,shown=0;
+  function hide(){bar.classList.remove('on');pend=null;rm=null}
+  function place(rc,below){shown=Date.now();bar.classList.add('on');var bw=bar.offsetWidth,bh=bar.offsetHeight,vw=document.documentElement.clientWidth;
+    var x=Math.min(Math.max(8,rc.left+rc.width/2-bw/2),vw-bw-8),y=below?rc.bottom+10:rc.top-bh-10;if(y<8)y=rc.bottom+10;if(y+bh>innerHeight-8)y=Math.max(8,rc.top-bh-10);bar.style.left=x+'px';bar.style.top=y+'px'}
+  function coarse(){return window.matchMedia&&matchMedia('(pointer:coarse)').matches}
+  function off(span,node,o){var w=document.createTreeWalker(span,NodeFilter.SHOW_TEXT),n,s=0;while(n=w.nextNode()){if(n===node)return s+o;s+=n.nodeValue.length}return -1}
+  function spansIn(r){return [].filter.call(mine.querySelectorAll('.hd[data-k]'),function(sp){return r.intersectsNode(sp)})}
+  function sel(){var S=getSelection();if(!S||!S.rangeCount||S.isCollapsed){if(!rm)hide();return}
+    var r=S.getRangeAt(0);if(!mine.contains(r.commonAncestorContainer)){hide();return}
+    if(!spansIn(r).length||S.toString().replace(/\s+/g,' ').trim().length<2){hide();return}
+    pend=r.cloneRange();rm=null;btn.innerHTML='<span class="fhl-dot" aria-hidden="true"></span>Surligner';btn.setAttribute('aria-label','Surligner la sélection');place(r.getBoundingClientRect(),coarse())}
+  var tm;document.addEventListener('selectionchange',function(){clearTimeout(tm);tm=setTimeout(function(){if(!bar.contains(document.activeElement)||!pend)sel()},coarse()?350:150)});
+  document.addEventListener('mouseup',function(){setTimeout(sel,10)});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')hide()});
+  addEventListener('scroll',function(){if((pend||rm)&&Date.now()-shown>600)hide()},{passive:true});
+  bar.addEventListener('mousedown',function(e){e.preventDefault()});
+  function item(sp){var row=sp.closest('.mi');return row?cur().it[+row.getAttribute('data-i')]:null}
+  btn.onclick=function(){
+    if(rm){var it=item(rm.sp),k=rm.sp.getAttribute('data-k'),R=hlR(it,k).filter(function(x){return !(x[0]<rm.e&&x[1]>rm.s)});it.hl[k]=R;if(!R.length)delete it.hl[k];save();hide();renderAll();return}
+    if(!pend)return;var r=pend;
+    spansIn(r).forEach(function(sp){var it=item(sp),k=sp.getAttribute('data-k'),t=String(it[k]||''),s=0,e=t.length;
+      if(sp.contains(r.startContainer)){s=r.startContainer.nodeType===3?off(sp,r.startContainer,r.startOffset):0}
+      if(sp.contains(r.endContainer)){e=r.endContainer.nodeType===3?off(sp,r.endContainer,r.endOffset):e}
+      while(s<e&&/\s/.test(t[s]))s++;while(e>s&&/\s/.test(t[e-1]))e--;if(s<0||e<=s)return;
+      var R=hlR(it,k).concat([[s,e]]).sort(function(a,b){return a[0]-b[0]}),M=[];
+      R.forEach(function(x){var L=M[M.length-1];if(L&&x[0]<=L[1])L[1]=Math.max(L[1],x[1]);else M.push([x[0],x[1]])});
+      it.hl=it.hl||{};it.hl[k]=M.map(function(x){return [x[0],x[1],t.slice(x[0],x[1])]})});
+    var S=getSelection();if(S)S.removeAllRanges();save();hide();renderAll()};
+  mine.addEventListener('click',function(e){var m=e.target.closest&&e.target.closest('mark.fhl');var S=getSelection();if(S&&!S.isCollapsed)return;if(!m)return;
+    var sp=m.closest('.hd'),tn=m.firstChild,s=off(sp,tn,0);pend=null;rm={sp:sp,s:s,e:s+m.textContent.length};
+    btn.textContent='Retirer le surlignage';btn.setAttribute('aria-label','Retirer ce surlignage');place(m.getBoundingClientRect(),false)});
+  document.addEventListener('click',function(e){if(rm&&!bar.contains(e.target)&&!(e.target.closest&&e.target.closest('mark.fhl')))hide()});
+})();
 nt.onchange=rCat;q.oninput=rCat;
 window.addEventListener('storage',function(e){if(e.key===FK){load();hydrate();renderAll()}});
 load();hydrate();(function(){var h=(location.hash||'').slice(1);if(h&&st.f.some(function(f){return f.id===h})){st.c=h;save()}})();renderAll();
 })();
 </script>
-<script src="fil.js?v=20261124134547" defer></script><script src="accessibilite.js?v=20261124134547" defer></script><script src="menu.js?v=20261124134547" defer></script>
+<script src="fil.js?v=20261124135836" defer></script><script src="accessibilite.js?v=20261124135836" defer></script><script src="menu.js?v=20261124135836" defer></script>
 </body>
 </html>
