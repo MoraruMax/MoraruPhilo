@@ -106,6 +106,16 @@
 (function(){try{
   var f=location.pathname.split('/').pop();
   if(!/\.html$/.test(f)||/^(index|accueil|carnet|atelier-|auto-evaluation|parcours-|reperes-conceptuels|dissertation-a-completer)/.test(f))return;
-  function go(){if(!document.querySelector('main'))return;var s=document.createElement('script');s.src='surligneur.js?v=20261126122121';document.head.appendChild(s)}
+  function go(){if(!document.querySelector('main'))return;var s=document.createElement('script');s.src='surligneur.js?v=20261128101737';document.head.appendChild(s)}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go();
+}catch(e){}})();
+/* Impression / PDF : les réponses à dérouler sont déroulées, puis refermées après. */
+(function(){try{
+  var st=document.createElement('style');st.id='print-deroule';
+  st.textContent='@media print{details::details-content{content-visibility:visible!important;display:block!important}details>summary~*{display:block!important}.case .out[hidden]{display:inline!important}}';
+  (document.head||document.documentElement).appendChild(st);
+  var ouverts=[];
+  window.addEventListener('beforeprint',function(){ouverts=[];[].forEach.call(document.querySelectorAll('details'),function(d){if(!d.open&&!d.closest('nav,.a11y,header'))
+    {ouverts.push(d);d.open=true}})});
+  window.addEventListener('afterprint',function(){ouverts.forEach(function(d){d.open=false});ouverts=[]});
 }catch(e){}})();
